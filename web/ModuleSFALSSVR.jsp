@@ -439,8 +439,8 @@
     String dPInstances = request.getParameter("dPInstances");
 
     String sFileData = request.getParameter("sFileData");
-    String sdAttributes = request.getParameter("nDFAttributes");
-    String sdInstances = request.getParameter("nDFInstances");
+    String sdAttributes = request.getParameter("sdAttributes");
+    String sdInstances = request.getParameter("sdInstances");
 
     String sPFileData = request.getParameter("sPFileData");
     String sdPAttributes = request.getParameter("sdPAttributes");
