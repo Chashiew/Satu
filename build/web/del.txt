@@ -1,0 +1,14 @@
+vpath = E:\00 Swarm Optimization\NiMOPSJava\build\web\	
+vfile =                            del	
+nFireFlies nMaxGeneration dMinBeta = 5.0000	 5.0000	 0.1000	
+dGamma dAlpha dAIWeight = 1.0000	 0.2000	 0.9000	
+dTau dBPotential dC1 = 1.5000	 4.0000	 0.0010	
+dC2 dS1 dS2 = 999999995904.0000	 0.0010	 1000.0000	
+dTrainingPS dValidationPS dTotalSize = 70.0000	 30.0000	 100.0000	
+nLastChange1 nLastChange2 dHoldOut = 3.0000	 0.0000	 20.0000	
+dCrossValidation dNormalRadio dOptimRadio = 10.0000	 1.0000	 1.0000	
+dSCRadio dPRadio dTORadio = 1.0000	 1.0000	 1.0000	
+sVariation dAttributes dInstances = 1.0000	 6.0000	 77.0000	
+dPAttributes dPInstances = 1.0000	 1.0000	
+Datatrain 11 Datatrain nn = 0.4600	 1.8100	
+Datapre 11 Datapre nn = 0.0000	 0.0000	

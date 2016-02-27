@@ -1,0 +1,259 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Sep 15, 2015, 4:56:06 PM
+    Author     : User
+*/
+
+.scrollToTop{
+	//width:100px; 
+	//height:130px;
+	padding:10px; 
+	text-align:center; 
+	font-weight: bold;
+	color: #444;
+	text-decoration: none;
+	position:fixed;
+	//top:600px;
+        bottom: 5%;
+	right: 18%;
+	display:none;
+}
+.scrollToTop:hover{
+	text-decoration:none;
+}
+
+.scrollToTopsm{
+	//width:100px; 
+	//height:130px;
+	padding:10px; 
+	text-align:center; 
+	background: whiteSmoke;
+	font-weight: bold;
+	color: #444;
+	text-decoration: none;
+	position:fixed;
+	//top:600px;
+        bottom: 5%;
+	right: 1%;
+	display:none;
+}
+.scrollToTopsm:hover{
+	text-decoration:none;
+}
+
+.ctn{
+    margin-left:auto;
+    margin-right:auto;
+    position:relative;
+    overflow:hidden;
+    width:800px;    //800px;
+}
+.ctn div{
+    display:table-cell;
+    vertical-align: middle;
+    text-align:center;
+}
+.ctn div img{
+    width:650px;    //800px;
+                    //image-align: center;
+}
+
+.sfawrap{
+    width:1000px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#wdetail{
+    width:1000px;  /*500px;*/    /*1000px;*/
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.wdetail{
+    width:1000px;  /*500px;*/    /*1000px;*/
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#wrap	{
+    width:100%; /* Spans the width of the page */
+    height:42px; 
+    margin:0; /* Ensures there is no space between sides of the screen and the menu */
+    z-index:99; /* Makes sure that your menu remains on top of other page elements */
+    position:relative; 
+    background-color:#ffffff;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.navbarcss	{
+    height:40px;
+    padding-left:40px;
+    margin:0;
+    position:absolute; /* Ensures that the menu doesn’t affect other elements */
+    border-right:1px solid #ffffff; 
+}
+
+.navbarcss li {
+    height:auto;
+    width:150px;   /*auto;*/  /*165px;*/  /* Each menu item is 165px wide */
+    float:left;        /* This lines up the menu items horizontally */
+    text-align:center;  /* All text is placed in the center of the box */
+    list-style:none;  /* Removes the default styling (bullets) for the list */
+    font:normal 16px/1em Georgia, serif;  
+    padding:0;
+    margin:0;
+    background-color:#ffffff;
+}
+
+.navbarcss a {							
+    padding:12px;  /*12px 0;*/  /* Adds a padding of 12 px on the top and bottom so the text appears centered vertically */
+    border-right:1px solid #cccccc; /* Creates a border in a slightly darker shade of blue than the background.  Combined with the left border, this creates a nice effect. */
+    text-decoration:none !important;  /* Removes the default hyperlink styling. */
+    color:#2F4F4F; /* Text color is black */
+    display:block;
+}
+
+.navbarcss li:hover, a:hover {
+    background-color: #ffffff;
+    color: gray;
+}
+
+.navbarcss li ul {
+    display: none;  /* Hides the drop-down menu */
+    height: auto;									
+    margin: 0; /* Aligns drop-down box underneath the menu item */
+    padding: 0; /* Aligns drop-down box underneath the menu item */
+}				
+
+.navbarcss li:hover ul {
+    //display: block; /* Displays the drop-down box when the menu item is hovered over */
+}
+
+.navbarcss li ul li {
+    background-color: #ffffff;
+    text-align:left;  /* All text is placed in the center of the box */
+} 
+
+.navbarcss li ul li a:hover, a:hover {
+    border-left: 1px solid #ffffff; 
+    border-top: 1px solid #ffffff; 
+    border-bottom: 1px solid #ffffff;
+    border-right: 1px solid #cccccc; 
+    color: #BDB76B !important;
+}
+
+.navbarcss li ul li a:hover	{
+    background-color: #ffffff;
+}
+
+.wdetailsm{
+    width:800px !important;  /*500px;*/    /*1000px;*/
+    margin-left:auto !important;
+    margin-right:auto !important;
+}
+
+#wrapsm	{
+    width:100%; /* Spans the width of the page */
+    height:42px; 
+    margin:0; /* Ensures there is no space between sides of the screen and the menu */
+    z-index:99; /* Makes sure that your menu remains on top of other page elements */
+    position:relative; 
+    background-color:#ffffff;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.navbarsm	{
+    height: 40px;
+    padding-left: 0px !important;
+    margin:0;
+    position:absolute; /* Ensures that the menu doesn’t affect other elements */
+    border-right:1px solid #ffffff; 
+}
+
+.navbarsm li {
+    height:auto;
+    width:133px;   /*auto;*/  /*165px;*/  /* Each menu item is 165px wide */
+    float:left;        /* This lines up the menu items horizontally */
+    text-align:center;  /* All text is placed in the center of the box */
+    list-style:none;  /* Removes the default styling (bullets) for the list */
+    font:normal 14px/1em Georgia, serif;  
+    padding:0;
+    margin:0;
+    background-color:#ffffff;
+}
+
+.navbarsm a {							
+    padding:10px;  /*12px 0;*/  /* Adds a padding of 12 px on the top and bottom so the text appears centered vertically */
+    border-right:1px solid #cccccc; /* Creates a border in a slightly darker shade of blue than the background.  Combined with the left border, this creates a nice effect. */
+    text-decoration:none !important;  /* Removes the default hyperlink styling. */
+    color:#2F4F4F; /* Text color is black */
+    display:block;
+}
+
+.navbarsm li:hover, a:hover {
+    background-color: #ffffff;
+    color: gray;
+}
+
+.navbarsm li ul {
+    display: none;  /* Hides the drop-down menu */
+    height: auto;									
+    margin: 0; /* Aligns drop-down box underneath the menu item */
+    padding: 0; /* Aligns drop-down box underneath the menu item */
+}				
+
+.navbarsm li:hover ul {
+    //display: block; /* Displays the drop-down box when the menu item is hovered over */
+}
+
+.navbarsm li ul li {
+    background-color: #ffffff;
+    text-align:left;  /* All text is placed in the center of the box */
+} 
+
+.navbarsm li ul li a:hover, a:hover {
+    border-left: 1px solid #ffffff; 
+    border-top: 1px solid #ffffff; 
+    border-bottom: 1px solid #ffffff;
+    border-right: 1px solid #cccccc; 
+    color: #BDB76B !important;
+}
+
+.navbarsm li ul li a:hover	{
+    background-color: #ffffff;
+}       
+
+#section { /*id "#" */
+    width:950px;
+    padding:10px;   /*10px*/
+    text-align: justify;
+    font: normal 14px/1.2em Arial, Verdana, Helvetica;  
+}
+
+.editbootstrap { /* class "." */
+    border-width: 0px !important;
+    background-image: none !important;    
+}
+
+a:focus {
+    outline: none !important;
+}
+
+.boundary {
+    width: 1000px !important;
+}
+
+.boundarysm {
+    width: 500px !important;
+}
+
+label {
+    font-weight: normal !important;
+}
