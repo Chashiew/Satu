@@ -1841,17 +1841,21 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 <button type="button" onclick="return cleardefaultsfalssvr(0);" class="btn btn-primary">Clear</button>
                             </div>
                         </td>
-                        <td style="width:64%">
-                            <% if (sLoadingDataExcel != "") { %>
+                        <a href="#bottomform">
+                            <img src="Arrow bottom.png" alt="..." width="18" style="float:right">
+                        </a>
+                            
+                        <!--<td style="width:64%">
+                            <%-- if (sLoadingDataExcel != "") { --%>
                                 <a href="#bottompage">
                                     <img src="arrowbottom.JPG" alt="..." width="15" style="float:right">
                                 </a>
-                            <% } else { %>
+                            <%-- } else { --%>
                                 <a href="#bottomform">
                                     <img src="arrowbottom.JPG" alt="..." width="15" style="float:right">
                                 </a>
-                            <% } %>
-                        </td>
+                            <%-- } --%>
+                        </td>-->
                     </tr>
                 </table>
 
@@ -2162,7 +2166,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 <table>
                     <tr>
                         <td>
-                            <div class="container boundary">
+                            <div class="container boundary"  id="bottomform">
                                 <h2><font face="Palatino Linotype, Book Antiqua, Palatino, serif" size="6">Dataset</font></h2>
                             </div>
                         </td>
@@ -2175,8 +2179,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             <input type="hidden" name="PRadio" id="PRadio" value="<%=PRadio%>"/>
                             <% if (PRadio.equals("PRadio1")) { 
 
-                                out.println("PRadio = "+PRadio);
-                                out.println("TORadio = "+TORadio);
+                                //out.println("PRadio = "+PRadio);
+                                //out.println("TORadio = "+TORadio);
                                     
                                 if (TORadio.equals("TORadio1")) {%><script>document.getElementById("TORadio1").checked = true; </script><%}
                                 else if (TORadio.equals("TORadio2")) {%><script>document.getElementById("TORadio2").checked = true; </script><%}
@@ -2191,7 +2195,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                             <input type="file" class="filestyle" name="sDataFile" id="sDataFile" accept=".csv,.txt" data-input="false"/>
                                         </div>
                                         <div class="col-md-2" style="margin-top : 4px">
-                                            <a onclick="return computeatform(1);">
+                                            <a onclick="return computeatform(1);"> 
                                                 <span class="glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
                                             </a>
                                         </div>
@@ -2413,14 +2417,17 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     <img src="Logo-Space.png" alt="     " width="4" height="5">
                     &nbsp;. . . [END OF DATA FORM] &nbsp;&nbsp;&nbsp;
                 </h6>-->
-                <% if (sLoadingDataExcel != "") { %>
-                <% } else { %>
+                <!--<%-- if (sLoadingDataExcel != "") { --%>
+                <%-- } else { --%>
                 <div class="scrollToTop">
-                    <img src="arrowup.JPG" alt="..." width="18">  
+                    <img src="Arrow top.png" alt="..." width="18">  
                 </div>
-                <% } 
+                <div class="scrollToBottom">
+                    <img src="Arrow bottom.png" alt="..." width="18">  
+                </div>-->
+                <%-- } 
 
-                /**/
+                /*
                 out.println("PRadio = "+PRadio);
                 out.println("TORadio = "+TORadio);
                 out.println("nLDFAttributes = "+nLDFAttributes);
@@ -2429,9 +2436,9 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 out.println("nPDFInstances = "+nPDFInstances);
                 out.println("sdInstances = "+sdInstances);
                 out.println("sdAttributes = "+sdAttributes);
-                /**/
+                */
                 
-                %>
+                --%>
 
                 <center>
                 <a onclick="return checkdata(1);">
@@ -2439,6 +2446,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         <b><u>SUBMIT >></u></b>
                     </font>
                 </a>
+                <a href="#title">
+                    <img src="Arrow top.png" alt="..." width="18" style="float:right">
+                </a>
+                
                     <table>
                         <tr>
                             <td><img src="Logo-Space.png" alt=""></td>
