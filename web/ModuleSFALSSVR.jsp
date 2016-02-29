@@ -74,16 +74,16 @@
     out.println("<p>");
     out.println("sPageControl = "+sPageControl);
     */
-
     if (sPageControl == null) {
-        sPageControl = "1";
+        sPageControl = "1"; 
     }
+    
     String sPageControlVisible = request.getParameter("sPageControlVisible"); 
     if (sPageControlVisible == null) {
         sPageControlVisible = "";
     }
     
-    /**/
+    /*
     if (sPageControl == "1") {
         sPageControlVisible = "1"; 
     }
@@ -93,7 +93,7 @@
     else if (sPageControl == "3") {
         sPageControlVisible = "3"; 
     }
-    /**/
+    */
     
     /*
     out.println("<p>");
@@ -1406,8 +1406,11 @@
                 document.getElementById("sViewProceed").value = sViewProceed;
 
                 var sPageControl = document.getElementById("sPageControl");
+                sPageControl = "val"; 
+                document.getElementById("sPageControl").value = "sPageControl";
+                
                 //alert("Aha1 ...!");
-                if (val === 1) {
+                /*if (val === 1) {
                     //alert("Aha11 ...!");
                     sPageControlVisible = "1"; 
                     document.getElementById("sPageControl").value = "1";
@@ -1419,8 +1422,25 @@
                     //alert("Aha13 ...!");
                     sPageControlVisible = "3"; 
                     document.getElementById("sPageControl").value = "3";
+                }*/
+                return refreshform(val);
+            }
+            
+            function changetab(val) {
+                if (val === 1)
+                {
+                    document.getElementById("sPageControl").value = "1";
+                }
+                else if (val === 2)
+                {
+                    document.getElementById("sPageControl").value = "2";
+                }
+                else if (val === 3)
+                {
+                    document.getElementById("sPageControl").value = "3";
                 }
                 return refreshform(val);
+                //return true;
             }           
         </script>
     </head>
@@ -1983,6 +2003,7 @@
                 <input type="hidden" name="vfile" id="vfile" value="<%=vfile%>"/>
 
                 <input type="hidden" name="sHasil" id="sHasil" value="<%=sHasil%>"/>
+                <input type="hidden" name="sPageControl" id="sPageControl" value="<%=sPageControl%>"/>
 
                 <%-- if (hdf.equals("1")) { %>
                     
@@ -2011,24 +2032,38 @@
 
                 <div class="container boundary">
                     <ul class="nav nav-tabs">
-                        <% if (sPageControl == "1") { %> 
+                        <%-- if (sPageControl == "1") { --%> 
                             <%--
                             out.println("<p>");
                             out.println("sPageControl = "+sPageControl); 
                             --%>
-                            <li class="active"><a data-toggle="tab" href="#initialize" onclick="return changepurpose(1);">Initialize</a></li>
-                            <li><a data-toggle="tab" href="#process" onclick="return changepurpose(2);">Processing</a></li>
-                            <li><a data-toggle="tab" href="#result" onclick="return changepurpose(3);">View The Results</a></li>
-                        <% } else if (sPageControl == "2") { %> 
+                            <% if (sPageControl.equals("1")) { %>
+                                <li class="active"><a data-toggle="tab" href="#initialize" onclick="return changetab(1);">Initialize</a></li>
+                            <% } else { %>
+                                <li><a data-toggle="tab" href="#initialize" onclick="return changetab(1);">Initialize</a></li>
+                            <% } %>        
+                            <% if (sPageControl.equals("2")) { %>
+                                <li class="active"><a data-toggle="tab" href="#process" onclick="return changetab(2);">Processing</a></li>
+                            <% } else { %>
+                                <li><a data-toggle="tab" href="#process" onclick="return changetab(2);">Processing</a></li>
+                            <% } %>        
+                            <% if (sPageControl.equals("3")) { %>
+                                <li class="active"><a data-toggle="tab" href="#result" onclick="return changetab(3);">View The Results</a></li>
+                            <% } else { %>
+                                <li><a data-toggle="tab" href="#result" onclick="return changetab(3);">View The Results</a></li>
+                            <% } %>        
+                                
+                            
+                        <%-- } else if (sPageControl == "2") { --%> 
                             <%--
                             out.println("<p>");
                             out.println("sPageControl = "+sPageControl); 
                             out.println("sPageControl = "+sPageControl); 
                             --%>
-                            <li><a data-toggle="tab" href="#initialize" onclick="return changepurpose(1);">Initialize</a></li>
+                            <!--<li><a data-toggle="tab" href="#initialize" onclick="return changepurpose(1);">Initialize</a></li>
                             <li class="active"><a data-toggle="tab" href="#process" onclick="return changepurpose(2);">Processing</a></li>
                             <li><a data-toggle="tab" href="#result" onclick="return changepurpose(3);">View The Results</a></li>
-                        <% } else if (sPageControl == "3") { %> 
+                        <%-- } else if (sPageControl == "3") { --%> 
                             <%--
                             out.println("<p>");
                             out.println("sPageControl = "+sPageControl); 
@@ -2037,8 +2072,8 @@
                             --%>
                             <li><a data-toggle="tab" href="#initialize" onclick="return changepurpose(1);">Initialize</a></li>
                             <li><a data-toggle="tab" href="#process" onclick="return changepurpose(2);">Processing</a></li>
-                            <li class="active"><a data-toggle="tab" href="#result" onclick="return changepurpose(3);">View The Results</a></li>
-                        <% } %>
+                            <li class="active"><a data-toggle="tab" href="#result" onclick="return changepurpose(3);">View The Results</a></li>-->
+                        <%-- } --%>
                     </ul>
                     <%--
                     out.println("<p>");
@@ -2046,14 +2081,3377 @@
                     out.println("sPageControl = "+sPageControl); 
                     --%>
                     <div class="tab-content">
-                        <div id="initialize" class="tab-pane fade in active">
+                        <% if (sPageControl.equals("1")) { %>
+                            <div id="initialize" class="tab-pane fade in active">
+                        <% } else { %>
+                            <div id="initialize" class="tab-pane fade in">
+                        <% } %>
+                            <br>
+                            <a onclick="return previousscreen();">
+                                <font color="blue" face="agency FB" size="3" style="float:left;">&nbsp;&nbsp;&nbsp;<b><u><< BACK</u></b></font>
+                            </a>
+                            <br>
+                            <br>
+                            <% //#1 displaying input data: 
+                                if (sLoadingDataExcelClick != "") { 
+                            %>
+                            <table>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>
+                                        <b> General Data: </b>
+                                    </td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>
+                                        <a onclick="return closesummarydata2();">
+                                            <img src="Icon-2ArrowLeft.png" alt="..." width="11" height="17">
+                                        </a>
+                                        &nbsp;&nbsp;
+                                    </td>
+                                    <td>
+                                        1. Swarm and evolutionary parameters:&nbsp;&nbsp;
+                                    </td>
+                                    <td>
+                                        No. of fireflies = <%=nf.format(nFireFlies)%>&nbsp;&nbsp;
+                                    </td>
+                                    <td>
+                                        Max. generation = <%=nf.format(nMaxGeneration)%>
+                                    </td>
+                                    <td>
+                                        &nbsp;&nbsp;&nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;&nbsp;&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>
+                                        2. Attractiveness:
+                                    </td>
+                                    <td>
+                                        Beta min. = <%=nf2.format(dMinBeta)%>&nbsp;&nbsp;
+                                    </td>
+                                    <td>
+                                        Gamma = <%=nf2.format(dGamma)%>
+                                    </td>
+                                    <td>
+                                        &nbsp;&nbsp;&nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;&nbsp;&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>
+                                        3. Random movement:
+                                    </td>
+                                    <td>
+                                        Alpha = <%=nf2.format(dAlpha)%>&nbsp;&nbsp;
+                                    </td>
+                                    <td>
+                                        Adaptive inertia weight = <%=nf2.format(dAIWeight)%>&nbsp;&nbsp;
+                                    </td>
+                                    <td>
+                                        Tau = <%=nf2.format(dTau)%>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;&nbsp;&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>
+                                        4. Logistic map:
+                                    </td>
+                                    <td>
+                                        Biotic potential, a = <%=nf2.format(dBPotential)%>
+                                    </td>
+                                    <td colspan="2">
+                                        &nbsp;&nbsp;&nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;&nbsp;&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>
+                                        5. Hyperparameters:
+                                    </td>
+                                    <td>
+                                        Range of C = <%=ndf.format(dC1)%> to
+                                        <%=ndf.format(dC2)%>&nbsp;&nbsp;
+                                    </td>
+                                    <td>
+                                        Range of sigma = <%=ndf.format(dS1)%> to
+                                        <%=ndf.format(dS2)%>&nbsp;&nbsp;
+                                    </td>
+                                    <td>
+                                        &nbsp;&nbsp;&nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;&nbsp;&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>
+                                        6. Learning Option:
+                                    </td>
+                                    <td>
+                                        Training partition size = <%=nf.format(dTrainingPS)%> (%)&nbsp;&nbsp;
+                                    </td>
+                                    <td>
+                                        Validation partition size = <%=nf.format(dValidationPS)%> (%)
+                                    </td>
+                                    <td>
+                                        &nbsp;&nbsp;&nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;&nbsp;&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>
+                                        7. Normalization Method:
+                                    </td>
+                                    <td>
+                                        <%
+                                        if (NormalRadio.equals("NormalRadio1")) {
+                                            sNormalRadio = "Original value";
+                                        }
+                                        else if (NormalRadio.equals("NormalRadio2")) {
+                                            sNormalRadio = "Feature scaling";
+                                        }
+                                        %>
+                                         <%=sNormalRadio%>
+                                    </td>
+                                    <td colspan="2">
+                                        &nbsp;&nbsp;&nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;&nbsp;&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>
+                                        8. Objective Function (OF): 
+                                    </td>
+                                    <td>
+                                        <%
+                                        if (OptimRadio.equals("OptimRadio1")) {
+                                            sOptimRadio = "RMSE validation";
+                                        }
+                                        else if (OptimRadio.equals("OptimRadio2")) {
+                                            sOptimRadio = "MAE validation";
+                                        }
+                                        else if (OptimRadio.equals("OptimRadio3")) {
+                                            sOptimRadio = "MAPE validation";
+                                        }
+                                        %>
+                                         <%=sOptimRadio%>
+                                    </td>
+                                    <td colspan="2">
+                                        &nbsp;&nbsp;&nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;&nbsp;&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>
+                                        9. Stop Criterion:
+                                    </td>
+                                    <td>
+                                        <%
+                                        if (SCRadio.equals("SCRadio1")) {
+                                            sSCRadio = "Max. generation is reached";
+                                            %> 
+                                            <%=sSCRadio%>
+                                            <%
+                                        }
+                                        else if (SCRadio.equals("SCRadio2")) {
+                                            sSCRadio = "last changes in OF value <";
+                                            %> 
+                                            <%=nf.format(nLastChange1)%> <%=sSCRadio%> <%=nf5.format(nLastChange2)%>
+                                            <%
+                                        }
+                                        else if (SCRadio.equals("SCRadio3")) {
+                                            sSCRadio = "Either criterion is reached";
+                                            %> 
+                                            <%=sSCRadio%>
+                                            <%
+                                        }
+                                        %>
+                                    </td>
+                                    <td colspan="2">
+                                        &nbsp;&nbsp;&nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;&nbsp;&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>
+                                        10. Purpose:
+                                    </td>
+                                    <td>
+                                        <%
+                                        sPRadio = "...";
+                                        if (PRadio.equals("PRadio1")) {
+                                            sPRadio = "Evaluation";
+                                            sDummy = "Data File : ";
+                                        }
+                                        else if (PRadio.equals("PRadio2")) {
+                                            sPRadio = "Prediction";
+                                            sDummy = "Learning Data File : ";
+                                            sFileData = sLearningFileName;
+                                            dAttributes = snLDFAttributes;
+                                            dInstances = snLDFInstances;
+                                            sPDummy = "Prediction Data File : ";
+                                            sPFileData = sPredictionFileName;
+                                            dPAttributes = snPDFAttributes;
+                                            dPInstances = snPDFInstances;
+                                            sVariation = "5";
+                                        }
+                                        %>
+                                        <%=sPRadio%>
+                                    </td>
+                                    <td colspan="2">
+                                        &nbsp;&nbsp;&nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;&nbsp;&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>
+                                        11. Test Option: 
+                                    </td>
+                                    <td>
+                                        <%
+                                        sTORadio = "...";
+                                        if (TORadio.equals("TORadio2")) { 
+                                            if (PRadio.equals("PRadio1")) { %>
+                                                Hold-out = <%=nf.format(dHoldOut)%> (%) 
+                                                <% 
+                                                sDummy = "Data File : ";
+                                                sFileData = sFileName;
+                                                dAttributes = snDFAttributes;
+                                                dInstances = snDFInstances;
+                                                sVariation = "2";
+                                                sPFileData = "";
+                                                dPAttributes = "0";
+                                                dPInstances = "0";
+                                            }
+                                            else if (PRadio.equals("PRadio2")) { %> 
+                                                -
+                                            <% }
+                                        }
+                                        else if (TORadio.equals("TORadio3")) {
+                                            if (PRadio.equals("PRadio1")) { %>
+                                                Cross-validation = <%=nf.format(dCrossValidation)%> (folds)
+                                                <%
+                                                sDummy = "Data File : ";
+                                                sFileData = sFileName;
+                                                dAttributes = snDFAttributes;
+                                                dInstances = snDFInstances;
+                                                sVariation = "3";
+                                                sPFileData = "";
+                                                dPAttributes = "0";
+                                                dPInstances = "0";
+                                            }
+                                            else if (PRadio.equals("PRadio2")) { %>
+                                                -
+                                            <% }
+                                        }
+                                        else {
+                                            if (TORadio.equals("TORadio1")) {
+                                                if (PRadio.equals("PRadio1")) {
+                                                    sTORadio = "Use data file";
+                                                    sDummy = "Data File : ";
+                                                    sFileData = sFileName;
+                                                    dAttributes = snDFAttributes;  
+                                                    dInstances = snDFInstances; 
+                                                    sVariation = "1";
+                                                    sPFileData = "";
+                                                    dPAttributes = "0";
+                                                    dPInstances = "0";
+                                                }
+                                                else if (PRadio.equals("PRadio2")) {
+                                                    sTORadio = "-";
+                                                }
+                                            }
+                                            else if (TORadio.equals("TORadio4")) {
+                                                if (PRadio.equals("PRadio1")) {
+                                                    sTORadio = "Use test data file";
+                                                    sDummy = "Data File : ";
+                                                    sFileData = sFileName;
+                                                    dAttributes = snDFAttributes;
+                                                    dInstances = snDFInstances; 
+                                                    sPDummy = "Test Data File : ";
+                                                    sPFileData = sTestFileName;
+                                                    dPAttributes = snTDFAttributes; 
+                                                    dPInstances = snTDFInstances; 
+                                                    sVariation = "4";
+                                                }
+                                                else if (PRadio.equals("PRadio2")) {
+                                                    sTORadio = "-";
+                                                }
+                                            }
+                                            else {
+                                                dAttributes = snDFAttributes;
+                                                dInstances = snDFInstances;
+                                            }%>
+
+                                            <%=sTORadio%>
+
+                                        <% } %>
+
+                                    </td>
+                                    <td colspan="2">
+                                        <b> Run variation # <%=sVariation%> </b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="8">&nbsp;</td>
+                                </tr>
+                            </table>
+
+                            <table>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>&nbsp;&nbsp;</td>
+                                    <td>
+                                        <%=sDummy%> <%=sFileData%> 
+                                    </td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>
+                                        No. of Attributes = <%=nf.format(Double.parseDouble(dAttributes))%>  
+                                    </td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>
+                                         No. of Instances = <%=nf.format(Double.parseDouble(dInstances))%>  
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <%if (sVariation == "4" || sVariation == "5") {%>
+                                        <td>&nbsp;&nbsp;</td>
+                                        <td>&nbsp;&nbsp;</td>
+                                        <td>&nbsp;&nbsp;</td>
+                                        <td>&nbsp;&nbsp;</td>
+                                        <td>
+                                            <%=sPDummy%> <%=sPFileData%> 
+                                        </td>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                        <td>
+                                            No. of Attributes = <%=nf.format(Double.parseDouble(dPAttributes))%>  
+                                        </td>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                        <td>
+                                             No. of Instances = <%=nf.format(Double.parseDouble(dPInstances))%>  
+                                        </td>
+                                    <%}%>
+                                </tr>
+                            </table>
+
+                            <% //#2 displaying data file 
+                            } else if (sLoadingDataExcelClick3 != "") { 
+                            %>
+                                <table>
+                                <tr>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                    <td>
+                                        <b> Training Dataset: </b>
+                                    </td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>
+                                        <a onclick="return closesummarydata2();">
+                                            <img src="Icon-2ArrowLeft.png" alt="..." width="11" height="17">
+                                        </a>
+                                    </td>
+                                    <td>&nbsp;&nbsp;</td>
+                                <%
+                                    if (sFileName != "") { 
+                                        String file = application.getRealPath("/") + sFileName;
+                                        BufferedReader br = new BufferedReader(new FileReader(file)); 
+                                        String line = null;
+                                        int i;
+                                        int j;
+
+                                        // first line: title
+                                        line = br.readLine();
+                                        if (line == null) {
+                                            out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
+                                        } else {
+                                            cols = line.split("\\t");
+
+                                            // second line: column header
+                                            line = br.readLine();
+                                            headers = line.split("\\t");
+
+                                            // third line and so on: data ... last column = dependent variable  
+                                            line = br.readLine(); 
+                                            j=0;
+                                            while (line != null) {
+                                                cols = line.split("\\t");
+                                                for (i = 0; i < ncols1; i += 1) {
+                                                    Dataraw[j][i]=cols[i];
+                                                }
+                                                j=j+1;
+                                                line = br.readLine();
+                                            }
+                                        }
+                                        br.close();
+                                        %>
+                                                <td align="center">
+                                                    No.
+                                                </td>
+                                                <td>&nbsp;&nbsp;&nbsp;</td>
+                                                <% for (j = 0; j < ncols1; j += 1) { %> 
+                                                    <td align="center">
+                                                        <%=headers[j]%>
+                                                    </td>
+                                                    <td>&nbsp;&nbsp;&nbsp;</td>
+                                                <% } %>
+                                            </tr>
+
+                                            <% for (i = 0; i < nrows1; i += 1) { %> 
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td align="center">
+                                                        <%=i%>
+                                                    </td> 
+                                                    <td>&nbsp;&nbsp;&nbsp;</td>
+                                                    <% for (j = 0; j < ncols1; j += 1) { %> 
+                                                        <td align="right">
+                                                            <%=nf3.format(Double.parseDouble(Dataraw[i][j]))%>
+                                                        </td>
+                                                        <td>&nbsp;&nbsp;&nbsp;</td>
+                                                    <% } %>
+                                                </tr>
+                                            <% } %>
+                                    <% } else { %>
+                                                <td align="left">
+                                                    <font color='red'>
+                                                    &nbsp;&nbsp;Data file not available ... !
+                                                    </font>
+                                                </td>
+                                            </tr>
+                                    <% } %>
+                                    </table>
+
+                            <% //#3 displaying test data file 
+                            } else if (sLoadingDataExcelClick4 != "") { 
+                            %>
+                                <%--Fileopen.mat Filetest.mat Fileopen.mat FilePredict.mat--%>
+                                <table>
+                                <tr>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                    <td>
+                                        <b> Test Dataset: </b>
+                                    </td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>
+                                        <a onclick="return closesummarydata2();">
+                                            <img src="Icon-2ArrowLeft.png" alt="..." width="11" height="17">
+                                        </a>
+                                    </td>
+                                    <td>&nbsp;&nbsp;</td>
+                                <%
+                                    if (sTestFileName != "") { 
+                                        String file = application.getRealPath("/") + sTestFileName;
+                                        BufferedReader br = new BufferedReader(new FileReader(file)); 
+                                        String line = null;
+                                        int i;
+                                        int j;
+
+                                        // first line: title
+                                        line = br.readLine();
+                                        if (line == null) {
+                                            out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
+                                        } else {
+                                            cols = line.split("\\t");
+
+                                            // second line: column header
+                                            line = br.readLine();
+                                            headers = line.split("\\t");
+
+                                            // third line and so on: data ... last column = dependent variable  
+                                            line = br.readLine(); 
+                                            j=0;
+                                            while (line != null) {
+                                                cols = line.split("\\t");
+                                                for (i = 0; i < ncols2; i += 1) {
+                                                    Datatest[j][i]=cols[i]; 
+                                                }
+                                                j=j+1;
+                                                line = br.readLine();
+                                            }
+                                        }
+                                        br.close();
+                                        %>
+                                                <td align="center">
+                                                    No.
+                                                </td>
+                                                <td>&nbsp;&nbsp;&nbsp;</td>
+                                                <% for (j = 0; j < ncols2; j += 1) { %>
+                                                    <td align="center">
+                                                        <%=headers[j]%>
+                                                    </td>
+                                                    <td>&nbsp;&nbsp;&nbsp;</td>
+                                                <% } %>
+                                            </tr>
+
+                                            <% for (i = 0; i < nrows2; i += 1) { %> 
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td align="center">
+                                                        <%=i%>
+                                                    </td> 
+                                                    <td>&nbsp;&nbsp;&nbsp;</td>
+                                                    <% for (j = 0; j < ncols2; j += 1) { %>
+                                                        <td align="right">
+                                                            <%=nf3.format(Double.parseDouble(Datatest[i][j]))%>
+                                                        </td>
+                                                        <td>&nbsp;&nbsp;&nbsp;</td>
+                                                    <% } %>
+                                                </tr>
+                                            <% } %>
+                                    <% } else { %>
+                                                <td align="left">
+                                                    <font color='red'>
+                                                    &nbsp;&nbsp;Test data file not available ... !
+                                                    </font>
+                                                </td>
+                                            </tr>
+                                    <% } %>
+                                    </table>
+
+                            <% //#4 displaying learning data file 
+                            } else if (sLoadingDataExcelClick5 != "") { 
+                            %>
+                                <table>
+                                <tr>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                    <td>
+                                        <b> Learning Dataset: </b>
+                                    </td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>
+                                        <a onclick="return closesummarydata2();">
+                                            <img src="Icon-2ArrowLeft.png" alt="..." width="11" height="17">
+                                        </a>
+                                    </td>
+                                    <td>&nbsp;&nbsp;</td>
+                                <% 
+                                    /*
+                                    out.println("<p>");
+                                    out.println("sLearningFileName = "+sLearningFileName);
+                                    out.println("<br>");
+                                    */ 
+
+                                    if (sLearningFileName != "") { 
+                                        String file = application.getRealPath("/") + sLearningFileName;
+                                        BufferedReader br = new BufferedReader(new FileReader(file)); 
+                                        String line = null;
+                                        int i;
+                                        int j;
+
+                                        //alert("Zero Y value observed, MAPE cannot be chosen as an objective function ...!"); 
+
+                                        /**/
+                                        // first line: title
+                                        line = br.readLine();
+                                        if (line == null) {
+                                            out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
+                                        } else {
+                                            cols = line.split("\\t");
+                                            //out.println("<table>");
+                                            //out.println("<tr>");
+
+                                            // second line: column header
+                                            line = br.readLine();
+                                            headers = line.split("\\t");
+
+                                            // third line and so on: data ... last column = dependent variable  
+                                            line = br.readLine(); 
+                                            j=0;
+                                            while (line != null) {
+                                                cols = line.split("\\t");
+                                                for (i = 0; i < ncols3; i += 1) {
+                                                    Datatrains[j][i]=cols[i]; 
+                                                }
+                                                sDummy = Datatrains[j][ncols3-1];
+                                                dDummy=Double.parseDouble(sDummy);
+                                                if (dDummy == 0) {
+                                                    sError="1";
+                                                }
+                                                j=j+1;
+                                                line = br.readLine();
+                                            }
+                                        }
+                                        /**/
+                                        br.close();
+
+                                        /*
+                                        out.println("snLDFInstances = "+snLDFInstances);
+                                        out.println("<br>");
+                                        */
+                                        %>
+
+                                        <%-->
+                                        <--%>
+                                                <td align="center">
+                                                    No.
+                                                </td>
+                                                <td>&nbsp;&nbsp;&nbsp;</td>
+                                                <% for (j = 0; j < ncols3; j += 1) { %>
+                                                    <td align="center">
+                                                        <%=headers[j]%>
+                                                    </td>
+                                                    <td>&nbsp;&nbsp;&nbsp;</td>
+                                                <% } %>
+                                            </tr>
+
+                                            <tr>
+                                            <td colspan="15">
+                                            <% 
+                                            if (OptimRadio.equals("OptimRadio1")) {
+                                                sOptimRadio = "RMSE validation";
+                                            }
+                                            else if (OptimRadio.equals("OptimRadio2")) {
+                                                sOptimRadio = "MAE validation";
+                                            }
+                                            else if (OptimRadio.equals("OptimRadio3")) {
+                                                sOptimRadio = "MAPE validation";
+                                            }
+
+                                            //out.println("sError = "+sError);
+                                            //out.println("OptimRadio = "+OptimRadio);
+                                            //out.println("sOptimRadio = "+sOptimRadio);
+
+                                            if (sError=="1") {
+                                            if (sOptimRadio=="MAPE validation") {
+                                                out.println("<h4><font color='red'>&nbsp;&nbsp;&nbsp;"
+                                                    + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                                                    + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                                                    + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                                                    + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                                                    + "&nbsp;&nbsp;&nbsp;&nbsp;" 
+                                                    + "Zero Y value observed, MAPE cannot be chosen as an objective function ... !</font></h4>");
+                                            }
+                                            }
+                                            %>
+                                            </td>
+                                            </tr>
+
+                                            <% for (i = 0; i < nrows3; i += 1) { %>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td align="center">
+                                                        <%=i%>
+                                                    </td> 
+                                                    <td>&nbsp;&nbsp;&nbsp;</td>
+                                                    <% for (j = 0; j < ncols3; j += 1) { %>
+                                                        <td align="right">
+                                                            <%-->
+                                                            <%=Datatrain[i][j]%>
+                                                            <--%>
+
+                                                            <%=nf3.format(Double.parseDouble(Datatrains[i][j]))%>
+                                                        </td>
+                                                        <td>&nbsp;&nbsp;&nbsp;</td>
+                                                    <% } %>
+                                                </tr>
+                                            <% } %>
+                                    <% } else { %>
+                                                <td align="left">
+                                                    <font color='red'>
+                                                    &nbsp;&nbsp;Learning data file not available ... !
+                                                    </font>
+                                                </td>
+                                            </tr>
+                                    <% } %>
+                                    </table>
+
+                            <% //#5 displaying prediction data file 
+                            } else if (sLoadingDataExcelClick6 != "") { 
+                            %>
+                                <table>
+                                <tr>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                    <td>
+                                        <b> Prediction Dataset: </b>
+                                    </td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>
+                                        <a onclick="return closesummarydata2();">
+                                            <img src="Icon-2ArrowLeft.png" alt="..." width="11" height="17">
+                                        </a>
+                                    </td>
+                                    <td>&nbsp;&nbsp;</td>
+                                <%
+                                    if (sPredictionFileName != "") { 
+                                        String file = application.getRealPath("/") + sPredictionFileName;
+                                        BufferedReader br = new BufferedReader(new FileReader(file)); 
+                                        String line = null;
+                                        int i;
+                                        int j;
+
+                                        // first line: title
+                                        line = br.readLine();
+                                        if (line == null) {
+                                            out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
+                                        } else {
+                                            cols = line.split("\\t");
+
+                                            // second line: column header
+                                            line = br.readLine();
+                                            headers = line.split("\\t");
+
+                                            // third line and so on: data ... last column = dependent variable  
+                                            line = br.readLine(); 
+                                            j=0;
+                                            while (line != null) {
+                                                cols = line.split("\\t");
+                                                for (i = 0; i < ncols4; i += 1) {
+                                                    Datapres[j][i]=cols[i];
+                                                }
+                                                j=j+1;
+                                                line = br.readLine();
+                                            }
+                                        }
+                                        br.close();
+                                        %>
+                                                <td align="center">
+                                                    No.
+                                                </td>
+                                                <td>&nbsp;&nbsp;&nbsp;</td>
+                                                <% for (j = 0; j < ncols4; j += 1) { %>
+                                                    <td align="center">
+                                                        <%=headers[j]%>
+                                                    </td>
+                                                    <td>&nbsp;&nbsp;&nbsp;</td>
+                                                <% } %>
+                                            </tr>
+
+                                            <% for (i = 0; i < nrows4; i += 1) { %>
+                                                <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                    <td align="center">
+                                                        <%=i%>
+                                                    </td> 
+                                                    <td>&nbsp;&nbsp;&nbsp;</td>
+                                                    <% for (j = 0; j < ncols4; j += 1) { %>
+                                                        <td align="right">
+                                                            <%=nf3.format(Double.parseDouble(Datapres[i][j]))%>
+                                                        </td>
+                                                        <td>&nbsp;&nbsp;&nbsp;</td>
+                                                    <% } %>
+                                                </tr>
+                                            <% } %>
+                                    <% } else { %>
+                                                <td align="left">
+                                                    <font color='red'>
+                                                    &nbsp;&nbsp;Prediction data file not available ... !
+                                                    </font>
+                                                </td>
+                                            </tr>
+                                    <% } %>
+                                    </table>
+
+                            <% //#6 displaying header
+                            } else { 
+                            %>
+                                <table>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>
+                                        <b> General Data: </b>
+                                    </td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>
+                                        <a onclick="return viewsummarydata2();">
+                                            <img src="Icon-2ArrowRight.png" alt="..." width="11" height="17">
+                                        </a>
+                                    </td>
+
+                                    <td>
+                                        <font color="black" face="tahoma" size="2">
+                                        &nbsp;&nbsp;Click 
+                                        </font>
+                                        <a onclick="return viewsummarydata2();">
+                                            <font color="blue">
+                                            <u>here</u>
+                                            </font>
+                                        </a> 
+                                        <font color="black" face="tahoma" size="2">
+                                        to view the summary data ...
+                                        </font>
+                                    </td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>&nbsp;&nbsp;&nbsp;</td>
+                                    <td>
+                                        <b> Dataset: </b> &nbsp;&nbsp;
+                                        <% if (PRadio.equals("PRadio1")) { %> 
+                                            <a onclick="return viewsummarydata3();">
+                                                <font color="blue">
+                                                <u>Learning Dataset</u>
+                                                </font>
+                                            </a> 
+                                            <% if (TORadio.equals("TORadio4")) { %> 
+                                                &nbsp; - &nbsp;
+                                                <a onclick="return viewsummarydata4();">
+                                                    <font color="blue">
+                                                    <u>Test Dataset</u>
+                                                    </font>
+                                                </a> 
+                                            <% } %>
+                                        <% } else if (PRadio.equals("PRadio2")) { %> 
+                                            <a onclick="return viewsummarydata5();">
+                                                <font color="blue">
+                                                <u>Learning Dataset</u>
+                                                </font>
+                                            </a> 
+                                            &nbsp; - &nbsp;
+                                            <a onclick="return viewsummarydata6();">
+                                                <font color="blue">
+                                                <u>Prediction Dataset</u>
+                                                </font>
+                                            </a> 
+                                        <% } %>
+                                    </td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>&nbsp;&nbsp;&nbsp;</td>
+                                    <td>
+                                        <b> Output: </b> &nbsp;&nbsp;
+                                        <a onclick="return rundata2(1);">
+                                            <font color="blue">
+                                            <u>Initialize</u>
+                                            </font>
+                                        </a> 
+                                    </td>
+                                </tr>
+                                </table>
+                            <% } %>
+
+                            <BR>
+
+                            <% if (sRunReportTable == "") { %> 
+                                <%-->
+                                <h6 id="bottompage">
+                                    <img src="Logo-Space.png" alt="     " width="4" height="5">
+                                    &nbsp;. . . [END OF OUTPUT FORM] &nbsp;&nbsp;&nbsp;
+                                </h6>
+                                <--%>
+                                <%--><a href="#top">
+                                    <img src="Icon-Top.png" alt="..." width="13" height="17">
+                                </a><--%>
+
+                                <div class="scrollToTop">
+                                  <img src="arrowup.JPG" alt="..." width="18">  
+                                </div>
+                            <% } %>
+
+                            <% 
+                            if ((int)Double.parseDouble(sRunReportTable) == 1) {
+                                if (sCreate != "") {  
+                                    sResult01Name = application.getRealPath("/") + sBaseFileName +"01.txt";
+                                    sResult02Name = application.getRealPath("/") + sBaseFileName +"02.txt";
+                                    sResult03Name = application.getRealPath("/") + sBaseFileName +"03.txt";
+                                    sResult04Name = application.getRealPath("/") + sBaseFileName +"04.txt";
+                                    sResult04aName = application.getRealPath("/") + sBaseFileName +"04a.txt";
+                                    sResult04bName = application.getRealPath("/") + sBaseFileName +"04b.txt";
+                                    sResult04cName = application.getRealPath("/") + sBaseFileName +"04c.txt";
+                                    sResult04dName = application.getRealPath("/") + sBaseFileName +"04d.txt";
+                                    sResult05Name = application.getRealPath("/") + sBaseFileName +"05.txt";
+                                    sResult06Name = application.getRealPath("/") + sBaseFileName +"06.txt";
+                                    %>
+                                    <script>
+                                        document.getElementById("sResult01Name").value = sResult01Name;
+                                        document.getElementById("sResult02Name").value = sResult02Name;
+                                        document.getElementById("sResult03Name").value = sResult03Name;
+                                        document.getElementById("sResult04Name").value = sResult04Name;
+                                        document.getElementById("sResult04aName").value = sResult04aName;
+                                        document.getElementById("sResult04bName").value = sResult04bName;
+                                        document.getElementById("sResult04cName").value = sResult04cName;
+                                        document.getElementById("sResult04dName").value = sResult04dName;
+                                        document.getElementById("sResult05Name").value = sResult05Name;
+                                        document.getElementById("sResult06Name").value = sResult06Name;
+                                    </script>
+
+                                    <script> 
+                                        var sCreate = document.getElementById("sCreate"); 
+                                        sCreate = "";
+                                        document.getElementById("sCreate").value = sCreate; 
+                                    </script>
+
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    &nbsp;
+                                                </td>
+                                                <td>
+                                                    <b> Running: </b>
+                                                </td>
+                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                <td colspan="4">
+                                                <input type="text" name="sResult01Name" id="sResult01Name" size="75" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" readonly/>
+                                                <font color="teal" face="tahoma" size="2"> &nbsp; ... main output. </font>
+                                                <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
+                                                <input type="hidden" name="sResult04Name" id="sResult04Name" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" />
+                                                <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
+                                                <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
+                                                <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
+                                                <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
+                                                <input type="hidden" name="sResult05Name" id="sResult05Name" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" />
+                                                <input type="hidden" name="sResult06Name" id="sResult06Name" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" />
+
+                                                <input type="hidden" name="sBaseFileName" id="sBaseFileName" value="<%=sBaseFileName%>">
+                                                </td>
+                                            </tr> 
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                <td colspan="4">
+                                                <input type="text" name="sResult02Name" id="sResult02Name" size="75" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" readonly/> 
+                                                <font color="teal" face="tahoma" size="2"> &nbsp; ... validation. </font>
+                                                </td>
+                                            </tr>
+                                            <% if (sResult05Name != "") { %>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td colspan="4">
+                                                    <input type="text" name="sResult05Name" id="sResult05Name" size="75" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" readonly/> 
+                                                    <font color="teal" face="tahoma" size="2"> &nbsp; ... performance. </font>
+                                                    </td>
+                                                </tr>
+                                            <% } %>
+                                            <tr>
+                                                <td colspan="7">
+                                                    &nbsp;
+                                                </td>
+                                            </tr> 
+
+                                            <%
+                                            /*
+                                            out.println("<p>");
+                                            out.println("sResult01Name = " + sResult01Name);
+                                            out.println("<br>");
+                                            out.println("sResult03Name = " + sResult03Name);
+                                            out.println("<br>");
+                                            out.println("sResult04Name = " + sResult04Name);
+                                            out.println("<br>");
+                                            out.println("sResult05Name = " + sResult05Name);
+                                            out.println("<br>");
+                                            */
+
+                                            if (sResult01Name!="") {
+                                            String file = "";
+                                            file = sResult01Name; 
+                                            BufferedReader br = new BufferedReader(new FileReader(file));
+                                            String line = null;
+                                            int i;
+                                            int j;
+
+                                            // first line: title
+                                            line = br.readLine();
+                                            if (line == null) {
+                                                out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
+                                            } else {
+                                                cols = line.split("\\t"); %>
+                                                <tr>
+                                                    <td> &nbsp; </td>
+                                                    <td>
+                                                        <b>Output:</b>
+                                                    </td>
+                                                    <td> &nbsp; </td>
+                                                    <td align="right"> Performance &nbsp; = &nbsp; </td>
+                                                    <td>
+                                                        <input type="text" size="10" value="<%=cols[0]%>" readonly>
+                                                    </td>
+                                                    <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                                                    <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                                                </tr> 
+                                                <tr>
+                                                    <td> &nbsp; </td>
+                                                    <td> &nbsp; </td>
+                                                    <td> &nbsp; </td>
+                                                    <td align="right"> Penalty Parameter, C &nbsp; = &nbsp; </td>
+                                                    <td>
+                                                        <input type="text" size="10" value="<%=cols[1]%>" readonly>
+                                                    </td>
+                                                    <td> &nbsp; </td>
+                                                    <td> &nbsp; </td>
+                                                </tr> 
+                                                <tr>
+                                                    <td> &nbsp; </td>
+                                                    <td> &nbsp; </td>
+                                                    <td> &nbsp; </td>
+                                                    <td align="right"> Kernel Function Parameter, S &nbsp; = &nbsp; </td>
+                                                    <td>
+                                                        <input type="text" size="10" value="<%=cols[2]%>" readonly>
+                                                    </td>
+                                                    <td> &nbsp; </td>
+                                                    <td> &nbsp; </td>
+                                                </tr> 
+                                            <% }
+                                            br.close(); %>
+
+                                            <tr>
+                                                <td colspan="7">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="7">&nbsp;</td>
+                                            </tr>
+                                            <% } %>
+                                        </table>
+
+                                        <table>
+                                            <tr>
+                                                <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                                                <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                                                <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                                                <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                                            <%
+                                            if (sResult02Name!="") {
+                                            String file = "";
+                                            file = sResult02Name; 
+                                            BufferedReader br = new BufferedReader(new FileReader(file)); 
+                                            String line = null;
+                                            int i;
+                                            int j;
+
+                                            // first line: title
+                                            line = br.readLine(); 
+                                            if (line == null) { 
+                                                out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
+                                            } else {
+                                                cols = line.split("\\t");
+                                                ncol = cols.length;
+
+                                                for (j=0; j<ncol; j++) {
+                                                    sDummy = cols[j];
+                                                    %>
+                                                        <td>
+                                                            <%=sDummy%>
+                                                        </td>
+                                                        <td> &nbsp;&nbsp; </td>
+                                                <% } %>
+                                            <% } %>
+                                                <td> &nbsp; </td>
+                                                <td> &nbsp; </td>
+                                            </tr> 
+                                            <% 
+                                            line = br.readLine();
+                                            while (line != null) { %>
+                                                <tr>
+                                                    <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
+                                                    <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
+                                                    <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
+                                                    <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
+                                                <%
+                                                cols = line.split("[,\\t]+");
+                                                for (j=0; j<ncol; j++) {
+                                                    sDummy = cols[j];
+                                                    %>
+                                                        <td align="right">
+                                                            <%=sDummy%>
+                                                        </td>
+                                                        <td> &nbsp;&nbsp; </td>
+                                                <% } %>
+                                                </tr>
+                                                <% line = br.readLine();
+                                            } %>
+                                            <% br.close(); %> 
+                                            <tr>
+                                                <td colspan="6"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
+                                            </tr>
+                                            <tr>
+                                                <td colspan="6"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
+                                            <% } %>
+                                            </tr>
+                                        </table>    
+
+                                        <% if (sResult05Name != "") { %>
+                                            <table>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td> Fold No.</td>
+                                                    <td>&nbsp;</td>
+                                                    <td> Generation No.</td>
+                                                    <td>&nbsp;</td>
+                                                    <td> Mean Performance</td>
+                                                    <td>&nbsp;</td>
+                                                    <td> Best Performance</td>
+                                                </tr>
+                                                <tr>
+                                                    <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                                                    <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                                                    <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                                                    <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                                                    <% 
+                                                    String file = "";
+                                                    file = sResult05Name;
+                                                    BufferedReader br = new BufferedReader(new FileReader(file));
+                                                    String line = null;
+                                                    int i;
+                                                    int j;
+
+                                                    // first line: title
+                                                    line = br.readLine();
+                                                    if (line == null) {
+                                                        out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
+                                                    } else {
+                                                        cols = line.split("\\t"); 
+                                                        ncol = cols.length;
+
+                                                        for (j=0; j<ncol; j++) {
+                                                            sDummy = cols[j];
+                                                            %>
+                                                            <td align="right">
+                                                                <%=sDummy%>
+                                                            </td>
+                                                            <td> &nbsp;&nbsp; </td>
+                                                        <% } %>
+                                                    <% } %>
+                                                    <td> &nbsp; </td>
+                                                    <td> &nbsp; </td>
+                                                </tr> 
+                                                <% 
+                                                line = br.readLine();
+                                                while (line != null) { %>
+                                                    <tr>
+                                                        <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
+                                                        <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
+                                                        <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
+                                                        <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
+                                                    <%
+                                                    cols = line.split("[,\\t]+");
+                                                    for (j=0; j<ncol; j++) {
+                                                        sDummy = cols[j];
+                                                        %>
+                                                        <td align="right">
+                                                            <%=sDummy%>
+                                                        </td>
+                                                        <td> &nbsp;&nbsp; </td>
+                                                    <% } %>
+                                                    </tr>
+                                                    <% line = br.readLine();
+                                                } %>
+                                                <tr>
+                                                    <td colspan="6"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
+                                                </tr>
+                                            </table>    
+                                            <% br.close();
+                                        } %>
+                                <% } else {
+                                    if (sRRTShow != "") {  
+                                        if (sViewProceed == "") { %>
+                                            <%--> VIEW Results <--%>
+                                            <script>
+                                                var sfilefileResult01 = document.getElementById("sfilefileResult01"); 
+                                                var sfilefileResult02 = document.getElementById("sfilefileResult02"); 
+                                            </script>
+
+                                            <% if (sResult01 != "") { 
+                                                sfilefileResult01 = application.getRealPath("/") + sResult01;
+                                                sResult01Name=sfilefileResult01; 
+                                            }
+                                            else {
+                                                sfilefileResult01 = sResult01Name;
+                                            } %>
+
+                                            <script>
+                                                var sResult01Name = document.getElementById("sResult01Name");
+                                                document.getElementById("sResult01Name").value = sResult01Name;
+                                            </script>
+
+                                            <% if (sResult02 != "") {
+                                                sfilefileResult02 = application.getRealPath("/") + sResult02;
+                                                sResult02Name=sfilefileResult02; 
+                                            }
+                                            else {
+                                                sfilefileResult02 = sResult02Name;
+                                            } %>
+
+                                            <script>
+                                                var sResult02Name = document.getElementById("sResult02Name");
+                                                document.getElementById("sResult02Name").value = sResult02Name;
+                                            </script>
+
+                                            <script>
+                                                var sResult03Name = document.getElementById("sResult03Name");
+                                                var sResult04Name = document.getElementById("sResult04Name"); 
+                                                var sResult04aName = document.getElementById("sResult04aName"); 
+                                                var sResult04bName = document.getElementById("sResult04bName"); 
+                                                var sResult04cName = document.getElementById("sResult04cName"); 
+                                                var sResult04dName = document.getElementById("sResult04dName"); 
+                                                var sResult05Name = document.getElementById("sResult05Name"); 
+                                                var sResult06Name = document.getElementById("sResult06Name"); 
+                                            </script> 
+
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        &nbsp;
+                                                    </td>
+                                                    <td>
+                                                        <b> Running: </b>
+                                                    </td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td colspan="4">
+                                                    <input type="text" name="sResult01Name" id="sResult01Name" size="75" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" readonly/>
+                                                    <font color="teal" face="tahoma" size="2"> &nbsp; ... main output. </font>
+                                                    <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
+                                                    <input type="hidden" name="sResult04Name" id="sResult04Name" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" />
+                                                    <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
+                                                    <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
+                                                    <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
+                                                    <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
+                                                    <input type="hidden" name="sResult05Name" id="sResult05Name" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" />
+                                                    <input type="hidden" name="sResult06Name" id="sResult06Name" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" />
+                                                    <input type="hidden" name="sBaseFileName" id="sBaseFileName" value="<%=sBaseFileName%>">
+                                                    </td>
+                                                </tr> 
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td colspan="4">
+                                                    <input type="text" name="sResult02Name" id="sResult02Name" size="75" value="<%=sResult02Name%>" readonly/> 
+                                                    <font color="teal" face="tahoma" size="2"> &nbsp; ... validation. </font>
+                                                    </td>
+                                                </tr>
+                                                <% if (sResult05Name != "") { %>
+                                                    <tr>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                        <td colspan="4">
+                                                        <input type="text" name="sResult05Name" id="sResult05Name" size="75" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" readonly/> 
+                                                        <font color="teal" face="tahoma" size="2"> &nbsp; ... performance. </font>
+                                                        </td>
+                                                    </tr>
+                                                <% } %>
+                                                <tr>
+                                                    <td colspan="7">
+                                                        &nbsp;
+                                                    </td>
+                                                </tr> 
+
+                                                <%
+                                                /*
+                                                out.println("<p>");
+                                                out.println("sResult01Name = " + sResult01Name);
+                                                out.println("<br>");
+                                                out.println("sResult03Name = " + sResult03Name);
+                                                out.println("<br>");
+                                                out.println("sResult04Name = " + sResult04Name);
+                                                out.println("<br>");
+                                                out.println("sResult05Name = " + sResult05Name);
+                                                out.println("<br>");
+                                                */
+
+                                                if (sResult01Name!="") {
+                                                String file = ""; 
+                                                file = sResult01Name;
+                                                BufferedReader br = new BufferedReader(new FileReader(file));
+                                                String line = null;
+                                                int i;
+                                                int j;
+
+                                                // first line: title
+                                                line = br.readLine();
+                                                if (line == null) {
+                                                    out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
+                                                } else {
+                                                    cols = line.split("\\t"); %>
+                                                    <tr>
+                                                        <td> &nbsp; </td>
+                                                        <td>
+                                                            <b>Output:</b>
+                                                        </td>
+                                                        <td> &nbsp; </td>
+                                                        <td align="right"> Performance &nbsp; = &nbsp; </td>
+                                                        <td>
+                                                            <input type="text" size="10" value="<%=cols[0]%>" readonly>
+                                                        </td>
+                                                        <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                                                        <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                                                    </tr> 
+                                                    <tr>
+                                                        <td> &nbsp; </td>
+                                                        <td> &nbsp; </td>
+                                                        <td> &nbsp; </td>
+                                                        <td align="right"> Penalty Parameter, C &nbsp; = &nbsp; </td>
+                                                        <td>
+                                                            <input type="text" size="10" value="<%=cols[1]%>" readonly>
+                                                        </td>
+                                                        <td> &nbsp; </td>
+                                                        <td> &nbsp; </td>
+                                                    </tr> 
+                                                    <tr>
+                                                        <td> &nbsp; </td>
+                                                        <td> &nbsp; </td>
+                                                        <td> &nbsp; </td>
+                                                        <td align="right"> Kernel Function Parameter, S &nbsp; = &nbsp; </td>
+                                                        <td>
+                                                            <input type="text" size="10" value="<%=cols[2]%>" readonly>
+                                                        </td>
+                                                        <td> &nbsp; </td>
+                                                        <td> &nbsp; </td>
+                                                    </tr> 
+                                                <% }
+                                                br.close(); %>
+                                                <% } %>
+
+                                                <tr>
+                                                    <td colspan="7">&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="7">&nbsp;</td>
+                                                </tr>
+                                            </table>
+
+                                            <table>
+                                                <tr>
+                                                    <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                                                    <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                                                    <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                                                    <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                                                <%
+                                                if (sResult02Name!="") {
+                                                String file = ""; 
+                                                file = sResult02Name;
+                                                BufferedReader br = new BufferedReader(new FileReader(file));
+                                                String line = null;
+                                                int i;
+                                                int j;
+
+                                                // first line: title
+                                                line = br.readLine();
+                                                if (line == null) {
+                                                    out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
+                                                } else {
+                                                    cols = line.split("\\t"); 
+                                                    ncol = cols.length;
+
+                                                    for (j=0; j<ncol; j++) {
+                                                        sDummy = cols[j];
+                                                        %>
+                                                            <td>
+                                                                <%=sDummy%>
+                                                            </td>
+                                                            <td> &nbsp;&nbsp; </td>
+                                                    <% } %>
+                                                <% } %>
+                                                    <td> &nbsp; </td>
+                                                    <td> &nbsp; </td>
+                                                </tr> 
+                                                <% 
+                                                line = br.readLine();
+                                                while (line != null) { %>
+                                                    <tr>
+                                                        <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
+                                                        <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
+                                                        <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
+                                                        <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
+                                                    <%
+                                                    cols = line.split("[,\\t]+");
+                                                    for (j=0; j<ncol; j++) {
+                                                        sDummy = cols[j];
+                                                        %>
+                                                            <td align="right">
+                                                                <%=sDummy%>
+                                                            </td>
+                                                            <td> &nbsp;&nbsp; </td>
+                                                    <% } %>
+                                                    <% line = br.readLine();
+                                                } %>
+                                                <% br.close(); %> 
+                                                <% } %>
+                                                    </tr>
+                                                <tr>
+                                                    <td colspan="6"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="6"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
+                                                </tr>
+                                            </table>    
+
+                                            <% if (sResult05Name != "") { %>
+                                                <table>
+                                                    <tr>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                        <td> Fold No.</td>
+                                                        <td>&nbsp;</td>
+                                                        <td> Generation No.</td>
+                                                        <td>&nbsp;</td>
+                                                        <td> Mean Performance</td>
+                                                        <td>&nbsp;</td>
+                                                        <td> Best Performance</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                                                        <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                                                        <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                                                        <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                                                        <% 
+                                                        String file = ""; 
+                                                        file = sResult05Name;
+                                                        BufferedReader br = new BufferedReader(new FileReader(file));
+                                                        String line = null;
+                                                        int i;
+                                                        int j;
+
+                                                        // first line: title
+                                                        line = br.readLine(); 
+                                                        if (line == null) { 
+                                                            out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
+                                                        } else {
+                                                            cols = line.split("\\t");
+                                                            ncol = cols.length;
+
+                                                            for (j=0; j<ncol; j++) { 
+                                                                sDummy = cols[j]; 
+                                                                %>
+                                                                <td align="right">
+                                                                    <%=sDummy%>
+                                                                </td>
+                                                                <td> &nbsp;&nbsp; </td>
+                                                            <% } %>
+                                                        <% } %>
+                                                        <td> &nbsp; </td>
+                                                        <td> &nbsp; </td>
+                                                    </tr> 
+                                                    <% 
+                                                    line = br.readLine();
+                                                    while (line != null) { %>
+                                                        <tr>
+                                                            <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
+                                                            <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
+                                                            <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
+                                                            <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
+                                                        <%
+                                                        cols = line.split("[,\\t]+");
+                                                        for (j=0; j<ncol; j++) {
+                                                            sDummy = cols[j];
+                                                            %>
+                                                            <td align="right">
+                                                                <%=sDummy%>
+                                                            </td>
+                                                            <td> &nbsp;&nbsp; </td>
+                                                        <% } %>
+                                                        </tr>
+                                                        <% line = br.readLine();
+                                                    } %>
+                                                    <tr>
+                                                        <td colspan="6"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
+                                                    </tr>
+                                                </table>    
+                                                <% br.close();
+                                            } %>
+
+                                        <% } else if (sViewProceed == "100") { %>
+                                            <%--> VIEW Performance in EXCEL <--%>
+                                            <p>
+                                            <%@page import="Fillo.*"%>
+                                            <script>
+                                                sReportFile = document.getElementById("sReportFile");
+                                            </script>
+                                            <%
+                                                if (sReportFile != "") {  
+                                                %>
+                                                    <script>
+                                                    var sReportFileName = document.getElementById("sReportFileName");
+                                                    var sReportFileNameTXT = document.getElementById("sReportFileNameTXT");
+                                                    </script>
+                                                <%
+                                                if (sReportFileName != "") {
+                                                    sReportFileName = application.getRealPath("/") + sReportFileName;
+                                                }
+
+                                                if (sReportFileNameTXT != "") {
+                                                    sReportFileNameTXT = application.getRealPath("/") + sReportFileNameTXT;
+                                                }
+
+                                                %>
+                                                <script>
+                                                    document.getElementById("sReportFileName").value = sReportFileName;
+                                                    document.getElementById("sReportFileNameTXT").value = sReportFileNameTXT;
+                                                </script>
+                                                <%
+                                                } else { %>
+                                                <script>
+                                                    var sReportFileName = document.getElementById("sReportFileName");
+                                                    var sReportFileNameTXT = document.getElementById("sReportFileNameTXT");
+                                                </script>
+                                                <% }
+                                            %>
+
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        &nbsp;
+                                                    </td>
+                                                    <td>
+                                                        <b> Running: </b>
+                                                    </td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td colspan="8">
+                                                    <input type="text" name="sReportFileName" id="sReportFileName" size="75" value="<%=sReportFileName%>" readonly/>
+                                                    <input type="hidden" name="sReportFileNameTXT" id="sReportFileNameTXT" value="<%=sReportFileNameTXT%>" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="11">&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>
+                                                        <b> Output: </b>
+                                                    </td>
+                                                    <td>&nbsp;&nbsp;&nbsp;</td>
+                                                    <th>RMSE Learning</th>
+                                                    <th>RMSE Test</th>
+                                                    <th>MAE Learning</th>
+                                                    <th>MAE Test</th>
+                                                    <th>MAPE Learning</th>
+                                                    <th>MAPE Test</th>
+                                                    <th>R Learning</th>
+                                                    <th>R Test</th>
+                                                </tr>
+
+                                                <%  if (sReportFileName != "") {  
+                                                Fillo fillo = new Fillo();
+
+                                                Connection connection = fillo.getConnection(sReportFileName);
+                                                String strQuery = "Select * from Performance";
+                                                Recordset recordset = connection.executeQuery(strQuery);
+
+                                                while (recordset.next()) { %>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td align="right">
+                                                        <%=recordset.getField("RMSE_Learning")%>
+                                                    </td>
+                                                    <td align="right">
+                                                        <%=recordset.getField("RMSE_Test")%>
+                                                    </td>
+                                                    <td align="right">
+                                                        <%=recordset.getField("MAE_Learning")%> 
+                                                    </td> 
+                                                    <td align="right">
+                                                        <%=recordset.getField("MAE_Test")%>
+                                                    </td>
+                                                    <td align="right">
+                                                        <%=recordset.getField("MAPE_Learning")%>
+                                                    </td>
+                                                    <td align="right">
+                                                        <%=recordset.getField("MAPE_Test")%>
+                                                    </td>
+                                                    <td align="right">
+                                                        <%=recordset.getField("R_Learning")%>
+                                                    </td>
+                                                    <td align="right">
+                                                        <%=recordset.getField("R_Test")%>
+                                                    </td>
+                                                </tr>
+                                                <% } %>
+                                                <%
+                                                    recordset.close();
+                                                    connection.close();
+                                                    }
+                                                %>
+                                            </table>
+
+                                        <% } else { %>
+                                            <%--> Start Running opt of sViewProceed <--%>
+                                            <script>
+                                                var sReportFile = document.getElementById("sReportFile");
+                                            </script>
+                                            <%
+                                                if (sReportFile != "") {  
+                                                %>
+                                                    <script>
+                                                    var sReportFileName = document.getElementById("sReportFileName");
+                                                    var sReportFileNameTXT = document.getElementById("sReportFileNameTXT");
+                                                    </script>
+                                                <%
+                                                if (sReportFileName != "") {
+                                                    sReportFileName = application.getRealPath("/") + sReportFileName;
+                                                }
+
+                                                if (sReportFileNameTXT != "") {
+                                                    sReportFileNameTXT = application.getRealPath("/") + sReportFileNameTXT;
+                                                }
+
+                                                %>
+                                                <script>
+                                                    document.getElementById("sReportFileName").value = sReportFileName;
+                                                    document.getElementById("sReportFileNameTXT").value = sReportFileNameTXT;
+                                                </script>
+                                                <% } %> 
+
+                                                <script>
+                                                    var sReportFileName = document.getElementById("sReportFileName");
+                                                    var sReportFileNameTXT = document.getElementById("sReportFileNameTXT");
+                                                </script>
+
+                                                <% sReportFileName="Result.xls";
+                                                sReportFileName = application.getRealPath("/") + sReportFileName;
+
+                                                sReportFileNameTXT="Result.txt";
+                                                sReportFileNameTXT = application.getRealPath("/") + sReportFileNameTXT;
+                                                %>
+
+                                                <script>
+                                                    document.getElementById("sReportFileName").value = sReportFileName;
+                                                    document.getElementById("sReportFileNameTXT").value = sReportFileNameTXT;
+                                                </script>
+
+                                                <% 
+                                                /*
+                                                out.println("<p>");
+                                                out.println("sReportFileName = " + sReportFileName);
+                                                out.println("sReportFileNameTXT = " + sReportFileNameTXT);
+                                                out.println("<br>");
+                                                */
+                                            %>
+
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        &nbsp;
+                                                    </td>
+                                                    <td>
+                                                        <b> Running: </b>
+                                                    </td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td colspan="8">
+                                                    <input type="text" name="sResult01Name" id="sResult01Name" size="60" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" readonly/>
+                                                    </td>
+                                                </tr>
+                                                    <td>
+                                                        &nbsp;
+                                                    </td>
+                                                    <td>
+                                                        &nbsp;
+                                                    </td>
+                                                    <td>
+                                                        &nbsp;
+                                                    </td>
+                                                    <td colspan="8">
+                                                    <input type="text" name="sResult02Name" id="sResult02Name" size="60" value="<%=sResult02Name%>" readonly/>
+                                                    <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
+                                                    <input type="hidden" name="sResult04Name" id="sResult04Name" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" />
+                                                    <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
+                                                    <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
+                                                    <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
+                                                    <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
+                                                    <input type="hidden" name="sResult05Name" id="sResult05Name" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" />
+                                                    <input type="hidden" name="sResult06Name" id="sResult06Name" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" />
+                                                    <input type="hidden" name="sBaseFileName" id="sBaseFileName" value="<%=sBaseFileName%>">
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <%-->
+                                            <h3>
+                                                <img src="Logo-Space.png" alt="     " width="4" height="5">
+                                                <b> Output: &nbsp;&nbsp;&nbsp;&nbsp;</b>
+                                            </h3>
+                                            <--%>
+
+                                            <% if (sLoadingDataExcel != "") { %>
+                                                <%--> #2 
+                                                <H2 ALIGN="CENTER">
+                                                    <% int percent = task.getPercent();%>
+                                                    <%= percent%>%
+                                                </H2>
+
+                                                <TABLE WIDTH="60%" ALIGN="CENTER"
+                                                BORDER=1 CELLPADDING=0 CELLSPACING=2>
+                                                <TR>
+                                                    <% for (int i = 10; i <= percent; i += 10) { %>
+                                                        <TD WIDTH="10%" BGCOLOR="#000080">&nbsp;</TD>
+                                                    <% } %>
+                                                    <% for (int i = 100; i > percent; i -= 10) { %>
+                                                        <TD WIDTH="10%">&nbsp;</TD>
+                                                    <% } %>
+                                                </TR>
+                                                </TABLE>
+
+                                                <TABLE WIDTH="100%" BORDER=0 CELLPADDING=0 CELLSPACING=0>
+                                                <TR>
+                                                <TD ALIGN="CENTER">
+                                                    <% if (task.isRunning()) { %>
+                                                        Running
+                                                    <% } else { %>
+                                                        <% if (task.isCompleted()) { %>
+                                                            Completed
+                                                        <% } else if (!task.isStarted()) { %>
+                                                            Not Started
+                                                        <% } else { %>
+                                                            Stopped
+                                                        <% } %>
+                                                    <% } %>
+                                                </TD>
+                                                </TR>
+                                                <TR>
+                                                <TD ALIGN="CENTER">
+                                                    <BR>
+                                                    <% if (task.isRunning()) {%>
+                                                        <!--
+                                                        <FORM METHOD="GET" ACTION="stop.jsp">
+                                                        <INPUT TYPE="SUBMIT" VALUE="Stop">
+                                                        </FORM>
+                                                        -->
+                                                        <a href="stop.jsp?<%=params%>">Stop</a>
+                                                    <% } else {%>
+                                                        <!--
+                                                        <FORM METHOD="GET" ACTION="start.jsp">
+                                                        <INPUT TYPE="SUBMIT" VALUE="Start">
+                                                        </FORM>
+                                                        -->
+                                                        <a href="start.jsp?<%=params%>">Start</a>
+                                                    <% }%>
+                                                </TD>
+                                                </TR>
+                                                </TABLE>
+
+                                                <% if (task.isCompleted()) {%>
+                                                    <BR>
+                                                <% }%>
+                                                <--%>
+
+                                                <%
+                                                /*
+                                                out.println("nFireFlies = "+snFireFlies);
+                                                out.println("nMaxGeneration = "+snMaxGeneration);
+                                                out.println("dMinBeta = "+sdMinBeta);
+                                                out.println("dGamma = "+sdGamma);
+                                                out.println("dAlpha = "+sdAlpha);
+                                                out.println("<br>");
+                                                out.println("dAIWeight = "+sdAIWeight);
+                                                out.println("dTau = "+sdTau);
+                                                out.println("dBPotential = "+sdBPotential);
+                                                out.println("dC1 = "+sdC1);
+                                                out.println("dC2 = "+sdC2);
+                                                out.println("<br>");
+                                                out.println("dS1 = "+sdS1);
+                                                out.println("dS2 = "+sdS2);
+                                                out.println("dTrainingPS = "+sdTrainingPS);
+                                                out.println("dValidationPS = "+sdValidationPS);
+                                                out.println("dTotalSize = "+sdTotalSize);
+                                                out.println("<br>");
+                                                out.println("nLastChange1 = "+snLastChange1);
+                                                out.println("nLastChange2 = "+snLastChange2);
+                                                out.println("dHoldOut = "+sdHoldOut);
+                                                out.println("dCrossValidation = "+sdCrossValidation);
+                                                out.println("<br>");
+                                                out.println("NormalRadio = "+NormalRadio);
+                                                out.println("OptimRadio = "+OptimRadio);
+                                                out.println("SCRadio = "+SCRadio);
+                                                out.println("PRadio = "+PRadio);
+                                                out.println("TORadio = "+TORadio);
+                                                out.println("<br>");
+                                                */
+
+                                                if (NormalRadio.equals("NormalRadio1")) {
+                                                    dNormalRadio=1;
+                                                }
+                                                else if (NormalRadio.equals("NormalRadio2")) {
+                                                    dNormalRadio=2;
+                                                }
+
+                                                if (OptimRadio.equals("OptimRadio1")) {
+                                                    dOptimRadio=1;
+                                                }    
+                                                else if (OptimRadio.equals("OptimRadio2")) {
+                                                    dOptimRadio=2;
+                                                }    
+                                                else if (OptimRadio.equals("OptimRadio3")) {
+                                                    dOptimRadio=3;
+                                                }    
+
+                                                if (SCRadio.equals("SCRadio1")) {
+                                                    dSCRadio=1;
+                                                }
+                                                else if (SCRadio.equals("SCRadio2")) {
+                                                    dSCRadio=2;
+                                                }
+                                                else if (SCRadio.equals("SCRadio3")) {
+                                                    dSCRadio=3;
+                                                }
+
+                                                if (PRadio.equals("PRadio2")) {
+                                                    sFileData = sLearningFileName;
+                                                    dAttributes = snLDFAttributes;
+                                                    dInstances = snLDFInstances;
+                                                    sPFileData = sPredictionFileName;
+                                                    dPAttributes = snPDFAttributes;
+                                                    dPInstances = snPDFInstances;
+                                                    sVariation = "5";
+                                                    dPRadio=2;
+                                                }
+
+                                                if (TORadio.equals("TORadio2")) { 
+                                                    dTORadio=2;
+                                                    if (PRadio.equals("PRadio1")) {
+                                                        sFileData = sFileName;
+                                                        dAttributes = snDFAttributes;
+                                                        dInstances = snDFInstances;
+                                                        sVariation = "2";
+                                                        sPFileData = "";
+                                                        dPAttributes = "1";
+                                                        dPInstances = "1";
+                                                        dPRadio=1;
+                                                    }
+                                                }
+                                                else if (TORadio.equals("TORadio3")) {
+                                                    dTORadio=3;
+                                                    if (PRadio.equals("PRadio1")) {
+                                                        sFileData = sFileName;
+                                                        dAttributes = snDFAttributes;
+                                                        dInstances = snDFInstances;
+                                                        sVariation = "3";
+                                                        sPFileData = "";
+                                                        dPAttributes = "1";
+                                                        dPInstances = "1";
+                                                        dPRadio=1;
+                                                    }
+                                                }
+                                                else {
+                                                    if (TORadio.equals("TORadio1")) {
+                                                        dTORadio=1;
+                                                        if (PRadio.equals("PRadio1")) {
+                                                            sFileData = sFileName;
+                                                            dAttributes = snDFAttributes;  
+                                                            dInstances = snDFInstances; 
+                                                            sVariation = "1";
+                                                            sPFileData = "";
+                                                            dPAttributes = "1";
+                                                            dPInstances = "1";
+                                                            dPRadio=1;
+                                                        }
+                                                    }
+                                                    else if (TORadio.equals("TORadio4")) {
+                                                        dTORadio=4;
+                                                        if (PRadio.equals("PRadio1")) {
+                                                            sFileData = sFileName;
+                                                            dAttributes = snDFAttributes;  
+                                                            dInstances = snDFInstances; 
+                                                            sPFileData = sTestFileName;
+                                                            dPAttributes = snTDFAttributes; 
+                                                            dPInstances = snTDFInstances;
+                                                            sVariation = "4";
+                                                            dPRadio=1;
+                                                        }
+                                                    }
+                                                }
+
+                                                /*
+                                                out.println("sVariation = "+sVariation);
+                                                out.println("<br>");
+                                                out.println("sFileData = "+sFileData);
+                                                out.println("dAttributes = "+dAttributes);
+                                                out.println("dInstances = "+dInstances);
+                                                out.println("<br>");
+                                                out.println("sPFileData = "+sPFileData);
+                                                out.println("dPAttributes = "+dPAttributes);
+                                                out.println("dPInstances = "+dPInstances);
+                                                */ 
+
+                                                if (sFileData != "") {  
+                                                    String file = application.getRealPath("/") + sFileData;
+                                                    BufferedReader br = new BufferedReader(new FileReader(file)); 
+                                                    String line = null;
+                                                    int i;
+                                                    int j;
+
+                                                    // first line: title
+                                                    line = br.readLine();
+                                                    if (line == null) {
+                                                        out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
+                                                    } else {
+                                                        cols = line.split("\\t");
+
+                                                        // second line: column header
+                                                        line = br.readLine();
+                                                        headers = line.split("\\t");
+
+                                                        // third line and so on: data ... last column = dependent variable  
+                                                        line = br.readLine(); 
+                                                        j=0;
+                                                        while (line != null) {
+                                                            cols = line.split("\\t");
+                                                            for (i = 0; i < ncol; i += 1) {
+                                                                Datatrains[j][i]=cols[i];
+                                                            }
+                                                            j=j+1;
+                                                            line = br.readLine();
+                                                        }
+                                                    }
+                                                    br.close();
+                                                } else {
+                                                    //String[][] Datatrain = new String[1][1];
+                                                }
+
+                                                /*
+                                                    out.println("ncol = "+ncol);
+                                                    out.println("nrow = "+nrow);
+                                                    out.println("Datatrain[nrow-1][ncol-1] = "+Datatrain[nrow-1][ncol-1]);
+                                                */
+
+                                                if (sPFileData == null) {
+                                                    /*
+                                                    out.println("<br>");
+                                                    */
+                                                }    
+                                                else if (sPFileData != "") {
+                                                    /*
+                                                    out.println("<br>");
+                                                    */
+
+                                                    String file = application.getRealPath("/") + sPFileData;
+                                                    BufferedReader br = new BufferedReader(new FileReader(file)); 
+                                                    String line = null;
+                                                    int i;
+                                                    int j;
+
+                                                    // first line: title
+                                                    line = br.readLine();
+                                                    if (line == null) {
+                                                        out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
+                                                    } else {
+                                                        cols = line.split("\\t");
+
+                                                        // second line: column header
+                                                        line = br.readLine();
+                                                        headers = line.split("\\t");
+
+                                                        // third line and so on: data ... last column = dependent variable  
+                                                        line = br.readLine(); 
+                                                        j=0;
+                                                        while (line != null) {
+                                                            cols = line.split("\\t");
+                                                            for (i = 0; i < ncol; i += 1) {
+                                                                Datapres[j][i]=cols[i];
+                                                            }
+                                                            j=j+1;
+                                                            line = br.readLine();
+                                                        }
+                                                    }
+                                                    br.close();
+                                                } else {
+                                                    /*
+                                                    out.println("<br>");
+                                                    */
+                                                }
+
+                                                vpath = application.getRealPath("/");
+
+                                                vfile = sBaseFileNameCO;                  //+"01.txt";
+                                                if (vfile == "") {
+                                                    vfile = "Result";
+                                                }
+                                                %>
+                                                <script> 
+                                                    document.getElementById("vpath").value = vpath; 
+                                                    document.getElementById("vfile").value = vfile; 
+                                                </script>
+                                                <%
+
+                                                /*
+                                                out.println("vfile = "+vfile);
+                                                out.println("<br>");
+                                                out.println("sBaseFileNameCO = "+sBaseFileNameCO);
+                                                out.println("<br>");
+
+                                                out.println("nFireFlies = "+snFireFlies);
+                                                out.println("<br>");
+                                                out.println("nMaxGeneration = "+snMaxGeneration);
+                                                out.println("<br>");
+                                                out.println("dMinBeta = "+sdMinBeta);
+                                                out.println("<br>");
+                                                out.println("dGamma = "+sdGamma);
+                                                out.println("<br>");
+                                                out.println("dAlpha = "+sdAlpha);
+                                                out.println("<br>");
+                                                out.println("dAIWeight = "+sdAIWeight);
+                                                out.println("<br>");
+                                                out.println("dTau = "+sdTau);
+                                                out.println("<br>");
+                                                out.println("dBPotential = "+sdBPotential);
+                                                out.println("<br>");
+                                                out.println("dC1 = "+sdC1);
+                                                out.println("<br>");
+                                                out.println("dC2 = "+sdC2);
+                                                out.println("<br>");
+                                                out.println("dS1 = "+sdS1);
+                                                out.println("<br>");
+                                                out.println("dS2 = "+sdS2);
+                                                out.println("<br>");
+                                                out.println("dTrainingPS = "+sdTrainingPS);
+                                                out.println("<br>");
+                                                out.println("dValidationPS = "+sdValidationPS);
+                                                out.println("<br>");
+                                                out.println("dTotalSize = "+sdTotalSize);
+                                                out.println("<br>");
+                                                out.println("nLastChange1 = "+snLastChange1);
+                                                out.println("<br>");
+                                                out.println("nLastChange2 = "+snLastChange2);
+                                                out.println("<br>");
+                                                out.println("dHoldOut = "+sdHoldOut);
+                                                out.println("<br>");
+                                                out.println("dCrossValidation = "+sdCrossValidation);
+                                                out.println("<br>");
+                                                out.println("dNormalRadio = "+dNormalRadio); 
+                                                out.println("<br>");
+                                                out.println("dOptimRadio = "+dOptimRadio); 
+                                                out.println("<br>");
+                                                out.println("dSCRadio = "+dSCRadio); 
+                                                out.println("<br>");
+                                                out.println("dPRadio = "+dPRadio); 
+                                                out.println("<br>");
+                                                out.println("dTORadio = "+dTORadio);
+                                                out.println("<br>");
+                                                out.println("sVariation = "+sVariation);
+                                                out.println("<br>");
+                                                out.println("sFileData = "+sFileData);
+                                                out.println("<br>");
+                                                out.println("dAttributes = "+dAttributes);
+                                                out.println("<br>");
+                                                out.println("dInstances = "+dInstances);
+                                                out.println("<br>");
+                                                out.println("sPFileData = "+sPFileData);
+                                                out.println("<br>");
+                                                out.println("dPAttributes = "+dPAttributes);
+                                                out.println("<br>");
+                                                out.println("dPInstances = "+dPInstances);
+
+                                                out.println("Datatrain[nrow-1][ncol-1] = "+Datatrain[nrow-1][ncol-1]);
+                                                */
+                                                %>
+                                                <jsp:include page="SFALSSVRServlet">
+                                                        <jsp:param name="nFireFlies" value="<%=nFireFlies%>" />
+                                                        <jsp:param name="nMaxGeneration" value="<%=nMaxGeneration%>" />
+                                                        <jsp:param name="dMinBeta" value="<%=dMinBeta%>" />
+                                                        <jsp:param name="dGamma" value="<%=dGamma%>" />
+                                                        <jsp:param name="dAlpha" value="<%=dAlpha%>" />
+                                                        <jsp:param name="dAIWeight" value="<%=dAIWeight%>" />
+                                                        <jsp:param name="dTau" value="<%=dTau%>" />
+                                                        <jsp:param name="dBPotential" value="<%=dBPotential%>" />
+                                                        <jsp:param name="dC1" value="<%=dC1%>" />
+                                                        <jsp:param name="dC2" value="<%=dC2%>" />
+                                                        <jsp:param name="dS1" value="<%=dS1%>" />
+                                                        <jsp:param name="dS2" value="<%=dS2%>" />
+                                                        <jsp:param name="dTrainingPS" value="<%=dTrainingPS%>" />
+                                                        <jsp:param name="dValidationPS" value="<%=dValidationPS%>" />
+                                                        <jsp:param name="dTotalSize" value="<%=dTotalSize%>" />
+                                                        <jsp:param name="nLastChange1" value="<%=nLastChange1%>" />
+                                                        <jsp:param name="nLastChange2" value="<%=nLastChange2%>" />
+                                                        <jsp:param name="dHoldOut" value="<%=dHoldOut%>" />
+                                                        <jsp:param name="dCrossValidation" value="<%=dCrossValidation%>" />
+
+                                                        <jsp:param name="dNormalRadio" value="<%=dNormalRadio%>" />
+                                                        <jsp:param name="dOptimRadio" value="<%=dOptimRadio%>" />
+                                                        <jsp:param name="dSCRadio" value="<%=dSCRadio%>" />
+                                                        <jsp:param name="dPRadio" value="<%=dPRadio%>" />
+                                                        <jsp:param name="dTORadio" value="<%=dTORadio%>" />
+
+                                                        <jsp:param name="sVariation" value="<%=sVariation%>" />
+
+                                                        <jsp:param name="dAttributes" value="<%=dAttributes%>" />
+                                                        <jsp:param name="dInstances" value="<%=dInstances%>" />
+
+                                                        <jsp:param name="dPAttributes" value="<%=dPAttributes%>" />
+                                                        <jsp:param name="dPInstances" value="<%=dPInstances%>" />
+
+                                                        <jsp:param name="sFileData" value="<%=sFileData%>" />
+                                                        <jsp:param name="sPFileData" value="<%=sPFileData%>" />
+
+                                                        <jsp:param name="sReportFileName" value="<%=sReportFileName%>" />
+                                                        <jsp:param name="sReportFileNameTXT" value="<%=sReportFileNameTXT%>" />
+
+                                                        <jsp:param name="vpath" value="<%=vpath%>" />
+                                                        <jsp:param name="vfile" value="<%=vfile%>" />
+
+                                                        <jsp:param name="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
+                                                        <jsp:param name="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
+                                                        <jsp:param name="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
+                                                        <jsp:param name="sResult04Name" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" />
+                                                        <jsp:param name="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
+                                                        <jsp:param name="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
+                                                        <jsp:param name="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
+                                                        <jsp:param name="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
+                                                        <jsp:param name="sResult05Name" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" />
+                                                        <jsp:param name="sResult06Name" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" />
+                                                </jsp:include> 	
+                                            <% } %>
+                                        <% } %>
+                                    <% } else { %> 
+                                        <%--> End of sViewProceed + Click on button RUN <--%>
+                                        <table>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>
+                                                <b> Initialization: </b>
+                                            </td>
+                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                            <td>
+                                                <font color="teal" face="tahoma" size="2"> Base output file name (eg. Result) </font>
+                                            </td>
+                                            <td>
+                                                &nbsp;
+                                                <input type="text" name="sBaseFileName" id="sBaseFileName" size="20" value="<%=sBaseFileName%>">
+                                            </td>
+                                            <td colspan="2">
+                                                &nbsp;&nbsp; - - -
+                                                <a onclick="return rundata22(1);">
+                                                    <font color="blue" face="tahoma" size="2"> <u>Accept</u>, </font>
+                                                </a>
+                                                <font color="teal" face="tahoma" size="2"> order number and .txt will be automatically added. </font>
+                                            </td>
+                                        </tr> 
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                        </tr> 
+                                        </table>
+
+                                        <%
+                                        /*
+                                        out.println("<p>");
+                                        out.println("sHasil = "+sHasil);
+                                        out.println("<br>");
+                                        */
+                                        if (sHasil!="") {
+                                            /*
+                                            out.println("sBaseFileName = "+sBaseFileName);
+                                            out.println("<br>");
+                                            */
+                                            if (sBaseFileName!="") {
+                                                /*
+                                                out.println("sRunReportTable = "+sRunReportTable);
+                                                out.println("<br>");
+                                                */
+                                                sResult01Name = application.getRealPath("/") + sBaseFileName +"01.txt";
+                                                sResult02Name = application.getRealPath("/") + sBaseFileName +"02.txt";
+                                                sResult03Name = application.getRealPath("/") + sBaseFileName +"03.txt";
+                                                sResult04Name = application.getRealPath("/") + sBaseFileName +"04.txt";
+                                                sResult04aName = application.getRealPath("/") + sBaseFileName +"04a.txt";
+                                                sResult04bName = application.getRealPath("/") + sBaseFileName +"04b.txt";
+                                                sResult04cName = application.getRealPath("/") + sBaseFileName +"04c.txt";
+                                                sResult04dName = application.getRealPath("/") + sBaseFileName +"04d.txt";
+                                                sResult05Name = application.getRealPath("/") + sBaseFileName +"05.txt";
+                                                sResult06Name = application.getRealPath("/") + sBaseFileName +"06.txt";
+
+                                                %>
+                                                <script>
+                                                    document.getElementById("sBaseFileName").value = sBaseFileName.value;
+                                                </script>
+
+                                                <table>
+                                                    <tr>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>&nbsp;</td>
+                                                        <td>
+                                                            <b> Output Files: </b>
+                                                        </td>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                        <td>
+                                                            <input type="text" name="sResult01Name" id="sResult01Name" size="70" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" readonly/>
+                                                            &nbsp;
+                                                            <font color="teal" face="tahoma" size="2">Main results - Optimum hyper-parameters</font>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                        <td>
+                                                            <input type="text" name="sResult02Name" id="sResult02Name" size="70" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" readonly/>
+                                                            &nbsp;
+                                                            <font color="teal" face="tahoma" size="2">Hyper-parameters; Performances of training and validation partitions</font>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                        <td>
+                                                            <input type="text" name="sResult03Name" id="sResult03Name" size="70" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" readonly/> 
+                                                            &nbsp;
+                                                            <font color="teal" face="tahoma" size="2">Analysis report</font>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                        <td>
+                                                            <input type="text" name="sResult04Name" id="sResult04Name" size="70" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" readonly/>
+                                                            &nbsp;
+                                                            <font color="teal" face="tahoma" size="2">Learning and test performances; Test dataset and predicted values </font>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                        <td>
+                                                            <input type="text" name="sResult04aName" id="sResult04aName" size="70" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" readonly/>
+                                                            &nbsp;
+                                                            <font color="teal" face="tahoma" size="2">Prediction graph of training partition from learning dataset</font>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                        <td>
+                                                            <input type="text" name="sResult04bName" id="sResult04bName" size="70" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" readonly/>
+                                                            &nbsp;
+                                                            <font color="teal" face="tahoma" size="2">Prediction graph of validation partition from learning dataset </font>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                        <td>
+                                                            <input type="text" name="sResult04cName" id="sResult04cName" size="70" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" readonly/>
+                                                            &nbsp;
+                                                            <font color="teal" face="tahoma" size="2">Prediction graph of learning dataset </font>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                        <td>
+                                                            <input type="text" name="sResult04dName" id="sResult04dName" size="70" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" readonly/>
+                                                            &nbsp;
+                                                            <font color="teal" face="tahoma" size="2">Prediction graph of test dataset </font>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                        <td>
+                                                            <input type="text" name="sResult05Name" id="sResult05Name" size="70" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" readonly/>
+                                                            &nbsp;
+                                                            <font color="teal" face="tahoma" size="2">Performance trajectory graph of test dataset </font>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                        <td>
+                                                            <input type="text" name="sResult06Name" id="sResult06Name" size="70" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" readonly/>
+                                                            &nbsp;
+                                                            <font color="teal" face="tahoma" size="2">Tracing path graph of test dataset </font>
+                                                        </td>
+                                                    </tr>
+                                                </table>                
+                                                <%
+                                            }
+                                            else {
+                                                /*
+                                                out.println("sRunReportTable = "+sRunReportTable);
+                                                out.println("<br>");
+                                                out.println("sHasil = "+sHasil);
+                                                out.println("<br>");
+                                                out.println("sBaseFileName = "+sBaseFileName);
+                                                out.println("<br>");
+                                                */
+                                                %>
+                                                <script>
+                                                    document.getElementById("sBaseFileName").value = "Result";
+                                                </script>
+                                                <%
+                                            } 
+                                        }
+                                    }
+                                }
+                            } 
+                            else if ((int)Double.parseDouble(sRunReportTable) == 2) {
+                                if (sRRTShow != "") { 
+                                    %>
+                                        <script>
+                                        var sfilefileResult03 = document.getElementById("sfilefileResult03");
+                                        </script>
+                                    <%
+                                    if (sResult03 != "") {
+                                        sfilefileResult03 = application.getRealPath("/") + sResult03;
+                                        sResult03Name=sfilefileResult03; 
+                                    }
+                                    else {
+                                        sfilefileResult03 = sResult03Name;
+                                    }
+                                    %>
+                                        <script>
+                                            var sResult03Name = document.getElementById("sResult03Name");
+                                            document.getElementById("sResult03Name").value = sResult03Name;
+                                        </script>
+                                    <%
+                                    /*
+                                    out.println("<p>");
+                                    out.println("sReportFileNameTXT = "+sReportFileNameTXT);
+                                    out.println("sfilefileTXT = "+sfilefileTXT);
+                                    */
+                                    %>
+
+                                    <table>
+                                    <tr>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                    <td>
+                                        <b>Analysis:</b>
+                                    </td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>
+                                    <input type="text" name="sResult03Name" id="sResult03Name" size="75" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" readonly/>
+                                    <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
+                                    <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
+                                    <input type="hidden" name="sResult04Name" id="sResult04Name" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" />
+                                    <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
+                                    <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
+                                    <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
+                                    <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
+                                    <input type="hidden" name="sResult05Name" id="sResult05Name" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" />
+                                    <input type="hidden" name="sResult06Name" id="sResult06Name" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" />
+                                    <input type="hidden" name="sBaseFileName" id="sBaseFileName" value="<%=sBaseFileName%>">
+                                    </td>
+                                    </tr>
+                                    <%
+                                    /*
+                                    if (sReportFileTXT != "") {
+                                        file = application.getRealPath("/") + sReportFileTXT;
+                                    }
+                                    else {
+                                    }
+                                    */
+                                    if (sResult03Name != "") {
+                                    String file = ""; 
+                                    file = sResult03Name;
+                                    BufferedReader br = new BufferedReader(new FileReader(file));
+                                    String line = null;
+                                    int i;
+                                    int j;
+
+                                    // first line: title
+                                    line = br.readLine();
+                                    if (line == null) {
+                                        out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
+                                        %> 
+                                    <% } else { %>
+                                        <tr>
+                                        <td> &nbsp; </td>
+                                        <td>
+                                            <b>Output:</b>
+                                        </td>
+                                        <td> &nbsp;&nbsp;&nbsp; </td>
+                                        <td>
+                                            <h4> <%=line%> </h4>
+                                        </td>
+                                        </tr>
+                                        <% // next line
+                                        line = br.readLine();
+                                        while (line != null) { %>
+                                            <tr>
+                                            <td> &nbsp; </td>
+                                            <td> &nbsp;&nbsp;&nbsp;&nbsp; </td>
+                                            <td> &nbsp;&nbsp;&nbsp;&nbsp; </td>
+                                            <td>
+                                                <%=line%>
+                                            </td>
+                                            </tr>
+                                            <% line = br.readLine();
+                                        }
+                                    }
+                                    br.close(); 
+                                    } %>
+                                </table>
+                                <% } else { %>
+                                    <script> var sCreate = document.getElementById("sCreate"); 
+                                        sCreate = "";
+                                        document.getElementById("sCreate").value = sCreate; 
+                                    </script>
+
+                                    <table>
+                                    <tr>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                    <td>
+                                        <b>Analysis:</b>
+                                    </td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>
+                                        &nbsp;<input type="file" name="sResult03" id="sResult03"/>
+                                    </td>
+                                    <td>
+                                        &nbsp;<input type="text" name="sResult03Name" id="sResult03Name" size="60" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" readonly/>
+                                        <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
+                                        <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
+                                        <input type="hidden" name="sResult04Name" id="sResult04Name" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" />
+                                        <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
+                                        <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
+                                        <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
+                                        <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
+                                        <input type="hidden" name="sResult05Name" id="sResult05Name" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" />
+                                        <input type="hidden" name="sResult06Name" id="sResult06Name" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" />
+                                    </td>
+                                    <td>
+                                        &nbsp;&nbsp; - - - 
+                                        <a onclick="return showsummaryreport(2);">
+                                        <font color="blue" face="tahoma" size="2">
+                                        <u><b>OPEN</b></u></font></a>
+                                        <font color="black" face="tahoma" size="2">the report.
+                                        </font>
+                                    </td>
+                                    </tr>
+                                    </table>
+                                <% } %>
+
+                            <% } else if ((int)Double.parseDouble(sRunReportTable) == 3) { 
+                                if (sRRTShow != "") { %> 
+                                    <script>
+                                        var sfilefileResult04 = document.getElementById("sfilefileResult04");
+                                    </script>
+                                    <%
+                                        if (sResult04 != "") {
+                                            sfilefileResult04 = application.getRealPath("/") + sResult04;
+                                            sResult04Name=sfilefileResult04; 
+                                        }
+                                        else {
+                                            sfilefileResult04 = sResult04Name;
+                                        }
+                                    %>
+                                    <script>
+                                        var sResult04Name = document.getElementById("sResult04Name");
+                                        document.getElementById("sResult04Name").value = sResult04Name;
+                                    </script>
+                                    <%
+                                        /*
+                                        out.println("<p>");
+                                        out.println("sReportFile = " + sReportFile);
+                                        out.println("sfilefile = " + sfilefile);
+                                        out.println("sReportFileName = " + sReportFileName);
+                                        out.println("<br>");
+                                        */
+                                    %>
+
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                &nbsp;
+                                            </td>
+                                            <td>
+                                                <b> Summary: </b>
+                                            </td>
+                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                            <td colspan="8">
+                                            <input type="text" name="sResult04Name" id="sResult04Name" size="75" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" readonly/>
+                                            <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
+                                            <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
+                                            <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
+                                            <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
+                                            <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
+                                            <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
+                                            <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
+                                            <input type="hidden" name="sResult05Name" id="sResult05Name" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" />
+                                            <input type="hidden" name="sResult06Name" id="sResult06Name" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" />
+                                            <input type="hidden" name="sBaseFileName" id="sBaseFileName" value="<%=sBaseFileName%>">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="11">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>
+                                                <b> Output: </b>
+                                            </td>
+                                            <td>&nbsp;</td>
+                                            <th>RMSE Learning</th>
+                                            <td>&nbsp;</td>
+                                            <th>RMSE Test</th>
+                                            <td>&nbsp;</td>
+                                            <th>MAE Learning</th>
+                                            <td>&nbsp;</td>
+                                            <th>MAE Test</th>
+                                            <td>&nbsp;</td>
+                                            <th>MAPE Learning</th>
+                                            <td>&nbsp;</td>
+                                            <th>MAPE Test</th>
+                                            <td>&nbsp;</td>
+                                            <th>R Learning</th>
+                                            <td>&nbsp;</td>
+                                            <th>R Test</th>
+                                        </tr>
+
+                                        <%
+                                        if (sResult04Name != "") {
+                                        String file = ""; 
+                                        file = sResult04Name;
+                                        BufferedReader br = new BufferedReader(new FileReader(file));
+                                        String line = null;
+                                        int i;
+                                        int j;
+
+                                        // first line: title
+                                        line = br.readLine();
+                                        if (line == null) {
+                                            out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
+                                        } else {
+                                            cols = line.split("\\t"); 
+                                            ncol = cols.length;
+                                        } 
+
+                                        line = br.readLine();
+                                        while (line != null) { %>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <%
+                                                cols = line.split("[,\\t]+");
+                                                for (j=0; j<ncol; j++) {
+                                                    sDummy = cols[j];
+                                                    %>
+                                                        <td align="right">
+                                                            <%=sDummy%>
+                                                        </td>
+                                                        <td> &nbsp;&nbsp; </td>
+                                                <% } %>
+                                            </tr>
+                                            <% line = br.readLine();
+                                        }
+                                        br.close();
+                                        } %>
+                                    </table>
+                                <% } else { %>
+                                    <script> var sCreate = document.getElementById("sCreate"); 
+                                        sCreate = "";
+                                        document.getElementById("sCreate").value = sCreate; 
+                                    </script>
+
+                                <table><tr>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                    <td>
+                                        <b> Summary: </b>
+                                    </td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>
+                                        <input type="file" name="sResult04" id="sResult04"/>
+                                    </td>
+                                    <td>
+                                        &nbsp;<input type="text" name="sResult04Name" id="sResult04Name" size="60" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" readonly/>
+                                        <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
+                                        <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
+                                        <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
+                                        <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
+                                        <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
+                                        <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
+                                        <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
+                                        <input type="hidden" name="sResult05Name" id="sResult05Name" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" />
+                                        <input type="hidden" name="sResult06Name" id="sResult06Name" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" />
+                                    </td>
+                                    <td>
+                                        &nbsp;&nbsp; - - - 
+                                        <a onclick="return showsummaryreport(3);">
+                                        <font color="blue" face="tahoma" size="2">
+                                        <u><b>OPEN</b></u></font></a>
+                                        <font color="black" face="tahoma" size="2">the report.
+                                        </font>
+                                    </td>
+                                </tr></table>
+                                <% } %>
+                            <% } else if ((int)Double.parseDouble(sRunReportTable) == 4) {
+                                if (sRRTShow != "") { %> 
+                                    <script>
+                                        var sfilefileResult05 = document.getElementById("sfilefileResult05");
+                                    </script>
+                                    <%
+                                        if (sResult05 != "") {
+                                            sfilefileResult05 = application.getRealPath("/") + sResult05;
+                                            sResult05Name=sfilefileResult05; 
+                                        }
+                                        else {
+                                            sfilefileResult05 = sResult05Name;
+                                        }
+                                    %>
+                                    <script>
+                                        var sResult05Name = document.getElementById("sResult05Name");
+                                        document.getElementById("sResult05Name").value = sResult05Name;
+                                    </script>
+                                    <%
+                                        /*
+                                        out.println("sReportFileName = " + sReportFileName);
+                                        out.println("<br>");
+                                        */
+                                    %>
+
+                                    <%
+                                    vpath = application.getRealPath("/");
+
+                                    vfile = sBaseFileNameCO;                  //+"01.txt";
+                                    if (vfile == "") {
+                                        vfile = "Result";
+                                    }
+                                    %>
+                                    <script> 
+                                        document.getElementById("vpath").value = vpath; 
+                                        document.getElementById("vfile").value = vfile; 
+                                    </script>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                &nbsp;
+                                            </td>
+                                            <td>
+                                                <b> Graphic: </b>
+                                            </td>
+                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                            <td colspan="8">
+                                            <input type="text" name="sResult05Name" id="sResult05Name" size="75" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" readonly/>
+                                            <font color="teal" face="tahoma" size="2"> &nbsp; ...</font> 
+                                            <a onclick="return showsummaryreport(6);">
+                                                <font color="blue" face="tahoma" size="2"> <u>performance</u> </font> </a> &nbsp; 
+                                            <% if (PRadio.equals("PRadio1")) {
+                                                if (TORadio.equals("TORadio3")) { 
+                                                    %> <%--><font color="blue" face="tahoma" size="2"> <u>1</u> &nbsp;
+                                                    <u>2</u> &nbsp; <u>3</u> &nbsp; <u>4</u> &nbsp; <u>5</u> &nbsp;
+                                                    <u>6</u> &nbsp; <u>7</u> &nbsp; <u>8</u> &nbsp; <u>9</u> &nbsp;
+                                                    <u>10</u> &nbsp; </font> <--%>
+                                                <% } else {
+                                                    %> <%--><font color="blue" face="tahoma" size="2"> <u>1</u> &nbsp; </font> <--%>
+                                                <% }
+                                            } 
+                                            else {
+                                                %> <%--><font color="blue" face="tahoma" size="2"> <u>1</u> &nbsp; </font> <--%>
+                                            <% } %>
+                                            <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
+                                            <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
+                                            <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
+                                            <input type="hidden" name="sResult04Name" id="sResult04Name" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" />
+                                            <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
+                                            <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
+                                            <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
+                                            <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
+                                            <input type="hidden" name="sBaseFileName" id="sBaseFileName" value="<%=sBaseFileName%>">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                &nbsp;
+                                            </td>
+                                            <td>
+                                                &nbsp;
+                                            </td>
+                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                            <td colspan="8">
+                                            <input type="text" name="sResult06Name" id="sResult06Name" size="75" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" readonly/>
+                                            <font color="teal" face="tahoma" size="2"> &nbsp; ...</font> 
+                                            <a onclick="return showsummaryreport(5);">
+                                                <font color="blue" face="tahoma" size="2"> <u>tracing path</u> </font> </a>
+                                            <% if (PRadio.equals("PRadio1")) {
+                                                if (TORadio.equals("TORadio3")) { 
+                                                    %> <%--><font color="blue" face="tahoma" size="2"> &nbsp; <u>1</u> &nbsp; 
+                                                    <u>2</u> &nbsp; <u>3</u> &nbsp; <u>4</u> &nbsp; <u>5</u> &nbsp;
+                                                    <u>6</u> &nbsp; <u>7</u> &nbsp; <u>8</u> &nbsp; <u>9</u> &nbsp;
+                                                    <u>10</u> &nbsp; </font><--%>
+                                                <% } else {
+                                                    %> <%--><font color="blue" face="tahoma" size="2"> &nbsp; <u>1</u> &nbsp; </font><--%>
+                                                <% }
+                                            } 
+                                            else {
+                                                %> <%--><font color="blue" face="tahoma" size="2"> &nbsp; <u>1</u> &nbsp; </font><--%>
+                                            <% } %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="11">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>
+                                                <b> Output: </b>
+                                            </td>
+                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                            <td>
+                                                <% // calling matlab graphic - performance
+                                                    int opt;
+                                                    opt = 0;
+                                                %>
+                                                <jsp:include page="SFALSSVRGraphServlet">
+                                                    <jsp:param name="opt" value="<%=opt%>" />
+                                                    <jsp:param name="dC1" value="<%=dC1%>" /> 
+                                                    <jsp:param name="dC2" value="<%=dC2%>" /> 
+                                                    <jsp:param name="dS1" value="<%=dS1%>" /> 
+                                                    <jsp:param name="dS2" value="<%=dS2%>" /> 
+
+                                                    <jsp:param name="vpath" value="<%=vpath%>" />
+                                                    <jsp:param name="vfile" value="<%=vfile%>" />
+                                                </jsp:include> 	
+                                            </td>
+                                        </tr>
+                                    </table>
+                                <% } else { %>
+                                    <script> var sCreate = document.getElementById("sCreate"); 
+                                        sCreate = "";
+                                        document.getElementById("sCreate").value = sCreate; 
+                                    </script>
+
+                                <table><tr>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                    <td>
+                                        <b> Graphic: </b>
+                                    </td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>
+                                        <input type="file" name="sResult05" id="sResult05"/>
+                                    </td>
+                                    <td>
+                                        &nbsp;<input type="text" name="sResult05Name" id="sResult05Name" size="60" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" readonly/>
+                                        <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
+                                        <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
+                                        <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
+                                        <input type="hidden" name="sResult04Name" id="sResult04Name" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" />
+                                        <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
+                                        <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
+                                        <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
+                                        <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
+                                    </td>
+                                    <td>
+                                        &nbsp;&nbsp; - - - 
+                                        <a onclick="return showsummaryreport(4);">
+                                        <font color="blue" face="tahoma" size="2">
+                                        <u><b>VIEW</b></u></font></a>
+                                        <font color="black" face="tahoma" size="2">the graphs.
+                                        </font>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>
+                                        <input type="file" name="sResult06" id="sResult06"/>
+                                    </td>
+                                    <td>
+                                        &nbsp;<input type="text" name="sResult06Name" id="sResult06Name" size="60" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" readonly/>
+                                    </td>
+                                </tr>
+                                </table>
+                                <% } %>
+                            <% } else if ((int)Double.parseDouble(sRunReportTable) == 5) { 
+                                if (sRRTShow != "") { %> 
+                                    <script>
+                                        var sResult06Name = document.getElementById("sResult06Name");
+                                    </script>
+                                    <%
+                                        /*
+                                        out.println("<p>");
+                                        out.println("sReportFile = " + sReportFile);
+                                        out.println("sfilefile = " + sfilefile);
+                                        out.println("sReportFileName = " + sReportFileName);
+                                        out.println("<br>");
+                                        */
+                                    %>
+
+                                    <%
+                                    vpath = application.getRealPath("/");
+
+                                    vfile = sBaseFileNameCO;                  //+"01.txt";
+                                    if (vfile == "") {
+                                        vfile = "Result";
+                                    }
+                                    %>
+
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                &nbsp;
+                                            </td>
+                                            <td>
+                                                <b> Graphic: </b>
+                                            </td>
+                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                            <td colspan="8">
+                                            <input type="text" name="sResult05Name" id="sResult05Name" size="75" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" readonly/>
+                                            <font color="teal" face="tahoma" size="2"> &nbsp; ...</font> 
+                                            <a onclick="return showsummaryreport(6);">
+                                                <font color="blue" face="tahoma" size="2"> <u>performance</u> </font> </a> &nbsp; 
+                                            <% if (PRadio.equals("PRadio1")) {
+                                                if (TORadio.equals("TORadio3")) { 
+                                                    %> <%--><font color="blue" face="tahoma" size="2"> <u>1</u> &nbsp;
+                                                    <u>2</u> &nbsp; <u>3</u> &nbsp; <u>4</u> &nbsp; <u>5</u> &nbsp;
+                                                    <u>6</u> &nbsp; <u>7</u> &nbsp; <u>8</u> &nbsp; <u>9</u> &nbsp;
+                                                    <u>10</u> &nbsp; </font> <--%>
+                                                <% } else {
+                                                    %> <%--><font color="blue" face="tahoma" size="2"> <u>1</u> &nbsp; </font> <--%>
+                                                <% }
+                                            } 
+                                            else {
+                                                %> <%--><font color="blue" face="tahoma" size="2"> <u>1</u> &nbsp; </font> <--%>
+                                            <% } %>
+                                            <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
+                                            <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
+                                            <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
+                                            <input type="hidden" name="sResult04Name" id="sResult04Name" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" />
+                                            <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
+                                            <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
+                                            <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
+                                            <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
+                                            <input type="hidden" name="sBaseFileName" id="sBaseFileName" value="<%=sBaseFileName%>">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                &nbsp;
+                                            </td>
+                                            <td>
+                                                &nbsp;
+                                            </td>
+                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                            <td colspan="8">
+                                            <input type="text" name="sResult06Name" id="sResult06Name" size="75" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" readonly/>
+                                            <font color="teal" face="tahoma" size="2"> &nbsp; ...</font> 
+                                            <a onclick="return showsummaryreport(5);">
+                                                <font color="blue" face="tahoma" size="2"> <u>tracing path</u> </font> </a>
+                                            <% if (PRadio.equals("PRadio1")) {
+                                                if (TORadio.equals("TORadio3")) { 
+                                                    %> <%--><font color="blue" face="tahoma" size="2"> &nbsp; <u>1</u> &nbsp; 
+                                                    <u>2</u> &nbsp; <u>3</u> &nbsp; <u>4</u> &nbsp; <u>5</u> &nbsp;
+                                                    <u>6</u> &nbsp; <u>7</u> &nbsp; <u>8</u> &nbsp; <u>9</u> &nbsp;
+                                                    <u>10</u> &nbsp; </font><--%>
+                                                <% } else {
+                                                    %> <%--><font color="blue" face="tahoma" size="2"> &nbsp; <u>1</u> &nbsp; </font><--%>
+                                                <% }
+                                            } 
+                                            else {
+                                                %> <%--><font color="blue" face="tahoma" size="2"> &nbsp; <u>1</u> &nbsp; </font><--%>
+                                            <% } %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="11">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>
+                                                <b> Output: </b>
+                                            </td>
+                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                            <td>
+                                                <% // calling matlab graphic - performance
+                                                    int opt;
+                                                    opt = 1;
+                                                %>
+                                                <jsp:include page="SFALSSVRGraphServlet">
+                                                    <jsp:param name="opt" value="<%=opt%>" />
+                                                    <jsp:param name="dC1" value="<%=dC1%>" />
+                                                    <jsp:param name="dC2" value="<%=dC2%>" />
+                                                    <jsp:param name="dS1" value="<%=dS1%>" />
+                                                    <jsp:param name="dS2" value="<%=dS2%>" />
+
+                                                    <jsp:param name="vpath" value="<%=vpath%>" />
+                                                    <jsp:param name="vfile" value="<%=vfile%>" />
+                                                </jsp:include> 	
+                                            </td>
+
+                                        </tr>
+                                    </table>
+                                <% } else { %>
+                                    <script> var sCreate = document.getElementById("sCreate"); 
+                                        sCreate = "";
+                                        document.getElementById("sCreate").value = sCreate; 
+                                    </script>
+
+                                <table><tr>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                    <td>
+                                        <b> Graphic: </b>
+                                    </td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>
+                                        <input type="file" name="sResult05" id="sResult05"/>
+                                    </td>
+                                    <td>
+                                        &nbsp;<input type="text" name="sResult05Name" id="sResult05Name" size="60" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" readonly/>
+                                        <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
+                                        <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
+                                        <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
+                                        <input type="hidden" name="sResult04Name" id="sResult04Name" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" />
+                                        <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
+                                        <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
+                                        <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
+                                        <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
+                                    </td>
+                                    <td>
+                                        &nbsp;&nbsp; - - - 
+                                        <a onclick="return showsummaryreport(4);">
+                                        <font color="blue" face="tahoma" size="2">
+                                        <u><b>VIEW</b></u></font></a>
+                                        <font color="black" face="tahoma" size="2">the graphs.
+                                        </font>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>
+                                        <input type="file" name="sResult06" id="sResult06"/>
+                                    </td>
+                                    <td>
+                                        &nbsp;<input type="text" name="sResult06Name" id="sResult06Name" size="60" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" readonly/>
+                                    </td>
+                                </tr>
+                                </table>
+                                <% } %>
+                            <% } else if ((int)Double.parseDouble(sRunReportTable) == 6) { 
+                                if (sRRTShow != "") { %> 
+                                    <script>
+                                        var include = document.getElementById("sResult05Name");
+                                    </script>
+                                    <%
+                                        /*
+                                        out.println("<p>");
+                                        out.println("sReportFile = " + sReportFile);
+                                        out.println("sfilefile = " + sfilefile);
+                                        out.println("sReportFileName = " + sReportFileName);
+                                        out.println("<br>");
+                                        */
+                                    %>
+
+                                    <%
+                                    vpath = application.getRealPath("/");
+
+                                    vfile = sBaseFileNameCO;                  //+"01.txt";
+                                    if (vfile == "") {
+                                        vfile = "Result";
+                                    }
+                                    %>
+
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                &nbsp;
+                                            </td>
+                                            <td>
+                                                <b> Graphic: </b>
+                                            </td>
+                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                            <td colspan="8">
+                                            <input type="text" name="sResult05Name" id="sResult05Name" size="75" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" readonly/>
+                                            <font color="teal" face="tahoma" size="2"> &nbsp; ...</font> 
+                                            <a onclick="return showsummaryreport(6);">
+                                                <font color="blue" face="tahoma" size="2"> <u>performance</u> </font> </a> &nbsp; 
+                                            <% if (PRadio.equals("PRadio1")) {
+                                                if (TORadio.equals("TORadio3")) { 
+                                                    %> <%--><font color="blue" face="tahoma" size="2"> <u>1</u> &nbsp;
+                                                    <u>2</u> &nbsp; <u>3</u> &nbsp; <u>4</u> &nbsp; <u>5</u> &nbsp;
+                                                    <u>6</u> &nbsp; <u>7</u> &nbsp; <u>8</u> &nbsp; <u>9</u> &nbsp;
+                                                    <u>10</u> &nbsp; </font> <--%>
+                                                <% } else {
+                                                    %> <%--><font color="blue" face="tahoma" size="2"> <u>1</u> &nbsp; </font> <--%>
+                                                <% }
+                                            } 
+                                            else {
+                                                %> <%--><font color="blue" face="tahoma" size="2"> <u>1</u> &nbsp; </font> <--%>
+                                            <% } %>
+                                            <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
+                                            <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
+                                            <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
+                                            <input type="hidden" name="sResult04Name" id="sResult04Name" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" />
+                                            <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
+                                            <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
+                                            <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
+                                            <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
+                                            <input type="hidden" name="sBaseFileName" id="sBaseFileName" value="<%=sBaseFileName%>">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                &nbsp;
+                                            </td>
+                                            <td>
+                                                &nbsp;
+                                            </td>
+                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                            <td colspan="8">
+                                            <input type="text" name="sResult06Name" id="sResult06Name" size="75" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" readonly/>
+                                            <font color="teal" face="tahoma" size="2"> &nbsp; ...</font> 
+                                            <a onclick="return showsummaryreport(5);">
+                                                <font color="blue" face="tahoma" size="2"> <u>tracing path</u> </font> </a>
+                                            <% if (PRadio.equals("PRadio1")) {
+                                                if (TORadio.equals("TORadio3")) { 
+                                                    %> <%--><font color="blue" face="tahoma" size="2"> &nbsp; <u>1</u> &nbsp; 
+                                                    <u>2</u> &nbsp; <u>3</u> &nbsp; <u>4</u> &nbsp; <u>5</u> &nbsp;
+                                                    <u>6</u> &nbsp; <u>7</u> &nbsp; <u>8</u> &nbsp; <u>9</u> &nbsp;
+                                                    <u>10</u> &nbsp; </font><--%>
+                                                <% } else {
+                                                    %> <%--><font color="blue" face="tahoma" size="2"> &nbsp; <u>1</u> &nbsp; </font><--%>
+                                                <% }
+                                            } 
+                                            else {
+                                                %> <%--><font color="blue" face="tahoma" size="2"> &nbsp; <u>1</u> &nbsp; </font><--%>
+                                            <% } %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="11">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>
+                                                <b> Output: </b>
+                                            </td>
+                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                            <td>
+                                                <% // calling matlab graphic - performance
+                                                    int opt;
+                                                    opt = 0;
+                                                %>
+                                                <jsp:include page="SFALSSVRGraphServlet">
+                                                    <jsp:param name="opt" value="<%=opt%>" />
+                                                    <jsp:param name="dC1" value="<%=dC1%>" />
+                                                    <jsp:param name="dC2" value="<%=dC2%>" />
+                                                    <jsp:param name="dS1" value="<%=dS1%>" />
+                                                    <jsp:param name="dS2" value="<%=dS2%>" />
+
+                                                    <jsp:param name="vpath" value="<%=vpath%>" />
+                                                    <jsp:param name="vfile" value="<%=vfile%>" />
+                                                </jsp:include> 	
+                                            </td>
+
+                                        </tr>
+                                    </table>
+                                <% } else { %>
+                                    <script> var sCreate = document.getElementById("sCreate"); 
+                                        sCreate = "";
+                                        document.getElementById("sCreate").value = sCreate; 
+                                    </script>
+
+                                <table><tr>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                    <td>
+                                        <b> Graphic: </b>
+                                    </td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>
+                                        <input type="file" name="sResult05" id="sResult05"/>
+                                    </td>
+                                    <td>
+                                        &nbsp;<input type="text" name="sResult05Name" id="sResult05Name" size="60" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" readonly/>
+                                        <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
+                                        <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
+                                        <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
+                                        <input type="hidden" name="sResult04Name" id="sResult04Name" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" />
+                                        <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
+                                        <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
+                                        <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
+                                        <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
+                                    </td>
+                                    <td>
+                                        &nbsp;&nbsp; - - - 
+                                        <a onclick="return showsummaryreport(4);">
+                                        <font color="blue" face="tahoma" size="2">
+                                        <u><b>VIEW</b></u></font></a>
+                                        <font color="black" face="tahoma" size="2">the graphs.
+                                        </font>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>
+                                        <input type="file" name="sResult06" id="sResult06"/>
+                                    </td>
+                                    <td>
+                                        &nbsp;<input type="text" name="sResult06Name" id="sResult06Name" size="60" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" readonly/>
+                                    </td>
+                                </tr>
+                                </table>
+                                <% } %>
+                            <% } else if ((int)Double.parseDouble(sRunReportTable) == 35) { 
+                                if (sRRTShow != "") { %> 
+                                    <p>
+                                    <%@page import="Fillo.*"%>
+                                    <%
+                                        if (sRRTShow != "") {  
+                                        %>
+                                            <script>
+                                            var sfilefile = document.getElementById("sfilefile");
+                                            </script>
+                                        <%
+                                        if (sReportFile != "") {
+                                            sfilefile = application.getRealPath("/") + sReportFile;
+                                            sReportFileName=sfilefile; 
+                                        }
+                                        else {
+                                            sfilefile = sReportFileName;
+                                        }
+                                        Fillo fillo = new Fillo();
+
+                                        %>
+                                        <script>
+                                            var sReportFileName = document.getElementById("sReportFileName");
+                                            document.getElementById("sReportFileName").value = sReportFileName;
+                                        </script>
+                                        <%
+                                        /*
+                                        out.println("<p>");
+                                        out.println("sReportFile = " + sReportFile);
+                                        out.println("sfilefile = " + sfilefile);
+                                        out.println("sReportFileName = " + sReportFileName);
+                                        out.println("<br>");
+                                        */
+
+                                        Connection connection = fillo.getConnection(sReportFileName);
+                                        String strQuery = "Select * from Performance";
+                                        Recordset recordset = connection.executeQuery(strQuery);
+                                    %>
+
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                &nbsp;
+                                            </td>
+                                            <td>
+                                                <b> Summary: </b>
+                                            </td>
+                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                            <td colspan="8">
+                                            <input type="text" name="sReportFileName" id="sReportFileName" size="75" value="<%=sReportFileName%>" readonly/>
+                                            <input type="hidden" name="sReportFileNameTXT" id="sReportFileNameTXT" value="<%=sReportFileNameTXT%>" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="11">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>
+                                                <b> Output: </b>
+                                            </td>
+                                            <td>&nbsp;</td>
+                                            <th>RMSE Learning</th>
+                                            <th>RMSE Test</th>
+                                            <th>MAE Learning</th>
+                                            <th>MAE Test</th>
+                                            <th>MAPE Learning</th>
+                                            <th>MAPE Test</th>
+                                            <th>R Learning</th>
+                                            <th>R Test</th>
+                                        </tr>
+                                    <% while (recordset.next()) { %>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td align="right">
+                                                <%=recordset.getField("RMSE_Learning")%>
+                                            </td>
+                                            <td align="right">
+                                                <%=recordset.getField("RMSE_Test")%>
+                                            </td>
+                                            <td align="right">
+                                                <%=recordset.getField("MAE_Learning")%>
+                                            </td>
+                                            <td align="right">
+                                                <%=recordset.getField("MAE_Test")%>
+                                            </td>
+                                            <td align="right">
+                                                <%=recordset.getField("MAPE_Learning")%>
+                                            </td>
+                                            <td align="right">
+                                                <%=recordset.getField("MAPE_Test")%>
+                                            </td>
+                                            <td align="right">
+                                                <%=recordset.getField("R_Learning")%>
+                                            </td>
+                                            <td align="right">
+                                                <%=recordset.getField("R_Test")%>
+                                            </td>
+                                        </tr>
+                                    <% } %>
+                                    </table>
+                                    <%
+                                        recordset.close();
+                                        connection.close();
+                                        }
+                                    %>
+                                <% } else { %>
+                                <table><tr>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                    <td>
+                                        <b> Summary: </b>
+                                    </td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>
+                                        &nbsp;<input type="file" name="sResult04" id="sResult04"/>
+                                    </td>
+                                    <td>
+                                        &nbsp;<input type="text" name="sResult04Name" id="sResult04Name" size="60" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" readonly/>
+                                        <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
+                                        <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
+                                        <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
+                                        <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
+                                        <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
+                                        <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
+                                        <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
+                                        <input type="hidden" name="sResult05Name" id="sResult05Name" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" />
+                                        <input type="hidden" name="sResult06Name" id="sResult06Name" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" />
+                                    </td>
+                                    <td>
+                                        &nbsp;&nbsp; - - - 
+                                        <a onclick="return showsummaryreport(3);">
+                                        <font color="blue" face="tahoma" size="2">
+                                        <u><b>OPEN</b></u></font></a>
+                                        <font color="black" face="tahoma" size="2">the report.
+                                        </font>
+                                    </td>
+                                </tr></table>
+                                <% } %>
+                            <% } %>
                         </div>
-                        <div id="process" class="tab-pane fade">
+                        <% if (sPageControl.equals("2")) { %>
+                            <div id="processing" class="tab-pane fade active">
+                        <% } else { %>
+                            <div id="processing" class="tab-pane fade">
+                        <% } %>
+                            <br>
+                            
                         </div>
-                        <div id="result" class="tab-pane fade">
+                        
+                        <% if (sPageControl.equals("3")) { %>
+                            <div id="results" class="tab-pane fade active">
+                        <% } else { %>
+                            <div id="results" class="tab-pane fade">
+                        <% } %>
+                            <br>
+                            <br>
+                            <ul class="nav nav-pills nav-justified">
+                                <li class="active"><a href="#Main">Output Table</a></li>
+                                <li><a href="#PGraph">Prediction Graph</a></li>
+                                <li><a href="#PTGraph">Performance Trajectory Graph</a></li>
+                                <li><a href="#TPGraph">Tracing Path Graph</a></li>
+                            </ul>
+                            <!--<div class="tab-content">
+                                <div id="Main" class="tab-pane fade in active">
+                                    <span><b><a href="#">Optimum huper-parameters</a></b></span>
+                                    <span><b><a href="#">Performance of partitions dataset</a></b></span>
+                                    <span><b><a href="#">Analysis Report</a></b></span>
+                                    <span><b><a href="#">Performance Value</a></b></span>
+                                </div>
+                                <div id="PGraph" class="tab-pane fade">
+                                    <span><b><a href="#">Optimum huper-parameters</a></b></span>
+                                </div>
+                                <div id="PTGraph" class="tab-pane fade">
+                                    <span><b><a href="#">Optimum huper-parameters</a></b></span>
+                                </div>
+                                <div id="TPGraph" class="tab-pane fade">
+                                    <span><b><a href="#">Optimum huper-parameters</a></b></span>
+                                </div>
+                              </div>-->
                         </div>
                     </div>
                     <br>
+                </div>
                     <%--
                     out.println("<p>");
                     out.println("sPageControl = "+sPageControl); 
@@ -2096,3332 +5494,16 @@
                         </tr>
                     </table>
                     <--%>
-                </div>
-
-                <% if (sPageControlVisible == "1") { %> 
-                    <a onclick="return previousscreen();">
+                
+                <%-- if (sPageControlVisible == "1") { %> 
+                    <!--<a onclick="return previousscreen();">
                         <font color="blue" face="agency FB" size="3" style="float:left;">
                         &nbsp;&nbsp;&nbsp;<b><u><< BACK</u></b>
                         </font>
-                    </a>
+                    </a>-->
                     <br>
                     <br>
-                    <% //#1 displaying input data: 
-                    if (sLoadingDataExcelClick != "") { 
-                    %>
-                    <table>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>
-                                <b> General Data: </b>
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                                <a onclick="return closesummarydata2();">
-                                    <img src="Icon-2ArrowLeft.png" alt="..." width="11" height="17">
-                                </a>
-                                &nbsp;&nbsp;
-                            </td>
-                            <td>
-                                1. Swarm and evolutionary parameters:&nbsp;&nbsp;
-                            </td>
-                            <td>
-                                No. of fireflies = <%=nf.format(nFireFlies)%>&nbsp;&nbsp;
-                            </td>
-                            <td>
-                                Max. generation = <%=nf.format(nMaxGeneration)%>
-                            </td>
-                            <td>
-                                &nbsp;&nbsp;&nbsp;
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;&nbsp;&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>
-                                2. Attractiveness:
-                            </td>
-                            <td>
-                                Beta min. = <%=nf2.format(dMinBeta)%>&nbsp;&nbsp;
-                            </td>
-                            <td>
-                                Gamma = <%=nf2.format(dGamma)%>
-                            </td>
-                            <td>
-                                &nbsp;&nbsp;&nbsp;
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;&nbsp;&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>
-                                3. Random movement:
-                            </td>
-                            <td>
-                                Alpha = <%=nf2.format(dAlpha)%>&nbsp;&nbsp;
-                            </td>
-                            <td>
-                                Adaptive inertia weight = <%=nf2.format(dAIWeight)%>&nbsp;&nbsp;
-                            </td>
-                            <td>
-                                Tau = <%=nf2.format(dTau)%>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;&nbsp;&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>
-                                4. Logistic map:
-                            </td>
-                            <td>
-                                Biotic potential, a = <%=nf2.format(dBPotential)%>
-                            </td>
-                            <td colspan="2">
-                                &nbsp;&nbsp;&nbsp;
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;&nbsp;&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>
-                                5. Hyperparameters:
-                            </td>
-                            <td>
-                                Range of C = <%=ndf.format(dC1)%> to
-                                <%=ndf.format(dC2)%>&nbsp;&nbsp;
-                            </td>
-                            <td>
-                                Range of sigma = <%=ndf.format(dS1)%> to
-                                <%=ndf.format(dS2)%>&nbsp;&nbsp;
-                            </td>
-                            <td>
-                                &nbsp;&nbsp;&nbsp;
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;&nbsp;&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>
-                                6. Learning Option:
-                            </td>
-                            <td>
-                                Training partition size = <%=nf.format(dTrainingPS)%> (%)&nbsp;&nbsp;
-                            </td>
-                            <td>
-                                Validation partition size = <%=nf.format(dValidationPS)%> (%)
-                            </td>
-                            <td>
-                                &nbsp;&nbsp;&nbsp;
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;&nbsp;&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>
-                                7. Normalization Method:
-                            </td>
-                            <td>
-                                <%
-                                if (NormalRadio.equals("NormalRadio1")) {
-                                    sNormalRadio = "Original value";
-                                }
-                                else if (NormalRadio.equals("NormalRadio2")) {
-                                    sNormalRadio = "Feature scaling";
-                                }
-                                %>
-                                 <%=sNormalRadio%>
-                            </td>
-                            <td colspan="2">
-                                &nbsp;&nbsp;&nbsp;
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;&nbsp;&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>
-                                8. Objective Function (OF): 
-                            </td>
-                            <td>
-                                <%
-                                if (OptimRadio.equals("OptimRadio1")) {
-                                    sOptimRadio = "RMSE validation";
-                                }
-                                else if (OptimRadio.equals("OptimRadio2")) {
-                                    sOptimRadio = "MAE validation";
-                                }
-                                else if (OptimRadio.equals("OptimRadio3")) {
-                                    sOptimRadio = "MAPE validation";
-                                }
-                                %>
-                                 <%=sOptimRadio%>
-                            </td>
-                            <td colspan="2">
-                                &nbsp;&nbsp;&nbsp;
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;&nbsp;&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>
-                                9. Stop Criterion:
-                            </td>
-                            <td>
-                                <%
-                                if (SCRadio.equals("SCRadio1")) {
-                                    sSCRadio = "Max. generation is reached";
-                                    %> 
-                                    <%=sSCRadio%>
-                                    <%
-                                }
-                                else if (SCRadio.equals("SCRadio2")) {
-                                    sSCRadio = "last changes in OF value <";
-                                    %> 
-                                    <%=nf.format(nLastChange1)%> <%=sSCRadio%> <%=nf5.format(nLastChange2)%>
-                                    <%
-                                }
-                                else if (SCRadio.equals("SCRadio3")) {
-                                    sSCRadio = "Either criterion is reached";
-                                    %> 
-                                    <%=sSCRadio%>
-                                    <%
-                                }
-                                %>
-                            </td>
-                            <td colspan="2">
-                                &nbsp;&nbsp;&nbsp;
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;&nbsp;&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>
-                                10. Purpose:
-                            </td>
-                            <td>
-                                <%
-                                sPRadio = "...";
-                                if (PRadio.equals("PRadio1")) {
-                                    sPRadio = "Evaluation";
-                                    sDummy = "Data File : ";
-                                }
-                                else if (PRadio.equals("PRadio2")) {
-                                    sPRadio = "Prediction";
-                                    sDummy = "Learning Data File : ";
-                                    sFileData = sLearningFileName;
-                                    dAttributes = snLDFAttributes;
-                                    dInstances = snLDFInstances;
-                                    sPDummy = "Prediction Data File : ";
-                                    sPFileData = sPredictionFileName;
-                                    dPAttributes = snPDFAttributes;
-                                    dPInstances = snPDFInstances;
-                                    sVariation = "5";
-                                }
-                                %>
-                                <%=sPRadio%>
-                            </td>
-                            <td colspan="2">
-                                &nbsp;&nbsp;&nbsp;
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;&nbsp;&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>
-                                11. Test Option: 
-                            </td>
-                            <td>
-                                <%
-                                sTORadio = "...";
-                                if (TORadio.equals("TORadio2")) { 
-                                    if (PRadio.equals("PRadio1")) { %>
-                                        Hold-out = <%=nf.format(dHoldOut)%> (%) 
-                                        <% 
-                                        sDummy = "Data File : ";
-                                        sFileData = sFileName;
-                                        dAttributes = snDFAttributes;
-                                        dInstances = snDFInstances;
-                                        sVariation = "2";
-                                        sPFileData = "";
-                                        dPAttributes = "0";
-                                        dPInstances = "0";
-                                    }
-                                    else if (PRadio.equals("PRadio2")) { %> 
-                                        -
-                                    <% }
-                                }
-                                else if (TORadio.equals("TORadio3")) {
-                                    if (PRadio.equals("PRadio1")) { %>
-                                        Cross-validation = <%=nf.format(dCrossValidation)%> (folds)
-                                        <%
-                                        sDummy = "Data File : ";
-                                        sFileData = sFileName;
-                                        dAttributes = snDFAttributes;
-                                        dInstances = snDFInstances;
-                                        sVariation = "3";
-                                        sPFileData = "";
-                                        dPAttributes = "0";
-                                        dPInstances = "0";
-                                    }
-                                    else if (PRadio.equals("PRadio2")) { %>
-                                        -
-                                    <% }
-                                }
-                                else {
-                                    if (TORadio.equals("TORadio1")) {
-                                        if (PRadio.equals("PRadio1")) {
-                                            sTORadio = "Use data file";
-                                            sDummy = "Data File : ";
-                                            sFileData = sFileName;
-                                            dAttributes = snDFAttributes;  
-                                            dInstances = snDFInstances; 
-                                            sVariation = "1";
-                                            sPFileData = "";
-                                            dPAttributes = "0";
-                                            dPInstances = "0";
-                                        }
-                                        else if (PRadio.equals("PRadio2")) {
-                                            sTORadio = "-";
-                                        }
-                                    }
-                                    else if (TORadio.equals("TORadio4")) {
-                                        if (PRadio.equals("PRadio1")) {
-                                            sTORadio = "Use test data file";
-                                            sDummy = "Data File : ";
-                                            sFileData = sFileName;
-                                            dAttributes = snDFAttributes;
-                                            dInstances = snDFInstances; 
-                                            sPDummy = "Test Data File : ";
-                                            sPFileData = sTestFileName;
-                                            dPAttributes = snTDFAttributes; 
-                                            dPInstances = snTDFInstances; 
-                                            sVariation = "4";
-                                        }
-                                        else if (PRadio.equals("PRadio2")) {
-                                            sTORadio = "-";
-                                        }
-                                    }
-                                    else {
-                                        dAttributes = snDFAttributes;
-                                        dInstances = snDFInstances;
-                                    }%>
-
-                                    <%=sTORadio%>
-
-                                <% } %>
-
-                            </td>
-                            <td colspan="2">
-                                <b> Run variation # <%=sVariation%> </b>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="8">&nbsp;</td>
-                        </tr>
-                    </table>
-
-                    <table>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>&nbsp;&nbsp;</td>
-                            <td>
-                                <%=sDummy%> <%=sFileData%> 
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                                No. of Attributes = <%=nf.format(Double.parseDouble(dAttributes))%>  
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                                 No. of Instances = <%=nf.format(Double.parseDouble(dInstances))%>  
-                            </td>
-                        </tr>
-                        <tr>
-                            <%if (sVariation == "4" || sVariation == "5") {%>
-                                <td>&nbsp;&nbsp;</td>
-                                <td>&nbsp;&nbsp;</td>
-                                <td>&nbsp;&nbsp;</td>
-                                <td>&nbsp;&nbsp;</td>
-                                <td>
-                                    <%=sPDummy%> <%=sPFileData%> 
-                                </td>
-                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                <td>
-                                    No. of Attributes = <%=nf.format(Double.parseDouble(dPAttributes))%>  
-                                </td>
-                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                <td>
-                                     No. of Instances = <%=nf.format(Double.parseDouble(dPInstances))%>  
-                                </td>
-                            <%}%>
-                        </tr>
-                    </table>
-
-                    <% //#2 displaying data file 
-                    } else if (sLoadingDataExcelClick3 != "") { 
-                    %>
-                        <table>
-                        <tr>
-                            <td>
-                                &nbsp;
-                            </td>
-                            <td>
-                                <b> Training Dataset: </b>
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                                <a onclick="return closesummarydata2();">
-                                    <img src="Icon-2ArrowLeft.png" alt="..." width="11" height="17">
-                                </a>
-                            </td>
-                            <td>&nbsp;&nbsp;</td>
-                        <%
-                            if (sFileName != "") { 
-                                String file = application.getRealPath("/") + sFileName;
-                                BufferedReader br = new BufferedReader(new FileReader(file)); 
-                                String line = null;
-                                int i;
-                                int j;
-
-                                // first line: title
-                                line = br.readLine();
-                                if (line == null) {
-                                    out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
-                                } else {
-                                    cols = line.split("\\t");
-
-                                    // second line: column header
-                                    line = br.readLine();
-                                    headers = line.split("\\t");
-
-                                    // third line and so on: data ... last column = dependent variable  
-                                    line = br.readLine(); 
-                                    j=0;
-                                    while (line != null) {
-                                        cols = line.split("\\t");
-                                        for (i = 0; i < ncols1; i += 1) {
-                                            Dataraw[j][i]=cols[i];
-                                        }
-                                        j=j+1;
-                                        line = br.readLine();
-                                    }
-                                }
-                                br.close();
-                                %>
-                                        <td align="center">
-                                            No.
-                                        </td>
-                                        <td>&nbsp;&nbsp;&nbsp;</td>
-                                        <% for (j = 0; j < ncols1; j += 1) { %> 
-                                            <td align="center">
-                                                <%=headers[j]%>
-                                            </td>
-                                            <td>&nbsp;&nbsp;&nbsp;</td>
-                                        <% } %>
-                                    </tr>
-
-                                    <% for (i = 0; i < nrows1; i += 1) { %> 
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td align="center">
-                                                <%=i%>
-                                            </td> 
-                                            <td>&nbsp;&nbsp;&nbsp;</td>
-                                            <% for (j = 0; j < ncols1; j += 1) { %> 
-                                                <td align="right">
-                                                    <%=nf3.format(Double.parseDouble(Dataraw[i][j]))%>
-                                                </td>
-                                                <td>&nbsp;&nbsp;&nbsp;</td>
-                                            <% } %>
-                                        </tr>
-                                    <% } %>
-                            <% } else { %>
-                                        <td align="left">
-                                            <font color='red'>
-                                            &nbsp;&nbsp;Data file not available ... !
-                                            </font>
-                                        </td>
-                                    </tr>
-                            <% } %>
-                            </table>
-
-                    <% //#3 displaying test data file 
-                    } else if (sLoadingDataExcelClick4 != "") { 
-                    %>
-                        <%--Fileopen.mat Filetest.mat Fileopen.mat FilePredict.mat--%>
-                        <table>
-                        <tr>
-                            <td>
-                                &nbsp;
-                            </td>
-                            <td>
-                                <b> Test Dataset: </b>
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                                <a onclick="return closesummarydata2();">
-                                    <img src="Icon-2ArrowLeft.png" alt="..." width="11" height="17">
-                                </a>
-                            </td>
-                            <td>&nbsp;&nbsp;</td>
-                        <%
-                            if (sTestFileName != "") { 
-                                String file = application.getRealPath("/") + sTestFileName;
-                                BufferedReader br = new BufferedReader(new FileReader(file)); 
-                                String line = null;
-                                int i;
-                                int j;
-
-                                // first line: title
-                                line = br.readLine();
-                                if (line == null) {
-                                    out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
-                                } else {
-                                    cols = line.split("\\t");
-
-                                    // second line: column header
-                                    line = br.readLine();
-                                    headers = line.split("\\t");
-
-                                    // third line and so on: data ... last column = dependent variable  
-                                    line = br.readLine(); 
-                                    j=0;
-                                    while (line != null) {
-                                        cols = line.split("\\t");
-                                        for (i = 0; i < ncols2; i += 1) {
-                                            Datatest[j][i]=cols[i]; 
-                                        }
-                                        j=j+1;
-                                        line = br.readLine();
-                                    }
-                                }
-                                br.close();
-                                %>
-                                        <td align="center">
-                                            No.
-                                        </td>
-                                        <td>&nbsp;&nbsp;&nbsp;</td>
-                                        <% for (j = 0; j < ncols2; j += 1) { %>
-                                            <td align="center">
-                                                <%=headers[j]%>
-                                            </td>
-                                            <td>&nbsp;&nbsp;&nbsp;</td>
-                                        <% } %>
-                                    </tr>
-
-                                    <% for (i = 0; i < nrows2; i += 1) { %> 
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td align="center">
-                                                <%=i%>
-                                            </td> 
-                                            <td>&nbsp;&nbsp;&nbsp;</td>
-                                            <% for (j = 0; j < ncols2; j += 1) { %>
-                                                <td align="right">
-                                                    <%=nf3.format(Double.parseDouble(Datatest[i][j]))%>
-                                                </td>
-                                                <td>&nbsp;&nbsp;&nbsp;</td>
-                                            <% } %>
-                                        </tr>
-                                    <% } %>
-                            <% } else { %>
-                                        <td align="left">
-                                            <font color='red'>
-                                            &nbsp;&nbsp;Test data file not available ... !
-                                            </font>
-                                        </td>
-                                    </tr>
-                            <% } %>
-                            </table>
-
-                    <% //#4 displaying learning data file 
-                    } else if (sLoadingDataExcelClick5 != "") { 
-                    %>
-                        <table>
-                        <tr>
-                            <td>
-                                &nbsp;
-                            </td>
-                            <td>
-                                <b> Learning Dataset: </b>
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                                <a onclick="return closesummarydata2();">
-                                    <img src="Icon-2ArrowLeft.png" alt="..." width="11" height="17">
-                                </a>
-                            </td>
-                            <td>&nbsp;&nbsp;</td>
-                        <% 
-                            /*
-                            out.println("<p>");
-                            out.println("sLearningFileName = "+sLearningFileName);
-                            out.println("<br>");
-                            */ 
-
-                            if (sLearningFileName != "") { 
-                                String file = application.getRealPath("/") + sLearningFileName;
-                                BufferedReader br = new BufferedReader(new FileReader(file)); 
-                                String line = null;
-                                int i;
-                                int j;
-
-                                //alert("Zero Y value observed, MAPE cannot be chosen as an objective function ...!"); 
-
-                                /**/
-                                // first line: title
-                                line = br.readLine();
-                                if (line == null) {
-                                    out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
-                                } else {
-                                    cols = line.split("\\t");
-                                    //out.println("<table>");
-                                    //out.println("<tr>");
-
-                                    // second line: column header
-                                    line = br.readLine();
-                                    headers = line.split("\\t");
-
-                                    // third line and so on: data ... last column = dependent variable  
-                                    line = br.readLine(); 
-                                    j=0;
-                                    while (line != null) {
-                                        cols = line.split("\\t");
-                                        for (i = 0; i < ncols3; i += 1) {
-                                            Datatrains[j][i]=cols[i]; 
-                                        }
-                                        sDummy = Datatrains[j][ncols3-1];
-                                        dDummy=Double.parseDouble(sDummy);
-                                        if (dDummy == 0) {
-                                            sError="1";
-                                        }
-                                        j=j+1;
-                                        line = br.readLine();
-                                    }
-                                }
-                                /**/
-                                br.close();
-
-                                /*
-                                out.println("snLDFInstances = "+snLDFInstances);
-                                out.println("<br>");
-                                */
-                                %>
-
-                                <%-->
-                                <--%>
-                                        <td align="center">
-                                            No.
-                                        </td>
-                                        <td>&nbsp;&nbsp;&nbsp;</td>
-                                        <% for (j = 0; j < ncols3; j += 1) { %>
-                                            <td align="center">
-                                                <%=headers[j]%>
-                                            </td>
-                                            <td>&nbsp;&nbsp;&nbsp;</td>
-                                        <% } %>
-                                    </tr>
-
-                                    <tr>
-                                    <td colspan="15">
-                                    <% 
-                                    if (OptimRadio.equals("OptimRadio1")) {
-                                        sOptimRadio = "RMSE validation";
-                                    }
-                                    else if (OptimRadio.equals("OptimRadio2")) {
-                                        sOptimRadio = "MAE validation";
-                                    }
-                                    else if (OptimRadio.equals("OptimRadio3")) {
-                                        sOptimRadio = "MAPE validation";
-                                    }
-
-                                    //out.println("sError = "+sError);
-                                    //out.println("OptimRadio = "+OptimRadio);
-                                    //out.println("sOptimRadio = "+sOptimRadio);
-
-                                    if (sError=="1") {
-                                    if (sOptimRadio=="MAPE validation") {
-                                        out.println("<h4><font color='red'>&nbsp;&nbsp;&nbsp;"
-                                            + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                                            + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                                            + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                                            + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                                            + "&nbsp;&nbsp;&nbsp;&nbsp;" 
-                                            + "Zero Y value observed, MAPE cannot be chosen as an objective function ... !</font></h4>");
-                                    }
-                                    }
-                                    %>
-                                    </td>
-                                    </tr>
-
-                                    <% for (i = 0; i < nrows3; i += 1) { %>
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td align="center">
-                                                <%=i%>
-                                            </td> 
-                                            <td>&nbsp;&nbsp;&nbsp;</td>
-                                            <% for (j = 0; j < ncols3; j += 1) { %>
-                                                <td align="right">
-                                                    <%-->
-                                                    <%=Datatrain[i][j]%>
-                                                    <--%>
-
-                                                    <%=nf3.format(Double.parseDouble(Datatrains[i][j]))%>
-                                                </td>
-                                                <td>&nbsp;&nbsp;&nbsp;</td>
-                                            <% } %>
-                                        </tr>
-                                    <% } %>
-                            <% } else { %>
-                                        <td align="left">
-                                            <font color='red'>
-                                            &nbsp;&nbsp;Learning data file not available ... !
-                                            </font>
-                                        </td>
-                                    </tr>
-                            <% } %>
-                            </table>
-
-                    <% //#5 displaying prediction data file 
-                    } else if (sLoadingDataExcelClick6 != "") { 
-                    %>
-                        <table>
-                        <tr>
-                            <td>
-                                &nbsp;
-                            </td>
-                            <td>
-                                <b> Prediction Dataset: </b>
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                                <a onclick="return closesummarydata2();">
-                                    <img src="Icon-2ArrowLeft.png" alt="..." width="11" height="17">
-                                </a>
-                            </td>
-                            <td>&nbsp;&nbsp;</td>
-                        <%
-                            if (sPredictionFileName != "") { 
-                                String file = application.getRealPath("/") + sPredictionFileName;
-                                BufferedReader br = new BufferedReader(new FileReader(file)); 
-                                String line = null;
-                                int i;
-                                int j;
-
-                                // first line: title
-                                line = br.readLine();
-                                if (line == null) {
-                                    out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
-                                } else {
-                                    cols = line.split("\\t");
-
-                                    // second line: column header
-                                    line = br.readLine();
-                                    headers = line.split("\\t");
-
-                                    // third line and so on: data ... last column = dependent variable  
-                                    line = br.readLine(); 
-                                    j=0;
-                                    while (line != null) {
-                                        cols = line.split("\\t");
-                                        for (i = 0; i < ncols4; i += 1) {
-                                            Datapres[j][i]=cols[i];
-                                        }
-                                        j=j+1;
-                                        line = br.readLine();
-                                    }
-                                }
-                                br.close();
-                                %>
-                                        <td align="center">
-                                            No.
-                                        </td>
-                                        <td>&nbsp;&nbsp;&nbsp;</td>
-                                        <% for (j = 0; j < ncols4; j += 1) { %>
-                                            <td align="center">
-                                                <%=headers[j]%>
-                                            </td>
-                                            <td>&nbsp;&nbsp;&nbsp;</td>
-                                        <% } %>
-                                    </tr>
-
-                                    <% for (i = 0; i < nrows4; i += 1) { %>
-                                        <tr>
-                                        <td>&nbsp;</td>
-                                        <td>&nbsp;</td>
-                                        <td>&nbsp;</td>
-                                        <td>&nbsp;</td>
-                                        <td>&nbsp;</td>
-                                            <td align="center">
-                                                <%=i%>
-                                            </td> 
-                                            <td>&nbsp;&nbsp;&nbsp;</td>
-                                            <% for (j = 0; j < ncols4; j += 1) { %>
-                                                <td align="right">
-                                                    <%=nf3.format(Double.parseDouble(Datapres[i][j]))%>
-                                                </td>
-                                                <td>&nbsp;&nbsp;&nbsp;</td>
-                                            <% } %>
-                                        </tr>
-                                    <% } %>
-                            <% } else { %>
-                                        <td align="left">
-                                            <font color='red'>
-                                            &nbsp;&nbsp;Prediction data file not available ... !
-                                            </font>
-                                        </td>
-                                    </tr>
-                            <% } %>
-                            </table>
-
-                    <% //#6 displaying header
-                    } else { 
-                    %>
-                        <table>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>
-                                <b> General Data: </b>
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                                <a onclick="return viewsummarydata2();">
-                                    <img src="Icon-2ArrowRight.png" alt="..." width="11" height="17">
-                                </a>
-                            </td>
-
-                            <td>
-                                <font color="black" face="tahoma" size="2">
-                                &nbsp;&nbsp;Click 
-                                </font>
-                                <a onclick="return viewsummarydata2();">
-                                    <font color="blue">
-                                    <u>here</u>
-                                    </font>
-                                </a> 
-                                <font color="black" face="tahoma" size="2">
-                                to view the summary data ...
-                                </font>
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                                <b> Dataset: </b> &nbsp;&nbsp;
-                                <% if (PRadio.equals("PRadio1")) { %> 
-                                    <a onclick="return viewsummarydata3();">
-                                        <font color="blue">
-                                        <u>Learning Dataset</u>
-                                        </font>
-                                    </a> 
-                                    <% if (TORadio.equals("TORadio4")) { %> 
-                                        &nbsp; - &nbsp;
-                                        <a onclick="return viewsummarydata4();">
-                                            <font color="blue">
-                                            <u>Test Dataset</u>
-                                            </font>
-                                        </a> 
-                                    <% } %>
-                                <% } else if (PRadio.equals("PRadio2")) { %> 
-                                    <a onclick="return viewsummarydata5();">
-                                        <font color="blue">
-                                        <u>Learning Dataset</u>
-                                        </font>
-                                    </a> 
-                                    &nbsp; - &nbsp;
-                                    <a onclick="return viewsummarydata6();">
-                                        <font color="blue">
-                                        <u>Prediction Dataset</u>
-                                        </font>
-                                    </a> 
-                                <% } %>
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                                <b> Output: </b> &nbsp;&nbsp;
-                                <a onclick="return rundata2(1);">
-                                    <font color="blue">
-                                    <u>Initialize</u>
-                                    </font>
-                                </a> 
-                            </td>
-                        </tr>
-                        </table>
-                    <% } %>
-
-                    <BR>
-
-                    <% if (sRunReportTable == "") { %> 
-                        <%-->
-                        <h6 id="bottompage">
-                            <img src="Logo-Space.png" alt="     " width="4" height="5">
-                            &nbsp;. . . [END OF OUTPUT FORM] &nbsp;&nbsp;&nbsp;
-                        </h6>
-                        <--%>
-                        <%--><a href="#top">
-                            <img src="Icon-Top.png" alt="..." width="13" height="17">
-                        </a><--%>
-
-                        <div class="scrollToTop">
-                          <img src="arrowup.JPG" alt="..." width="18">  
-                        </div>
-                    <% } %>
-
-                    <% 
-                    if ((int)Double.parseDouble(sRunReportTable) == 1) {
-                        if (sCreate != "") {  
-                            sResult01Name = application.getRealPath("/") + sBaseFileName +"01.txt";
-                            sResult02Name = application.getRealPath("/") + sBaseFileName +"02.txt";
-                            sResult03Name = application.getRealPath("/") + sBaseFileName +"03.txt";
-                            sResult04Name = application.getRealPath("/") + sBaseFileName +"04.txt";
-                            sResult04aName = application.getRealPath("/") + sBaseFileName +"04a.txt";
-                            sResult04bName = application.getRealPath("/") + sBaseFileName +"04b.txt";
-                            sResult04cName = application.getRealPath("/") + sBaseFileName +"04c.txt";
-                            sResult04dName = application.getRealPath("/") + sBaseFileName +"04d.txt";
-                            sResult05Name = application.getRealPath("/") + sBaseFileName +"05.txt";
-                            sResult06Name = application.getRealPath("/") + sBaseFileName +"06.txt";
-                            %>
-                            <script>
-                                document.getElementById("sResult01Name").value = sResult01Name;
-                                document.getElementById("sResult02Name").value = sResult02Name;
-                                document.getElementById("sResult03Name").value = sResult03Name;
-                                document.getElementById("sResult04Name").value = sResult04Name;
-                                document.getElementById("sResult04aName").value = sResult04aName;
-                                document.getElementById("sResult04bName").value = sResult04bName;
-                                document.getElementById("sResult04cName").value = sResult04cName;
-                                document.getElementById("sResult04dName").value = sResult04dName;
-                                document.getElementById("sResult05Name").value = sResult05Name;
-                                document.getElementById("sResult06Name").value = sResult06Name;
-                            </script>
-
-                            <script> 
-                                var sCreate = document.getElementById("sCreate"); 
-                                sCreate = "";
-                                document.getElementById("sCreate").value = sCreate; 
-                            </script>
-
-                                <table>
-                                    <tr>
-                                        <td>
-                                            &nbsp;
-                                        </td>
-                                        <td>
-                                            <b> Running: </b>
-                                        </td>
-                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                        <td colspan="4">
-                                        <input type="text" name="sResult01Name" id="sResult01Name" size="75" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" readonly/>
-                                        <font color="teal" face="tahoma" size="2"> &nbsp; ... main output. </font>
-                                        <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
-                                        <input type="hidden" name="sResult04Name" id="sResult04Name" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" />
-                                        <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
-                                        <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
-                                        <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
-                                        <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
-                                        <input type="hidden" name="sResult05Name" id="sResult05Name" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" />
-                                        <input type="hidden" name="sResult06Name" id="sResult06Name" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" />
-
-                                        <input type="hidden" name="sBaseFileName" id="sBaseFileName" value="<%=sBaseFileName%>">
-                                        </td>
-                                    </tr> 
-                                    <tr>
-                                        <td>&nbsp;</td>
-                                        <td>&nbsp;</td>
-                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                        <td colspan="4">
-                                        <input type="text" name="sResult02Name" id="sResult02Name" size="75" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" readonly/> 
-                                        <font color="teal" face="tahoma" size="2"> &nbsp; ... validation. </font>
-                                        </td>
-                                    </tr>
-                                    <% if (sResult05Name != "") { %>
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                            <td colspan="4">
-                                            <input type="text" name="sResult05Name" id="sResult05Name" size="75" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" readonly/> 
-                                            <font color="teal" face="tahoma" size="2"> &nbsp; ... performance. </font>
-                                            </td>
-                                        </tr>
-                                    <% } %>
-                                    <tr>
-                                        <td colspan="7">
-                                            &nbsp;
-                                        </td>
-                                    </tr> 
-
-                                    <%
-                                    /*
-                                    out.println("<p>");
-                                    out.println("sResult01Name = " + sResult01Name);
-                                    out.println("<br>");
-                                    out.println("sResult03Name = " + sResult03Name);
-                                    out.println("<br>");
-                                    out.println("sResult04Name = " + sResult04Name);
-                                    out.println("<br>");
-                                    out.println("sResult05Name = " + sResult05Name);
-                                    out.println("<br>");
-                                    */
-
-                                    if (sResult01Name!="") {
-                                    String file = "";
-                                    file = sResult01Name; 
-                                    BufferedReader br = new BufferedReader(new FileReader(file));
-                                    String line = null;
-                                    int i;
-                                    int j;
-
-                                    // first line: title
-                                    line = br.readLine();
-                                    if (line == null) {
-                                        out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
-                                    } else {
-                                        cols = line.split("\\t"); %>
-                                        <tr>
-                                            <td> &nbsp; </td>
-                                            <td>
-                                                <b>Output:</b>
-                                            </td>
-                                            <td> &nbsp; </td>
-                                            <td align="right"> Performance &nbsp; = &nbsp; </td>
-                                            <td>
-                                                <input type="text" size="10" value="<%=cols[0]%>" readonly>
-                                            </td>
-                                            <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                                            <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                                        </tr> 
-                                        <tr>
-                                            <td> &nbsp; </td>
-                                            <td> &nbsp; </td>
-                                            <td> &nbsp; </td>
-                                            <td align="right"> Penalty Parameter, C &nbsp; = &nbsp; </td>
-                                            <td>
-                                                <input type="text" size="10" value="<%=cols[1]%>" readonly>
-                                            </td>
-                                            <td> &nbsp; </td>
-                                            <td> &nbsp; </td>
-                                        </tr> 
-                                        <tr>
-                                            <td> &nbsp; </td>
-                                            <td> &nbsp; </td>
-                                            <td> &nbsp; </td>
-                                            <td align="right"> Kernel Function Parameter, S &nbsp; = &nbsp; </td>
-                                            <td>
-                                                <input type="text" size="10" value="<%=cols[2]%>" readonly>
-                                            </td>
-                                            <td> &nbsp; </td>
-                                            <td> &nbsp; </td>
-                                        </tr> 
-                                    <% }
-                                    br.close(); %>
-
-                                    <tr>
-                                        <td colspan="7">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="7">&nbsp;</td>
-                                    </tr>
-                                    <% } %>
-                                </table>
-
-                                <table>
-                                    <tr>
-                                        <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                                        <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                                        <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                                        <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                                    <%
-                                    if (sResult02Name!="") {
-                                    String file = "";
-                                    file = sResult02Name; 
-                                    BufferedReader br = new BufferedReader(new FileReader(file)); 
-                                    String line = null;
-                                    int i;
-                                    int j;
-
-                                    // first line: title
-                                    line = br.readLine(); 
-                                    if (line == null) { 
-                                        out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
-                                    } else {
-                                        cols = line.split("\\t");
-                                        ncol = cols.length;
-
-                                        for (j=0; j<ncol; j++) {
-                                            sDummy = cols[j];
-                                            %>
-                                                <td>
-                                                    <%=sDummy%>
-                                                </td>
-                                                <td> &nbsp;&nbsp; </td>
-                                        <% } %>
-                                    <% } %>
-                                        <td> &nbsp; </td>
-                                        <td> &nbsp; </td>
-                                    </tr> 
-                                    <% 
-                                    line = br.readLine();
-                                    while (line != null) { %>
-                                        <tr>
-                                            <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
-                                            <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
-                                            <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
-                                            <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
-                                        <%
-                                        cols = line.split("[,\\t]+");
-                                        for (j=0; j<ncol; j++) {
-                                            sDummy = cols[j];
-                                            %>
-                                                <td align="right">
-                                                    <%=sDummy%>
-                                                </td>
-                                                <td> &nbsp;&nbsp; </td>
-                                        <% } %>
-                                        </tr>
-                                        <% line = br.readLine();
-                                    } %>
-                                    <% br.close(); %> 
-                                    <tr>
-                                        <td colspan="6"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
-                                    </tr>
-                                    <tr>
-                                        <td colspan="6"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
-                                    <% } %>
-                                    </tr>
-                                </table>    
-
-                                <% if (sResult05Name != "") { %>
-                                    <table>
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td> Fold No.</td>
-                                            <td>&nbsp;</td>
-                                            <td> Generation No.</td>
-                                            <td>&nbsp;</td>
-                                            <td> Mean Performance</td>
-                                            <td>&nbsp;</td>
-                                            <td> Best Performance</td>
-                                        </tr>
-                                        <tr>
-                                            <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                                            <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                                            <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                                            <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                                            <% 
-                                            String file = "";
-                                            file = sResult05Name;
-                                            BufferedReader br = new BufferedReader(new FileReader(file));
-                                            String line = null;
-                                            int i;
-                                            int j;
-
-                                            // first line: title
-                                            line = br.readLine();
-                                            if (line == null) {
-                                                out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
-                                            } else {
-                                                cols = line.split("\\t"); 
-                                                ncol = cols.length;
-
-                                                for (j=0; j<ncol; j++) {
-                                                    sDummy = cols[j];
-                                                    %>
-                                                    <td align="right">
-                                                        <%=sDummy%>
-                                                    </td>
-                                                    <td> &nbsp;&nbsp; </td>
-                                                <% } %>
-                                            <% } %>
-                                            <td> &nbsp; </td>
-                                            <td> &nbsp; </td>
-                                        </tr> 
-                                        <% 
-                                        line = br.readLine();
-                                        while (line != null) { %>
-                                            <tr>
-                                                <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
-                                                <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
-                                                <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
-                                                <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
-                                            <%
-                                            cols = line.split("[,\\t]+");
-                                            for (j=0; j<ncol; j++) {
-                                                sDummy = cols[j];
-                                                %>
-                                                <td align="right">
-                                                    <%=sDummy%>
-                                                </td>
-                                                <td> &nbsp;&nbsp; </td>
-                                            <% } %>
-                                            </tr>
-                                            <% line = br.readLine();
-                                        } %>
-                                        <tr>
-                                            <td colspan="6"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
-                                        </tr>
-                                    </table>    
-                                    <% br.close();
-                                } %>
-                        <% } else {
-                            if (sRRTShow != "") {  
-                                if (sViewProceed == "") { %>
-                                    <%--> VIEW Results <--%>
-                                    <script>
-                                        var sfilefileResult01 = document.getElementById("sfilefileResult01"); 
-                                        var sfilefileResult02 = document.getElementById("sfilefileResult02"); 
-                                    </script>
-
-                                    <% if (sResult01 != "") { 
-                                        sfilefileResult01 = application.getRealPath("/") + sResult01;
-                                        sResult01Name=sfilefileResult01; 
-                                    }
-                                    else {
-                                        sfilefileResult01 = sResult01Name;
-                                    } %>
-
-                                    <script>
-                                        var sResult01Name = document.getElementById("sResult01Name");
-                                        document.getElementById("sResult01Name").value = sResult01Name;
-                                    </script>
-
-                                    <% if (sResult02 != "") {
-                                        sfilefileResult02 = application.getRealPath("/") + sResult02;
-                                        sResult02Name=sfilefileResult02; 
-                                    }
-                                    else {
-                                        sfilefileResult02 = sResult02Name;
-                                    } %>
-
-                                    <script>
-                                        var sResult02Name = document.getElementById("sResult02Name");
-                                        document.getElementById("sResult02Name").value = sResult02Name;
-                                    </script>
-
-                                    <script>
-                                        var sResult03Name = document.getElementById("sResult03Name");
-                                        var sResult04Name = document.getElementById("sResult04Name"); 
-                                        var sResult04aName = document.getElementById("sResult04aName"); 
-                                        var sResult04bName = document.getElementById("sResult04bName"); 
-                                        var sResult04cName = document.getElementById("sResult04cName"); 
-                                        var sResult04dName = document.getElementById("sResult04dName"); 
-                                        var sResult05Name = document.getElementById("sResult05Name"); 
-                                        var sResult06Name = document.getElementById("sResult06Name"); 
-                                    </script> 
-
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                &nbsp;
-                                            </td>
-                                            <td>
-                                                <b> Running: </b>
-                                            </td>
-                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                            <td colspan="4">
-                                            <input type="text" name="sResult01Name" id="sResult01Name" size="75" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" readonly/>
-                                            <font color="teal" face="tahoma" size="2"> &nbsp; ... main output. </font>
-                                            <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
-                                            <input type="hidden" name="sResult04Name" id="sResult04Name" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" />
-                                            <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
-                                            <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
-                                            <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
-                                            <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
-                                            <input type="hidden" name="sResult05Name" id="sResult05Name" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" />
-                                            <input type="hidden" name="sResult06Name" id="sResult06Name" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" />
-                                            <input type="hidden" name="sBaseFileName" id="sBaseFileName" value="<%=sBaseFileName%>">
-                                            </td>
-                                        </tr> 
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                            <td colspan="4">
-                                            <input type="text" name="sResult02Name" id="sResult02Name" size="75" value="<%=sResult02Name%>" readonly/> 
-                                            <font color="teal" face="tahoma" size="2"> &nbsp; ... validation. </font>
-                                            </td>
-                                        </tr>
-                                        <% if (sResult05Name != "") { %>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                <td colspan="4">
-                                                <input type="text" name="sResult05Name" id="sResult05Name" size="75" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" readonly/> 
-                                                <font color="teal" face="tahoma" size="2"> &nbsp; ... performance. </font>
-                                                </td>
-                                            </tr>
-                                        <% } %>
-                                        <tr>
-                                            <td colspan="7">
-                                                &nbsp;
-                                            </td>
-                                        </tr> 
-
-                                        <%
-                                        /*
-                                        out.println("<p>");
-                                        out.println("sResult01Name = " + sResult01Name);
-                                        out.println("<br>");
-                                        out.println("sResult03Name = " + sResult03Name);
-                                        out.println("<br>");
-                                        out.println("sResult04Name = " + sResult04Name);
-                                        out.println("<br>");
-                                        out.println("sResult05Name = " + sResult05Name);
-                                        out.println("<br>");
-                                        */
-
-                                        if (sResult01Name!="") {
-                                        String file = ""; 
-                                        file = sResult01Name;
-                                        BufferedReader br = new BufferedReader(new FileReader(file));
-                                        String line = null;
-                                        int i;
-                                        int j;
-
-                                        // first line: title
-                                        line = br.readLine();
-                                        if (line == null) {
-                                            out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
-                                        } else {
-                                            cols = line.split("\\t"); %>
-                                            <tr>
-                                                <td> &nbsp; </td>
-                                                <td>
-                                                    <b>Output:</b>
-                                                </td>
-                                                <td> &nbsp; </td>
-                                                <td align="right"> Performance &nbsp; = &nbsp; </td>
-                                                <td>
-                                                    <input type="text" size="10" value="<%=cols[0]%>" readonly>
-                                                </td>
-                                                <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                                                <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                                            </tr> 
-                                            <tr>
-                                                <td> &nbsp; </td>
-                                                <td> &nbsp; </td>
-                                                <td> &nbsp; </td>
-                                                <td align="right"> Penalty Parameter, C &nbsp; = &nbsp; </td>
-                                                <td>
-                                                    <input type="text" size="10" value="<%=cols[1]%>" readonly>
-                                                </td>
-                                                <td> &nbsp; </td>
-                                                <td> &nbsp; </td>
-                                            </tr> 
-                                            <tr>
-                                                <td> &nbsp; </td>
-                                                <td> &nbsp; </td>
-                                                <td> &nbsp; </td>
-                                                <td align="right"> Kernel Function Parameter, S &nbsp; = &nbsp; </td>
-                                                <td>
-                                                    <input type="text" size="10" value="<%=cols[2]%>" readonly>
-                                                </td>
-                                                <td> &nbsp; </td>
-                                                <td> &nbsp; </td>
-                                            </tr> 
-                                        <% }
-                                        br.close(); %>
-                                        <% } %>
-
-                                        <tr>
-                                            <td colspan="7">&nbsp;</td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="7">&nbsp;</td>
-                                        </tr>
-                                    </table>
-
-                                    <table>
-                                        <tr>
-                                            <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                                            <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                                            <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                                            <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                                        <%
-                                        if (sResult02Name!="") {
-                                        String file = ""; 
-                                        file = sResult02Name;
-                                        BufferedReader br = new BufferedReader(new FileReader(file));
-                                        String line = null;
-                                        int i;
-                                        int j;
-
-                                        // first line: title
-                                        line = br.readLine();
-                                        if (line == null) {
-                                            out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
-                                        } else {
-                                            cols = line.split("\\t"); 
-                                            ncol = cols.length;
-
-                                            for (j=0; j<ncol; j++) {
-                                                sDummy = cols[j];
-                                                %>
-                                                    <td>
-                                                        <%=sDummy%>
-                                                    </td>
-                                                    <td> &nbsp;&nbsp; </td>
-                                            <% } %>
-                                        <% } %>
-                                            <td> &nbsp; </td>
-                                            <td> &nbsp; </td>
-                                        </tr> 
-                                        <% 
-                                        line = br.readLine();
-                                        while (line != null) { %>
-                                            <tr>
-                                                <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
-                                                <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
-                                                <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
-                                                <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
-                                            <%
-                                            cols = line.split("[,\\t]+");
-                                            for (j=0; j<ncol; j++) {
-                                                sDummy = cols[j];
-                                                %>
-                                                    <td align="right">
-                                                        <%=sDummy%>
-                                                    </td>
-                                                    <td> &nbsp;&nbsp; </td>
-                                            <% } %>
-                                            <% line = br.readLine();
-                                        } %>
-                                        <% br.close(); %> 
-                                        <% } %>
-                                            </tr>
-                                        <tr>
-                                            <td colspan="6"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
-                                        </tr>
-                                        <tr>
-                                            <td colspan="6"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
-                                        </tr>
-                                    </table>    
-
-                                    <% if (sResult05Name != "") { %>
-                                        <table>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td> Fold No.</td>
-                                                <td>&nbsp;</td>
-                                                <td> Generation No.</td>
-                                                <td>&nbsp;</td>
-                                                <td> Mean Performance</td>
-                                                <td>&nbsp;</td>
-                                                <td> Best Performance</td>
-                                            </tr>
-                                            <tr>
-                                                <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                                                <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                                                <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                                                <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                                                <% 
-                                                String file = ""; 
-                                                file = sResult05Name;
-                                                BufferedReader br = new BufferedReader(new FileReader(file));
-                                                String line = null;
-                                                int i;
-                                                int j;
-
-                                                // first line: title
-                                                line = br.readLine(); 
-                                                if (line == null) { 
-                                                    out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
-                                                } else {
-                                                    cols = line.split("\\t");
-                                                    ncol = cols.length;
-
-                                                    for (j=0; j<ncol; j++) { 
-                                                        sDummy = cols[j]; 
-                                                        %>
-                                                        <td align="right">
-                                                            <%=sDummy%>
-                                                        </td>
-                                                        <td> &nbsp;&nbsp; </td>
-                                                    <% } %>
-                                                <% } %>
-                                                <td> &nbsp; </td>
-                                                <td> &nbsp; </td>
-                                            </tr> 
-                                            <% 
-                                            line = br.readLine();
-                                            while (line != null) { %>
-                                                <tr>
-                                                    <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
-                                                    <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
-                                                    <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
-                                                    <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
-                                                <%
-                                                cols = line.split("[,\\t]+");
-                                                for (j=0; j<ncol; j++) {
-                                                    sDummy = cols[j];
-                                                    %>
-                                                    <td align="right">
-                                                        <%=sDummy%>
-                                                    </td>
-                                                    <td> &nbsp;&nbsp; </td>
-                                                <% } %>
-                                                </tr>
-                                                <% line = br.readLine();
-                                            } %>
-                                            <tr>
-                                                <td colspan="6"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
-                                            </tr>
-                                        </table>    
-                                        <% br.close();
-                                    } %>
-
-                                <% } else if (sViewProceed == "100") { %>
-                                    <%--> VIEW Performance in EXCEL <--%>
-                                    <p>
-                                    <%@page import="Fillo.*"%>
-                                    <script>
-                                        sReportFile = document.getElementById("sReportFile");
-                                    </script>
-                                    <%
-                                        if (sReportFile != "") {  
-                                        %>
-                                            <script>
-                                            var sReportFileName = document.getElementById("sReportFileName");
-                                            var sReportFileNameTXT = document.getElementById("sReportFileNameTXT");
-                                            </script>
-                                        <%
-                                        if (sReportFileName != "") {
-                                            sReportFileName = application.getRealPath("/") + sReportFileName;
-                                        }
-
-                                        if (sReportFileNameTXT != "") {
-                                            sReportFileNameTXT = application.getRealPath("/") + sReportFileNameTXT;
-                                        }
-
-                                        %>
-                                        <script>
-                                            document.getElementById("sReportFileName").value = sReportFileName;
-                                            document.getElementById("sReportFileNameTXT").value = sReportFileNameTXT;
-                                        </script>
-                                        <%
-                                        } else { %>
-                                        <script>
-                                            var sReportFileName = document.getElementById("sReportFileName");
-                                            var sReportFileNameTXT = document.getElementById("sReportFileNameTXT");
-                                        </script>
-                                        <% }
-                                    %>
-
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                &nbsp;
-                                            </td>
-                                            <td>
-                                                <b> Running: </b>
-                                            </td>
-                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                            <td colspan="8">
-                                            <input type="text" name="sReportFileName" id="sReportFileName" size="75" value="<%=sReportFileName%>" readonly/>
-                                            <input type="hidden" name="sReportFileNameTXT" id="sReportFileNameTXT" value="<%=sReportFileNameTXT%>" />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="11">&nbsp;</td>
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                            <td>
-                                                <b> Output: </b>
-                                            </td>
-                                            <td>&nbsp;&nbsp;&nbsp;</td>
-                                            <th>RMSE Learning</th>
-                                            <th>RMSE Test</th>
-                                            <th>MAE Learning</th>
-                                            <th>MAE Test</th>
-                                            <th>MAPE Learning</th>
-                                            <th>MAPE Test</th>
-                                            <th>R Learning</th>
-                                            <th>R Test</th>
-                                        </tr>
-
-                                        <%  if (sReportFileName != "") {  
-                                        Fillo fillo = new Fillo();
-
-                                        Connection connection = fillo.getConnection(sReportFileName);
-                                        String strQuery = "Select * from Performance";
-                                        Recordset recordset = connection.executeQuery(strQuery);
-
-                                        while (recordset.next()) { %>
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td align="right">
-                                                <%=recordset.getField("RMSE_Learning")%>
-                                            </td>
-                                            <td align="right">
-                                                <%=recordset.getField("RMSE_Test")%>
-                                            </td>
-                                            <td align="right">
-                                                <%=recordset.getField("MAE_Learning")%> 
-                                            </td> 
-                                            <td align="right">
-                                                <%=recordset.getField("MAE_Test")%>
-                                            </td>
-                                            <td align="right">
-                                                <%=recordset.getField("MAPE_Learning")%>
-                                            </td>
-                                            <td align="right">
-                                                <%=recordset.getField("MAPE_Test")%>
-                                            </td>
-                                            <td align="right">
-                                                <%=recordset.getField("R_Learning")%>
-                                            </td>
-                                            <td align="right">
-                                                <%=recordset.getField("R_Test")%>
-                                            </td>
-                                        </tr>
-                                        <% } %>
-                                        <%
-                                            recordset.close();
-                                            connection.close();
-                                            }
-                                        %>
-                                    </table>
-
-                                <% } else { %>
-                                    <%--> Start Running opt of sViewProceed <--%>
-                                    <script>
-                                        var sReportFile = document.getElementById("sReportFile");
-                                    </script>
-                                    <%
-                                        if (sReportFile != "") {  
-                                        %>
-                                            <script>
-                                            var sReportFileName = document.getElementById("sReportFileName");
-                                            var sReportFileNameTXT = document.getElementById("sReportFileNameTXT");
-                                            </script>
-                                        <%
-                                        if (sReportFileName != "") {
-                                            sReportFileName = application.getRealPath("/") + sReportFileName;
-                                        }
-
-                                        if (sReportFileNameTXT != "") {
-                                            sReportFileNameTXT = application.getRealPath("/") + sReportFileNameTXT;
-                                        }
-
-                                        %>
-                                        <script>
-                                            document.getElementById("sReportFileName").value = sReportFileName;
-                                            document.getElementById("sReportFileNameTXT").value = sReportFileNameTXT;
-                                        </script>
-                                        <% } %> 
-
-                                        <script>
-                                            var sReportFileName = document.getElementById("sReportFileName");
-                                            var sReportFileNameTXT = document.getElementById("sReportFileNameTXT");
-                                        </script>
-
-                                        <% sReportFileName="Result.xls";
-                                        sReportFileName = application.getRealPath("/") + sReportFileName;
-
-                                        sReportFileNameTXT="Result.txt";
-                                        sReportFileNameTXT = application.getRealPath("/") + sReportFileNameTXT;
-                                        %>
-
-                                        <script>
-                                            document.getElementById("sReportFileName").value = sReportFileName;
-                                            document.getElementById("sReportFileNameTXT").value = sReportFileNameTXT;
-                                        </script>
-
-                                        <% 
-                                        /*
-                                        out.println("<p>");
-                                        out.println("sReportFileName = " + sReportFileName);
-                                        out.println("sReportFileNameTXT = " + sReportFileNameTXT);
-                                        out.println("<br>");
-                                        */
-                                    %>
-
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                &nbsp;
-                                            </td>
-                                            <td>
-                                                <b> Running: </b>
-                                            </td>
-                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                            <td colspan="8">
-                                            <input type="text" name="sResult01Name" id="sResult01Name" size="60" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" readonly/>
-                                            </td>
-                                        </tr>
-                                            <td>
-                                                &nbsp;
-                                            </td>
-                                            <td>
-                                                &nbsp;
-                                            </td>
-                                            <td>
-                                                &nbsp;
-                                            </td>
-                                            <td colspan="8">
-                                            <input type="text" name="sResult02Name" id="sResult02Name" size="60" value="<%=sResult02Name%>" readonly/>
-                                            <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
-                                            <input type="hidden" name="sResult04Name" id="sResult04Name" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" />
-                                            <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
-                                            <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
-                                            <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
-                                            <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
-                                            <input type="hidden" name="sResult05Name" id="sResult05Name" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" />
-                                            <input type="hidden" name="sResult06Name" id="sResult06Name" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" />
-                                            <input type="hidden" name="sBaseFileName" id="sBaseFileName" value="<%=sBaseFileName%>">
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <%-->
-                                    <h3>
-                                        <img src="Logo-Space.png" alt="     " width="4" height="5">
-                                        <b> Output: &nbsp;&nbsp;&nbsp;&nbsp;</b>
-                                    </h3>
-                                    <--%>
-
-                                    <% if (sLoadingDataExcel != "") { %>
-                                        <%--> #2 
-                                        <H2 ALIGN="CENTER">
-                                            <% int percent = task.getPercent();%>
-                                            <%= percent%>%
-                                        </H2>
-
-                                        <TABLE WIDTH="60%" ALIGN="CENTER"
-                                        BORDER=1 CELLPADDING=0 CELLSPACING=2>
-                                        <TR>
-                                            <% for (int i = 10; i <= percent; i += 10) { %>
-                                                <TD WIDTH="10%" BGCOLOR="#000080">&nbsp;</TD>
-                                            <% } %>
-                                            <% for (int i = 100; i > percent; i -= 10) { %>
-                                                <TD WIDTH="10%">&nbsp;</TD>
-                                            <% } %>
-                                        </TR>
-                                        </TABLE>
-
-                                        <TABLE WIDTH="100%" BORDER=0 CELLPADDING=0 CELLSPACING=0>
-                                        <TR>
-                                        <TD ALIGN="CENTER">
-                                            <% if (task.isRunning()) { %>
-                                                Running
-                                            <% } else { %>
-                                                <% if (task.isCompleted()) { %>
-                                                    Completed
-                                                <% } else if (!task.isStarted()) { %>
-                                                    Not Started
-                                                <% } else { %>
-                                                    Stopped
-                                                <% } %>
-                                            <% } %>
-                                        </TD>
-                                        </TR>
-                                        <TR>
-                                        <TD ALIGN="CENTER">
-                                            <BR>
-                                            <% if (task.isRunning()) {%>
-                                                <!--
-                                                <FORM METHOD="GET" ACTION="stop.jsp">
-                                                <INPUT TYPE="SUBMIT" VALUE="Stop">
-                                                </FORM>
-                                                -->
-                                                <a href="stop.jsp?<%=params%>">Stop</a>
-                                            <% } else {%>
-                                                <!--
-                                                <FORM METHOD="GET" ACTION="start.jsp">
-                                                <INPUT TYPE="SUBMIT" VALUE="Start">
-                                                </FORM>
-                                                -->
-                                                <a href="start.jsp?<%=params%>">Start</a>
-                                            <% }%>
-                                        </TD>
-                                        </TR>
-                                        </TABLE>
-
-                                        <% if (task.isCompleted()) {%>
-                                            <BR>
-                                        <% }%>
-                                        <--%>
-
-                                        <%
-                                        /*
-                                        out.println("nFireFlies = "+snFireFlies);
-                                        out.println("nMaxGeneration = "+snMaxGeneration);
-                                        out.println("dMinBeta = "+sdMinBeta);
-                                        out.println("dGamma = "+sdGamma);
-                                        out.println("dAlpha = "+sdAlpha);
-                                        out.println("<br>");
-                                        out.println("dAIWeight = "+sdAIWeight);
-                                        out.println("dTau = "+sdTau);
-                                        out.println("dBPotential = "+sdBPotential);
-                                        out.println("dC1 = "+sdC1);
-                                        out.println("dC2 = "+sdC2);
-                                        out.println("<br>");
-                                        out.println("dS1 = "+sdS1);
-                                        out.println("dS2 = "+sdS2);
-                                        out.println("dTrainingPS = "+sdTrainingPS);
-                                        out.println("dValidationPS = "+sdValidationPS);
-                                        out.println("dTotalSize = "+sdTotalSize);
-                                        out.println("<br>");
-                                        out.println("nLastChange1 = "+snLastChange1);
-                                        out.println("nLastChange2 = "+snLastChange2);
-                                        out.println("dHoldOut = "+sdHoldOut);
-                                        out.println("dCrossValidation = "+sdCrossValidation);
-                                        out.println("<br>");
-                                        out.println("NormalRadio = "+NormalRadio);
-                                        out.println("OptimRadio = "+OptimRadio);
-                                        out.println("SCRadio = "+SCRadio);
-                                        out.println("PRadio = "+PRadio);
-                                        out.println("TORadio = "+TORadio);
-                                        out.println("<br>");
-                                        */
-
-                                        if (NormalRadio.equals("NormalRadio1")) {
-                                            dNormalRadio=1;
-                                        }
-                                        else if (NormalRadio.equals("NormalRadio2")) {
-                                            dNormalRadio=2;
-                                        }
-
-                                        if (OptimRadio.equals("OptimRadio1")) {
-                                            dOptimRadio=1;
-                                        }    
-                                        else if (OptimRadio.equals("OptimRadio2")) {
-                                            dOptimRadio=2;
-                                        }    
-                                        else if (OptimRadio.equals("OptimRadio3")) {
-                                            dOptimRadio=3;
-                                        }    
-
-                                        if (SCRadio.equals("SCRadio1")) {
-                                            dSCRadio=1;
-                                        }
-                                        else if (SCRadio.equals("SCRadio2")) {
-                                            dSCRadio=2;
-                                        }
-                                        else if (SCRadio.equals("SCRadio3")) {
-                                            dSCRadio=3;
-                                        }
-
-                                        if (PRadio.equals("PRadio2")) {
-                                            sFileData = sLearningFileName;
-                                            dAttributes = snLDFAttributes;
-                                            dInstances = snLDFInstances;
-                                            sPFileData = sPredictionFileName;
-                                            dPAttributes = snPDFAttributes;
-                                            dPInstances = snPDFInstances;
-                                            sVariation = "5";
-                                            dPRadio=2;
-                                        }
-
-                                        if (TORadio.equals("TORadio2")) { 
-                                            dTORadio=2;
-                                            if (PRadio.equals("PRadio1")) {
-                                                sFileData = sFileName;
-                                                dAttributes = snDFAttributes;
-                                                dInstances = snDFInstances;
-                                                sVariation = "2";
-                                                sPFileData = "";
-                                                dPAttributes = "1";
-                                                dPInstances = "1";
-                                                dPRadio=1;
-                                            }
-                                        }
-                                        else if (TORadio.equals("TORadio3")) {
-                                            dTORadio=3;
-                                            if (PRadio.equals("PRadio1")) {
-                                                sFileData = sFileName;
-                                                dAttributes = snDFAttributes;
-                                                dInstances = snDFInstances;
-                                                sVariation = "3";
-                                                sPFileData = "";
-                                                dPAttributes = "1";
-                                                dPInstances = "1";
-                                                dPRadio=1;
-                                            }
-                                        }
-                                        else {
-                                            if (TORadio.equals("TORadio1")) {
-                                                dTORadio=1;
-                                                if (PRadio.equals("PRadio1")) {
-                                                    sFileData = sFileName;
-                                                    dAttributes = snDFAttributes;  
-                                                    dInstances = snDFInstances; 
-                                                    sVariation = "1";
-                                                    sPFileData = "";
-                                                    dPAttributes = "1";
-                                                    dPInstances = "1";
-                                                    dPRadio=1;
-                                                }
-                                            }
-                                            else if (TORadio.equals("TORadio4")) {
-                                                dTORadio=4;
-                                                if (PRadio.equals("PRadio1")) {
-                                                    sFileData = sFileName;
-                                                    dAttributes = snDFAttributes;  
-                                                    dInstances = snDFInstances; 
-                                                    sPFileData = sTestFileName;
-                                                    dPAttributes = snTDFAttributes; 
-                                                    dPInstances = snTDFInstances;
-                                                    sVariation = "4";
-                                                    dPRadio=1;
-                                                }
-                                            }
-                                        }
-
-                                        /*
-                                        out.println("sVariation = "+sVariation);
-                                        out.println("<br>");
-                                        out.println("sFileData = "+sFileData);
-                                        out.println("dAttributes = "+dAttributes);
-                                        out.println("dInstances = "+dInstances);
-                                        out.println("<br>");
-                                        out.println("sPFileData = "+sPFileData);
-                                        out.println("dPAttributes = "+dPAttributes);
-                                        out.println("dPInstances = "+dPInstances);
-                                        */ 
-
-                                        if (sFileData != "") {  
-                                            String file = application.getRealPath("/") + sFileData;
-                                            BufferedReader br = new BufferedReader(new FileReader(file)); 
-                                            String line = null;
-                                            int i;
-                                            int j;
-
-                                            // first line: title
-                                            line = br.readLine();
-                                            if (line == null) {
-                                                out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
-                                            } else {
-                                                cols = line.split("\\t");
-
-                                                // second line: column header
-                                                line = br.readLine();
-                                                headers = line.split("\\t");
-
-                                                // third line and so on: data ... last column = dependent variable  
-                                                line = br.readLine(); 
-                                                j=0;
-                                                while (line != null) {
-                                                    cols = line.split("\\t");
-                                                    for (i = 0; i < ncol; i += 1) {
-                                                        Datatrains[j][i]=cols[i];
-                                                    }
-                                                    j=j+1;
-                                                    line = br.readLine();
-                                                }
-                                            }
-                                            br.close();
-                                        } else {
-                                            //String[][] Datatrain = new String[1][1];
-                                        }
-
-                                        /*
-                                            out.println("ncol = "+ncol);
-                                            out.println("nrow = "+nrow);
-                                            out.println("Datatrain[nrow-1][ncol-1] = "+Datatrain[nrow-1][ncol-1]);
-                                        */
-
-                                        if (sPFileData == null) {
-                                            /*
-                                            out.println("<br>");
-                                            */
-                                        }    
-                                        else if (sPFileData != "") {
-                                            /*
-                                            out.println("<br>");
-                                            */
-
-                                            String file = application.getRealPath("/") + sPFileData;
-                                            BufferedReader br = new BufferedReader(new FileReader(file)); 
-                                            String line = null;
-                                            int i;
-                                            int j;
-
-                                            // first line: title
-                                            line = br.readLine();
-                                            if (line == null) {
-                                                out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
-                                            } else {
-                                                cols = line.split("\\t");
-
-                                                // second line: column header
-                                                line = br.readLine();
-                                                headers = line.split("\\t");
-
-                                                // third line and so on: data ... last column = dependent variable  
-                                                line = br.readLine(); 
-                                                j=0;
-                                                while (line != null) {
-                                                    cols = line.split("\\t");
-                                                    for (i = 0; i < ncol; i += 1) {
-                                                        Datapres[j][i]=cols[i];
-                                                    }
-                                                    j=j+1;
-                                                    line = br.readLine();
-                                                }
-                                            }
-                                            br.close();
-                                        } else {
-                                            /*
-                                            out.println("<br>");
-                                            */
-                                        }
-
-                                        vpath = application.getRealPath("/");
-
-                                        vfile = sBaseFileNameCO;                  //+"01.txt";
-                                        if (vfile == "") {
-                                            vfile = "Result";
-                                        }
-                                        %>
-                                        <script> 
-                                            document.getElementById("vpath").value = vpath; 
-                                            document.getElementById("vfile").value = vfile; 
-                                        </script>
-                                        <%
-
-                                        /*
-                                        out.println("vfile = "+vfile);
-                                        out.println("<br>");
-                                        out.println("sBaseFileNameCO = "+sBaseFileNameCO);
-                                        out.println("<br>");
-
-                                        out.println("nFireFlies = "+snFireFlies);
-                                        out.println("<br>");
-                                        out.println("nMaxGeneration = "+snMaxGeneration);
-                                        out.println("<br>");
-                                        out.println("dMinBeta = "+sdMinBeta);
-                                        out.println("<br>");
-                                        out.println("dGamma = "+sdGamma);
-                                        out.println("<br>");
-                                        out.println("dAlpha = "+sdAlpha);
-                                        out.println("<br>");
-                                        out.println("dAIWeight = "+sdAIWeight);
-                                        out.println("<br>");
-                                        out.println("dTau = "+sdTau);
-                                        out.println("<br>");
-                                        out.println("dBPotential = "+sdBPotential);
-                                        out.println("<br>");
-                                        out.println("dC1 = "+sdC1);
-                                        out.println("<br>");
-                                        out.println("dC2 = "+sdC2);
-                                        out.println("<br>");
-                                        out.println("dS1 = "+sdS1);
-                                        out.println("<br>");
-                                        out.println("dS2 = "+sdS2);
-                                        out.println("<br>");
-                                        out.println("dTrainingPS = "+sdTrainingPS);
-                                        out.println("<br>");
-                                        out.println("dValidationPS = "+sdValidationPS);
-                                        out.println("<br>");
-                                        out.println("dTotalSize = "+sdTotalSize);
-                                        out.println("<br>");
-                                        out.println("nLastChange1 = "+snLastChange1);
-                                        out.println("<br>");
-                                        out.println("nLastChange2 = "+snLastChange2);
-                                        out.println("<br>");
-                                        out.println("dHoldOut = "+sdHoldOut);
-                                        out.println("<br>");
-                                        out.println("dCrossValidation = "+sdCrossValidation);
-                                        out.println("<br>");
-                                        out.println("dNormalRadio = "+dNormalRadio); 
-                                        out.println("<br>");
-                                        out.println("dOptimRadio = "+dOptimRadio); 
-                                        out.println("<br>");
-                                        out.println("dSCRadio = "+dSCRadio); 
-                                        out.println("<br>");
-                                        out.println("dPRadio = "+dPRadio); 
-                                        out.println("<br>");
-                                        out.println("dTORadio = "+dTORadio);
-                                        out.println("<br>");
-                                        out.println("sVariation = "+sVariation);
-                                        out.println("<br>");
-                                        out.println("sFileData = "+sFileData);
-                                        out.println("<br>");
-                                        out.println("dAttributes = "+dAttributes);
-                                        out.println("<br>");
-                                        out.println("dInstances = "+dInstances);
-                                        out.println("<br>");
-                                        out.println("sPFileData = "+sPFileData);
-                                        out.println("<br>");
-                                        out.println("dPAttributes = "+dPAttributes);
-                                        out.println("<br>");
-                                        out.println("dPInstances = "+dPInstances);
-
-                                        out.println("Datatrain[nrow-1][ncol-1] = "+Datatrain[nrow-1][ncol-1]);
-                                        */
-                                        %>
-                                        <jsp:include page="SFALSSVRServlet">
-                                                <jsp:param name="nFireFlies" value="<%=nFireFlies%>" />
-                                                <jsp:param name="nMaxGeneration" value="<%=nMaxGeneration%>" />
-                                                <jsp:param name="dMinBeta" value="<%=dMinBeta%>" />
-                                                <jsp:param name="dGamma" value="<%=dGamma%>" />
-                                                <jsp:param name="dAlpha" value="<%=dAlpha%>" />
-                                                <jsp:param name="dAIWeight" value="<%=dAIWeight%>" />
-                                                <jsp:param name="dTau" value="<%=dTau%>" />
-                                                <jsp:param name="dBPotential" value="<%=dBPotential%>" />
-                                                <jsp:param name="dC1" value="<%=dC1%>" />
-                                                <jsp:param name="dC2" value="<%=dC2%>" />
-                                                <jsp:param name="dS1" value="<%=dS1%>" />
-                                                <jsp:param name="dS2" value="<%=dS2%>" />
-                                                <jsp:param name="dTrainingPS" value="<%=dTrainingPS%>" />
-                                                <jsp:param name="dValidationPS" value="<%=dValidationPS%>" />
-                                                <jsp:param name="dTotalSize" value="<%=dTotalSize%>" />
-                                                <jsp:param name="nLastChange1" value="<%=nLastChange1%>" />
-                                                <jsp:param name="nLastChange2" value="<%=nLastChange2%>" />
-                                                <jsp:param name="dHoldOut" value="<%=dHoldOut%>" />
-                                                <jsp:param name="dCrossValidation" value="<%=dCrossValidation%>" />
-
-                                                <jsp:param name="dNormalRadio" value="<%=dNormalRadio%>" />
-                                                <jsp:param name="dOptimRadio" value="<%=dOptimRadio%>" />
-                                                <jsp:param name="dSCRadio" value="<%=dSCRadio%>" />
-                                                <jsp:param name="dPRadio" value="<%=dPRadio%>" />
-                                                <jsp:param name="dTORadio" value="<%=dTORadio%>" />
-
-                                                <jsp:param name="sVariation" value="<%=sVariation%>" />
-
-                                                <jsp:param name="dAttributes" value="<%=dAttributes%>" />
-                                                <jsp:param name="dInstances" value="<%=dInstances%>" />
-
-                                                <jsp:param name="dPAttributes" value="<%=dPAttributes%>" />
-                                                <jsp:param name="dPInstances" value="<%=dPInstances%>" />
-
-                                                <jsp:param name="sFileData" value="<%=sFileData%>" />
-                                                <jsp:param name="sPFileData" value="<%=sPFileData%>" />
-
-                                                <jsp:param name="sReportFileName" value="<%=sReportFileName%>" />
-                                                <jsp:param name="sReportFileNameTXT" value="<%=sReportFileNameTXT%>" />
-
-                                                <jsp:param name="vpath" value="<%=vpath%>" />
-                                                <jsp:param name="vfile" value="<%=vfile%>" />
-
-                                                <jsp:param name="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
-                                                <jsp:param name="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
-                                                <jsp:param name="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
-                                                <jsp:param name="sResult04Name" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" />
-                                                <jsp:param name="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
-                                                <jsp:param name="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
-                                                <jsp:param name="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
-                                                <jsp:param name="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
-                                                <jsp:param name="sResult05Name" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" />
-                                                <jsp:param name="sResult06Name" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" />
-                                        </jsp:include> 	
-                                    <% } %>
-                                <% } %>
-                            <% } else { %> 
-                                <%--> End of sViewProceed + Click on button RUN <--%>
-                                <table>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>
-                                        <b> Initialization: </b>
-                                    </td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td>
-                                        <font color="teal" face="tahoma" size="2"> Base output file name (eg. Result) </font>
-                                    </td>
-                                    <td>
-                                        &nbsp;
-                                        <input type="text" name="sBaseFileName" id="sBaseFileName" size="20" value="<%=sBaseFileName%>">
-                                    </td>
-                                    <td colspan="2">
-                                        &nbsp;&nbsp; - - -
-                                        <a onclick="return rundata22(1);">
-                                            <font color="blue" face="tahoma" size="2"> <u>Accept</u>, </font>
-                                        </a>
-                                        <font color="teal" face="tahoma" size="2"> order number and .txt will be automatically added. </font>
-                                    </td>
-                                </tr> 
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                </tr> 
-                                </table>
-
-                                <%
-                                /*
-                                out.println("<p>");
-                                out.println("sHasil = "+sHasil);
-                                out.println("<br>");
-                                */
-                                if (sHasil!="") {
-                                    /*
-                                    out.println("sBaseFileName = "+sBaseFileName);
-                                    out.println("<br>");
-                                    */
-                                    if (sBaseFileName!="") {
-                                        /*
-                                        out.println("sRunReportTable = "+sRunReportTable);
-                                        out.println("<br>");
-                                        */
-                                        sResult01Name = application.getRealPath("/") + sBaseFileName +"01.txt";
-                                        sResult02Name = application.getRealPath("/") + sBaseFileName +"02.txt";
-                                        sResult03Name = application.getRealPath("/") + sBaseFileName +"03.txt";
-                                        sResult04Name = application.getRealPath("/") + sBaseFileName +"04.txt";
-                                        sResult04aName = application.getRealPath("/") + sBaseFileName +"04a.txt";
-                                        sResult04bName = application.getRealPath("/") + sBaseFileName +"04b.txt";
-                                        sResult04cName = application.getRealPath("/") + sBaseFileName +"04c.txt";
-                                        sResult04dName = application.getRealPath("/") + sBaseFileName +"04d.txt";
-                                        sResult05Name = application.getRealPath("/") + sBaseFileName +"05.txt";
-                                        sResult06Name = application.getRealPath("/") + sBaseFileName +"06.txt";
-
-                                        %>
-                                        <script>
-                                            document.getElementById("sBaseFileName").value = sBaseFileName.value;
-                                        </script>
-
-                                        <table>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>
-                                                    <b> Output Files: </b>
-                                                </td>
-                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                <td>
-                                                    <input type="text" name="sResult01Name" id="sResult01Name" size="70" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" readonly/>
-                                                    &nbsp;
-                                                    <font color="teal" face="tahoma" size="2">Main results - Optimum hyper-parameters</font>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                <td>
-                                                    <input type="text" name="sResult02Name" id="sResult02Name" size="70" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" readonly/>
-                                                    &nbsp;
-                                                    <font color="teal" face="tahoma" size="2">Hyper-parameters; Performances of training and validation partitions</font>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                <td>
-                                                    <input type="text" name="sResult03Name" id="sResult03Name" size="70" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" readonly/> 
-                                                    &nbsp;
-                                                    <font color="teal" face="tahoma" size="2">Analysis report</font>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                <td>
-                                                    <input type="text" name="sResult04Name" id="sResult04Name" size="70" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" readonly/>
-                                                    &nbsp;
-                                                    <font color="teal" face="tahoma" size="2">Learning and test performances; Test dataset and predicted values </font>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                <td>
-                                                    <input type="text" name="sResult04aName" id="sResult04aName" size="70" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" readonly/>
-                                                    &nbsp;
-                                                    <font color="teal" face="tahoma" size="2">Prediction graph of training partition from learning dataset</font>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                <td>
-                                                    <input type="text" name="sResult04bName" id="sResult04bName" size="70" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" readonly/>
-                                                    &nbsp;
-                                                    <font color="teal" face="tahoma" size="2">Prediction graph of validation partition from learning dataset </font>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                <td>
-                                                    <input type="text" name="sResult04cName" id="sResult04cName" size="70" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" readonly/>
-                                                    &nbsp;
-                                                    <font color="teal" face="tahoma" size="2">Prediction graph of learning dataset </font>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                <td>
-                                                    <input type="text" name="sResult04dName" id="sResult04dName" size="70" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" readonly/>
-                                                    &nbsp;
-                                                    <font color="teal" face="tahoma" size="2">Prediction graph of test dataset </font>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                <td>
-                                                    <input type="text" name="sResult05Name" id="sResult05Name" size="70" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" readonly/>
-                                                    &nbsp;
-                                                    <font color="teal" face="tahoma" size="2">Performance trajectory graph of test dataset </font>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                <td>
-                                                    <input type="text" name="sResult06Name" id="sResult06Name" size="70" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" readonly/>
-                                                    &nbsp;
-                                                    <font color="teal" face="tahoma" size="2">Tracing path graph of test dataset </font>
-                                                </td>
-                                            </tr>
-                                        </table>                
-                                        <%
-                                    }
-                                    else {
-                                        /*
-                                        out.println("sRunReportTable = "+sRunReportTable);
-                                        out.println("<br>");
-                                        out.println("sHasil = "+sHasil);
-                                        out.println("<br>");
-                                        out.println("sBaseFileName = "+sBaseFileName);
-                                        out.println("<br>");
-                                        */
-                                        %>
-                                        <script>
-                                            document.getElementById("sBaseFileName").value = "Result";
-                                        </script>
-                                        <%
-                                    } 
-                                }
-                            }
-                        }
-                    } 
-                    else if ((int)Double.parseDouble(sRunReportTable) == 2) {
-                        if (sRRTShow != "") { 
-                            %>
-                                <script>
-                                var sfilefileResult03 = document.getElementById("sfilefileResult03");
-                                </script>
-                            <%
-                            if (sResult03 != "") {
-                                sfilefileResult03 = application.getRealPath("/") + sResult03;
-                                sResult03Name=sfilefileResult03; 
-                            }
-                            else {
-                                sfilefileResult03 = sResult03Name;
-                            }
-                            %>
-                                <script>
-                                    var sResult03Name = document.getElementById("sResult03Name");
-                                    document.getElementById("sResult03Name").value = sResult03Name;
-                                </script>
-                            <%
-                            /*
-                            out.println("<p>");
-                            out.println("sReportFileNameTXT = "+sReportFileNameTXT);
-                            out.println("sfilefileTXT = "+sfilefileTXT);
-                            */
-                            %>
-
-                            <table>
-                            <tr>
-                            <td>
-                                &nbsp;
-                            </td>
-                            <td>
-                                <b>Analysis:</b>
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                            <input type="text" name="sResult03Name" id="sResult03Name" size="75" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" readonly/>
-                            <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
-                            <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
-                            <input type="hidden" name="sResult04Name" id="sResult04Name" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" />
-                            <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
-                            <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
-                            <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
-                            <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
-                            <input type="hidden" name="sResult05Name" id="sResult05Name" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" />
-                            <input type="hidden" name="sResult06Name" id="sResult06Name" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" />
-                            <input type="hidden" name="sBaseFileName" id="sBaseFileName" value="<%=sBaseFileName%>">
-                            </td>
-                            </tr>
-                            <%
-                            /*
-                            if (sReportFileTXT != "") {
-                                file = application.getRealPath("/") + sReportFileTXT;
-                            }
-                            else {
-                            }
-                            */
-                            if (sResult03Name != "") {
-                            String file = ""; 
-                            file = sResult03Name;
-                            BufferedReader br = new BufferedReader(new FileReader(file));
-                            String line = null;
-                            int i;
-                            int j;
-
-                            // first line: title
-                            line = br.readLine();
-                            if (line == null) {
-                                out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
-                                %> 
-                            <% } else { %>
-                                <tr>
-                                <td> &nbsp; </td>
-                                <td>
-                                    <b>Output:</b>
-                                </td>
-                                <td> &nbsp;&nbsp;&nbsp; </td>
-                                <td>
-                                    <h4> <%=line%> </h4>
-                                </td>
-                                </tr>
-                                <% // next line
-                                line = br.readLine();
-                                while (line != null) { %>
-                                    <tr>
-                                    <td> &nbsp; </td>
-                                    <td> &nbsp;&nbsp;&nbsp;&nbsp; </td>
-                                    <td> &nbsp;&nbsp;&nbsp;&nbsp; </td>
-                                    <td>
-                                        <%=line%>
-                                    </td>
-                                    </tr>
-                                    <% line = br.readLine();
-                                }
-                            }
-                            br.close(); 
-                            } %>
-                        </table>
-                        <% } else { %>
-                            <script> var sCreate = document.getElementById("sCreate"); 
-                                sCreate = "";
-                                document.getElementById("sCreate").value = sCreate; 
-                            </script>
-
-                            <table>
-                            <tr>
-                            <td>
-                                &nbsp;
-                            </td>
-                            <td>
-                                <b>Analysis:</b>
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                                &nbsp;<input type="file" name="sResult03" id="sResult03"/>
-                            </td>
-                            <td>
-                                &nbsp;<input type="text" name="sResult03Name" id="sResult03Name" size="60" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" readonly/>
-                                <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
-                                <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
-                                <input type="hidden" name="sResult04Name" id="sResult04Name" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" />
-                                <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
-                                <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
-                                <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
-                                <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
-                                <input type="hidden" name="sResult05Name" id="sResult05Name" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" />
-                                <input type="hidden" name="sResult06Name" id="sResult06Name" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" />
-                            </td>
-                            <td>
-                                &nbsp;&nbsp; - - - 
-                                <a onclick="return showsummaryreport(2);">
-                                <font color="blue" face="tahoma" size="2">
-                                <u><b>OPEN</b></u></font></a>
-                                <font color="black" face="tahoma" size="2">the report.
-                                </font>
-                            </td>
-                            </tr>
-                            </table>
-                        <% } %>
-
-                    <% } else if ((int)Double.parseDouble(sRunReportTable) == 3) { 
-                        if (sRRTShow != "") { %> 
-                            <script>
-                                var sfilefileResult04 = document.getElementById("sfilefileResult04");
-                            </script>
-                            <%
-                                if (sResult04 != "") {
-                                    sfilefileResult04 = application.getRealPath("/") + sResult04;
-                                    sResult04Name=sfilefileResult04; 
-                                }
-                                else {
-                                    sfilefileResult04 = sResult04Name;
-                                }
-                            %>
-                            <script>
-                                var sResult04Name = document.getElementById("sResult04Name");
-                                document.getElementById("sResult04Name").value = sResult04Name;
-                            </script>
-                            <%
-                                /*
-                                out.println("<p>");
-                                out.println("sReportFile = " + sReportFile);
-                                out.println("sfilefile = " + sfilefile);
-                                out.println("sReportFileName = " + sReportFileName);
-                                out.println("<br>");
-                                */
-                            %>
-
-                            <table>
-                                <tr>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                    <td>
-                                        <b> Summary: </b>
-                                    </td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td colspan="8">
-                                    <input type="text" name="sResult04Name" id="sResult04Name" size="75" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" readonly/>
-                                    <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
-                                    <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
-                                    <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
-                                    <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
-                                    <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
-                                    <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
-                                    <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
-                                    <input type="hidden" name="sResult05Name" id="sResult05Name" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" />
-                                    <input type="hidden" name="sResult06Name" id="sResult06Name" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" />
-                                    <input type="hidden" name="sBaseFileName" id="sBaseFileName" value="<%=sBaseFileName%>">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="11">&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>
-                                        <b> Output: </b>
-                                    </td>
-                                    <td>&nbsp;</td>
-                                    <th>RMSE Learning</th>
-                                    <td>&nbsp;</td>
-                                    <th>RMSE Test</th>
-                                    <td>&nbsp;</td>
-                                    <th>MAE Learning</th>
-                                    <td>&nbsp;</td>
-                                    <th>MAE Test</th>
-                                    <td>&nbsp;</td>
-                                    <th>MAPE Learning</th>
-                                    <td>&nbsp;</td>
-                                    <th>MAPE Test</th>
-                                    <td>&nbsp;</td>
-                                    <th>R Learning</th>
-                                    <td>&nbsp;</td>
-                                    <th>R Test</th>
-                                </tr>
-
-                                <%
-                                if (sResult04Name != "") {
-                                String file = ""; 
-                                file = sResult04Name;
-                                BufferedReader br = new BufferedReader(new FileReader(file));
-                                String line = null;
-                                int i;
-                                int j;
-
-                                // first line: title
-                                line = br.readLine();
-                                if (line == null) {
-                                    out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
-                                } else {
-                                    cols = line.split("\\t"); 
-                                    ncol = cols.length;
-                                } 
-
-                                line = br.readLine();
-                                while (line != null) { %>
-                                    <tr>
-                                        <td>&nbsp;</td>
-                                        <td>&nbsp;</td>
-                                        <td>&nbsp;</td>
-                                        <%
-                                        cols = line.split("[,\\t]+");
-                                        for (j=0; j<ncol; j++) {
-                                            sDummy = cols[j];
-                                            %>
-                                                <td align="right">
-                                                    <%=sDummy%>
-                                                </td>
-                                                <td> &nbsp;&nbsp; </td>
-                                        <% } %>
-                                    </tr>
-                                    <% line = br.readLine();
-                                }
-                                br.close();
-                                } %>
-                            </table>
-                        <% } else { %>
-                            <script> var sCreate = document.getElementById("sCreate"); 
-                                sCreate = "";
-                                document.getElementById("sCreate").value = sCreate; 
-                            </script>
-
-                        <table><tr>
-                            <td>
-                                &nbsp;
-                            </td>
-                            <td>
-                                <b> Summary: </b>
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                                <input type="file" name="sResult04" id="sResult04"/>
-                            </td>
-                            <td>
-                                &nbsp;<input type="text" name="sResult04Name" id="sResult04Name" size="60" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" readonly/>
-                                <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
-                                <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
-                                <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
-                                <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
-                                <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
-                                <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
-                                <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
-                                <input type="hidden" name="sResult05Name" id="sResult05Name" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" />
-                                <input type="hidden" name="sResult06Name" id="sResult06Name" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" />
-                            </td>
-                            <td>
-                                &nbsp;&nbsp; - - - 
-                                <a onclick="return showsummaryreport(3);">
-                                <font color="blue" face="tahoma" size="2">
-                                <u><b>OPEN</b></u></font></a>
-                                <font color="black" face="tahoma" size="2">the report.
-                                </font>
-                            </td>
-                        </tr></table>
-                        <% } %>
-                    <% } else if ((int)Double.parseDouble(sRunReportTable) == 4) {
-                        if (sRRTShow != "") { %> 
-                            <script>
-                                var sfilefileResult05 = document.getElementById("sfilefileResult05");
-                            </script>
-                            <%
-                                if (sResult05 != "") {
-                                    sfilefileResult05 = application.getRealPath("/") + sResult05;
-                                    sResult05Name=sfilefileResult05; 
-                                }
-                                else {
-                                    sfilefileResult05 = sResult05Name;
-                                }
-                            %>
-                            <script>
-                                var sResult05Name = document.getElementById("sResult05Name");
-                                document.getElementById("sResult05Name").value = sResult05Name;
-                            </script>
-                            <%
-                                /*
-                                out.println("sReportFileName = " + sReportFileName);
-                                out.println("<br>");
-                                */
-                            %>
-
-                            <%
-                            vpath = application.getRealPath("/");
-
-                            vfile = sBaseFileNameCO;                  //+"01.txt";
-                            if (vfile == "") {
-                                vfile = "Result";
-                            }
-                            %>
-                            <script> 
-                                document.getElementById("vpath").value = vpath; 
-                                document.getElementById("vfile").value = vfile; 
-                            </script>
-                            <table>
-                                <tr>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                    <td>
-                                        <b> Graphic: </b>
-                                    </td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td colspan="8">
-                                    <input type="text" name="sResult05Name" id="sResult05Name" size="75" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" readonly/>
-                                    <font color="teal" face="tahoma" size="2"> &nbsp; ...</font> 
-                                    <a onclick="return showsummaryreport(6);">
-                                        <font color="blue" face="tahoma" size="2"> <u>performance</u> </font> </a> &nbsp; 
-                                    <% if (PRadio.equals("PRadio1")) {
-                                        if (TORadio.equals("TORadio3")) { 
-                                            %> <%--><font color="blue" face="tahoma" size="2"> <u>1</u> &nbsp;
-                                            <u>2</u> &nbsp; <u>3</u> &nbsp; <u>4</u> &nbsp; <u>5</u> &nbsp;
-                                            <u>6</u> &nbsp; <u>7</u> &nbsp; <u>8</u> &nbsp; <u>9</u> &nbsp;
-                                            <u>10</u> &nbsp; </font> <--%>
-                                        <% } else {
-                                            %> <%--><font color="blue" face="tahoma" size="2"> <u>1</u> &nbsp; </font> <--%>
-                                        <% }
-                                    } 
-                                    else {
-                                        %> <%--><font color="blue" face="tahoma" size="2"> <u>1</u> &nbsp; </font> <--%>
-                                    <% } %>
-                                    <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
-                                    <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
-                                    <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
-                                    <input type="hidden" name="sResult04Name" id="sResult04Name" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" />
-                                    <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
-                                    <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
-                                    <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
-                                    <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
-                                    <input type="hidden" name="sBaseFileName" id="sBaseFileName" value="<%=sBaseFileName%>">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td colspan="8">
-                                    <input type="text" name="sResult06Name" id="sResult06Name" size="75" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" readonly/>
-                                    <font color="teal" face="tahoma" size="2"> &nbsp; ...</font> 
-                                    <a onclick="return showsummaryreport(5);">
-                                        <font color="blue" face="tahoma" size="2"> <u>tracing path</u> </font> </a>
-                                    <% if (PRadio.equals("PRadio1")) {
-                                        if (TORadio.equals("TORadio3")) { 
-                                            %> <%--><font color="blue" face="tahoma" size="2"> &nbsp; <u>1</u> &nbsp; 
-                                            <u>2</u> &nbsp; <u>3</u> &nbsp; <u>4</u> &nbsp; <u>5</u> &nbsp;
-                                            <u>6</u> &nbsp; <u>7</u> &nbsp; <u>8</u> &nbsp; <u>9</u> &nbsp;
-                                            <u>10</u> &nbsp; </font><--%>
-                                        <% } else {
-                                            %> <%--><font color="blue" face="tahoma" size="2"> &nbsp; <u>1</u> &nbsp; </font><--%>
-                                        <% }
-                                    } 
-                                    else {
-                                        %> <%--><font color="blue" face="tahoma" size="2"> &nbsp; <u>1</u> &nbsp; </font><--%>
-                                    <% } %>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="11">&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>
-                                        <b> Output: </b>
-                                    </td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td>
-                                        <% // calling matlab graphic - performance
-                                            int opt;
-                                            opt = 0;
-                                        %>
-                                        <jsp:include page="SFALSSVRGraphServlet">
-                                            <jsp:param name="opt" value="<%=opt%>" />
-                                            <jsp:param name="dC1" value="<%=dC1%>" /> 
-                                            <jsp:param name="dC2" value="<%=dC2%>" /> 
-                                            <jsp:param name="dS1" value="<%=dS1%>" /> 
-                                            <jsp:param name="dS2" value="<%=dS2%>" /> 
-
-                                            <jsp:param name="vpath" value="<%=vpath%>" />
-                                            <jsp:param name="vfile" value="<%=vfile%>" />
-                                        </jsp:include> 	
-                                    </td>
-                                </tr>
-                            </table>
-                        <% } else { %>
-                            <script> var sCreate = document.getElementById("sCreate"); 
-                                sCreate = "";
-                                document.getElementById("sCreate").value = sCreate; 
-                            </script>
-
-                        <table><tr>
-                            <td>
-                                &nbsp;
-                            </td>
-                            <td>
-                                <b> Graphic: </b>
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                                <input type="file" name="sResult05" id="sResult05"/>
-                            </td>
-                            <td>
-                                &nbsp;<input type="text" name="sResult05Name" id="sResult05Name" size="60" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" readonly/>
-                                <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
-                                <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
-                                <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
-                                <input type="hidden" name="sResult04Name" id="sResult04Name" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" />
-                                <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
-                                <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
-                                <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
-                                <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
-                            </td>
-                            <td>
-                                &nbsp;&nbsp; - - - 
-                                <a onclick="return showsummaryreport(4);">
-                                <font color="blue" face="tahoma" size="2">
-                                <u><b>VIEW</b></u></font></a>
-                                <font color="black" face="tahoma" size="2">the graphs.
-                                </font>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                &nbsp;
-                            </td>
-                            <td>
-                                &nbsp;
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                                <input type="file" name="sResult06" id="sResult06"/>
-                            </td>
-                            <td>
-                                &nbsp;<input type="text" name="sResult06Name" id="sResult06Name" size="60" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" readonly/>
-                            </td>
-                        </tr>
-                        </table>
-                        <% } %>
-                    <% } else if ((int)Double.parseDouble(sRunReportTable) == 5) { 
-                        if (sRRTShow != "") { %> 
-                            <script>
-                                var sResult06Name = document.getElementById("sResult06Name");
-                            </script>
-                            <%
-                                /*
-                                out.println("<p>");
-                                out.println("sReportFile = " + sReportFile);
-                                out.println("sfilefile = " + sfilefile);
-                                out.println("sReportFileName = " + sReportFileName);
-                                out.println("<br>");
-                                */
-                            %>
-
-                            <%
-                            vpath = application.getRealPath("/");
-
-                            vfile = sBaseFileNameCO;                  //+"01.txt";
-                            if (vfile == "") {
-                                vfile = "Result";
-                            }
-                            %>
-
-                            <table>
-                                <tr>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                    <td>
-                                        <b> Graphic: </b>
-                                    </td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td colspan="8">
-                                    <input type="text" name="sResult05Name" id="sResult05Name" size="75" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" readonly/>
-                                    <font color="teal" face="tahoma" size="2"> &nbsp; ...</font> 
-                                    <a onclick="return showsummaryreport(6);">
-                                        <font color="blue" face="tahoma" size="2"> <u>performance</u> </font> </a> &nbsp; 
-                                    <% if (PRadio.equals("PRadio1")) {
-                                        if (TORadio.equals("TORadio3")) { 
-                                            %> <%--><font color="blue" face="tahoma" size="2"> <u>1</u> &nbsp;
-                                            <u>2</u> &nbsp; <u>3</u> &nbsp; <u>4</u> &nbsp; <u>5</u> &nbsp;
-                                            <u>6</u> &nbsp; <u>7</u> &nbsp; <u>8</u> &nbsp; <u>9</u> &nbsp;
-                                            <u>10</u> &nbsp; </font> <--%>
-                                        <% } else {
-                                            %> <%--><font color="blue" face="tahoma" size="2"> <u>1</u> &nbsp; </font> <--%>
-                                        <% }
-                                    } 
-                                    else {
-                                        %> <%--><font color="blue" face="tahoma" size="2"> <u>1</u> &nbsp; </font> <--%>
-                                    <% } %>
-                                    <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
-                                    <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
-                                    <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
-                                    <input type="hidden" name="sResult04Name" id="sResult04Name" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" />
-                                    <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
-                                    <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
-                                    <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
-                                    <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
-                                    <input type="hidden" name="sBaseFileName" id="sBaseFileName" value="<%=sBaseFileName%>">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td colspan="8">
-                                    <input type="text" name="sResult06Name" id="sResult06Name" size="75" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" readonly/>
-                                    <font color="teal" face="tahoma" size="2"> &nbsp; ...</font> 
-                                    <a onclick="return showsummaryreport(5);">
-                                        <font color="blue" face="tahoma" size="2"> <u>tracing path</u> </font> </a>
-                                    <% if (PRadio.equals("PRadio1")) {
-                                        if (TORadio.equals("TORadio3")) { 
-                                            %> <%--><font color="blue" face="tahoma" size="2"> &nbsp; <u>1</u> &nbsp; 
-                                            <u>2</u> &nbsp; <u>3</u> &nbsp; <u>4</u> &nbsp; <u>5</u> &nbsp;
-                                            <u>6</u> &nbsp; <u>7</u> &nbsp; <u>8</u> &nbsp; <u>9</u> &nbsp;
-                                            <u>10</u> &nbsp; </font><--%>
-                                        <% } else {
-                                            %> <%--><font color="blue" face="tahoma" size="2"> &nbsp; <u>1</u> &nbsp; </font><--%>
-                                        <% }
-                                    } 
-                                    else {
-                                        %> <%--><font color="blue" face="tahoma" size="2"> &nbsp; <u>1</u> &nbsp; </font><--%>
-                                    <% } %>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="11">&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>
-                                        <b> Output: </b>
-                                    </td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td>
-                                        <% // calling matlab graphic - performance
-                                            int opt;
-                                            opt = 1;
-                                        %>
-                                        <jsp:include page="SFALSSVRGraphServlet">
-                                            <jsp:param name="opt" value="<%=opt%>" />
-                                            <jsp:param name="dC1" value="<%=dC1%>" />
-                                            <jsp:param name="dC2" value="<%=dC2%>" />
-                                            <jsp:param name="dS1" value="<%=dS1%>" />
-                                            <jsp:param name="dS2" value="<%=dS2%>" />
-
-                                            <jsp:param name="vpath" value="<%=vpath%>" />
-                                            <jsp:param name="vfile" value="<%=vfile%>" />
-                                        </jsp:include> 	
-                                    </td>
-
-                                </tr>
-                            </table>
-                        <% } else { %>
-                            <script> var sCreate = document.getElementById("sCreate"); 
-                                sCreate = "";
-                                document.getElementById("sCreate").value = sCreate; 
-                            </script>
-
-                        <table><tr>
-                            <td>
-                                &nbsp;
-                            </td>
-                            <td>
-                                <b> Graphic: </b>
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                                <input type="file" name="sResult05" id="sResult05"/>
-                            </td>
-                            <td>
-                                &nbsp;<input type="text" name="sResult05Name" id="sResult05Name" size="60" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" readonly/>
-                                <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
-                                <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
-                                <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
-                                <input type="hidden" name="sResult04Name" id="sResult04Name" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" />
-                                <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
-                                <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
-                                <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
-                                <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
-                            </td>
-                            <td>
-                                &nbsp;&nbsp; - - - 
-                                <a onclick="return showsummaryreport(4);">
-                                <font color="blue" face="tahoma" size="2">
-                                <u><b>VIEW</b></u></font></a>
-                                <font color="black" face="tahoma" size="2">the graphs.
-                                </font>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                &nbsp;
-                            </td>
-                            <td>
-                                &nbsp;
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                                <input type="file" name="sResult06" id="sResult06"/>
-                            </td>
-                            <td>
-                                &nbsp;<input type="text" name="sResult06Name" id="sResult06Name" size="60" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" readonly/>
-                            </td>
-                        </tr>
-                        </table>
-                        <% } %>
-                    <% } else if ((int)Double.parseDouble(sRunReportTable) == 6) { 
-                        if (sRRTShow != "") { %> 
-                            <script>
-                                var include = document.getElementById("sResult05Name");
-                            </script>
-                            <%
-                                /*
-                                out.println("<p>");
-                                out.println("sReportFile = " + sReportFile);
-                                out.println("sfilefile = " + sfilefile);
-                                out.println("sReportFileName = " + sReportFileName);
-                                out.println("<br>");
-                                */
-                            %>
-
-                            <%
-                            vpath = application.getRealPath("/");
-
-                            vfile = sBaseFileNameCO;                  //+"01.txt";
-                            if (vfile == "") {
-                                vfile = "Result";
-                            }
-                            %>
-
-                            <table>
-                                <tr>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                    <td>
-                                        <b> Graphic: </b>
-                                    </td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td colspan="8">
-                                    <input type="text" name="sResult05Name" id="sResult05Name" size="75" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" readonly/>
-                                    <font color="teal" face="tahoma" size="2"> &nbsp; ...</font> 
-                                    <a onclick="return showsummaryreport(6);">
-                                        <font color="blue" face="tahoma" size="2"> <u>performance</u> </font> </a> &nbsp; 
-                                    <% if (PRadio.equals("PRadio1")) {
-                                        if (TORadio.equals("TORadio3")) { 
-                                            %> <%--><font color="blue" face="tahoma" size="2"> <u>1</u> &nbsp;
-                                            <u>2</u> &nbsp; <u>3</u> &nbsp; <u>4</u> &nbsp; <u>5</u> &nbsp;
-                                            <u>6</u> &nbsp; <u>7</u> &nbsp; <u>8</u> &nbsp; <u>9</u> &nbsp;
-                                            <u>10</u> &nbsp; </font> <--%>
-                                        <% } else {
-                                            %> <%--><font color="blue" face="tahoma" size="2"> <u>1</u> &nbsp; </font> <--%>
-                                        <% }
-                                    } 
-                                    else {
-                                        %> <%--><font color="blue" face="tahoma" size="2"> <u>1</u> &nbsp; </font> <--%>
-                                    <% } %>
-                                    <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
-                                    <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
-                                    <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
-                                    <input type="hidden" name="sResult04Name" id="sResult04Name" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" />
-                                    <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
-                                    <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
-                                    <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
-                                    <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
-                                    <input type="hidden" name="sBaseFileName" id="sBaseFileName" value="<%=sBaseFileName%>">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td colspan="8">
-                                    <input type="text" name="sResult06Name" id="sResult06Name" size="75" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" readonly/>
-                                    <font color="teal" face="tahoma" size="2"> &nbsp; ...</font> 
-                                    <a onclick="return showsummaryreport(5);">
-                                        <font color="blue" face="tahoma" size="2"> <u>tracing path</u> </font> </a>
-                                    <% if (PRadio.equals("PRadio1")) {
-                                        if (TORadio.equals("TORadio3")) { 
-                                            %> <%--><font color="blue" face="tahoma" size="2"> &nbsp; <u>1</u> &nbsp; 
-                                            <u>2</u> &nbsp; <u>3</u> &nbsp; <u>4</u> &nbsp; <u>5</u> &nbsp;
-                                            <u>6</u> &nbsp; <u>7</u> &nbsp; <u>8</u> &nbsp; <u>9</u> &nbsp;
-                                            <u>10</u> &nbsp; </font><--%>
-                                        <% } else {
-                                            %> <%--><font color="blue" face="tahoma" size="2"> &nbsp; <u>1</u> &nbsp; </font><--%>
-                                        <% }
-                                    } 
-                                    else {
-                                        %> <%--><font color="blue" face="tahoma" size="2"> &nbsp; <u>1</u> &nbsp; </font><--%>
-                                    <% } %>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="11">&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>
-                                        <b> Output: </b>
-                                    </td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td>
-                                        <% // calling matlab graphic - performance
-                                            int opt;
-                                            opt = 0;
-                                        %>
-                                        <jsp:include page="SFALSSVRGraphServlet">
-                                            <jsp:param name="opt" value="<%=opt%>" />
-                                            <jsp:param name="dC1" value="<%=dC1%>" />
-                                            <jsp:param name="dC2" value="<%=dC2%>" />
-                                            <jsp:param name="dS1" value="<%=dS1%>" />
-                                            <jsp:param name="dS2" value="<%=dS2%>" />
-
-                                            <jsp:param name="vpath" value="<%=vpath%>" />
-                                            <jsp:param name="vfile" value="<%=vfile%>" />
-                                        </jsp:include> 	
-                                    </td>
-
-                                </tr>
-                            </table>
-                        <% } else { %>
-                            <script> var sCreate = document.getElementById("sCreate"); 
-                                sCreate = "";
-                                document.getElementById("sCreate").value = sCreate; 
-                            </script>
-
-                        <table><tr>
-                            <td>
-                                &nbsp;
-                            </td>
-                            <td>
-                                <b> Graphic: </b>
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                                <input type="file" name="sResult05" id="sResult05"/>
-                            </td>
-                            <td>
-                                &nbsp;<input type="text" name="sResult05Name" id="sResult05Name" size="60" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" readonly/>
-                                <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
-                                <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
-                                <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
-                                <input type="hidden" name="sResult04Name" id="sResult04Name" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" />
-                                <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
-                                <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
-                                <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
-                                <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
-                            </td>
-                            <td>
-                                &nbsp;&nbsp; - - - 
-                                <a onclick="return showsummaryreport(4);">
-                                <font color="blue" face="tahoma" size="2">
-                                <u><b>VIEW</b></u></font></a>
-                                <font color="black" face="tahoma" size="2">the graphs.
-                                </font>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                &nbsp;
-                            </td>
-                            <td>
-                                &nbsp;
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                                <input type="file" name="sResult06" id="sResult06"/>
-                            </td>
-                            <td>
-                                &nbsp;<input type="text" name="sResult06Name" id="sResult06Name" size="60" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" readonly/>
-                            </td>
-                        </tr>
-                        </table>
-                        <% } %>
-                    <% } else if ((int)Double.parseDouble(sRunReportTable) == 35) { 
-                        if (sRRTShow != "") { %> 
-                            <p>
-                            <%@page import="Fillo.*"%>
-                            <%
-                                if (sRRTShow != "") {  
-                                %>
-                                    <script>
-                                    var sfilefile = document.getElementById("sfilefile");
-                                    </script>
-                                <%
-                                if (sReportFile != "") {
-                                    sfilefile = application.getRealPath("/") + sReportFile;
-                                    sReportFileName=sfilefile; 
-                                }
-                                else {
-                                    sfilefile = sReportFileName;
-                                }
-                                Fillo fillo = new Fillo();
-
-                                %>
-                                <script>
-                                    var sReportFileName = document.getElementById("sReportFileName");
-                                    document.getElementById("sReportFileName").value = sReportFileName;
-                                </script>
-                                <%
-                                /*
-                                out.println("<p>");
-                                out.println("sReportFile = " + sReportFile);
-                                out.println("sfilefile = " + sfilefile);
-                                out.println("sReportFileName = " + sReportFileName);
-                                out.println("<br>");
-                                */
-
-                                Connection connection = fillo.getConnection(sReportFileName);
-                                String strQuery = "Select * from Performance";
-                                Recordset recordset = connection.executeQuery(strQuery);
-                            %>
-
-                            <table>
-                                <tr>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                    <td>
-                                        <b> Summary: </b>
-                                    </td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td colspan="8">
-                                    <input type="text" name="sReportFileName" id="sReportFileName" size="75" value="<%=sReportFileName%>" readonly/>
-                                    <input type="hidden" name="sReportFileNameTXT" id="sReportFileNameTXT" value="<%=sReportFileNameTXT%>" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="11">&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>
-                                        <b> Output: </b>
-                                    </td>
-                                    <td>&nbsp;</td>
-                                    <th>RMSE Learning</th>
-                                    <th>RMSE Test</th>
-                                    <th>MAE Learning</th>
-                                    <th>MAE Test</th>
-                                    <th>MAPE Learning</th>
-                                    <th>MAPE Test</th>
-                                    <th>R Learning</th>
-                                    <th>R Test</th>
-                                </tr>
-                            <% while (recordset.next()) { %>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td align="right">
-                                        <%=recordset.getField("RMSE_Learning")%>
-                                    </td>
-                                    <td align="right">
-                                        <%=recordset.getField("RMSE_Test")%>
-                                    </td>
-                                    <td align="right">
-                                        <%=recordset.getField("MAE_Learning")%>
-                                    </td>
-                                    <td align="right">
-                                        <%=recordset.getField("MAE_Test")%>
-                                    </td>
-                                    <td align="right">
-                                        <%=recordset.getField("MAPE_Learning")%>
-                                    </td>
-                                    <td align="right">
-                                        <%=recordset.getField("MAPE_Test")%>
-                                    </td>
-                                    <td align="right">
-                                        <%=recordset.getField("R_Learning")%>
-                                    </td>
-                                    <td align="right">
-                                        <%=recordset.getField("R_Test")%>
-                                    </td>
-                                </tr>
-                            <% } %>
-                            </table>
-                            <%
-                                recordset.close();
-                                connection.close();
-                                }
-                            %>
-                        <% } else { %>
-                        <table><tr>
-                            <td>
-                                &nbsp;
-                            </td>
-                            <td>
-                                <b> Summary: </b>
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                                &nbsp;<input type="file" name="sResult04" id="sResult04"/>
-                            </td>
-                            <td>
-                                &nbsp;<input type="text" name="sResult04Name" id="sResult04Name" size="60" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" readonly/>
-                                <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
-                                <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
-                                <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
-                                <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
-                                <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
-                                <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
-                                <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
-                                <input type="hidden" name="sResult05Name" id="sResult05Name" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" />
-                                <input type="hidden" name="sResult06Name" id="sResult06Name" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" />
-                            </td>
-                            <td>
-                                &nbsp;&nbsp; - - - 
-                                <a onclick="return showsummaryreport(3);">
-                                <font color="blue" face="tahoma" size="2">
-                                <u><b>OPEN</b></u></font></a>
-                                <font color="black" face="tahoma" size="2">the report.
-                                </font>
-                            </td>
-                        </tr></table>
-                        <% } %>
-                    <% } %>
+                    
                             
                     <%--
                     out.println("<p>");
@@ -5431,7 +5513,7 @@
                     out.println("sPageControl = "+sPageControl); 
                     --%>
                     
-                <% } else if (sPageControl == "2") { %> 
+                <%-- } else if (sPageControl == "2") { %> 
                     <a onclick="return previousscreen();">
                         <font color="blue" face="agency FB" size="3" style="float:left;">
                         &nbsp;&nbsp;&nbsp;<b><u><< BACK</u></b>
@@ -5446,7 +5528,7 @@
                     out.println("sPageControl = "+sPageControl); 
                     --%>
                     
-                <% } else if (sPageControl == "3") { %>
+                <%-- } else if (sPageControl == "3") { %>
                     <a onclick="return previousscreen();">
                         <font color="blue" face="agency FB" size="3" style="float:left;">
                         &nbsp;&nbsp;&nbsp;<b><u><< BACK</u></b>
@@ -5460,7 +5542,7 @@
                     out.println("sPageControl = "+sPageControl); 
                     --%>
                     
-                <% } %>
+                <%-- } --%>
                 <BR>
                 
                 <%-->
