@@ -76,6 +76,10 @@ String sLoadingDataFileLSSVM = request.getParameter("sLoadingDataFileLSSVM");
 if (sLoadingDataFileLSSVM == null) {
     sLoadingDataFileLSSVM = "";        
 };
+String sSaveDataFile = request.getParameter("sSaveDataFile");
+if (sSaveDataFile == null) {
+    sSaveDataFile = "";        
+};
 String sLoadingDataExcelLSSVM = request.getParameter("sLoadingDataExcelLSSVM");
 if (sLoadingDataExcelLSSVM == null) {
     sLoadingDataExcelLSSVM = "";        
@@ -225,6 +229,7 @@ if (dCrossValidationLSSVM == null) {
     dCrossValidationLSSVM = "";  //"10";
 };
 
+/**/
 if (nDFAttributesLSSVM == null) {nDFAttributesLSSVM = "";};
 if (nDFInstancesLSSVM == null) {nDFInstancesLSSVM = "";};
 if (nTDFAttributesLSSVM == null) {nTDFAttributesLSSVM = "";};
@@ -233,6 +238,7 @@ if (nLDFAttributesLSSVM == null) {nLDFAttributesLSSVM = "";};
 if (nLDFInstancesLSSVM == null) {nLDFInstancesLSSVM = "";};
 if (nPDFAttributesLSSVM == null) {nPDFAttributesLSSVM = "";};
 if (nPDFInstancesLSSVM == null) {nPDFInstancesLSSVM = "";};
+/**/
 
 String sDataFileLSSVM = request.getParameter("sDataFileLSSVM");
 if (sDataFileLSSVM == null) {
@@ -394,6 +400,12 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
 <!DOCTYPE html>
 <html>
     <head>
+    <%
+    String hdf = request.getParameter("hiddendatafile");
+    if (hdf == null) {
+        hdf = "0";
+    }
+    %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>
             NiMOPS: SFA-LSSVM
@@ -506,18 +518,18 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 return valid;
             }
 
-                function testdatasection(val) {
+            function testdatasection(val) {
                 var valid = false;
-                
-                if (document.getElementById("testdatasection").style.display === "none")
+                if (val === 1)
                 {
                     document.getElementById("testdatasection").style.display = "block";
+                    document.getElementById("hiddendatafile").value = "1";
                 }
                 else
                 {
                     document.getElementById("testdatasection").style.display = "none";
+                    document.getElementById("hiddendatafile").value = "0";
                 }
-                
                 return valid;
             }
             
@@ -594,6 +606,12 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 var sLoadingDataFileLSSVM = document.getElementById("sLoadingDataFileLSSVM");
                 sLoadingDataFileLSSVM = "";
                 document.getElementById("sLoadingDataFileLSSVM").value = sLoadingDataFileLSSVM;
+
+                var sSaveDataFile = document.getElementById("sSaveDataFile");
+
+                sSaveDataFile = "";
+                document.getElementById("sSaveDataFile").value = sSaveDataFile;
+
                 
                 var sLoadingDataExcelLSSVM = document.getElementById("sLoadingDataExcelLSSVM");
                 sLoadingDataExcelLSSVM = "";
@@ -689,6 +707,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 sLoadingDataFileLSSVM = "";
                 document.getElementById("sLoadingDataFileLSSVM").value = sLoadingDataFileLSSVM;
                 
+                var sSaveDataFile = document.getElementById("sSaveDataFile");
+                sSaveDataFile = "";
+                document.getElementById("sSaveDataFile").value = sSaveDataFile;
+
                 var sLoadingDataExcelLSSVM = document.getElementById("sLoadingDataExcelLSSVM");
                 sLoadingDataExcelLSSVM = "";
                 document.getElementById("sLoadingDataExcelLSSVM").value = sLoadingDataExcelLSSVM;
@@ -1601,7 +1623,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
         
     <body onload="MoveBottom()">
         <center>
-            <img src="headhomepage2.jpg" alt="Image Not Found ..." width="1000">
+            <img src="headhomepagesub.jpg" alt="Image Not Found ..." width="1000">
         </center>
         <%@include file="navmenu.jsp" %>
     
@@ -1620,7 +1642,13 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 <input type="hidden" name="sMoveBottom" id="sMoveBottom" value="<%=sMoveBottom%>"/>
                 <input type="hidden" name="VarNextLSSVM" id="VarNextLSSVM" value="<%=VarNextLSSVM%>"/> 
                 <input type="hidden" name="sErrorLSSVM" id="sErrorLSSVM" value="<%=sErrorLSSVM%>"/> 
-                <%-->
+                
+                <% if (hdf.equals("1")) { %>
+                    <input type="hidden" name="hiddendatafile" id="hiddendatafile" value="1">
+                <% } else { %>
+                    <input type="hidden" name="hiddendatafile" id="hiddendatafile" value="0">
+                <% } %>
+
                 <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%=sResult01Name%>" />
                 <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%=sResult02Name%>" />
                 <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%=sResult03Name%>" />
@@ -1671,17 +1699,20 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 <button type="button" onclick="return cleardefaultsfalssvm(0);" class="btn btn-primary">Clear</button>
                             </div>
                         </td>
-                        <td style="width:64%">
-                            <% if (sLoadingDataExcelLSSVM != "") { %>
+                        <a href="#bottomform">
+                            <img src="Arrow bottom.png" alt="..." width="18" style="float:right">
+                        </a>
+                        <!--<td style="width:64%">
+                            <%-- if (sLoadingDataExcelLSSVM != "") { --%>
                                 <a href="#bottompageLSSVM">
                                     <img src="arrowbottom.JPG" alt="..." width="15" style="float:right">
                                 </a>
-                            <% } else { %>
+                            <%-- } else { --%>
                                 <a href="#bottomformLSSVM">
                                     <img src="arrowbottom.JPG" alt="..." width="15" style="float:right">
                                 </a>
-                            <% } %>
-                        </td>
+                            <%-- } --%>
+                        </td>-->
                     </tr>
                 </table>
                 
@@ -1905,7 +1936,13 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <input type="hidden" name="PRadioLSSVM" id="PRadioLSSVM" value="<%=PRadioLSSVM%>"/>
-                            <% if (PRadioLSSVM.equals("PRadio1LSSVM")) { %>        
+                            <% if (PRadioLSSVM.equals("PRadio1LSSVM")) { 
+							
+                                if (TORadioLSSVM.equals("TORadio1LSSVM")) {%><script>document.getElementById("TORadio1LSSVM").checked = true; </script><%}
+                                else if (TORadioLSSVM.equals("TORadio2LSSVM")) {%><script>document.getElementById("TORadio2LSSVM").checked = true; </script><%}
+                                else if (TORadioLSSVM.equals("TORadio3LSSVM")) {%><script>document.getElementById("TORadio3LSSVM").checked = true; </script><%}
+                                else if (TORadioLSSVM.equals("TORadio4LSSVM")) {%><script>document.getElementById("TORadio4LSSVM").checked = true; </script><%}
+                            %>        
                             <div class="container boundary">
                                 <h3>Data File</h3>
                                 <div class="row">
@@ -2104,15 +2141,19 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         <b><u>SUBMIT >></u></b>
                     </font>
                 </a>
+                <a href="#title">
+                    <img src="Arrow top.png" alt="..." width="18" style="float:right">
+                </a>
+
                 <table>
-                    <tr>
-                        <td></td>
-                    </tr>
+                        <tr>
+                                <td><img src="Logo-Space.png" alt=""></td>
+                        </tr>
                 </table>
                 <table>
-                    <tr>
-                        <td></td>
-                    </tr>
+                        <tr>
+                                <td><img src="Logo-Space.png" alt=""></td>
+                        </tr>
                 </table>
             </center>
             <%

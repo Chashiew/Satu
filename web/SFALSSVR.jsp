@@ -400,12 +400,12 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
 <!DOCTYPE html>
 <html>
     <head>
-    <%
-    String hdf = request.getParameter("hiddendatafile");
-    if (hdf == null) {
-        hdf = "0";
-    }
-    %>
+        <%
+        String hdf = request.getParameter("hiddendatafile");
+        if (hdf == null) {
+            hdf = "0";
+        }
+        %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>
             NiMOPS: SFA-LSSVR
@@ -516,9 +516,9 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 document.getElementById("sLoadingDataExcelClick").value = sLoadingDataExcelClick;
 
                 fullPath.value = sFileName.value;
+                
                 document.getElementById("myform").action = "SFALSSVR.jsp";  //jsp#title";
                 document.getElementById("myform").submit();
-                valid = false;
                 
                 return valid;
             }
@@ -899,6 +899,13 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 var sLearningFileName = document.getElementById("sLearningFileName");
                 var sPredictionFileName = document.getElementById("sPredictionFileName");
                 
+                var sFileData = document.getElementById("sFileData");
+                var sdInstances = document.getElementById("sdInstances");
+                var sdAttributes = document.getElementById("sdAttributes");
+                var sPFileData = document.getElementById("sPFileData");
+                var sdPInstances = document.getElementById("sdPInstances");
+                var sdPAttributes = document.getElementById("sdPAttributes");
+
                 var PRadio = document.getElementById("PRadio");
                 var TORadio = document.getElementById("TORadio");
 
@@ -1765,7 +1772,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
         
     <body onload="MoveBottom()">
         <center>
-            <img src="headhomepage2.jpg" alt="Image Not Found ..." width="1000">
+            <img src="headhomepagesub.jpg" alt="Image Not Found ..." width="1000">
         </center>
         <%@include file="navmenu.jsp" %>
     
@@ -1844,9 +1851,9 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         <a href="#bottomform">
                             <img src="Arrow bottom.png" alt="..." width="18" style="float:right">
                         </a>
-                            
+                        
                         <!--<td style="width:64%">
-                            <%-- if (sLoadingDataExcel != "") { --%>
+                            <%-- if (sLoadingDataExcel != "") {--%>
                                 <a href="#bottompage">
                                     <img src="arrowbottom.JPG" alt="..." width="15" style="float:right">
                                 </a>
@@ -1858,7 +1865,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         </td>-->
                     </tr>
                 </table>
-
+                
                 <div class="bs-example">
                     <div class="panel panel-default">
                         <div class="panel-body">
@@ -2166,7 +2173,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 <table>
                     <tr>
                         <td>
-                            <div class="container boundary"  id="bottomform">
+                            <div class="container boundary" id="bottomform">
                                 <h2><font face="Palatino Linotype, Book Antiqua, Palatino, serif" size="6">Dataset</font></h2>
                             </div>
                         </td>
@@ -2178,14 +2185,12 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         <div class="panel-body">
                             <input type="hidden" name="PRadio" id="PRadio" value="<%=PRadio%>"/>
                             <% if (PRadio.equals("PRadio1")) { 
-
-                                //out.println("PRadio = "+PRadio);
-                                //out.println("TORadio = "+TORadio);
                                     
                                 if (TORadio.equals("TORadio1")) {%><script>document.getElementById("TORadio1").checked = true; </script><%}
                                 else if (TORadio.equals("TORadio2")) {%><script>document.getElementById("TORadio2").checked = true; </script><%}
                                 else if (TORadio.equals("TORadio3")) {%><script>document.getElementById("TORadio3").checked = true; </script><%}
                                 else if (TORadio.equals("TORadio4")) {%><script>document.getElementById("TORadio4").checked = true; </script><%}
+
                                 %>        
                                 <div class="container boundary">
                                     <h3>Data File</h3>
@@ -2195,7 +2200,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                             <input type="file" class="filestyle" name="sDataFile" id="sDataFile" accept=".csv,.txt" data-input="false"/>
                                         </div>
                                         <div class="col-md-2" style="margin-top : 4px">
-                                            <a onclick="return computeatform(1);"> 
+                                            <a onclick="return computeatform(1);">
                                                 <span class="glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
                                             </a>
                                         </div>
@@ -2299,8 +2304,14 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                     <% } %>
                                 </div>
 
-                                <% //if (PRadio.equals("PRadio1")) { %>        
-                                <% //} %>
+                                <% 
+                                sFileData=sFileName;
+                                sdInstances=nDFInstances;
+                                sdAttributes=nDFAttributes;
+                                sPFileData=sTestFileName;
+                                sdPInstances=nTDFInstances;
+                                sdPAttributes=nTDFAttributes;
+                                %>
                             
                                 <input type="hidden" name="fullPathL" id="fullPathL" value="<%=fullPathL%>">
                                 <input type="hidden" name="sLearningDataFile" id="sLearningDataFile" value="<%=sLearningDataFile%>">
@@ -2313,7 +2324,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 <input type="hidden" name="nPDFAttributes" id="nPDFAttributes" value="<%=nPDFAttributes%>">
                                 <input type="hidden" name="nPDFInstances" id="nPDFInstances" value="<%=nPDFInstances%>">
                                 
-                            <% } else if (PRadio.equals("PRadio2")) { %>        
+                            <% } else if (PRadio.equals("PRadio2")) { %> 
+                            
                                 <div class="container boundary">
                                     <h3>Learning from Data</h3>
                                     <div class="row">
@@ -2384,12 +2396,23 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                     </div>
                                 </div>
 
-                                <%-->
-                                <input type="hidden" name="TORadio" id="TORadio1" value="TORadio1"> 
-                                <input type="hidden" name="TORadio" id="TORadio2" value="TORadio2"> 
-                                <input type="hidden" name="TORadio" id="TORadio3" value="TORadio3"> 
-                                <input type="hidden" name="TORadio" id="TORadio4" value="TORadio4"> 
-                                <--%>
+                                <script>
+                                    document.getElementById("sFileData").value = "<%=sLearningFileName%>";
+                                    document.getElementById("sdInstances").value = "<%=nLDFInstances%>";
+                                    document.getElementById("sdAttributes").value = "<%=nLDFAttributes%>";
+                                    document.getElementById("sPFileData").value = "<%=sPredictionFileName%>";
+                                    document.getElementById("sdPInstances").value = "<%=nPDFInstances%>";
+                                    document.getElementById("sdPAttributes").value = "<%=nPDFAttributes%>";
+                                </script>
+                                
+                                <% 
+                                sFileData=sLearningFileName;
+                                sdInstances=nLDFInstances;
+                                sdAttributes=nLDFAttributes;
+                                sPFileData=sPredictionFileName;
+                                sdPInstances=nPDFInstances;
+                                sdPAttributes=nPDFAttributes;
+                                %>
                                 
                                 <input type="hidden" name="TORadio" id="TORadio" value="<%=TORadio%>"/>
                                 <input type="hidden" name="dHoldOut" id = "dHoldOut" value="<%=dHoldOut%>">
@@ -2405,8 +2428,20 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 <input type="hidden" name="nTDFAttributes" id="nTDFAttributes" value="<%=nTDFAttributes%>">
                                 <input type="hidden" name="nTDFInstances" id="nTDFInstances" value="<%=nTDFInstances%>">
                             
-                            <% } %>
+                            <% } 
 
+                            /*
+                            out.println("PRadio = "+PRadio); 
+                            out.println("TORadio = "+TORadio);
+                            out.println("sFileData = "+sFileData);
+                            out.println("sdInstances = "+sdInstances);
+                            out.println("sdAttributes = "+sdAttributes);
+                            out.println("sPFileData = "+sPFileData);
+                            out.println("sdPInstances = "+sdPInstances);
+                            out.println("sdPAttributes = "+sdPAttributes);
+                            */
+                            
+                            %>
                         </div>
                     </div>
                 </div>
@@ -2417,13 +2452,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     <img src="Logo-Space.png" alt="     " width="4" height="5">
                     &nbsp;. . . [END OF DATA FORM] &nbsp;&nbsp;&nbsp;
                 </h6>-->
-                <!--<%-- if (sLoadingDataExcel != "") { --%>
+                <%-- if (sLoadingDataExcel != "") { --%>
                 <%-- } else { --%>
-                <div class="scrollToTop">
-                    <img src="Arrow top.png" alt="..." width="18">  
-                </div>
-                <div class="scrollToBottom">
-                    <img src="Arrow bottom.png" alt="..." width="18">  
+                <!--<div class="scrollToTop">
+                    <img src="arrowup.JPG" alt="..." width="18">  
                 </div>-->
                 <%-- } 
 
@@ -2441,15 +2473,16 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 --%>
 
                 <center>
-                <a onclick="return checkdata(1);">
-                    <font color="blue" face="agency FB" size="3">
-                        <b><u>SUBMIT >></u></b>
-                    </font>
-                </a>
-                <a href="#title">
-                    <img src="Arrow top.png" alt="..." width="18" style="float:right">
-                </a>
-                
+                    <a onclick="return checkdata(1);">
+                        <font color="blue" face="agency FB" size="3">
+                            <b><u>SUBMIT >></u></b>
+                        </font>
+                    </a>
+
+                    <a href="#title">
+                        <img src="Arrow top.png" alt="..." width="18" style="float:right">
+                    </a>
+
                     <table>
                         <tr>
                             <td><img src="Logo-Space.png" alt=""></td>
