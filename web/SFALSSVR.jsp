@@ -1835,7 +1835,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     </div>
                 </div>
                     
-                <br>
                 <table>
                     <tr>
                         <td>

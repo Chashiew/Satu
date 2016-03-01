@@ -239,7 +239,15 @@ and open the template in the editor.
 
 .editbootstrap { /* class "." */
     border-width: 0px !important;
-    background-image: none !important;    
+    background-image: none !important;
+}
+
+.editscrollspy { /* class "." */
+    background-color: #ffffff !important;
+    border-color: #ffffff !important;
+    top: auto !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
 }
 
 a:focus {
@@ -256,4 +264,8 @@ a:focus {
 
 label {
     font-weight: normal !important;
+}
+
+.edittab {
+    margin-left: 24%;
 }
