@@ -29,7 +29,7 @@
                     response.sendRedirect("Home.jsp");
                 } 
             else {
-                response.sendRedirect("Error.jsp");
+                response.sendRedirect("loginpage.jsp?wronglogin=1");
             } 
         %>
 

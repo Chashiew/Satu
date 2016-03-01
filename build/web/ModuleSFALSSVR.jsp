@@ -654,33 +654,20 @@
             function viewsummarydata3() {
                 //tanpa sBaseNameCO
                 
-                var sLoadingDataExcel = document.getElementById("sLoadingDataExcel");
-                sLoadingDataExcel = "";
-                document.getElementById("sLoadingDataExcel").value = sLoadingDataExcel;
+                document.getElementById("sLoadingDataExcel").value = "";
 
                 //to un-hide summary data
-                var sLoadingDataExcelClick = document.getElementById("sLoadingDataExcelClick");
-                sLoadingDataExcelClick = "";
-                document.getElementById("sLoadingDataExcelClick").value = sLoadingDataExcelClick;
-                    var sLoadingDataExcelClick3 = document.getElementById("sLoadingDataExcelClick3");
-                    sLoadingDataExcelClick3 = "3";
-                    document.getElementById("sLoadingDataExcelClick3").value = sLoadingDataExcelClick3;
-                var sLoadingDataExcelClick4 = document.getElementById("sLoadingDataExcelClick4");
-                sLoadingDataExcelClick4 = "";
-                document.getElementById("sLoadingDataExcelClick4").value = sLoadingDataExcelClick4;
-                    var sLoadingDataExcelClick5 = document.getElementById("sLoadingDataExcelClick5");
-                    sLoadingDataExcelClick5 = "";
-                    document.getElementById("sLoadingDataExcelClick5").value = sLoadingDataExcelClick5;
-                var sLoadingDataExcelClick6 = document.getElementById("sLoadingDataExcelClick6");
-                sLoadingDataExcelClick6 = "";
-                document.getElementById("sLoadingDataExcelClick6").value = sLoadingDataExcelClick6;
+ 
+                document.getElementById("sLoadingDataExcelClick").value = "";
+                    document.getElementById("sLoadingDataExcelClick3").value = "3";
+                document.getElementById("sLoadingDataExcelClick4").value = "";
+                    document.getElementById("sLoadingDataExcelClick5").value = "";
+                document.getElementById("sLoadingDataExcelClick6").value = "";
                 
-                var sRunReportTable = document.getElementById("sRunReportTable");
-                sRunReportTable = "";
                 sHasil = "";
-                document.getElementById("sRunReportTable").value = sRunReportTable;
+                document.getElementById("sRunReportTable").value = "0";
 
-                return refreshform(val);
+                return refreshform(0);
             }
 
             function viewsummarydata4() {
@@ -4542,7 +4529,7 @@
                                 <tr>
                                     <td>&nbsp;</td>
                                     <td>
-                                        <b> General Data: </b>
+                                        <b>General Data: </b>
                                     </td>
                                     <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                     <td>
@@ -4892,6 +4879,50 @@
                             </table>
 
                             <br>
+                            
+                            <table>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>
+                                        <b>Dataset: </b>
+                                        &nbsp;&nbsp;
+                                    </td>
+                                    <td>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                    <td>
+                                        <% if (PRadio.equals("PRadio1")) { %> 
+                                            <a onclick="return viewsummarydata3();">
+                                                <font color="blue">
+                                                <u>Learning Dataset</u>
+                                                </font>
+                                            </a>
+                                            <% if (TORadio.equals("TORadio4")) { %> 
+                                                &nbsp; - &nbsp;
+                                                <a onclick="return viewsummarydata4();">
+                                                    <font color="blue">
+                                                    <u>Test Dataset</u>
+                                                    </font>
+                                                </a> 
+                                            <% } %>
+                                        <% } else if (PRadio.equals("PRadio2")) { %> 
+                                            <a onclick="return viewsummarydata5();">
+                                                <font color="blue">
+                                                <u>Learning Dataset</u>
+                                                </font>
+                                            </a> 
+                                            &nbsp; - &nbsp;
+                                            <a onclick="return viewsummarydata6();">
+                                                <font color="blue">
+                                                <u>Prediction Dataset</u>
+                                                </font>
+                                            </a> 
+                                        <% } %>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br>        
                             <% //#1 displaying input data: 
                             if (sLoadingDataExcelClick != "") { 
                             %>
@@ -4905,7 +4936,7 @@
                                         &nbsp;
                                     </td>
                                     <td>
-                                        <b> Training Dataset: </b>
+                                        <b>Learning Dataset: </b>
                                     </td>
                                     <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                     <td>
@@ -5331,48 +5362,6 @@
                             %>
 
                             <% } %>
-                            <table>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>
-                                        <b> Dataset: </b>
-                                        &nbsp;&nbsp;
-                                    </td>
-                                    <td>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
-                                    </td>
-                                    <td>
-                                        <% if (PRadio.equals("PRadio1")) { %> 
-                                            <a onclick="return viewsummarydata3();">
-                                                <font color="blue">
-                                                <u>Learning Dataset</u>
-                                                </font>
-                                            </a>
-                                            <% if (TORadio.equals("TORadio4")) { %> 
-                                                &nbsp; - &nbsp;
-                                                <a onclick="return viewsummarydata4();">
-                                                    <font color="blue">
-                                                    <u>Test Dataset</u>
-                                                    </font>
-                                                </a> 
-                                            <% } %>
-                                        <% } else if (PRadio.equals("PRadio2")) { %> 
-                                            <a onclick="return viewsummarydata5();">
-                                                <font color="blue">
-                                                <u>Learning Dataset</u>
-                                                </font>
-                                            </a> 
-                                            &nbsp; - &nbsp;
-                                            <a onclick="return viewsummarydata6();">
-                                                <font color="blue">
-                                                <u>Prediction Dataset</u>
-                                                </font>
-                                            </a> 
-                                        <% } %>
-                                    </td>
-                                </tr>
-                            </table>
 
                             <br>
                                     
@@ -5391,8 +5380,8 @@
                         <% } %>
                             <br>
                             <br>
-                            <ul class="nav nav-pills nav-justified">
-                                <li class="active"><a data-toggle="tab" href="#Main">Output Table</a></li>
+                            <ul class="nav nav-pills nav-justified" style="background-color: lavender;">
+                                <li class="active"><a data-toggle="tab" href="#Main" id="Menu">Output Table</a></li>
                                 <li><a data-toggle="tab" href="#PGraph">Prediction Graph</a></li>
                                 <li><a data-toggle="tab" href="#PTGraph">Performance Trajectory Graph</a></li>
                                 <li><a data-toggle="tab" href="#TPGraph">Tracing Path Graph</a></li>
@@ -5411,20 +5400,40 @@
                                     <br>
                                     <center>
                                         <font size="4" id="Optimum">Main results - Optimum hyper-parameters</font>
+                                        <a href="#Partition"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                        <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+                                        <br>
+                                        <div><img src="homepage1.jpg" alt="..."></div>
                                     </center>
+                                    
                                     <br>
                                     <center>
                                         <font size="4" id="Partition">Hyper-parameters; Performances of training and validation partitions</font>
+                                        <a href="#Optimum"><span class="glyphicon glyphicon-menu-left"></span></a>
+                                        <a href="#Report"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                        <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+                                        <br>
+                                        <div><img src="homepage1.jpg" alt="..."></div>
                                     </center>
+                                    
                                     <br>
                                     <center>
                                         <font size="4" id="Report">Analysis report</font>
+                                        <a href="#Partition"><span class="glyphicon glyphicon-menu-left"></span></a>
+                                        <a href="#Performance"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                        <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+                                        <br>
+                                        <div><img src="homepage1.jpg" alt="..."></div>
                                     </center>
+                                    
                                     <br>
                                     <center>
                                         <font size="4" id="Performance">Learning and test performances; Test dataset and predicted values</font>
+                                        <a href="#Report"><span class="glyphicon glyphicon-menu-left"></span></a>
+                                        <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+                                        <br>
+                                        <div><img src="homepage1.jpg" alt="..."></div>
                                     </center>
-                                    
                                 </div>
                                 <div id="PGraph" class="tab-pane fade in">
                                     <div class="edittab">
@@ -5440,18 +5449,39 @@
                                     <br>
                                     <center>
                                         <font size="4" id="TPDataset">Prediction graph of training partition from learning dataset</font>
+                                        <a href="#VPDataset"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                        <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+                                        <br>
+                                        <div><img src="homepage1.jpg" alt="..."></div>
                                     </center>
+                                    
                                     <br>
                                     <center>
                                         <font size="4" id="VPDataset">Prediction graph of validation partition from learning dataset</font>
+                                        <a href="#TPDataset"><span class="glyphicon glyphicon-menu-left"></span></a>
+                                        <a href="#LDataset"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                        <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+                                        <br>
+                                        <div><img src="homepage1.jpg" alt="..."></div>
                                     </center>
+                                    
                                     <br>
                                     <center>
                                         <font size="4" id="LDataset">Prediction graph of learning dataset</font>
+                                        <a href="#VPDataset"><span class="glyphicon glyphicon-menu-left"></span></a>
+                                        <a href="#TDataset"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                        <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+                                        <br>
+                                        <div><img src="homepage1.jpg" alt="..."></div>
                                     </center>
+                                    
                                     <br>
                                     <center>
                                         <font size="4" id="TDataset">Prediction graph of test dataset</font>
+                                        <a href="#LDataset"><span class="glyphicon glyphicon-menu-left"></span></a>
+                                        <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+                                        <br>
+                                        <div><img src="homepage1.jpg" alt="..."></div>
                                     </center>
                                 </div>
                                 <div id="PTGraph" class="tab-pane fade in">

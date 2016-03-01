@@ -46,6 +46,14 @@
     <center>
         <br><br>
         <h1><font color="#2F4F4F" face="Georgia">Please Sign In</font></h1>
+        <% 
+            String wronglogin = request.getParameter("wronglogin"); 
+            if (wronglogin == null) {
+        %>
+            <input type="hidden" id="wronglogin">
+        <% } else { %>
+            <input type="hidden" id="wronglogin" value="1">
+        <% } %>
         <form name="form" action="logincheck.jsp" method="post">
             <table>
                 <tr>
@@ -82,7 +90,7 @@
                 </tr>
             </table>
             
-            <input type="submit" name="VarSubmit" value="Submit" style="font-size: 10pt" onclick=" return checklogin(1);"/> 
+            <input type="submit" name="VarSubmit" value="Submit" style="font-size: 10pt"/> 
             
             <%--
             username.focus();
@@ -90,7 +98,7 @@
         </form> 
     </center>
  
-    <script>
+    <!--<script>
         function checklogin(val) { 
             var valid = true;
             var username = document.getElementById("username");
@@ -104,8 +112,13 @@
                     }
             return valid;
         }
-   </script>
+   </script>-->
+    <script>
+        if (document.getElementById("wronglogin").value !== "")
+        {
+            alert("Username or Password is incorrect!");
+        }
+    </script>
 </body>
-
 
 </html>
