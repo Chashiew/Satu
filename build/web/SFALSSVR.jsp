@@ -1920,13 +1920,17 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             <!--<div class="container visible-lg-block wdetail">-->
                             <div class="container wdetail">
                                 <h2>Parameter</h2>
-                                <p>Input data and system parameters. The system then initialized the search parameters via chaotic map operator (Logistic map).</p>
+                                <p>Input data and system parameters</p>
                                 <div class="row">
                                     <div class="col-md-3">Swarm and evolutionary parameters:</div>
                                     <div class="col-md-2">No. of fireflies</div>
                                     <div class="col-md-1">
                                         <input type="text" name="nFireFlies" id="nFireFlies" size="5" value="<%=nFireFlies%>"/>
                                     </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-3"></div>
                                     <div class="col-md-2">Max. generation</div>
                                     <div class="col-md-1">
                                         <input type="text" name="nMaxGeneration" id="nMaxGeneration" size="5" value="<%=nMaxGeneration%>"/>
@@ -1939,6 +1943,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                     <div class="col-md-1">
                                         <input type="text" name="dMinBeta" id="dMinBeta" size="5" value="<%=dMinBeta%>"/>
                                     </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-3"></div>
                                     <div class="col-md-2">Gamma</div>
                                     <div class="col-md-1">
                                         <input type="text" name="dGamma" id="dGamma" size="5" value="<%=dGamma%>"/>
@@ -2010,7 +2018,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         <div class="panel-body">
                             <div class="container boundary">
                                 <h2>Normalization</h2>
-                                <p>Data preprocessing is considered a crucial step in data anlytics that performs data cleansing and transforming to improve the respective results.</p>
                                 <p>User can decide whether or not to normalize the data to (0, 1) scale.</p>
                                 <div class="radio">
                                     <label><input type="radio" name="NormalRadio" id="NormalRadio1" value="NormalRadio1">Original value</label>
@@ -2043,7 +2050,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 
                             <div class="container boundary">
                                 <h3>Learning Option</h3>
-                                <p>Set the partition size for Train Data and Validation Data</p>
+                                <p>Set the partition size for train data and validation data</p>
                                     <!-- <form oninput="dTotalSize.value=parseInt(dTrainingPS.value)+parseInt(dValidationPS.value)"> -->
                                 <div oninput="dValidationPS.value=100-parseInt(dTrainingPS.value); dTotalSize.value=100;">
                                     <div class="form-group">
@@ -2072,8 +2079,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         
                             <div class="container boundary">
                                 <h3>Stop Criterion</h3>
-                                <p>Stopping condition. End the optimization process if the generation number (MaxGen) has achieved the maximum number of fitness function f(m)</p>
-                                <p> with the minimum f(m) values.</p>
                                 <div class="radio">
                                     <label><input type="radio" name="SCRadio" id="SCRadio1" value="SCRadio1">Max. generation is reached</label>
                                 </div>
@@ -2083,7 +2088,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                         <div class="input-group col-md-2">
                                             <input type="text" class="form-control" name="nLastChange1" id="nLastChange1" value="<%=nLastChange1%>">
                                         </div>
-                                            last changes in OF value <
+                                            consecutive rates of change in OF values <
                                         <div class="input-group col-md-2">
                                             <input type="text" class="form-control" name="nLastChange2" id="nLastChange2" value="<%=nLastChange2%>">
                                         </div>
@@ -2104,8 +2109,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             <div class="panel-body">
                                 <div class="container boundary">
                                     <h2>Test Option</h2>
-                                    <p>The test data file used to evaluate the optimized model again. Output phase: calculate performance measures (i.e., RMSE, MAE, MAPE, R)</p>
-                                    <p>to find the prediction accuracy.</p>
                                     <div class="container boundary">
                                         <div class="form-inline">
                                             <div class="radio col-md-2">
@@ -2137,7 +2140,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 <table>
                     <tr>
                         <td>
-                            <div class="container boundary" id="bottomform">
+                            <div class="container boundary">
                                 <h2><font face="Palatino Linotype, Book Antiqua, Palatino, serif" size="6">Dataset</font></h2>
                             </div>
                         </td>
@@ -2422,40 +2425,12 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 <div class="bs-example">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <table>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>
-                                        <b> Initialization: </b>
-                                    </td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td>
-                                        <font color="teal" face="tahoma" size="2"> Base output file name (eg. Result) </font>
-                                    </td>
-                                    <td>
-                                        &nbsp;
-                                        <input type="text" name="sBaseFileName" id="sBaseFileName" size="20" value="<%=sBaseFileName%>">
-                                    </td>
-                                    <td>
-                                        <font color="teal" face="tahoma" size="2"> order number and .txt will be automatically added. </font>
-                                    </td>
-                                </tr> 
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                </tr> 
-                            </table>
+                            <div class="container boundary">
+                                <b> Initialization: </b>
+                                <font color="teal" face="tahoma" size="2"> Base output file name (eg. Result) </font>
+                                <input type="text" name="sBaseFileName" id="sBaseFileName" size="20" value="<%=sBaseFileName%>">
+                                <font color="teal" face="tahoma" size="2">order number and .txt will be automatically added. </font>
+                            </div>
                         </div>
                     </div>
                 </div>

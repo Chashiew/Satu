@@ -1872,6 +1872,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                     <div class="col-md-1">
                                         <input type="text" name="nFireFliesLSSVM" id="nFireFliesLSSVM" size="5" value="<%=nFireFliesLSSVM%>"> 
                                     </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-3"></div>
                                     <div class="col-md-2">Max. generation</div>
                                     <div class="col-md-1">
                                         <input type="text" name="nMaxGenerationLSSVM" id="nMaxGenerationLSSVM" size="5" value="<%=nMaxGenerationLSSVM%>"> 
@@ -1884,6 +1888,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                     <div class="col-md-1">
                                         <input type="text" name="dMinBetaLSSVM" id="dMinBetaLSSVM" size="5" value="<%=dMinBetaLSSVM%>"> 
                                     </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-3"></div>
                                     <div class="col-md-2">Gamma</div>
                                     <div class="col-md-1">
                                         <input type="text" name="dGammaLSSVM" id="dGammaLSSVM" size="5" value="<%=dGammaLSSVM%>">

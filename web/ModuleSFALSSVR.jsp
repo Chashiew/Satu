@@ -2056,9 +2056,16 @@
                 out.println("VarNext = "+VarNext);
                 out.println("snFireFlies = "+snFireFlies);
                 */ 
-
-                dHoldOut = Float.parseFloat(sdHoldOut);
-                dCrossValidation = Float.parseFloat(sdCrossValidation);
+                if (PRadio.equals("PRadio1"))
+                {
+                    dHoldOut = Float.parseFloat(sdHoldOut);
+                    dCrossValidation = Float.parseFloat(sdCrossValidation);
+                }
+                else
+                {
+                    dHoldOut = 20.0;
+                    dCrossValidation = 10;
+                }
                 /**/
                 
                 /*
@@ -2267,7 +2274,10 @@
                         <% } %>
                             <br>
                             <br>
-                            <table>
+                            <a onclick="return previousscreen();">
+                                <font color="blue" face="agency FB" size="3" style="float:left;">&nbsp;&nbsp;&nbsp;<b><u><< BACK</u></b></font>
+                            </a>
+                            <br> <table>
                                 <tr>
                                     <td>
                                         <div class="container boundary" id="bottomform">
@@ -2276,10 +2286,7 @@
                                     </td>
                                 </tr>
                             </table>
-                            <a onclick="return previousscreen();">
-                                <font color="blue" face="agency FB" size="3" style="float:left;">&nbsp;&nbsp;&nbsp;<b><u><< BACK</u></b></font>
-                            </a>
-                            <br>
+                            
                             <input type="hidden" name="sBaseFileName" id="sBaseFileName" value="<%=sBaseFileName%>">
                             
                             <% if (sRunReportTable == "") { %> 
@@ -3591,7 +3598,7 @@
                                                         <td>
                                                             <input type="text" name="sResult01Name" id="sResult01Name" size="65" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" readonly/>
                                                             &nbsp;
-                                                            <font color="teal" face="tahoma" size="2">Main results - Optimum hyper-parameters</font>
+                                                            <font color="teal" face="tahoma" size="2">Main results - Optimum hyperparameters</font>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -3601,7 +3608,7 @@
                                                         <td>
                                                             <input type="text" name="sResult02Name" id="sResult02Name" size="65" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" readonly/>
                                                             &nbsp;
-                                                            <font color="teal" face="tahoma" size="2">Hyper-parameters; Performances of training and validation partitions</font>
+                                                            <font color="teal" face="tahoma" size="2">Hyperparameters; Performances of training and validation partitions</font>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -4675,405 +4682,295 @@
                                 <% } %>
                             <% } %>
                         
-                            <br>
-                            <table>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>
-                                        <b>General Data: </b>
-                                    </td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td>
-                                        1. Swarm and evolutionary parameters:&nbsp;&nbsp;
-                                    </td>
-                                    <td>
-                                        No. of fireflies = <%=nf.format(nFireFlies)%>&nbsp;&nbsp;
-                                    </td>
-                                    <td>
-                                        Max. generation = <%=nf.format(nMaxGeneration)%>
-                                    </td>
-                                    <td>
-                                        &nbsp;&nbsp;&nbsp;
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;&nbsp;&nbsp;</td>
-                                    <td>
-                                        2. Attractiveness:
-                                    </td>
-                                    <td>
-                                        Beta min. = <%=nf2.format(dMinBeta)%>&nbsp;&nbsp;
-                                    </td>
-                                    <td>
-                                        Gamma = <%=nf2.format(dGamma)%>
-                                    </td>
-                                    <td>
-                                        &nbsp;&nbsp;&nbsp;
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;&nbsp;&nbsp;</td>
-                                    <td>
-                                        3. Random movement:
-                                    </td>
-                                    <td>
-                                        Alpha = <%=nf2.format(dAlpha)%>&nbsp;&nbsp;
-                                    </td>
-                                    <td>
-                                        Adaptive inertia weight = <%=nf2.format(dAIWeight)%>&nbsp;&nbsp;
-                                    </td>
-                                    <td>
-                                        Tau = <%=nf2.format(dTau)%>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;&nbsp;&nbsp;</td>
-                                    <td>
-                                        4. Logistic map:
-                                    </td>
-                                    <td>
-                                        Biotic potential, a = <%=nf2.format(dBPotential)%>
-                                    </td>
-                                    <td colspan="2">
-                                        &nbsp;&nbsp;&nbsp;
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;&nbsp;&nbsp;</td>
-                                    <td>
-                                        5. Hyperparameters:
-                                    </td>
-                                    <td>
-                                        Range of C = <%=ndf.format(dC1)%> to
-                                        <%=ndf.format(dC2)%>&nbsp;&nbsp;
-                                    </td>
-                                    <td>
-                                        Range of sigma = <%=ndf.format(dS1)%> to
-                                        <%=ndf.format(dS2)%>&nbsp;&nbsp;
-                                    </td>
-                                    <td>
-                                        &nbsp;&nbsp;&nbsp;
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;&nbsp;&nbsp;</td>
-                                    <td>
-                                        6. Learning Option:
-                                    </td>
-                                    <td>
-                                        Training partition size = <%=nf.format(dTrainingPS)%> (%)&nbsp;&nbsp;
-                                    </td>
-                                    <td>
-                                        Validation partition size = <%=nf.format(dValidationPS)%> (%)
-                                    </td>
-                                    <td>
-                                        &nbsp;&nbsp;&nbsp;
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;&nbsp;&nbsp;</td>
-                                    <td>
-                                        7. Normalization Method:
-                                    </td>
-                                    <td>
-                                        <%
-                                        if (NormalRadio.equals("NormalRadio1")) {
-                                            sNormalRadio = "Original value";
-                                        }
-                                        else if (NormalRadio.equals("NormalRadio2")) {
-                                            sNormalRadio = "Feature scaling";
-                                        }
-                                        %>
-                                         <%=sNormalRadio%>
-                                    </td>
-                                    <td colspan="2">
-                                        &nbsp;&nbsp;&nbsp;
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;&nbsp;&nbsp;</td>
-                                    <td>
-                                        8. Objective Function (OF): 
-                                    </td>
-                                    <td>
-                                        <%
-                                        if (OptimRadio.equals("OptimRadio1")) {
-                                            sOptimRadio = "RMSE validation";
-                                        }
-                                        else if (OptimRadio.equals("OptimRadio2")) {
-                                            sOptimRadio = "MAE validation";
-                                        }
-                                        else if (OptimRadio.equals("OptimRadio3")) {
-                                            sOptimRadio = "MAPE validation";
-                                        }
-                                        %>
-                                         <%=sOptimRadio%>
-                                    </td>
-                                    <td colspan="2">
-                                        &nbsp;&nbsp;&nbsp;
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;&nbsp;&nbsp;</td>
-                                    <td>
-                                        9. Stop Criterion:
-                                    </td>
-                                    <td>
-                                        <%
-                                        if (SCRadio.equals("SCRadio1")) {
-                                            sSCRadio = "Max. generation is reached";
-                                            %> 
-                                            <%=sSCRadio%>
-                                            <%
-                                        }
-                                        else if (SCRadio.equals("SCRadio2")) {
-                                            sSCRadio = "last changes in OF value <";
-                                            %> 
-                                            <%=nf.format(nLastChange1)%> <%=sSCRadio%> <%=nf5.format(nLastChange2)%>
-                                            <%
-                                        }
-                                        else if (SCRadio.equals("SCRadio3")) {
-                                            sSCRadio = "Either criterion is reached";
-                                            %> 
-                                            <%=sSCRadio%>
-                                            <%
-                                        }
-                                        %>
-                                    </td>
-                                    <td colspan="2">
-                                        &nbsp;&nbsp;&nbsp;
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;&nbsp;&nbsp;</td>
-                                    <td>
-                                        10. Purpose:
-                                    </td>
-                                    <td>
-                                        <%
-                                        sPRadio = "...";
-                                        if (PRadio.equals("PRadio1")) {
-                                            sPRadio = "Evaluation";
-                                            sDummy = "Data File : ";
-                                        }
-                                        else if (PRadio.equals("PRadio2")) {
-                                            sPRadio = "Prediction";
-                                            sDummy = "Learning Data File : ";
-                                            sFileData = sLearningFileName;
-                                            dAttributes = snLDFAttributes;
-                                            dInstances = snLDFInstances;
-                                            sPDummy = "Prediction Data File : ";
-                                            sPFileData = sPredictionFileName;
-                                            dPAttributes = snPDFAttributes;
-                                            dPInstances = snPDFInstances;
-                                            sVariation = "5";
-                                        }
-                                        %>
-                                        <%=sPRadio%>
-                                    </td>
-                                    <td colspan="2">
-                                        &nbsp;&nbsp;&nbsp;
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;&nbsp;&nbsp;</td>
-                                    <td>
-                                        11. Test Option: 
-                                    </td>
-                                    <td>
-                                        <%
-                                        sTORadio = "...";
-                                        if (TORadio.equals("TORadio2")) { 
-                                            if (PRadio.equals("PRadio1")) { %>
-                                                Hold-out = <%=nf.format(dHoldOut)%> (%) 
-                                                <% 
-                                                sDummy = "Data File : ";
-                                                sFileData = sFileName;
-                                                dAttributes = snDFAttributes;
-                                                dInstances = snDFInstances;
-                                                sVariation = "2";
-                                                sPFileData = "";
-                                                dPAttributes = "0";
-                                                dPInstances = "0";
-                                            }
-                                            else if (PRadio.equals("PRadio2")) { %> 
-                                                -
-                                            <% }
-                                        }
-                                        else if (TORadio.equals("TORadio3")) {
-                                            if (PRadio.equals("PRadio1")) { %>
-                                                Cross-validation = <%=nf.format(dCrossValidation)%> (folds)
-                                                <%
-                                                sDummy = "Data File : ";
-                                                sFileData = sFileName;
-                                                dAttributes = snDFAttributes;
-                                                dInstances = snDFInstances;
-                                                sVariation = "3";
-                                                sPFileData = "";
-                                                dPAttributes = "0";
-                                                dPInstances = "0";
-                                            }
-                                            else if (PRadio.equals("PRadio2")) { %>
-                                                -
-                                            <% }
-                                        }
-                                        else {
-                                            if (TORadio.equals("TORadio1")) {
-                                                if (PRadio.equals("PRadio1")) {
-                                                    sTORadio = "Use data file";
-                                                    sDummy = "Data File : ";
-                                                    sFileData = sFileName;
-                                                    dAttributes = snDFAttributes;  
-                                                    dInstances = snDFInstances; 
-                                                    sVariation = "1";
-                                                    sPFileData = "";
-                                                    dPAttributes = "0";
-                                                    dPInstances = "0";
-                                                }
-                                                else if (PRadio.equals("PRadio2")) {
-                                                    sTORadio = "-";
-                                                }
-                                            }
-                                            else if (TORadio.equals("TORadio4")) {
-                                                if (PRadio.equals("PRadio1")) {
-                                                    sTORadio = "Use test data file";
-                                                    sDummy = "Data File : ";
-                                                    sFileData = sFileName;
-                                                    dAttributes = snDFAttributes;
-                                                    dInstances = snDFInstances; 
-                                                    sPDummy = "Test Data File : ";
-                                                    sPFileData = sTestFileName;
-                                                    dPAttributes = snTDFAttributes; 
-                                                    dPInstances = snTDFInstances; 
-                                                    sVariation = "4";
-                                                }
-                                                else if (PRadio.equals("PRadio2")) {
-                                                    sTORadio = "-";
-                                                }
-                                            }
-                                            else {
-                                                dAttributes = snDFAttributes;
-                                                dInstances = snDFInstances;
-                                            }%>
-
-                                            <%=sTORadio%>
-
-                                        <% } %>
-
-                                    </td>
-                                    <td colspan="2">
-                                        <b> Run variation # <%=sVariation%> </b>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="8">&nbsp;</td>
-                                </tr>
-                            </table>
-
-                            <table>
-                                <tr>
-                                    <td>&nbsp;&nbsp;&nbsp;</td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td>
-                                        <%=sDummy%> <%=sFileData%> 
-                                    </td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td>
-                                        No. of Attributes = <%=nf.format(Double.parseDouble(dAttributes))%>  
-                                    </td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td>
-                                         No. of Instances = <%=nf.format(Double.parseDouble(dInstances))%>  
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <%if (sVariation == "4" || sVariation == "5") {%>
-                                        <td>&nbsp;&nbsp;</td>
-                                        <td>&nbsp;&nbsp;</td>
-                                        <td>&nbsp;&nbsp;</td>
-                                        <td>&nbsp;&nbsp;</td>
-                                        <td>
-                                            <%=sPDummy%> <%=sPFileData%> 
-                                        </td>
-                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                        <td>
-                                            No. of Attributes = <%=nf.format(Double.parseDouble(dPAttributes))%>  
-                                        </td>
-                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                        <td>
-                                             No. of Instances = <%=nf.format(Double.parseDouble(dPInstances))%>  
-                                        </td>
-                                    <%}%>
-                                </tr>
-                            </table>
-
-                            <br>
-                            
-                            <table>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>
-                                        <b>Dataset: </b>
-                                        &nbsp;&nbsp;
-                                    </td>
-                                    <td>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
-                                    </td>
-                                    <td>
-                                        <% if (PRadio.equals("PRadio1")) { %> 
-                                            <a onclick="return viewdataset(1);">
-                                                <font color="blue">
-                                                <u>Learning Dataset</u>
-                                                </font>
-                                            </a>
-                                            <% if (TORadio.equals("TORadio4")) { %> 
-                                                &nbsp; - &nbsp;
-                                                <a onclick="return viewdataset(2);">
-                                                    <font color="blue">
-                                                    <u>Test Dataset</u>
-                                                    </font>
-                                                </a> 
-                                            <% } %>
-                                        <% } else if (PRadio.equals("PRadio2")) { %> 
-                                            <a onclick="return viewdataset(3);">
-                                                <font color="blue">
-                                                <u>Learning Dataset</u>
-                                                </font>
-                                            </a> 
-                                            &nbsp; - &nbsp;
-                                            <a onclick="return viewdataset(4);">
-                                                <font color="blue">
-                                                <u>Prediction Dataset</u>
-                                                </font>
-                                            </a> 
-                                        <% } %>
-                                    </td>
-                                </tr>
-                            </table>
-                            <br>  
+                            <div class="bs-example">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="container boundary">
+                                            <h3>Model Settings</h3>
+                                            <div class="row">
+                                                <div class="col-md-4">Swarm and evolutionary parameters:</div>
+                                                <div class="col-md-2">No. of fireflies = <%=nf.format(nFireFlies)%></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4"></div>
+                                                <div class="col-md-2">Max. generation = <%=nf.format(nMaxGeneration)%></div>
+                                            </div><br>
+                                            <div class="row">
+                                                <div class="col-md-4">Attractiveness:</div>
+                                                <div class="col-md-3">Beta min. = <%=nf2.format(dMinBeta)%></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4"></div>
+                                                <div class="col-md-2">Gamma = <%=nf2.format(dGamma)%></div>
+                                            </div><br>
+                                            <div class="row">
+                                                <div class="col-md-4">Random movement:</div>
+                                                <div class="col-md-2">Alpha = <%=nf2.format(dAlpha)%></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4"></div>
+                                                <div class="col-md-3">Adaptive inertia weight = <%=nf2.format(dAIWeight)%></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4"></div>
+                                                <div class="col-md-2">Tau = <%=nf2.format(dTau)%></div>
+                                            </div><br>
+                                            <div class="row">
+                                                <div class="col-md-4">Logistic map:</div>
+                                                <div class="col-md-3">Biotic potential, a = <%=nf2.format(dBPotential)%></div>
+                                            </div><br>
+                                            <div class="row">
+                                                <div class="col-md-4">Hyperparameters:</div>
+                                                <div class="col-md-3">Range of C = <%=ndf.format(dC1)%> to <%=ndf.format(dC2)%></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4"></div>
+                                                <div class="col-md-4">Range of sigma = <%=ndf.format(dS1)%> to <%=ndf.format(dS2)%></div>
+                                            </div><br>
+                                            <div class="row">
+                                                <div class="col-md-4">Learning Option:</div>
+                                                <div class="col-md-4">Training partition size = <%=nf.format(dTrainingPS)%> (%)</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4"></div>
+                                                <div class="col-md-3">Validation partition size = <%=nf.format(dValidationPS)%> (%)</div>
+                                            </div><br>
+                                            <div class="row">
+                                                <div class="col-md-4">Normalization Method:</div>
+                                                <div class="col-md-3">
+                                                    <%
+                                                    if (NormalRadio.equals("NormalRadio1")) {
+                                                        sNormalRadio = "Original value";
+                                                    }
+                                                    else if (NormalRadio.equals("NormalRadio2")) {
+                                                        sNormalRadio = "Feature scaling";
+                                                    }
+                                                    %>
+                                                    <%=sNormalRadio%>
+                                                </div>
+                                            </div><br>
+                                            <div class="row">
+                                                <div class="col-md-4">Objective Function (OF):</div>
+                                                <div class="col-md-3">
+                                                    <%
+                                                    if (OptimRadio.equals("OptimRadio1")) {
+                                                        sOptimRadio = "RMSE validation";
+                                                    }
+                                                    else if (OptimRadio.equals("OptimRadio2")) {
+                                                        sOptimRadio = "MAE validation";
+                                                    }
+                                                    else if (OptimRadio.equals("OptimRadio3")) {
+                                                        sOptimRadio = "MAPE validation";
+                                                    }
+                                                    %>
+                                                    <%=sOptimRadio%>
+                                                </div>
+                                            </div><br>
+                                            <div class="row">
+                                                <div class="col-md-4">Stop Criterion:</div>
+                                                <div class="col-md-3">
+                                                    <%
+                                                    if (SCRadio.equals("SCRadio1")) {
+                                                        sSCRadio = "Max. generation is reached";
+                                                        %> 
+                                                        <%=sSCRadio%>
+                                                        <%
+                                                    }
+                                                    else if (SCRadio.equals("SCRadio2")) {
+                                                        sSCRadio = "last changes in OF value <";
+                                                        %> 
+                                                        <%=nf.format(nLastChange1)%> <%=sSCRadio%> <%=nf5.format(nLastChange2)%>
+                                                        <%
+                                                    }
+                                                    else if (SCRadio.equals("SCRadio3")) {
+                                                        sSCRadio = "Either criterion is reached";
+                                                        %> 
+                                                        <%=sSCRadio%>
+                                                        <%
+                                                    }
+                                                    %>
+                                                </div>
+                                            </div><br>
+                                            <div class="row">
+                                                <div class="col-md-4">Purpose:</div>
+                                                <div class="col-md-3">
+                                                    <%
+                                                    sPRadio = "...";
+                                                    if (PRadio.equals("PRadio1")) {
+                                                        sPRadio = "Evaluation";
+                                                        sDummy = "Data File : ";
+                                                    }
+                                                    else if (PRadio.equals("PRadio2")) {
+                                                        sPRadio = "Prediction";
+                                                        sDummy = "Learning Data File : ";
+                                                        sFileData = sLearningFileName;
+                                                        dAttributes = snLDFAttributes;
+                                                        dInstances = snLDFInstances;
+                                                        sPDummy = "Prediction Data File : ";
+                                                        sPFileData = sPredictionFileName;
+                                                        dPAttributes = snPDFAttributes;
+                                                        dPInstances = snPDFInstances;
+                                                        sVariation = "5";
+                                                    }
+                                                    %>
+                                                    <%=sPRadio%>
+                                                </div>
+                                            </div><br>
+                                            <div class="row">
+                                                <div class="col-md-4">Test Option:</div>
+                                                <div class="col-md-3">
+                                                    <%
+                                                    sTORadio = "...";
+                                                    if (TORadio.equals("TORadio2")) { 
+                                                        if (PRadio.equals("PRadio1")) { %>
+                                                            Hold-out = <%=nf.format(dHoldOut)%> (%) 
+                                                            <% 
+                                                            sDummy = "Data File : ";
+                                                            sFileData = sFileName;
+                                                            dAttributes = snDFAttributes;
+                                                            dInstances = snDFInstances;
+                                                            sVariation = "2";
+                                                            sPFileData = "";
+                                                            dPAttributes = "0";
+                                                            dPInstances = "0";
+                                                        }
+                                                        else if (PRadio.equals("PRadio2")) { %> 
+                                                            -
+                                                        <% }
+                                                    }
+                                                    else if (TORadio.equals("TORadio3")) {
+                                                        if (PRadio.equals("PRadio1")) { %>
+                                                            Cross-validation = <%=nf.format(dCrossValidation)%> (folds)
+                                                            <%
+                                                            sDummy = "Data File : ";
+                                                            sFileData = sFileName;
+                                                            dAttributes = snDFAttributes;
+                                                            dInstances = snDFInstances;
+                                                            sVariation = "3";
+                                                            sPFileData = "";
+                                                            dPAttributes = "0";
+                                                            dPInstances = "0";
+                                                        }
+                                                        else if (PRadio.equals("PRadio2")) { %>
+                                                            -
+                                                        <% }
+                                                    }
+                                                    else {
+                                                        if (TORadio.equals("TORadio1")) {
+                                                            if (PRadio.equals("PRadio1")) {
+                                                                sTORadio = "Use data file";
+                                                                sDummy = "Data File : ";
+                                                                sFileData = sFileName;
+                                                                dAttributes = snDFAttributes;  
+                                                                dInstances = snDFInstances; 
+                                                                sVariation = "1";
+                                                                sPFileData = "";
+                                                                dPAttributes = "0";
+                                                                dPInstances = "0";
+                                                            }
+                                                            else if (PRadio.equals("PRadio2")) {
+                                                                sTORadio = "-";
+                                                            }
+                                                        }
+                                                        else if (TORadio.equals("TORadio4")) {
+                                                            if (PRadio.equals("PRadio1")) {
+                                                                sTORadio = "Use test data file";
+                                                                sDummy = "Data File : ";
+                                                                sFileData = sFileName;
+                                                                dAttributes = snDFAttributes;
+                                                                dInstances = snDFInstances; 
+                                                                sPDummy = "Test Data File : ";
+                                                                sPFileData = sTestFileName;
+                                                                dPAttributes = snTDFAttributes; 
+                                                                dPInstances = snTDFInstances; 
+                                                                sVariation = "4";
+                                                            }
+                                                            else if (PRadio.equals("PRadio2")) {
+                                                                sTORadio = "-";
+                                                            }
+                                                        }
+                                                        else {
+                                                            dAttributes = snDFAttributes;
+                                                            dInstances = snDFInstances;
+                                                        }%>
+                                                        <%=sTORadio%>
+                                                    <% } %>
+                                                </div>
+                                            </div><br> 
+                                            <div class="row">
+                                                <div class="col-md-4"><b> Run variation # <%=sVariation%> </b></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                            
+                            <div class="bs-example">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="container boundary">
+                                            <h3>Dataset</h3>
+                                            <div class="row">
+                                                <div class="col-md-4"><%=sDummy%></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4"><%=sFileData%></div>
+                                                <div class="col-md-2">No. of Attributes = <%=nf.format(Double.parseDouble(dAttributes))%></div>
+                                                <div class="col-md-2">No. of Instances = <%=nf.format(Double.parseDouble(dInstances))%></div>
+                                            </div><br>
+                                            <%if (sVariation == "4" || sVariation == "5") {%>
+                                                <div class="row">
+                                                    <div class="col-md-4"><%=sPDummy%></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4"><%=sFileData%></div>
+                                                    <div class="col-md-2">No. of Attributes = <%=nf.format(Double.parseDouble(dPAttributes))%></div>
+                                                    <div class="col-md-2">No. of Instances = <%=nf.format(Double.parseDouble(dPInstances))%></div>
+                                                </div>
+                                            <%}%>
+                                        </div><br>
+                                        <div class="container boundary" id="view">
+                                            <h4>View Dataset</h4>
+                                            <div class="row">
+                                                <% if (PRadio.equals("PRadio1")) { %> 
+                                                    <div class="col-md-2">
+                                                        <a onclick="return viewdataset(1);">
+                                                            <font color="blue">
+                                                            <u>Learning Dataset</u>
+                                                            </font>
+                                                        </a>
+                                                    </div>
+                                                    <% if (TORadio.equals("TORadio4")) { %> 
+                                                        <div class="col-md-2">
+                                                            <a onclick="return viewdataset(2);">
+                                                                <font color="blue">
+                                                                <u>Test Dataset</u>
+                                                                </font>
+                                                            </a>
+                                                        </div>
+                                                    <% } %>
+                                                    
+                                                <% } else if (PRadio.equals("PRadio2")) { %> 
+                                                    <div class="col-md-2">
+                                                        <a onclick="return viewdataset(3);">
+                                                            <font color="blue">
+                                                            <u>Learning Dataset</u>
+                                                            </font>
+                                                        </a> 
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <a onclick="return viewdataset(4);">
+                                                            <font color="blue">
+                                                            <u>Prediction Dataset</u>
+                                                            </font>
+                                                        </a> 
+                                                    </div>
+                                                <% } %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             
                             <% //#1 displaying input data: 
                             if (sLoadingDataExcelClick != "") { 
@@ -5146,79 +5043,96 @@
                                     br.close();
                                     %>
 
-                                    <table>
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                            <% if (sLoadingDataSet1 != "") { %>
-                                                <td>
-                                                    <b>Learning Dataset (for Evaluation): </b>
-                                                </td>
-                                            <% } else { %>
-                                                <td>
-                                                    <b>Learning Dataset (for Prediction): </b>
-                                                </td>
-                                            <% } %> 
-                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                            <td>
-                                                <a onclick="return closesummarydata2();">
-                                                    <img src="Icon-2ArrowLeft.png" alt="..." width="11" height="17">
-                                                </a>
-                                            </td>
-                                            <td>&nbsp;&nbsp;</td>
-                                            <td align="center">
-                                                No.
-                                            </td>
-                                            <td>&nbsp;&nbsp;&nbsp;</td>
-                                            <% for (j = 0; j < ncols1; j += 1) { %> 
-                                                <td align="center">
-                                                    <%=headers[j]%>
-                                                </td>
-                                                <td>&nbsp;&nbsp;&nbsp;</td>
-                                            <% } %>
-                                        </tr>
+                                    <div class="bs-example">
+                                        <div class="panel panel-default">
+                                            <div class="panel-body">
+                                                <div class="container boundary">
+                                                    <table>
+                                                        <tr>
+                                                            <% if (sLoadingDataSet1 != "") { %>
+                                                                <td>
+                                                                    <b>Learning Dataset (for Evaluation): </b>
+                                                                </td>
+                                                            <% } else { %>
+                                                                <td>
+                                                                    <b>Learning Dataset (for Prediction): </b>
+                                                                </td>
+                                                            <% } %> 
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                            <td>
+                                                                <a onclick="return closesummarydata2();">
+                                                                    <img src="Icon-2ArrowLeft.png" alt="..." width="11" height="17">
+                                                                </a>
+                                                            </td>
+                                                            <td>&nbsp;&nbsp;</td>
+                                                            <td align="center">
+                                                                No.
+                                                            </td>
+                                                            <td>&nbsp;&nbsp;&nbsp;</td>
+                                                            <% for (j = 0; j < ncols1; j += 1) { %> 
+                                                                <td align="center">
+                                                                    <%=headers[j]%>
+                                                                </td>
+                                                                <td>&nbsp;&nbsp;&nbsp;</td>
+                                                            <% } %>
+                                                        </tr>
 
-                                        <% for (i = 0; i < nrows1; i += 1) { %> 
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td align="center">
-                                                    <%=i%>
-                                                </td> 
-                                                <td>&nbsp;&nbsp;&nbsp;</td>
-                                                <% if (sLoadingDataSet1 != "") { %>
-                                                    <% for (j = 0; j < ncols1; j += 1) { %> 
-                                                        <td align="right">
-                                                            <%=nf3.format(Double.parseDouble(Dataraw[i][j]))%>
-                                                        </td>
-                                                        <td>&nbsp;&nbsp;&nbsp;</td>
-                                                    <% } %>
-                                                <% } else { %>
-                                                    <% for (j = 0; j < ncols1; j += 1) { %> 
-                                                        <td align="right">
-                                                            <%=nf3.format(Double.parseDouble(Datatrains[i][j]))%>
-                                                        </td>
-                                                        <td>&nbsp;&nbsp;&nbsp;</td>
-                                                    <% } %>
-                                                <% } %>
-                                            </tr>
-                                        <% } %>
-                                    </table>
+                                                        <% for (i = 0; i < nrows1; i += 1) { %> 
+                                                            <tr>
+                                                                <td>&nbsp;</td>
+                                                                <td>&nbsp;</td>
+                                                                <td>&nbsp;</td>
+                                                                <td>&nbsp;</td>
+                                                                <td>&nbsp;</td>
+                                                                <td align="center">
+                                                                    <%=i%>
+                                                                </td> 
+                                                                <td>&nbsp;&nbsp;&nbsp;</td>
+                                                                <% if (sLoadingDataSet1 != "") { %>
+                                                                    <% for (j = 0; j < ncols1; j += 1) { %> 
+                                                                        <td align="right">
+                                                                            <%=nf3.format(Double.parseDouble(Dataraw[i][j]))%>
+                                                                        </td>
+                                                                        <td>&nbsp;&nbsp;&nbsp;</td>
+                                                                    <% } %>
+                                                                <% } else { %>
+                                                                    <% for (j = 0; j < ncols1; j += 1) { %> 
+                                                                        <td align="right">
+                                                                            <%=nf3.format(Double.parseDouble(Datatrains[i][j]))%>
+                                                                        </td>
+                                                                        <td>&nbsp;&nbsp;&nbsp;</td>
+                                                                    <% } %>
+                                                                <% } %>
+                                                            </tr>
+                                                        <% } %>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 <% } else { %>
-                                    <table>
-                                        <tr>
-                                            <td align="left">
-                                                <font color='red'>
-                                                &nbsp;&nbsp;Data file not available ... !
-                                                </font>
-                                            </td> 
-                                        </tr>
-                                    </table>
-                                <% }
-                                
-                            } else if (sLoadingDataSet2 != "" || sLoadingDataSet4 != "") { 
+                                    <div class="bs-example">
+                                        <div class="panel panel-default">
+                                            <div class="panel-body">
+                                                <div class="container boundary">
+                                                    <table>
+                                                        <tr>
+                                                            <td align="left">
+                                                                <font color='red'>
+                                                                &nbsp;&nbsp;Data file not available ... !
+                                                                </font>
+                                                            </td> 
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% } %>
+                            <script>
+                                window.scrollTo(0,document.getElementById("view").offsetTop);
+                            </script>    
+                         <% } else if (sLoadingDataSet2 != "" || sLoadingDataSet4 != "") { 
                                 /*
                                 out.println("<p>");
                                 out.println("sLoadingDataSet1 = "+sLoadingDataSet1);
@@ -5284,78 +5198,95 @@
                                     br.close();
                                     %>
 
-                                    <table>
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                            <% if (sLoadingDataSet2 != "") { %>
-                                                <td>
-                                                    <b>Test Dataset: </b>
-                                                </td>
-                                            <% } else { %>
-                                                <td>
-                                                    <b>Prediction Dataset: </b>
-                                                </td>
-                                            <% } %> 
-                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                            <td>
-                                                <a onclick="return closesummarydata2();">
-                                                    <img src="Icon-2ArrowLeft.png" alt="..." width="11" height="17">
-                                                </a>
-                                            </td>
-                                            <td>&nbsp;&nbsp;</td>
-                                            <td align="center">
-                                                No.
-                                            </td>
-                                            <td>&nbsp;&nbsp;&nbsp;</td>
-                                            <% for (j = 0; j < ncols2; j += 1) { %> 
-                                                <td align="center">
-                                                    <%=headers[j]%>
-                                                </td>
-                                                <td>&nbsp;&nbsp;&nbsp;</td>
-                                            <% } %>
-                                        </tr>
+                                    <div class="bs-example">
+                                        <div class="panel panel-default">
+                                            <div class="panel-body">
+                                                <div class="container boundary">
+                                                    <table>
+                                                        <tr>
+                                                            <% if (sLoadingDataSet2 != "") { %>
+                                                                <td>
+                                                                    <b>Test Dataset: </b>
+                                                                </td>
+                                                            <% } else { %>
+                                                                <td>
+                                                                    <b>Prediction Dataset: </b>
+                                                                </td>
+                                                            <% } %> 
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                            <td>
+                                                                <a onclick="return closesummarydata2();">
+                                                                    <img src="Icon-2ArrowLeft.png" alt="..." width="11" height="17">
+                                                                </a>
+                                                            </td>
+                                                            <td>&nbsp;&nbsp;</td>
+                                                            <td align="center">
+                                                                No.
+                                                            </td>
+                                                            <td>&nbsp;&nbsp;&nbsp;</td>
+                                                            <% for (j = 0; j < ncols2; j += 1) { %> 
+                                                                <td align="center">
+                                                                    <%=headers[j]%>
+                                                                </td>
+                                                                <td>&nbsp;&nbsp;&nbsp;</td>
+                                                            <% } %>
+                                                        </tr>
 
-                                        <% for (i = 0; i < nrows2; i += 1) { %> 
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td align="center">
-                                                    <%=i%>
-                                                </td> 
-                                                <td>&nbsp;&nbsp;&nbsp;</td>
-                                                <% if (sLoadingDataSet2 != "") { %>
-                                                    <% for (j = 0; j < ncols2; j += 1) { %> 
-                                                        <td align="right">
-                                                            <%=nf3.format(Double.parseDouble(Datatest[i][j]))%>
-                                                        </td>
-                                                        <td>&nbsp;&nbsp;&nbsp;</td>
-                                                    <% } %>
-                                                <% } else { %>
-                                                    <% for (j = 0; j < ncols2; j += 1) { %> 
-                                                        <td align="right">
-                                                            <%=nf3.format(Double.parseDouble(Datapres[i][j]))%>
-                                                        </td>
-                                                        <td>&nbsp;&nbsp;&nbsp;</td>
-                                                    <% } %>
-                                                <% } %>
-                                            </tr>
-                                        <% } %>
-                                    </table>
+                                                        <% for (i = 0; i < nrows2; i += 1) { %> 
+                                                            <tr>
+                                                                <td>&nbsp;</td>
+                                                                <td>&nbsp;</td>
+                                                                <td>&nbsp;</td>
+                                                                <td>&nbsp;</td>
+                                                                <td>&nbsp;</td>
+                                                                <td align="center">
+                                                                    <%=i%>
+                                                                </td> 
+                                                                <td>&nbsp;&nbsp;&nbsp;</td>
+                                                                <% if (sLoadingDataSet2 != "") { %>
+                                                                    <% for (j = 0; j < ncols2; j += 1) { %> 
+                                                                        <td align="right">
+                                                                            <%=nf3.format(Double.parseDouble(Datatest[i][j]))%>
+                                                                        </td>
+                                                                        <td>&nbsp;&nbsp;&nbsp;</td>
+                                                                    <% } %>
+                                                                <% } else { %>
+                                                                    <% for (j = 0; j < ncols2; j += 1) { %> 
+                                                                        <td align="right">
+                                                                            <%=nf3.format(Double.parseDouble(Datapres[i][j]))%>
+                                                                        </td>
+                                                                        <td>&nbsp;&nbsp;&nbsp;</td>
+                                                                    <% } %>
+                                                                <% } %>
+                                                            </tr>
+                                                        <% } %>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 <% } else { %>
-                                    <table>
-                                        <tr>
-                                            <td align="left">
-                                                <font color='red'>
-                                                &nbsp;&nbsp;Data file not available ... !
-                                                </font>
-                                            </td> 
-                                        </tr>
-                                    </table>
+                                    <div class="bs-example">
+                                        <div class="panel panel-default">
+                                            <div class="panel-body">
+                                                <div class="container boundary">
+                                                    <table>
+                                                        <tr>
+                                                            <td align="left">
+                                                                <font color='red'>
+                                                                    Data file not available ... !
+                                                                </font>
+                                                            </td> 
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 <% } %>
-                                
+                            <script>
+                                window.scrollTo(0,document.getElementById("view").offsetTop);
+                            </script>       
                             <% //#3 displaying test data file 
                             } else if (sLoadingDataExcelClick3 != "") {  
                             %>
@@ -5364,340 +5295,361 @@
                             } else if (sLoadingDataExcelClick4 != "") {
                             %>
                                 <%--Fileopen.mat Filetest.mat Fileopen.mat FilePredict.mat--%>
-                                <table>
-                                <tr>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                    <td>
-                                        <b> Test Dataset: </b>
-                                    </td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td>
-                                        <a onclick="return closesummarydata2();">
-                                            <img src="Icon-2ArrowLeft.png" alt="..." width="11" height="17">
-                                        </a>
-                                    </td>
-                                    <td>&nbsp;&nbsp;</td>
-                                <%
-                                    if (sTestFileName != "") { 
-                                        String file = application.getRealPath("/") + sTestFileName;
-                                        BufferedReader br = new BufferedReader(new FileReader(file)); 
-                                        String line = null;
-                                        int i;
-                                        int j;
+                                <div class="bs-example">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <div class="container boundary">
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <b> Test Dataset: </b>
+                                                        </td>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                        <td>
+                                                            <a onclick="return closesummarydata2();">
+                                                                <img src="Icon-2ArrowLeft.png" alt="..." width="11" height="17">
+                                                            </a>
+                                                        </td>
+                                                        <td>&nbsp;&nbsp;</td>
+                                                    <%
+                                                        if (sTestFileName != "") { 
+                                                            String file = application.getRealPath("/") + sTestFileName;
+                                                            BufferedReader br = new BufferedReader(new FileReader(file)); 
+                                                            String line = null;
+                                                            int i;
+                                                            int j;
 
-                                        // first line: title
-                                        line = br.readLine();
-                                        if (line == null) {
-                                            out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
-                                        } else {
-                                            cols = line.split("\\t");
+                                                            // first line: title
+                                                            line = br.readLine();
+                                                            if (line == null) {
+                                                                out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
+                                                            } else {
+                                                                cols = line.split("\\t");
 
-                                            // second line: column header
-                                            line = br.readLine();
-                                            headers = line.split("\\t");
+                                                                // second line: column header
+                                                                line = br.readLine();
+                                                                headers = line.split("\\t");
 
-                                            // third line and so on: data ... last column = dependent variable  
-                                            line = br.readLine(); 
-                                            j=0;
-                                            while (line != null) {
-                                                cols = line.split("\\t");
-                                                for (i = 0; i < ncols2; i += 1) {
-                                                    Datatest[j][i]=cols[i]; 
-                                                }
-                                                j=j+1;
-                                                line = br.readLine();
-                                            }
-                                        }
-                                        br.close();
-                                        %>
-                                                <td align="center">
-                                                    No.
-                                                </td>
-                                                <td>&nbsp;&nbsp;&nbsp;</td>
-                                                <% for (j = 0; j < ncols2; j += 1) { %>
-                                                    <td align="center">
-                                                        <%=headers[j]%>
-                                                    </td>
-                                                    <td>&nbsp;&nbsp;&nbsp;</td>
-                                                <% } %>
-                                            </tr>
-
-                                            <% for (i = 0; i < nrows2; i += 1) { %> 
-                                                <tr>
-                                                    <td>&nbsp;</td>
-                                                    <td>&nbsp;</td>
-                                                    <td>&nbsp;</td>
-                                                    <td>&nbsp;</td>
-                                                    <td>&nbsp;</td>
-                                                    <td align="center">
-                                                        <%=i%>
-                                                    </td> 
-                                                    <td>&nbsp;&nbsp;&nbsp;</td>
-                                                    <% for (j = 0; j < ncols2; j += 1) { %>
-                                                        <td align="right">
-                                                            <%=nf3.format(Double.parseDouble(Datatest[i][j]))%>
+                                                                // third line and so on: data ... last column = dependent variable  
+                                                                line = br.readLine(); 
+                                                                j=0;
+                                                                while (line != null) {
+                                                                    cols = line.split("\\t");
+                                                                    for (i = 0; i < ncols2; i += 1) {
+                                                                        Datatest[j][i]=cols[i]; 
+                                                                    }
+                                                                    j=j+1;
+                                                                    line = br.readLine();
+                                                                }
+                                                            }
+                                                            br.close();
+                                                        %>
+                                                        <td align="center">
+                                                            No.
                                                         </td>
                                                         <td>&nbsp;&nbsp;&nbsp;</td>
-                                                    <% } %>
-                                                </tr>
-                                            <% } %>
-                                    <% } else { %>
-                                                <td align="left">
-                                                    <font color='red'>
-                                                    &nbsp;&nbsp;Test data file not available ... !
-                                                    </font>
-                                                </td>
-                                            </tr>
-                                    <% } %>
-                                    </table>
-
+                                                        <% for (j = 0; j < ncols2; j += 1) { %>
+                                                            <td align="center">
+                                                                <%=headers[j]%>
+                                                            </td>
+                                                            <td>&nbsp;&nbsp;&nbsp;</td>
+                                                        <% } %>
+                                                    </tr>
+                                                        <% for (i = 0; i < nrows2; i += 1) { %> 
+                                                        <tr>
+                                                            <td>&nbsp;</td>
+                                                            <td>&nbsp;</td>
+                                                            <td>&nbsp;</td>
+                                                            <td>&nbsp;</td>
+                                                            <td>&nbsp;</td>
+                                                            <td align="center">
+                                                                <%=i%>
+                                                            </td> 
+                                                            <td>&nbsp;&nbsp;&nbsp;</td>
+                                                            <% for (j = 0; j < ncols2; j += 1) { %>
+                                                                <td align="right">
+                                                                    <%=nf3.format(Double.parseDouble(Datatest[i][j]))%>
+                                                                </td>
+                                                                <td>&nbsp;&nbsp;&nbsp;</td>
+                                                            <% } %>
+                                                        </tr>
+                                                        <% } %>
+                                                        <% } else { %>
+                                                            <td align="left">
+                                                                <font color='red'>
+                                                                &nbsp;&nbsp;Test data file not available ... !
+                                                                </font>
+                                                            </td>
+                                                        </tr>
+                                                        <% } %>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <script>
+                                window.scrollTo(0,document.getElementById("view").offsetTop);
+                            </script>    
+                                                
                             <% //#4 displaying learning data file 
                             } else if (sLoadingDataExcelClick5 != "") { 
                             %>
-                                <table>
-                                <tr>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                    <td>
-                                        <b> Learning Dataset: </b>
-                                    </td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td>
-                                        <a onclick="return closesummarydata2();">
-                                            <img src="Icon-2ArrowLeft.png" alt="..." width="11" height="17">
-                                        </a>
-                                    </td>
-                                    <td>&nbsp;&nbsp;</td>
-                                <% 
-                                    /*
-                                    out.println("<p>");
-                                    out.println("sLearningFileName = "+sLearningFileName);
-                                    out.println("<br>");
-                                    */ 
-
-                                    if (sLearningFileName != "") { 
-                                        String file = application.getRealPath("/") + sLearningFileName;
-                                        BufferedReader br = new BufferedReader(new FileReader(file)); 
-                                        String line = null;
-                                        int i;
-                                        int j;
-
-                                        //alert("Zero Y value observed, MAPE cannot be chosen as an objective function ...!"); 
-
-                                        /**/
-                                        // first line: title
-                                        line = br.readLine();
-                                        if (line == null) {
-                                            out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
-                                        } else {
-                                            cols = line.split("\\t");
-                                            //out.println("<table>");
-                                            //out.println("<tr>");
-
-                                            // second line: column header
-                                            line = br.readLine();
-                                            headers = line.split("\\t");
-
-                                            // third line and so on: data ... last column = dependent variable  
-                                            line = br.readLine(); 
-                                            j=0;
-                                            while (line != null) {
-                                                cols = line.split("\\t");
-                                                for (i = 0; i < ncols3; i += 1) {
-                                                    Datatrains[j][i]=cols[i]; 
-                                                }
-                                                sDummy = Datatrains[j][ncols3-1];
-                                                dDummy=Double.parseDouble(sDummy);
-                                                if (dDummy == 0) {
-                                                    sError="1";
-                                                }
-                                                j=j+1;
-                                                line = br.readLine();
-                                            }
-                                        }
-                                        /**/
-                                        br.close();
-
-                                        /*
-                                        out.println("snLDFInstances = "+snLDFInstances);
-                                        out.println("<br>");
-                                        */
-                                        %>
-
-                                        <%-->
-                                        <--%>
-                                                <td align="center">
-                                                    No.
-                                                </td>
-                                                <td>&nbsp;&nbsp;&nbsp;</td>
-                                                <% for (j = 0; j < ncols3; j += 1) { %>
-                                                    <td align="center">
-                                                        <%=headers[j]%>
-                                                    </td>
-                                                    <td>&nbsp;&nbsp;&nbsp;</td>
-                                                <% } %>
-                                            </tr>
-
-                                            <tr>
-                                            <td colspan="15">
-                                            <% 
-                                            if (OptimRadio.equals("OptimRadio1")) {
-                                                sOptimRadio = "RMSE validation";
-                                            }
-                                            else if (OptimRadio.equals("OptimRadio2")) {
-                                                sOptimRadio = "MAE validation";
-                                            }
-                                            else if (OptimRadio.equals("OptimRadio3")) {
-                                                sOptimRadio = "MAPE validation";
-                                            }
-
-                                            //out.println("sError = "+sError);
-                                            //out.println("OptimRadio = "+OptimRadio);
-                                            //out.println("sOptimRadio = "+sOptimRadio);
-
-                                            if (sError=="1") {
-                                            if (sOptimRadio=="MAPE validation") {
-                                                out.println("<h4><font color='red'>&nbsp;&nbsp;&nbsp;"
-                                                    + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                                                    + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                                                    + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                                                    + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                                                    + "&nbsp;&nbsp;&nbsp;&nbsp;" 
-                                                    + "Zero Y value observed, MAPE cannot be chosen as an objective function ... !</font></h4>");
-                                            }
-                                            }
-                                            %>
-                                            </td>
-                                            </tr>
-
-                                            <% for (i = 0; i < nrows3; i += 1) { %>
-                                                <tr>
-                                                    <td>&nbsp;</td>
-                                                    <td>&nbsp;</td>
-                                                    <td>&nbsp;</td>
-                                                    <td>&nbsp;</td>
-                                                    <td>&nbsp;</td>
-                                                    <td align="center">
-                                                        <%=i%>
-                                                    </td> 
-                                                    <td>&nbsp;&nbsp;&nbsp;</td>
-                                                    <% for (j = 0; j < ncols3; j += 1) { %>
-                                                        <td align="right">
-                                                            <%-->
-                                                            <%=Datatrain[i][j]%>
-                                                            <--%>
-
-                                                            <%=nf3.format(Double.parseDouble(Datatrains[i][j]))%>
+                                <div class="bs-example">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <div class="container boundary">
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <b> Learning Dataset: </b>
                                                         </td>
-                                                        <td>&nbsp;&nbsp;&nbsp;</td>
-                                                    <% } %>
-                                                </tr>
-                                            <% } %>
-                                    <% } else { %>
-                                                <td align="left">
-                                                    <font color='red'>
-                                                    &nbsp;&nbsp;Learning data file not available ... !
-                                                    </font>
-                                                </td>
-                                            </tr>
-                                    <% } %>
-                                    </table>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                        <td>
+                                                            <a onclick="return closesummarydata2();">
+                                                                <img src="Icon-2ArrowLeft.png" alt="..." width="11" height="17">
+                                                            </a>
+                                                        </td>
+                                                        <td>&nbsp;&nbsp;</td>
+                                                    <% 
+                                                        /*
+                                                        out.println("<p>");
+                                                        out.println("sLearningFileName = "+sLearningFileName);
+                                                        out.println("<br>");
+                                                        */ 
 
+                                                        if (sLearningFileName != "") { 
+                                                            String file = application.getRealPath("/") + sLearningFileName;
+                                                            BufferedReader br = new BufferedReader(new FileReader(file)); 
+                                                            String line = null;
+                                                            int i;
+                                                            int j;
+
+                                                            //alert("Zero Y value observed, MAPE cannot be chosen as an objective function ...!"); 
+
+                                                            /**/
+                                                            // first line: title
+                                                            line = br.readLine();
+                                                            if (line == null) {
+                                                                out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
+                                                            } else {
+                                                                cols = line.split("\\t");
+                                                                //out.println("<table>");
+                                                                //out.println("<tr>");
+
+                                                                // second line: column header
+                                                                line = br.readLine();
+                                                                headers = line.split("\\t");
+
+                                                                // third line and so on: data ... last column = dependent variable  
+                                                                line = br.readLine(); 
+                                                                j=0;
+                                                                while (line != null) {
+                                                                    cols = line.split("\\t");
+                                                                    for (i = 0; i < ncols3; i += 1) {
+                                                                        Datatrains[j][i]=cols[i]; 
+                                                                    }
+                                                                    sDummy = Datatrains[j][ncols3-1];
+                                                                    dDummy=Double.parseDouble(sDummy);
+                                                                    if (dDummy == 0) {
+                                                                        sError="1";
+                                                                    }
+                                                                    j=j+1;
+                                                                    line = br.readLine();
+                                                                }
+                                                            }
+                                                            /**/
+                                                            br.close();
+
+                                                            /*
+                                                            out.println("snLDFInstances = "+snLDFInstances);
+                                                            out.println("<br>");
+                                                            */
+                                                            %>
+
+                                                            <%-->
+                                                            <--%>
+                                                                    <td align="center">
+                                                                        No.
+                                                                    </td>
+                                                                    <td>&nbsp;&nbsp;&nbsp;</td>
+                                                                    <% for (j = 0; j < ncols3; j += 1) { %>
+                                                                        <td align="center">
+                                                                            <%=headers[j]%>
+                                                                        </td>
+                                                                        <td>&nbsp;&nbsp;&nbsp;</td>
+                                                                    <% } %>
+                                                                </tr>
+
+                                                                <tr>
+                                                                <td colspan="15">
+                                                                <% 
+                                                                if (OptimRadio.equals("OptimRadio1")) {
+                                                                    sOptimRadio = "RMSE validation";
+                                                                }
+                                                                else if (OptimRadio.equals("OptimRadio2")) {
+                                                                    sOptimRadio = "MAE validation";
+                                                                }
+                                                                else if (OptimRadio.equals("OptimRadio3")) {
+                                                                    sOptimRadio = "MAPE validation";
+                                                                }
+
+                                                                //out.println("sError = "+sError);
+                                                                //out.println("OptimRadio = "+OptimRadio);
+                                                                //out.println("sOptimRadio = "+sOptimRadio);
+
+                                                                if (sError=="1") {
+                                                                if (sOptimRadio=="MAPE validation") {
+                                                                    out.println("<h4><font color='red'>&nbsp;&nbsp;&nbsp;"
+                                                                        + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                                                                        + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                                                                        + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                                                                        + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                                                                        + "&nbsp;&nbsp;&nbsp;&nbsp;" 
+                                                                        + "Zero Y value observed, MAPE cannot be chosen as an objective function ... !</font></h4>");
+                                                                }
+                                                                }
+                                                                %>
+                                                                </td>
+                                                                </tr>
+
+                                                                <% for (i = 0; i < nrows3; i += 1) { %>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>&nbsp;</td>
+                                                                        <td align="center">
+                                                                            <%=i%>
+                                                                        </td> 
+                                                                        <td>&nbsp;&nbsp;&nbsp;</td>
+                                                                        <% for (j = 0; j < ncols3; j += 1) { %>
+                                                                            <td align="right">
+                                                                                <%-->
+                                                                                <%=Datatrain[i][j]%>
+                                                                                <--%>
+
+                                                                                <%=nf3.format(Double.parseDouble(Datatrains[i][j]))%>
+                                                                            </td>
+                                                                            <td>&nbsp;&nbsp;&nbsp;</td>
+                                                                        <% } %>
+                                                                    </tr>
+                                                                <% } %>
+                                                        <% } else { %>
+                                                                    <td align="left">
+                                                                        <font color='red'>
+                                                                        &nbsp;&nbsp;Learning data file not available ... !
+                                                                        </font>
+                                                                    </td>
+                                                                </tr>
+                                                        <% } %>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <script>
+                                window.scrollTo(0,document.getElementById("view").offsetTop);
+                            </script>    
                             <% //#5 displaying prediction data file 
                             } else if (sLoadingDataExcelClick6 != "") { 
                             %>
-                                <table>
-                                <tr>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                    <td>
-                                        <b> Prediction Dataset: </b>
-                                    </td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td>
-                                        <a onclick="return closesummarydata2();">
-                                            <img src="Icon-2ArrowLeft.png" alt="..." width="11" height="17">
-                                        </a>
-                                    </td>
-                                    <td>&nbsp;&nbsp;</td>
-                                <%
-                                    if (sPredictionFileName != "") { 
-                                        String file = application.getRealPath("/") + sPredictionFileName;
-                                        BufferedReader br = new BufferedReader(new FileReader(file)); 
-                                        String line = null;
-                                        int i;
-                                        int j;
-
-                                        // first line: title
-                                        line = br.readLine();
-                                        if (line == null) {
-                                            out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
-                                        } else {
-                                            cols = line.split("\\t");
-
-                                            // second line: column header
-                                            line = br.readLine();
-                                            headers = line.split("\\t");
-
-                                            // third line and so on: data ... last column = dependent variable  
-                                            line = br.readLine(); 
-                                            j=0;
-                                            while (line != null) {
-                                                cols = line.split("\\t");
-                                                for (i = 0; i < ncols4; i += 1) {
-                                                    Datapres[j][i]=cols[i];
-                                                }
-                                                j=j+1;
-                                                line = br.readLine();
-                                            }
-                                        }
-                                        br.close();
-                                        %>
-                                                <td align="center">
-                                                    No.
-                                                </td>
-                                                <td>&nbsp;&nbsp;&nbsp;</td>
-                                                <% for (j = 0; j < ncols4; j += 1) { %>
-                                                    <td align="center">
-                                                        <%=headers[j]%>
-                                                    </td>
-                                                    <td>&nbsp;&nbsp;&nbsp;</td>
-                                                <% } %>
-                                            </tr>
-
-                                            <% for (i = 0; i < nrows4; i += 1) { %>
-                                                <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                    <td align="center">
-                                                        <%=i%>
-                                                    </td> 
-                                                    <td>&nbsp;&nbsp;&nbsp;</td>
-                                                    <% for (j = 0; j < ncols4; j += 1) { %>
-                                                        <td align="right">
-                                                            <%=nf3.format(Double.parseDouble(Datapres[i][j]))%>
+                                <div class="bs-example">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <div class="container boundary">
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <b> Prediction Dataset: </b>
                                                         </td>
-                                                        <td>&nbsp;&nbsp;&nbsp;</td>
-                                                    <% } %>
-                                                </tr>
-                                            <% } %>
-                                    <% } else { %>
-                                                <td align="left">
-                                                    <font color='red'>
-                                                    &nbsp;&nbsp;Prediction data file not available ... !
-                                                    </font>
-                                                </td>
-                                            </tr>
-                                    <% } %>
-                                    </table>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                        <td>
+                                                            <a onclick="return closesummarydata2();">
+                                                                <img src="Icon-2ArrowLeft.png" alt="..." width="11" height="17">
+                                                            </a>
+                                                        </td>
+                                                        <td>&nbsp;&nbsp;</td>
+                                                    <%
+                                                        if (sPredictionFileName != "") { 
+                                                            String file = application.getRealPath("/") + sPredictionFileName;
+                                                            BufferedReader br = new BufferedReader(new FileReader(file)); 
+                                                            String line = null;
+                                                            int i;
+                                                            int j;
 
+                                                            // first line: title
+                                                            line = br.readLine();
+                                                            if (line == null) {
+                                                                out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
+                                                            } else {
+                                                                cols = line.split("\\t");
+
+                                                                // second line: column header
+                                                                line = br.readLine();
+                                                                headers = line.split("\\t");
+
+                                                                // third line and so on: data ... last column = dependent variable  
+                                                                line = br.readLine(); 
+                                                                j=0;
+                                                                while (line != null) {
+                                                                    cols = line.split("\\t");
+                                                                    for (i = 0; i < ncols4; i += 1) {
+                                                                        Datapres[j][i]=cols[i];
+                                                                    }
+                                                                    j=j+1;
+                                                                    line = br.readLine();
+                                                                }
+                                                            }
+                                                            br.close();
+                                                            %>
+                                                                    <td align="center">
+                                                                        No.
+                                                                    </td>
+                                                                    <td>&nbsp;&nbsp;&nbsp;</td>
+                                                                    <% for (j = 0; j < ncols4; j += 1) { %>
+                                                                        <td align="center">
+                                                                            <%=headers[j]%>
+                                                                        </td>
+                                                                        <td>&nbsp;&nbsp;&nbsp;</td>
+                                                                    <% } %>
+                                                                </tr>
+
+                                                                <% for (i = 0; i < nrows4; i += 1) { %>
+                                                                    <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>&nbsp;</td>
+                                                                        <td align="center">
+                                                                            <%=i%>
+                                                                        </td> 
+                                                                        <td>&nbsp;&nbsp;&nbsp;</td>
+                                                                        <% for (j = 0; j < ncols4; j += 1) { %>
+                                                                            <td align="right">
+                                                                                <%=nf3.format(Double.parseDouble(Datapres[i][j]))%>
+                                                                            </td>
+                                                                            <td>&nbsp;&nbsp;&nbsp;</td>
+                                                                        <% } %>
+                                                                    </tr>
+                                                                <% } %>
+                                                        <% } else { %>
+                                                                    <td align="left">
+                                                                        <font color='red'>
+                                                                        &nbsp;&nbsp;Prediction data file not available ... !
+                                                                        </font>
+                                                                    </td>
+                                                                </tr>
+                                                        <% } %>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <script>
+                                window.scrollTo(0,document.getElementById("view").offsetTop);
+                            </script>    
                             <% //#6 displaying header
                             } else { 
                             %>
@@ -5707,7 +5659,7 @@
                             <br>
                                     
                             <center>
-                                <button type="button" onclick="return rundata2(1);" class="btn btn-primary">Start Running</button>
+                                <button type="button" onclick="return rundata2(1);" class="btn btn-primary">Run</button>
                             </center>
 
                             <br>
@@ -5740,31 +5692,30 @@
                             <br>
                             <div class="tab-content">
                                 <div id="Main" class="tab-pane fade in active">
-                                    <a href="#Optimum">Optimum hyper-parameters</a>
+                                    <a href="#Optimum">Optimum hyperparameters</a>
                                     <span class="glyphicon glyphicon-minus"></span>
-                                    <a href="#Partition">Hyper-parameters of partitions dataset</a>
+                                    <a href="#Partition">Hyperparameters of partitions dataset</a>
                                     <span class="glyphicon glyphicon-minus"></span>
                                     <a href="#Report">Analysis report</a>
                                     <span class="glyphicon glyphicon-minus"></span>
                                     <a href="#Performance">Performance values</a>
                                     <br>
                                     <br>
+                                    <br>
                                     <center>
-                                        <font size="4" id="Optimum">Main results - Optimum hyper-parameters</font>
+                                        <font size="4" id="Optimum">Main results - Optimum hyperparameters</font>
                                         <a href="#Partition"><span class="glyphicon glyphicon-menu-right"></span></a>
                                         <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                         <br>
-                                        <div><img src="homepage1.jpg" alt="..."></div>
                                     </center>
                                     
                                     <br>
                                     <center>
-                                        <font size="4" id="Partition">Hyper-parameters; Performances of training and validation partitions</font>
+                                        <font size="4" id="Partition">Hyperparameters; Performances of training and validation partitions</font>
                                         <a href="#Optimum"><span class="glyphicon glyphicon-menu-left"></span></a>
                                         <a href="#Report"><span class="glyphicon glyphicon-menu-right"></span></a>
                                         <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                         <br>
-                                        <div><img src="homepage1.jpg" alt="..."></div>
                                     </center>
                                     
                                     <br>
@@ -5774,7 +5725,6 @@
                                         <a href="#Performance"><span class="glyphicon glyphicon-menu-right"></span></a>
                                         <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                         <br>
-                                        <div><img src="homepage1.jpg" alt="..."></div>
                                     </center>
                                     
                                     <br>
@@ -5783,9 +5733,9 @@
                                         <a href="#Report"><span class="glyphicon glyphicon-menu-left"></span></a>
                                         <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                         <br>
-                                        <div><img src="homepage1.jpg" alt="..."></div>
                                     </center>
                                 </div>
+                                
                                 <div id="PGraph" class="tab-pane fade in">
                                     <div class="edittab">
                                         <a href="#TPDataset">Training partition dataset</a>
@@ -5803,7 +5753,6 @@
                                         <a href="#VPDataset"><span class="glyphicon glyphicon-menu-right"></span></a>
                                         <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                         <br>
-                                        <div><img src="homepage1.jpg" alt="..."></div>
                                     </center>
                                     
                                     <br>
@@ -5813,7 +5762,6 @@
                                         <a href="#LDataset"><span class="glyphicon glyphicon-menu-right"></span></a>
                                         <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                         <br>
-                                        <div><img src="homepage1.jpg" alt="..."></div>
                                     </center>
                                     
                                     <br>
@@ -5823,7 +5771,6 @@
                                         <a href="#TDataset"><span class="glyphicon glyphicon-menu-right"></span></a>
                                         <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                         <br>
-                                        <div><img src="homepage1.jpg" alt="..."></div>
                                     </center>
                                     
                                     <br>
@@ -5832,9 +5779,9 @@
                                         <a href="#LDataset"><span class="glyphicon glyphicon-menu-left"></span></a>
                                         <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                         <br>
-                                        <div><img src="homepage1.jpg" alt="..."></div>
                                     </center>
                                 </div>
+                                
                                 <div id="PTGraph" class="tab-pane fade in">
                                     <br>
                                     <br>
@@ -5843,6 +5790,7 @@
                                         <font size="4">Performance Trajectory Graph of Test Dataset</font>
                                     </center>
                                 </div>
+                                
                                 <div id="TPGraph" class="tab-pane fade in">
                                     <br>
                                     <br>
