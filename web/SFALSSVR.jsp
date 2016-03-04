@@ -120,6 +120,22 @@ String sResult04Name = request.getParameter("sResult04Name");
 if (sResult04Name == null) {
     sResult04Name = "";
 }
+String sResult04aName = request.getParameter("sResult04aName");
+if (sResult04aName == null) {
+    sResult04aName = "";
+}
+String sResult04bName = request.getParameter("sResult04bName");
+if (sResult04bName == null) {
+    sResult04bName = "";
+}
+String sResult04cName = request.getParameter("sResult04cName");
+if (sResult04cName == null) {
+    sResult04cName = "";
+}
+String sResult04dName = request.getParameter("sResult04dName");
+if (sResult04dName == null) {
+    sResult04dName = "";
+}
 String sResult05Name = request.getParameter("sResult05Name");
 if (sResult05Name == null) {
     sResult05Name = "";
@@ -128,17 +144,6 @@ String sResult06Name = request.getParameter("sResult06Name");
 if (sResult06Name == null) {
     sResult06Name = "";
 }
-
-/* 
-out.println("<p>");
-out.println("VarOne = "+VarOne);
-out.println("<br>");
-out.println("sLoadingDataFile = "+sLoadingDataFile);
-out.println("<p>");
-out.println("VarTwo = "+VarTwo);
-out.println("<br>");
-out.println("sLoadingDataExcelClick = "+sLoadingDataExcelClick);
-*/
 
 String nFireFlies = request.getParameter("nFireFlies");
 String nMaxGeneration = request.getParameter("nMaxGeneration");
@@ -360,6 +365,10 @@ String sdPInstances = request.getParameter("sdPInstances");
 if (sdPInstances == null) {
     sdPInstances = "1";
 }
+String sBaseFileName = request.getParameter("sBaseFileName");
+if (sBaseFileName == null) {
+    sBaseFileName = "";
+}
 
 String ssAttributes = "";
 String ssInstances = "";
@@ -516,27 +525,21 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 document.getElementById("sLoadingDataExcelClick").value = sLoadingDataExcelClick;
 
                 fullPath.value = sFileName.value;
-                
                 document.getElementById("myform").action = "SFALSSVR.jsp";  //jsp#title";
                 document.getElementById("myform").submit();
                 
                 return valid;
             }
 
-            function testdatasection(val) {
+            function ftestdatasection(val) {
                 var valid = false;
-                
-                if (val === 1)
-                {
+                if (val === 1) {
                     document.getElementById("testdatasection").style.display = "block";
                     document.getElementById("hiddendatafile").value = "1";
-                }
-                else
-                {
+                } else {
                     document.getElementById("testdatasection").style.display = "none";
                     document.getElementById("hiddendatafile").value = "0";
                 }
-                
                 return valid;
             }
             
@@ -594,13 +597,21 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 document.getElementById("nLDFAttributes").value = "0"; 
                 document.getElementById("nLDFInstances").value = "0"; 
                 document.getElementById("nPDFAttributes").value = "0"; 
-                document.getElementById("nPDFInstances").value = "0"; 
+                document.getElementById("nPDFInstances").value = "0";
+                document.getElementById("sBaseFileName").value = "Result"; 
 
                 document.getElementById("sFileName").value = "";    //"null"; 
                 document.getElementById("sTestFileName").value = ""; 
                 document.getElementById("sLearningFileName").value = ""; 
                 document.getElementById("sPredictionFileName").value = ""; 
                         
+                document.getElementById("sFileData").value = "";
+                document.getElementById("sdInstances").value = "";
+                document.getElementById("sdAttributes").value = "";
+                document.getElementById("sPFileData").value = "";
+                document.getElementById("sdPInstances").value = "";
+                document.getElementById("sdPAttributes").value = "";
+
                 //document.getElementById("sLoadingDataExcel").value = "";
 
                 var sMoveBottom = document.getElementById("sMoveBottom");
@@ -635,8 +646,12 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 sLoadingDataExcelClick = "";
                 document.getElementById("sLoadingDataExcelClick").value = sLoadingDataExcelClick;
 
-                //alert("Aha4 ...!");
-                fullPath.value = sFileName.value;
+                document.getElementById("testdatasection").style.display = "none";
+                var hdf = document.getElementById("hdf");
+                hdf = "0";
+                document.getElementById("hdf").value = "0";
+
+                //1. these lines to follow are not executed, as the display has been refreshed.
                 document.getElementById("myform").action = "SFALSSVR.jsp";
                 document.getElementById("myform").submit();
                 valid = false;
@@ -701,12 +716,20 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 document.getElementById("nLDFInstances").value = "0"; 
                 document.getElementById("nPDFAttributes").value = "0"; 
                 document.getElementById("nPDFInstances").value = "0"; 
+                document.getElementById("sBaseFileName").value = ""; 
 
                 document.getElementById("sFileName").value = "";    //"null"; 
                 document.getElementById("sTestFileName").value = ""; 
                 document.getElementById("sLearningFileName").value = ""; 
                 document.getElementById("sPredictionFileName").value = ""; 
                         
+                document.getElementById("sFileData").value = "";
+                document.getElementById("sdInstances").value = "";
+                document.getElementById("sdAttributes").value = "";
+                document.getElementById("sPFileData").value = "";
+                document.getElementById("sdPInstances").value = "";
+                document.getElementById("sdPAttributes").value = "";
+
                 //document.getElementById("sLoadingDataExcel").value = "";
 
                 var sMoveBottom = document.getElementById("sMoveBottom");
@@ -741,7 +764,9 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 sLoadingDataExcelClick = "";
                 document.getElementById("sLoadingDataExcelClick").value = sLoadingDataExcelClick;
 
-                //alert("Aha4 ...!");
+                document.getElementById("testdatasection").style.display = "block"; //none, kalo mw diilangin
+                document.getElementById("hdf").value = "1"; //"0", kalo mw diilangin
+                
                 fullPath.value = sFileName.value;
                 document.getElementById("myform").action = "SFALSSVR.jsp";
                 document.getElementById("myform").submit();
@@ -910,7 +935,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 var TORadio = document.getElementById("TORadio");
 
                 if (nFireFlies.value === "") {
-                    alert("Load default values and calculate first ...!");
+                    alert("Load default values ...!");
                     nFireFlies.focus();
                     valid = false;
                 } else {
@@ -1003,14 +1028,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     var sTestFileName = document.getElementById("sTestFileName");
                     var sLearningFileName = document.getElementById("sLearningFileName");
                     var sPredictionFileName = document.getElementById("sPredictionFileName");
-                   
-                    var sResult01Name = document.getElementById("sResult01Name");
-                    var sResult02Name = document.getElementById("sResult02Name");
-                    var sResult03Name = document.getElementById("sResult03Name");
-                    var sResult04Name = document.getElementById("sResult04Name");
-                    var sResult05Name = document.getElementById("sResult05Name");
-                    var sResult06Name = document.getElementById("sResult06Name");
-
+                    
+                    document.getElementById("sHasil").value = "2";
+                    document.getElementById("sRunReportTable").value = "1";
+                    
                     var VarNext = document.getElementById("VarNext");
                     document.getElementById("VarNext").value = val;
                     
@@ -1738,6 +1759,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 //document.getElementById("sMoveBottom").value = val;
 
                 fullPath.value = sFileName.value;
+                document.getElementById("sBaseFileName").value = "Result";
                 document.getElementById("myform").action = "SFALSSVR.jsp";
                 document.getElementById("myform").submit();
                 //alert("Data file already loaded ...!");
@@ -1749,7 +1771,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
 
             function MoveBottom() {
                 var sMoveBottom = document.getElementById("sMoveBottom");
-                if (sMoveBottom.value == "1") {
+                if (sMoveBottom.value === "1") {
                     window.scrollTo(0,document.body.scrollHeight);
                 } else {
                     window.null;
@@ -1787,27 +1809,41 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 <input type="hidden" name="sLoadingDataFile" id="sLoadingDataFile" value="<%=sLoadingDataFile%>"/>
                 <input type="hidden" name="sLoadingDataExcel" id="sLoadingDataExcel" value="<%=sLoadingDataExcel%>"/>
                 <input type="hidden" name="sLoadingDataExcelClick" id="sLoadingDataExcelClick" value="<%=sLoadingDataExcelClick%>"/>
+                
                 <input type="hidden" name="sSaveDataFile" id="sSaveDataFile" value="<%=sSaveDataFile%>"/>
                 <input type="hidden" name="sMoveBottom" id="sMoveBottom" value="<%=sMoveBottom%>"/>
                 <input type="hidden" name="VarNext" id="VarNext" value="<%=VarNext%>"/>
                 <input type="hidden" name="sError" id="sError" value="<%=sError%>"/>
+                
                 <% if (hdf.equals("1")) { %>
                     <input type="hidden" name="hiddendatafile" id="hiddendatafile" value="1">
                 <% } else { %>
                     <input type="hidden" name="hiddendatafile" id="hiddendatafile" value="0">
                 <% } %>
                 
-                <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%=sResult01Name%>" />
+                <!--<input type="hidden" name="sResult01Name" id="sResult01Name" value="<%--=sResult01Name%>" />
                 <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%=sResult02Name%>" />
                 <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%=sResult03Name%>" />
                 <input type="hidden" name="sResult04Name" id="sResult04Name" value="<%=sResult04Name%>" />
+                <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%=sResult04aName%>">
+                <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%=sResult04bName%>">
+                <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%=sResult04cName%>">
+                <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%=sResult04dName%>">
                 <input type="hidden" name="sResult05Name" id="sResult05Name" value="<%=sResult05Name%>" />
-                <input type="hidden" name="sResult06Name" id="sResult06Name" value="<%=sResult06Name%>" />
+                <input type="hidden" name="sResult06Name" id="sResult06Name" value="<%=sResult06Name--%>" />-->
+                <input type="hidden" name="sRunReportTable" id="sRunReportTable" value="" />
+                <input type="hidden" name="sHasil" id="sHasil" value="" />
                                 
                 <input type="hidden" name="sLoadingDefault" id="sLoadingDefault" value="<%=sLoadingDefault%>" />
                 <input type="hidden" name="sLoadingEvaluation" id="sLoadingEvaluation" value="<%=sLoadingEvaluation%>" />
                 <input type="hidden" name="sLoadingPrediction" id="sLoadingPrediction" value="<%=sLoadingPrediction%>" />
                 
+                <input type="hidden" name="sFileData" id="sFileData" value="<%=sFileData%>" /> 
+                <input type="hidden" name="sdInstances" id="sdInstances" value="<%=sdInstances%>" /> 
+                <input type="hidden" name="sdAttributes" id="sdAttributes" value="<%=sdAttributes%>" /> 
+                <input type="hidden" name="sPFileData" id="sPFileData" value="<%=sPFileData%>" /> 
+                <input type="hidden" name="sdPInstances" id="sdPInstances" value="<%=sdPInstances%>" /> 
+                <input type="hidden" name="sdPAttributes" id="sdPAttributes" value="<%=sdPAttributes%>" /> 
                 <br>
                 <br>
                 <center id="title">
@@ -1829,8 +1865,21 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
 
                     <div class="tab-content">
                         <div id="evaluation" class="tab-pane fade in active">
+                            <script>
+                                document.getElementById("TORadio1").checked = false; 
+                                document.getElementById("TORadio2").checked = false; 
+                                document.getElementById("TORadio3").checked = false; 
+                                document.getElementById("TORadio4").checked = false; 
+                            </script>
+                            <% if (TORadio.equals("TORadio1")) {%><script>document.getElementById("TORadio1").checked = true; </script>
+                            <% } else if (TORadio.equals("TORadio2")) {%><script>document.getElementById("TORadio2").checked = true; </script>
+                            <% } else if (TORadio.equals("TORadio3")) {%><script>document.getElementById("TORadio3").checked = true; </script>
+                            <% } else if (TORadio.equals("TORadio4")) {%><script>document.getElementById("TORadio4").checked = true; </script>
+                            <% } %>
                         </div>
                         <div id="prediction" class="tab-pane fade">
+                            <input type="hidden" name="dHoldOut" id="dHoldOut" value="<%=dHoldOut%>"/>
+                            <input type="hidden" name="dCrossValidation" id="dCrossValidation" value="<%=dCrossValidation%>"/>
                         </div>
                     </div>
                 </div>
@@ -1952,90 +2001,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                     </div>
                                 </div>
                             </div>
-                            <!--<div class="container visible-sm-block wdetailsm">
-                                <h2>Parameter</h2>
-                                <p>Input data and system parameters. The system then initialized the search parameters via chaotic map operator (Logistic map).</p>
-                                <div class="row">
-                                    <div class="col-sm-4">Swarm and evolutionary parameters:</div></div>
-                                <div class="row">
-                                    <div class="col-sm-2">No. of fireflies</div>
-                                    <div class="col-sm-1">
-                                        <input type="text" name="nFireFlies" id="nFireFlies" size="5" value="<%=nFireFlies%>"/>
-                                    </div>
-                                    <div class="col-sm-3">Max. generation</div>
-                                    <div class="col-sm-1">
-                                        <input type="text" name="nMaxGeneration" id="nMaxGeneration" size="5" value="<%=nMaxGeneration%>"/>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-md-3">Attractiveness:</div>
-                                    <div class="col-md-2">Beta min.</div>
-                                    <div class="col-md-1">
-                                        <input type="text" name="dMinBeta" id="dMinBeta" size="5" value="<%=dMinBeta%>"/>
-                                    </div>
-                                    <div class="col-md-2">Gamma</div>
-                                    <div class="col-md-1">
-                                        <input type="text" name="dGamma" id="dGamma" size="5" value="<%=dGamma%>"/>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-md-3">Random movement:</div>
-                                    <div class="col-md-2">Alpha</div>
-                                    <div class="col-md-1">
-                                        <input type="text" name="dAlpha" id="dAlpha" size="5" value="<%=dAlpha%>"/>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-md-3"></div>
-                                    <div class="col-md-2">Adaptive inertia weight</div>
-                                    <div class="col-md-1">
-                                        <input type="text" id="dAIWeight" name="dAIWeight" size="5" value="<%=dAIWeight%>"/>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-md-3"></div>
-                                    <div class="col-md-2">Tau</div>
-                                    <div class="col-md-1">
-                                        <input type="text" id="dTau" name="dTau" size="5" value="<%=dTau%>"/>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-md-3">Logistic map:</div>
-                                    <div class="col-md-2">Biotic potential (a)</div>
-                                    <div class="col-md-1">
-                                        <input type="text" name="dBPotential" id="dBPotential" size="5" value="<%=dBPotential%>"/>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-md-3">Hyperparameters:</div>
-                                    <div class="col-md-2">Range of C</div>
-                                    <div class="col-md-1">
-                                        <input type="text" id="dC1" name="dC1" size="5" value="<%=dC1%>"/>
-                                    </div>
-                                    <div class="col-md-1">to</div>
-                                    <div class="col-md-1">
-                                        <input type="text" name="dC2" id="dC2" size="5" value="<%=dC2%>"/>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-md-3"></div>
-                                    <div class="col-md-2">Range of sigma</div>
-                                    <div class="col-md-1">
-                                        <input type="text" name="dS1" id="dS1" size="5" value="<%=dS1%>"/>
-                                    </div>
-                                    <div class="col-md-1">to</div>
-                                    <div class="col-md-1">
-                                        <input type="text" id="dS2" name="dS2" size="5" value="<%=dS2%>"/>
-                                    </div>
-                                </div>
-                            </div><-->
                         </div>
                     </div>
                 </div>
@@ -2144,22 +2109,22 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                     <div class="container boundary">
                                         <div class="form-inline">
                                             <div class="radio col-md-2">
-                                                <label><input type="radio" name="TORadio" id="TORadio1" value="TORadio1" onclick="testdatasection(0);">&nbsp;Use data file</label>
+                                                <label><input type="radio" name="TORadio" id="TORadio1" value="TORadio1" onclick="ftestdatasection(0);">&nbsp;Use data file</label>
                                             </div>
                                             <div class="radio col-md-3">
                                                 <label>
-                                                    <input type="radio" name="TORadio" id="TORadio2" value="TORadio2" onclick="testdatasection(0);">&nbsp;Hold-out
+                                                    <input type="radio" name="TORadio" id="TORadio2" value="TORadio2" onclick="ftestdatasection(0);">&nbsp;Hold-out
                                                     <input type="text" class="form-control" name="dHoldOut" id = "dHoldOut" size="3" value="<%=dHoldOut%>">
                                                 </label>
                                             </div>
                                             <div class="radio col-md-3">
                                                 <label>
-                                                    <input type="radio" name="TORadio" id="TORadio3" value="TORadio3" onclick="testdatasection(0);">&nbsp;Cross-validation
+                                                    <input type="radio" name="TORadio" id="TORadio3" value="TORadio3" onclick="ftestdatasection(0);">&nbsp;Cross-validation
                                                     <input type="text" class="form-control" name="dCrossValidation" id = "dCrossValidation" size="3" value="<%=dCrossValidation%>"> 
                                                 </label>
                                             </div>
                                             <div class="radio col-md-2">
-                                                <label><input type="radio" name="TORadio" id="TORadio4" value="TORadio4" onclick="testdatasection(1);">&nbsp;Use test data file</label>
+                                                <label><input type="radio" name="TORadio" id="TORadio4" value="TORadio4" onclick="ftestdatasection(1);">&nbsp;Use test data file</label>
                                             </div>
                                         </div>
                                     </div>
@@ -2189,7 +2154,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 else if (TORadio.equals("TORadio2")) {%><script>document.getElementById("TORadio2").checked = true; </script><%}
                                 else if (TORadio.equals("TORadio3")) {%><script>document.getElementById("TORadio3").checked = true; </script><%}
                                 else if (TORadio.equals("TORadio4")) {%><script>document.getElementById("TORadio4").checked = true; </script><%}
-
                                 %>        
                                 <div class="container boundary">
                                     <h3>Data File</h3>
@@ -2205,7 +2169,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                         </div>
                                         <div class="col-md-2  col-sm-1" style="margin-top : 7px">File Name</div>
                                         <div class="col-md-4 col-sm-1">
-                                            <input type="text" name="sFileName" id="sFileName" size="60" value="<%=sFileName%>" readonly/>
+                                            <input type="text" name="sFileName" id="sFileName" size="45" value="<%=sFileName%>" readonly/>
                                         </div>
                                     </div>
                                     <div class="row" style="margin-bottom : 8px">
@@ -2244,7 +2208,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                                 </div>
                                                 <div class="col-md-2" style="margin-top : 7px">File Name</div>
                                                 <div class="col-md-4">
-                                                    <input type="text" name="sTestFileName" id="sTestFileName" size="60" value="<%=sTestFileName%>" readonly/>
+                                                    <input type="text" name="sTestFileName" id="sTestFileName" size="45" value="<%=sTestFileName%>" readonly/>
                                                 </div>
                                             </div>
                                             <div class="row" style="margin-bottom : 8px">
@@ -2280,7 +2244,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                                 </div>
                                                 <div class="col-md-2" style="margin-top : 7px">File Name</div>
                                                 <div class="col-md-4">
-                                                    <input type="text" name="sTestFileName" id="sTestFileName" size="60" value="<%=sTestFileName%>" readonly/>
+                                                    <input type="text" name="sTestFileName" id="sTestFileName" size="45" value="<%=sTestFileName%>" readonly/>
                                                 </div>
                                             </div>
                                             <div class="row" style="margin-bottom : 8px">
@@ -2339,7 +2303,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                         </div>
                                         <div class="col-md-2  col-sm-1" style="margin-top : 7px">Learning File Name</div>
                                         <div class="col-md-4 col-sm-1">
-                                            <input type="text" name="sLearningFileName" id="sLearningFileName" size="60" value="<%=sLearningFileName%>" readonly/>
+                                            <input type="text" name="sLearningFileName" id="sLearningFileName" size="45" value="<%=sLearningFileName%>" readonly/>
                                         </div>
                                     </div>
                                     <div class="row" style="margin-bottom : 8px">
@@ -2374,7 +2338,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                         </div>
                                         <div class="col-md-2" style="margin-top : 7px">Predictor Data File Name</div>
                                         <div class="col-md-4">
-                                            <input type="text" name="sPredictionFileName" id="sPredictionFileName" size="60" value="<%=sPredictionFileName%>" readonly/>
+                                            <input type="text" name="sPredictionFileName" id="sPredictionFileName" size="45" value="<%=sPredictionFileName%>" readonly/>
                                         </div>
                                     </div>
                                     <div class="row" style="margin-bottom : 8px">
@@ -2445,6 +2409,56 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     </div>
                 </div>
                 
+                <table>
+                    <tr>
+                        <td>
+                            <div class="container boundary" id="bottomform">
+                                <h2><font face="Palatino Linotype, Book Antiqua, Palatino, serif" size="6">Output File Name</font></h2>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                
+                <div class="bs-example">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <table>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>
+                                        <b> Initialization: </b>
+                                    </td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>
+                                        <font color="teal" face="tahoma" size="2"> Base output file name (eg. Result) </font>
+                                    </td>
+                                    <td>
+                                        &nbsp;
+                                        <input type="text" name="sBaseFileName" id="sBaseFileName" size="20" value="<%=sBaseFileName%>">
+                                    </td>
+                                    <td>
+                                        <font color="teal" face="tahoma" size="2"> order number and .txt will be automatically added. </font>
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr> 
+                            </table>
+                        </div>
+                    </div>
+                </div>
                 <br>
             
                 <!--<h6 class="sfawrap" id="bottomform">
@@ -2456,6 +2470,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 <!--<div class="scrollToTop">
                     <img src="arrowup.JPG" alt="..." width="18">  
                 </div>-->
+                
                 <%-- } 
 
                 /*
@@ -3127,18 +3142,34 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 int iDummy=Integer.parseInt(sDummy);
                                 if (iDummy == 1) {
                                     %><script>document.getElementById("TORadio1").checked = true; 
+                                    document.getElementById("testdatasection").style.display = "none";
+                                    var hiddendatafile = document.getElementById("hiddendatafile");
+                                    hiddendatafile = "0";
+                                    document.getElementById("hiddendatafile").value = "0";
                                     </script><%
                                 }
                                 else if (iDummy == 2) {
                                     %><script>document.getElementById("TORadio2").checked = true; 
+                                    document.getElementById("testdatasection").style.display = "none";
+                                    var hiddendatafile = document.getElementById("hiddendatafile");
+                                    hiddendatafile = "0";
+                                    document.getElementById("hiddendatafile").value = "0";
                                     </script><%
                                 }
                                 else if (iDummy == 3) {
                                     %><script>document.getElementById("TORadio3").checked = true; 
+                                    document.getElementById("testdatasection").style.display = "none";
+                                    var hiddendatafile = document.getElementById("hiddendatafile");
+                                    hiddendatafile = "0";
+                                    document.getElementById("hiddendatafile").value = "0";
                                     </script><%
                                 }
                                 else {
                                     %><script>document.getElementById("TORadio4").checked = true; 
+                                    document.getElementById("testdatasection").style.display = "block";
+                                    var hiddendatafile = document.getElementById("hiddendatafile");
+                                    hiddendatafile = "1";
+                                    document.getElementById("hiddendatafile").value = "1";
                                     </script><%
                                 }
                             }
@@ -3620,6 +3651,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     filewriter.write("-\n");
                 }
                 filewriter.close();
+                
                 %><script>alert('Your input form has been saved on the server');</script><%
                 
                 if (NormalRadio.equals("NormalRadio1")) {%><script>document.getElementById("NormalRadio1").checked = true; </script><%}
@@ -3653,6 +3685,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 } 
 
                 if (sLoadingPrediction != "") {} 
+                
                 if (NormalRadio.equals("NormalRadio1")) {%><script>document.getElementById("NormalRadio1").checked = true; </script><%}
                 else if (NormalRadio.equals("NormalRadio2")) {%><script>document.getElementById("NormalRadio2").checked = true; </script><%}
             
@@ -3883,7 +3916,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
             
                 if (PRadio.equals("PRadio1")) {
                     //if (TORadio.equals("TORadio4")) {
-                        if (sTestFileName!="") {
+                    if (sTestFileName!="") {
                         %>
                         <script>
                             document.getElementById("sPFileData").value = "<%=sTestFileName%>";
@@ -3899,7 +3932,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             document.getElementById("sdPAttributes").value = "1";
                         </script>
                         <%
-                        }
+                    }
                 }
                 
                 int iLDFAttributes = 0;

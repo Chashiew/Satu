@@ -30,7 +30,7 @@ public final class Header_jsp extends org.apache.jasper.runtime.HttpJspBase
     PageContext _jspx_page_context = null;
 
     try {
-      response.setContentType("text/html;charset=UTF-8");
+      response.setContentType("text/html");
       pageContext = _jspxFactory.getPageContext(this, request, response,
       			null, true, 8192, true);
       _jspx_page_context = pageContext;
@@ -41,24 +41,59 @@ public final class Header_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
       out.write("<!DOCTYPE html>\n");
       out.write("<html>\n");
-      out.write("    <head>\n");
+      out.write("\n");
+      out.write("<head>\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
-      out.write("        <title>JSP Page</title>\n");
-      out.write("        <style>\n");
-      out.write("            img {\n");
-      out.write("                width: 100%;\n");
+      out.write("        <title>NiMOPS: Header</title>\n");
+      out.write("        <link rel=\"stylesheet\" type=\"text/css\" href=\"mystyle.css\">\n");
+      out.write("        <link href=\"css/bootstrap.css\" rel=\"stylesheet\">\n");
+      out.write("        <script src=\"js/jquery.min.js\"></script>\n");
+      out.write("        <script src=\"js/bootstrap.js\"></script>\n");
+      out.write("\t\n");
+      out.write("\t<style>\n");
+      out.write("\t    img.bg {\n");
+      out.write("                    /* Set rules to fill background */\n");
+      out.write("                    min-height: 100%;\n");
+      out.write("                    min-width: 1024px;\n");
+      out.write("\n");
+      out.write("                    /* Set up proportionate scaling */\n");
+      out.write("                    width: 100%;\n");
+      out.write("                    height: auto;\n");
+      out.write("\n");
+      out.write("                    /* Set up positioning */\n");
+      out.write("                    position: fixed;\n");
+      out.write("                    top: 0;\n");
+      out.write("                    left: 0;\n");
       out.write("            }\n");
-      out.write("        </style>\n");
-      out.write("    </head>\n");
-      out.write("    <body>\n");
-      out.write("        <img src = \"Header.jpg\" >\n");
-      out.write("    </body>\n");
-      out.write("</html>\n");
+      out.write("\n");
+      out.write("            @media screen and (max-width: 1024px){\n");
+      out.write("                    img.bg {\n");
+      out.write("                            left: 50%;\n");
+      out.write("                            margin-left: -512px; }\n");
+      out.write("            }\n");
+      out.write("\n");
+      out.write("            #page-wrap { position: relative; width: 400px; margin: 50px auto; padding: 20px; background: white; -moz-box-shadow: 0 0 20px black; -webkit-box-shadow: 0 0 20px black; box-shadow: 0 0 20px black; }\n");
+      out.write("            p { font: 15px/2 Georgia, Serif; margin: 0 0 30px 0; text-indent: 40px; }\n");
+      out.write("\t</style>\n");
+      out.write("</head>\n");
+      out.write("\n");
+      out.write("<body>\n");
+      out.write("\n");
+      out.write("    <img src=\"Header.jpg\" alt=\"...\" class=\"bg\">\n");
+      out.write("        \n");
+      out.write("    <div id=\"page-wrap\">\n");
+      out.write("        <a href=\"loginpage.jsp\">\n");
+      out.write("            <font>\n");
+      out.write("                Sign In\n");
+      out.write("            </font>\n");
+      out.write("        </a>\n");
+      out.write("    </div>   \n");
+      out.write("\t\n");
+      out.write("</body>\n");
+      out.write("\n");
+      out.write("</html>");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;
