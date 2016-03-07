@@ -7,7 +7,7 @@ No.	Description	Variable	Value	Remark
 5	Alpha	dAlpha	0.20	-
 6	Adaptive inertia weight	dAIWeight	0.90	-
 7	Tau	dTau	1.50	-
-8	Biotic potential (a)	dBPotential	4.00	-
+8	Biotic potential, a	dBPotential	4.00	-
 9	Range of C1	dC1	1.00E-3	-
 10	C2	dC2	1.00E12	-
 11	Range of Sigma, S1	dS1	1.00E-3	-
@@ -30,9 +30,9 @@ No.	Description	Variable	Value	Remark
 28	Test Data File	sTestDataFile		-
 29	No. of Attributes	nTDFAttributes	0	-
 30	No. of Instances	nTDFInstances	0	-
-31	First Data File	sFileData		-
-32	No. of Attributes	sdAttributes	1	-
-33	No. of Instances	sdInstances	1	-
+31	First Data File	sFileData	NY Bedload transport preprocessing.txt	-
+32	No. of Attributes	sdAttributes	6	-
+33	No. of Instances	sdInstances	77	-
 34	Second Data File	sPFileData		-
-35	No. of Attributes	sdPAttributes	1	-
-36	No. of Instances	sdPInstances	1	-
+35	No. of Attributes	sdPAttributes	0	-
+36	No. of Instances	sdPInstances	0	-

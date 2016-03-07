@@ -356,6 +356,11 @@ if (sdPInstancesLSSVM == null) {
     sdPInstancesLSSVM = "1";
 }
 
+String sBaseFileName = request.getParameter("sBaseFileName");
+if (sBaseFileName == null) {
+    sBaseFileName = "";
+}
+
 String ssAttributesLSSVM = "";
 String ssInstancesLSSVM = "";
 String ssPAttributesLSSVM = "";
@@ -399,7 +404,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
         <%
         String hdf = request.getParameter("hiddendatafile");
         if (hdf == null) {
-            hdf = "1";
+            hdf = "0";
         }
         %>
         
@@ -580,6 +585,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 document.getElementById("nLDFInstancesLSSVM").value = "0"; 
                 document.getElementById("nPDFAttributesLSSVM").value = "0"; 
                 document.getElementById("nPDFInstancesLSSVM").value = "0"; 
+                document.getElementById("sBaseFileName").value = "SFAMResult"; 
 
                 document.getElementById("sFileNameLSSVM").value = "";    //"null"; 
                 document.getElementById("sTestFileNameLSSVM").value = ""; 
@@ -673,11 +679,12 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 document.getElementById("SCRadio2LSSVM").checked = false; 
                 document.getElementById("SCRadio3LSSVM").checked = false; 
                 //document.getElementById("PRadio1LSSVM").checked = false; 
-                document.getElementById("TORadio1LSSVM").checked = false; 
-                document.getElementById("TORadio2LSSVM").checked = false; 
-                document.getElementById("TORadio3LSSVM").checked = false; 
-                document.getElementById("TORadio4LSSVM").checked = false; 
-            
+                if (PRadioLSSVM.value === "PRadio1LSSVM") {
+                    document.getElementById("TORadio1LSSVM").checked = false; 
+                    document.getElementById("TORadio2LSSVM").checked = false; 
+                    document.getElementById("TORadio3LSSVM").checked = false; 
+                    document.getElementById("TORadio4LSSVM").checked = false; 
+                }
                 //document.getElementById("Classaccuracy").value="Classification accuracy (validation)" ;
                 
                 document.getElementById("sDataFileLSSVM").value = "";    //"null"; 
@@ -693,6 +700,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 document.getElementById("nLDFInstancesLSSVM").value = "0"; 
                 document.getElementById("nPDFAttributesLSSVM").value = "0"; 
                 document.getElementById("nPDFInstancesLSSVM").value = "0"; 
+                document.getElementById("sBaseFileName").value = ""; 
 
                 document.getElementById("sFileNameLSSVM").value = "";    //"null"; 
                 document.getElementById("sTestFileNameLSSVM").value = ""; 
@@ -742,10 +750,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 sLoadingDataExcelClickLSSVM = "";
                 document.getElementById("sLoadingDataExcelClickLSSVM").value = sLoadingDataExcelClickLSSVM;
 
-                document.getElementById("testdatasection").style.display = "block";
+                document.getElementById("testdatasection").style.display = "none";
                 var hdf = document.getElementById("hdf");
-                hdf = "1";
-                document.getElementById("hdf").value = "1";
+                hdf = "0";
+                document.getElementById("hdf").value = "0";
 
                 fullPathLSSVM.value = sFileNameLSSVM.value;
                 document.getElementById("myformLSSVM").action = "SFALSSVM.jsp";
@@ -1006,29 +1014,26 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     var sLearningFileNameLSSVM = document.getElementById("sLearningFileNameLSSVM");
                     var sPredictionFileNameLSSVM = document.getElementById("sPredictionFileNameLSSVM");
 
-                    var sResult01Name = document.getElementById("sResult01Name");
-                    var sResult02Name = document.getElementById("sResult02Name");
-                    var sResult03Name = document.getElementById("sResult03Name");
-                    var sResult04Name = document.getElementById("sResult04Name");
-                    var sResult05Name = document.getElementById("sResult05Name");
-                    var sResult06Name = document.getElementById("sResult06Name");
-
+                    document.getElementById("sHasil").value = "2";
+                    document.getElementById("sRunReportTable").value = "1";
+                    
                     var VarNextLSSVM = document.getElementById("VarNextLSSVM");
                     document.getElementById("VarNextLSSVM").value = val;
 
                     var sLoadingDataExcelLSSVM = document.getElementById("sLoadingDataExcelLSSVM");
-                    sLoadingDataExcelLSSVM = "2";
+                    sLoadingDataExcelLSSVM = "";
                     document.getElementById("sLoadingDataExcelLSSVM").value = sLoadingDataExcelLSSVM;
 
                     var sLoadingDataExcelClickLSSVM = document.getElementById("sLoadingDataExcelClickLSSVM");
                     sLoadingDataExcelClickLSSVM = "";
                     document.getElementById("sLoadingDataExcelClickLSSVM").value = sLoadingDataExcelClickLSSVM;
 
-                    valid = false;
                     fullPathLSSVM.value = sFileNameLSSVM.value;
                     document.getElementById("myformLSSVM").action = "ModuleSFALSSVM.jsp";
                     document.getElementById("myformLSSVM").submit();
                     nFireFliesLSSVM.focus();
+                    
+                    valid = false;
                 }    
                 else {
                     alert("Data file not yet selected ...!");
@@ -1235,11 +1240,11 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     dTauLSSVM.select();
                     valid = false;
                 } else if (dBPotentialLSSVM.value.length <= 0) {
-                    alert("Biotic potential (a)cannot be empty!");
+                    alert("Biotic potential cannot be empty!");
                     dBPotentialLSSVM.focus();
                     valid = false;
                 } else if (isNaN(dBPotentialLSSVM.value)) {
-                    alert("Biotic potential (a)= ... - ... (4.00)");
+                    alert("Biotic potential, a = ... - ... (4.00)");
                     dBPotentialLSSVM.focus();
                     dBPotentialLSSVM.select();
                     valid = false;
@@ -1289,11 +1294,11 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     dTrainingPSLSSVM.select();
                     valid = false;
                 } else if (nLastChange1LSSVM.value.length <= 0) {
-                    alert("No. of Last Changes cannot be empty!");
+                    alert("No. of Consecutive Rates of Change cannot be empty!");
                     nLastChange1LSSVM.focus();
                     valid = false;
                 } else if (isNaN(nLastChange1LSSVM.value)) {
-                    alert("No. of Last Changes = ... - ... (3)");
+                    alert("No. of Consecutive Rates of Change = ... - ... (3)");
                     nLastChange1LSSVM.focus();
                     nLastChange1LSSVM.select();
                     valid = false;
@@ -1542,11 +1547,11 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     dTauLSSVM.select();
                     valid = false;
                 } else if (dBPotentialLSSVM.value.length <= 0) {
-                    alert("Biotic potential (a)cannot be empty!");
+                    alert("Biotic potential cannot be empty!");
                     dBPotentialLSSVM.focus();
                     valid = false;
                 } else if (isNaN(dBPotentialLSSVM.value)) {
-                    alert("Biotic potential (a)= ... - ... (4.00)");
+                    alert("Biotic potential, a = ... - ... (4.00)");
                     dBPotentialLSSVM.focus();
                     dBPotentialLSSVM.select();
                     valid = false;
@@ -1613,20 +1618,20 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     nLastChange2LSSVM.focus();
                     nLastChange2LSSVM.select();
                     valid = false;
-                } else if (dHoldOutLSSVM.value.length <= 0) {
+                } else if (dHoldOutLSSVM.value.length <= 0 && PRadioLSSVM.value === "PRadio1LSSVM") {
                     alert("Hold-Out (%) cannot be empty ...!");
                     dHoldOutLSSVM.focus();
                     valid = false;
-                } else if (isNaN(dHoldOutLSSVM.value)) {
+                } else if (isNaN(dHoldOutLSSVM.value) && PRadioLSSVM.value === "PRadio1LSSVM") {
                     alert("Hold-Out (%) = ... - ... (20)");
                     dHoldOutLSSVM.focus();
                     dHoldOutLSSVM.select();
                     valid = false;
-                } else if (dCrossValidationLSSVM.value.length <= 0) {
+                } else if (dCrossValidationLSSVM.value.length <= 0 && PRadioLSSVM.value === "PRadio1LSSVM") {
                     alert("Cross-Validation (%) cannot be empty ...!");
                     dCrossValidationLSSVM.focus();
                     valid = false;
-                } else if (isNaN(dCrossValidationLSSVM.value)) {
+                } else if (isNaN(dCrossValidationLSSVM.value) && PRadioLSSVM.value === "PRadio1LSSVM") {
                     alert("Cross-Validation (%) = ... - ... (10)");
                     dCrossValidationLSSVM.focus();
                     dCrossValidationLSSVM.select();
@@ -1721,6 +1726,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 //document.getElementById("sMoveBottom").value = val;
 
                 fullPathLSSVM.value = sFileNameLSSVM.value;
+                document.getElementById("sBaseFileName").value = "SFAMResult";
                 document.getElementById("myformLSSVM").action = "SFALSSVM.jsp";
                 document.getElementById("myformLSSVM").submit();
                 //alert("Data file already loaded ...!");
@@ -1785,12 +1791,15 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     <input type="hidden" name="hiddendatafile" id="hiddendatafile" value="0">
                 <% } %>
                 
-                <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%=sResult01Name%>" />
+                <%--input type="hidden" name="sResult01Name" id="sResult01Name" value="<%=sResult01Name%>" />
                 <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%=sResult02Name%>" />
                 <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%=sResult03Name%>" />
                 <input type="hidden" name="sResult04Name" id="sResult04Name" value="<%=sResult04Name%>" />
                 <input type="hidden" name="sResult05Name" id="sResult05Name" value="<%=sResult05Name%>" />
-                <input type="hidden" name="sResult06Name" id="sResult06Name" value="<%=sResult06Name%>" />
+                <input type="hidden" name="sResult06Name" id="sResult06Name" value="<%=sResult06Name%>" /--%>
+                
+                <input type="hidden" name="sRunReportTable" id="sRunReportTable" value="" />
+                <input type="hidden" name="sHasil" id="sHasil" value="" />
                 
                 <input type="hidden" name="sLoadingDefaultLSSVM" id="sLoadingDefaultLSSVM" value="<%=sLoadingDefaultLSSVM%>" /> 
                 <input type="hidden" name="sLoadingEvaluationLSSVM" id="sLoadingEvaluationLSSVM" value="<%=sLoadingEvaluationLSSVM%>" /> 
@@ -1803,8 +1812,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 <input type="hidden" name="sdPInstancesLSSVM" id="sdPInstancesLSSVM" value="<%=sdPInstancesLSSVM%>" /> 
                 <input type="hidden" name="sdPAttributesLSSVM" id="sdPAttributesLSSVM" value="<%=sdPAttributesLSSVM%>" /> 
                 
-                <br>
-                <br>
+                <br><br>
                 <center id="title">
                     <font style="font-family: Palatino Linotype, Book Antiqua, Palatino, serif; font-size: 24pt" color="#2F4F4F">
                         <b>NiMOPS for Binary Classification</b>
@@ -1837,6 +1845,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             %>
                         </div>
                         <div id="prediction" class="tab-pane fade">
+                            <input type="hidden" name="dHoldOutLSSVM" id="dHoldOutLSSVM" value="<%=dHoldOutLSSVM%>"/>
+                            <input type="hidden" name="dCrossValidationLSSVM" id="dCrossValidationLSSVM" value="<%=dCrossValidationLSSVM%>"/>
                         </div>
                     </div>
                 </div>
@@ -1845,9 +1855,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     <tr>
                         <td>
                             <div class="container boundary">
-                                <h2><font face="Pa
-                                          
-                                          latino Linotype, Book Antiqua, Palatino, serif" size="6">Model Settings</font></h2>
+                                <h2><font face="Palatino Linotype, Book Antiqua, Palatino, serif" size="6">Model Settings</font></h2>
                                 <button type="button" onclick="return writedefaultsfalssvm(0)" class="btn btn-primary">Default</button>
                                 <button type="button" onclick="return loadingdataformLSSVM(1);" class="btn btn-primary">Import</button>
                                 <button type="button" onclick="return savingdataLSSVM(0);" class="btn btn-primary">Export</button>
@@ -1865,9 +1873,9 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         <div class="panel-body">
                             <div class="container wdetail">
                                 <h2>Parameter</h2>
-                                <p>Input data and system parameters. The system then initialized the search parameters via chaotic map operator (Logistic map).</p>
+                                <p>Input data and system parameters. <%-->The system then initialized the search parameters via chaotic map operator (Logistic map).</p><--%>
                                 <div class="row">
-                                    <div class="col-md-3">Swarm and evolutionary parameters:</div>
+                                    <div class="col-md-4">Swarm and evolutionary parameters:</div>
                                     <div class="col-md-2">No. of fireflies</div>
                                     <div class="col-md-1">
                                         <input type="text" name="nFireFliesLSSVM" id="nFireFliesLSSVM" size="5" value="<%=nFireFliesLSSVM%>"> 
@@ -1875,7 +1883,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 </div>
                                 <br>
                                 <div class="row">
-                                    <div class="col-md-3"></div>
+                                    <div class="col-md-4"></div>
                                     <div class="col-md-2">Max. generation</div>
                                     <div class="col-md-1">
                                         <input type="text" name="nMaxGenerationLSSVM" id="nMaxGenerationLSSVM" size="5" value="<%=nMaxGenerationLSSVM%>"> 
@@ -1883,7 +1891,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 </div>
                                 <br>
                                 <div class="row">
-                                    <div class="col-md-3">Attractiveness:</div>
+                                    <div class="col-md-4">Attractiveness:</div>
                                     <div class="col-md-2">Beta min.</div>
                                     <div class="col-md-1">
                                         <input type="text" name="dMinBetaLSSVM" id="dMinBetaLSSVM" size="5" value="<%=dMinBetaLSSVM%>"> 
@@ -1891,7 +1899,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 </div>
                                 <br>
                                 <div class="row">
-                                    <div class="col-md-3"></div>
+                                    <div class="col-md-4"></div>
                                     <div class="col-md-2">Gamma</div>
                                     <div class="col-md-1">
                                         <input type="text" name="dGammaLSSVM" id="dGammaLSSVM" size="5" value="<%=dGammaLSSVM%>">
@@ -1899,7 +1907,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 </div>
                                 <br>
                                 <div class="row">
-                                    <div class="col-md-3">Random movement:</div>
+                                    <div class="col-md-4">Random movement:</div>
                                     <div class="col-md-2">Alpha</div>
                                     <div class="col-md-1">
                                         <input type="text" name="dAlphaLSSVM" id="dAlphaLSSVM" size="5" value="<%=dAlphaLSSVM%>">
@@ -1907,7 +1915,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 </div>
                                 <br>
                                 <div class="row">
-                                    <div class="col-md-3"></div>
+                                    <div class="col-md-4"></div>
                                     <div class="col-md-2">Adaptive inertia weight</div>
                                     <div class="col-md-1">
                                         <input type="text" id="dAIWeightLSSVM" name="dAIWeightLSSVM" size="5" value="<%=dAIWeightLSSVM%>">
@@ -1915,7 +1923,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 </div>
                                 <br>
                                 <div class="row">
-                                    <div class="col-md-3"></div>
+                                    <div class="col-md-4"></div>
                                     <div class="col-md-2">Tau</div>
                                     <div class="col-md-1">
                                         <input type="text" id="dTauLSSVM" name="dTauLSSVM" size="5" value="<%=dTauLSSVM%>"> 
@@ -1923,15 +1931,15 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 </div>
                                 <br>
                                 <div class="row">
-                                    <div class="col-md-3">Logistic map:</div>
-                                    <div class="col-md-2">Biotic potential (a)</div>
+                                    <div class="col-md-4">Logistic map:</div>
+                                    <div class="col-md-2">Biotic potential, a</div>
                                     <div class="col-md-1">
                                         <input type="text" name="dBPotentialLSSVM" id="dBPotentialLSSVM" size="5" value="<%=dBPotentialLSSVM%>">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="row">
-                                    <div class="col-md-3">Hyperparameters:</div>
+                                    <div class="col-md-4">Hyperparameters:</div>
                                     <div class="col-md-2">Range of C</div>
                                     <div class="col-md-1">
                                         <input type="text" id="dC1LSSVM" name="dC1LSSVM" size="5" value="<%=dC1LSSVM%>"> 
@@ -1943,7 +1951,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 </div>
                                 <br>
                                 <div class="row">
-                                    <div class="col-md-3"></div>
+                                    <div class="col-md-4"></div>
                                     <div class="col-md-2">Range of sigma</div>
                                     <div class="col-md-1">
                                         <input type="text" name="dS1LSSVM" id="dS1LSSVM" size="5" value="<%=dS1LSSVM%>">
@@ -1962,8 +1970,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         <div class="panel-body">
                             <div class="container boundary">
                                 <h2>Normalization</h2>
-                                <p>Data preprocessing is considered a crucial step in data anlytics that performs data cleansing and transforming to improve the respective results.</p>
-                                <p>User can decide whether or not to normalize the data to (0, 1) scale.</p>
+                                <%--><p>Data preprocessing is considered a crucial step in data anlytics that performs data cleansing and transforming to improve the respective results.</p><--%>
+                                <p>User can decide whether or not to normalize the data to (0,1) scale.</p>
                                 <div class="radio">
                                     <label><input type="radio" name="NormalRadioLSSVM" id="NormalRadio1LSSVM" value="NormalRadio1LSSVM">Original value</label>
                                 </div>
@@ -1997,7 +2005,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                     <div class="form-group">
                                         <label class="col-md-3">Validation partition size</label>
                                         <div class="input-group col-md-2">
-                                            <input type="number" class="form-control" id="dValidationPSLSSVM" name="dValidationPSLSSVM" value="<%=dValidationPSLSSVM%>" readonly="readonly">
+                                            <input type="text" class="form-control" id="dValidationPSLSSVM" name="dValidationPSLSSVM" value="<%=dValidationPSLSSVM%>" readonly="readonly">
                                             <span class="input-group-addon">(%)</span>
                                         </div>
                                     </div>
@@ -2013,8 +2021,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         
                             <div class="container boundary">
                                 <h3>Stop Criterion</h3>
-                                <p>Stopping condition. End the optimization process if the generation number (MaxGen) has achieved the maximum number of fitness function f(m)</p>
-                                <p> with the minimum f(m) values.</p>
+                                <%--><p>Stopping condition. End the optimization process if the generation number (MaxGen) has achieved the maximum number of fitness function f(m)</p><--%>
+                                <%--><p> with the minimum f(m) values.</p><--%>
                                 <div class="radio">
                                     <label><input type="radio" name="SCRadioLSSVM" id="SCRadio1LSSVM" value="SCRadio1LSSVM">Max. generation is reached</label>
                                 </div>
@@ -2025,7 +2033,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                         <div class="input-group col-md-2">
                                             <input type="text" class="form-control" name="nLastChange1LSSVM" id = "nLastChange1LSSVM" value="<%=nLastChange1LSSVM%>">
                                         </div>
-                                            last changes in OF value <
+                                            <%-->last changes in OF value <<--%>
+                                            consecutive rates of change in OF values <
                                         <div class="input-group col-md-2">
                                             <input type="text" class="form-control" name="nLastChange2LSSVM" id = "nLastChange2LSSVM" value="<%=nLastChange2LSSVM%>" >
                                         </div>
@@ -2047,12 +2056,15 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             <div class="panel-body">
                                 <div class="container boundary">
                                     <h2>Test Option</h2>
-                                    <p>The test data file used to evaluate the optimized model again. Output phase: calculate performance measures (i.e., RMSE, MAE, MAPE, R)</p>
-                                    <p>to find the prediction accuracy.</p>
-                                    <div class="container boundary">
-                                        <div class="form-inline">
+                                    <%--><p>The test data file used to evaluate the optimized model again. Output phase: calculate performance measures (i.e., RMSE, MAE, MAPE, R)</p><--%>
+                                    <%--><p>to find the prediction accuracy.</p><--%>
+                                    <div class="boundary">
+                                        <div class=" row form-inline">
                                             <div class="radio col-md-2">
                                                 <label><input type="radio" name="TORadioLSSVM" id="TORadio1LSSVM" value="TORadio1LSSVM" onclick="testdatasection(0);">&nbsp;Use data file</label>
+                                            </div>
+                                            <div class="radio col-md-3">
+                                                <label><input type="radio" name="TORadioLSSVM" id="TORadio4LSSVM" value="TORadio4LSSVM" onclick="testdatasection(1);">&nbsp;Use test data file</label>
                                             </div>
                                             <div class="radio col-md-3">
                                                 <label>
@@ -2065,9 +2077,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                                     <input type="radio" name="TORadioLSSVM" id="TORadio3LSSVM" value="TORadio3LSSVM" onclick="testdatasection(0);">&nbsp;Cross-validation
                                                     <input type="text" class="form-control" name="dCrossValidationLSSVM" id = "dCrossValidationLSSVM" size="3" value="<%=dCrossValidationLSSVM%>"> 
                                                 </label>
-                                            </div>
-                                            <div class="radio col-md-2">
-                                                <label><input type="radio" name="TORadioLSSVM" id="TORadio4LSSVM" value="TORadio4LSSVM" onclick="testdatasection(1);">&nbsp;Use test data file</label>
                                             </div>
                                         </div>
                                     </div>
@@ -2093,13 +2102,11 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             <input type="hidden" name="PRadioLSSVM" id="PRadioLSSVM" value="<%=PRadioLSSVM%>"/>
                             <% if (PRadioLSSVM.equals("PRadio1LSSVM")) { 
 
-                                if (TORadioLSSVM.equals("TORadio1LSSVM")) {%>
-                                    <script>document.getElementById("TORadio1LSSVM").checked = true; </script>
-                                <%}
+                                if (TORadioLSSVM.equals("TORadio1LSSVM")) {%> <script>document.getElementById("TORadio1LSSVM").checked = true; </script><%}
                                 else if (TORadioLSSVM.equals("TORadio2LSSVM")) {%><script>document.getElementById("TORadio2LSSVM").checked = true; </script><%}
                                 else if (TORadioLSSVM.equals("TORadio3LSSVM")) {%><script>document.getElementById("TORadio3LSSVM").checked = true; </script><%}
                                 else if (TORadioLSSVM.equals("TORadio4LSSVM")) {%><script>document.getElementById("TORadio4LSSVM").checked = true; </script><%}
-                                %>        
+                            %>        
                                 <div class="container boundary">
                                     <h3>Data File</h3>
                                     <div class="row">
@@ -2340,35 +2347,59 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         </div>
                     </div>
                 </div>
-            <br>
-            
-            <!--<h6 id="bottomformLSSVM" class="sfawrap">
-                <img src="Logo-Space.png" alt="     " width="4" height="5">
-                &nbsp;. . . [END OF DATA FORM] &nbsp;&nbsp;&nbsp;
-            </h6>-->
                         
-            <center>
-                <a onclick="return checkdataLSSVM(1);">
-                    <font color="blue" face="agency FB" size="3">
-                        <b><u>SUBMIT >></u></b>
-                    </font>
-                </a>
-                
-                <a href="#title">
-                    <img src="Arrow top.png" alt="..." width="18" style="float:right">
-                </a>
+                <!--<h6 id="bottomformLSSVM" class="sfawrap">
+                    <img src="Logo-Space.png" alt="     " width="4" height="5">
+                    &nbsp;. . . [END OF DATA FORM] &nbsp;&nbsp;&nbsp;
+                </h6>-->
+                        
 
                 <table>
                     <tr>
-                        <td><img src="Logo-Space.png" alt=""></td>
+                        <td>
+                            <div class="container boundary" id="bottomform">
+                                <h2><font face="Palatino Linotype, Book Antiqua, Palatino, serif" size="6">Output File Name</font></h2>
+                            </div>
+                        </td>
                     </tr>
                 </table>
-                <table>
-                    <tr>
-                        <td><img src="Logo-Space.png" alt=""></td>
-                    </tr>
-                </table>
-            </center>
+
+                <div class="bs-example">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="container boundary">
+                                <b> Initialization: </b>
+                                <font color="teal" face="tahoma" size="2"> Base output file name (eg. SFAMResult) </font>
+                                <input type="text" name="sBaseFileName" id="sBaseFileName" size="20" value="<%=sBaseFileName%>">
+                                <font color="teal" face="tahoma" size="2">order number and .txt will be automatically added. </font>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+
+                <center>
+                    <a onclick="return checkdataLSSVM(1);">
+                        <font color="blue" face="agency FB" size="3">
+                            <b><u>SUBMIT >></u></b>
+                        </font>
+                    </a>
+
+                    <a href="#title">
+                        <img src="Arrow top.png" alt="..." width="18" style="float:right">
+                    </a>
+
+                    <table>
+                        <tr>
+                            <td><img src="Logo-Space.png" alt=""></td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td><img src="Logo-Space.png" alt=""></td>
+                        </tr>
+                    </table>
+                </center>
 
             <%
             if (sLoadingDataExcelLSSVM != "") {
@@ -2603,7 +2634,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         <td>&nbsp;</td>
                         <td>&nbsp;&nbsp;</td>
                         <td>
-                            5. Hyperparameters:
+                            5. Hyper-parameters:
                         </td>
                         <td>
                             Range of C = <%=ndf.format(Double.parseDouble(dC1LSSVM))%> to
@@ -3145,7 +3176,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 filewriter.write("-\n");
                 
                 filewriter.write("8\t");
-                filewriter.write("Biotic potential (a)\t");
+                filewriter.write("Biotic potential, a\t");
                 filewriter.write("dBPotentialLSSVM\t");
                 filewriter.write(dBPotentialLSSVM+"\t");
                 filewriter.write("-\n");
