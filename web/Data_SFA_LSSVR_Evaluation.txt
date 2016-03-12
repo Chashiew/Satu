@@ -1,38 +1,38 @@
 SFA-LSSVR Data:
 No.	Description	Variable	Value	Remark
-1	No. of fireflies	nFireFlies	5.0	-
-2	Max. generation	nMaxGeneration	5.0	-
-3	Beta min.	dMinBeta	0.10000000149011612	-
-4	Gamma	dGamma	1.0	-
-5	Alpha	dAlpha	0.20000000298023224	-
-6	Adaptive inertia weight	dAIWeight	0.8999999761581421	-
-7	Tau	dTau	1.5	-
-8	Biotic potential (a)	dBPotential	4.0	-
-9	Range of C1	dC1	0.0010000000474974513	-
-10	C2	dC2	9.99999995904E11	-
-11	Range of Sigma, S1	dS1	0.0010000000474974513	-
-12	S2	dS2	1000.0	-
-13	Training partition size (%)	dTrainingPS	70.0	-
-14	Validation partition size (%)	dValidationPS	30.0	-
-15	Total Size (%)	dTotalSize	100.0	-
-16	No. of Last Changes	nLastChange1	3.0	-
-17	Constant OF Value	nLastChange2	9.999999747378752E-6	-
+1	No. of fireflies	nFireFlies	50	-
+2	Max. generation	nMaxGeneration	25	-
+3	Beta min.	dMinBeta	0.10	-
+4	Gamma	dGamma	1.00	-
+5	Alpha	dAlpha	0.20	-
+6	Adaptive inertia weight	dAIWeight	0.90	-
+7	Tau	dTau	1.50	-
+8	Biotic potential, a	dBPotential	4.00	-
+9	Range of C1	dC1	1.00E-3	-
+10	C2	dC2	1.00E12	-
+11	Range of Sigma, S1	dS1	1.00E-3	-
+12	S2	dS2	1.00E3	-
+13	Training partition size (%)	dTrainingPS	70	-
+14	Validation partition size (%)	dValidationPS	30	-
+15	Total Size (%)	dTotalSize	100	-
+16	No. of Last Changes	nLastChange1	3	-
+17	Constant OF Value	nLastChange2	0.00001	-
 18	Normalization Method	sNormalRadio	1	Original value
 19	Objective Function	sOptimRadio	1	RMSE validation
 20	Stop Criterion	sSCRadio	1	Max. generation is reached
 21	Purpose	sPRadio	1	Evaluation
-22	Hold-Out (%)	dHoldOut	20.0	-
-23	Cross-Validation (%)	dCrossValidation	10.0	-
+22	Hold-Out (%)	dHoldOut	20	-
+23	Cross-Validation (%)	dCrossValidation	10	-
 24	Test Option	sTORadio	1	Use data file
 25	Data File	sDataFile	NY Bedload transport preprocessing.txt	-
-26	No. of Attributes	nDFAttributes	6.0	-
-27	No. of Instances	nDFInstances	77.0	-
+26	No. of Attributes	nDFAttributes	6	-
+27	No. of Instances	nDFInstances	77	-
 28	Test Data File	sTestDataFile		-
-29	No. of Attributes	nTDFAttributes	0.0	-
-30	No. of Instances	nTDFInstances	0.0	-
+29	No. of Attributes	nTDFAttributes	0	-
+30	No. of Instances	nTDFInstances	0	-
 31	First Data File	sFileData	NY Bedload transport preprocessing.txt	-
 32	No. of Attributes	sdAttributes	6	-
 33	No. of Instances	sdInstances	77	-
 34	Second Data File	sPFileData		-
-35	No. of Attributes	sdPAttributes	1	-
-36	No. of Instances	sdPInstances	1	-
+35	No. of Attributes	sdPAttributes	0	-
+36	No. of Instances	sdPInstances	0	-

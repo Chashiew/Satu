@@ -50,7 +50,7 @@
     }
     
     String sRunReportTable = request.getParameter("sRunReportTable");
-    if (sRunReportTable == null) {
+    if (sRunReportTable == null || sRunReportTable == "") {
         sRunReportTable = "0";
     }
     String sRRTShow = request.getParameter("sRRTShow");
@@ -1733,10 +1733,10 @@
                     <%
                     sTORadioLSSVM = "...";
                     if (TORadioLSSVM.equals("TORadio1LSSVM")) {
-                        sTORadioLSSVM = "Use data file";
+                        sTORadioLSSVM = "Use learning dataset";
                     }
                     else if (PRadioLSSVM.equals("TORadio4LSSVM")) {
-                        sTORadioLSSVM = "Use test data file";
+                        sTORadioLSSVM = "Use test dataset";
                     }
                     else if (PRadioLSSVM.equals("TORadio2LSSVM")) {
                         sTORadioLSSVM = "Hold-out";
@@ -1967,7 +1967,7 @@
                     <ul class="nav nav-tabs">
                     </ul>
                 </div>
-                <br><br>
+                <br>
                 
                 <div class="tab-content">
                     <% if (sPageControl.equals("1")) { %>
@@ -1989,19 +1989,23 @@
 
                         <table>
                             <tr>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                 <td>
-                                    <div id="bottomform">
-                                        <h3><font face="Palatino Linotype, Book Antiqua, Palatino, serif">I. Input Data Review and Run</font></h3>
+                                    <h3><span class="glyphicon glyphicon-bookmark"></span></h3>
+                                </td>
+                                <td>&nbsp;&nbsp;</td>
+                                <td>
+                                    <div>
+                                        <%--><h3><font face="Palatino Linotype, Book Antiqua, Palatino, serif">I. Input Data Review and Run</font></h3><--%>
+                                        <h3><b><font face="Palatino Linotype, Book Antiqua, Palatino, serif">Input Data Review and Run</font></b></h3>
                                     </div>
                                 </td>
-                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                 <td>
-                                    <h3><span class="glyphicon glyphicon-arrow-right"></span></h3>
-                                </td>
-                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                <td>
-                                    <div title="Go to view the results directly!" onclick="changetab(2)">
-                                        <h3><u><i><font face="Palatino Linotype, Book Antiqua, Palatino, serif">II. The Results</font></i></u></h3>
+                                    <%--><div title="Go to view the results directly!" onclick="changetab(2)"><--%>
+                                    <div title="View pre-computed results..." onclick="changetab(2)">
+                                        <%--><h3><u><i><font face="Palatino Linotype, Book Antiqua, Palatino, serif">II. The Results</font></i></u></h3><--%>
+                                        <h3><font color="skyblue" face="Palatino Linotype, Book Antiqua, Palatino, serif">The Results</font></h3>
                                     </div>
                                 </td>
                             </tr>
@@ -2009,7 +2013,6 @@
                         <a href="#bottomform">
                             <img src="Arrow bottom.png" alt="..." width="18" style="float:right">
                         </a>
-                        
                         <input type="hidden" name="sBaseFileName" id="sBaseFileName" value="<%=sBaseFileName%>">
                         
                         <% if (sRunReportTable == "") { %> 
@@ -2783,74 +2786,8 @@
                                                 </td>
                                             </tr>
                                         </table>
-                                        <%-->
-                                        <h3>
-                                            <img src="Logo-Space.png" alt="     " width="4" height="5">
-                                            <b> Output: &nbsp;&nbsp;&nbsp;&nbsp;</b>
-                                        </h3>
-                                        <--%>
 
                                         <% if (sLoadingDataExcelLSSVM != "") { %>
-                                            <%--> #2 
-                                            <H2 ALIGN="CENTER">
-                                                <% int percent = task.getPercent();%>
-                                                <%= percent%>%
-                                            </H2>
-
-                                            <TABLE WIDTH="60%" ALIGN="CENTER"
-                                            BORDER=1 CELLPADDING=0 CELLSPACING=2>
-                                            <TR>
-                                                <% for (int i = 10; i <= percent; i += 10) { %>
-                                                    <TD WIDTH="10%" BGCOLOR="#000080">&nbsp;</TD>
-                                                <% } %>
-                                                <% for (int i = 100; i > percent; i -= 10) { %>
-                                                    <TD WIDTH="10%">&nbsp;</TD>
-                                                <% } %>
-                                            </TR>
-                                            </TABLE>
-
-                                            <TABLE WIDTH="100%" BORDER=0 CELLPADDING=0 CELLSPACING=0>
-                                            <TR>
-                                            <TD ALIGN="CENTER">
-                                                <% if (task.isRunning()) { %>
-                                                    Running
-                                                <% } else { %>
-                                                    <% if (task.isCompleted()) { %>
-                                                        Completed
-                                                    <% } else if (!task.isStarted()) { %>
-                                                        Not Started
-                                                    <% } else { %>
-                                                        Stopped
-                                                    <% } %>
-                                                <% } %>
-                                            </TD>
-                                            </TR>
-                                            <TR>
-                                            <TD ALIGN="CENTER">
-                                                <BR>
-                                                <% if (task.isRunning()) {%>
-                                                    <!--
-                                                    <FORM METHOD="GET" ACTION="stop.jsp">
-                                                    <INPUT TYPE="SUBMIT" VALUE="Stop">
-                                                    </FORM>
-                                                    -->
-                                                    <a href="stop.jsp?<%=params%>">Stop</a>
-                                                <% } else {%>
-                                                    <!--
-                                                    <FORM METHOD="GET" ACTION="start.jsp">
-                                                    <INPUT TYPE="SUBMIT" VALUE="Start">
-                                                    </FORM>
-                                                    -->
-                                                    <a href="start.jsp?<%=params%>">Start</a>
-                                                <% }%>
-                                            </TD>
-                                            </TR>
-                                            </TABLE>
-
-                                            <% if (task.isCompleted()) {%>
-                                                <BR>
-                                            <% }%>
-                                            <--%>
 
                                             <%
                                             if (NormalRadioLSSVM.equals("NormalRadio1LSSVM")) {
@@ -3103,7 +3040,7 @@
                                             </jsp:include> 	
                                         <% } %>
                                     <% } %> 
-                                <% } else { %> 
+                                <% } else { %>
                                     <%--> End of sViewProceed + Click on button RUN <--%>
                                     <%
                                     /*
@@ -4349,7 +4286,7 @@
                                                         else {
                                                             if (TORadioLSSVM.equals("TORadio1LSSVM")) {
                                                                 if (PRadioLSSVM.equals("PRadio1LSSVM")) {
-                                                                    sTORadioLSSVM = "Use data file";
+                                                                    sTORadioLSSVM = "Use learning dataset";
                                                                     sDummy = "Learning Dataset : ";
                                                                     sFileDataLSSVM = sFileNameLSSVM;
                                                                     dAttributesLSSVM = snDFAttributesLSSVM;  
@@ -4365,7 +4302,7 @@
                                                             }
                                                             else if (TORadioLSSVM.equals("TORadio4LSSVM")) {
                                                                 if (PRadioLSSVM.equals("PRadio1LSSVM")) {
-                                                                    sTORadioLSSVM = "Use test data file";
+                                                                    sTORadioLSSVM = "Use test dataset";
                                                                     sDummy = "Learning Dataset : ";
                                                                     sFileDataLSSVM = sFileNameLSSVM;
                                                                     dAttributesLSSVM = snDFAttributesLSSVM;
@@ -4419,7 +4356,7 @@
                                                         else {
                                                             if (TORadioLSSVM.equals("TORadio1LSSVM")) {
                                                                 if (PRadioLSSVM.equals("PRadio1LSSVM")) {
-                                                                    sTORadioLSSVM = "Use data file";
+                                                                    sTORadioLSSVM = "Use learning dataset";
                                                                     sDummy = "Learning Dataset : ";
                                                                     sFileDataLSSVM = sFileNameLSSVM;
                                                                     dAttributesLSSVM = snDFAttributesLSSVM;  
@@ -4435,7 +4372,7 @@
                                                             }
                                                             else if (TORadioLSSVM.equals("TORadio4LSSVM")) {
                                                                 if (PRadioLSSVM.equals("PRadio1LSSVM")) {
-                                                                    sTORadioLSSVM = "Use test data file";
+                                                                    sTORadioLSSVM = "Use test dataset";
                                                                     sDummy = "Learning Dataset : ";
                                                                     sFileDataLSSVM = sFileNameLSSVM;
                                                                     dAttributesLSSVM = snDFAttributesLSSVM;
@@ -4532,7 +4469,7 @@
                         if (sLoadingDataExcelClickLSSVM != "") { 
                         %>
                         
-                        <% //#2 displaying data file 
+                        <% //#2 displaying dataset 
                         } else if (sLoadingDataSet1 != "" || sLoadingDataSet3 != "") { 
                                 /*
                                 out.println("<p>");
@@ -4846,7 +4783,7 @@
                                 window.scrollTo(0,document.getElementById("view").offsetTop);
                             </script>
                         
-                            <%  //#3 displaying test data file   
+                            <%  //#3 displaying test dataset   
                         } else if (sLoadingDataExcelClick3LSSVM != "") { 
                         %>
                         
@@ -4932,14 +4869,14 @@
                                 <% } else { %>
                                             <td align="left">
                                                 <font color='red'>
-                                                &nbsp;&nbsp;Test data file not available ... !
+                                                &nbsp;&nbsp;Test dataset not available ... !
                                                 </font>
                                             </td>
                                         </tr>
                                 <% } %>
                                 </table>
 
-                        <% //#4 displaying learning data file 
+                        <% //#4 displaying learning dataset 
                         } else if (sLoadingDataExcelClick5LSSVM != "") { 
                         %>
                             <table>
@@ -5055,14 +4992,14 @@
                                 <% } else { %>
                                             <td align="left">
                                                 <font color='red'>
-                                                &nbsp;&nbsp;Learning data file not available ... !
+                                                &nbsp;&nbsp;Learning dataset not available ... !
                                                 </font>
                                             </td>
                                         </tr>
                                 <% } %>
                                 </table>
 
-                        <% //#5 displaying prediction data file 
+                        <% //#5 displaying prediction dataset 
                         } else if (sLoadingDataExcelClick6LSSVM != "") { 
                         %>
                             <table>
@@ -5143,7 +5080,7 @@
                                 <% } else { %>
                                             <td align="left">
                                                 <font color='red'>
-                                                &nbsp;&nbsp;Prediction data file not available ... !
+                                                &nbsp;&nbsp;Prediction dataset not available ... !
                                                 </font>
                                             </td>
                                         </tr>
@@ -5163,7 +5100,6 @@
                         <a href="#title">
                             <img src="Arrow top.png" alt="..." width="18" style="float:right">
                         </a>
-                        <br>
                     </div>
                         
                     <% if (sPageControl.equals("2")) { %>
@@ -5171,22 +5107,25 @@
                     <% } else { %>
                     <div id="results" class="tab-pane fade in">
                     <% } %>
-                        <br>
+                    <br>
                         <table>
                             <tr>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                 <td>
-                                    <div title="Go to previous page" onclick="changetab(1)">
-                                        <h3><u><i><font face="Palatino Linotype, Book Antiqua, Palatino, serif">I. Input Data Review and Run</font></i></u></h3>
+                                    <%--><div title="Go to previous page" onclick="changetab(1)"><--%>
+                                    <div title="View the previous page" onclick="changetab(1)">
+                                        <%--><h3><u><i><font face="Palatino Linotype, Book Antiqua, Palatino, serif">I. Input Data Review and Run</font></i></u></h3><--%>
+                                        <h3><font color="skyblue" face="Palatino Linotype, Book Antiqua, Palatino, serif">Input Data Review and Run</font></h3>
                                     </div>
                                 </td>
-                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                 <td>
-                                    <h3><span class="glyphicon glyphicon-arrow-right"></span></h3>
+                                    <h3><span class="glyphicon glyphicon-bookmark"></span></h3>
                                 </td>
-                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                 <td>
                                     <div>
-                                        <h3><font face="Palatino Linotype, Book Antiqua, Palatino, serif">II. The Results</font></h3>
+                                        <%--><h3><font face="Palatino Linotype, Book Antiqua, Palatino, serif">II. The Results</font></h3><--%>
+                                        <h3><b><font face="Palatino Linotype, Book Antiqua, Palatino, serif">The Results</font></b></h3>
                                     </div>
                                 </td>
                             </tr>
@@ -5201,18 +5140,18 @@
                         <br>
                         <div class="tab-content">
                             <div id="Main" class="tab-pane fade in active">
-                                <a href="#Optimum">Optimum hyperparameters</a>
+                                <a href="#Optimum">Best Optimum hyperparameters</a>
                                 <span class="glyphicon glyphicon-minus"></span>
-                                <a href="#Partition">Hyperparameters of partitions dataset</a>
+                                <a href="#Partition">Performance of data partitions</a>
                                 <span class="glyphicon glyphicon-minus"></span>
                                 <a href="#Report">Analysis report</a>
                                 <span class="glyphicon glyphicon-minus"></span>
-                                <a href="#Performance">Performance values</a>
+                                <a href="#Performance">Test data and prediction</a>
                                 <br>
                                 <br>
                                 <br>
                                 <center>
-                                    <font size="4" id="Optimum">Main results - Optimum hyperparameters</font>
+                                    <font size="4" id="Optimum">Main results - Best Optimum hyperparameters</font>
                                     <a href="#Partition"><span class="glyphicon glyphicon-menu-right"></span></a>
                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                     <br>
@@ -5279,7 +5218,7 @@
                                 
                                 <br>
                                 <center>
-                                    <font size="4" id="Partition">Hyperparameters; Performances of training and validation partitions</font>
+                                    <font size="4" id="Partition">Optimum hyperparameters; Performance of training and validation partitions of learning data</font>
                                     <a href="#Optimum"><span class="glyphicon glyphicon-menu-left"></span></a>
                                     <a href="#Report"><span class="glyphicon glyphicon-menu-right"></span></a>
                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
@@ -5478,7 +5417,7 @@
                                 
                                 <br>
                                 <center>
-                                    <font size="4" id="Performance">Learning and test performances; Test dataset and predicted values</font>
+                                    <font size="4" id="Performance">Performance of learning and test data; Test data and predicted values of the best fold</font>
                                     <a href="#Report"><span class="glyphicon glyphicon-menu-left"></span></a>
                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                     <br>
@@ -5616,7 +5555,7 @@
                                     </tr></table></div></center> 
                                 <% } %>
                             </div>
-
+                            
                             <div id="PGraph" class="tab-pane fade in">
                                 <div class="edittab">
                                     <a href="#TPDataset">Training partition dataset</a>
@@ -5680,7 +5619,11 @@
                                     <font size="4">Tracing Path Graph of Test Dataset</font>
                                 </center>
                             </div>
-                        </div><br>
+                        </div>
+                        <br><br>
+                        <center id="bottomform">
+                            <button type="button" onclick="" class="btn btn-primary">Save</button>
+                        </center>
                     </div>
                     </div><br>
                 </div>
