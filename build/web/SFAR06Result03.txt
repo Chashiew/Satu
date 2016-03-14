@@ -1,0 +1,54 @@
+Analysis report
+============================================================= 
+Experimental settings
+No. of fireflies:				 5 
+Maximun generation:				 5 
+Alpha:						 0.20 
+Adaptive inertial weight:			 0.90 
+Gamma:						 1.00 
+Beta min:					 0.10 
+Tau:						 1.50 
+Logistic map, biotic potential (a):		 4 
+Normalization setting:				 Feature scaling 
+Learning setting 
+	 Training partition size [%]:		 70.00 
+	 Vaidation partition size [%]:		 30.00 
+------------------------------------------------------------- 
+Total No. of attributes:			 6 
+Total No. of data (instances):			 74 
+Test option: Use opened data file 
+No. of test data:				 74 
+No. of learning data:				 74 
+	 No. of data for SFA-LSSVR training:	 52 
+	 No. of data for SFA-LSSVR validation:	 22 
+============================================================= 
+Stopping criteria: 
+Max. generation is reached 
+------------------------------------------------------------- 
+Performance measures during optimization phase
+Root mean square error (training) [unit]:	 0.2529 
+Root mean square error (validation) [unit]:	 3.3959 
+Mean absolute error (training) [unit]:		 0.1778 
+Mean absolute error (validation) [unit]:	 1.0831 
+Mean absolute percentage error (training) [%]:	 16.36 
+Mean absolute percentage error (validation) [%]: 45.57 
+Correlation coefficient (training):		 0.9915 
+Correlation coefficient (validation):		 0.0528 
+============================================================= 
+Optimal parameters for LSSVR model
+C:						 2.195269e+11 
+Sigma:						 8.949031e+02 
+------------------------------------------------------------- 
+Performance measures using learning data
+Root mean square error (learning) [unit]:	 0.3165 
+Mean absolute error (learning) [unit]:		 0.2301 
+Mean absolute percentage error (learning) [%]:	 19.67 
+Correlation coefficient (learning):		 0.9849 
+------------------------------------------------------------- 
+Performance measures using test data
+Root mean square error (test) [unit]:		 0.3165 
+Mean absolute error (test) [unit]:		 0.2301 
+Mean absolute percentage error (test) [%]:	 19.67 
+Correlation coefficient (test):			 0.9849 
+============================================================= 
+Total time [s]:					 1.02 

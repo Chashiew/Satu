@@ -1,0 +1,49 @@
+Analysis report
+============================================================= 
+Experimental settings
+No. of fireflies:				 5 
+Maximun generation:				 5 
+Alpha:						 0.20 
+Adaptive inertial weight:			 0.90 
+Gamma:						 1.00 
+Beta min:					 0.10 
+Tau:						 1.50 
+Logistic map, biotic potential (a):		 4 
+Normalization setting:				 Feature scaling 
+Learning setting 
+	 Training partition size [%]:		 70.00 
+	 Vaidation partition size [%]:		 30.00 
+------------------------------------------------------------- 
+Total No. of learning attributes:		 6 
+Total No. of learning data (instances):		 61 
+No. of attributes for prediction:		 5 
+No. of data for prediction:			 15 
+------------------------------------------------------------- 
+No. of learning data:				 61 
+	 No. of data for SFA-LSSVR training:	 43 
+	 No. of data for SFA-LSSVR validation:	 18 
+============================================================= 
+Stopping criteria: 
+Max. generation is reached 
+------------------------------------------------------------- 
+Performance measures during optimization phase
+Root mean square error (training) [unit]:	 0.2246 
+Root mean square error (validation) [unit]:	 2.4579 
+Mean absolute error (training) [unit]:		 0.1495 
+Mean absolute error (validation) [unit]:	 0.9395 
+Mean absolute percentage error (training) [%]:	 11.88 
+Mean absolute percentage error (validation) [%]: 52.20 
+Correlation coefficient (training):		 0.9921 
+Correlation coefficient (validation):		 0.2747 
+------------------------------------------------------------- 
+Optimal parameters for LSSVR model
+C:						 8.511622e+11 
+Sigma:						 1000 
+------------------------------------------------------------- 
+Performance measures using learning data
+Root mean square error (learning) [unit]:	 0.2531 
+Mean absolute error (learning) [unit]:		 0.1799 
+Mean absolute percentage error (learning) [%]:	 16.57 
+Correlation coefficient (learning):		 0.9893 
+============================================================= 
+Total time [s]:					 1.11 

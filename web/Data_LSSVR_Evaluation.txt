@@ -1,0 +1,21 @@
+LSSVR Data:
+No.	Description	Variable	Value	Remark
+1	Value of C	nValueC	10	-
+2	Value of Sigma	nValueS	0.1	-
+3	Normalization Method	sNormalRadio	1	Original value
+4	Purpose	sPRadio	1	Evaluation
+5	Hold-Out (%)	dHoldOut	20	-
+6	Cross-Validation (%)	dCrossValidation	10	-
+7	Test Option	sTORadio	1	Use data file
+8	Data File	sDataFile	NY Bedload transport preprocessing.txt	-
+9	No. of Attributes	nDFAttributes	6	-
+10	No. of Instances	nDFInstances	77	-
+11	Test Data File	sTestDataFile		-
+12	No. of Attributes	nTDFAttributes	0	-
+13	No. of Instances	nTDFInstances	0	-
+14	First Data File	sFileData		-
+15	No. of Attributes	sdAttributes		-
+16	No. of Instances	sdInstances		-
+17	Second Data File	sPFileData		-
+18	No. of Attributes	sdPAttributes	1	-
+19	No. of Instances	sdPInstances	1	-

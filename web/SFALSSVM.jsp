@@ -1874,8 +1874,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             %>
                         </div>
                         <div id="prediction" class="tab-pane fade">
-                            <input type="hidden" name="dHoldOutLSSVM" id="dHoldOutLSSVM" value="<%=dHoldOutLSSVM%>"/>
-                            <input type="hidden" name="dCrossValidationLSSVM" id="dCrossValidationLSSVM" value="<%=dCrossValidationLSSVM%>"/>
+                            <%--><input type="hidden" name="dHoldOutLSSVM" id="dHoldOutLSSVM" value="<%=dHoldOutLSSVM%>"/>
+                            <input type="hidden" name="dCrossValidationLSSVM" id="dCrossValidationLSSVM" value="<%=dCrossValidationLSSVM%>"/><--%>
                         </div>
                     </div>
                 </div>
@@ -1990,6 +1990,13 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                         <input type="text" id="dS2LSSVM" name="dS2LSSVM" size="5" value="<%=dS2LSSVM%>">
                                     </div>
                                 </div>
+                                <%--><div class="row">
+                                    <div class="col-md-4">Test option parameters:</div>
+                                    <div class="col-md-2">Hold-out rate (%)</div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="dHoldOutLSSVM" id = "dHoldOutLSSVM" size="3" value="<%=dHoldOutLSSVM%>">
+                                    </div>
+                                </div><--%>
                             </div>
                         </div>
                     </div>

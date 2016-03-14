@@ -1,0 +1,39 @@
+No. of fireflies = 5	
+Max. generation = 5	
+Beta min = 0.10	
+Gamma = 1.00	
+Alpha = 0.20	
+Adaptive inertial weight = 0.90	
+Tau = 1.50	
+Biotic potential, a = 4
+
+Range of C = 1.0000e-03 to 1.0000e+12
+Range of Sigma = 1.0000e-03 to 1.0000e+03
+
+Training partition size (%) = 70
+Vaidation partition size (%) = 30
+Total size (%) = 100
+
+No. of last repetition = 3	
+Criteria = 0.00001	
+
+Hold-out = 20 (%)	
+Cross Validation = 10 (folds)	
+
+dNormalRadio = 1	
+dOptimRadio = 1	
+dSCRadio = 3	
+dPRadio = 1	
+dTORadio = 2	
+
+sVariation = 23	
+
+dAttributes = 6	
+dInstances = 74	
+Datalearn(1,1) = 0.4600	
+Datalearn(74,6) = 4.5500	
+
+dPAttributes = 6	
+dPInstances = 24	
+Datatest(1,1) = 0.3200	
+Datatest(24,6) = 4.5500	

@@ -1906,8 +1906,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             <% } %>
                         </div>
                         <div id="prediction" class="tab-pane fade">
-                            <input type="hidden" name="dHoldOut" id="dHoldOut" value="<%=dHoldOut%>"/>
-                            <input type="hidden" name="dCrossValidation" id="dCrossValidation" value="<%=dCrossValidation%>"/>
+                            <%--><input type="hidden" name="dHoldOut" id="dHoldOut" value="<%=dHoldOut%>"/>
+                            <input type="hidden" name="dCrossValidation" id="dCrossValidation" value="<%=dCrossValidation%>"/><--%>
                         </div>
                     </div>
                 </div>

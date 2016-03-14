@@ -977,8 +977,8 @@
                 var dCrossValidation = document.getElementById("dCrossValidation");
 
                 var NormalRadio = document.getElementById("NormalRadio");
-                var OptimRadio = document.getElementById("OptimRadio");
-                var SCRadio = document.getElementById("SCRadio");
+                //var OptimRadio = document.getElementById("OptimRadio");
+                //var SCRadio = document.getElementById("SCRadio");
                 var PRadio = document.getElementById("PRadio");
                 var TORadio = document.getElementById("TORadio");
 
@@ -5196,7 +5196,18 @@
                     <% } else { %>
                     <div id="results" class="tab-pane fade in">
                     <% } %>
-                    <br>
+                        <table>
+                            <tr>
+                                <td style="width: 10%">
+                                    <a onclick="return previousscreen();" style="float:left;">
+                                        <font color="blue" face="agency FB" size="3">
+                                        <b><u><< BACK</u></b>
+                                        </font>
+                                    </a>                            
+                                </td>
+                            </tr>
+                        </table> 
+                            
                         <table>
                             <tr>
                                 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -5211,6 +5222,7 @@
                                 <td>
                                     <h3><span class="glyphicon glyphicon-bookmark"></span></h3>
                                 </td>
+                                <td>&nbsp;&nbsp;</td>
                                 <td>
                                     <div>
                                         <%--><h3><font face="Palatino Linotype, Book Antiqua, Palatino, serif">II. The Results</font></h3><--%>
@@ -5229,7 +5241,7 @@
                         <br>
                         <div class="tab-content">
                             <div id="Main" class="tab-pane fade in active">
-                                <a href="#Optimum">Best Optimum hyperparameters</a>
+                                <a href="#Optimum">Best performance</a>
                                 <span class="glyphicon glyphicon-minus"></span>
                                 <a href="#Partition">Performance of data partitions</a>
                                 <span class="glyphicon glyphicon-minus"></span>
@@ -5240,14 +5252,68 @@
                                 <br>
                                 <br>
                                 <center>
-                                    <font size="4" id="Optimum">Main results - Best Optimum hyperparameters</font>
+                                    <font size="4" id="Optimum">Main results - Best Performance</font>
                                     <a href="#Partition"><span class="glyphicon glyphicon-menu-right"></span></a>
                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                     <br>
                                 </center>
                                 <br>
+                                    
+                                <%  File a = new File(stResult01Name);
+                                if (stResult01Name != "" && a.exists() && !a.isDirectory()) {  
+                                    String file = stResult01Name; 
+                                    BufferedReader br = new BufferedReader(new FileReader(file)); 
+                                    String line = null;
+                                    int i;
+                                    int j;
 
-                                
+                                    // first and only line
+                                    line = br.readLine();
+                                    if (line == null) {
+                                        %><center><div><table><tr>
+                                            <td align="center">
+                                                <h3><font color='red'>Output file empty ...!</font></h3>
+                                            </td>
+                                        </tr></table></div></center><% 
+                                    } else {
+                                        cols = line.split("\\t");
+                                        %>
+                                        <center>
+                                            <div> 
+                                                <table>
+                                                    <tr>
+                                                        <td align="right">Mean RMSE of Test Data</td>
+                                                        <td align="center">&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                        <td align="left"><%=cols[0]%></td>
+                                                    </tr> 
+                                                    <tr>
+                                                        <td align="right">Mean R of Test Data</td> 
+                                                        <td align="center">=</td> 
+                                                        <td align="left"><%=cols[1]%></td>
+                                                    </tr> 
+                                                    <tr>
+                                                        <td align="right">Best Fold</td> 
+                                                        <td align="center">=</td> 
+                                                        <td align="left"><%=cols[2]%></td>
+                                                    </tr> 
+                                                    <tr>
+                                                        <td align="right">Computing time, s (sec)</td> 
+                                                        <td align="center">=</td> 
+                                                        <td align="left"><%=cols[3]%></td>
+                                                    </tr> 
+                                                </table> 
+                                            </div> 
+                                        </center> 
+                                    <%} 
+                                    br.close(); 
+                                } else { %> 
+                                    <center><div><table><tr>
+                                        <td align="center">
+                                            <h4><font color='red'>Output file not found ...!</font></h4>
+                                        </td>
+                                    </tr></table></div></center> 
+                                <% } %> 
+
                                 <br>
                                 <br> 
                                 <center>
@@ -5258,7 +5324,102 @@
                                     <br>
                                 </center>
                                 <br>
-
+                                <% File b = new File(stResult02Name);
+                                    String[][] datatemp2 = new String[21][9];
+                                    if (stResult02Name != "" && b.exists() && !b.isDirectory()) {  
+                                        String file = stResult02Name;
+                                        BufferedReader br = new BufferedReader(new FileReader(file)); 
+                                        String line = null;
+                                        String stemp;
+                                        int i;
+                                        int j;
+                                        int ii;
+                                        stemp="1"; 
+                                        i=1;
+                                        ii=1;
+                                        String[][] datatemp = new String[21][9];
+                                        
+                                        // first block
+                                        line = br.readLine();
+                                        cols = line.split("\\t");
+                                        j=0;
+                                        while (stemp == "1") {
+                                            for (i = 0; i < 4; i += 1) {
+                                                datatemp[j][i]=cols[i];
+                                            }
+                                            j=j+1;
+                                            line = br.readLine();
+                                            if (line != null)
+                                            {
+                                                cols = line.split("\\t");
+                                                ncol = cols.length;
+                                                if (ncol != 4) {
+                                                    stemp="0";      //to exit loop 
+                                                }
+                                            }
+                                            else
+                                            {
+                                                stemp="0"; //to exit loop
+                                            }
+                                        }
+                                        if (j == 0) { %>
+                                            <center><div><table><tr>
+                                                <td align="center">
+                                                    <h2><font color='red'>Output file empty ...!</font></h2>
+                                                </td>
+                                            </tr></table></div></center> 
+                                        <% } else { %>
+                                            <center>
+                                                <div> 
+                                                    <table>
+                                                        <tr>
+                                                            <td align="center">RMSE Training</td>
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center">MAE Training</td> 
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center">MAPE Training</td> 
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center">R Training</td> 
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                        </tr>
+                                                        <% i = 0; %>
+                                                            <tr>
+                                                            <td align="center"><%=datatemp[i][3]%></td>
+                                                            <% for (ii = 0; ii < 3; ii += 1) { %>
+                                                                <td>&nbsp;</td>
+                                                                <td align="center"><%=datatemp[i][ii]%></td> 
+                                                            <% } %>
+                                                            </tr>
+                                                        <tr>
+                                                            <td align="center">RMSE Validation</td> 
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center">MAE Validation</td> 
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center">MAPE Validation</td> 
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center">R Validation</td>
+                                                        </tr> 
+                                                        <% i = 1; %>
+                                                            <tr>
+                                                            <td align="center"><%=datatemp[i][3]%></td>
+                                                            <% for (ii = 0; ii < 3; ii += 1) { %>
+                                                                <td>&nbsp;</td>
+                                                                <td align="center"><%=datatemp[i][ii]%></td> 
+                                                            <% } %>
+                                                            </tr>
+                                                    </table> 
+                                                </div> 
+                                            </center> 
+                                            <br>
+                                        <% } 
+                                        br.close(); 
+                                    } else { %> 
+                                        <center><div><table><tr>
+                                            <td align="center">
+                                                <h4><font color='red'>Output file not found ...!</font></h4>
+                                            </td>
+                                        </tr></table></div></center> 
+                                    <% } %> 
                                 <br>
                                 <br>
                                 <center>
@@ -5269,7 +5430,45 @@
                                     <br>
                                 </center>
                                 <br>
+                                <% File c = new File(stResult03Name);
+                                if (stResult03Name != "" && c.exists() && !c.isDirectory()) {  
+                                    String file = stResult03Name;
+                                    BufferedReader br = new BufferedReader(new FileReader(file)); 
+                                    String line = null;
+                                    String stemp;
+                                    int i;
+                                    int j;
+                                    int ii;
+                                    stemp="1"; 
+                                    i=1;
+                                    ii=1;
+                                    String[][] datatemp = new String[1021][9];
 
+                                    j=0;
+                                    line = br.readLine();
+                                    while (line != null) {
+                                        datatemp[j][1]=line;
+                                        line = br.readLine();
+                                        j=j+1;
+                                    } 
+                                    br.close();
+                                    %>
+
+                                    <center><div><table>
+                                        <% for (i = 0; i < j; i += 1) { %>
+                                            <tr>
+                                            <td><%=datatemp[i][1]%></td>
+                                            </tr>
+                                        <% } %>
+                                            </table></div></center> 
+
+                                <% } else { %>  
+                                    <center><div><table><tr>
+                                        <td align="center">
+                                            <h4><font color='red'>Output file not found ...!</font></h4>
+                                        </td>
+                                    </tr></table></div></center> 
+                                <% } %> 
                                 <br>
                                 <br>
                                 <center>
@@ -5279,6 +5478,133 @@
                                     <br>
                                 </center>
                                 <br>
+                                <% File d = new File(stResult04Name);
+                                if (stResult04Name != "" && d.exists() && !d.isDirectory()) {  
+                                    String file = stResult04Name;
+                                    BufferedReader br = new BufferedReader(new FileReader(file)); 
+                                    String line = null;
+                                    String stemp;
+                                    int i;
+                                    int j;
+                                    int ii;
+
+                                    stemp="1"; //initial value
+                                    i=1;
+                                    ii=1;
+                                    String[][] datatemp = new String[1021][9];
+
+                                    // first block
+                                    if (sVariation == "3" || sVariation == "8") { 
+                                        line = br.readLine();
+                                        cols = line.split("\\t");
+                                        j=0;
+                                        while (stemp == "1") {
+                                            for (i = 0; i < 8; i += 1) {
+                                                datatemp2[j][i]=cols[i];
+                                            }
+                                            j=j+1;
+                                            line = br.readLine();
+                                            cols = line.split("\\t");
+                                            ncol = cols.length;
+                                            if (ncol != 8) {
+                                                stemp="0";      //to exit loop 
+                                            }
+                                        } 
+                                    } 
+                                    else {
+                                        j=1;
+                                    }
+                                    %>
+
+                                    <center>
+                                        <div> 
+                                            <table>
+                                                <tr>
+                                                    <td align="center">Fold No.</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                    <td align="center">RMSE Learning</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                    <td align="center">RMSE Test</td> 
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                    <td align="center">MAE Learning</td> 
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                    <td align="center">MAE Test</td> 
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                    <td align="center">MAPE Learning</td> 
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                    <td align="center">MAPE Test</td> 
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                    <td align="center">R Learning</td> 
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                    <td align="center">R Test</td> 
+                                                </tr> 
+                                                <% for (i = 0; i < j; i += 1) { %>
+                                                    <tr>
+                                                    <td align="center"><%=(i+1)%></td>
+                                                    <td>&nbsp;</td>
+                                                    <td align="center"><%=datatemp2[i][0]%></td>
+                                                    <% for (ii = 1; ii < 8; ii += 1) { %>
+                                                        <td>&nbsp;</td>
+                                                        <td align="center"><%=datatemp2[i][ii]%></td> 
+                                                    <% } %>
+                                                    </tr>
+                                                <% } %>
+                                            </table> 
+                                        </div> 
+                                    </center> 
+                                    <br>
+
+                                    <% line = br.readLine();
+                                    cols = line.split("\\t");
+                                    ncol = cols.length;
+                                    j=0;
+                                    while (line != null) {
+                                        cols = line.split("\\t");
+                                        for (i = 0; i < ncol; i += 1) {
+                                            datatemp[j][i]=cols[i];
+                                        }
+                                        j=j+1;
+                                        line = br.readLine();
+                                    } %>
+
+                                    <% br.close(); %>
+
+                                    <center>
+                                        <div> 
+                                            <table>
+                                                <tr>
+                                                    <td align="center">Data No.</td>
+                                                    <% for (ii = 1; ii < ncol-1; ii += 1) { %>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                        <td align="center">X<%=ii%></td> 
+                                                    <% } %> 
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                    <td align="center">Actual Y</td> 
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                    <td align="center">Predicted Y</td> 
+                                                </tr> 
+                                                <% for (i = 0; i < j; i += 1) { %>
+                                                    <tr>
+                                                    <td align="center"><%=(i+1)%></td>
+                                                    <td>&nbsp;</td>
+                                                    <td align="center"><%=datatemp[i][0]%></td>
+                                                    <% for (ii = 1; ii < ncol; ii += 1) { %>
+                                                        <td>&nbsp;</td>
+                                                        <td align="center"><%=datatemp[i][ii]%></td> 
+                                                    <% } %>
+                                                    </tr>
+                                                <% } %>
+                                            </table> 
+                                        </div> 
+                                    </center> 
+
+                                <% } else { %>  
+                                    <center><div><table><tr>
+                                        <td align="center">
+                                            <h4><font color='red'>Output file not found ...!</font></h4>
+                                        </td>
+                                    </tr></table></div></center> 
+                                <% } %> 
                             </div>
 
                             <div id="PGraph" class="tab-pane fade in"> 

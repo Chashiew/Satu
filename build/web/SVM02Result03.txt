@@ -1,0 +1,22 @@
+Analysis report LSSVM (Binary Class) 
+===================================================================== 
+Experimental setings
+C:							 10 
+Sigma:							 1.000000e-01 
+--------------------------------------------------------------------- 
+Testing partition size [%]:				 20.00 
+Learning partition size [%]:				 80.00 
+--------------------------------------------------------------------- 
+Total No. of attributes:				 8 
+Total No. of data (instances):				 240 
+Test option: Hold-out [%]:				 20 
+No. of training data:					 192 
+No. of test data:					 48 
+===================================================================== 
+Performance measures using training data
+Percentage of correct prediction (training) [%]:	 100.0000 
+--------------------------------------------------------------------- 
+Performance measures using test data
+Percentage of correct prediction (test) [%]:		 83.3333 
+===================================================================== 
+Total time [s]:						 0.06 

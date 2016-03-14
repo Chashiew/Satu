@@ -1,0 +1,20 @@
+Value of C = 10	
+Value of Sigma = 0.10	
+Hold-out = 20 (%)	
+Cross Validation = 10 (folds)	
+
+dNormalRadioLSSVM = 1	
+dPRadioLSSVM = 1	
+dTORadioLSSVM = 2	
+
+sVariation = 3	
+
+dAttributesLSSVM = 8	
+dInstancesLSSVM = 240	
+Datatrain(1,1) = 2.5000	
+Datatrain(240,8) = 1.0000	
+
+dPAttributesLSSVM = 8	
+dPInstancesLSSVM = 48	
+Datatest(1,1) = 2.5000	
+Datatest(48,8) = 1.0000	

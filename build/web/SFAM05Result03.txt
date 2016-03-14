@@ -1,0 +1,45 @@
+Analysis report SFA-LSSVM (Binary Class)
+===================================================================== 
+Experimental setings
+No. of fireflies:					 5 
+Maximum generation:					 5 
+Alpha:							 0.20 
+Adaptive inertial weight:				 0.90 
+Beta_minimum:						 0.10 
+Gamma:							 1.00 
+Tau:							 1.50 
+Logistic map, Biotic potential (a) :			 4.00 
+Normalization setting:					 Original value 
+Learning setting 
+	 Training partition size [%]:		 70.00 
+	 Vaidation partition size [%]:		 30.00 
+--------------------------------------------------------------------- 
+Learning setting 
+	 Training partition size [%]:			 70.00 
+	 Validation partition size [%]:			 30.00 
+--------------------------------------------------------------------- 
+Total No. of learning attributes:			 8 
+Total No. of learning data (instances):			 192 
+Total No. of prediction attributes:			 7 
+Total No. of prediction data (instances):		 48 
+--------------------------------------------------------------------- 
+No. of learning data:					 192 
+	 No. of data for SFA-LSSVM training:		 134 
+	 No. of data for SFA-LSSVM validation:		 58 
+===================================================================== 
+Stopping criteria 
+3 consecutive rates of change in OF values < 0.00001 
+The No. of generations is: 4 
+--------------------------------------------------------------------- 
+Performance measures during optimization phase
+Percentage of correct prediction (training) [%]:	 97.7612 
+Percentage of correct prediction (validation) [%]:	 81.0345 
+--------------------------------------------------------------------- 
+Optimal parameters for LSSVM model
+C:							 3.331493e+11 
+Sigma:							 3.979910e+02 
+--------------------------------------------------------------------- 
+Performance measures using learning data
+Percentage of correct prediction (learning) [%]:	 97.9167 
+===================================================================== 
+Total time [s]:						 0.99 

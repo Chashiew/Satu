@@ -1,0 +1,54 @@
+Analysis report
+============================================================= 
+Experimental settings
+No. of fireflies:				 5 
+Maximun generation:				 5 
+Alpha:						 0.20 
+Adaptive inertial weight:			 0.90 
+Gamma:						 1.00 
+Beta min:					 0.10 
+Tau:						 1.50 
+Logistic map, biotic potential (a):		 4 
+Normalization setting:				 Feature scaling 
+Learning setting 
+	 Training partition size [%]:		 70.00 
+	 Vaidation partition size [%]:		 30.00 
+------------------------------------------------------------- 
+Total No. of attributes:			 6 
+Total No. of data (instances):			 74 
+Test option: Hold-out [%]:			 20 
+No. of test data:				 15 
+No. of learning data:				 59 
+	 No. of data for SFA-LSSVR training:	 41 
+	 No. of data for SFA-LSSVR validation:	 18 
+============================================================= 
+Stopping criteria: 
+Max. generation is reached 
+------------------------------------------------------------- 
+Performance measures during optimization phase
+Root mean square error (training) [unit]:	 0.2234 
+Root mean square error (validation) [unit]:	 1.0984 
+Mean absolute error (training) [unit]:		 0.1600 
+Mean absolute error (validation) [unit]:	 0.8246 
+Mean absolute percentage error (training) [%]:	 16.61 
+Mean absolute percentage error (validation) [%]: 57.55 
+Correlation coefficient (training):		 0.9927 
+Correlation coefficient (validation):		 0.9192 
+============================================================= 
+Optimal parameters for LSSVR model
+C:						 5.065664e+11 
+Sigma:						 1000 
+------------------------------------------------------------- 
+Performance measures using learning data
+Root mean square error (learning) [unit]:	 0.3018 
+Mean absolute error (learning) [unit]:		 0.2288 
+Mean absolute percentage error (learning) [%]:	 20.61 
+Correlation coefficient (learning):		 0.9872 
+------------------------------------------------------------- 
+Performance measures using test data
+Root mean square error (test) [unit]:		 3.5988 
+Mean absolute error (test) [unit]:		 1.4421 
+Mean absolute percentage error (test) [%]:	 56.00 
+Correlation coefficient (test):			 0.1654 
+============================================================= 
+Total time [s]:					 1.17 

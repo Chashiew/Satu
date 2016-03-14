@@ -1,0 +1,186 @@
+Analysis report
+============================================================= 
+Experimental settings
+C:						 10 
+Sigma:						 1.000000e-01 
+Normalization setting:				 Original value 
+------------------------------------------------------------- 
+Total No. of attributes:			 6 
+Total No. of data (instances):			 74 
+Test option: Cross-validation [folds]:		 10 
+============================================================= 
+Fold #1 
+No. of training data:				 67 
+No. of test data:				 7 
+------------------------------------------------------------- 
+Performance measures using training data
+Root mean square error (training) [unit]:	 0.2090 
+Mean absolute error (training) [unit]:		 0.1600 
+Mean absolute percentage error (training) [%]: 	 13.36 
+Correlation coefficient (training):		 0.9934 
+------------------------------------------------------------- 
+Performance measures using test data
+Root mean square error (test) [unit]:		 0.5969 
+Mean absolute error (test) [unit]:		 0.4975 
+Mean absolute percentage error (test) [%]:	 32.01 
+Correlation coefficient (test):			 0.9727 
+============================================================= 
+Fold #2 
+No. of training data:				 66 
+No. of test data:				 8 
+------------------------------------------------------------- 
+Performance measures using training data
+Root mean square error (training) [unit]:	 0.2497 
+Mean absolute error (training) [unit]:		 0.1902 
+Mean absolute percentage error (training) [%]: 	 16.35 
+Correlation coefficient (training):		 0.9913 
+------------------------------------------------------------- 
+Performance measures using test data
+Root mean square error (test) [unit]:		 0.3132 
+Mean absolute error (test) [unit]:		 0.2212 
+Mean absolute percentage error (test) [%]:	 12.24 
+Correlation coefficient (test):			 0.9790 
+============================================================= 
+Fold #3 
+No. of training data:				 67 
+No. of test data:				 7 
+------------------------------------------------------------- 
+Performance measures using training data
+Root mean square error (training) [unit]:	 0.2294 
+Mean absolute error (training) [unit]:		 0.1719 
+Mean absolute percentage error (training) [%]: 	 14.12 
+Correlation coefficient (training):		 0.9923 
+------------------------------------------------------------- 
+Performance measures using test data
+Root mean square error (test) [unit]:		 0.4492 
+Mean absolute error (test) [unit]:		 0.3463 
+Mean absolute percentage error (test) [%]:	 44.11 
+Correlation coefficient (test):			 0.9757 
+============================================================= 
+Fold #4 
+No. of training data:				 67 
+No. of test data:				 7 
+------------------------------------------------------------- 
+Performance measures using training data
+Root mean square error (training) [unit]:	 0.2468 
+Mean absolute error (training) [unit]:		 0.1889 
+Mean absolute percentage error (training) [%]: 	 15.58 
+Correlation coefficient (training):		 0.9909 
+------------------------------------------------------------- 
+Performance measures using test data
+Root mean square error (test) [unit]:		 0.2468 
+Mean absolute error (test) [unit]:		 0.2107 
+Mean absolute percentage error (test) [%]:	 23.13 
+Correlation coefficient (test):			 0.9991 
+============================================================= 
+Fold #5 
+No. of training data:				 66 
+No. of test data:				 8 
+------------------------------------------------------------- 
+Performance measures using training data
+Root mean square error (training) [unit]:	 0.2286 
+Mean absolute error (training) [unit]:		 0.1759 
+Mean absolute percentage error (training) [%]: 	 13.72 
+Correlation coefficient (training):		 0.9929 
+------------------------------------------------------------- 
+Performance measures using test data
+Root mean square error (test) [unit]:		 0.5407 
+Mean absolute error (test) [unit]:		 0.3930 
+Mean absolute percentage error (test) [%]:	 52.72 
+Correlation coefficient (test):			 0.9489 
+============================================================= 
+Fold #6 
+No. of training data:				 67 
+No. of test data:				 7 
+------------------------------------------------------------- 
+Performance measures using training data
+Root mean square error (training) [unit]:	 0.2331 
+Mean absolute error (training) [unit]:		 0.1746 
+Mean absolute percentage error (training) [%]: 	 15.56 
+Correlation coefficient (training):		 0.9925 
+------------------------------------------------------------- 
+Performance measures using test data
+Root mean square error (test) [unit]:		 0.9484 
+Mean absolute error (test) [unit]:		 0.8360 
+Mean absolute percentage error (test) [%]:	 37.46 
+Correlation coefficient (test):			 0.6201 
+============================================================= 
+Fold #7 
+No. of training data:				 66 
+No. of test data:				 8 
+------------------------------------------------------------- 
+Performance measures using training data
+Root mean square error (training) [unit]:	 0.2127 
+Mean absolute error (training) [unit]:		 0.1558 
+Mean absolute percentage error (training) [%]: 	 14.63 
+Correlation coefficient (training):		 0.9937 
+------------------------------------------------------------- 
+Performance measures using test data
+Root mean square error (test) [unit]:		 0.9015 
+Mean absolute error (test) [unit]:		 0.6183 
+Mean absolute percentage error (test) [%]:	 23.14 
+Correlation coefficient (test):			 0.9434 
+============================================================= 
+Fold #8 
+No. of training data:				 67 
+No. of test data:				 7 
+------------------------------------------------------------- 
+Performance measures using training data
+Root mean square error (training) [unit]:	 0.2151 
+Mean absolute error (training) [unit]:		 0.1604 
+Mean absolute percentage error (training) [%]: 	 14.43 
+Correlation coefficient (training):		 0.9935 
+------------------------------------------------------------- 
+Performance measures using test data
+Root mean square error (test) [unit]:		 0.5820 
+Mean absolute error (test) [unit]:		 0.4148 
+Mean absolute percentage error (test) [%]:	 21.24 
+Correlation coefficient (test):			 0.9706 
+============================================================= 
+Fold #9 
+No. of training data:				 66 
+No. of test data:				 8 
+------------------------------------------------------------- 
+Performance measures using training data
+Root mean square error (training) [unit]:	 0.2208 
+Mean absolute error (training) [unit]:		 0.1650 
+Mean absolute percentage error (training) [%]: 	 14.99 
+Correlation coefficient (training):		 0.9930 
+------------------------------------------------------------- 
+Performance measures using test data
+Root mean square error (test) [unit]:		 0.5941 
+Mean absolute error (test) [unit]:		 0.5077 
+Mean absolute percentage error (test) [%]:	 26.78 
+Correlation coefficient (test):			 0.9672 
+============================================================= 
+Fold #10 
+No. of training data:				 67 
+No. of test data:				 7 
+------------------------------------------------------------- 
+Performance measures using training data
+Root mean square error (training) [unit]:	 0.2136 
+Mean absolute error (training) [unit]:		 0.1629 
+Mean absolute percentage error (training) [%]: 	 14.19 
+Correlation coefficient (training):		 0.9935 
+------------------------------------------------------------- 
+Performance measures using test data
+Root mean square error (test) [unit]:		 0.6764 
+Mean absolute error (test) [unit]:		 0.5007 
+Mean absolute percentage error (test) [%]:	 57.09 
+Correlation coefficient (test):			 0.9307 
+============================================================= 
+Average cross-fold results
+------------------------------------------------------------- 
+Average performance measures using training data
+Root mean square error (training) [unit]:	 0.2259 
+Mean absolute error (training) [unit]:		 0.1705 
+Mean absolute percentage error (training) [%]: 	 14.69 
+Correlation coefficient (training):		 0.9927 
+------------------------------------------------------------- 
+Average performance measures using test data
+Root mean square error (test) [unit]:		 0.5849 
+Mean absolute error (test) [unit]:		 0.4546 
+Mean absolute percentage error (test) [%]:	 32.99 
+Correlation coefficient (test):			 0.9307 
+============================================================= 
+Total time [s]:					 0.51 

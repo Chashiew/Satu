@@ -1,0 +1,20 @@
+Value of C = 10	
+Value of Sigma = 0.10	
+Hold-out = 20 (percent)	
+Cross Validation = 10 (folds)	
+
+dNormalRadio = 2	
+dPRadio = 2	
+dTORadio = 1	
+
+sVariation = 10	
+
+dAttributes = 6	
+dInstances = 61	
+Datatrain(1,1) = 0.2900	
+Datatrain(61,6) = 4.6800	
+
+dPAttributes = 5	
+dPInstances = 15	
+Datapre(1,1) = 0.1500	
+Datapre(15,5) = 13.0000	

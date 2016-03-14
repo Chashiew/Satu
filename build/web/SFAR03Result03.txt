@@ -1,0 +1,354 @@
+Analysis report
+============================================================= 
+Experimental settings
+No. of fireflies:				 5 
+Maximun generation:				 5 
+Alpha:						 0.20 
+Adaptive inertial weight:			 0.90 
+Gamma:						 1.00 
+Beta min:					 0.10 
+Tau:						 1.50 
+Logistic map, biotic potential (a):		 4 
+Normalization setting:				 Original value 
+Learning setting 
+	 Training partition size [%]:		 70.00 
+	 Vaidation partition size [%]:		 30.00 
+------------------------------------------------------------- 
+Total No. of attributes:			 6 
+Total No. of data (instances):			 74 
+Test option: Cross-validation [folds]:		 10 
+============================================================= 
+Fold #1 
+No. of test data:				 8 
+No. of learning data:				 66 
+	 No. of data for SFA-LSSVR training:	 46 
+	 No. of data for SFA-LSSVR validation:	 20 
+------------------------------------------------------------- 
+Performance measures during optimization phase
+Root mean square error (training) [unit]:	 0.2572 
+Root mean square error (validation) [unit]:	 0.7108 
+Mean absolute error (training) [unit]:		 0.1607 
+Mean absolute error (validation) [unit]:	 0.5139 
+Mean absolute percentage error (training) [%]:	 10.24 
+Mean absolute percentage error (validation) [%]: 41.81 
+Correlation coefficient (training):		 0.9887 
+Correlation coefficient (validation):		 0.9183 
+------------------------------------------------------------- 
+Optimal parameters for LSSVR model
+C:						 9.263225e+08 
+Sigma:						 9.468121e+02 
+------------------------------------------------------------- 
+Performance measures using learning data
+Root mean square error (learning) [unit]:	 0.3701 
+Mean absolute error (learning) [unit]:		 0.2568 
+Mean absolute percentage error (learning) [%]:	 19.52 
+Correlation coefficient (learning):		 0.9771 
+------------------------------------------------------------- 
+Performance measures using test data
+Root mean square error (test) [unit]:		 0.6426 
+Mean absolute error (test) [unit]:		 0.4941 
+Mean absolute percentage error (test) [%]:	 19.89 
+Correlation coefficient (test):			 0.9658 
+============================================================= 
+Fold #2 
+No. of test data:				 7 
+No. of learning data:				 67 
+	 No. of data for SFA-LSSVR training:	 46 
+	 No. of data for SFA-LSSVR validation:	 21 
+------------------------------------------------------------- 
+Performance measures during optimization phase
+Root mean square error (training) [unit]:	 0.3047 
+Root mean square error (validation) [unit]:	 0.8236 
+Mean absolute error (training) [unit]:		 0.2245 
+Mean absolute error (validation) [unit]:	 0.6075 
+Mean absolute percentage error (training) [%]:	 18.14 
+Mean absolute percentage error (validation) [%]: 40.22 
+Correlation coefficient (training):		 0.9850 
+Correlation coefficient (validation):		 0.9173 
+------------------------------------------------------------- 
+Optimal parameters for LSSVR model
+C:						 5.670147e+09 
+Sigma:						 9.384988e+02 
+------------------------------------------------------------- 
+Performance measures using learning data
+Root mean square error (learning) [unit]:	 0.3571 
+Mean absolute error (learning) [unit]:		 0.2453 
+Mean absolute percentage error (learning) [%]:	 18.95 
+Correlation coefficient (learning):		 0.9796 
+------------------------------------------------------------- 
+Performance measures using test data
+Root mean square error (test) [unit]:		 10.0007 
+Mean absolute error (test) [unit]:		 4.2173 
+Mean absolute percentage error (test) [%]:	 131.53 
+Correlation coefficient (test):			 0.0414 
+============================================================= 
+Fold #3 
+No. of test data:				 8 
+No. of learning data:				 66 
+	 No. of data for SFA-LSSVR training:	 46 
+	 No. of data for SFA-LSSVR validation:	 20 
+------------------------------------------------------------- 
+Performance measures during optimization phase
+Root mean square error (training) [unit]:	 0.2326 
+Root mean square error (validation) [unit]:	 4.2587 
+Mean absolute error (training) [unit]:		 0.1541 
+Mean absolute error (validation) [unit]:	 1.5717 
+Mean absolute percentage error (training) [%]:	 15.95 
+Mean absolute percentage error (validation) [%]: 76.17 
+Correlation coefficient (training):		 0.9904 
+Correlation coefficient (validation):		 0.5379 
+------------------------------------------------------------- 
+Optimal parameters for LSSVR model
+C:						 6.364978e+11 
+Sigma:						 9.991307e+02 
+------------------------------------------------------------- 
+Performance measures using learning data
+Root mean square error (learning) [unit]:	 0.2883 
+Mean absolute error (learning) [unit]:		 0.2071 
+Mean absolute percentage error (learning) [%]:	 18.87 
+Correlation coefficient (learning):		 0.9872 
+------------------------------------------------------------- 
+Performance measures using test data
+Root mean square error (test) [unit]:		 0.6187 
+Mean absolute error (test) [unit]:		 0.5255 
+Mean absolute percentage error (test) [%]:	 18.82 
+Correlation coefficient (test):			 0.9572 
+============================================================= 
+Fold #4 
+No. of test data:				 7 
+No. of learning data:				 67 
+	 No. of data for SFA-LSSVR training:	 46 
+	 No. of data for SFA-LSSVR validation:	 21 
+------------------------------------------------------------- 
+Performance measures during optimization phase
+Root mean square error (training) [unit]:	 0.2849 
+Root mean square error (validation) [unit]:	 5.8251 
+Mean absolute error (training) [unit]:		 0.1924 
+Mean absolute error (validation) [unit]:	 2.4876 
+Mean absolute percentage error (training) [%]:	 17.42 
+Mean absolute percentage error (validation) [%]: 71.29 
+Correlation coefficient (training):		 0.9856 
+Correlation coefficient (validation):		 0.5880 
+------------------------------------------------------------- 
+Optimal parameters for LSSVR model
+C:						 2.046379e+11 
+Sigma:						 8.458845e+02 
+------------------------------------------------------------- 
+Performance measures using learning data
+Root mean square error (learning) [unit]:	 0.3087 
+Mean absolute error (learning) [unit]:		 0.2106 
+Mean absolute percentage error (learning) [%]:	 17.51 
+Correlation coefficient (learning):		 0.9862 
+------------------------------------------------------------- 
+Performance measures using test data
+Root mean square error (test) [unit]:		 0.5152 
+Mean absolute error (test) [unit]:		 0.3841 
+Mean absolute percentage error (test) [%]:	 19.57 
+Correlation coefficient (test):			 0.9371 
+============================================================= 
+Fold #5 
+No. of test data:				 8 
+No. of learning data:				 66 
+	 No. of data for SFA-LSSVR training:	 46 
+	 No. of data for SFA-LSSVR validation:	 20 
+------------------------------------------------------------- 
+Performance measures during optimization phase
+Root mean square error (training) [unit]:	 0.1770 
+Root mean square error (validation) [unit]:	 3.5798 
+Mean absolute error (training) [unit]:		 0.1360 
+Mean absolute error (validation) [unit]:	 1.2905 
+Mean absolute percentage error (training) [%]:	 13.74 
+Mean absolute percentage error (validation) [%]: 45.66 
+Correlation coefficient (training):		 0.9954 
+Correlation coefficient (validation):		 0.2422 
+------------------------------------------------------------- 
+Optimal parameters for LSSVR model
+C:						 6.277438e+11 
+Sigma:						 9.938976e+02 
+------------------------------------------------------------- 
+Performance measures using learning data
+Root mean square error (learning) [unit]:	 0.2762 
+Mean absolute error (learning) [unit]:		 0.2070 
+Mean absolute percentage error (learning) [%]:	 19.18 
+Correlation coefficient (learning):		 0.9890 
+------------------------------------------------------------- 
+Performance measures using test data
+Root mean square error (test) [unit]:		 0.5941 
+Mean absolute error (test) [unit]:		 0.4422 
+Mean absolute percentage error (test) [%]:	 36.35 
+Correlation coefficient (test):			 0.9379 
+============================================================= 
+Fold #6 
+No. of test data:				 7 
+No. of learning data:				 67 
+	 No. of data for SFA-LSSVR training:	 46 
+	 No. of data for SFA-LSSVR validation:	 21 
+------------------------------------------------------------- 
+Performance measures during optimization phase
+Root mean square error (training) [unit]:	 0.2846 
+Root mean square error (validation) [unit]:	 0.6220 
+Mean absolute error (training) [unit]:		 0.1924 
+Mean absolute error (validation) [unit]:	 0.4424 
+Mean absolute percentage error (training) [%]:	 13.05 
+Mean absolute percentage error (validation) [%]: 35.87 
+Correlation coefficient (training):		 0.9860 
+Correlation coefficient (validation):		 0.9599 
+------------------------------------------------------------- 
+Optimal parameters for LSSVR model
+C:						 3.903483e+10 
+Sigma:						 1000 
+------------------------------------------------------------- 
+Performance measures using learning data
+Root mean square error (learning) [unit]:	 0.3575 
+Mean absolute error (learning) [unit]:		 0.2563 
+Mean absolute percentage error (learning) [%]:	 18.17 
+Correlation coefficient (learning):		 0.9816 
+------------------------------------------------------------- 
+Performance measures using test data
+Root mean square error (test) [unit]:		 3.5488 
+Mean absolute error (test) [unit]:		 1.4555 
+Mean absolute percentage error (test) [%]:	 69.42 
+Correlation coefficient (test):			 0.0298 
+============================================================= 
+Fold #7 
+No. of test data:				 7 
+No. of learning data:				 67 
+	 No. of data for SFA-LSSVR training:	 46 
+	 No. of data for SFA-LSSVR validation:	 21 
+------------------------------------------------------------- 
+Performance measures during optimization phase
+Root mean square error (training) [unit]:	 0.2542 
+Root mean square error (validation) [unit]:	 0.5947 
+Mean absolute error (training) [unit]:		 0.1699 
+Mean absolute error (validation) [unit]:	 0.4467 
+Mean absolute percentage error (training) [%]:	 15.70 
+Mean absolute percentage error (validation) [%]: 23.83 
+Correlation coefficient (training):		 0.9905 
+Correlation coefficient (validation):		 0.9446 
+------------------------------------------------------------- 
+Optimal parameters for LSSVR model
+C:						 1.643802e+10 
+Sigma:						 3.192407e+02 
+------------------------------------------------------------- 
+Performance measures using learning data
+Root mean square error (learning) [unit]:	 0.2920 
+Mean absolute error (learning) [unit]:		 0.2105 
+Mean absolute percentage error (learning) [%]:	 16.68 
+Correlation coefficient (learning):		 0.9871 
+------------------------------------------------------------- 
+Performance measures using test data
+Root mean square error (test) [unit]:		 4.9937 
+Mean absolute error (test) [unit]:		 2.2252 
+Mean absolute percentage error (test) [%]:	 82.41 
+Correlation coefficient (test):			 -0.1535 
+============================================================= 
+Fold #8 
+No. of test data:				 7 
+No. of learning data:				 67 
+	 No. of data for SFA-LSSVR training:	 46 
+	 No. of data for SFA-LSSVR validation:	 21 
+------------------------------------------------------------- 
+Performance measures during optimization phase
+Root mean square error (training) [unit]:	 0.2055 
+Root mean square error (validation) [unit]:	 0.7735 
+Mean absolute error (training) [unit]:		 0.1439 
+Mean absolute error (validation) [unit]:	 0.5310 
+Mean absolute percentage error (training) [%]:	 10.40 
+Mean absolute percentage error (validation) [%]: 49.43 
+Correlation coefficient (training):		 0.9939 
+Correlation coefficient (validation):		 0.9025 
+------------------------------------------------------------- 
+Optimal parameters for LSSVR model
+C:						 4.770874e+11 
+Sigma:						 2.526825e+02 
+------------------------------------------------------------- 
+Performance measures using learning data
+Root mean square error (learning) [unit]:	 0.2271 
+Mean absolute error (learning) [unit]:		 0.1595 
+Mean absolute percentage error (learning) [%]:	 13.45 
+Correlation coefficient (learning):		 0.9925 
+------------------------------------------------------------- 
+Performance measures using test data
+Root mean square error (test) [unit]:		 1.0622 
+Mean absolute error (test) [unit]:		 0.8445 
+Mean absolute percentage error (test) [%]:	 94.16 
+Correlation coefficient (test):			 0.8152 
+============================================================= 
+Fold #9: 
+No. of test data:				 8 
+No. of learning data:				 66 
+	 No. of data for SFA-LSSVR training:	 46 
+	 No. of data for SFA-LSSVR validation:	 20 
+------------------------------------------------------------- 
+Performance measures during optimization phase
+Root mean square error (training) [unit]:	 0.2983 
+Root mean square error (validation) [unit]:	 4.6672 
+Mean absolute error (training) [unit]:		 0.2244 
+Mean absolute error (validation) [unit]:	 1.3663 
+Mean absolute percentage error (training) [%]:	 21.94 
+Mean absolute percentage error (validation) [%]: 47.58 
+Correlation coefficient (training):		 0.9854 
+Correlation coefficient (validation):		 0.0757 
+------------------------------------------------------------- 
+Optimal parameters for LSSVR model
+C:						 6.143490e+11 
+Sigma:						 1000 
+------------------------------------------------------------- 
+Performance measures using learning data
+Root mean square error (learning) [unit]:	 0.3133 
+Mean absolute error (learning) [unit]:		 0.2319 
+Mean absolute percentage error (learning) [%]:	 20.09 
+Correlation coefficient (learning):		 0.9845 
+------------------------------------------------------------- 
+Performance measures using test data
+Root mean square error (test) [unit]:		 0.3792 
+Mean absolute error (test) [unit]:		 0.2503 
+Mean absolute percentage error (test) [%]:	 20.41 
+Correlation coefficient (test):			 0.9909 
+============================================================= 
+Fold #10 
+No. of test data:				 7 
+No. of learning data:				 67 
+	 No. of data for SFA-LSSVR training:	 46 
+	 No. of data for SFA-LSSVR validation:	 21 
+------------------------------------------------------------- 
+Performance measures during optimization phase
+Root mean square error (training) [unit]:	 0.2303 
+Root mean square error (validation) [unit]:	 6.0553 
+Mean absolute error (training) [unit]:		 0.1564 
+Mean absolute error (validation) [unit]:	 2.3434 
+Mean absolute percentage error (training) [%]:	 13.54 
+Mean absolute percentage error (validation) [%]: 94.98 
+Correlation coefficient (training):		 0.9928 
+Correlation coefficient (validation):		 0.4886 
+------------------------------------------------------------- 
+Optimal parameters for LSSVR model
+C:						 7.703746e+11 
+Sigma:						 7.006976e+02 
+------------------------------------------------------------- 
+Performance measures using learning data
+Root mean square error (learning) [unit]:	 0.2703 
+Mean absolute error (learning) [unit]:		 0.2013 
+Mean absolute percentage error (learning) [%]:	 19.03 
+Correlation coefficient (learning):		 0.9896 
+------------------------------------------------------------- 
+Performance measures using test data
+Root mean square error (test) [unit]:		 0.6932 
+Mean absolute error (test) [unit]:		 0.5374 
+Mean absolute percentage error (test) [%]:	 37.60 
+Correlation coefficient (test):			 0.9859 
+============================================================= 
+Average cross-fold results
+Performance measures using learning data
+Root mean square error (learning) [unit]:	 0.3061 
+Mean absolute error (learning) [unit]:		 0.2186 
+Mean absolute percentage error (learning) [%]:	 18.15 
+Correlation coefficient (learning):		 0.9854 
+------------------------------------------------------------- 
+Performance measures using test data
+Root mean square error (test) [unit]:		 2.3049 
+Mean absolute error (test) [unit]:		 1.1376 
+Mean absolute percentage error (test) [%]:	 53.02 
+Correlation coefficient (test):			 0.6508 
+============================================================= 
+Total time [s]:					 10.72 

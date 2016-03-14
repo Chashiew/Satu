@@ -1,0 +1,49 @@
+Analysis report
+============================================================= 
+Experimental settings
+No. of fireflies:				 5 
+Maximun generation:				 5 
+Alpha:						 0.20 
+Adaptive inertial weight:			 0.90 
+Gamma:						 1.00 
+Beta min:					 0.10 
+Tau:						 1.50 
+Logistic map, biotic potential (a):		 4 
+Normalization setting:				 Original value 
+Learning setting 
+	 Training partition size [%]:		 70.00 
+	 Vaidation partition size [%]:		 30.00 
+------------------------------------------------------------- 
+Total No. of learning attributes:		 6 
+Total No. of learning data (instances):		 61 
+No. of attributes for prediction:		 5 
+No. of data for prediction:			 15 
+------------------------------------------------------------- 
+No. of learning data:				 61 
+	 No. of data for SFA-LSSVR training:	 43 
+	 No. of data for SFA-LSSVR validation:	 18 
+============================================================= 
+Stopping criteria: 
+Max. generation is reached 
+------------------------------------------------------------- 
+Performance measures during optimization phase
+Root mean square error (training) [unit]:	 0.3143 
+Root mean square error (validation) [unit]:	 1.0010 
+Mean absolute error (training) [unit]:		 0.2157 
+Mean absolute error (validation) [unit]:	 0.5724 
+Mean absolute percentage error (training) [%]:	 18.37 
+Mean absolute percentage error (validation) [%]: 20.06 
+Correlation coefficient (training):		 0.9794 
+Correlation coefficient (validation):		 0.9187 
+------------------------------------------------------------- 
+Optimal parameters for LSSVR model
+C:						 2.115941e+08 
+Sigma:						 6.652735e+02 
+------------------------------------------------------------- 
+Performance measures using learning data
+Root mean square error (learning) [unit]:	 0.3331 
+Mean absolute error (learning) [unit]:		 0.2427 
+Mean absolute percentage error (learning) [%]:	 19.31 
+Correlation coefficient (learning):		 0.9814 
+============================================================= 
+Total time [s]:					 1.05 

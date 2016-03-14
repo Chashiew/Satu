@@ -1250,7 +1250,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     //var VarA = document.getElementById("VarA");
                     
                     document.getElementById("sHasil").value = "2";
-                    document.getElementById("sRunReportTable").value = "1";
+                    //document.getElementById("sRunReportTable").value = "1";
                     
                     var VarNext = document.getElementById("VarNext");
                     document.getElementById("VarNext").value = val;
@@ -1352,7 +1352,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     var sPredictionFileNameLSSVM = document.getElementById("sPredictionFileNameLSSVM");
 
                     document.getElementById("sHasil").value = "2";
-                    document.getElementById("sRunReportTable").value = "1";
+                    //document.getElementById("sRunReportTable").value = "1";
                     
                     var VarNextLSSVM = document.getElementById("VarNextLSSVM");
                     document.getElementById("VarNextLSSVM").value = val;
@@ -2264,7 +2264,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     <input type="hidden" name="hiddendatafile" id="hiddendatafile" value="0">
                 <% } %>
                 
-                <input type="hidden" name="sRunReportTable" id="sRunReportTable" value="" />
                 <input type="hidden" name="sHasil" id="sHasil" value="" />
                                 
                 <input type="hidden" name="sLoadingDefault" id="sLoadingDefault" value="<%=sLoadingDefault%>" />
@@ -2312,8 +2311,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             %>
                         </div>
                         <div id="prediction" class="tab-pane fade">
-                            <input type="hidden" name="dHoldOut" id="dHoldOut" value="<%=dHoldOut%>"/>
-                            <input type="hidden" name="dCrossValidation" id="dCrossValidation" value="<%=dCrossValidation%>"/>
+                            <%--><input type="hidden" name="dHoldOut" id="dHoldOut" value="<%=dHoldOut%>"/>
+                            <input type="hidden" name="dCrossValidation" id="dCrossValidation" value="<%=dCrossValidation%>"/><--%>
                         </div>
                     </div>
                 </div>
@@ -4241,7 +4240,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     <input type="hidden" name="hiddendatafile" id="hiddendatafile" value="0">
                 <% } %>
                 
-                <input type="hidden" name="sRunReportTable" id="sRunReportTable" value="" />
                 <input type="hidden" name="sHasil" id="sHasil" value="" />
                                 
                 <input type="hidden" name="sLoadingDefaultLSSVM" id="sLoadingDefaultLSSVM" value="<%=sLoadingDefaultLSSVM%>" />
@@ -4295,8 +4293,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             <% } %>
                         </div>
                         <div id="prediction" class="tab-pane fade">
-                            <input type="hidden" name="dHoldOutLSSVM" id="dHoldOutLSSVM" value="<%=dHoldOutLSSVM%>"/>
-                            <input type="hidden" name="dCrossValidationLSSVM" id="dCrossValidationLSSVM" value="<%=dCrossValidationLSSVM%>"/>
+                            <%--><input type="hidden" name="dHoldOutLSSVM" id="dHoldOutLSSVM" value="<%=dHoldOutLSSVM%>"/>
+                            <input type="hidden" name="dCrossValidationLSSVM" id="dCrossValidationLSSVM" value="<%=dCrossValidationLSSVM%>"/><--%>
                         </div>
                     </div>
                 </div>

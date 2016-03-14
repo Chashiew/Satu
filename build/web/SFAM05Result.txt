@@ -1,0 +1,25 @@
+No. of fireflies = 5	
+Max. generation = 5	
+Alpha = 0.20	
+Adaptive inertial weight = 0.90	
+Beta min = 0.10	
+Gamma = 1.00	
+Tau = 1.50	
+Logistic map, biotic potential (a) = 4 	
+
+dNormalRadio = 1	
+dSCRadio = 3	
+dPRadio = 2	
+dTORadio = 1	
+
+sVariation = 25	
+
+dAttributes = 8	
+dInstances = 192	
+Datalearn(1,1) = 37.0000	
+Datalearn(192,8) = 0.0000	
+
+dPAttributes = 7	
+dPInstances = 48	
+Datapre(1,1) = 2.5000	
+Datapre(48,7) = 4.6500	
