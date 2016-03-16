@@ -14,4 +14,4 @@ No. of data for prediction:				 48
 Performance measures using training data
 Percentage of correct prediction (training) [%]:	 99.4792 
 ===================================================================== 
-Total time [s]:						 0.10 
+Total time [s]:						 0.14 

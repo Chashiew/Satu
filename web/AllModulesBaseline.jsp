@@ -1185,7 +1185,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 var sTestFileName = document.getElementById("sTestFileName");
                 var sLearningFileName = document.getElementById("sLearningFileName");
                 var sPredictionFileName = document.getElementById("sPredictionFileName");
-                
+                    
                 if (nValueC.value === "") {
                     alert("Load default values and calculate first ...!");
                     nValueC.focus();
@@ -1248,9 +1248,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     var sPredictionFileName = document.getElementById("sPredictionFileName");
 
                     //var VarA = document.getElementById("VarA");
-                    
-                    document.getElementById("sHasil").value = "2";
-                    //document.getElementById("sRunReportTable").value = "1";
                     
                     var VarNext = document.getElementById("VarNext");
                     document.getElementById("VarNext").value = val;
@@ -1351,9 +1348,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     var sLearningFileNameLSSVM = document.getElementById("sLearningFileNameLSSVM");
                     var sPredictionFileNameLSSVM = document.getElementById("sPredictionFileNameLSSVM");
 
-                    document.getElementById("sHasil").value = "2";
-                    //document.getElementById("sRunReportTable").value = "1";
-                    
                     var VarNextLSSVM = document.getElementById("VarNextLSSVM");
                     document.getElementById("VarNextLSSVM").value = val;
 
@@ -1817,6 +1811,15 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     var sLearningFileNameLSSVM = document.getElementById("sLearningFileNameLSSVM");
                     var sPredictionFileNameLSSVM = document.getElementById("sPredictionFileNameLSSVM");
 
+                    sSaveDataFileLSSVM = "";
+                    document.getElementById("sSaveDataFileLSSVM").value = "";
+                    //alert("Aha 135 ...!");
+
+                    var sLoadingDataFileLSSVM = document.getElementById("sLoadingDataFileLSSVM");
+                    sLoadingDataFileLSSVM = "";
+                    document.getElementById("sLoadingDataFileLSSVM").value = sLoadingDataFileLSSVM;
+                    //alert("Aha 1351 ...!");
+
                     var sMoveBottom = document.getElementById("sMoveBottom");
                     sMoveBottom.value = val;
                     document.getElementById("sMoveBottom").value = val;
@@ -2264,8 +2267,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     <input type="hidden" name="hiddendatafile" id="hiddendatafile" value="0">
                 <% } %>
                 
-                <input type="hidden" name="sHasil" id="sHasil" value="" />
-                                
                 <input type="hidden" name="sLoadingDefault" id="sLoadingDefault" value="<%=sLoadingDefault%>" />
                 <input type="hidden" name="sLoadingEvaluation" id="sLoadingEvaluation" value="<%=sLoadingEvaluation%>" />
                 <input type="hidden" name="sLoadingPrediction" id="sLoadingPrediction" value="<%=sLoadingPrediction%>" />
@@ -2667,6 +2668,15 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 sPFileData=sPredictionFileName;
                                 sdPInstances=nPDFInstances;
                                 sdPAttributes=nPDFAttributes;
+
+                                /*
+                                out.println("sFileData = "+sFileData);
+                                out.println("sdInstances = "+sdInstances);
+                                out.println("sdAttributes = "+sdAttributes);
+                                out.println("sPFileData = "+sPFileData);
+                                out.println("sdPInstances = "+sdPInstances);
+                                out.println("sdPAttributes = "+sdPAttributes);
+                                */ 
                                 %>
                                 
                                 <input type="hidden" name="TORadio" id="TORadio" value="<%=TORadio%>"/>
@@ -2687,146 +2697,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     </div>
                 </div>
                         
-                <%-->
-                <table>    
-                    <tr>
-                        <input type="hidden" name="fullPath" id="fullPath" value=""/>
-                        <input type="hidden" name="sFileData" id="sFileData" size="50" value="<%=sFileData%>" readonly/>
-                        <input type="hidden" name="sdAttributes" id="sdAttributes" size="4" value="<%=sdAttributes%>" readonly/>
-                        <input type="hidden" name="sdInstances" id="sdInstances" size="4" value="<%=sdInstances%>" readonly/>
-                        <input type="hidden" name="fullPath" id="fullPath" value=""/>
-                        <input type="hidden" name="sPFileData" id="sPFileData" size="50" value="<%=sPFileData%>" readonly/>
-                        <input type="hidden" name="sdPAttributes" id="sdPAttributes" size="4" value="<%=sdPAttributes%>" readonly/>
-                        <input type="hidden" name="sdPInstances" id="sdPInstances" size="4" value="<%=sdPInstances%>" readonly/>
-                    </tr>
-                </table>
-                <--%>
-            
-                <%--><h6 id="bottomform">
-                    <img src="Logo-Space.png" alt="     " width="4" height="5">
-                    &nbsp;. . . [END OF DATA FORM] &nbsp;&nbsp;&nbsp;
-                    
-                    <% if (sLoadingDataExcel != "") { %>
-                    <% } else { %>
-                    <div class="scrollToTop">
-                        <img src="arrowup.JPG" alt="..." width="18">  
-                    </div>
-                    <% } %>
-                </h6><--%>
-                
-                <!--<table>
-                    <hr/>
-                    <tr>
-                        <td colspan="12">
-                            <h3>
-                                <img src="Logo-Space.png" alt="     " width="1" height="1">
-                                Data To Analyze:
-                            </h3>
-                        </td>
-                        <td style="width:43%">
-                            <input type="submit" name="VarCompute" value="COMPUTE" onclick="return computeatform(1);" style="float:right"/>
-                        </td>
-                    </tr>
-                </table>
-                <table>    
-                    <tr>
-                        <td>
-                            <img src="Logo-Space.png" alt="     " width="9" height="1">
-                            * First Data file:
-                        </td>
-                        <td>&nbsp;</td>
-                        <td>
-                            <img src="Logo-Space.png" alt="     " width="27" height="1">
-                        </td>
-                        <td colspan="6">
-                            <input type="hidden" name="fullPath" id="fullPath" value=""/>
-                            <input type="text" name="sFileData" id="sFileData" size="50" value="<%=sFileData%>" readonly/>
-                        </td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td align="right">
-                            <font color="purple" face="tahoma" size="2">
-                                No. of attributes
-                            </font>
-                        </td>
-                        <td>
-                            <input type="text" name="sdAttributes" id="sdAttributes" size="4" value="<%=sdAttributes%>" readonly/>
-                        </td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td align="right">
-                            <font color="purple" face="tahoma" size="2">
-                                No. of instances
-                            </font>
-                        </td>
-                        <td>
-                            <input type="text" name="sdInstances" id="sdInstances" size="4" value="<%=sdInstances%>" readonly/>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td colspan="9"></td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <img src="Logo-Space.png" alt="..." width="9" height="1">
-                            * Second data file:
-                        </td>
-                        <td>&nbsp;</td>
-                        <td>
-                            <img src="Logo-Space.png" alt="..." width="27" height="1">
-                        </td>
-                        <td colspan="6">
-                            <input type="hidden" name="fullPath" id="fullPath" value=""/>
-                            <input type="text" name="sPFileData" id="sPFileData" size="50" value="<%=sPFileData%>" readonly/>
-                        </td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td align="right">
-                            <font color="purple" face="tahoma" size="2">
-                                No. of attributes
-                            </font>
-                        </td>
-                        <td>
-                            <input type="text" name="sdPAttributes" id="sdPAttributes" size="4" value="<%=sdPAttributes%>" readonly/>
-                        </td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td align="right">
-                            <font color="purple" face="tahoma" size="2">
-                                No. of instances
-                            </font>
-                        </td>
-                        <td>
-                            <input type="text" name="sdPInstances" id="sdPInstances" size="4" value="<%=sdPInstances%>" readonly/>
-                            <%-->
-                            <a onclick="return computeatform(1);">
-                                <img src="Icon-Calc.png" alt="..." width="13" height="17">
-                            </a>
-                            <--%>
-                        </td>
-                    </tr>
-                </table>
-                        
-                <BR>
-            
-            <h6 id="bottomform">
-                <img src="Logo-Space.png" alt="     " width="4" height="5">
-                &nbsp;. . . [END OF DATA FORM] &nbsp;&nbsp;&nbsp;
-                    
-                <% //if (sLoadingDataExcel != "") { %>
-                <% //} else { %>
-                    <%--<a href="#top">
-                        <img src="Icon-Top.png" alt="..." width="13" height="17">
-                    </a>--%>
-                    <div class="scrollToTop">
-                      <img src="arrowup.JPG" alt="..." width="18">  
-                    </div>
-                <% //} %>
-            </h6><-->
-
                 <table>
                     <tr>
                         <td>
@@ -4240,8 +4110,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     <input type="hidden" name="hiddendatafile" id="hiddendatafile" value="0">
                 <% } %>
                 
-                <input type="hidden" name="sHasil" id="sHasil" value="" />
-                                
                 <input type="hidden" name="sLoadingDefaultLSSVM" id="sLoadingDefaultLSSVM" value="<%=sLoadingDefaultLSSVM%>" />
                 <input type="hidden" name="sLoadingEvaluationLSSVM" id="sLoadingEvaluationLSSVM" value="<%=sLoadingEvaluationLSSVM%>" />
                 <input type="hidden" name="sLoadingPredictionLSSVM" id="sLoadingPredictionLSSVM" value="<%=sLoadingPredictionLSSVM%>" />
@@ -4275,16 +4143,11 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     <div class="tab-content">
                         <div id="evaluation" class="tab-pane fade in active">
                             <script>
-                                document.getElementById("NormalRadio1LSSVM").checked = false;
-                                document.getElementById("NormalRadio2LSSVM").checked = false;
                                 document.getElementById("TORadio1LSSVM").checked = false; 
                                 document.getElementById("TORadio2LSSVM").checked = false; 
                                 document.getElementById("TORadio3LSSVM").checked = false; 
                                 document.getElementById("TORadio4LSSVM").checked = false; 
                             </script>
-                            <% if (NormalRadio.equals("NormalRadio1")) {%><script>document.getElementById("NormalRadio1").checked = true; </script>
-                            <% } else if (NormalRadio.equals("NormalRadio2")) {%><script>document.getElementById("NormalRadio2").checked = true; </script>
-                            <% } %>
                             
                             <% if (TORadioLSSVM.equals("TORadio1LSSVM")) {%><script>document.getElementById("TORadio1LSSVM").checked = true; </script>
                             <% } else if (TORadioLSSVM.equals("TORadio2LSSVM")) {%><script>document.getElementById("TORadio2LSSVM").checked = true; </script>

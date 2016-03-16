@@ -27,6 +27,14 @@
 String VarA = request.getParameter("VarA");
 String VarB = request.getParameter("VarB");
 
+String sNormalRadio = "";
+String sPRadio = "";
+String sTORadio = "";
+
+String sNormalRadioLSSVM = "";
+String sPRadioLSSVM = "";
+String sTORadioLSSVM = "";
+
 String sLoadingDefault = request.getParameter("sLoadingDefault");
 if (sLoadingDefault == null) {
     sLoadingDefault = "";        
@@ -75,6 +83,15 @@ if (sLoadingDataExcelClick == null) {
     String sLoadingDataExcelClickLSSVM = request.getParameter("sLoadingDataExcelClickLSSVM");
     if (sLoadingDataExcelClickLSSVM == null) {
         sLoadingDataExcelClickLSSVM = "";        
+    };
+
+String sSaveDataFile = request.getParameter("sSaveDataFile");
+if (sSaveDataFile == null) {
+    sSaveDataFile = "";        
+};
+    String sSaveDataFileLSSVM = request.getParameter("sSaveDataFileLSSVM");
+    if (sSaveDataFileLSSVM == null) {
+        sSaveDataFileLSSVM = "";        
     };
 
 String NormalRadio = request.getParameter("NormalRadio");
@@ -270,6 +287,15 @@ if (sPredictionFileName == null) {
         sPredictionFileNameLSSVM = "";
     }
 
+String sBaseFileName = request.getParameter("sBaseFileName");
+if (sBaseFileName == null) {
+    sBaseFileName = "";
+}
+String sBaseFileNameLSSVM = request.getParameter("sBaseFileNameLSSVM");
+if (sBaseFileNameLSSVM == null) {
+    sBaseFileNameLSSVM = "";
+}
+
 String PRadio = request.getParameter("PRadio");
 if (PRadio == null) {
     PRadio = "PRadio1";
@@ -397,8 +423,18 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html> 
     <head>
+        <%
+        String hdf = request.getParameter("hiddendatafile");
+        if (hdf == null) {
+            hdf = "0";
+        }
+        /**/
+        //out.println("hdf = "+hdf); 
+        /**/
+        %>
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>
             <% if (VarA != null) { %>
@@ -409,7 +445,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
         </title>
 
         <link rel="stylesheet" type="text/css" href="mystyle.css">
-        
         <link rel="Stylesheet" type="text/css"
               media=all href="./StyleSheet.css" />
         <link href="StyleSheet.css" rel="stylesheet" type="text/css" />
@@ -417,7 +452,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.js"></script>
         <script src="js/bootstrap-filestyle.js"></script>
-        <style type="text/css">
+        <style type="text/css"> 
             .bs-example{
                 margin: 20px;
             }
@@ -459,6 +494,14 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
 
                 var VarA = document.getElementById("VarA");
                     
+                var sSaveDataFile = document.getElementById("sSaveDataFile");
+                sSaveDataFile = "";
+                document.getElementById("sSaveDataFile").value = sSaveDataFile;
+                
+                var sLoadingDataFile = document.getElementById("sLoadingDataFile");
+                sLoadingDataFile = "";
+                document.getElementById("sLoadingDataFile").value = sLoadingDataFile;
+                
                 var sLoadingDefault = document.getElementById("sLoadingDefault");
                 sLoadingDefault = "";
                 document.getElementById("sLoadingDefault").value = sLoadingDefault;
@@ -531,6 +574,14 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
 
                 var VarB = document.getElementById("VarB");
 
+                var sSaveDataFileLSSVM = document.getElementById("sSaveDataFileLSSVM");
+                sSaveDataFileLSSVM = "";
+                document.getElementById("sSaveDataFileLSSVM").value = sSaveDataFileLSSVM;
+                
+                var sLoadingDataFileLSSVM = document.getElementById("sLoadingDataFileLSSVM");
+                sLoadingDataFileLSSVM = "";
+                document.getElementById("sLoadingDataFileLSSVM").value = sLoadingDataFileLSSVM;
+                
                 var sLoadingDefaultLSSVM = document.getElementById("sLoadingDefaultLSSVM");
                 sLoadingDefaultLSSVM = "";
                 document.getElementById("sLoadingDefaultLSSVM").value = sLoadingDefaultLSSVM;
@@ -551,10 +602,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 }
                 document.getElementById("sLoadingPredictionLSSVM").value = sLoadingPredictionLSSVM;
 
-                var sLoadingDataFileLSSVM = document.getElementById("sLoadingDataFileLSSVM");
-                sLoadingDataFileLSSVM="";
-                document.getElementById("sLoadingDataFileLSSVM").value = sLoadingDataFileLSSVM;
-                
                 var sLoadingDataExcelLSSVM = document.getElementById("sLoadingDataExcelLSSVM");
                 sLoadingDataExcelLSSVM = "";
                 document.getElementById("sLoadingDataExcelLSSVM").value = "";
@@ -571,18 +618,15 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 return valid;
             }
             
-            function testdatasection(val) {
+            function ftestdatasection(val) {
                 var valid = false;
-                
-                if (document.getElementById("testdatasection").style.display === "none")
-                {
+                if (val === 1) {
                     document.getElementById("testdatasection").style.display = "block";
-                }
-                else
-                {
+                    document.getElementById("hiddendatafile").value = "1";
+                } else {
                     document.getElementById("testdatasection").style.display = "none";
+                    document.getElementById("hiddendatafile").value = "0";
                 }
-                
                 return valid;
             }
 
@@ -593,15 +637,20 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 document.getElementById("dHoldOut").value = "20" ;
                 document.getElementById("dCrossValidation").value = "10";
 
+                document.getElementById("sBaseFileName").value = "SVRResult"; 
+
+                //alert("Aha21 ...!");
                 document.getElementById("NormalRadio1").checked = true; //"null" ;
-                document.getElementById("PRadio1").checked = true; 
+                //document.getElementById("PRadio1").checked = true; 
                 document.getElementById("TORadio1").checked = true; 
                 
+                //alert("Aha22 ...!");
                 document.getElementById("sDataFile").value = "";    //"null"; 
                 document.getElementById("sTestDataFile").value = ""; 
                 document.getElementById("sLearningDataFile").value = ""; 
                 document.getElementById("sPredictionDataFile").value = ""; 
                 
+                //alert("Aha23 ...!");
                 document.getElementById("nDFAttributes").value = "0"; 
                 document.getElementById("nDFInstances").value = "0"; 
                 document.getElementById("nTDFAttributes").value = "0"; 
@@ -616,6 +665,13 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 document.getElementById("sLearningFileName").value = ""; 
                 document.getElementById("sPredictionFileName").value = ""; 
                         
+                document.getElementById("sFileData").value = "";
+                document.getElementById("sdInstances").value = "";
+                document.getElementById("sdAttributes").value = "";
+                document.getElementById("sPFileData").value = "";
+                document.getElementById("sdPInstances").value = "";
+                document.getElementById("sdPAttributes").value = "";
+
                 //document.getElementById("sLoadingDataExcel").value = "";
 
                 var sMoveBottom = document.getElementById("sMoveBottom");
@@ -636,6 +692,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 sLoadingPrediction = "";
                 document.getElementById("sLoadingPrediction").value = sLoadingPrediction;
 
+                var sSaveDataFile = document.getElementById("sSaveDataFile");
+                sSaveDataFile = "";
+                document.getElementById("sSaveDataFile").value = "";
+
                 var sLoadingDataFile = document.getElementById("sLoadingDataFile");
                 sLoadingDataFile = "";
                 document.getElementById("sLoadingDataFile").value = sLoadingDataFile;
@@ -648,8 +708,14 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 sLoadingDataExcelClick = "";
                 document.getElementById("sLoadingDataExcelClick").value = sLoadingDataExcelClick;
 
+                document.getElementById("testdatasection").style.display = "none";
+                var hdf = document.getElementById("hdf");
+                hdf = "0";
+                document.getElementById("hdf").value = "0";
+
+                //1. these lines to follow are not executed, as the display has been refreshed.
                 //alert("Aha2 ...!");
-                fullPath.value = sFileName.value;
+                //fullPath.value = sFileName.value;
                 document.getElementById("myform").action = "AllModulesBaseline.jsp";
                 document.getElementById("myform").submit();
                 valid = false;
@@ -664,8 +730,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 document.getElementById("dHoldOutLSSVM").value = "20" ;
                 document.getElementById("dCrossValidationLSSVM").value = "10";
 
+                document.getElementById("sBaseFileNameLSSVM").value = "SVMResult"; 
+
                 document.getElementById("NormalRadio1LSSVM").checked = true; //"null" ;
-                document.getElementById("PRadio1LSSVM").checked = true; 
+                //document.getElementById("PRadio1LSSVM").checked = true; 
                 document.getElementById("TORadio1LSSVM").checked = true; 
                 
                 document.getElementById("sDataFileLSSVM").value = "";    //"null"; 
@@ -707,6 +775,9 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 sLoadingPredictionLSSVM = "";
                 document.getElementById("sLoadingPredictionLSSVM").value = sLoadingPredictionLSSVM;
 
+                sSaveDataFileLSSVM = "";
+                document.getElementById("sSaveDataFileLSSVM").value = "";
+
                 var sLoadingDataFileLSSVM = document.getElementById("sLoadingDataFileLSSVM");
                 sLoadingDataFileLSSVM = "";
                 document.getElementById("sLoadingDataFileLSSVM").value = sLoadingDataFileLSSVM;
@@ -719,6 +790,12 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 sLoadingDataExcelClickLSSVM = "";
                 document.getElementById("sLoadingDataExcelClickLSSVM").value = sLoadingDataExcelClickLSSVM;
 
+                document.getElementById("testdatasection").style.display = "none";
+                var hdf = document.getElementById("hdf");
+                hdf = "0";
+                document.getElementById("hdf").value = "0";
+
+                //1. these lines to follow are not executed, as the display has been refreshed.
                 //alert("Aha2 ...!");
                 fullPathLSSVM.value = sFileNameLSSVM.value;
                 document.getElementById("myformLSSVM").action = "AllModulesBaseline.jsp";
@@ -736,8 +813,13 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 document.getElementById("dCrossValidation").value = "";
 
                 document.getElementById("NormalRadio1").checked = false; //"null" ;
-                document.getElementById("PRadio1").checked = false; 
-                document.getElementById("TORadio1").checked = false; 
+                //document.getElementById("PRadio1").checked = false; 
+                if (PRadio.value === "PRadio1") {
+                    document.getElementById("TORadio1").checked = false; 
+                    document.getElementById("TORadio2").checked = false;
+                    document.getElementById("TORadio3").checked = false;
+                    document.getElementById("TORadio4").checked = false;
+                }
                 
                 document.getElementById("sDataFile").value = "";    //"null"; 
                 document.getElementById("sTestDataFile").value = ""; 
@@ -752,6 +834,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 document.getElementById("nLDFInstances").value = "0"; 
                 document.getElementById("nPDFAttributes").value = "0"; 
                 document.getElementById("nPDFInstances").value = "0"; 
+                document.getElementById("sBaseFileName").value = ""; 
                         
                 document.getElementById("sFileName").value = "";    //"null"; 
                 document.getElementById("sTestFileName").value = ""; 
@@ -760,7 +843,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         
                 //document.getElementById("sLoadingDataExcel").value = "";
 
-                var sMoveBottom = document.getElementById("sMoveBottom");
+                var sMove  = document.getElementById("sMoveBottom");
                 sMoveBottom.value = val;
                 document.getElementById("sMoveBottom").value = val;
                 
@@ -778,6 +861,9 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 sLoadingPrediction = "";
                 document.getElementById("sLoadingPrediction").value = sLoadingPrediction;
 
+                sSaveDataFile = "";
+                document.getElementById("sSaveDataFile").value = "";
+
                 var sLoadingDataFile = document.getElementById("sLoadingDataFile");
                 sLoadingDataFile = "";
                 document.getElementById("sLoadingDataFile").value = sLoadingDataFile;
@@ -790,7 +876,11 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 sLoadingDataExcelClick = "";
                 document.getElementById("sLoadingDataExcelClick").value = sLoadingDataExcelClick;
 
-                //alert("Aha2 ...!");
+                //this line refresh the screen - no submission made
+                document.getElementById("testdatasection").style.display = "none"; //none, kalo mw diilangin
+                hdf = "0";
+                document.getElementById("hdf").value = "0"; //"0", kalo mw diilangin
+                
                 fullPath.value = sFileName.value;
                 document.getElementById("myform").action = "AllModulesBaseline.jsp";
                 document.getElementById("myform").submit();
@@ -807,8 +897,13 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 document.getElementById("dCrossValidationLSSVM").value = "";
 
                 document.getElementById("NormalRadio1LSSVM").checked = false; //"null" ;
-                document.getElementById("PRadio1LSSVM").checked = false; 
-                document.getElementById("TORadio1LSSVM").checked = false; 
+                //document.getElementById("PRadio1LSSVM").checked = false; 
+                if (PRadioLSSVM.value === "PRadio1LSSVM") {
+                    document.getElementById("TORadio1LSSVM").checked = false; 
+                    document.getElementById("TORadio2LSSVM").checked = false; 
+                    document.getElementById("TORadio3LSSVM").checked = false; 
+                    document.getElementById("TORadio4LSSVM").checked = false; 
+                }
                 
                 document.getElementById("sDataFileLSSVM").value = "";    //"null"; 
                 document.getElementById("sTestDataFileLSSVM").value = ""; 
@@ -823,6 +918,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 document.getElementById("nLDFInstancesLSSVM").value = "0"; 
                 document.getElementById("nPDFAttributesLSSVM").value = "0"; 
                 document.getElementById("nPDFInstancesLSSVM").value = "0"; 
+                document.getElementById("sBaseFileNameLSSVM").value = ""; 
                         
                 document.getElementById("sFileNameLSSVM").value = "";    //"null"; 
                 document.getElementById("sTestFileNameLSSVM").value = ""; 
@@ -849,6 +945,9 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 sLoadingPredictionLSSVM = "";
                 document.getElementById("sLoadingPredictionLSSVM").value = sLoadingPredictionLSSVM;
 
+                sSaveDataFileLSSVM = "";
+                document.getElementById("sSaveDataFileLSSVM").value = "";
+
                 var sLoadingDataFileLSSVM = document.getElementById("sLoadingDataFileLSSVM");
                 sLoadingDataFileLSSVM = "";
                 document.getElementById("sLoadingDataFileLSSVM").value = sLoadingDataFileLSSVM;
@@ -861,7 +960,11 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 sLoadingDataExcelClickLSSVM = "";
                 document.getElementById("sLoadingDataExcelClickLSSVM").value = sLoadingDataExcelClickLSSVM;
 
-                //alert("Aha2 ...!");
+                //this line refresh the screen - no submission made
+                document.getElementById("testdatasection").style.display = "none"; //none, kalo mw diilangin
+                hdf = "0";
+                document.getElementById("hdf").value = "0"; //"0", kalo mw diilangin
+                
                 fullPathLSSVM.value = sFileNameLSSVM.value;
                 document.getElementById("myformLSSVM").action = "AllModulesBaseline.jsp";
                 document.getElementById("myformLSSVM").submit();
@@ -1146,6 +1249,9 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
 
                     //var VarA = document.getElementById("VarA");
                     
+                    document.getElementById("sHasil").value = "2";
+                    //document.getElementById("sRunReportTable").value = "1";
+                    
                     var VarNext = document.getElementById("VarNext");
                     document.getElementById("VarNext").value = val;
                     
@@ -1245,6 +1351,9 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     var sLearningFileNameLSSVM = document.getElementById("sLearningFileNameLSSVM");
                     var sPredictionFileNameLSSVM = document.getElementById("sPredictionFileNameLSSVM");
 
+                    document.getElementById("sHasil").value = "2";
+                    //document.getElementById("sRunReportTable").value = "1";
+                    
                     var VarNextLSSVM = document.getElementById("VarNextLSSVM");
                     document.getElementById("VarNextLSSVM").value = val;
 
@@ -1480,6 +1589,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
 
                 var valid = true;
 
+                //alert("Aha 1 ...!");
                 if (nValueC.value === "") {
                     alert("Value of C cannot be empty!");
                     nValueC.focus();
@@ -1490,39 +1600,44 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     nValueC.select();
                     valid = false;
                 } else if (nValueS.value.length <= 0) {
-                    alert("Value of Sigma cannot be empty!");
+                    alert("Value of sigma cannot be empty!");
                     nValueS.focus();
                     valid = false;
                 } else if (isNaN(nValueS.value)) {
-                    alert("Value of Sigma = ... - ... (0.1)");
+                    alert("Value of sigma = ... - ... (0.1)");
                     nValueS.focus();
                     nValueS.select();
                     valid = false;
                 } else if (dHoldOut.value.length <= 0) {
-                    alert("Hold-Out (%) cannot be empty ...!");
+                    alert("Hold-out (%) cannot be empty ...!");
                     dHoldOut.focus();
                     valid = false;
                 } else if (isNaN(dHoldOut.value)) {
-                    alert("Hold-Out (%) = ... - ... (20)");
+                    alert("Hold-out (%) = ... - ... (20)");
                     dHoldOut.focus();
                     dHoldOut.select();
                     valid = false;
                 } else if (dCrossValidation.value.length <= 0) {
-                    alert("Cross-Validation (%) cannot be empty ...!");
+                    alert("Cross-validation (%) cannot be empty ...!");
                     dCrossValidation.focus();
                     valid = false;
                 } else if (isNaN(dCrossValidation.value)) {
-                    alert("Cross-Validation (%) = ... - ... (10)");
+                    alert("Cross-validation (%) = ... - ... (10)");
                     dCrossValidation.focus();
                     dCrossValidation.select();
                     valid = false;
                 } else {
                 }
+                //alert("Aha 12 ...!");
                 
                 //analyze data files
                 /**/
                 if (valid === true) {
+                    //alert("Aha 13 ...!");
+                    
                     var sDataFile = document.getElementById("sDataFile");
+                    //alert("Aha 131 ...!");
+                    
                     var nDFInstances = document.getElementById("nDFInstances");
                     var nDFAttributes = document.getElementById("nDFAttributes");
                     var sTestDataFile = document.getElementById("sTestDataFile");
@@ -1534,26 +1649,38 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     var sPredictionDataFile = document.getElementById("sPredictionDataFile");
                     var nPDFInstances = document.getElementById("nPDFInstances");
                     var nPDFAttributes = document.getElementById("nPDFAttributes");
+                    //alert("Aha 132 ...!");
+
                     var fullPath = document.getElementById("fullPath");
                     var fullPathT = document.getElementById("fullPathT");
                     var fullPathL = document.getElementById("fullPathL");
                     var fullPathP = document.getElementById("fullPathP");
+                    //alert("Aha 133 ...!");
 
                     var sFileName = document.getElementById("sFileName");
                     var sTestFileName = document.getElementById("sTestFileName");
                     var sLearningFileName = document.getElementById("sLearningFileName");
                     var sPredictionFileName = document.getElementById("sPredictionFileName");
+                    //alert("Aha 134 ...!");
+
+                    sSaveDataFile = "";
+                    document.getElementById("sSaveDataFile").value = "";
+                    //alert("Aha 135 ...!");
 
                     var sLoadingDataFile = document.getElementById("sLoadingDataFile");
                     sLoadingDataFile = "";
                     document.getElementById("sLoadingDataFile").value = sLoadingDataFile;
+                    //alert("Aha 1351 ...!");
 
                     var VarA = document.getElementById("VarA");
+                    //alert("Aha 1352 ...!");
                     
                     var sMoveBottom = document.getElementById("sMoveBottom");
                     sMoveBottom.value = val;
                     document.getElementById("sMoveBottom").value = val;
+                    //alert("Aha 1353 ...!");
 
+                    /**/
                     if (VarA !== null) {
                         if (sFileName.value === "") {
                             if (sTestFileName.value === "") {
@@ -1607,8 +1734,13 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             document.getElementById("myform").submit();
                         }
                     }
+                    /**/
                 }
-                /**/
+                //alert("Aha 14 ...!");
+
+                //fullPath.value = sFileName.value;
+                //document.getElementById("myform").action = "AllModulesBaseline.jsp";
+                //document.getElementById("myform").submit();
                 return valid;
             }
 
@@ -1684,6 +1816,15 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     var sTestFileNameLSSVM = document.getElementById("sTestFileNameLSSVM");
                     var sLearningFileNameLSSVM = document.getElementById("sLearningFileNameLSSVM");
                     var sPredictionFileNameLSSVM = document.getElementById("sPredictionFileNameLSSVM");
+
+                    sSaveDataFileLSSVM = "";
+                    document.getElementById("sSaveDataFileLSSVM").value = "";
+                    //alert("Aha 135 ...!");
+
+                    var sLoadingDataFileLSSVM = document.getElementById("sLoadingDataFileLSSVM");
+                    sLoadingDataFileLSSVM = "";
+                    document.getElementById("sLoadingDataFileLSSVM").value = sLoadingDataFileLSSVM;
+                    //alert("Aha 1351 ...!");
 
                     var sMoveBottom = document.getElementById("sMoveBottom");
                     sMoveBottom.value = val;
@@ -1768,38 +1909,82 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     nValueC.select();
                     valid = false;
                 } else if (nValueS.value.length <= 0) {
-                    alert("Value of Sigma cannot be empty!");
+                    alert("Value of sigma cannot be empty!");
                     nValueS.focus();
                     valid = false;
                 } else if (isNaN(nValueS.value)) {
-                    alert("Value of Sigma = ... - ... (0.1)");
+                    alert("Value of sigma = ... - ... (0.1)");
                     nValueS.focus();
                     nValueS.select();
                     valid = false;
                 } else if (dHoldOut.value.length <= 0) {
-                    alert("Hold-Out (%) cannot be empty ...!");
+                    alert("Hold-out (%) cannot be empty ...!");
                     dHoldOut.focus();
                     valid = false;
                 } else if (isNaN(dHoldOut.value)) {
-                    alert("Hold-Out (%) = ... - ... (20)");
+                    alert("Hold-out (%) = ... - ... (20)");
                     dHoldOut.focus();
                     dHoldOut.select();
                     valid = false;
                 } else if (dCrossValidation.value.length <= 0) {
-                    alert("Cross-Validation (%) cannot be empty ...!");
+                    alert("Cross-validation (%) cannot be empty ...!");
                     dCrossValidation.focus();
                     valid = false;
                 } else if (isNaN(dCrossValidation.value)) {
-                    alert("Cross-Validation (%) = ... - ... (10)");
+                    alert("Cross-validation (%) = ... - ... (10)");
                     dCrossValidation.focus();
                     dCrossValidation.select();
                     valid = false;
                 } else {
                 }
 
+                var sDataFile = document.getElementById("sDataFile");
+                var nDFInstances = document.getElementById("nDFInstances");
+                var nDFAttributes = document.getElementById("nDFAttributes");
+                var sTestDataFile = document.getElementById("sTestDataFile");
+                var nTDFInstances = document.getElementById("nTDFInstances");
+                var nTDFAttributes = document.getElementById("nTDFAttributes");
+                var sLearningDataFile = document.getElementById("sLearningDataFile");
+                var nLDFInstances = document.getElementById("nLDFInstances");
+                var nLDFAttributes = document.getElementById("nLDFAttributes");
+                var sPredictionDataFile = document.getElementById("sPredictionDataFile");
+                var nPDFInstances = document.getElementById("nPDFInstances");
+                var nPDFAttributes = document.getElementById("nPDFAttributes");
+                var fullPath = document.getElementById("fullPath");
+                var fullPathT = document.getElementById("fullPathT");
+                var fullPathL = document.getElementById("fullPathL");
+                var fullPathP = document.getElementById("fullPathP");
+
+                var sFileName = document.getElementById("sFileName");
+                var sTestFileName = document.getElementById("sTestFileName");
+                var sLearningFileName = document.getElementById("sLearningFileName");
+                var sPredictionFileName = document.getElementById("sPredictionFileName");
+
+                var VarA = document.getElementById("VarA");
+                
+                var sSaveDataFile = document.getElementById("sSaveDataFile");
+                if (valid === true) {
+                    sSaveDataFile = "1";
+                    document.getElementById("sSaveDataFile").value = sSaveDataFile;
+                }
+                
+                sLoadingDataFile = "";
+                document.getElementById("sLoadingDataFile").value = "";
+
+                sLoadingDataExcel = "";
+                document.getElementById("sLoadingDataExcel").value = "";
+
+                sLoadingDataExcelClick = "";
+                document.getElementById("sLoadingDataExcelClick").value = "";
+                
                 var sMoveBottom = document.getElementById("sMoveBottom");
-                sMoveBottom.value = val;
-                document.getElementById("sMoveBottom").value = val;
+                sMoveBottom.value = "0";
+                document.getElementById("sMoveBottom").value = "0";
+
+                fullPath.value = sFileName.value;
+                document.getElementById("sBaseFileName").value = "SVRResult";
+                document.getElementById("myform").action = "AllModulesBaseline.jsp";
+                document.getElementById("myform").submit();
                 
                 return valid;
             }
@@ -1823,38 +2008,82 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     nValueCLSSVM.select();
                     valid = false;
                 } else if (nValueSLSSVM.value.length <= 0) {
-                    alert("Value of Sigma cannot be empty!");
+                    alert("Value of sigma cannot be empty!");
                     nValueSLSSVM.focus();
                     valid = false;
                 } else if (isNaN(nValueSLSSVM.value)) {
-                    alert("Value of Sigma = ... - ... (0.1)");
+                    alert("Value of sigma = ... - ... (0.1)");
                     nValueSLSSVM.focus();
                     nValueSLSSVM.select();
                     valid = false;
                 } else if (dHoldOutLSSVM.value.length <= 0) {
-                    alert("Hold-Out (%) cannot be empty ...!");
+                    alert("Hold-out (%) cannot be empty ...!");
                     dHoldOutLSSVM.focus();
                     valid = false;
                 } else if (isNaN(dHoldOutLSSVM.value)) {
-                    alert("Hold-Out (%) = ... - ... (20)");
+                    alert("Hold-out (%) = ... - ... (20)");
                     dHoldOutLSSVM.focus();
                     dHoldOutLSSVM.select();
                     valid = false;
                 } else if (dCrossValidationLSSVM.value.length <= 0) {
-                    alert("Cross-Validation (%) cannot be empty ...!");
+                    alert("Cross-validation (%) cannot be empty ...!");
                     dCrossValidationLSSVM.focus();
                     valid = false;
                 } else if (isNaN(dCrossValidationLSSVM.value)) {
-                    alert("Cross-Validation (%) = ... - ... (10)");
+                    alert("Cross-validation (%) = ... - ... (10)");
                     dCrossValidationLSSVM.focus();
                     dCrossValidationLSSVM.select();
                     valid = false;
                 } else {
                 }
 
+                var sDataFileLSSVM = document.getElementById("sDataFileLSSVM");
+                var nDFInstancesLSSVM = document.getElementById("nDFInstancesLSSVM");
+                var nDFAttributesLSSVM = document.getElementById("nDFAttributesLSSVM");
+                var sTestDataFileLSSVM = document.getElementById("sTestDataFileLSSVM");
+                var nTDFInstancesLSSVM = document.getElementById("nTDFInstancesLSSVM");
+                var nTDFAttributesLSSVM = document.getElementById("nTDFAttributesLSSVM");
+                var sLearningDataFileLSSVM = document.getElementById("sLearningDataFileLSSVM");
+                var nLDFInstancesLSSVM = document.getElementById("nLDFInstancesLSSVM");
+                var nLDFAttributesLSSVM = document.getElementById("nLDFAttributesLSSVM");
+                var sPredictionDataFileLSSVM = document.getElementById("sPredictionDataFileLSSVM");
+                var nPDFInstancesLSSVM = document.getElementById("nPDFInstancesLSSVM");
+                var nPDFAttributesLSSVM = document.getElementById("nPDFAttributesLSSVM");
+                var fullPathLSSVM = document.getElementById("fullPathLSSVM");
+                var fullPathTLSSVM = document.getElementById("fullPathTLSSVM");
+                var fullPathLLSSVM = document.getElementById("fullPathLLSSVM");
+                var fullPathPLSSVM = document.getElementById("fullPathPLSSVM");
+
+                var sFileNameLSSVM = document.getElementById("sFileNameLSSVM");
+                var sTestFileNameLSSVM = document.getElementById("sTestFileNameLSSVM");
+                var sLearningFileNameLSSVM = document.getElementById("sLearningFileNameLSSVM");
+                var sPredictionFileNameLSSVM = document.getElementById("sPredictionFileNameLSSVM");
+
+                var VarB = document.getElementById("VarB");
+                
+                var sSaveDataFileLSSVM = document.getElementById("sSaveDataFileLSSVM");
+                if (valid === true) {
+                    sSaveDataFileLSSVM = "1";
+                    document.getElementById("sSaveDataFileLSSVM").value = sSaveDataFileLSSVM;
+                }
+                
+                sLoadingDataFileLSSVM = "";
+                document.getElementById("sLoadingDataFileLSSVM").value = "";
+
+                sLoadingDataExcelLSSVM = "";
+                document.getElementById("sLoadingDataExcelLSSVM").value = "";
+
+                sLoadingDataExcelClickLSSVM = "";
+                document.getElementById("sLoadingDataExcelClickLSSVM").value = "";
+                
                 var sMoveBottom = document.getElementById("sMoveBottom");
-                sMoveBottom.value = val;
-                document.getElementById("sMoveBottom").value = val;
+                sMoveBottom.value = "0";
+                document.getElementById("sMoveBottom").value = "0";
+
+                fullPathLSSVM.value = sFileNameLSSVM.value;
+                document.getElementById("sBaseFileNameLSSVM").value = "SVMResult";
+                document.getElementById("myformLSSVM").action = "AllModulesBaseline.jsp";
+                document.getElementById("myformLSSVM").submit();
                 
                 return valid;
             }
@@ -1889,6 +2118,9 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
 
                 var VarA = document.getElementById("VarA");
                 
+                sSaveDataFile = "";
+                document.getElementById("sSaveDataFile").value = "";
+
                 var sLoadingDataFile = document.getElementById("sLoadingDataFile");
                 sLoadingDataFile = "1";
                 document.getElementById("sLoadingDataFile").value = sLoadingDataFile;
@@ -1899,16 +2131,19 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 sLoadingDataExcelClick = "";
                 document.getElementById("sLoadingDataExcelClick").value = "";
                 
+                /*
                 var sMoveBottom = document.getElementById("sMoveBottom");
-                sMoveBottom.value = val;
-                document.getElementById("sMoveBottom").value = val;
-
+                sMoveBottom.value = "0";
+                document.getElementById("sMoveBottom").value = "0";
+                */
+               
                 fullPath.value = sFileName.value;
+                document.getElementById("sBaseFileName").value = "SVRResult";
                 document.getElementById("myform").action = "AllModulesBaseline.jsp";
                 document.getElementById("myform").submit();
-                alert("Data file already loaded ...!");
-                nValueC.focus();
-                valid = false;
+                //alert("Data file already loaded ...!");
+                //nValueC.focus();
+                //valid = false;
                 
                 return valid;
             }
@@ -1943,6 +2178,9 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
 
                 var VarB = document.getElementById("VarB");
                 
+                sSaveDataFileLSSVM = "";
+                document.getElementById("sSaveDataFileLSSVM").value = "";
+
                 var sLoadingDataFileLSSVM = document.getElementById("sLoadingDataFileLSSVM");
                 sLoadingDataFileLSSVM = "2";
                 document.getElementById("sLoadingDataFileLSSVM").value = sLoadingDataFileLSSVM;
@@ -1953,16 +2191,19 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 sLoadingDataExcelClickLSSVM = "";
                 document.getElementById("sLoadingDataExcelClickLSSVM").value = "";
                 
+                /*
                 var sMoveBottom = document.getElementById("sMoveBottom");
-                sMoveBottom.value = val;
-                document.getElementById("sMoveBottom").value = val;
-
+                sMoveBottom.value = "0";
+                document.getElementById("sMoveBottom").value = "0";
+                 */
+                
                 fullPathLSSVM.value = sFileNameLSSVM.value;
+                document.getElementById("sBaseFileNameLSSVM").value = "SVMResult";
                 document.getElementById("myformLSSVM").action = "AllModulesBaseline.jsp";
                 document.getElementById("myformLSSVM").submit();
-                alert("Data file already loaded ...!");
-                nValueCLSSVM.focus();
-                valid = false;
+                //alert("Data file already loaded ...!");
+                //nValueCLSSVM.focus();
+                //valid = false;
                 
                 return valid;
             }
@@ -2020,14 +2261,30 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 <input type="hidden" name="sLoadingDataFile" id="sLoadingDataFile" value="<%=sLoadingDataFile%>"/>
                 <input type="hidden" name="sLoadingDataExcel" id="sLoadingDataExcel" value="<%=sLoadingDataExcel%>"/>
                 <input type="hidden" name="sLoadingDataExcelClick" id="sLoadingDataExcelClick" value="<%=sLoadingDataExcelClick%>"/>
+                
+                <input type="hidden" name="sSaveDataFile" id="sSaveDataFile" value="<%=sSaveDataFile%>"/>
                 <input type="hidden" name="sMoveBottom" id="sMoveBottom" value="<%=sMoveBottom%>"/>
                 <input type="hidden" name="VarNext" id="VarNext" value="<%=VarNext%>"/>
                 <input type="hidden" name="sError" id="sError" value="<%=sError%>"/>
+                                
+                <% if (hdf.equals("1")) { %>
+                    <input type="hidden" name="hiddendatafile" id="hiddendatafile" value="1">
+                <% } else { %>
+                    <input type="hidden" name="hiddendatafile" id="hiddendatafile" value="0">
+                <% } %>
+                
+                <input type="hidden" name="sHasil" id="sHasil" value="" />
                                 
                 <input type="hidden" name="sLoadingDefault" id="sLoadingDefault" value="<%=sLoadingDefault%>" />
                 <input type="hidden" name="sLoadingEvaluation" id="sLoadingEvaluation" value="<%=sLoadingEvaluation%>" />
                 <input type="hidden" name="sLoadingPrediction" id="sLoadingPrediction" value="<%=sLoadingPrediction%>" />
                 
+                <input type="hidden" name="sFileData" id="sFileData" value="<%=sFileData%>" /> 
+                <input type="hidden" name="sdInstances" id="sdInstances" value="<%=sdInstances%>" /> 
+                <input type="hidden" name="sdAttributes" id="sdAttributes" value="<%=sdAttributes%>" /> 
+                <input type="hidden" name="sPFileData" id="sPFileData" value="<%=sPFileData%>" /> 
+                <input type="hidden" name="sdPInstances" id="sdPInstances" value="<%=sdPInstances%>" /> 
+                <input type="hidden" name="sdPAttributes" id="sdPAttributes" value="<%=sdPAttributes%>" /> 
                 <br>
                 <br>
                 <center id="title">
@@ -2049,35 +2306,41 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
 
                     <div class="tab-content">
                         <div id="evaluation" class="tab-pane fade in active">
+                            <script>
+                                document.getElementById("TORadio1").checked = false; 
+                                document.getElementById("TORadio2").checked = false; 
+                                document.getElementById("TORadio3").checked = false; 
+                                document.getElementById("TORadio4").checked = false; 
+                            </script>
+                
+                            <%if (TORadio.equals("TORadio1")) {%><script>document.getElementById("TORadio1").checked = true; </script><%}
+                            else if (TORadio.equals("TORadio2")) {%><script>document.getElementById("TORadio2").checked = true; </script><%}
+                            else if (TORadio.equals("TORadio3")) {%><script>document.getElementById("TORadio3").checked = true; </script><%}
+                            else if (TORadio.equals("TORadio4")) {%><script>document.getElementById("TORadio4").checked = true; </script><%}
+                            %>
                         </div>
                         <div id="prediction" class="tab-pane fade">
+                            <%--><input type="hidden" name="dHoldOut" id="dHoldOut" value="<%=dHoldOut%>"/>
+                            <input type="hidden" name="dCrossValidation" id="dCrossValidation" value="<%=dCrossValidation%>"/><--%>
                         </div>
                     </div>
                 </div>
-                <br>
                 
                 <table>
                     <tr>
                         <td>
                             <div class="container boundary">
                                 <h2><font face="Palatino Linotype, Book Antiqua, Palatino, serif" size="6">Model Settings</font></h2>
-                                <button type="button" onclick="return writedefaultsfalssvr(0)" class="btn btn-primary">Default</button>
+                                <button type="button" onclick="return writedefaultlssvr(0)" class="btn btn-primary">Default</button>
                                 <button type="button" onclick="return loadingdataform(1);" class="btn btn-primary">Import</button>
                                 <button type="button" onclick="return savingdata(0);" class="btn btn-primary">Export</button>
-                                <button type="button" onclick="return cleardefaultsfalssvr(0);" class="btn btn-primary">Clear</button>
+                                <button type="button" onclick="return cleardefaultlssvr(0);" class="btn btn-primary">Clear</button>
                             </div>
                         </td>
-                        <td style="width:64%">
-                            <% if (sLoadingDataExcel != "") { %>
-                                <a href="#bottompage">
-                                    <img src="arrowbottom.JPG" alt="..." width="15" style="float:right">
-                                </a>
-                            <% } else { %>
-                                <a href="#bottomform">
-                                    <img src="arrowbottom.JPG" alt="..." width="15" style="float:right">
-                                </a>
-                            <% } %>
-                        </td>
+                        <a href="#bottomform">
+                            <%--><img src="arrowbottom.JPG" alt="..." width="15" style="float:right"><--%>
+                            <img src="Arrow bottom.png" alt="..." width="18" style="float:right">
+                        </a>
                     </tr>
                 </table>
 
@@ -2087,29 +2350,39 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             <!--<div class="container visible-lg-block wdetail">-->
                             <div class="container wdetail">
                                 <h2>Parameter</h2>
-                                <p>Input data and system parameters. The system then initialized the search parameters via chaotic map operator (Logistic map).</p>
+                                <p>Input data and system parameters.</p>
+                                <!--<div class="row">
+                                    <div class="col-md-3">Input data:</div>
+                                    <div class="col-md-2">none</div>
+                                </div>
+                                <br>-->
                                 <div class="row">
-                                    <div class="col-md-3">Setting parameters:</div>
-                                    <div class="col-md-2">Value of C:</div>
+                                    <div class="col-md-3">System parameters:</div>
+                                    <div class="col-md-2">Value of C</div>
                                     <div class="col-md-1">
-                                        <input type="text" name="nValueC" id="nValueC" size="4" value="<%=nValueC%>"/>
+                                        <input type="text" name="nValueC" id="nValueC" size="5" value="<%=nValueC%>"/>
                                     </div>
-                                    <div class="col-md-2">Value of Sigma:</div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-3"></div>
+                                    <div class="col-md-2">Value of sigma</div>
                                     <div class="col-md-1">
-                                        <input type="text" name="nValueS" id="nValueS" size="4" value="<%=nValueS%>"/>
+                                        <input type="text" name="nValueS" id="nValueS" size="5" value="<%=nValueS%>"/>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                                    
                 <div class="bs-example">
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="container boundary">
                                 <h2>Normalization</h2>
-                                <p>Data preprocessing is considered a crucial step in data anlytics that performs data cleansing and transforming to improve the respective results.</p>
-                                <p>User can decide whether or not to normalize the data to (0, 1) scale.</p>
+                                <%--><p>Data preprocessing is considered a crucial step in data anlytics that performs data cleansing and transforming to improve the respective results.</p><--%>
+                                <p>User can decide whether or not to normalize each independent variable of the dataset to (0 - 1) scale.</p>
                                 <div class="radio">
                                     <label><input type="radio" name="NormalRadio" id="NormalRadio1" value="NormalRadio1">Original value</label>
                                 </div>
@@ -2120,41 +2393,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         </div>
                     </div>
                 </div>
-                <% if (PRadio.equals("PRadio1")) { %>            
-                <div class="bs-example">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="container boundary">
-                                <h2>Test Option</h2>
-                                <p>The test data file used to evaluate the optimized model again. Output phase: calculate performance measures (i.e., RMSE, MAE, MAPE, R)</p>
-                                <p>to find the prediction accuracy.</p>
-                                <div class="container boundary">
-                                    <div class="form-inline">
-                                        <div class="radio col-md-2">
-                                            <label><input type="radio" name="TORadio" id="TORadio1" value="TORadio1">&nbsp;Use data file</label>
-                                        </div>
-                                        <div class="radio col-md-3">
-                                            <label>
-                                                <input type="radio" name="TORadio" id="TORadio2" value="TORadio2">&nbsp;Hold-out
-                                                <input type="text" class="form-control" name="dHoldOut" id = "dHoldOut" size="3" value="<%=dHoldOut%>">
-                                            </label>
-                                        </div>
-                                        <div class="radio col-md-3">
-                                            <label>
-                                                <input type="radio" name="TORadio" id="TORadio3" value="TORadio3">&nbsp;Cross-validation
-                                                <input type="text" class="form-control" name="dCrossValidation" id = "dCrossValidation" size="3" value="<%=dCrossValidation%>"> 
-                                            </label>
-                                        </div>
-                                        <div class="radio col-md-2">
-                                            <label><input type="radio" name="TORadio" id="TORadio4" value="TORadio4" onclick="return testdatasection(1);">&nbsp;Use test data file</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <% } %>
+                                
+                <%-- if (PRadio.equals("PRadio1")) { --%>            
+                <%-- } --%>
+                
                 <table>
                     <tr>
                         <td>
@@ -2164,65 +2406,33 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         </td>
                     </tr>
                 </table>
+                
                 <div class="bs-example">
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <input type="hidden" name="PRadio" id="PRadio" value="<%=PRadio%>"/>
-                            <% if (PRadio.equals("PRadio1")) { %>        
-                            <div class="container boundary">
-                                <h3>Data File</h3>
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <input type="hidden" name="fullPath" id="fullPath" value=""/>
-                                        <input type="file" class="filestyle" name="sDataFile" id="sDataFile" accept=".csv,.txt" data-input="false"/>
-                                    </div>
-                                    <div class="col-md-2" style="margin-top : 4px">
-                                        <a onclick="return computeatform(1);">
-                                            <span class="glyphicon glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
-                                        </a>
-                                    </div>
-                                    <div class="col-md-2  col-sm-1" style="margin-top : 7px">File Name</div>
-                                    <div class="col-md-4 col-sm-1">
-                                        <input type="text" name="sFileName" id="sFileName" size="60" value="<%=sFileName%>" readonly/>
-                                    </div>
-                                </div>
-                                <div class="row" style="margin-bottom : 8px">
-                                    <div class="col-md-3"></div>
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-2">No. of attributes</div>
-                                    <div class="col-md-3">
-                                        <input type="text" name="nDFAttributes" id="nDFAttributes" size="5" value="<%=nDFAttributes%>" readonly/>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3"></div>
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-2">No. of instances</div>
-                                    <div class="col-md-3">
-                                        <input type="text" name="nDFInstances" id="nDFInstances" size="5" value="<%=nDFInstances%>" readonly/>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                            <% if (PRadio.equals("PRadio1")) { %>        
-                            <div class="container boundary">
-                                <div id="testdatasection" class="container boundary" style="display: none !important;">
-                                    <h3>Test Data File</h3>
+                            <% if (PRadio.equals("PRadio1")) { 
+                                    
+                                if (TORadio.equals("TORadio1")) {%><script>document.getElementById("TORadio1").checked = true; </script><%}
+                                else if (TORadio.equals("TORadio2")) {%><script>document.getElementById("TORadio2").checked = true; </script><%}
+                                else if (TORadio.equals("TORadio3")) {%><script>document.getElementById("TORadio3").checked = true; </script><%}
+                                else if (TORadio.equals("TORadio4")) {%><script>document.getElementById("TORadio4").checked = true; </script><%}
+                                %>        
+                                <div class="container boundary">
+                                    <h3>Learning Data File</h3>
                                     <div class="row">
                                         <div class="col-md-2">
-                                                <input type="hidden" name="fullPathT" id="fullPathT" value=""/>
-                                                <!--<input type="file" name="sDataFile" id="sDataFile"/>-->
-                                                <input type="file" class="filestyle" name="sTestDataFile" id="sTestDataFile" accept=".csv,.txt" data-input="false"/>
-                                            </label>
+                                            <input type="hidden" name="fullPath" id="fullPath" value=""/>
+                                            <input type="file" class="filestyle" name="sDataFile" id="sDataFile" accept=".csv,.txt" data-input="false"/>
                                         </div>
                                         <div class="col-md-2" style="margin-top : 4px">
                                             <a onclick="return computeatform(1);">
-                                                <span class="glyphicon glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
+                                                <span class="glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
                                             </a>
                                         </div>
-                                        <div class="col-md-2" style="margin-top : 7px">File Name</div>
-                                        <div class="col-md-4">
-                                            <input type="text" name="sTestFileName" id="sTestFileName" size="60" value="<%=sTestFileName%>" readonly/>
+                                        <div class="col-md-2  col-sm-1" style="margin-top : 7px">File name</div>
+                                        <div class="col-md-4 col-sm-1">
+                                            <input type="text" name="sFileName" id="sFileName" size="45" value="<%=sFileName%>" readonly/>
                                         </div>
                                     </div>
                                     <div class="row" style="margin-bottom : 8px">
@@ -2230,7 +2440,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                         <div class="col-md-1"></div>
                                         <div class="col-md-2">No. of attributes</div>
                                         <div class="col-md-3">
-                                            <input type="text" name="nTDFAttributes" id="nTDFAttributes" size="5" value="<%=nTDFAttributes%>" readonly/>
+                                            <input type="text" name="nDFAttributes" id="nDFAttributes" size="5" value="<%=nDFAttributes%>" readonly/>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -2238,18 +2448,237 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                         <div class="col-md-1"></div>
                                         <div class="col-md-2">No. of instances</div>
                                         <div class="col-md-3">
-                                                <input type="text" name="nTDFInstances" id="nTDFInstances" size="5" value="<%=nTDFInstances%>" readonly/>
+                                            <input type="text" name="nDFInstances" id="nDFInstances" size="5" value="<%=nDFInstances%>" readonly/>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <% } %>
+                                <div class="bs-example">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <div class="container boundary">
+                                                <h3>Test Option Available</h3>
+                                                <%--><p>The test data file used to evaluate the optimized model again. Output phase: calculate performance measures (i.e., RMSE, MAE, MAPE, R)</p>
+                                                <p>to find the prediction accuracy.</p><--%>
+                                                <div class="boundary">
+                                                    <div class="row form-inline">
+                                                        <div class="radio col-md-3">
+                                                            <label><input type="radio" name="TORadio" id="TORadio1" value="TORadio1" onclick="ftestdatasection(0);">&nbsp;Use learning dataset</label>
+                                                        </div>
+                                                        <div class="radio col-md-3">
+                                                            <label>
+                                                                <input type="radio" name="TORadio" id="TORadio2" value="TORadio2" onclick="ftestdatasection(0);">&nbsp;Hold-out
+                                                                <input type="text" class="form-control" name="dHoldOut" id = "dHoldOut" size="3" value="<%=dHoldOut%>">
+                                                            </label>
+                                                        </div>
+                                                        <div class="radio col-md-3">
+                                                            <label>
+                                                                <input type="radio" name="TORadio" id="TORadio3" value="TORadio3" onclick="ftestdatasection(0);">&nbsp;Cross-validation
+                                                                <input type="text" class="form-control" name="dCrossValidation" id = "dCrossValidation" size="3" value="<%=dCrossValidation%>"> 
+                                                            </label>
+                                                        </div>
+                                                    </div><br>
+                                                    <div class="row container">
+                                                        <i><p>If you want to use test dataset, select the option below!</p></i>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="radio col-md-3">
+                                                            <label><input type="radio" name="TORadio" id="TORadio4" value="TORadio4" onclick="ftestdatasection(1);">&nbsp;Use test dataset</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="container boundary">
+                                                <% if (hdf.equals("1")) { %>
+                                                    <div id="testdatasection" style="display: block !important;">
+                                                        <h3>Test Data File</h3>
+                                                        <div class="row">
+                                                            <div class="col-md-2">
+                                                                    <input type="hidden" name="fullPathT" id="fullPathT" value=""/>
+                                                                    <!--<input type="file" name="sDataFile" id="sDataFile"/>-->
+                                                                    <input type="file" class="filestyle" name="sTestDataFile" id="sTestDataFile" accept=".csv,.txt" data-input="false"/>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-md-2" style="margin-top : 4px">
+                                                                <a onclick="return computeatform(1);">
+                                                                    <span class="glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-md-2" style="margin-top : 7px">File name</div>
+                                                            <div class="col-md-4">
+                                                                <input type="text" name="sTestFileName" id="sTestFileName" size="45" value="<%=sTestFileName%>" readonly/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row" style="margin-bottom : 8px">
+                                                            <div class="col-md-3"></div>
+                                                            <div class="col-md-1"></div>
+                                                            <div class="col-md-2">No. of attributes</div>
+                                                            <div class="col-md-3">
+                                                                <input type="text" name="nTDFAttributes" id="nTDFAttributes" size="5" value="<%=nTDFAttributes%>" readonly/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-3"></div>
+                                                            <div class="col-md-1"></div>
+                                                            <div class="col-md-2">No. of instances</div>
+                                                            <div class="col-md-3">
+                                                                    <input type="text" name="nTDFInstances" id="nTDFInstances" size="5" value="<%=nTDFInstances%>" readonly/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% } else { %>
+                                                    <div id="testdatasection" style="display: none !important;">
+                                                        <h3>Test Data File</h3>
+                                                        <div class="row">
+                                                            <div class="col-md-2">
+                                                                    <input type="hidden" name="fullPathT" id="fullPathT" value=""/>
+                                                                    <!--<input type="file" name="sDataFile" id="sDataFile"/>-->
+                                                                    <input type="file" class="filestyle" name="sTestDataFile" id="sTestDataFile" accept=".csv,.txt" data-input="false"/>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-md-2" style="margin-top : 4px">
+                                                                <a onclick="return computeatform(1);">
+                                                                    <span class="glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-md-2" style="margin-top : 7px">File name</div>
+                                                            <div class="col-md-4">
+                                                                <input type="text" name="sTestFileName" id="sTestFileName" size="45" value="<%=sTestFileName%>" readonly/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row" style="margin-bottom : 8px">
+                                                            <div class="col-md-3"></div>
+                                                            <div class="col-md-1"></div>
+                                                            <div class="col-md-2">No. of attributes</div>
+                                                            <div class="col-md-3">
+                                                                <input type="text" name="nTDFAttributes" id="nTDFAttributes" size="5" value="<%=nTDFAttributes%>" readonly/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-3"></div>
+                                                            <div class="col-md-1"></div>
+                                                            <div class="col-md-2">No. of instances</div>
+                                                            <div class="col-md-3">
+                                                                    <input type="text" name="nTDFInstances" id="nTDFInstances" size="5" value="<%=nTDFInstances%>" readonly/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% } %> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                            
+                                <% 
+                                sFileData=sFileName;
+                                sdInstances=nDFInstances;
+                                sdAttributes=nDFAttributes;
+                                sPFileData=sTestFileName;
+                                sdPInstances=nTDFInstances;
+                                sdPAttributes=nTDFAttributes;
+                                %>
                             
-                            <% } else { %>
-                                <input type="hidden" name="TORadio" id="TORadio1"> 
-                                <input type="hidden" name="TORadio" id="TORadio2"> 
-                                <input type="hidden" name="TORadio" id="TORadio3"> 
-                                <input type="hidden" name="TORadio" id="TORadio4"> 
+                                <input type="hidden" name="fullPathL" id="fullPathL" value="<%=fullPathL%>">
+                                <input type="hidden" name="sLearningDataFile" id="sLearningDataFile" value="<%=sLearningDataFile%>">
+                                <input type="hidden" name="sLearningFileName" id="sLearningFileName" value="<%=sLearningFileName%>">
+                                <input type="hidden" name="nLDFAttributes" id="nLDFAttributes" value="<%=nLDFAttributes%>">
+                                <input type="hidden" name="nLDFInstances" id="nLDFInstances" value="<%=nLDFInstances%>">
+                                <input type="hidden" name="fullPathP" id="fullPathP" value="<%=fullPathP%>">
+                                <input type="hidden" name="sPredictionDataFile" id="sPredictionDataFile" value="<%=sPredictionDataFile%>">
+                                <input type="hidden" name="sPredictionFileName" id="sPredictionFileName" value="<%=sPredictionFileName%>">
+                                <input type="hidden" name="nPDFAttributes" id="nPDFAttributes" value="<%=nPDFAttributes%>">
+                                <input type="hidden" name="nPDFInstances" id="nPDFInstances" value="<%=nPDFInstances%>">
+                                
+                            <% } else if (PRadio.equals("PRadio2")) { %>        
+                                <div class="container boundary">
+                                    <h3>Learning Data File</h3>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <input type="hidden" name="fullPathL" id="fullPathL" value=""/>
+                                            <input type="file" class="filestyle" name="sLearningDataFile" id="sLearningDataFile" accept=".csv,.txt" data-input="false"/>
+                                        </div>
+                                        <div class="col-md-2" style="margin-top : 4px">
+                                            <a onclick="return computeatform(1);">
+                                                <span class="glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-2  col-sm-1" style="margin-top : 7px">File name</div>
+                                        <div class="col-md-4 col-sm-1">
+                                            <input type="text" name="sLearningFileName" id="sLearningFileName" size="45" value="<%=sLearningFileName%>" readonly/>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-bottom : 8px">
+                                        <div class="col-md-3"></div>
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-2">No. of attributes</div>
+                                        <div class="col-md-3">
+                                            <input type="text" name="nLDFAttributes" id="nLDFAttributes" size="5" value="<%=nLDFAttributes%>" readonly/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3"></div>
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-2">No. of instances</div>
+                                        <div class="col-md-3">
+                                            <input type="text" name="nLDFInstances" id="nLDFInstances" size="5" value="<%=nLDFInstances%>" readonly/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="container boundary">
+                                    <h3>Prediction Data File: Make Predictions for New Data</h3>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                                <input type="hidden" name="fullPathP" id="fullPathP" value=""/>
+                                                <input type="file" class="filestyle"  name="sPredictionDataFile" id="sPredictionDataFile" accept=".csv,.txt" data-input="false"/>
+                                            </label>
+                                        </div>
+                                        <div class="col-md-2" style="margin-top : 4px">
+                                            <a onclick="return computeatform(1);">
+                                                <span class="glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-2" style="margin-top : 7px">File name</div>
+                                        <div class="col-md-4">
+                                            <input type="text" name="sPredictionFileName" id="sPredictionFileName" size="45" value="<%=sPredictionFileName%>" readonly/>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-bottom : 8px">
+                                        <div class="col-md-3"></div>
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-2">No. of attributes</div>
+                                        <div class="col-md-3">
+                                            <input type="text" name="nPDFAttributes" id="nPDFAttributes" size="5" value="<%=nPDFAttributes%>" readonly/>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3"></div>
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-2">No. of instances</div>
+                                        <div class="col-md-3">
+                                                <input type="text" name="nPDFInstances" id="nPDFInstances" size="5" value="<%=nPDFInstances%>" readonly/>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <script>
+                                    document.getElementById("sFileData").value = "<%=sLearningFileName%>";
+                                    document.getElementById("sdInstances").value = "<%=nLDFInstances%>";
+                                    document.getElementById("sdAttributes").value = "<%=nLDFAttributes%>";
+                                    document.getElementById("sPFileData").value = "<%=sPredictionFileName%>";
+                                    document.getElementById("sdPInstances").value = "<%=nPDFInstances%>";
+                                    document.getElementById("sdPAttributes").value = "<%=nPDFAttributes%>";
+                                </script>
+                                
+                                <% 
+                                sFileData=sLearningFileName;
+                                sdInstances=nLDFInstances;
+                                sdAttributes=nLDFAttributes;
+                                sPFileData=sPredictionFileName;
+                                sdPInstances=nPDFInstances;
+                                sdPAttributes=nPDFAttributes;
+                                %>
+                                
+                                <input type="hidden" name="TORadio" id="TORadio" value="<%=TORadio%>"/>
                                 <input type="hidden" name="dHoldOut" id = "dHoldOut" value="<%=dHoldOut%>">
                                 <input type="hidden" name="dCrossValidation" id = "dCrossValidation" value="<%=dCrossValidation%>"> 
                                 <input type="hidden" name="fullPath" id="fullPath" value="<%=fullPath%>">
@@ -2263,94 +2692,11 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 <input type="hidden" name="nTDFAttributes" id="nTDFAttributes" value="<%=nTDFAttributes%>">
                                 <input type="hidden" name="nTDFInstances" id="nTDFInstances" value="<%=nTDFInstances%>">
                             <% } %>
-
-                            <% if (PRadio.equals("PRadio2")) { %>        
-                            <div class="container boundary">
-                                <h3>Data File: Learning</h3>
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <input type="hidden" name="fullPathL" id="fullPathL" value=""/>
-                                        <input type="file" class="filestyle" name="sLearningDataFile" id="sLearningDataFile" accept=".csv,.txt" data-input="false"/>
-                                    </div>
-                                    <div class="col-md-2" style="margin-top : 4px">
-                                        <a onclick="return computeatform(1);">
-                                            <span class="glyphicon glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
-                                        </a>
-                                    </div>
-                                    <div class="col-md-2  col-sm-1" style="margin-top : 7px">Learning File Name</div>
-                                    <div class="col-md-4 col-sm-1">
-                                        <input type="text" name="sLearningFileName" id="sLearningFileName" size="60" value="<%=sLearningFileName%>" readonly/>
-                                    </div>
-                                </div>
-                                <div class="row" style="margin-bottom : 8px">
-                                    <div class="col-md-3"></div>
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-2">No. of attributes</div>
-                                    <div class="col-md-3">
-                                        <input type="text" name="nLDFAttributes" id="nLDFAttributes" size="5" value="<%=nLDFAttributes%>" readonly/>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3"></div>
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-2">No. of instances</div>
-                                    <div class="col-md-3">
-                                        <input type="text" name="nLDFInstances" id="nLDFInstances" size="5" value="<%=nLDFInstances%>" readonly/>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="container boundary">
-                                <h3>Data File: Prediction</h3>
-                                <div class="row">
-                                    <div class="col-md-2">
-                                            <input type="hidden" name="fullPathP" id="fullPathP" value=""/>
-                                            <input type="file" class="filestyle"  name="sPredictionDataFile" id="sPredictionDataFile" accept=".csv,.txt" data-input="false"/>
-                                        </label>
-                                    </div>
-                                    <div class="col-md-2" style="margin-top : 4px">
-                                        <a onclick="return computeatform(1);">
-                                            <span class="glyphicon glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
-                                        </a>
-                                    </div>
-                                    <div class="col-md-2" style="margin-top : 7px">Prediction File Name</div>
-                                    <div class="col-md-4">
-                                        <input type="text" name="sPredictionFileName" id="sPredictionFileName" size="60" value="<%=sPredictionFileName%>" readonly/>
-                                    </div>
-                                </div>
-                                <div class="row" style="margin-bottom : 8px">
-                                    <div class="col-md-3"></div>
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-2">No. of attributes</div>
-                                    <div class="col-md-3">
-                                        <input type="text" name="nPDFAttributes" id="nPDFAttributes" size="5" value="<%=nPDFAttributes%>" readonly/>
-                                </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3"></div>
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-2">No. of instances</div>
-                                    <div class="col-md-3">
-                                            <input type="text" name="nPDFAttributes" id="nPDFAttributes" size="5" value="<%=nPDFAttributes%>" readonly/>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <% } else { %>
-                                <input type="hidden" name="fullPathL" id="fullPathL" value="<%=fullPathL%>">
-                                <input type="hidden" name="sLearningDataFile" id="sLearningDataFile" value="<%=sLearningDataFile%>">
-                                <input type="hidden" name="sLearningFileName" id="sLearningFileName" value="<%=sLearningFileName%>">
-                                <input type="hidden" name="nLDFAttributes" id="nLDFAttributes" value="<%=nLDFAttributes%>">
-                                <input type="hidden" name="nLDFInstances" id="nLDFInstances" value="<%=nLDFInstances%>">
-                                <input type="hidden" name="fullPathP" id="fullPathP" value="<%=fullPathP%>">
-                                <input type="hidden" name="sPredictionDataFile" id="sPredictionDataFile" value="<%=sPredictionDataFile%>">
-                                <input type="hidden" name="sPredictionFileName" id="sPredictionFileName" value="<%=sPredictionFileName%>">
-                                <input type="hidden" name="nPDFAttributes" id="nPDFAttributes" value="<%=nPDFAttributes%>">
-                                <input type="hidden" name="nPDFInstances" id="nPDFInstances" value="<%=nPDFInstances%>">
-                            <% } %>
                         </div>
                     </div>
                 </div>
+                        
+                <%-->
                 <table>    
                     <tr>
                         <input type="hidden" name="fullPath" id="fullPath" value=""/>
@@ -2363,9 +2709,9 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         <input type="hidden" name="sdPInstances" id="sdPInstances" size="4" value="<%=sdPInstances%>" readonly/>
                     </tr>
                 </table>
-                <br>
+                <--%>
             
-                <h6 id="bottomform">
+                <%--><h6 id="bottomform">
                     <img src="Logo-Space.png" alt="     " width="4" height="5">
                     &nbsp;. . . [END OF DATA FORM] &nbsp;&nbsp;&nbsp;
                     
@@ -2375,7 +2721,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         <img src="arrowup.JPG" alt="..." width="18">  
                     </div>
                     <% } %>
-                </h6>
+                </h6><--%>
                 
                 <!--<table>
                     <hr/>
@@ -2479,42 +2825,70 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 <img src="Logo-Space.png" alt="     " width="4" height="5">
                 &nbsp;. . . [END OF DATA FORM] &nbsp;&nbsp;&nbsp;
                     
-                <% if (sLoadingDataExcel != "") { %>
-                <% } else { %>
+                <% //if (sLoadingDataExcel != "") { %>
+                <% //} else { %>
                     <%--<a href="#top">
                         <img src="Icon-Top.png" alt="..." width="13" height="17">
                     </a>--%>
                     <div class="scrollToTop">
                       <img src="arrowup.JPG" alt="..." width="18">  
                     </div>
-                <% } %>
+                <% //} %>
             </h6><-->
 
-                <br>
+                <table>
+                    <tr>
+                        <td>
+                            <div class="container boundary" id="bottomform">
+                                <h2><font face="Palatino Linotype, Book Antiqua, Palatino, serif" size="6">Output File Name</font></h2>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                
+                <div class="bs-example">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="container boundary">
+                                <b>Base output file name (eg. SVRResult):</b>&nbsp;&nbsp;&nbsp;
+                                <!--<font color="teal" face="tahoma" size="2"> Base output file name (eg. SVRResult) </font>-->
+                                <input type="text" name="sBaseFileName" id="sBaseFileName" size="20" value="<%=sBaseFileName%>">
+                                <!--<font color="teal" face="tahoma" size="2">order number and .txt will be automatically added. </font>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <br>                
                 <center>
                 <a onclick="return checkdata(1);">
                     <font color="blue" face="agency FB" size="3">
                         <b><u>SUBMIT >></u></b>
                     </font>
                 </a>
-                    <table>
-                        <tr>
-                            <td></td>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <td></td>
-                        </tr>
-                    </table>
+
+                <a href="#title">
+                    <img src="Arrow top.png" alt="..." width="18" style="float:right">
+                </a>
+
+                <table>
+                    <tr>
+                        <td><img src="Logo-Space.png" alt=""></td>
+                    </tr>
+                </table>
                 </center>
                 
             <%
             
             //reading data from file
             if (sLoadingDataExcel != "") {
+                /*
+                out.println("<p>");
+                out.println("sLoadingDataExcel = "+sLoadingDataExcel);
+                */ 
+
                 //running
-                if (NormalRadio.equals("NormalRadio1")) {
+                if (NormalRadio.equals("NormalRadio1")) { 
                     %>
                     <script>
                         document.getElementById("NormalRadio1").checked = true; //"null" ;
@@ -2532,14 +2906,14 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 if (PRadio.equals("PRadio1")) {
                     %>
                     <script>
-                        document.getElementById("PRadio1").checked = true; //"null" ;
+                        //document.getElementById("PRadio1").checked = true; //"null" ;
                     </script>
                     <%
                 }
                 else if (PRadio.equals("PRadio2")) {
                     %>
                     <script>
-                        document.getElementById("PRadio2").checked = true; //"null" ;
+                        //document.getElementById("PRadio2").checked = true; //"null" ;
                     </script>
                     <%
                 }
@@ -2573,7 +2947,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     <%
                 }
                 
-                String sPRadio = "...";
+                sPRadio = "...";
                 if (PRadio.equals("PRadio1")) {
                     sPRadio = "Evaluation";
                     sDummy = "Data File : ";
@@ -2591,74 +2965,74 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     sVariation = "5";
                 }
 
-                String sTORadio = "...";
-                    if (TORadio.equals("TORadio1")) {
-                        sTORadio = "Use data file";
-                        if (PRadio.equals("PRadio1")) {
-                            sDummy = "Data File : ";
-                            sFileData = sFileName;
-                            dAttributes = Double.parseDouble(nDFAttributes); 
-                            dInstances = Double.parseDouble(nDFInstances);
-                            sVariation = "1";
-                        }
-                        else if (PRadio.equals("PRadio2")) {
-                            sTORadio = "-";
-                        }
+                sTORadio = "...";
+                if (TORadio.equals("TORadio1")) {
+                    sTORadio = "Use learning dataset";
+                    if (PRadio.equals("PRadio1")) {
+                        sDummy = "Data File : ";
+                        sFileData = sFileName;
+                        dAttributes = Double.parseDouble(nDFAttributes); 
+                        dInstances = Double.parseDouble(nDFInstances);
+                        sVariation = "1";
                     }
-                    else if (TORadio.equals("TORadio2")) {
-                        //sTORadio = "Hold-out "+nf.format(dHoldOut)+" (%)";
-                        if (PRadio.equals("PRadio1")) {
-                            sDummy = "Data File : ";
-                            sFileData = sFileName;
-                            dAttributes = Double.parseDouble(nDFAttributes);
-                            dInstances = Double.parseDouble(nDFInstances);
-                            sVariation = "2";
-                        }
-                        else if (PRadio.equals("PRadio2")) {
-                            sTORadio = "-";
-                        }
+                    else if (PRadio.equals("PRadio2")) {
+                        sTORadio = "-";
                     }
-                    else if (TORadio.equals("TORadio3")) {
-                        //sTORadio = "Cross-validation "+nf.format(dCrossValidation)+" (folds)";
-                        if (PRadio.equals("PRadio1")) {
-                            sDummy = "Data File : ";
-                            sFileData = sFileName;
-                            dAttributes = Double.parseDouble(nDFAttributes);
-                            dInstances = Double.parseDouble(nDFInstances);
-                            sVariation = "3";
-                        }
-                        else if (PRadio.equals("PRadio2")) {
-                            sTORadio = "-";
-                        }
+                }
+                else if (TORadio.equals("TORadio2")) {
+                    //sTORadio = "Hold-out "+nf.format(dHoldOut)+" (%)";
+                    if (PRadio.equals("PRadio1")) {
+                        sDummy = "Data File : ";
+                        sFileData = sFileName;
+                        dAttributes = Double.parseDouble(nDFAttributes);
+                        dInstances = Double.parseDouble(nDFInstances);
+                        sVariation = "2";
                     }
-                    else if (TORadio.equals("TORadio4")) {
-                        sTORadio = "Use test data file";
-                        if (PRadio.equals("PRadio1")) {
-                            sDummy = "Data File : ";
-                            sFileData = sFileName;
-                            dAttributes = Double.parseDouble(nDFAttributes);
-                            dInstances = Double.parseDouble(nDFInstances);
-                            sPDummy = "Test Data File : ";
-                            sPFileData = sTestFileName;
-                            dPAttributes = Double.parseDouble(nTDFAttributes);
-                            dPInstances = Double.parseDouble(nTDFInstances);
-                            sVariation = "4";
-                        }
-                        else if (PRadio.equals("PRadio2")) {
-                            sTORadio = "-";
-                        }
-                    } 
+                    else if (PRadio.equals("PRadio2")) {
+                        sTORadio = "-";
+                    }
+                }
+                else if (TORadio.equals("TORadio3")) {
+                    //sTORadio = "Cross-validation "+nf.format(dCrossValidation)+" (folds)";
+                    if (PRadio.equals("PRadio1")) {
+                        sDummy = "Data File : ";
+                        sFileData = sFileName;
+                        dAttributes = Double.parseDouble(nDFAttributes);
+                        dInstances = Double.parseDouble(nDFInstances);
+                        sVariation = "3";
+                    }
+                    else if (PRadio.equals("PRadio2")) {
+                        sTORadio = "-";
+                    }
+                }
+                else if (TORadio.equals("TORadio4")) {
+                    sTORadio = "Use test dataset";
+                    if (PRadio.equals("PRadio1")) {
+                        sDummy = "Data File : ";
+                        sFileData = sFileName;
+                        dAttributes = Double.parseDouble(nDFAttributes);
+                        dInstances = Double.parseDouble(nDFInstances);
+                        sPDummy = "Test Data File : ";
+                        sPFileData = sTestFileName;
+                        dPAttributes = Double.parseDouble(nTDFAttributes);
+                        dPInstances = Double.parseDouble(nTDFInstances);
+                        sVariation = "4";
+                    }
+                    else if (PRadio.equals("PRadio2")) {
+                        sTORadio = "-";
+                    }
+                } 
 
-                    /*
-                    out.println("<p>");
-                    out.println("nPDFAttributes = "+nPDFAttributes);
-                    out.println("<br>");
-                    out.println("NormalRadio = "+NormalRadio);
-                    out.println("OptimRadio = "+OptimRadio);
-                    out.println("SCRadio = "+SCRadio);
-                    out.println("PRadio = "+PRadio);
-                    out.println("TORadio = "+TORadio);
-                    */
+                /*
+                out.println("<p>");
+                out.println("nPDFAttributes = "+nPDFAttributes);
+                out.println("<br>");
+                out.println("NormalRadio = "+NormalRadio);
+                out.println("OptimRadio = "+OptimRadio);
+                out.println("SCRadio = "+SCRadio);
+                out.println("PRadio = "+PRadio);
+                out.println("TORadio = "+TORadio);
+                */
 
                 %>
 
@@ -2698,7 +3072,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         </td>
                         <td>
                             <%
-                            String sNormalRadio = "...";
+                            sNormalRadio = "...";
                             if (NormalRadio.equals("NormalRadio1")) {
                                 sNormalRadio = "Original value";
                             }
@@ -2766,7 +3140,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             else {
                                 if (TORadio.equals("TORadio1")) {
                                     if (PRadio.equals("PRadio1")) {
-                                        sTORadio = "Use data file";
+                                        sTORadio = "Use learning dataset";
                                     }
                                     else if (PRadio.equals("PRadio2")) {
                                         sTORadio = "-";
@@ -2774,7 +3148,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 }
                                 else if (TORadio.equals("TORadio4")) {
                                     if (PRadio.equals("PRadio1")) {
-                                        sTORadio = "Use test data file";
+                                        sTORadio = "Use test dataset";
                                     }
                                     else if (PRadio.equals("PRadio2")) {
                                         sTORadio = "-";
@@ -2876,6 +3250,11 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 <%
             }
             else if (sLoadingDataFile != "") {
+                /*
+                out.println("<p>");
+                out.println("sLoadingDataFile = "+sLoadingDataFile);
+                */
+
                 String filename;
                 if (PRadio.equals("PRadio2")) { 
                     filename = "Data_LSSVR_Prediction.txt";
@@ -2939,11 +3318,11 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             sDummy = cols[3];
                             int iDummy=Integer.parseInt(sDummy);
                             if (iDummy == 1) {
-                                %><script>document.getElementById("PRadio1").checked = true; 
+                                %><script>//document.getElementById("PRadio1").checked = true; 
                                 </script><%
                             }
                             else {
-                                %><script>document.getElementById("PRadio2").checked = true; 
+                                %><script>//document.getElementById("PRadio2").checked = true; 
                                 </script><%
                             }
                         }
@@ -2971,18 +3350,34 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 int iDummy=Integer.parseInt(sDummy);
                                 if (iDummy == 1) {
                                     %><script>document.getElementById("TORadio1").checked = true; 
+                                    document.getElementById("testdatasection").style.display = "none";
+                                    var hiddendatafile = document.getElementById("hiddendatafile");
+                                    hiddendatafile = "0";
+                                    document.getElementById("hiddendatafile").value = "0";
                                     </script><%
                                 }
                                 else if (iDummy == 2) {
                                     %><script>document.getElementById("TORadio2").checked = true; 
+                                    document.getElementById("testdatasection").style.display = "none";
+                                    var hiddendatafile = document.getElementById("hiddendatafile");
+                                    hiddendatafile = "0";
+                                    document.getElementById("hiddendatafile").value = "0";
                                     </script><%
                                 }
                                 else if (iDummy == 3) {
                                     %><script>document.getElementById("TORadio3").checked = true; 
+                                    document.getElementById("testdatasection").style.display = "none";
+                                    var hiddendatafile = document.getElementById("hiddendatafile");
+                                    hiddendatafile = "0";
+                                    document.getElementById("hiddendatafile").value = "0";
                                     </script><%
                                 }
                                 else {
                                     %><script>document.getElementById("TORadio4").checked = true; 
+                                    document.getElementById("testdatasection").style.display = "block";
+                                    var hiddendatafile = document.getElementById("hiddendatafile");
+                                    hiddendatafile = "1";
+                                    document.getElementById("hiddendatafile").value = "1";
                                     </script><%
                                 }
                             }
@@ -3012,23 +3407,307 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 }
                 br.close(); 
             }
-            else {
-                if (sLoadingDefault != "") { 
-                    %><script>document.getElementById("TORadio1").checked = true; </script>
-                <% } 
+            else if (sSaveDataFile != "") {               
+                /*
+                out.println("<p>");
+                out.println("sSaveDataFile = "+sSaveDataFile);
+                */
+
+                String filename;
+                if (PRadio.equals("PRadio2")) {
+                    filename = "Data_LSSVR_Prediction.txt";
+                }
+                else {
+                    filename = "Data_LSSVR_Evaluation.txt";
+                }
+                String file = application.getRealPath("/") + filename;
+                FileWriter filewriter = new FileWriter(file, false);
+                int iRadio = 0;
+
+                /*
+                nValueC = Float.parseFloat(snValueC);
+                nValueS = Float.parseFloat(snValueS);
+                dHoldOut = Float.parseFloat(sdHoldOut);
+                dCrossValidation = Float.parseFloat(sdCrossValidation);
                 
+                nDFAttributes = Float.parseFloat(snDFAttributes);
+                nDFInstances = Float.parseFloat(snDFInstances);
+                nTDFAttributes = Float.parseFloat(snTDFAttributes);
+                nTDFInstances = Float.parseFloat(snTDFInstances);
+                nLDFAttributes = Float.parseFloat(snLDFAttributes);
+                nLDFInstances = Float.parseFloat(snLDFInstances);
+                nPDFAttributes = Float.parseFloat(snPDFAttributes);
+                nPDFInstances = Float.parseFloat(snPDFInstances);
+                */
+                
+                // title
+                filewriter.write("LSSVR Data:\n");
+            
+                // column header
+                filewriter.write("No.\t");
+                filewriter.write("Description\t");
+                filewriter.write("Variable\t");
+                filewriter.write("Value\t");
+                filewriter.write("Remark\n");
+
+                // data rows
+                filewriter.write("1\t");
+                filewriter.write("Value of C\t");
+                filewriter.write("nValueC\t");
+                filewriter.write(nValueC+"\t");
+                filewriter.write("-\n");
+                
+                filewriter.write("2\t");
+                filewriter.write("Value of Sigma\t");
+                filewriter.write("nValueS\t");
+                filewriter.write(nValueS+"\t");
+                filewriter.write("-\n");
+                
+                sNormalRadio = "...";
+                if (NormalRadio.equals("NormalRadio1")) {
+                    sNormalRadio = "Original value";
+                    iRadio=1;
+                }
+                else if (NormalRadio.equals("NormalRadio2")) {
+                    sNormalRadio = "Feature scaling";
+                    iRadio=2;
+                }
+
+                filewriter.write("3\t");
+                filewriter.write("Normalization Method\t");
+                filewriter.write("sNormalRadio\t");
+                filewriter.write(iRadio+"\t");
+                filewriter.write(sNormalRadio+"\n");
+
+                sPRadio = "...";
+                if (PRadio.equals("PRadio1")) {
+                    sPRadio = "Evaluation";
+                    iRadio=1;
+                }
+                else if (PRadio.equals("PRadio2")) {
+                    sPRadio = "Prediction";
+                    iRadio=2;
+                }
+                    
+                filewriter.write("4\t");
+                filewriter.write("Purpose\t");
+                filewriter.write("sPRadio\t");
+                filewriter.write(iRadio+"\t");
+                filewriter.write(sPRadio+"\n");
+                
+                if (PRadio.equals("PRadio2")) {
+                    filewriter.write("5\t");
+                    filewriter.write("Learning Data File\t");
+                    filewriter.write("sLearningDataFile\t");
+                    filewriter.write(sLearningFileName+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("6\t");
+                    filewriter.write("No. of Attributes\t");
+                    filewriter.write("nLDFAttributes\t");
+                    filewriter.write(nLDFAttributes+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("7\t");
+                    filewriter.write("No. of Instances\t");
+                    filewriter.write("nLDFInstances\t");
+                    filewriter.write(nLDFInstances+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("8\t");
+                    filewriter.write("Prediction Data File\t");
+                    filewriter.write("sPredictionDataFile\t");
+                    filewriter.write(sPredictionFileName+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("9\t");
+                    filewriter.write("No. of Attributes\t");
+                    filewriter.write("nPDFAttributes\t");
+                    filewriter.write(nPDFAttributes+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("10\t");
+                    filewriter.write("No. of Instances\t");
+                    filewriter.write("nPDFInstances\t");
+                    filewriter.write(nPDFInstances+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("11\t");
+                    filewriter.write("First Data File\t");
+                    filewriter.write("sFileData\t");
+                    filewriter.write(sFileData+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("12\t");
+                    filewriter.write("No. of Attributes\t");
+                    filewriter.write("sdAttributes\t");
+                    filewriter.write(sdAttributes+"\t"); 
+                    filewriter.write("-\n");
+
+                    filewriter.write("13\t");
+                    filewriter.write("No. of Instances\t");
+                    filewriter.write("sdInstances\t");
+                    filewriter.write(sdInstances+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("14\t");
+                    filewriter.write("Second Data File\t");
+                    filewriter.write("sPFileData\t");
+                    filewriter.write(sPFileData+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("15\t");
+                    filewriter.write("No. of Attributes\t");
+                    filewriter.write("sdPAttributes\t");
+                    filewriter.write(sdPAttributes+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("16\t");
+                    filewriter.write("No. of Instances\t");
+                    filewriter.write("sdPInstances\t");
+                    filewriter.write(sdPInstances+"\t");
+                    filewriter.write("-\n");
+                } else {
+                    filewriter.write("5\t");
+                    filewriter.write("Hold-Out (%)\t");
+                    filewriter.write("dHoldOut\t");
+                    filewriter.write(dHoldOut+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("6\t");
+                    filewriter.write("Cross-Validation (%)\t");
+                    filewriter.write("dCrossValidation\t");
+                    filewriter.write(dCrossValidation+"\t");
+                    filewriter.write("-\n");
+                
+                    sTORadio = "...";
+                    if (TORadio.equals("TORadio1")) {
+                        sTORadio = "Use learning dataset";
+                        iRadio=1;
+                    }
+                    else if (TORadio.equals("TORadio4")) {
+                        sTORadio = "Use test dataset";
+                        iRadio=4;
+                    }
+                    else if (TORadio.equals("TORadio2")) {
+                        sTORadio = "Hold-out";
+                        iRadio=2;
+                    }
+                    else if (TORadio.equals("TORadio3")) {
+                        sTORadio = "Cross-validation";
+                        iRadio=3;
+                    }
+
+                    filewriter.write("7\t");
+                    filewriter.write("Test Option\t");
+                    filewriter.write("sTORadio\t");
+                    filewriter.write(iRadio+"\t");
+                    filewriter.write(sTORadio+"\n");
+
+                    filewriter.write("8\t");
+                    filewriter.write("Data File\t");
+                    filewriter.write("sDataFile\t");
+                    filewriter.write(sFileName+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("9\t");
+                    filewriter.write("No. of Attributes\t");
+                    filewriter.write("nDFAttributes\t");
+                    filewriter.write(nDFAttributes+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("10\t");
+                    filewriter.write("No. of Instances\t");
+                    filewriter.write("nDFInstances\t");
+                    filewriter.write(nDFInstances+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("11\t");
+                    filewriter.write("Test Data File\t");
+                    filewriter.write("sTestDataFile\t");
+                    filewriter.write(sTestFileName+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("12\t");
+                    filewriter.write("No. of Attributes\t");
+                    filewriter.write("nTDFAttributes\t");
+                    filewriter.write(nTDFAttributes+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("13\t");
+                    filewriter.write("No. of Instances\t");
+                    filewriter.write("nTDFInstances\t");
+                    filewriter.write(nTDFInstances+"\t");
+                    filewriter.write("-\n");
+
+
+                    filewriter.write("14\t");
+                    filewriter.write("First Data File\t");
+                    filewriter.write("sFileData\t");
+                    filewriter.write(sFileData+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("15\t");
+                    filewriter.write("No. of Attributes\t");
+                    filewriter.write("sdAttributes\t");
+                    filewriter.write(sdAttributes+"\t"); 
+                    filewriter.write("-\n");
+
+                    filewriter.write("16\t");
+                    filewriter.write("No. of Instances\t");
+                    filewriter.write("sdInstances\t");
+                    filewriter.write(sdInstances+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("17\t");
+                    filewriter.write("Second Data File\t");
+                    filewriter.write("sPFileData\t");
+                    filewriter.write(sPFileData+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("18\t");
+                    filewriter.write("No. of Attributes\t");
+                    filewriter.write("sdPAttributes\t");
+                    filewriter.write(sdPAttributes+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("19\t");
+                    filewriter.write("No. of Instances\t");
+                    filewriter.write("sdPInstances\t");
+                    filewriter.write(sdPInstances+"\t");
+                    filewriter.write("-\n");
+                }
+                filewriter.close();
+                
+                %><script>alert('Your input form has been saved on the server');</script><%
+                
+                if (NormalRadio.equals("NormalRadio1")) {%><script>document.getElementById("NormalRadio1").checked = true; </script><%}
+                else if (NormalRadio.equals("NormalRadio2")) {%><script>document.getElementById("NormalRadio2").checked = true; </script><%}
+            
+                if (PRadio.equals("PRadio1")) { 
+                    if (TORadio.equals("TORadio1")) {%><script>document.getElementById("TORadio1").checked = true; </script><%}
+                    else if (TORadio.equals("TORadio2")) {%><script>document.getElementById("TORadio2").checked = true; </script><%}
+                    else if (TORadio.equals("TORadio3")) {%><script>document.getElementById("TORadio3").checked = true; </script><%}
+                    else if (TORadio.equals("TORadio4")) {%><script>document.getElementById("TORadio4").checked = true; </script><%}
+                }
+            }
+            else {
+                /*
+                out.println("<p>");
+                out.println("sLoadingEvaluation = "+sLoadingEvaluation);
+                out.println("sLoadingPrediction = "+sLoadingPrediction);
+                */
+
                 if (sLoadingEvaluation != "") {  
-                    %><script>document.getElementById("TORadio1").checked = true; </script>
-                    <% 
                     if (sTestFileName != "") { 
-                        %><script>document.getElementById("TORadio4").checked = true; </script>
+                        %><script>document.getElementById("TORadio4").checked = true; 
+                                  document.getElementById("TORadio").value = "<%=TORadio%>";
+                        </script>          
                         <% 
                     }
                 }
 
-                if (sLoadingPrediction != "") {  
-                    %><script>document.getElementById("TORadio1").checked = true; </script>
-                <% }  
+                if (sLoadingPrediction != "") {}  
 
                 if (NormalRadio.equals("NormalRadio1")) {
                     %>
@@ -3046,47 +3725,15 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 }
             
                 if (PRadio.equals("PRadio1")) {
-                    %>
-                    <script>
-                        document.getElementById("PRadio1").checked = true; //"null" ;
-                    </script>
-                    <%
                 }
                 else if (PRadio.equals("PRadio2")) {
-                    %>
-                    <script>
-                        document.getElementById("PRadio2").checked = true; //"null" ;
-                    </script>
-                    <%
                 }
 
-                if (TORadio.equals("TORadio1")) {
-                    %>
-                    <script>
-                        document.getElementById("TORadio1").checked = true; //"null" ;
-                    </script>
-                    <%
-                }
-                else if (TORadio.equals("TORadio2")) {
-                    %>
-                    <script>
-                        document.getElementById("TORadio2").checked = true; //"null" ;
-                    </script>
-                    <%
-                }
-                else if (TORadio.equals("TORadio3")) {
-                    %>
-                    <script>
-                        document.getElementById("TORadio3").checked = true; //"null" ;
-                    </script>
-                    <%
-                }
-                else if (TORadio.equals("TORadio4")) {
-                    %>
-                    <script>
-                        document.getElementById("TORadio4").checked = true; //"null" ;
-                    </script>
-                    <%
+                if (PRadio.equals("PRadio1")) { 
+                    if (TORadio.equals("TORadio1")) {%><script>document.getElementById("TORadio1").checked = true; </script><%}
+                    else if (TORadio.equals("TORadio2")) {%><script>document.getElementById("TORadio2").checked = true; </script><%}
+                    else if (TORadio.equals("TORadio3")) {%><script>document.getElementById("TORadio3").checked = true; </script><%}
+                    else if (TORadio.equals("TORadio4")) {%><script>document.getElementById("TORadio4").checked = true; </script><%}
                 }
                 
                 /*
@@ -3591,13 +4238,29 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 <input type="hidden" name="sLoadingDataExcelLSSVM" id="sLoadingDataExcelLSSVM" value="<%=sLoadingDataExcelLSSVM%>"/>
                 <input type="hidden" name="sLoadingDataExcelClickLSSVM" id="sLoadingDataExcelClickLSSVM" value="<%=sLoadingDataExcelClickLSSVM%>"/>
 
+                <input type="hidden" name="sSaveDataFileLSSVM" id="sSaveDataFileLSSVM" value="<%=sSaveDataFileLSSVM%>"/>
                 <input type="hidden" name="sMoveBottom" id="sMoveBottom" value="<%=sMoveBottom%>"/> 
                 <input type="hidden" name="VarNextLSSVM" id="VarNextLSSVM" value="<%=VarNextLSSVM%>"/>
                 <input type="hidden" name="sErrorLSSVM" id="sErrorLSSVM" value="<%=sErrorLSSVM%>"/>
 
+                <% if (hdf.equals("1")) { %>
+                    <input type="hidden" name="hiddendatafile" id="hiddendatafile" value="1">
+                <% } else { %>
+                    <input type="hidden" name="hiddendatafile" id="hiddendatafile" value="0">
+                <% } %>
+                
+                <input type="hidden" name="sHasil" id="sHasil" value="" />
+                                
                 <input type="hidden" name="sLoadingDefaultLSSVM" id="sLoadingDefaultLSSVM" value="<%=sLoadingDefaultLSSVM%>" />
                 <input type="hidden" name="sLoadingEvaluationLSSVM" id="sLoadingEvaluationLSSVM" value="<%=sLoadingEvaluationLSSVM%>" />
                 <input type="hidden" name="sLoadingPredictionLSSVM" id="sLoadingPredictionLSSVM" value="<%=sLoadingPredictionLSSVM%>" />
+                
+                <input type="hidden" name="sFileDataLSSVM" id="sFileDataLSSVM" value="<%=sFileDataLSSVM%>" /> 
+                <input type="hidden" name="sdInstancesLSSVM" id="sdInstancesLSSVM" value="<%=sdInstancesLSSVM%>" /> 
+                <input type="hidden" name="sdAttributesLSSVM" id="sdAttributesLSSVM" value="<%=sdAttributesLSSVM%>" /> 
+                <input type="hidden" name="sPFileDataLSSVM" id="sPFileDataLSSVM" value="<%=sPFileDataLSSVM%>" /> 
+                <input type="hidden" name="sdPInstancesLSSVM" id="sdPInstancesLSSVM" value="<%=sdPInstancesLSSVM%>" /> 
+                <input type="hidden" name="sdPAttributesLSSVM" id="sdPAttributesLSSVM" value="<%=sdPAttributesLSSVM%>" /> 
                 
                 <br>
                 <br>
@@ -3620,34 +4283,40 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
 
                     <div class="tab-content">
                         <div id="evaluation" class="tab-pane fade in active">
+                            <script>
+                                document.getElementById("TORadio1LSSVM").checked = false; 
+                                document.getElementById("TORadio2LSSVM").checked = false; 
+                                document.getElementById("TORadio3LSSVM").checked = false; 
+                                document.getElementById("TORadio4LSSVM").checked = false; 
+                            </script>
+                            
+                            <% if (TORadioLSSVM.equals("TORadio1LSSVM")) {%><script>document.getElementById("TORadio1LSSVM").checked = true; </script>
+                            <% } else if (TORadioLSSVM.equals("TORadio2LSSVM")) {%><script>document.getElementById("TORadio2LSSVM").checked = true; </script>
+                            <% } else if (TORadioLSSVM.equals("TORadio3LSSVM")) {%><script>document.getElementById("TORadio3LSSVM").checked = true; </script>
+                            <% } else if (TORadioLSSVM.equals("TORadio4LSSVM")) {%><script>document.getElementById("TORadio4LSSVM").checked = true; </script>
+                            <% } %>
                         </div>
                         <div id="prediction" class="tab-pane fade">
+                            <%--><input type="hidden" name="dHoldOutLSSVM" id="dHoldOutLSSVM" value="<%=dHoldOutLSSVM%>"/>
+                            <input type="hidden" name="dCrossValidationLSSVM" id="dCrossValidationLSSVM" value="<%=dCrossValidationLSSVM%>"/><--%>
                         </div>
                     </div>
                 </div>
-                <br>
+
                 <table>
                     <tr>
                         <td>
                             <div class="container boundary">
                                 <h2><font face="Palatino Linotype, Book Antiqua, Palatino, serif" size="6">Model Settings</font></h2>
-                                <button type="button" onclick="return writedefaultsfalssvm(0)" class="btn btn-primary">Default</button>
+                                <button type="button" onclick="return writedefaultlssvm(0)" class="btn btn-primary">Default</button>
                                 <button type="button" onclick="return loadingdataformLSSVM(1);" class="btn btn-primary">Import</button>
                                 <button type="button" onclick="return savingdataLSSVM(0);" class="btn btn-primary">Export</button>
-                                <button type="button" onclick="return cleardefaultsfalssvm(0);" class="btn btn-primary">Clear</button>
+                                <button type="button" onclick="return cleardefaultlssvm(0);" class="btn btn-primary">Clear</button>
                             </div>
                         </td>
-                        <td style="width:64%">
-                            <% if (sLoadingDataExcelLSSVM != "") { %>
-                                <a href="#bottompageLSSVM">
-                                    <img src="arrowbottom.JPG" alt="..." width="15" style="float:right">
-                                </a>
-                            <% } else { %>
-                                <a href="#bottomformLSSVM">
-                                    <img src="arrowbottom.JPG" alt="..." width="15" style="float:right">
-                                </a>
-                            <% } %>
-                        </td>
+                        <a href="#bottomformLSSVM">
+                            <img src="Arrow bottom.png" alt="..." width="18" style="float:right">
+                        </a>
                     </tr>
                 </table>
 
@@ -3657,16 +4326,25 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             <!--<div class="container visible-lg-block wdetail">-->
                             <div class="container wdetail">
                                 <h2>Parameter</h2>
-                                <p>Input data and system parameters. The system then initialized the search parameters via chaotic map operator (Logistic map).</p>
+                                <p>Input data and system parameters.</p>
+                                <!--<div class="row">
+                                    <div class="col-md-3">Input data:</div>
+                                    <div class="col-md-2">none</div>
+                                </div>
+                                <br>-->
                                 <div class="row">
-                                    <div class="col-md-3">System Parameters:</div>
+                                    <div class="col-md-3">System parameters:</div>
                                     <div class="col-md-2">Value of C</div>
                                     <div class="col-md-1">
                                         <input type="text" name="nValueCLSSVM" id="nValueCLSSVM" size="5" value="<%=nValueCLSSVM%>"> 
                                     </div>
-                                    <div class="col-md-2">Value of Sigma</div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-3"></div>
+                                    <div class="col-md-2">Value of sigma</div>
                                     <div class="col-md-1">
-                                        <input type="text" name="nValueSLSSVM" id="nValueSLSSVM" size="4" value="<%=nValueSLSSVM%>">
+                                        <input type="text" name="nValueSLSSVM" id="nValueSLSSVM" size="5" value="<%=nValueSLSSVM%>">
                                     </div>
                                 </div>
                             </div>
@@ -3678,8 +4356,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         <div class="panel-body">
                             <div class="container boundary">
                                 <h2>Normalization</h2>
-                                <p>Data preprocessing is considered a crucial step in data anlytics that performs data cleansing and transforming to improve the respective results.</p>
-                                <p>User can decide whether or not to normalize the data to (0, 1) scale.</p>
+                                <%--><p>Data preprocessing is considered a crucial step in data anlytics that performs data cleansing and transforming to improve the respective results.</p><--%>
+                                <p>User can decide whether or not to normalize each independent variable of the dataset to (0 - 1) scale.</p>
                                 <div class="radio">
                                     <label><input type="radio" name="NormalRadioLSSVM" id="NormalRadio1LSSVM" value="NormalRadio1LSSVM">Original value</label>
                                 </div>
@@ -3690,39 +4368,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         </div>
                     </div>
                 </div>
-                                <% if (PRadioLSSVM.equals("PRadio1LSSVM")) { %>            
-                <div class="bs-example">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="container boundary">
-                                <h3>Test Option</h3>
-                                <p>The test data file used to evaluate the optimized model again. Output phase: calculate performance measures (i.e., RMSE, MAE, MAPE, R)</p>
-                                <p>to find the prediction accuracy.</p>
-                                <div class="form-inline">
-                                    <div class="radio col-md-2">
-                                        <label><input type="radio" name="TORadioLSSVM" id="TORadio1LSSVM" value="TORadio1LSSVM">&nbsp;Use data file</label>
-                                    </div>
-                                    <div class="radio col-md-3">
-                                        <label>
-                                            <input type="radio" name="TORadioLSSVM" id="TORadio2LSSVM" value="TORadio2LSSVM">&nbsp;Hold-out
-                                            <input type="text" class="form-control" name="dHoldOutLSSVM" id = "dHoldOutLSSVM" size="3" value="<%=dHoldOutLSSVM%>">
-                                        </label>
-                                    </div>
-                                    <div class="radio col-md-3">
-                                        <label>
-                                            <input type="radio" name="TORadioLSSVM" id="TORadio3LSSVM" value="TORadio3LSSVM">&nbsp;Cross-validation
-                                            <input type="text" class="form-control" name="dCrossValidationLSSVM" id = "dCrossValidationLSSVM" size="3" value="<%=dCrossValidationLSSVM%>"> 
-                                        </label>
-                                    </div>
-                                    <div class="radio col-md-2">
-                                        <label><input type="radio" name="TORadioLSSVM" id="TORadio4LSSVM" value="TORadio4LSSVM" onclick="return testdatasection(1);">&nbsp;Use test data file</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <% } %>
                 <table>
                     <tr>
                         <td>
@@ -3737,58 +4382,21 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         <div class="panel-body">
                             <input type="hidden" name="PRadioLSSVM" id="PRadioLSSVM" value="<%=PRadioLSSVM%>"/>
                             <% if (PRadioLSSVM.equals("PRadio1LSSVM")) { %>        
-                            <div class="container boundary">
-                                <h3>Data File</h3>
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <input type="hidden" name="fullPathLSSVM" id="fullPathLSSVM" value=""/>
-                                        <input type="file" class="filestyle" name="sDataFileLSSVM" id="sDataFileLSSVM" accept=".csv,.txt" data-input="false"/>
-                                    </div>
-                                    <div class="col-md-2" style="margin-top : 4px">
-                                        <a onclick="return computeatformLSSVM(1);">
-                                            <span class="glyphicon glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
-                                        </a>
-                                    </div>
-                                    <div class="col-md-2  col-sm-1" style="margin-top : 7px">File Name</div>
-                                    <div class="col-md-4 col-sm-1">
-                                        <input type="text" name="sFileNameLSSVM" id="sFileNameLSSVM" size="60" value="<%=sFileNameLSSVM%>" readonly/>
-                                    </div>
-                                </div>
-                                <div class="row" style="margin-bottom : 8px">
-                                    <div class="col-md-3"></div>
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-2">No. of attributes</div>
-                                    <div class="col-md-3">
-                                        <input type="text" name="nDFAttributesLSSVM" id="nDFAttributesLSSVM" size="5" value="<%=nDFAttributesLSSVM%>"  readonly/>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3"></div>
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-2">No. of instances</div>
-                                    <div class="col-md-3">
-                                        <input type="text" name="nDFInstancesLSSVM" id="nDFInstancesLSSVM" size="5" value="<%=nDFInstancesLSSVM%>" readonly/>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="container boundary">
-                                <div id="testdatasection" class="container boundary" style="display: none !important;">
-                                    <h3>Test Data File</h3>
+                                <div class="container boundary">
+                                    <h3>Learning Data File</h3>
                                     <div class="row">
                                         <div class="col-md-2">
-                                                <input type="hidden" name="fullPathTLSSVM" id="fullPathTLSSVM" value=""/>
-                                                <input type="file" class="filestyle" name="sTestDataFileLSSVM" id="sTestDataFileLSSVM" accept=".csv,.txt" data-input="false"/>
-                                            </label>
+                                            <input type="hidden" name="fullPathLSSVM" id="fullPathLSSVM" value=""/>
+                                            <input type="file" class="filestyle" name="sDataFileLSSVM" id="sDataFileLSSVM" accept=".csv,.txt" data-input="false"/>
                                         </div>
                                         <div class="col-md-2" style="margin-top : 4px">
                                             <a onclick="return computeatformLSSVM(1);">
-                                                <span class="glyphicon glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
+                                                <span class="glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
                                             </a>
                                         </div>
-                                        <div class="col-md-2" style="margin-top : 7px">File Name</div>
-                                        <div class="col-md-4">
-                                            <input type="text" name="sTestFileNameLSSVM" id="sTestFileNameLSSVM" size="60" value="<%=sTestFileNameLSSVM%>" readonly/>
+                                        <div class="col-md-2  col-sm-1" style="margin-top : 7px">File name</div>
+                                        <div class="col-md-4 col-sm-1">
+                                            <input type="text" name="sFileNameLSSVM" id="sFileNameLSSVM" size="45" value="<%=sFileNameLSSVM%>" readonly/>
                                         </div>
                                     </div>
                                     <div class="row" style="margin-bottom : 8px">
@@ -3796,7 +4404,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                         <div class="col-md-1"></div>
                                         <div class="col-md-2">No. of attributes</div>
                                         <div class="col-md-3">
-                                            <input type="text" name="nTDFAttributesLSSVM" id="nTDFAttributesLSSVM" size="5" value="<%=nTDFAttributesLSSVM%>" readonly/>
+                                            <input type="text" name="nDFAttributesLSSVM" id="nDFAttributesLSSVM" size="5" value="<%=nDFAttributesLSSVM%>"  readonly/>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -3804,17 +4412,237 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                         <div class="col-md-1"></div>
                                         <div class="col-md-2">No. of instances</div>
                                         <div class="col-md-3">
-                                                <input type="text" name="nTDFInstancesLSSVM" id="nTDFInstancesLSSVM" size="5" value="<%=nTDFInstancesLSSVM%>" readonly/>
+                                            <input type="text" name="nDFInstancesLSSVM" id="nDFInstancesLSSVM" size="5" value="<%=nDFInstancesLSSVM%>" readonly/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bs-example">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <div class="container boundary">
+                                                <h3>Test Option Available</h3>
+                                                <!--<p>The test data file used to evaluate the optimized model again. Output phase: calculate performance measures (i.e., RMSE, MAE, MAPE, R)</p>
+                                                <p>to find the prediction accuracy.</p>-->
+                                                <div class="boundary">
+                                                    <div class="row form-inline">
+                                                        <div class="radio col-md-3">
+                                                            <label><input type="radio" name="TORadioLSSVM" id="TORadio1LSSVM" value="TORadio1LSSVM" onclick="ftestdatasection(0);">&nbsp;Use learning dataset</label>
+                                                        </div>
+                                                        <div class="radio col-md-3">
+                                                            <label>
+                                                                <input type="radio" name="TORadioLSSVM" id="TORadio2LSSVM" value="TORadio2LSSVM" onclick="ftestdatasection(0);">&nbsp;Hold-out
+                                                                <input type="text" class="form-control" name="dHoldOutLSSVM" id = "dHoldOutLSSVM" size="3" value="<%=dHoldOutLSSVM%>">
+                                                            </label>
+                                                        </div>
+                                                        <div class="radio col-md-3">
+                                                            <label>
+                                                                <input type="radio" name="TORadioLSSVM" id="TORadio3LSSVM" value="TORadio3LSSVM" onclick="ftestdatasection(0);">&nbsp;Cross-validation
+                                                                <input type="text" class="form-control" name="dCrossValidationLSSVM" id = "dCrossValidationLSSVM" size="3" value="<%=dCrossValidationLSSVM%>"> 
+                                                            </label>
+                                                        </div>
+                                                    </div><br>
+                                                    <div class="row container">
+                                                        <i><p>If you want to use test dataset, select the option below!</p></i>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="radio col-md-3">
+                                                            <label><input type="radio" name="TORadioLSSVM" id="TORadio4LSSVM" value="TORadio4LSSVM" onclick="ftestdatasection(1);">&nbsp;Use test dataset</label>
+                                                        </div>
+                                                    </div>    
+                                                </div>
+                                            </div>
+                                            <div class="container boundary">
+                                            <% if (hdf.equals("1")) { %>
+                                                <div id="testdatasection" style="display: block !important;">
+                                                    <h3>Test Data File</h3>
+                                                    <div class="row">
+                                                        <div class="col-md-2">
+                                                                <input type="hidden" name="fullPathTLSSVM" id="fullPathTLSSVM" value=""/>
+                                                                <input type="file" class="filestyle" name="sTestDataFileLSSVM" id="sTestDataFileLSSVM" accept=".csv,.txt" data-input="false"/>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-2" style="margin-top : 4px">
+                                                            <a onclick="return computeatformLSSVM(1);">
+                                                                <span class="glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
+                                                            </a>
+                                                        </div>
+                                                        <div class="col-md-2" style="margin-top : 7px">File name</div>
+                                                        <div class="col-md-4">
+                                                            <input type="text" name="sTestFileNameLSSVM" id="sTestFileNameLSSVM" size="45" value="<%=sTestFileNameLSSVM%>" readonly/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="margin-bottom : 8px">
+                                                        <div class="col-md-3"></div>
+                                                        <div class="col-md-1"></div>
+                                                        <div class="col-md-2">No. of attributes</div>
+                                                        <div class="col-md-3">
+                                                            <input type="text" name="nTDFAttributesLSSVM" id="nTDFAttributesLSSVM" size="5" value="<%=nTDFAttributesLSSVM%>" readonly/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-3"></div>
+                                                        <div class="col-md-1"></div>
+                                                        <div class="col-md-2">No. of instances</div>
+                                                        <div class="col-md-3">
+                                                                <input type="text" name="nTDFInstancesLSSVM" id="nTDFInstancesLSSVM" size="5" value="<%=nTDFInstancesLSSVM%>" readonly/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <%-- if (PRadioLSSVM.equals("PRadio1LSSVM")) { --%>            
+                                                <%-- } --%>
+                                            <% } else { %>
+                                                <div id="testdatasection" style="display: none !important;">
+                                                    <h3>Test Data File</h3>
+                                                    <div class="row">
+                                                        <div class="col-md-2">
+                                                                <input type="hidden" name="fullPathTLSSVM" id="fullPathTLSSVM" value=""/>
+                                                                <input type="file" class="filestyle" name="sTestDataFileLSSVM" id="sTestDataFileLSSVM" accept=".csv,.txt" data-input="false"/>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-2" style="margin-top : 4px">
+                                                            <a onclick="return computeatformLSSVM(1);">
+                                                                <span class="glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
+                                                            </a>
+                                                        </div>
+                                                        <div class="col-md-2" style="margin-top : 7px">File name</div>
+                                                        <div class="col-md-4">
+                                                            <input type="text" name="sTestFileNameLSSVM" id="sTestFileNameLSSVM" size="45" value="<%=sTestFileNameLSSVM%>" readonly/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="margin-bottom : 8px">
+                                                        <div class="col-md-3"></div>
+                                                        <div class="col-md-1"></div>
+                                                        <div class="col-md-2">No. of attributes</div>
+                                                        <div class="col-md-3">
+                                                            <input type="text" name="nTDFAttributesLSSVM" id="nTDFAttributesLSSVM" size="5" value="<%=nTDFAttributesLSSVM%>" readonly/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-3"></div>
+                                                        <div class="col-md-1"></div>
+                                                        <div class="col-md-2">No. of instances</div>
+                                                        <div class="col-md-3">
+                                                                <input type="text" name="nTDFInstancesLSSVM" id="nTDFInstancesLSSVM" size="5" value="<%=nTDFInstancesLSSVM%>" readonly/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <% } %>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                                        
+                                <% 
+                                sFileDataLSSVM=sFileNameLSSVM;
+                                sdInstancesLSSVM=nDFInstancesLSSVM;
+                                sdAttributesLSSVM=nDFAttributesLSSVM;
+                                sPFileDataLSSVM=sTestFileNameLSSVM;
+                                sdPInstancesLSSVM=nTDFInstancesLSSVM;
+                                sdPAttributesLSSVM=nTDFAttributesLSSVM;
+                                %>
                             
-                            <% } else { %>
-                                <input type="hidden" name="TORadioLSSVM" id="TORadio1LSSVM"> 
-                                <input type="hidden" name="TORadioLSSVM" id="TORadio2LSSVM"> 
-                                <input type="hidden" name="TORadioLSSVM" id="TORadio3LSSVM"> 
-                                <input type="hidden" name="TORadioLSSVM" id="TORadio4LSSVM"> 
+                            <input type="hidden" name="fullPathLLSSVM" id="fullPathLLSSVM" value="<%=fullPathLLSSVM%>">
+                            <input type="hidden" name="sLearningDataFileLSSVM" id="sLearningDataFileLSSVM" value="<%=sLearningDataFileLSSVM%>">
+                            <input type="hidden" name="sLearningFileNameLSSVM" id="sLearningFileNameLSSVM" value="<%=sLearningFileNameLSSVM%>">
+                            <input type="hidden" name="nLDFAttributesLSSVM" id="nLDFAttributesLSSVM" value="<%=nLDFAttributesLSSVM%>">
+                            <input type="hidden" name="nLDFInstancesLSSVM" id="nLDFInstancesLSSVM" value="<%=nLDFInstancesLSSVM%>">
+                            <input type="hidden" name="fullPathPLSSVM" id="fullPathPLSSVM" value="<%=fullPathPLSSVM%>">
+                            <input type="hidden" name="sPredictionDataFileLSSVM" id="sPredictionDataFileLSSVM" value="<%=sPredictionDataFileLSSVM%>">
+                            <input type="hidden" name="sPredictionFileNameLSSVM" id="sPredictionFileNameLSSVM" value="<%=sPredictionFileNameLSSVM%>">
+                            <input type="hidden" name="nPDFAttributesLSSVM" id="nPDFAttributesLSSVM" value="<%=nPDFAttributesLSSVM%>">
+                            <input type="hidden" name="nPDFInstancesLSSVM" id="nPDFInstancesLSSVM" value="<%=nPDFInstancesLSSVM%>">
+                            
+                            <% } else if (PRadioLSSVM.equals("PRadio2LSSVM")) { %>        
+                                <div class="container boundary">
+                                    <h3>Learning Data File</h3>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <input type="hidden" name="fullPathLLSSVM" id="fullPathLLSSVM" value=""/>
+                                            <input type="file" class="filestyle" name="sLearningDataFileLSSVM" id="sLearningDataFileLSSVM" accept=".csv,.txt" data-input="false"/>
+                                        </div>
+                                        <div class="col-md-2" style="margin-top : 4px">
+                                            <a onclick="return computeatformLSSVM(1);">
+                                                <span class="glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-2  col-sm-1" style="margin-top : 7px">File name</div>
+                                        <div class="col-md-4 col-sm-1">
+                                            <input type="text" name="sLearningFileNameLSSVM" id="sLearningFileNameLSSVM" size="45" value="<%=sLearningFileNameLSSVM%>" readonly/>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-bottom : 8px">
+                                        <div class="col-md-3"></div>
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-2">No. of attributes</div>
+                                        <div class="col-md-3">
+                                            <input type="text" name="nLDFAttributesLSSVM" id="nLDFAttributesLSSVM" size="5" value="<%=nLDFAttributesLSSVM%>" readonly/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3"></div>
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-2">No. of instances</div>
+                                        <div class="col-md-3">
+                                            <input type="text" name="nLDFInstancesLSSVM" id="nLDFInstancesLSSVM" size="5" value="<%=nLDFInstancesLSSVM%>" readonly/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="container boundary">
+                                    <h3>Prediction Data File: Make Predictions for New Data</h3>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                                <input type="hidden" name="fullPathPLSSVM" id="fullPathPLSSVM" value=""/>
+                                                <input type="file" class="filestyle"  name="sPredictionDataFileLSSVM" id="sPredictionDataFileLSSVM" accept=".csv,.txt" data-input="false"/>
+                                            </label>
+                                        </div>
+                                        <div class="col-md-2" style="margin-top : 4px">
+                                            <a onclick="return computeatformLSSVM(1);">
+                                                <span class="glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-2" style="margin-top : 7px">File name</div>
+                                        <div class="col-md-4">
+                                            <input type="text" name="sPredictionFileNameLSSVM" id="sPredictionFileNameLSSVM" size="45" value="<%=sPredictionFileNameLSSVM%>" readonly/>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-bottom : 8px">
+                                        <div class="col-md-3"></div>
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-2">No. of attributes</div>
+                                        <div class="col-md-3">
+                                            <input type="text" name="nPDFAttributesLSSVM" id="nPDFAttributesLSSVM" size="5" value="<%=nPDFAttributesLSSVM%>" readonly/>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3"></div>
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-2">No. of instances</div>
+                                        <div class="col-md-3">
+                                                <input type="text" name="nPDFInstancesLSSVM" id="nPDFInstancesLSSVM" size="5" value="<%=nPDFInstancesLSSVM%>" readonly/>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <script>
+                                    document.getElementById("sFileDataLSSVM").value = "<%=sLearningFileNameLSSVM%>";
+                                    document.getElementById("sdInstancesLSSVM").value = "<%=nLDFInstancesLSSVM%>";
+                                    document.getElementById("sdAttributesLSSVM").value = "<%=nLDFAttributesLSSVM%>";
+                                    document.getElementById("sPFileDataLSSVM").value = "<%=sPredictionFileNameLSSVM%>";
+                                    document.getElementById("sdPInstancesLSSVM").value = "<%=nPDFInstancesLSSVM%>";
+                                    document.getElementById("sdPAttributesLSSVM").value = "<%=nPDFAttributesLSSVM%>";
+                                </script>
+
+                                <% 
+                                sFileDataLSSVM=sFileNameLSSVM;
+                                sdInstancesLSSVM=nDFInstancesLSSVM;
+                                sdAttributesLSSVM=nDFAttributesLSSVM;
+                                sPFileDataLSSVM=sTestFileNameLSSVM;
+                                sdPInstancesLSSVM=nTDFInstancesLSSVM;
+                                sdPAttributesLSSVM=nTDFAttributesLSSVM;
+                                %>
+
+                                <input type="hidden" name="TORadioLSSVM" id="TORadioLSSVM" value="<%=TORadioLSSVM%>"/> 
                                 <input type="hidden" name="dHoldOutLSSVM" id = "dHoldOutLSSVM" value="<%=dHoldOutLSSVM%>"> 
                                 <input type="hidden" name="dCrossValidationLSSVM" id = "dCrossValidationLSSVM" value="<%=dCrossValidationLSSVM%>">
                                 <input type="hidden" name="fullPathLSSVM" id="fullPathLSSVM" value="<%=fullPathLSSVM%>"> 
@@ -3828,124 +4656,63 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 <input type="hidden" name="nTDFAttributesLSSVM" id="nTDFAttributesLSSVM" value="<%=nTDFAttributesLSSVM%>"> 
                                 <input type="hidden" name="nTDFInstancesLSSVM" id="nTDFInstancesLSSVM" value="<%=nTDFInstancesLSSVM%>"> 
                             <% } %>
-
-                            <% if (PRadioLSSVM.equals("PRadio2LSSVM")) { %>        
-                            <div class="container boundary">
-                                <h3>Data File: Learning</h3>
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <input type="hidden" name="fullPathLLSSVM" id="fullPathLLSSVM" value=""/>
-                                        <input type="file" class="filestyle" name="sLearningDataFileLSSVM" id="sLearningDataFileLSSVM" accept=".csv,.txt" data-input="false"/>
-                                    </div>
-                                    <div class="col-md-2" style="margin-top : 4px">
-                                        <a onclick="return computeatformLSSVM(1);">
-                                            <span class="glyphicon glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
-                                        </a>
-                                    </div>
-                                    <div class="col-md-2  col-sm-1" style="margin-top : 7px">Learning File Name</div>
-                                    <div class="col-md-4 col-sm-1">
-                                        <input type="text" name="sLearningFileNameLSSVM" id="sLearningFileNameLSSVM" size="60" value="<%=sLearningFileNameLSSVM%>" readonly/>
-                                    </div>
-                                </div>
-                                <div class="row" style="margin-bottom : 8px">
-                                    <div class="col-md-3"></div>
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-2">No. of attributes</div>
-                                    <div class="col-md-3">
-                                        <input type="text" name="nLDFAttributesLSSVM" id="nLDFAttributesLSSVM" size="5" value="<%=nLDFAttributesLSSVM%>" readonly/>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3"></div>
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-2">No. of instances</div>
-                                    <div class="col-md-3">
-                                        <input type="text" name="nLDFInstancesLSSVM" id="nLDFInstancesLSSVM" size="5" value="<%=nLDFInstancesLSSVM%>" readonly/>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="container boundary">
-                                <h3>Data File: Prediction</h3>
-                                <div class="row">
-                                    <div class="col-md-2">
-                                            <input type="hidden" name="fullPathPLSSVM" id="fullPathPLSSVM" value=""/>
-                                            <input type="file" class="filestyle"  name="sPredictionDataFileLSSVM" id="sPredictionDataFileLSSVM" accept=".csv,.txt" data-input="false"/>
-                                        </label>
-                                    </div>
-                                    <div class="col-md-2" style="margin-top : 4px">
-                                        <a onclick="return computeatformLSSVM(1);">
-                                            <span class="glyphicon glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
-                                        </a>
-                                    </div>
-                                    <div class="col-md-2" style="margin-top : 7px">Prediction File Name</div>
-                                    <div class="col-md-4">
-                                        <input type="text" name="sPredictionFileNameLSSVM" id="sPredictionFileNameLSSVM" size="60" value="<%=sPredictionFileNameLSSVM%>" readonly/>
-                                    </div>
-                                </div>
-                                <div class="row" style="margin-bottom : 8px">
-                                    <div class="col-md-3"></div>
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-2">No. of attributes</div>
-                                    <div class="col-md-3">
-                                        <input type="text" name="nPDFAttributesLSSVM" id="nPDFAttributesLSSVM" size="5" value="<%=nPDFAttributesLSSVM%>" readonly/>
-                                </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3"></div>
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-2">No. of instances</div>
-                                    <div class="col-md-3">
-                                            <input type="text" name="nPDFInstancesLSSVM" id="nPDFInstancesLSSVM" size="5" value="<%=nPDFInstancesLSSVM%>" readonly/>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <% } else { %>
-                                <input type="hidden" name="fullPathLLSSVM" id="fullPathLLSSVM" value="<%=fullPathLLSSVM%>">
-                                <input type="hidden" name="sLearningDataFileLSSVM" id="sLearningDataFileLSSVM" value="<%=sLearningDataFileLSSVM%>">
-                                <input type="hidden" name="sLearningFileNameLSSVM" id="sLearningFileNameLSSVM" value="<%=sLearningFileNameLSSVM%>">
-                                <input type="hidden" name="nLDFAttributesLSSVM" id="nLDFAttributesLSSVM" value="<%=nLDFAttributesLSSVM%>">
-                                <input type="hidden" name="nLDFInstancesLSSVM" id="nLDFInstancesLSSVM" value="<%=nLDFInstancesLSSVM%>">
-                                <input type="hidden" name="fullPathPLSSVM" id="fullPathPLSSVM" value="<%=fullPathPLSSVM%>">
-                                <input type="hidden" name="sPredictionDataFileLSSVM" id="sPredictionDataFileLSSVM" value="<%=sPredictionDataFileLSSVM%>">
-                                <input type="hidden" name="sPredictionFileNameLSSVM" id="sPredictionFileNameLSSVM" value="<%=sPredictionFileNameLSSVM%>">
-                                <input type="hidden" name="nPDFAttributesLSSVM" id="nPDFAttributesLSSVM" value="<%=nPDFAttributesLSSVM%>">
-                                <input type="hidden" name="nPDFInstancesLSSVM" id="nPDFInstancesLSSVM" value="<%=nPDFInstancesLSSVM%>">
-                            <% } %>
                         </div>
                     </div>
                 </div>
-            <br>
-            <h6 id="bottomformLSSVM">
+            
+            <%--><h6 id="bottomformLSSVM">
                 <img src="Logo-Space.png" alt="     " width="4" height="5">
                 &nbsp;. . . [END OF DATA FORM] &nbsp;&nbsp;&nbsp;
                     
                 <% if (sLoadingDataExcelLSSVM != "") { %>
                 <% } else { %>
-                <%--<a href="#top">
+                    <%--><a href="#top">
                         <img src="Icon-Top.png" alt="..." width="13" height="17" style="float:right">
-                    </a>--%>
-                    <div class="scrollToTop">
+                    </a><--%>
+                    <%--><div class="scrollToTop">
                       <img src="arrowup.JPG" alt="..." width="18">  
                     </div>
                 <% } %>
-            </h6>
-            <br>
+            </h6><--%>
+            
+            <table>
+                <tr>
+                    <td>
+                        <div class="container boundary" id="bottomformLSSVM">
+                            <h2><font face="Palatino Linotype, Book Antiqua, Palatino, serif" size="6">Output File Name</font></h2>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="bs-example">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="container boundary">
+                            <b>Base output file name (eg. SVMResult):</b>&nbsp;&nbsp;&nbsp;
+                            <!--<font color="teal" face="tahoma" size="2"> Base output file name (eg. SVMResult) </font>-->
+                            <input type="text" name="sBaseFileNameLSSVM" id="sBaseFileNameLSSVM" size="20" value="<%=sBaseFileNameLSSVM%>">
+                            <!--<font color="teal" face="tahoma" size="2">order number and .txt will be automatically added. </font>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br>                
             <center>
                 <a onclick="return checkdataLSSVM(1);">
                     <font color="blue" face="agency FB" size="3">
                         <b><u>SUBMIT >></u></b>
                     </font>
                 </a>
+                
+                <a href="#title">
+                    <img src="Arrow top.png" alt="..." width="18" style="float:right">
+                </a>
+
                 <table>
                     <tr>
-                        <td></td>
-                    </tr>
-                </table>
-                <table>
-                    <tr>
-                        <td></td>
+                        <td><img src="Logo-Space.png" alt=""></td>
                     </tr>
                 </table>
             </center>
@@ -3972,14 +4739,14 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 if (PRadioLSSVM.equals("PRadio1LSSVM")) {
                     %>
                     <script>
-                        document.getElementById("PRadio1LSSVM").checked = true; //"null" ;
+                        //document.getElementById("PRadio1LSSVM").checked = true; //"null" ;
                     </script>
                     <%
                 }
                 else if (PRadioLSSVM.equals("PRadio2LSSVM")) {
                     %>
                     <script>
-                        document.getElementById("PRadio2LSSVM").checked = true; //"null" ;
+                        //document.getElementById("PRadio2LSSVM").checked = true; //"null" ;
                     </script>
                     <%
                 }
@@ -4013,7 +4780,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     <%
                 }
 
-                String sPRadioLSSVM = "...";
+                sPRadioLSSVM = "...";
                 if (PRadioLSSVM.equals("PRadio1LSSVM")) {
                     sPRadioLSSVM = "Evaluation"; 
                     sDummy = "Data File : ";
@@ -4031,9 +4798,9 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     sVariationLSSVM = "5";
                 }
 
-                String sTORadioLSSVM = "...";
+                sTORadioLSSVM = "..."; 
                     if (TORadioLSSVM.equals("TORadio1LSSVM")) {
-                        sTORadioLSSVM = "Use data file";
+                        sTORadioLSSVM = "Use learning dataset";
                         if (PRadioLSSVM.equals("PRadio1LSSVM")) {
                             sDummy = "Data File : ";
                             sFileDataLSSVM = sFileNameLSSVM;
@@ -4072,7 +4839,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         }
                     }
                     else if (TORadioLSSVM.equals("TORadio4LSSVM")) {
-                        sTORadioLSSVM = "Use test data file";
+                        sTORadioLSSVM = "Use test dataset";
                         if (PRadioLSSVM.equals("PRadio1LSSVM")) {
                             sDummy = "Data File : ";
                             sFileDataLSSVM = sFileNameLSSVM;
@@ -4126,7 +4893,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         </td>
                         <td>
                             <%
-                            String sNormalRadioLSSVM = "...";
+                            sNormalRadioLSSVM = "...";
                             if (NormalRadioLSSVM.equals("NormalRadio1LSSVM")) {
                                 sNormalRadioLSSVM = "Original value";
                             }
@@ -4194,7 +4961,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             else {
                                 if (TORadioLSSVM.equals("TORadio1LSSVM")) {
                                     if (PRadioLSSVM.equals("PRadio1LSSVM")) {
-                                        sTORadioLSSVM = "Use data file";
+                                        sTORadioLSSVM = "Use learning dataset";
                                     }
                                     else if (PRadioLSSVM.equals("PRadio2LSSVM")) {
                                         sTORadioLSSVM = "-";
@@ -4202,7 +4969,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 }
                                 else if (TORadioLSSVM.equals("TORadio4LSSVM")) {
                                     if (PRadioLSSVM.equals("PRadio1LSSVM")) {
-                                        sTORadioLSSVM = "Use test data file";
+                                        sTORadioLSSVM = "Use test dataset";
                                     }
                                     else if (PRadioLSSVM.equals("PRadio2LSSVM")) {
                                         sTORadioLSSVM = "-";
@@ -4371,11 +5138,11 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             sDummy = cols[3];
                             int iDummy=Integer.parseInt(sDummy);
                             if (iDummy == 1) {
-                                %><script>document.getElementById("PRadio1LSSVM").checked = true; 
+                                %><script>//document.getElementById("PRadio1LSSVM").checked = true; 
                                 </script><%
                             }
                             else {
-                                %><script>document.getElementById("PRadio2LSSVM").checked = true; 
+                                %><script>//document.getElementById("PRadio2LSSVM").checked = true; 
                                 </script><%
                             }
                         }
@@ -4403,18 +5170,34 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 int iDummy=Integer.parseInt(sDummy);
                                 if (iDummy == 1) {
                                     %><script>document.getElementById("TORadio1LSSVM").checked = true; 
+                                    document.getElementById("testdatasection").style.display = "none";
+                                    var hiddendatafile = document.getElementById("hiddendatafile");
+                                    hiddendatafile = "0";
+                                    document.getElementById("hiddendatafile").value = "0";
                                     </script><%
                                 }
                                 else if (iDummy == 2) {
                                     %><script>document.getElementById("TORadio2LSSVM").checked = true; 
+                                    document.getElementById("testdatasection").style.display = "none";
+                                    var hiddendatafile = document.getElementById("hiddendatafile");
+                                    hiddendatafile = "0";
+                                    document.getElementById("hiddendatafile").value = "0";
                                     </script><%
                                 }
                                 else if (iDummy == 3) {
                                     %><script>document.getElementById("TORadio3LSSVM").checked = true; 
+                                    document.getElementById("testdatasection").style.display = "none";
+                                    var hiddendatafile = document.getElementById("hiddendatafile");
+                                    hiddendatafile = "0";
+                                    document.getElementById("hiddendatafile").value = "0";
                                     </script><%
                                 }
                                 else {
                                     %><script>document.getElementById("TORadio4LSSVM").checked = true; 
+                                    document.getElementById("testdatasection").style.display = "block";
+                                    var hiddendatafile = document.getElementById("hiddendatafile");
+                                    hiddendatafile = "1";
+                                    document.getElementById("hiddendatafile").value = "1";
                                     </script><%
                                 }
                             }
@@ -4443,16 +5226,291 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 }
                 br.close();
             }
-            else {
-                if (sLoadingDefaultLSSVM != "") { 
-                    %><script>document.getElementById("TORadio1LSSVM").checked = true; </script>
-                <% } 
+            else if (sSaveDataFileLSSVM != "") {               
+                String filename;
+                if (PRadioLSSVM.equals("PRadio2LSSVM")) {
+                    filename = "Data_LSSVM_Prediction.txt";
+                }
+                else {
+                    filename = "Data_LSSVM_Evaluation.txt";
+                }
+                String file = application.getRealPath("/") + filename;
+                FileWriter filewriter = new FileWriter(file, false);
+                int iRadio = 0;
                 
+                /*
+                nValueCLSSVM = Float.parseFloat(snValueCLSSVM);
+                nValueSLSSVM = Float.parseFloat(snValueSLSSVM);
+                dHoldOutLSSVM = Float.parseFloat(sdHoldOutLSSVM);
+                dCrossValidationLSSVM = Float.parseFloat(sdCrossValidationLSSVM);
+                
+                nDFAttributesLSSVM = Float.parseFloat(snDFAttributesLSSVM);
+                nDFInstancesLSSVM = Float.parseFloat(snDFInstancesLSSVM);
+                nTDFAttributesLSSVM = Float.parseFloat(snTDFAttributesLSSVM);
+                nTDFInstancesLSSVM = Float.parseFloat(snTDFInstancesLSSVM);
+                nLDFAttributesLSSVM = Float.parseFloat(snLDFAttributesLSSVM);
+                nLDFInstancesLSSVM = Float.parseFloat(snLDFInstancesLSSVM);
+                nPDFAttributesLSSVM = Float.parseFloat(snPDFAttributesLSSVM);
+                nPDFInstancesLSSVM = Float.parseFloat(snPDFInstancesLSSVM);
+                */
+                
+                // title
+                filewriter.write("LSSVM Data:\n");
+            
+                // column header
+                filewriter.write("No.\t");
+                filewriter.write("Description\t");
+                filewriter.write("Variable\t");
+                filewriter.write("Value\t");
+                filewriter.write("Remark\n");
+
+                // data rows
+                filewriter.write("1\t");
+                filewriter.write("Value of C\t");
+                filewriter.write("nValueCLSSVM\t");
+                filewriter.write(nValueCLSSVM+"\t");
+                filewriter.write("-\n");
+                
+                filewriter.write("2\t");
+                filewriter.write("Value of Sigma\t");
+                filewriter.write("nValueSLSSVM\t");
+                filewriter.write(nValueSLSSVM+"\t");
+                filewriter.write("-\n");
+                
+                sNormalRadioLSSVM = "...";
+                if (NormalRadioLSSVM.equals("NormalRadio1LSSVM")) {
+                    sNormalRadioLSSVM = "Original value";
+                    iRadio=1;
+                }
+                else if (NormalRadioLSSVM.equals("NormalRadio2LSSVM")) {
+                    sNormalRadioLSSVM = "Feature scaling";
+                    iRadio=2;
+                }
+
+                filewriter.write("3\t");
+                filewriter.write("Normalization Method\t");
+                filewriter.write("sNormalRadioLSSVM\t");
+                filewriter.write(iRadio+"\t");
+                filewriter.write(sNormalRadioLSSVM+"\n");
+
+                sPRadioLSSVM = "...";
+                if (PRadioLSSVM.equals("PRadio1LSSVM")) {
+                    sPRadioLSSVM = "Evaluation";
+                    iRadio=1;
+                }
+                else if (PRadioLSSVM.equals("PRadio2LSSVM")) {
+                    sPRadioLSSVM = "Prediction";
+                    iRadio=2;
+                }
+                    
+                filewriter.write("4\t");
+                filewriter.write("Purpose\t");
+                filewriter.write("sPRadioLSSVM\t");
+                filewriter.write(iRadio+"\t");
+                filewriter.write(sPRadioLSSVM+"\n");
+                
+                if (PRadioLSSVM.equals("PRadio2LSSVM")) {
+                    filewriter.write("5\t");
+                    filewriter.write("Learning Data File\t");
+                    filewriter.write("sLearningDataFileLSSVM\t");
+                    filewriter.write(sLearningFileNameLSSVM+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("6\t");
+                    filewriter.write("No. of Attributes\t");
+                    filewriter.write("nLDFAttributesLSSVM\t");
+                    filewriter.write(nLDFAttributesLSSVM+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("7\t");
+                    filewriter.write("No. of Instances\t");
+                    filewriter.write("nLDFInstancesLSSVM\t");
+                    filewriter.write(nLDFInstancesLSSVM+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("8\t");
+                    filewriter.write("Prediction Data File\t");
+                    filewriter.write("sPredictionDataFileLSSVM\t");
+                    filewriter.write(sPredictionFileNameLSSVM+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("9\t");
+                    filewriter.write("No. of Attributes\t");
+                    filewriter.write("nPDFAttributesLSSVM\t");
+                    filewriter.write(nPDFAttributesLSSVM+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("10\t");
+                    filewriter.write("No. of Instances\t");
+                    filewriter.write("nPDFInstancesLSSVM\t");
+                    filewriter.write(nPDFInstancesLSSVM+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("11\t");
+                    filewriter.write("First Data File\t");
+                    filewriter.write("sFileDataLSSVM\t");
+                    filewriter.write(sFileDataLSSVM+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("12\t");
+                    filewriter.write("No. of Attributes\t");
+                    filewriter.write("sdAttributesLSSVM\t");
+                    filewriter.write(sdAttributesLSSVM+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("13\t");
+                    filewriter.write("No. of Instances\t");
+                    filewriter.write("sdInstancesLSSVM\t");
+                    filewriter.write(sdInstancesLSSVM+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("14\t");
+                    filewriter.write("Second Data File\t");
+                    filewriter.write("sPFileDataLSSVM\t");
+                    filewriter.write(sPFileDataLSSVM+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("15\t");
+                    filewriter.write("No. of Attributes\t");
+                    filewriter.write("sdPAttributesLSSVM\t");
+                    filewriter.write(sdPAttributesLSSVM+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("16\t");
+                    filewriter.write("No. of Instances\t");
+                    filewriter.write("sdPInstancesLSSVM\t");
+                    filewriter.write(sdPInstancesLSSVM+"\t");
+                    filewriter.write("-\n");
+                } else {
+                    filewriter.write("5\t");
+                    filewriter.write("Hold-Out (%)\t");
+                    filewriter.write("dHoldOutLSSVM\t");
+                    filewriter.write(dHoldOutLSSVM+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("6\t");
+                    filewriter.write("Cross-Validation (%)\t");
+                    filewriter.write("dCrossValidationLSSVM\t");
+                    filewriter.write(dCrossValidationLSSVM+"\t");
+                    filewriter.write("-\n");
+
+                    sTORadioLSSVM = "...";
+                    if (TORadioLSSVM.equals("TORadio1LSSVM")) {
+                        sTORadioLSSVM = "Use learning dataset";
+                        iRadio=1;
+                    }
+                    else if (TORadioLSSVM.equals("TORadio4LSSVM")) {
+                        sTORadioLSSVM = "Use test dataset";
+                        iRadio=4;
+                    }
+                    else if (TORadioLSSVM.equals("TORadio2LSSVM")) {
+                        sTORadioLSSVM = "Hold-out";
+                        iRadio=2;
+                    }
+                    else if (TORadioLSSVM.equals("TORadio3LSSVM")) {
+                        sTORadioLSSVM = "Cross-validation";
+                        iRadio=3;
+                    }
+
+                    filewriter.write("7\t");
+                    filewriter.write("Test Option\t");
+                    filewriter.write("sTORadioLSSVM\t");
+                    filewriter.write(iRadio+"\t");
+                    filewriter.write(sTORadioLSSVM+"\n");
+
+                    filewriter.write("8\t");
+                    filewriter.write("Data File\t");
+                    filewriter.write("sDataFileLSSVM\t");
+                    filewriter.write(sFileNameLSSVM+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("9\t");
+                    filewriter.write("No. of Attributes\t");
+                    filewriter.write("nDFAttributesLSSVM\t");
+                    filewriter.write(nDFAttributesLSSVM+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("10\t");
+                    filewriter.write("No. of Instances\t");
+                    filewriter.write("nDFInstancesLSSVM\t");
+                    filewriter.write(nDFInstancesLSSVM+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("11\t");
+                    filewriter.write("Test Data File\t");
+                    filewriter.write("sTestDataFileLSSVM\t");
+                    filewriter.write(sTestFileNameLSSVM+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("12\t");
+                    filewriter.write("No. of Attributes\t");
+                    filewriter.write("nTDFAttributesLSSVM\t");
+                    filewriter.write(nTDFAttributesLSSVM+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("13\t");
+                    filewriter.write("No. of Instances\t");
+                    filewriter.write("nTDFInstancesLSSVM\t");
+                    filewriter.write(nTDFInstancesLSSVM+"\t");
+                    filewriter.write("-\n");
+                
+                    filewriter.write("14\t");
+                    filewriter.write("First Data File\t");
+                    filewriter.write("sFileDataLSSVM\t");
+                    filewriter.write(sFileDataLSSVM+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("15\t");
+                    filewriter.write("No. of Attributes\t");
+                    filewriter.write("sdAttributesLSSVM\t");
+                    filewriter.write(sdAttributesLSSVM+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("16\t");
+                    filewriter.write("No. of Instances\t");
+                    filewriter.write("sdInstancesLSSVM\t");
+                    filewriter.write(sdInstancesLSSVM+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("17\t");
+                    filewriter.write("Second Data File\t");
+                    filewriter.write("sPFileDataLSSVM\t");
+                    filewriter.write(sPFileDataLSSVM+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("18\t");
+                    filewriter.write("No. of Attributes\t");
+                    filewriter.write("sdPAttributesLSSVM\t");
+                    filewriter.write(sdPAttributesLSSVM+"\t");
+                    filewriter.write("-\n");
+
+                    filewriter.write("19\t");
+                    filewriter.write("No. of Instances\t");
+                    filewriter.write("sdPInstancesLSSVM\t");
+                    filewriter.write(sdPInstancesLSSVM+"\t");
+                    filewriter.write("-\n");
+                }
+
+                filewriter.close();
+
+                %><script>alert('Your input form has been saved on the server');</script><%
+                
+                if (NormalRadioLSSVM.equals("NormalRadio1LSSVM")) {%><script>document.getElementById("NormalRadio1LSSVM").checked = true;</script>
+                <% } else if (NormalRadioLSSVM.equals("NormalRadio2LSSVM")) {%><script>document.getElementById("NormalRadio2LSSVM").checked = true;</script> <% }
+            
+                if (PRadio.equals("PRadio1")) { 
+                    if (TORadioLSSVM.equals("TORadio1LSSVM")) {%><script>document.getElementById("TORadio1LSSVM").checked = true;</script>
+                    <% } else if (TORadioLSSVM.equals("TORadio2LSSVM")) {%><script>document.getElementById("TORadio2LSSVM").checked = true;</script>
+                    <% } else if (TORadioLSSVM.equals("TORadio3LSSVM")) {%><script>document.getElementById("TORadio3LSSVM").checked = true;</script>
+                    <% } else if (TORadioLSSVM.equals("TORadio4LSSVM")) {%><script>document.getElementById("TORadio4LSSVM").checked = true;</script><% }
+                }
+            }
+            else {
                 if (sLoadingEvaluationLSSVM != "") {  
-                    %><script>document.getElementById("TORadio1LSSVM").checked = true; </script>
-                    <% 
                     if (sTestFileNameLSSVM != "") {
-                        %><script>document.getElementById("TORadio4LSSVM").checked = true; </script>
+                        %><script>document.getElementById("TORadio4LSSVM").checked = true; 
+                                  document.getElementById("TORadioLSSVM").value = "<%=TORadioLSSVM%>";
+                        </script>          
                         <% 
                     }
                 } 
@@ -4477,49 +5535,17 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 }
             
                 if (PRadioLSSVM.equals("PRadio1LSSVM")) {
-                    %>
-                    <script>
-                        document.getElementById("PRadio1LSSVM").checked = true; //"null" ;
-                    </script>
-                    <%
                 }
                 else if (PRadioLSSVM.equals("PRadio2LSSVM")) {
-                    %>
-                    <script>
-                        document.getElementById("PRadio2LSSVM").checked = true; //"null" ;
-                    </script>
-                    <%
                 }
 
-                if (TORadioLSSVM.equals("TORadio1LSSVM")) {
-                    %>
-                    <script>
-                        document.getElementById("TORadio1LSSVM").checked = true; //"null" ;
-                    </script>
-                    <%
+                if (PRadioLSSVM.equals("PRadio1LSSVM")) { 
+                    if (TORadioLSSVM.equals("TORadio1LSSVM")) {%><script>document.getElementById("TORadio1LSSVM").checked = true; </script><%}
+                    else if (TORadioLSSVM.equals("TORadio2LSSVM")) {%><script>document.getElementById("TORadio2LSSVM").checked = true; </script><%}
+                    else if (TORadioLSSVM.equals("TORadio3LSSVM")) {%><script>document.getElementById("TORadio3LSSVM").checked = true; </script><%}
+                    else if (TORadioLSSVM.equals("TORadio4LSSVM")) {%><script>document.getElementById("TORadio4LSSVM").checked = true; </script><%}
                 }
-                else if (TORadioLSSVM.equals("TORadio2LSSVM")) {
-                    %>
-                    <script>
-                        document.getElementById("TORadio2LSSVM").checked = true; //"null" ;
-                    </script>
-                    <%
-                }
-                else if (TORadioLSSVM.equals("TORadio3LSSVM")) {
-                    %>
-                    <script>
-                        document.getElementById("TORadio3LSSVM").checked = true; //"null" ;
-                    </script>
-                    <%
-                }
-                else if (TORadioLSSVM.equals("TORadio4LSSVM")) {
-                    %>
-                    <script>
-                        document.getElementById("TORadio4LSSVM").checked = true; //"null" ;
-                    </script>
-                    <%
-                }
-            
+
                 // compute nLDFAttributes and nLDFInstances 
                 int iDFInstancesLSSVM = 0;
                 int iDFAttributesLSSVM = 0;

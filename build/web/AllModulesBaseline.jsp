@@ -1817,6 +1817,15 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     var sLearningFileNameLSSVM = document.getElementById("sLearningFileNameLSSVM");
                     var sPredictionFileNameLSSVM = document.getElementById("sPredictionFileNameLSSVM");
 
+                    sSaveDataFileLSSVM = "";
+                    document.getElementById("sSaveDataFileLSSVM").value = "";
+                    //alert("Aha 135 ...!");
+
+                    var sLoadingDataFileLSSVM = document.getElementById("sLoadingDataFileLSSVM");
+                    sLoadingDataFileLSSVM = "";
+                    document.getElementById("sLoadingDataFileLSSVM").value = sLoadingDataFileLSSVM;
+                    //alert("Aha 1351 ...!");
+
                     var sMoveBottom = document.getElementById("sMoveBottom");
                     sMoveBottom.value = val;
                     document.getElementById("sMoveBottom").value = val;
@@ -4275,16 +4284,11 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     <div class="tab-content">
                         <div id="evaluation" class="tab-pane fade in active">
                             <script>
-                                document.getElementById("NormalRadio1LSSVM").checked = false;
-                                document.getElementById("NormalRadio2LSSVM").checked = false;
                                 document.getElementById("TORadio1LSSVM").checked = false; 
                                 document.getElementById("TORadio2LSSVM").checked = false; 
                                 document.getElementById("TORadio3LSSVM").checked = false; 
                                 document.getElementById("TORadio4LSSVM").checked = false; 
                             </script>
-                            <% if (NormalRadio.equals("NormalRadio1")) {%><script>document.getElementById("NormalRadio1").checked = true; </script>
-                            <% } else if (NormalRadio.equals("NormalRadio2")) {%><script>document.getElementById("NormalRadio2").checked = true; </script>
-                            <% } %>
                             
                             <% if (TORadioLSSVM.equals("TORadio1LSSVM")) {%><script>document.getElementById("TORadio1LSSVM").checked = true; </script>
                             <% } else if (TORadioLSSVM.equals("TORadio2LSSVM")) {%><script>document.getElementById("TORadio2LSSVM").checked = true; </script>

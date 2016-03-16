@@ -2069,12 +2069,26 @@
                                                 </a>
                                             </div>
                                             <% if (TORadio.equals("TORadio4")) { %> 
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
                                                     <a onclick="return viewdataset(2);">
                                                         <font color="blue">
                                                         <u>Test Dataset</u>
                                                         </font>
                                                     </a>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <font color="black">
+                                                        Base output file name: &nbsp;<b><%=sBaseFileName%></b>
+                                                    </font>
+                                                </div>
+                                            <% } else { %>
+                                                <div class="col-md-4">
+                                                    &nbsp;
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <font color="black">
+                                                        Base output file name: &nbsp;<b><%=sBaseFileName%></b>
+                                                    </font>
                                                 </div>
                                             <% } %>
 
@@ -2086,12 +2100,17 @@
                                                     </font>
                                                 </a> 
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <a onclick="return viewdataset(4);">
                                                     <font color="blue">
                                                     <u>Prediction Dataset</u>
                                                     </font>
                                                 </a> 
+                                            </div>
+                                            <div class="col-md-4">
+                                                <font color="black">
+                                                Base output file name: &nbsp;<b><%=sBaseFileName%></b>
+                                                </font>
                                             </div>
                                         <% } %>
                                     </div>
@@ -5234,25 +5253,25 @@
                         <br>
                         <ul class="nav nav-pills nav-justified" style="background-color: lavender;">
                             <li class="active"><a data-toggle="tab" href="#Main" id="Menu">Output Table</a></li>
-                            <li><a data-toggle="tab" href="#PGraph">Prediction Graph</a></li>
-                            <li><a data-toggle="tab" href="#PTGraph">Performance Trajectory Graph</a></li>
-                            <li><a data-toggle="tab" href="#TPGraph">Tracing Path Graph</a></li>
+                            <li><a data-toggle="tab" href="#PGraph">Prediction Graph of Learning Data</a></li>
+                            <li><a data-toggle="tab" href="#PTGraph">Prediction Graph of Test Data</a></li>
+                            <li><a data-toggle="tab" href="#TPGraph">Performance and Tracing Path Graph</a></li><%-->Performance Trajectory Graph<--%>
                         </ul>
                         <br>
                         <div class="tab-content">
                             <div id="Main" class="tab-pane fade in active">
                                 <a href="#Optimum">Best performance</a>
                                 <span class="glyphicon glyphicon-minus"></span>
-                                <a href="#Partition">Performance of data partitions</a>
+                                <a href="#Partition">Performance of learning and test data</a>
                                 <span class="glyphicon glyphicon-minus"></span>
                                 <a href="#Report">Analysis report</a>
                                 <span class="glyphicon glyphicon-minus"></span>
-                                <a href="#Performance">Test data and prediction</a>
+                                <a href="#Performance">Learning and test data with prediction</a>
                                 <br>
                                 <br>
                                 <br>
                                 <center>
-                                    <font size="4" id="Optimum">Main results - Best Performance</font>
+                                    <font size="4" id="Optimum">Main results - Best performance</font>
                                     <a href="#Partition"><span class="glyphicon glyphicon-menu-right"></span></a>
                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                     <br>
@@ -5260,6 +5279,7 @@
                                 <br>
                                     
                                 <%  File a = new File(stResult01Name);
+                                int BestFold = 0;
                                 if (stResult01Name != "" && a.exists() && !a.isDirectory()) {  
                                     String file = stResult01Name; 
                                     BufferedReader br = new BufferedReader(new FileReader(file)); 
@@ -5277,6 +5297,7 @@
                                         </tr></table></div></center><% 
                                     } else {
                                         cols = line.split("\\t");
+                                        BestFold = (int)Double.parseDouble(cols[2]);
                                         %>
                                         <center>
                                             <div> 
@@ -5317,13 +5338,14 @@
                                 <br>
                                 <br> 
                                 <center>
-                                    <font size="4" id="Partition">Optimum hyperparameters; Performance of training and validation partitions of learning data</font>
+                                    <font size="4" id="Partition">Performance and mean performance of learning and test data</font>
                                     <a href="#Optimum"><span class="glyphicon glyphicon-menu-left"></span></a> 
                                     <a href="#Report"><span class="glyphicon glyphicon-menu-right"></span></a> 
                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a> 
                                     <br>
                                 </center>
                                 <br>
+                                
                                 <% File b = new File(stResult02Name);
                                     String[][] datatemp2 = new String[21][9];
                                     if (stResult02Name != "" && b.exists() && !b.isDirectory()) {  
@@ -5342,9 +5364,10 @@
                                         // first block
                                         line = br.readLine();
                                         cols = line.split("\\t");
+                                        ncol = cols.length;
                                         j=0;
                                         while (stemp == "1") {
-                                            for (i = 0; i < 4; i += 1) {
+                                            for (i = 0; i < ncol; i += 1) {
                                                 datatemp[j][i]=cols[i];
                                             }
                                             j=j+1;
@@ -5353,7 +5376,7 @@
                                             {
                                                 cols = line.split("\\t");
                                                 ncol = cols.length;
-                                                if (ncol != 4) {
+                                                if (ncol != 8) {
                                                     stemp="0";      //to exit loop 
                                                 }
                                             }
@@ -5362,6 +5385,7 @@
                                                 stemp="0"; //to exit loop
                                             }
                                         }
+                                        
                                         if (j == 0) { %>
                                             <center><div><table><tr>
                                                 <td align="center">
@@ -5373,44 +5397,96 @@
                                                 <div> 
                                                     <table>
                                                         <tr>
-                                                            <td align="center">RMSE Training</td>
+                                                            <td align="center">Fold No.</td>
                                                             <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
-                                                            <td align="center">MAE Training</td> 
+                                                            <td align="center">RMSE Learning</td>
                                                             <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
-                                                            <td align="center">MAPE Training</td> 
+                                                            <td align="center">RMSE Test</td>
                                                             <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
-                                                            <td align="center">R Training</td> 
+                                                            <td align="center">MAE Learning</td> 
                                                             <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center">MAE Test</td> 
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center">MAPE Learning</td> 
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center">MAPE Test</td> 
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center">R Learning</td> 
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center">R Test</td> 
                                                         </tr>
-                                                        <% i = 0; %>
+                                                        
+                                                        <% for (i = 0; i < j; i += 1) { %>
                                                             <tr>
-                                                            <td align="center"><%=datatemp[i][3]%></td>
-                                                            <% for (ii = 0; ii < 3; ii += 1) { %>
+                                                            <td align="center"><%=i+1%></td>
+                                                            <% for (ii = 0; ii < 8; ii += 1) { %>
                                                                 <td>&nbsp;</td>
                                                                 <td align="center"><%=datatemp[i][ii]%></td> 
                                                             <% } %>
                                                             </tr>
+                                                        <% } %>
+                                                    </table> 
+                                                    <br>
+                                                        
+                                                    <% 
+                                                        line = br.readLine();
+                                                        cols = line.split("\\t");
+                                                        datatemp[0][0] = cols[0];
+                                                        datatemp[1][0] = cols[1];
+                                                        datatemp[2][0] = cols[2];
+                                                        datatemp[3][0] = cols[3];
+                                                        
+                                                        line = br.readLine();
+                                                        cols = line.split("\\t");
+                                                        datatemp[4][0] = cols[0];
+                                                        datatemp[5][0] = cols[1];
+                                                        datatemp[6][0] = cols[2];
+                                                        datatemp[7][0] = cols[3];
+                                                    %>
+                                                        
+                                                    <table> 
                                                         <tr>
-                                                            <td align="center">RMSE Validation</td> 
+                                                            <td align="center">Mean RMSE Learning</td> 
                                                             <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
-                                                            <td align="center">MAE Validation</td> 
+                                                            <td align="center">Mean MAE Learning</td> 
                                                             <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
-                                                            <td align="center">MAPE Validation</td> 
+                                                            <td align="center">Mean MAPE Learning</td> 
                                                             <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
-                                                            <td align="center">R Validation</td>
+                                                            <td align="center">Mean R Learning</td>
                                                         </tr> 
-                                                        <% i = 1; %>
-                                                            <tr>
-                                                            <td align="center"><%=datatemp[i][3]%></td>
-                                                            <% for (ii = 0; ii < 3; ii += 1) { %>
-                                                                <td>&nbsp;</td>
-                                                                <td align="center"><%=datatemp[i][ii]%></td> 
-                                                            <% } %>
-                                                            </tr>
+                                                        <tr>
+                                                            <td align="center"><%=datatemp[0][0]%></td>
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center"><%=datatemp[1][0]%></td>
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center"><%=datatemp[2][0]%></td>
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center"><%=datatemp[3][0]%></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="7">&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                        </tr> 
+                                                        <tr>
+                                                            <td align="center">Mean RMSE Test</td> 
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center">Mean MAE Test</td> 
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center">Mean MAPE Test</td> 
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center">Mean R Test</td>
+                                                        </tr> 
+                                                        <tr>
+                                                            <td align="center"><%=datatemp[4][0]%></td>
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center"><%=datatemp[5][0]%></td>
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center"><%=datatemp[6][0]%></td>
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center"><%=datatemp[7][0]%></td>
+                                                        </tr>
                                                     </table> 
                                                 </div> 
                                             </center> 
-                                            <br>
                                         <% } 
                                         br.close(); 
                                     } else { %> 
@@ -5420,6 +5496,7 @@
                                             </td>
                                         </tr></table></div></center> 
                                     <% } %> 
+                                    
                                 <br>
                                 <br>
                                 <center>
@@ -5430,6 +5507,7 @@
                                     <br>
                                 </center>
                                 <br>
+                                
                                 <% File c = new File(stResult03Name);
                                 if (stResult03Name != "" && c.exists() && !c.isDirectory()) {  
                                     String file = stResult03Name;
@@ -5469,15 +5547,17 @@
                                         </td>
                                     </tr></table></div></center> 
                                 <% } %> 
+                                
                                 <br>
                                 <br>
                                 <center>
-                                    <font size="4" id="Performance">Performance of learning and test data; Test data and predicted values of the best fold</font> 
+                                    <font size="4" id="Performance">Best performance; Learning and test data with predicted values of the best fold</font> 
                                     <a href="#Report"><span class="glyphicon glyphicon-menu-left"></span></a> 
                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a> 
                                     <br>
                                 </center>
                                 <br>
+                                
                                 <% File d = new File(stResult04Name);
                                 if (stResult04Name != "" && d.exists() && !d.isDirectory()) {  
                                     String file = stResult04Name;
@@ -5487,14 +5567,16 @@
                                     int i;
                                     int j;
                                     int ii;
-
+                                    int jj;
+                                    int ncol2;                                    
                                     stemp="1"; //initial value
                                     i=1;
                                     ii=1;
-                                    String[][] datatemp = new String[1021][9];
+                                    String[][] datatemp = new String[2021][19];
+                                    String[][] datatemp3 = new String[2021][19];
 
                                     // first block
-                                    if (sVariation == "3" || sVariation == "8") { 
+                                    //if (sVariation == "3" || sVariation == "8") { 
                                         line = br.readLine();
                                         cols = line.split("\\t");
                                         j=0;
@@ -5503,6 +5585,16 @@
                                                 datatemp2[j][i]=cols[i];
                                             }
                                             j=j+1;
+                                            if (j == BestFold) {
+                                                datatemp[0][0]=cols[0];
+                                                datatemp[0][1]=cols[1];
+                                                datatemp[0][2]=cols[2];
+                                                datatemp[0][3]=cols[3];
+                                                datatemp[0][4]=cols[4];
+                                                datatemp[0][5]=cols[5];
+                                                datatemp[0][6]=cols[6];
+                                                datatemp[0][7]=cols[7];
+                                            }
                                             line = br.readLine();
                                             cols = line.split("\\t");
                                             ncol = cols.length;
@@ -5510,10 +5602,10 @@
                                                 stemp="0";      //to exit loop 
                                             }
                                         } 
-                                    } 
-                                    else {
-                                        j=1;
-                                    }
+                                    //} 
+                                    //else {
+                                    //    j=0;
+                                    //}
                                     %>
 
                                     <center>
@@ -5538,43 +5630,56 @@
                                                     <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
                                                     <td align="center">R Test</td> 
                                                 </tr> 
-                                                <% for (i = 0; i < j; i += 1) { %>
-                                                    <tr>
-                                                    <td align="center"><%=(i+1)%></td>
-                                                    <td>&nbsp;</td>
-                                                    <td align="center"><%=datatemp2[i][0]%></td>
-                                                    <% for (ii = 1; ii < 8; ii += 1) { %>
-                                                        <td>&nbsp;</td>
-                                                        <td align="center"><%=datatemp2[i][ii]%></td> 
-                                                    <% } %>
-                                                    </tr>
-                                                <% } %>
+                                                <tr>
+                                                    <td align="center"><%=BestFold%></td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                    <td align="center"><%=datatemp[0][0]%></td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                    <td align="center"><%=datatemp[0][1]%></td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                    <td align="center"><%=datatemp[0][2]%></td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                    <td align="center"><%=datatemp[0][3]%></td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                    <td align="center"><%=datatemp[0][4]%></td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                    <td align="center"><%=datatemp[0][5]%></td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                    <td align="center"><%=datatemp[0][6]%></td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                    <td align="center"><%=datatemp[0][7]%></td>
+                                                </tr>
                                             </table> 
                                         </div> 
                                     </center> 
                                     <br>
 
-                                    <% line = br.readLine();
+                                    <% stemp = "1";
+                                    line = br.readLine();
                                     cols = line.split("\\t");
                                     ncol = cols.length;
                                     j=0;
-                                    while (line != null) {
-                                        cols = line.split("\\t");
-                                        for (i = 0; i < ncol; i += 1) {
-                                            datatemp[j][i]=cols[i];
+                                    ncol2 = ncol;
+                                    while (stemp == "1") {
+                                        for (i = 0; i < ncol; i += 1) { 
+                                            datatemp3[j][i]=cols[i];
                                         }
                                         j=j+1;
                                         line = br.readLine();
-                                    } %>
-
-                                    <% br.close(); %>
+                                        cols = line.split("\\t");
+                                        ncol = cols.length;
+                                        if (ncol != ncol2) {
+                                            stemp="0";      //to exit loop 
+                                        }
+                                    } 
+                                    %> 
 
                                     <center>
                                         <div> 
                                             <table>
                                                 <tr>
                                                     <td align="center">Data No.</td>
-                                                    <% for (ii = 1; ii < ncol-1; ii += 1) { %>
+                                                    <% for (ii = 1; ii < ncol2-1; ii += 1) { %>
                                                         <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
                                                         <td align="center">X<%=ii%></td> 
                                                     <% } %> 
@@ -5587,8 +5692,64 @@
                                                     <tr>
                                                     <td align="center"><%=(i+1)%></td>
                                                     <td>&nbsp;</td>
+                                                    <td align="center"><%=datatemp3[i][0]%></td>
+                                                    <% for (ii = 1; ii < ncol2; ii += 1) { %>
+                                                        <td>&nbsp;</td>
+                                                        <td align="center"><%=datatemp3[i][ii]%></td> 
+                                                    <% } %>
+                                                    </tr>
+                                                <% } %>
+                                            </table> 
+                                        </div> 
+                                    </center> 
+                                    
+                                    <%
+                                    /**/
+                                    stemp = "1";
+                                    line = br.readLine(); 
+                                    cols = line.split("\\t");
+                                    ncol = cols.length;
+                                    jj=0;
+                                    while (line != null && stemp == "1") {
+                                        cols = line.split("\\t");
+                                        for (i = 0; i < ncol; i += 1) {
+                                            datatemp[jj][i]=cols[i]; 
+                                        }
+                                        jj=jj+1; 
+                                        line = br.readLine();
+                                        if (line != null) {
+                                            cols = line.split("\\t");
+                                            ncol = cols.length;
+                                            if (ncol != ncol2) {
+                                                stemp="0";      //to exit loop 
+                                            }
+                                        }
+                                        //}
+                                        //while (line != null) {
+                                    }/**/ 
+                                    %>
+                                    
+                                    <br>
+                                    <center>
+                                        <div> 
+                                            <table>
+                                                <tr>
+                                                    <td align="center">Data No.</td>
+                                                    <% for (ii = 1; ii < ncol2-1; ii += 1) { %>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                        <td align="center">X<%=ii%></td> 
+                                                    <% } %> 
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                    <td align="center">Actual Y</td> 
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                    <td align="center">Predicted Y</td> 
+                                                </tr> 
+                                                <% for (i = 0; i < jj; i += 1) { %>
+                                                    <tr>
+                                                    <td align="center"><%=(i+1)%></td>
+                                                    <td>&nbsp;</td>
                                                     <td align="center"><%=datatemp[i][0]%></td>
-                                                    <% for (ii = 1; ii < ncol; ii += 1) { %>
+                                                    <% for (ii = 1; ii < ncol2; ii += 1) { %>
                                                         <td>&nbsp;</td>
                                                         <td align="center"><%=datatemp[i][ii]%></td> 
                                                     <% } %>
@@ -5598,6 +5759,8 @@
                                         </div> 
                                     </center> 
 
+                                    <% br.close(); %>
+
                                 <% } else { %>  
                                     <center><div><table><tr>
                                         <td align="center">
@@ -5605,61 +5768,378 @@
                                         </td>
                                     </tr></table></div></center> 
                                 <% } %> 
+
+                                <br><br>
+                                <center id="bottomform2">
+                                    <button type="button" onclick="" class="btn btn-primary">Save</button>
+                                </center>
+                                <br>
                             </div>
 
                             <div id="PGraph" class="tab-pane fade in"> 
                                 <div class="edittab">
-                                    <a href="#TPDataset">Training partition dataset</a>
-                                    <span class="glyphicon glyphicon-minus"></span> 
-                                    <a href="#VPDataset">Validation partition dataset</a>
-                                    <span class="glyphicon glyphicon-minus"></span> 
-                                    <a href="#LDataset">Learning dataset</a>
-                                    <span class="glyphicon glyphicon-minus"></span> 
-                                    <a href="#TDataset">Test dataset</a>
+                                    Fold No.:&nbsp;
+                                    <a href="#PG1">1</a>
+                                    <%if (sVariation == "3" || sVariation == "8") { %>
+                                        <span class="glyphicon glyphicon-minus"></span> 
+                                        <a href="#PG2">2</a>
+                                        <span class="glyphicon glyphicon-minus"></span> 
+                                        <a href="#PG3">3</a>
+                                        <span class="glyphicon glyphicon-minus"></span> 
+                                        <a href="#PG4">4</a>
+                                        <span class="glyphicon glyphicon-minus"></span> 
+                                        <a href="#PG5">5</a>
+                                        <span class="glyphicon glyphicon-minus"></span> 
+                                        <a href="#PG6">6</a>
+                                        <span class="glyphicon glyphicon-minus"></span> 
+                                        <a href="#PG7">7</a>
+                                        <span class="glyphicon glyphicon-minus"></span> 
+                                        <a href="#PG8">8</a>
+                                        <span class="glyphicon glyphicon-minus"></span> 
+                                        <a href="#PG9">9</a>
+                                        <span class="glyphicon glyphicon-minus"></span> 
+                                        <a href="#PG10">10</a>
+                                    <% } %>
                                 </div>
                                 <br>
                                 <br>
-                                <center>
-                                    <font size="4" id="TPDataset">Prediction graph of training partition from learning dataset</font>
-                                    <a href="#VPDataset"><span class="glyphicon glyphicon-menu-right"></span></a> 
-                                    <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a> 
-                                    <br>
-                                </center>
+                                    
+                                <% File jst = new File(stResult04cName); 
+                                if (stResult04cName != "" && jst.exists() && !jst.isDirectory()) {  
+                                    String file = stResult04cName; 
+                                    BufferedReader br = new BufferedReader(new FileReader(file)); 
+                                    String line = null;
+                                    String stemp;
+                                    int i; 
+                                    int j;
+                                    int ii;
+                                    int jj;
+                                    int nNilai1=1;
+                                    int nNilai2;
 
-                                <br>
-                                <center>
-                                    <font size="4" id="VPDataset">Prediction graph of validation partition from learning dataset</font>
-                                    <a href="#TPDataset"><span class="glyphicon glyphicon-menu-left"></span></a>
-                                    <a href="#LDataset"><span class="glyphicon glyphicon-menu-right"></span></a>
-                                    <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
-                                    <br>
-                                </center>
+                                    stemp="1"; //initial value
+                                    i=1;
+                                    ii=1;
+                                    jj=0; 
+                                    String[][] datatemp = new String[1000][21];
 
-                                <br>
-                                <center>
-                                    <font size="4" id="LDataset">Prediction graph of learning dataset</font>
-                                    <a href="#VPDataset"><span class="glyphicon glyphicon-menu-left"></span></a>
-                                    <a href="#TDataset"><span class="glyphicon glyphicon-menu-right"></span></a>
-                                    <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
-                                    <br>
-                                </center>
+                                    line = br.readLine();
+                                    line = br.readLine();
+                                    cols = line.split("\\t");
+                                    ncol = cols.length;
+                                    nNilai2 = ncol; 
 
-                                <br>
-                                <center>
-                                    <font size="4" id="TDataset">Prediction graph of test dataset</font>
-                                    <a href="#LDataset"><span class="glyphicon glyphicon-menu-left"></span></a>
-                                    <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
-                                    <br>
+                                    while (line != null) {
+                                        stemp="1";
+                                        j=0;
+                                        while (line != null && stemp=="1") {
+                                            if (j==0) {
+                                                cols = line.split("\\t");
+                                                for (i = 0; i < ncol; i += 1) {
+                                                    datatemp[j][i]=cols[i];
+                                                }
+                                                j=j+1;
+                                                line = br.readLine();
+                                                cols = line.split("\\t");
+                                                nNilai1 = cols.length;
+                                            }
+                                            else if (nNilai1 == nNilai2) {
+                                                cols = line.split("\\t");
+                                                for (i = 0; i < ncol; i += 1) {
+                                                    datatemp[j][i]=cols[i];
+                                                }
+                                                j=j+1;
+                                                line = br.readLine();
+                                                if (line != null) {
+                                                    cols = line.split("\\t");
+                                                    nNilai1 = cols.length;
+                                                }
+                                            }
+                                            else { 
+                                                stemp="0";
+                                            }
+                                        }
+                                        jj = jj + 1;
+                                        if (jj>1) { %>
+                                            <br><br>
+                                        <% } %>
+
+                                        <center>
+                                            <% if (jj==1) { %> <font size="4" id="PG1">Prediction of Learning Data - Fold No. <%=jj%></font>
+                                                <a href="#PG2"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+                                            <% } %>
+                                            <% if (jj==2) { %> <font size="4" id="PG2">Prediction of Learning Data - Fold No. <%=jj%></font>
+                                                <a href="#PG1"><span class="glyphicon glyphicon-menu-left"></span></a>
+                                                <a href="#PG3"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+                                            <% } %>  
+                                            <% if (jj==3) { %> <font size="4" id="PG3">Prediction of Learning Data - Fold No. <%=jj%></font>
+                                                <a href="#PG2"><span class="glyphicon glyphicon-menu-left"></span></a>
+                                                <a href="#PG4"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+                                            <% } %>  
+                                            <% if (jj==4) { %> <font size="4" id="PG4">Prediction of Learning Data - Fold No. <%=jj%></font>
+                                                <a href="#PG3"><span class="glyphicon glyphicon-menu-left"></span></a>
+                                                <a href="#PG5"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+                                            <% } %> 
+                                            <% if (jj==5) { %> <font size="4" id="PG5">Prediction of Learning Data - Fold No. <%=jj%></font>
+                                                <a href="#PG4"><span class="glyphicon glyphicon-menu-left"></span></a>
+                                                <a href="#PG6"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+                                            <% } %> 
+                                            <% if (jj==6) { %> <font size="4" id="PG6">Prediction of Learning Data - Fold No. <%=jj%></font>
+                                                <a href="#PG5"><span class="glyphicon glyphicon-menu-left"></span></a>
+                                                <a href="#PG7"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+                                            <% } %> 
+                                            <% if (jj==7) { %> <font size="4" id="PG7">Prediction of Learning Data - Fold No. <%=jj%></font>
+                                                <a href="#PG6"><span class="glyphicon glyphicon-menu-left"></span></a>
+                                                <a href="#PG8"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+                                            <% } %> 
+                                            <% if (jj==8) { %> <font size="4" id="PG8">Prediction of Learning Data - Fold No. <%=jj%></font>
+                                                <a href="#PG7"><span class="glyphicon glyphicon-menu-left"></span></a>
+                                                <a href="#PG9"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+                                            <% } %> 
+                                            <% if (jj==9) { %> <font size="4" id="PG9">Prediction of Learning Data - Fold No. <%=jj%></font>
+                                                <a href="#PG8"><span class="glyphicon glyphicon-menu-left"></span></a>
+                                                <a href="#PG10"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+                                            <% } %> 
+                                            <% if (jj==10) { %> <font size="4" id="PG10">Prediction of Learning Data - Fold No. <%=jj%></font>
+                                                <a href="#PG9"><span class="glyphicon glyphicon-menu-left"></span></a>
+                                                <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+                                            <% } %> 
+                                        </center>
+                                        <br>
+
+                                        <center>
+                                            <div> 
+                                                <table>
+                                                    <tr>
+                                                        <td align="center">Data No.</td>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                        <td align="center">Actual Value</td>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                        <td align="center">Predicted Value</td> 
+                                                    </tr> 
+                                                    <% for (i = 0; i < j; i += 1) { %>
+                                                        <tr>
+                                                        <td align="center"><%=i+1%></td>
+                                                        <% for (ii = 0; ii < nNilai2; ii += 1) { %>
+                                                            <td>&nbsp;</td>
+                                                            <td align="center"><%=datatemp[i][ii]%></td> 
+                                                        <% } %>
+                                                        </tr>
+                                                    <% } %>
+                                                </table> 
+                                            </div> 
+                                        </center> 
+                                        <% line = br.readLine();
+                                        line = br.readLine();
+                                    } %>   
+
+                                    <% br.close(); %>
+
+                                <% } else { %>  
+                                    <center><div><table><tr>
+                                        <td align="center">
+                                            <h4><font color='red'>Output file not found ...!</font></h4>
+                                        </td>
+                                    </tr></table></div></center> 
+                                <% } %>
+
+                                <br><br>
+                                <center id="bottomform2">
+                                    <button type="button" onclick="" class="btn btn-primary">Save</button>
                                 </center>
+                                <br>
                             </div>
 
                             <div id="PTGraph" class="tab-pane fade in">
+                                <div class="edittab">
+                                    Fold No.:&nbsp;
+                                    <a href="#PT1">1</a>
+                                    <%if (sVariation == "3" || sVariation == "8") { %>
+                                        <span class="glyphicon glyphicon-minus"></span> 
+                                        <a href="#PT2">2</a>
+                                        <span class="glyphicon glyphicon-minus"></span> 
+                                        <a href="#PT3">3</a>
+                                        <span class="glyphicon glyphicon-minus"></span> 
+                                        <a href="#PT4">4</a>
+                                        <span class="glyphicon glyphicon-minus"></span> 
+                                        <a href="#PT5">5</a>
+                                        <span class="glyphicon glyphicon-minus"></span> 
+                                        <a href="#PT6">6</a>
+                                        <span class="glyphicon glyphicon-minus"></span> 
+                                        <a href="#PT7">7</a>
+                                        <span class="glyphicon glyphicon-minus"></span> 
+                                        <a href="#PT8">8</a>
+                                        <span class="glyphicon glyphicon-minus"></span> 
+                                        <a href="#PT9">9</a>
+                                        <span class="glyphicon glyphicon-minus"></span> 
+                                        <a href="#PT10">10</a>
+                                    <% } %>
+                                </div>
                                 <br>
                                 <br>
-                                <br>
-                                <center>
-                                    <font size="4">Performance Trajectory Graph of Test Dataset</font>
+                                    
+                                <% File kst = new File(stResult04dName); 
+                                if (stResult04dName != "" && kst.exists() && !kst.isDirectory()) {  
+                                    String file = stResult04dName; 
+                                    BufferedReader br = new BufferedReader(new FileReader(file)); 
+                                    String line = null;
+                                    String stemp;
+                                    int i; 
+                                    int j;
+                                    int ii;
+                                    int jj;
+                                    int nNilai1=1;
+                                    int nNilai2;
+
+                                    stemp="1"; //initial value
+                                    i=1;
+                                    ii=1;
+                                    jj=0; 
+                                    String[][] datatemp = new String[1000][21];
+
+                                    line = br.readLine();
+                                    line = br.readLine();
+                                    cols = line.split("\\t");
+                                    ncol = cols.length;
+                                    nNilai2 = ncol; 
+
+                                    while (line != null) {
+                                        stemp="1";
+                                        j=0;
+                                        while (line != null && stemp=="1") {
+                                            if (j==0) {
+                                                cols = line.split("\\t");
+                                                for (i = 0; i < ncol; i += 1) {
+                                                    datatemp[j][i]=cols[i];
+                                                }
+                                                j=j+1;
+                                                line = br.readLine();
+                                                cols = line.split("\\t");
+                                                nNilai1 = cols.length;
+                                            }
+                                            else if (nNilai1 == nNilai2) {
+                                                cols = line.split("\\t");
+                                                for (i = 0; i < ncol; i += 1) {
+                                                    datatemp[j][i]=cols[i];
+                                                }
+                                                j=j+1;
+                                                line = br.readLine();
+                                                if (line != null) {
+                                                    cols = line.split("\\t");
+                                                    nNilai1 = cols.length;
+                                                }
+                                            }
+                                            else {
+                                                stemp="0";
+                                            }
+                                        }
+                                        jj = jj + 1;
+                                        if (jj>1) { %>
+                                            <br><br>
+                                        <% } %>
+
+                                        <center>
+                                            <% if (jj==1) { %> <font size="4" id="PT1">Prediction of Test Data - Fold No. <%=jj%></font>
+                                                <a href="#PT2"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+                                            <% } %>
+                                            <% if (jj==2) { %> <font size="4" id="PT2">Prediction of Test Data - Fold No. <%=jj%></font>
+                                                <a href="#PT1"><span class="glyphicon glyphicon-menu-left"></span></a>
+                                                <a href="#PT3"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+                                            <% } %>  
+                                            <% if (jj==3) { %> <font size="4" id="PT3">Prediction of Test Data - Fold No. <%=jj%></font>
+                                                <a href="#PT2"><span class="glyphicon glyphicon-menu-left"></span></a>
+                                                <a href="#PT4"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+                                            <% } %>  
+                                            <% if (jj==4) { %> <font size="4" id="PT4">Prediction of Test Data - Fold No. <%=jj%></font>
+                                                <a href="#PT3"><span class="glyphicon glyphicon-menu-left"></span></a>
+                                                <a href="#PT5"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+                                            <% } %> 
+                                            <% if (jj==5) { %> <font size="4" id="PT5">Prediction of Test Data - Fold No. <%=jj%></font>
+                                                <a href="#PT4"><span class="glyphicon glyphicon-menu-left"></span></a>
+                                                <a href="#PT6"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+                                            <% } %> 
+                                            <% if (jj==6) { %> <font size="4" id="PT6">Prediction of Test Data - Fold No. <%=jj%></font>
+                                                <a href="#PT5"><span class="glyphicon glyphicon-menu-left"></span></a>
+                                                <a href="#PT7"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+                                            <% } %> 
+                                            <% if (jj==7) { %> <font size="4" id="PT7">Prediction of Test Data - Fold No. <%=jj%></font>
+                                                <a href="#PT6"><span class="glyphicon glyphicon-menu-left"></span></a>
+                                                <a href="#PT8"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+                                            <% } %> 
+                                            <% if (jj==8) { %> <font size="4" id="PT8">Prediction of Test Data - Fold No. <%=jj%></font>
+                                                <a href="#PT7"><span class="glyphicon glyphicon-menu-left"></span></a>
+                                                <a href="#PT9"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+                                            <% } %> 
+                                            <% if (jj==9) { %> <font size="4" id="PT9">Prediction of Test Data - Fold No. <%=jj%></font>
+                                                <a href="#PT8"><span class="glyphicon glyphicon-menu-left"></span></a>
+                                                <a href="#PT10"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+                                            <% } %> 
+                                            <% if (jj==10) { %> <font size="4" id="PT10">Prediction of Test Data - Fold No. <%=jj%></font>
+                                                <a href="#PT9"><span class="glyphicon glyphicon-menu-left"></span></a>
+                                                <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+                                            <% } %> 
+                                        </center>
+                                        <br>
+
+                                        <center>
+                                            <div> 
+                                                <table>
+                                                    <tr>
+                                                        <td align="center">Data No.</td>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                        <td align="center">Actual Value</td>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                        <td align="center">Predicted Value</td> 
+                                                    </tr> 
+                                                    <% for (i = 0; i < j; i += 1) { %>
+                                                        <tr>
+                                                        <td align="center"><%=i+1%></td>
+                                                        <% for (ii = 0; ii < nNilai2; ii += 1) { %>
+                                                            <td>&nbsp;</td>
+                                                            <td align="center"><%=datatemp[i][ii]%></td> 
+                                                        <% } %>
+                                                        </tr>
+                                                    <% } %>
+                                                </table> 
+                                            </div> 
+                                        </center> 
+                                        <% line = br.readLine();
+                                        line = br.readLine();
+                                    } %>   
+
+                                    <% br.close(); %>
+
+                                <% } else { %>  
+                                    <center><div><table><tr>
+                                        <td align="center">
+                                            <h4><font color='red'>Output file not found ...!</font></h4>
+                                        </td>
+                                    </tr></table></div></center> 
+                                <% } %>
+
+                                <br><br>
+                                <center id="bottomform2">
+                                    <button type="button" onclick="" class="btn btn-primary">Save</button>
                                 </center>
+                                <br>
                             </div>
 
                             <div id="TPGraph" class="tab-pane fade in">
@@ -5667,16 +6147,10 @@
                                 <br>
                                 <br>
                                 <center>
-                                    <font size="4">Tracing Path Graph of Test Dataset</font>
+                                    <i><font color="red" size="4">... n.a. for baseline system.</font></i>
                                 </center>
                             </div>
                         </div>
-
-                        <br><br>
-                        <center id="bottomform2">
-                            <button type="button" onclick="" class="btn btn-primary">Save</button>
-                        </center>
-                        <br>
                     </div>
                     <input type="hidden" name="stResult01Name" id="stResult01Name" value="<%if (stResult01Name != null) {%><%=stResult01Name%><%}%>" />
                     <input type="hidden" name="stResult02Name" id="stResult02Name" value="<%if (stResult02Name != null) {%><%=stResult02Name%><%}%>" />

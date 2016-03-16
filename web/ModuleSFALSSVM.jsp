@@ -2383,12 +2383,26 @@
                                                     </a>
                                                 </div>
                                                 <% if (TORadioLSSVM.equals("TORadio4LSSVM")) { %> 
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-4">
                                                         <a onclick="return viewdataset(2);">
                                                             <font color="blue">
                                                             <u>Test Dataset</u>
                                                             </font>
                                                         </a>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <font color="black">
+                                                            Base output file name: &nbsp;<b><%=sBaseFileName%></b>
+                                                        </font>
+                                                    </div>
+                                                <% } else {%>
+                                                    <div class="col-md-4">
+                                                        &nbsp;
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <font color="black">
+                                                            Base output file name: &nbsp;<b><%=sBaseFileName%></b>
+                                                        </font>
                                                     </div>
                                                 <% } %>
 
@@ -2400,12 +2414,17 @@
                                                         </font>
                                                     </a> 
                                                 </div>
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
                                                     <a onclick="return viewdataset(4);">
                                                         <font color="blue">
                                                         <u>Prediction Dataset</u>
                                                         </font>
                                                     </a> 
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <font color="black">
+                                                    Base output file name: &nbsp;<b><%=sBaseFileName%></b>
+                                                    </font>
                                                 </div>
                                             <% } %>
                                         </div>
@@ -5159,7 +5178,8 @@
                                     </a>
                                 </td>
                                 <td>&nbsp;</td>
-                            <%
+                                
+                                <%
                                 if (sPredictionFileNameLSSVM != "") { 
                                     String file = application.getRealPath("/") + sPredictionFileNameLSSVM;
                                     BufferedReader br = new BufferedReader(new FileReader(file)); 
@@ -5192,40 +5212,41 @@
                                     }
                                     br.close();
                                     %>
+                                    
+                                    <td align="center">
+                                        No.
+                                    </td>
+                                    <% for (j = 0; j < ncols4; j += 1) { %>
+                                        <td align="center">
+                                            <%=headers[j]%>
+                                        </td>
+                                    <% } %>
+                                    </tr>
+
+                                    <% for (i = 0; i < nrows4; i += 1) { %>
+                                        <tr>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
                                             <td align="center">
-                                                No.
-                                            </td>
+                                                <%=i%>
+                                            </td> 
                                             <% for (j = 0; j < ncols4; j += 1) { %>
-                                                <td align="center">
-                                                    <%=headers[j]%>
+                                                <td align="right">
+                                                    <%=nf3.format(Double.parseDouble(Datapres[i][j]))%>
                                                 </td>
                                             <% } %>
                                         </tr>
-
-                                        <% for (i = 0; i < nrows4; i += 1) { %>
-                                            <tr>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                                <td align="center">
-                                                    <%=i%>
-                                                </td> 
-                                                <% for (j = 0; j < ncols4; j += 1) { %>
-                                                    <td align="right">
-                                                        <%=nf3.format(Double.parseDouble(Datapres[i][j]))%>
-                                                    </td>
-                                                <% } %>
-                                            </tr>
-                                        <% } %>
+                                    <% } %>
                                 <% } else { %>
-                                            <td align="left">
-                                                <font color='red'>
-                                                &nbsp;&nbsp;Prediction dataset not available ... !
-                                                </font>
-                                            </td>
-                                        </tr>
+                                    <td align="left">
+                                        <font color='red'>
+                                        &nbsp;&nbsp;Prediction dataset not available ... !
+                                        </font>
+                                    </td>
+                                </tr>
                                 <% } %>
                                 </table>
                         <script>
@@ -5299,7 +5320,7 @@
                                 <br>
                                 <br>
                                 <center>
-                                    <font size="4" id="Optimum">Main results - Best Optimum hyperparameters</font>
+                                    <font size="4" id="Optimum">Main results - Best optimum hyperparameters</font>
                                     <a href="#Partition"><span class="glyphicon glyphicon-menu-right"></span></a>
                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                     <br>
@@ -5439,11 +5460,16 @@
                                         </center> 
                                         <br>
 
-                                        <% line = br.readLine();
-                                        line = br.readLine();
-                                        line = br.readLine();
-                                        line = br.readLine();
-                                        line = br.readLine();
+                                        <% 
+                                        if (sVariation == "3" || sVariation == "8") { 
+                                            line = br.readLine();
+                                            line = br.readLine();
+                                            line = br.readLine();
+                                            line = br.readLine();
+                                            line = br.readLine();
+                                        } else { 
+                                            line = br.readLine();
+                                        } 
                                         cols = line.split("\\t");
                                         ncol = cols.length;
                                         stemp="1"; 
@@ -5479,9 +5505,9 @@
                                                     <tr>
                                                         <td align="center">Fold No.</td>
                                                         <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
-                                                        <td align="center">Percent Accurate of Training Data</td>
+                                                        <td align="center">Percent Accuracy of Training Data</td>
                                                         <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
-                                                        <td align="center">Percent Accurate of Validation Data</td> 
+                                                        <td align="center">Percent Accuracy of Validation Data</td> 
                                                     </tr> 
                                                     <% for (i = 0; i < j; i += 1) { %>
                                                         <tr>
@@ -5591,27 +5617,31 @@
                                     stemp="1"; 
                                     i=1;
                                     ii=1;
+                                    j=0;
                                     String[][] datatemp = new String[1021][9];
 
                                     // first block
-                                    line = br.readLine();
-                                    cols = line.split("\\t");
-                                    ncol = cols.length;
-                                    ncol2 =ncol;
-                                    j=0;
-                                    while (stemp == "1") {
-                                        for (i = 0; i < ncol; i += 1) {
-                                            datatemp[j][i]=cols[i];
-                                        }
-                                        j=j+1;
+                                    if (sVariation == "3" || sVariation == "8") { 
                                         line = br.readLine();
                                         cols = line.split("\\t");
                                         ncol = cols.length;
-                                        if (ncol != 2) {
-                                            stemp="0";      //to exit loop 
-                                        }
-                                    } 
-                                    ncol = ncol2;
+                                        ncol2 =ncol;
+                                        while (stemp == "1") {
+                                            for (i = 0; i < ncol; i += 1) {
+                                                datatemp[j][i]=cols[i];
+                                            }
+                                            j=j+1;
+                                            line = br.readLine();
+                                            cols = line.split("\\t");
+                                            ncol = cols.length;
+                                            if (ncol != 2) {
+                                                stemp="0";      //to exit loop 
+                                            }
+                                        } 
+                                        ncol = ncol2;
+                                    } else {
+                                        j=0;
+                                    }
                                     %>
 
                                     <center>
@@ -5620,9 +5650,9 @@
                                                 <tr>
                                                     <td align="center">Fold No.</td>
                                                     <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
-                                                    <td align="center">Percent Accurate of Learning Data</td>
+                                                    <td align="center">Percent Accuracy of Learning Data</td>
                                                     <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
-                                                    <td align="center">Percent Accurate of Test Data</td> 
+                                                    <td align="center">Percent Accuracy of Test Data</td> 
                                                 </tr> 
                                                 <% for (i = 0; i < j; i += 1) { %>
                                                     <tr>
@@ -5696,6 +5726,7 @@
                             
                             <div id="PGraph" class="tab-pane fade in">
                                 <div class="edittab">
+                                    <label><input type="checkbox" name="TDCheck" id="TDCheck1" value="TDCheck1" onclick="fTDCheckBox(1);" checked>&nbsp;</label>
                                     <a href="#TPDataset">Training partition data</a>
                                     <span class="glyphicon glyphicon-minus"></span>
                                     <a href="#VPDataset">Validation partition data</a>
@@ -6009,7 +6040,8 @@
 
                             <div id="PTGraph" class="tab-pane fade in">
                                 <div class="edittab">
-                                    Fold No.:&nbsp;
+                                    <label><input type="checkbox" name="TDCheck" id="TDCheck1" value="TDCheck1" onclick="fTDCheckBox(1);" checked>&nbsp;&nbsp;Fold No.:&nbsp;</label>
+                                    <%-->Fold No.:&nbsp;<--%>
                                     <a href="#PT1">1</a>
                                     <%if (sVariation == "3" || sVariation == "8") { %>
                                         <span class="glyphicon glyphicon-minus"></span> 
@@ -6193,7 +6225,8 @@
 
                             <div id="TPGraph" class="tab-pane fade in">
                                 <div class="edittab">
-                                    Fold No.:&nbsp;
+                                    <label><input type="checkbox" name="TDCheck" id="TDCheck1" value="TDCheck1" onclick="fTDCheckBox(1);" checked>&nbsp;&nbsp;Fold No.:&nbsp;</label>
+                                    <%-->Fold No.:&nbsp;<--%>
                                     <a href="#TP1">1</a>
                                     <%if (sVariation == "3" || sVariation == "8") { %>
                                         <span class="glyphicon glyphicon-minus"></span> 
@@ -6381,11 +6414,12 @@
                                 <% } %>
                             </div>
                             </div>
+                            
+                            <br><br>
+                            <center id="bottomform">
+                                <button type="button" onclick="" class="btn btn-primary">Save</button>
+                            </center>
                         </div>
-                        <br><br>
-                        <center id="bottomform">
-                            <button type="button" onclick="" class="btn btn-primary">Save</button>
-                        </center>
                     </div>
                 </div>
                 </div>

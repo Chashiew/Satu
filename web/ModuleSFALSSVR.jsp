@@ -64,11 +64,6 @@
         sRRTShow = "";
     }
 
-    String sHasil = request.getParameter("sHasil"); 
-    if (sHasil == null) {
-        sHasil = "";
-    }
-
     String sPageControl = request.getParameter("sPageControl"); 
     if (sPageControl == null) {
         sPageControl = "1";
@@ -362,6 +357,17 @@
     String snLDFInstances = request.getParameter("nLDFInstances"); 
     String snPDFAttributes = request.getParameter("nPDFAttributes"); 
     String snPDFInstances = request.getParameter("nPDFInstances"); 
+
+    /*
+    out.println("nDFAttributes = "+snDFAttributes);
+    out.println("<br>");
+    out.println("nTDFAttributes = "+snTDFAttributes);
+    out.println("<br>");
+    out.println("nLDFAttributes = "+snLDFAttributes);
+    out.println("<br>");
+    out.println("nPDFAttributes = "+snPDFAttributes);
+    out.println("<br>");
+    */
 
     int nrows1;
     if (snDFInstances!="") {
@@ -693,7 +699,6 @@
                     document.getElementById("sLoadingDataExcelClick5").value = "";
                 document.getElementById("sLoadingDataExcelClick6").value = "";
                 
-                sHasil = "";
                 document.getElementById("sRunReportTable").value = "0";
 
                 return refreshform(0);
@@ -739,7 +744,6 @@
                 sLoadingDataExcelClick6 = "";
                 document.getElementById("sLoadingDataExcelClick6").value = sLoadingDataExcelClick6;
                 
-                sHasil = "";
                 document.getElementById("sRunReportTable").value = "0";
 
                 return refreshform(0);
@@ -784,7 +788,6 @@
                 sLoadingDataExcelClick6 = "6";
                 document.getElementById("sLoadingDataExcelClick6").value = sLoadingDataExcelClick6;
                 
-                sHasil = "";
                 document.getElementById("sRunReportTable").value = "0";
 
                 return refreshform(0);
@@ -883,7 +886,6 @@
                 document.getElementById("sLoadingDataExcelClick6").value = sLoadingDataExcelClick6;
 
                 var sRunReportTable = document.getElementById("sRunReportTable");
-                var sHasil = document.getElementById("sHasil");
                 //alert("Aha1 ...!");
                 if (sRunReportTable.value==="1") {
                     //sRunReportTable = val;
@@ -894,22 +896,18 @@
                     //if (sRunReportTable==="9") {
                     //if (val.value==="9") {
                         //sRunReportTable = "1";
-                        //sHasil="1";
                         //alert("Aha12 ...!");
                     //}
                     //else {
                         sRunReportTable = "";
-                        sHasil="";
                         //alert("Aha13 ...!");
                     //}
                 }
                 else {
                     //alert("Aha14 ...!");
                     sRunReportTable = val;
-                    sHasil="";
                 }
                 document.getElementById("sRunReportTable").value = sRunReportTable;
-                document.getElementById("sHasil").value = sHasil;
                 var sRRTShow = document.getElementById("sRRTShow");
                 sRRTShow = "";
                 document.getElementById("sRRTShow").value = sRRTShow;
@@ -1419,11 +1417,8 @@
                 document.getElementById("sLoadingDataExcelClick6").value = sLoadingDataExcelClick6;
 
                 var sRunReportTable = document.getElementById("sRunReportTable");
-                var sHasil = document.getElementById("sHasil");
                 sRunReportTable = "";
-                sHasil="";
                 document.getElementById("sRunReportTable").value = sRunReportTable;
-                document.getElementById("sHasil").value = sHasil;
 
                 var sRRTShow = document.getElementById("sRRTShow");
                 sRRTShow = "";
@@ -2087,7 +2082,6 @@
                 <input type="hidden" name="vpath" id="vpath" value="<%=vpath%>"/>
                 <input type="hidden" name="vfile" id="vfile" value="<%=vfile%>"/>
 
-                <input type="hidden" name="sHasil" id="sHasil" value="<%=sHasil%>"/>
                 <input type="hidden" name="sPageControl" id="sPageControl" value="<%=sPageControl%>"/>
 
                 <%-- if (hdf.equals("1")) { %>
@@ -2343,10 +2337,10 @@
                                                     <td> &nbsp; </td>
                                                     <td align="right"> Performance &nbsp; = &nbsp; </td>
                                                     <td>
-                                                        <input type="text" size="10" value="<%=cols[0]%>" readonly>
+                                                        <"text" size="10" value="<%=cols[0]%>" readonly>
                                                     </td>
                                                     <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                                                    <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                                                    <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbspinput type=;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
                                                 </tr> 
                                                 <tr>
                                                     <td> &nbsp; </td>
@@ -3047,100 +3041,7 @@
                                             <--%>
 
                                             <% if (sLoadingDataExcel != "") { %>
-                                                <%--> #2 
-                                                <H2 ALIGN="CENTER">
-                                                    <% int percent = task.getPercent();%>
-                                                    <%= percent%>%
-                                                </H2>
-
-                                                <TABLE WIDTH="60%" ALIGN="CENTER"
-                                                BORDER=1 CELLPADDING=0 CELLSPACING=2>
-                                                <TR>
-                                                    <% for (int i = 10; i <= percent; i += 10) { %>
-                                                        <TD WIDTH="10%" BGCOLOR="#000080">&nbsp;</TD>
-                                                    <% } %>
-                                                    <% for (int i = 100; i > percent; i -= 10) { %>
-                                                        <TD WIDTH="10%">&nbsp;</TD>
-                                                    <% } %>
-                                                </TR>
-                                                </TABLE>
-
-                                                <TABLE WIDTH="100%" BORDER=0 CELLPADDING=0 CELLSPACING=0>
-                                                <TR>
-                                                <TD ALIGN="CENTER">
-                                                    <% if (task.isRunning()) { %>
-                                                        Running
-                                                    <% } else { %>
-                                                        <% if (task.isCompleted()) { %>
-                                                            Completed
-                                                        <% } else if (!task.isStarted()) { %>
-                                                            Not Started
-                                                        <% } else { %>
-                                                            Stopped
-                                                        <% } %>
-                                                    <% } %>
-                                                </TD>
-                                                </TR>
-                                                <TR>
-                                                <TD ALIGN="CENTER">
-                                                    <BR>
-                                                    <% if (task.isRunning()) {%>
-                                                        <!--
-                                                        <FORM METHOD="GET" ACTION="stop.jsp">
-                                                        <INPUT TYPE="SUBMIT" VALUE="Stop">
-                                                        </FORM>
-                                                        -->
-                                                        <a href="stop.jsp?<%=params%>">Stop</a>
-                                                    <% } else {%>
-                                                        <!--
-                                                        <FORM METHOD="GET" ACTION="start.jsp">
-                                                        <INPUT TYPE="SUBMIT" VALUE="Start">
-                                                        </FORM>
-                                                        -->
-                                                        <a href="start.jsp?<%=params%>">Start</a>
-                                                    <% }%>
-                                                </TD>
-                                                </TR>
-                                                </TABLE>
-
-                                                <% if (task.isCompleted()) {%>
-                                                    <BR>
-                                                <% }%>
-                                                <--%>
-
                                                 <%
-                                                /*
-                                                out.println("nFireFlies = "+snFireFlies);
-                                                out.println("nMaxGeneration = "+snMaxGeneration);
-                                                out.println("dMinBeta = "+sdMinBeta);
-                                                out.println("dGamma = "+sdGamma);
-                                                out.println("dAlpha = "+sdAlpha);
-                                                out.println("<br>");
-                                                out.println("dAIWeight = "+sdAIWeight);
-                                                out.println("dTau = "+sdTau);
-                                                out.println("dBPotential = "+sdBPotential);
-                                                out.println("dC1 = "+sdC1);
-                                                out.println("dC2 = "+sdC2);
-                                                out.println("<br>");
-                                                out.println("dS1 = "+sdS1);
-                                                out.println("dS2 = "+sdS2);
-                                                out.println("dTrainingPS = "+sdTrainingPS);
-                                                out.println("dValidationPS = "+sdValidationPS);
-                                                out.println("dTotalSize = "+sdTotalSize);
-                                                out.println("<br>");
-                                                out.println("nLastChange1 = "+snLastChange1);
-                                                out.println("nLastChange2 = "+snLastChange2);
-                                                out.println("dHoldOut = "+sdHoldOut);
-                                                out.println("dCrossValidation = "+sdCrossValidation);
-                                                out.println("<br>");
-                                                out.println("NormalRadio = "+NormalRadio);
-                                                out.println("OptimRadio = "+OptimRadio);
-                                                out.println("SCRadio = "+SCRadio);
-                                                out.println("PRadio = "+PRadio);
-                                                out.println("TORadio = "+TORadio);
-                                                out.println("<br>");
-                                                */
-
                                                 if (NormalRadio.equals("NormalRadio1")) {
                                                     dNormalRadio=1;
                                                 }
@@ -3374,79 +3275,7 @@
                                                     document.getElementById("vpath").value = vpath; 
                                                     document.getElementById("vfile").value = vfile; 
                                                 </script>
-                                                <%
 
-                                                /*
-                                                out.println("vfile = "+vfile);
-                                                out.println("<br>");
-                                                out.println("sBaseFileNameCO = "+sBaseFileNameCO);
-                                                out.println("<br>");
-
-                                                out.println("nFireFlies = "+snFireFlies);
-                                                out.println("<br>");
-                                                out.println("nMaxGeneration = "+snMaxGeneration);
-                                                out.println("<br>");
-                                                out.println("dMinBeta = "+sdMinBeta);
-                                                out.println("<br>");
-                                                out.println("dGamma = "+sdGamma);
-                                                out.println("<br>");
-                                                out.println("dAlpha = "+sdAlpha);
-                                                out.println("<br>");
-                                                out.println("dAIWeight = "+sdAIWeight);
-                                                out.println("<br>");
-                                                out.println("dTau = "+sdTau);
-                                                out.println("<br>");
-                                                out.println("dBPotential = "+sdBPotential);
-                                                out.println("<br>");
-                                                out.println("dC1 = "+sdC1);
-                                                out.println("<br>");
-                                                out.println("dC2 = "+sdC2);
-                                                out.println("<br>");
-                                                out.println("dS1 = "+sdS1);
-                                                out.println("<br>");
-                                                out.println("dS2 = "+sdS2);
-                                                out.println("<br>");
-                                                out.println("dTrainingPS = "+sdTrainingPS);
-                                                out.println("<br>");
-                                                out.println("dValidationPS = "+sdValidationPS);
-                                                out.println("<br>");
-                                                out.println("dTotalSize = "+sdTotalSize);
-                                                out.println("<br>");
-                                                out.println("nLastChange1 = "+snLastChange1);
-                                                out.println("<br>");
-                                                out.println("nLastChange2 = "+snLastChange2);
-                                                out.println("<br>");
-                                                out.println("dHoldOut = "+sdHoldOut);
-                                                out.println("<br>");
-                                                out.println("dCrossValidation = "+sdCrossValidation);
-                                                out.println("<br>");
-                                                out.println("dNormalRadio = "+dNormalRadio); 
-                                                out.println("<br>");
-                                                out.println("dOptimRadio = "+dOptimRadio); 
-                                                out.println("<br>");
-                                                out.println("dSCRadio = "+dSCRadio); 
-                                                out.println("<br>");
-                                                out.println("dPRadio = "+dPRadio); 
-                                                out.println("<br>");
-                                                out.println("dTORadio = "+dTORadio);
-                                                out.println("<br>");
-                                                out.println("sVariation = "+sVariation);
-                                                out.println("<br>");
-                                                out.println("sFileData = "+sFileData);
-                                                out.println("<br>");
-                                                out.println("dAttributes = "+dAttributes);
-                                                out.println("<br>");
-                                                out.println("dInstances = "+dInstances);
-                                                out.println("<br>");
-                                                out.println("sPFileData = "+sPFileData);
-                                                out.println("<br>");
-                                                out.println("dPAttributes = "+dPAttributes);
-                                                out.println("<br>");
-                                                out.println("dPInstances = "+dPInstances);
-
-                                                out.println("Datatrain[nrow-1][ncol-1] = "+Datatrain[nrow-1][ncol-1]);
-                                                */
-                                                %>
                                                 <jsp:include page="SFALSSVRServlet">
                                                         <jsp:param name="nFireFlies" value="<%=nFireFlies%>" />
                                                         <jsp:param name="nMaxGeneration" value="<%=nMaxGeneration%>" />
@@ -3508,158 +3337,135 @@
                                         <%--> End of sViewProceed + Click on button RUN <--%>
                                         <%
                                         /*
-                                        out.println("<p>");
-                                        out.println("sHasil = "+sHasil);
+                                        out.println("sBaseFileName = "+sBaseFileName);
                                         out.println("<br>");
                                         */
-                                        if (sHasil!="") {
-                                            /*
-                                            out.println("sBaseFileName = "+sBaseFileName);
-                                            out.println("<br>");
-                                            */
-                                            if (sBaseFileName!="") {
-                                                /*
-                                                out.println("sRunReportTable = "+sRunReportTable);
-                                                out.println("<br>");
-                                                */
-                                                sResult01Name = application.getRealPath("/") + sBaseFileName +"01.txt";
-                                                sResult02Name = application.getRealPath("/") + sBaseFileName +"02.txt";
-                                                sResult03Name = application.getRealPath("/") + sBaseFileName +"03.txt";
-                                                sResult04Name = application.getRealPath("/") + sBaseFileName +"04.txt";
-                                                sResult04aName = application.getRealPath("/") + sBaseFileName +"04a.txt";
-                                                sResult04bName = application.getRealPath("/") + sBaseFileName +"04b.txt";
-                                                sResult04cName = application.getRealPath("/") + sBaseFileName +"04c.txt";
-                                                sResult04dName = application.getRealPath("/") + sBaseFileName +"04d.txt";
-                                                sResult05Name = application.getRealPath("/") + sBaseFileName +"05.txt";
-                                                sResult06Name = application.getRealPath("/") + sBaseFileName +"06.txt";
+                                        if (sBaseFileName!="") {
+                                            sResult01Name = application.getRealPath("/") + sBaseFileName +"01.txt";
+                                            sResult02Name = application.getRealPath("/") + sBaseFileName +"02.txt";
+                                            sResult03Name = application.getRealPath("/") + sBaseFileName +"03.txt";
+                                            sResult04Name = application.getRealPath("/") + sBaseFileName +"04.txt";
+                                            sResult04aName = application.getRealPath("/") + sBaseFileName +"04a.txt";
+                                            sResult04bName = application.getRealPath("/") + sBaseFileName +"04b.txt";
+                                            sResult04cName = application.getRealPath("/") + sBaseFileName +"04c.txt";
+                                            sResult04dName = application.getRealPath("/") + sBaseFileName +"04d.txt";
+                                            sResult05Name = application.getRealPath("/") + sBaseFileName +"05.txt";
+                                            sResult06Name = application.getRealPath("/") + sBaseFileName +"06.txt";
 
-                                                %>
-                                                <script>
-                                                    document.getElementById("sBaseFileName").value = sBaseFileName.value;
-                                                </script>
+                                            %>
+                                            <script>
+                                                document.getElementById("sBaseFileName").value = sBaseFileName.value;
+                                            </script>
 
-                                                <table style="display:none;">
-                                                    <tr>
-                                                        <td>&nbsp;</td>
-                                                        <td>
-                                                            <b> Output Files: </b>
-                                                        </td>
-                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                        <td>
-                                                            <input type="text" name="sResult01Name" id="sResult01Name" size="65" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" readonly/>
-                                                            &nbsp;
-                                                            <font color="teal" face="tahoma" size="2">Main results - Optimum hyperparameters</font>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>&nbsp;</td>
-                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                        <td>
-                                                            <input type="text" name="sResult02Name" id="sResult02Name" size="65" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" readonly/>
-                                                            &nbsp;
-                                                            <font color="teal" face="tahoma" size="2">Hyperparameters; Performance of training and validation partitions</font>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>&nbsp;</td>
-                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                        <td>
-                                                            <input type="text" name="sResult03Name" id="sResult03Name" size="65" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" readonly/> 
-                                                            &nbsp;
-                                                            <font color="teal" face="tahoma" size="2">Analysis report</font>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>&nbsp;</td>
-                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                        <td>
-                                                            <input type="text" name="sResult04Name" id="sResult04Name" size="65" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" readonly/>
-                                                            &nbsp;
-                                                            <font color="teal" face="tahoma" size="2">Learning and test performances; Test dataset and predicted values</font>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>&nbsp;</td>
-                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                        <td>
-                                                            <input type="text" name="sResult04aName" id="sResult04aName" size="65" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" readonly/>
-                                                            &nbsp;
-                                                            <font color="teal" face="tahoma" size="2">Prediction graph of training partition from learning dataset</font>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>&nbsp;</td>
-                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                        <td>
-                                                            <input type="text" name="sResult04bName" id="sResult04bName" size="65" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" readonly/>
-                                                            &nbsp;
-                                                            <font color="teal" face="tahoma" size="2">Prediction graph of validation partition from learning dataset </font>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>&nbsp;</td>
-                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                        <td>
-                                                            <input type="text" name="sResult04cName" id="sResult04cName" size="65" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" readonly/>
-                                                            &nbsp;
-                                                            <font color="teal" face="tahoma" size="2">Prediction graph of learning dataset </font>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>&nbsp;</td>
-                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                        <td>
-                                                            <input type="text" name="sResult04dName" id="sResult04dName" size="65" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" readonly/>
-                                                            &nbsp;
-                                                            <font color="teal" face="tahoma" size="2">Prediction graph of test dataset </font>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>&nbsp;</td>
-                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                        <td>
-                                                            <input type="text" name="sResult05Name" id="sResult05Name" size="65" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" readonly/>
-                                                            &nbsp;
-                                                            <font color="teal" face="tahoma" size="2">Performance trajectory graph of test dataset </font>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>&nbsp;</td>
-                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                        <td>
-                                                            <input type="text" name="sResult06Name" id="sResult06Name" size="65" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" readonly/>
-                                                            &nbsp;
-                                                            <font color="teal" face="tahoma" size="2">Tracing path graph of test dataset </font>
-                                                        </td>
-                                                    </tr>
-                                                </table>                
-                                                <%
-                                            }
-                                            else {
-                                                /*
-                                                out.println("sRunReportTable = "+sRunReportTable);
-                                                out.println("<br>");
-                                                out.println("sHasil = "+sHasil);
-                                                out.println("<br>");
-                                                out.println("sBaseFileName = "+sBaseFileName);
-                                                out.println("<br>");
-                                                */
-                                                %>
-                                                <script>
-                                                    document.getElementById("sBaseFileName").value = "Result";
-                                                </script>
-                                                <%
-                                            } 
-                                        }
+                                            <table style="display:none;">
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>
+                                                        <b> Output Files: </b>
+                                                    </td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>
+                                                        <input type="text" name="sResult01Name" id="sResult01Name" size="65" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" readonly/>
+                                                        &nbsp;
+                                                        <font color="teal" face="tahoma" size="2">Main results - Optimum hyperparameters</font>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>
+                                                        <input type="text" name="sResult02Name" id="sResult02Name" size="65" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" readonly/>
+                                                        &nbsp;
+                                                        <font color="teal" face="tahoma" size="2">Hyperparameters; Performance of training and validation partitions</font>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>
+                                                        <input type="text" name="sResult03Name" id="sResult03Name" size="65" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" readonly/> 
+                                                        &nbsp;
+                                                        <font color="teal" face="tahoma" size="2">Analysis report</font>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>
+                                                        <input type="text" name="sResult04Name" id="sResult04Name" size="65" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" readonly/>
+                                                        &nbsp;
+                                                        <font color="teal" face="tahoma" size="2">Learning and test performances; Test dataset and predicted values</font>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>
+                                                        <input type="text" name="sResult04aName" id="sResult04aName" size="65" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" readonly/>
+                                                        &nbsp;
+                                                        <font color="teal" face="tahoma" size="2">Prediction graph of training partition from learning dataset</font>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>
+                                                        <input type="text" name="sResult04bName" id="sResult04bName" size="65" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" readonly/>
+                                                        &nbsp;
+                                                        <font color="teal" face="tahoma" size="2">Prediction graph of validation partition from learning dataset </font>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>
+                                                        <input type="text" name="sResult04cName" id="sResult04cName" size="65" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" readonly/>
+                                                        &nbsp;
+                                                        <font color="teal" face="tahoma" size="2">Prediction graph of learning dataset </font>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>
+                                                        <input type="text" name="sResult04dName" id="sResult04dName" size="65" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" readonly/>
+                                                        &nbsp;
+                                                        <font color="teal" face="tahoma" size="2">Prediction graph of test dataset </font>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>
+                                                        <input type="text" name="sResult05Name" id="sResult05Name" size="65" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" readonly/>
+                                                        &nbsp;
+                                                        <font color="teal" face="tahoma" size="2">Performance trajectory graph of test dataset </font>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>
+                                                        <input type="text" name="sResult06Name" id="sResult06Name" size="65" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" readonly/>
+                                                        &nbsp;
+                                                        <font color="teal" face="tahoma" size="2">Tracing path graph of test dataset </font>
+                                                    </td>
+                                                </tr>
+                                            </table>                
+                                        <% } else { %>
+                                            <script>
+                                                document.getElementById("sBaseFileName").value = "Result";
+                                            </script>
+                                        <% } 
                                     }
                                 }
                             } 
@@ -4722,10 +4528,6 @@
                                                                     sTORadio = "-";
                                                                 }
                                                             }
-                                                            else {
-                                                                dAttributes = snDFAttributes;
-                                                                dInstances = snDFInstances;
-                                                            }
                                                         } 
                                                     } else {
                                                         if (TORadio.equals("TORadio2")) { 
@@ -4830,7 +4632,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-4"><%=sPFileData%></div>
-                                                    <div class="col-md-2">No. of Attributes = <%=nf.format(Double.parseDouble(dPAttributes))%></div>
+                                                                <div class="col-md-2">No. of Attributes = <%=nf.format(Double.parseDouble(dPAttributes))%></div>
                                                     <div class="col-md-3">No. of Instances = <%=nf.format(Double.parseDouble(dPInstances))%></div>
                                                 </div>
                                             <%}%>
@@ -4848,12 +4650,26 @@
                                                         </a>
                                                     </div>
                                                     <% if (TORadio.equals("TORadio4")) { %> 
-                                                        <div class="col-md-3">
+                                                        <div class="col-md-4">
                                                             <a onclick="return viewdataset(2);">
                                                                 <font color="blue">
                                                                 <u>Test Dataset</u>
                                                                 </font>
                                                             </a>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <font color="black">
+                                                                Base output file name: &nbsp;<b><%=sBaseFileName%></b>
+                                                            </font>
+                                                        </div>
+                                                    <% } else { %>
+                                                        <div class="col-md-4">
+                                                            &nbsp;
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <font color="black">
+                                                                Base output file name: &nbsp;<b><%=sBaseFileName%></b>
+                                                            </font>
                                                         </div>
                                                     <% } %>
                                                     
@@ -4865,12 +4681,17 @@
                                                             </font>
                                                         </a> 
                                                     </div>
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-4">
                                                         <a onclick="return viewdataset(4);">
                                                             <font color="blue">
                                                             <u>Prediction Dataset</u>
                                                             </font>
                                                         </a> 
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <font color="black">
+                                                        Base output file name: &nbsp;<b><%=sBaseFileName%></b>
+                                                        </font>
                                                     </div>
                                                 <% } %>
                                             </div>
@@ -5666,7 +5487,7 @@
                             <br>
                             <div class="tab-content">
                                 <div id="Main" class="tab-pane fade in active">
-                                    <a href="#Optimum">Best Optimum hyperparameters</a>
+                                    <a href="#Optimum">Best optimum hyperparameters</a>
                                     <span class="glyphicon glyphicon-minus"></span>
                                     <a href="#Partition">Performance of data partitions</a>
                                     <span class="glyphicon glyphicon-minus"></span>
@@ -5677,7 +5498,7 @@
                                     <br>
                                     <br>
                                     <center>
-                                        <font size="4" id="Optimum">Main results - Best Optimum hyperparameters</font>
+                                        <font size="4" id="Optimum">Main results - Best optimum hyperparameters</font>
                                         <a href="#Partition"><span class="glyphicon glyphicon-menu-right"></span></a>
                                         <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                         <br>
@@ -6007,7 +5828,7 @@
                                             } 
                                         } 
                                         else {
-                                            j=1;
+                                            j=0;
                                         }
                                         %>
 
@@ -6104,6 +5925,7 @@
                                 
                                 <div id="PGraph" class="tab-pane fade in"> 
                                     <div class="edittab">
+                                        <label><input type="checkbox" name="TDCheck" id="TDCheck1" value="TDCheck1" onclick="fTDCheckBox(1);" checked>&nbsp;</label>
                                         <a href="#TPDataset">Training partition data</a>
                                         <span class="glyphicon glyphicon-minus"></span> 
                                         <a href="#VPDataset">Validation partition data</a>
@@ -6417,7 +6239,8 @@
                                 
                                 <div id="PTGraph" class="tab-pane fade in">
                                     <div class="edittab">
-                                        Fold No.:&nbsp;
+                                        <label><input type="checkbox" name="TDCheck" id="TDCheck1" value="TDCheck1" onclick="fTDCheckBox(1);" checked>&nbsp;&nbsp;Fold No.:&nbsp;</label>
+                                        <%-->Fold No.:&nbsp;<--%>
                                         <a href="#PT1">1</a>
                                         <%if (sVariation == "3" || sVariation == "8") { %>
                                             <span class="glyphicon glyphicon-minus"></span> 
@@ -6601,7 +6424,8 @@
                                 
                                 <div id="TPGraph" class="tab-pane fade in">
                                     <div class="edittab">
-                                        Fold No.:&nbsp;
+                                        <label><input type="checkbox" name="TDCheck" id="TDCheck1" value="TDCheck1" onclick="fTDCheckBox(1);" checked>&nbsp;&nbsp;Fold No.:&nbsp;</label>
+                                        <%-->Fold No.:&nbsp;<--%>
                                         <a href="#TP1">1</a>
                                         <%if (sVariation == "3" || sVariation == "8") { %>
                                             <span class="glyphicon glyphicon-minus"></span> 

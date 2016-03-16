@@ -16,17 +16,17 @@ No. of training data:					 216
 No. of test data:					 24 
 --------------------------------------------------------------------- 
 Performance measures using training data
-Percentage of correct prediction (training) [%]:	 100.0000 
+Percentage of correct prediction (training) [%]:	 99.5370 
 --------------------------------------------------------------------- 
 Performance measures using test data
-Percentage of correct prediction (test) [%]:		 75.0000 
+Percentage of correct prediction (test) [%]:		 87.5000 
 ===================================================================== 
 Fold #2 
 No. of training data:					 216 
 No. of test data:					 24 
 --------------------------------------------------------------------- 
 Performance measures using training data
-Percentage of correct prediction (training) [%]:	 100.0000 
+Percentage of correct prediction (training) [%]:	 99.5370 
 --------------------------------------------------------------------- 
 Performance measures using test data
 Percentage of correct prediction (test) [%]:		 91.6667 
@@ -36,7 +36,7 @@ No. of training data:					 216
 No. of test data:					 24 
 --------------------------------------------------------------------- 
 Performance measures using training data
-Percentage of correct prediction (training) [%]:	 99.5370 
+Percentage of correct prediction (training) [%]:	 100.0000 
 --------------------------------------------------------------------- 
 Performance measures using test data
 Percentage of correct prediction (test) [%]:		 83.3333 
@@ -66,7 +66,7 @@ No. of training data:					 216
 No. of test data:					 24 
 --------------------------------------------------------------------- 
 Performance measures using training data
-Percentage of correct prediction (training) [%]:	 100.0000 
+Percentage of correct prediction (training) [%]:	 99.5370 
 --------------------------------------------------------------------- 
 Performance measures using test data
 Percentage of correct prediction (test) [%]:		 83.3333 
@@ -76,17 +76,17 @@ No. of training data:					 216
 No. of test data:					 24 
 --------------------------------------------------------------------- 
 Performance measures using training data
-Percentage of correct prediction (training) [%]:	 100.0000 
+Percentage of correct prediction (training) [%]:	 99.5370 
 --------------------------------------------------------------------- 
 Performance measures using test data
-Percentage of correct prediction (test) [%]:		 95.8333 
+Percentage of correct prediction (test) [%]:		 79.1667 
 ===================================================================== 
 Fold #8 
 No. of training data:					 216 
 No. of test data:					 24 
 --------------------------------------------------------------------- 
 Performance measures using training data
-Percentage of correct prediction (training) [%]:	 99.5370 
+Percentage of correct prediction (training) [%]:	 100.0000 
 --------------------------------------------------------------------- 
 Performance measures using test data
 Percentage of correct prediction (test) [%]:		 83.3333 
@@ -96,27 +96,27 @@ No. of training data:					 216
 No. of test data:					 24 
 --------------------------------------------------------------------- 
 Performance measures using training data
-Percentage of correct prediction (training) [%]:	 99.5370 
+Percentage of correct prediction (training) [%]:	 100.0000 
 --------------------------------------------------------------------- 
 Performance measures using test data
-Percentage of correct prediction (test) [%]:		 87.5000 
+Percentage of correct prediction (test) [%]:		 91.6667 
 ===================================================================== 
 Fold #10 
 No. of training data:					 216 
 No. of test data:					 24 
 --------------------------------------------------------------------- 
 Performance measures using training data
-Percentage of correct prediction (training) [%]:	 100.0000 
+Percentage of correct prediction (training) [%]:	 99.5370 
 --------------------------------------------------------------------- 
 Performance measures using test data
-Percentage of correct prediction (test) [%]:		 75.0000 
+Percentage of correct prediction (test) [%]:		 83.3333 
 ===================================================================== 
 Average cross-folds results
 --------------------------------------------------------------------- 
 Average performance measures using training data
-Percentage of correct prediction (training) [%]:	 99.8611 
+Percentage of correct prediction (training) [%]:	 99.7685 
 --------------------------------------------------------------------- 
 Average performance measures using test data
-Percentage of correct prediction (test) [%]:		 84.1667 
+Percentage of correct prediction (test) [%]:		 85.0000 
 ===================================================================== 
-Total time [s]:						 0.41 
+Total time [s]:						 0.69 

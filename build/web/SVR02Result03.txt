@@ -12,15 +12,15 @@ No. of training data:				 59
 No. of test data:				 15 
 ============================================================= 
 Performance measures using training data
-Root mean square error (training) [unit]:	 0.1996 
-Mean absolute error (training) [unit]:		 0.1543 
-Mean absolute percentage error (training) [%]: 	 13.69 
-Correlation coefficient (training):		 0.9946 
+Root mean square error (training) [unit]:	 0.2127 
+Mean absolute error (training) [unit]:		 0.1582 
+Mean absolute percentage error (training) [%]: 	 12.99 
+Correlation coefficient (training):		 0.9935 
 ------------------------------------------------------------- 
 Performance measures using test data
-Root mean square error (test) [unit]:		 0.7824 
-Mean absolute error (test) [unit]:		 0.5978 
-Mean absolute percentage error (test) [%]:	 22.57 
-Correlation coefficient (test):			 0.9034 
+Root mean square error (test) [unit]:		 0.5936 
+Mean absolute error (test) [unit]:		 0.5074 
+Mean absolute percentage error (test) [%]:	 37.12 
+Correlation coefficient (test):			 0.9545 
 ============================================================= 
-Total time [s]:					 0.11 
+Total time [s]:					 0.37
