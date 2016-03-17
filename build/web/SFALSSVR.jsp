@@ -931,13 +931,9 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
             }
 
             function checkdata(val) {
-                var nFireFlies = document.getElementById("nFireFlies");
-                var sDataFile = document.getElementById("sDataFile");
-                var sTestDataFile = document.getElementById("sTestDataFile");
-                var sLearningDataFile = document.getElementById("sLearningDataFile");
-                var sPredictionDataFile = document.getElementById("sPredictionDataFile");
                 var valid = true;
-
+                var nFireFlies = document.getElementById("nFireFlies");
+                
                 var sFileName = document.getElementById("sFileName");
                 var sTestFileName = document.getElementById("sTestFileName");
                 var sLearningFileName = document.getElementById("sLearningFileName");
@@ -1043,12 +1039,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     var fullPathL = document.getElementById("fullPathL");
                     var fullPathP = document.getElementById("fullPathP");
 
-                    var sFileName = document.getElementById("sFileName");
-                    var sTestFileName = document.getElementById("sTestFileName");
-                    var sLearningFileName = document.getElementById("sLearningFileName");
-                    var sPredictionFileName = document.getElementById("sPredictionFileName");
-                    
-                    document.getElementById("sHasil").value = "2";
                     document.getElementById("sRunReportTable").value = "1";
                     
                     var VarNext = document.getElementById("VarNext");
@@ -1857,7 +1847,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 <input type="hidden" name="sResult06Name" id="sResult06Name" value="<%=sResult06Name--%>" />-->
                 
                 <input type="hidden" name="sRunReportTable" id="sRunReportTable" value="" />
-                <input type="hidden" name="sHasil" id="sHasil" value="" />
                                 
                 <input type="hidden" name="sLoadingDefault" id="sLoadingDefault" value="<%=sLoadingDefault%>" />
                 <input type="hidden" name="sLoadingEvaluation" id="sLoadingEvaluation" value="<%=sLoadingEvaluation%>" />

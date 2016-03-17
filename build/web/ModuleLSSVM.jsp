@@ -29,6 +29,11 @@
     String VarB = request.getParameter("VarB");
     String VarNextLSSVM = request.getParameter("VarNextLSSVM");
     
+    /*
+    out.println("VarB = "+VarB);
+    out.println("VarNextLSSVM = "+VarNextLSSVM);
+    */
+    
     String sPageControl = request.getParameter("sPageControl"); 
     if (sPageControl == null) {
         sPageControl = "1";
@@ -232,6 +237,12 @@
     
     String snValueCLSSVM = request.getParameter("nValueCLSSVM");
     String snValueSLSSVM = request.getParameter("nValueSLSSVM");
+
+    /*
+    out.println("snValueCLSSVM = "+snValueCLSSVM);
+    out.println("snValueSLSSVM = "+snValueSLSSVM);
+    */
+    
     String sdHoldOutLSSVM = request.getParameter("dHoldOutLSSVM");
     String sdCrossValidationLSSVM = request.getParameter("dCrossValidationLSSVM");
 
@@ -2672,7 +2683,8 @@
 
                             <div id="PGraph" class="tab-pane fade in"> 
                                 <div class="edittab">
-                                    Fold No.:&nbsp;
+                                    <label><input type="checkbox" name="TDCheck" id="TDCheck1" value="TDCheck1" onclick="fTDCheckBox(1);" checked>&nbsp;&nbsp;Fold No.:&nbsp;</label>
+                                    <%-->Fold No.:&nbsp;<--%>
                                     <a href="#PG1">1</a>
                                     <%if (sVariation == "3" || sVariation == "8") { %>
                                         <span class="glyphicon glyphicon-minus"></span> 
@@ -2855,7 +2867,8 @@
 
                             <div id="PTGraph" class="tab-pane fade in">
                                 <div class="edittab">
-                                    Fold No.:&nbsp;
+                                    <label><input type="checkbox" name="TDCheck" id="TDCheck1" value="TDCheck1" onclick="fTDCheckBox(1);" checked>&nbsp;&nbsp;Fold No.:&nbsp;</label>
+                                    <%-->Fold No.:&nbsp;<--%>
                                     <a href="#PT1">1</a>
                                     <%if (sVariation == "3" || sVariation == "8") { %>
                                         <span class="glyphicon glyphicon-minus"></span> 

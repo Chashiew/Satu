@@ -38,10 +38,6 @@
     if (sRRTShow == null) {
         sRRTShow = "";
     }
-    String sHasil = request.getParameter("sHasil"); 
-    if (sHasil == null) {
-        sHasil = "";
-    }
     String sPageControl = request.getParameter("sPageControl"); 
     if (sPageControl == null) {
         sPageControl = "1";
@@ -475,7 +471,6 @@
                     document.getElementById("sLoadingDataExcelClick5").value = "";
                 document.getElementById("sLoadingDataExcelClick6").value = "";
                 
-                sHasil = "";
                 document.getElementById("sRunReportTable").value = "0";
 
                 return refreshform(0);
@@ -574,33 +569,15 @@
                 document.getElementById("sLoadingDataExcelClick6").value = sLoadingDataExcelClick6;
 
                 var sRunReportTable = document.getElementById("sRunReportTable");
-                var sHasil = document.getElementById("sHasil");
                 //alert("Aha1 ...!");
                 if (sRunReportTable.value==="1") {
-                    //sRunReportTable = val;
-                    //document.getElementById("sRunReportTable").value = sRunReportTable;
-                    //alert("Aha11 ...!");
-                    //if (sRunReportTable.value==="9") {
-                    //if (val==="9") {
-                    //if (sRunReportTable==="9") {
-                    //if (val.value==="9") {
-                        //sRunReportTable = "1";
-                        //sHasil="1";
-                        //alert("Aha12 ...!");
-                    //}
-                    //else {
-                        sRunReportTable = "";
-                        sHasil="";
-                        //alert("Aha13 ...!");
-                    //}
+                    sRunReportTable = "";
                 }
                 else {
                     //alert("Aha14 ...!");
                     sRunReportTable = val;
-                    sHasil="";
                 }
                 document.getElementById("sRunReportTable").value = sRunReportTable;
-                document.getElementById("sHasil").value = sHasil;
                 var sRRTShow = document.getElementById("sRRTShow");
                 sRRTShow = "";
                 document.getElementById("sRRTShow").value = sRRTShow;
@@ -729,68 +706,6 @@
                     var sResult04dName = document.getElementById("sResult04dName");
                     var sResult05Name = document.getElementById("sResult05Name");
                     var sResult06Name = document.getElementById("sResult06Name");
-
-                    /*
-                    if (sResult01.value==="") {
-                        if (sResult01Name.value==="") {
-                            var sResult01Name="Result01.txt";
-                        }
-                    }
-                    */
-                    
-                    /*
-                    alert("Aha1 ...!");
-                    if (sResult02!=="") {
-                    }
-                    else {
-                        alert("Aha2 ...!");
-                        if (sResult02Name!=="") {
-                            alert("Aha3 ...!");
-                        }
-                        else {
-                            alert("Aha4 ...!");
-                            var sResult02 = document.getElementById("sResult02");
-                            var sResult02Name = document.getElementById("sResult02Name");
-                            sResult02="Result02.txt";
-                            sResult02Name="Result02.txt"; 
-                            document.getElementById("sResult02").value = sResult02;
-                            document.getElementById("sResult02Name").value = sResult02Name;
-                        }
-                        alert("Aha5 ...!");
-                    }
-                    */
-           
-                    /*
-                    var sReportFile = document.getElementById("sReportFile").value;
-                    //alert("Aha3 ...!");
-                    if (sReportFile!=="") {
-                        //alert("Aha4 ...!");
-                        if (sReportFile!=="") {
-                            //var sReportFile = document.getElementById("sReportFile").value;
-                            
-                            var res = sReportFile.replace(/.xls/gi, "");
-                            //alert("Aha41 ...!");
-                            
-                            var sReportFile = res.replace(/.txt/gi, "");
-                            //alert("Aha42 ...!");
-                            
-                            var sReportFileName = document.getElementById("sReportFileName");
-                            sReportFileName = sReportFile+".xls";
-                            document.getElementById("sReportFileName").value = sReportFileName;
-                        
-                            var sReportFileNameTXT = document.getElementById("sReportFileNameTXT");
-                            sReportFileNameTXT = sReportFile+".txt";
-                            document.getElementById("sReportFileNameTXT").value = sReportFileNameTXT;
-                        }
-                        //sReportFile = sReportFile.split(".");
-
-                        //alert("Aha43 ...!");
-                    }
-                    else {
-                        var sReportFileName = document.getElementById("sReportFileName");
-                        var sReportFileNameTXT = document.getElementById("sReportFileNameTXT");
-                    }
-                    */
                 }
                 else if (valData===2) {
                     var sResult01Name = document.getElementById("sResult01Name");
@@ -1058,366 +973,19 @@
             </center>
             <%@include file="navmenu.jsp" %>
 
-        <% if (VarSaveData != null) { %>
-            <%--<%
-                String filename;
-                if (PRadio.equals("PRadio2")) {
-                    filename = "Data_LSSVR_Prediction.txt";
-                }
-                else {
-                    filename = "Data_LSSVR_Evaluation.txt";
-                }
-                String file = application.getRealPath("/") + filename;
-                FileWriter filewriter = new FileWriter(file, false);
-                int iRadio = 0;
-
-                nValueC = Float.parseFloat(snValueC);
-                nValueS = Float.parseFloat(snValueS);
-                dHoldOut = Float.parseFloat(sdHoldOut);
-                dCrossValidation = Float.parseFloat(sdCrossValidation);
-                
-                nDFAttributes = Float.parseFloat(snDFAttributes);
-                nDFInstances = Float.parseFloat(snDFInstances);
-                nTDFAttributes = Float.parseFloat(snTDFAttributes);
-                nTDFInstances = Float.parseFloat(snTDFInstances);
-                nLDFAttributes = Float.parseFloat(snLDFAttributes);
-                nLDFInstances = Float.parseFloat(snLDFInstances);
-                nPDFAttributes = Float.parseFloat(snPDFAttributes);
-                nPDFInstances = Float.parseFloat(snPDFInstances);
-
-                // title
-                filewriter.write("LSSVR Data:\n");
-            
-                // column header
-                filewriter.write("No.\t");
-                filewriter.write("Description\t");
-                filewriter.write("Variable\t");
-                filewriter.write("Value\t");
-                filewriter.write("Remark\n");
-
-                // data rows
-                filewriter.write("1\t");
-                filewriter.write("Value of C\t");
-                filewriter.write("nValueC\t");
-                filewriter.write(nValueC+"\t");
-                filewriter.write("-\n");
-                
-                filewriter.write("2\t");
-                filewriter.write("Value of Sigma\t");
-                filewriter.write("nValueS\t");
-                filewriter.write(nValueS+"\t");
-                filewriter.write("-\n");
-                
-                sNormalRadio = "...";
-                if (NormalRadio.equals("NormalRadio1")) {
-                    sNormalRadio = "Original value";
-                    iRadio=1;
-                }
-                else if (NormalRadio.equals("NormalRadio2")) {
-                    sNormalRadio = "Feature scaling";
-                    iRadio=2;
-                }
-
-                filewriter.write("3\t");
-                filewriter.write("Normalization Method\t");
-                filewriter.write("sNormalRadio\t");
-                filewriter.write(iRadio+"\t");
-                filewriter.write(sNormalRadio+"\n");
-
-                sPRadio = "...";
-                if (PRadio.equals("PRadio1")) {
-                    sPRadio = "Evaluation";
-                    iRadio=1;
-                }
-                else if (PRadio.equals("PRadio2")) {
-                    sPRadio = "Prediction";
-                    iRadio=2;
-                }
-                    
-                filewriter.write("4\t");
-                filewriter.write("Purpose\t");
-                filewriter.write("sPRadio\t");
-                filewriter.write(iRadio+"\t");
-                filewriter.write(sPRadio+"\n");
-                
-                if (PRadio.equals("PRadio2")) {
-                    filewriter.write("5\t");
-                    filewriter.write("Learning Dataset\t");
-                    filewriter.write("sLearningDataFile\t");
-                    filewriter.write(sLearningFileName+"\t");
-                    filewriter.write("-\n");
-
-                    filewriter.write("6\t");
-                    filewriter.write("No. of Attributes\t");
-                    filewriter.write("nLDFAttributes\t");
-                    filewriter.write(nLDFAttributes+"\t");
-                    filewriter.write("-\n");
-
-                    filewriter.write("7\t");
-                    filewriter.write("No. of Instances\t");
-                    filewriter.write("nLDFInstances\t");
-                    filewriter.write(nLDFInstances+"\t");
-                    filewriter.write("-\n");
-
-                    filewriter.write("8\t");
-                    filewriter.write("Prediction Dataset\t");
-                    filewriter.write("sPredictionDataFile\t");
-                    filewriter.write(sPredictionFileName+"\t");
-                    filewriter.write("-\n");
-
-                    filewriter.write("9\t");
-                    filewriter.write("No. of Attributes\t");
-                    filewriter.write("nPDFAttributes\t");
-                    filewriter.write(nPDFAttributes+"\t");
-                    filewriter.write("-\n");
-
-                    filewriter.write("10\t");
-                    filewriter.write("No. of Instances\t");
-                    filewriter.write("nPDFInstances\t");
-                    filewriter.write(nPDFInstances+"\t");
-                    filewriter.write("-\n");
-
-                    filewriter.write("11\t");
-                    filewriter.write("First Dataset\t");
-                    filewriter.write("sFileData\t");
-                    filewriter.write(sFileData+"\t");
-                    filewriter.write("-\n");
-
-                    filewriter.write("12\t");
-                    filewriter.write("No. of Attributes\t");
-                    filewriter.write("sdAttributes\t");
-                    filewriter.write(sdAttributes+"\t"); 
-                    filewriter.write("-\n");
-
-                    filewriter.write("13\t");
-                    filewriter.write("No. of Instances\t");
-                    filewriter.write("sdInstances\t");
-                    filewriter.write(sdInstances+"\t");
-                    filewriter.write("-\n");
-
-                    filewriter.write("14\t");
-                    filewriter.write("Second Dataset\t");
-                    filewriter.write("sPFileData\t");
-                    filewriter.write(sPFileData+"\t");
-                    filewriter.write("-\n");
-
-                    filewriter.write("15\t");
-                    filewriter.write("No. of Attributes\t");
-                    filewriter.write("sdPAttributes\t");
-                    filewriter.write(sdPAttributes+"\t");
-                    filewriter.write("-\n");
-
-                    filewriter.write("16\t");
-                    filewriter.write("No. of Instances\t");
-                    filewriter.write("sdPInstances\t");
-                    filewriter.write(sdPInstances+"\t");
-                    filewriter.write("-\n");
-                } else {
-                    filewriter.write("5\t");
-                    filewriter.write("Hold-Out (%)\t");
-                    filewriter.write("dHoldOut\t");
-                    filewriter.write(dHoldOut+"\t");
-                    filewriter.write("-\n");
-
-                    filewriter.write("6\t");
-                    filewriter.write("Cross-Validation (%)\t");
-                    filewriter.write("dCrossValidation\t");
-                    filewriter.write(dCrossValidation+"\t");
-                    filewriter.write("-\n");
-                
-                    sTORadio = "...";
-                    if (TORadio.equals("TORadio1")) {
-                        sTORadio = "Use learning dataset";
-                        iRadio=1;
-                    }
-                    else if (TORadio.equals("TORadio4")) {
-                        sTORadio = "Use test dataset";
-                        iRadio=4;
-                    }
-                    else if (TORadio.equals("TORadio2")) {
-                        sTORadio = "Hold-out";
-                        iRadio=2;
-                    }
-                    else if (TORadio.equals("TORadio3")) {
-                        sTORadio = "Cross-validation";
-                        iRadio=3;
-                    }
-
-                    filewriter.write("7\t");
-                    filewriter.write("Test Option\t");
-                    filewriter.write("sTORadio\t");
-                    filewriter.write(iRadio+"\t");
-                    filewriter.write(sTORadio+"\n");
-
-                    filewriter.write("8\t");
-                    filewriter.write("Dataset\t");
-                    filewriter.write("sDataFile\t");
-                    filewriter.write(sFileName+"\t");
-                    filewriter.write("-\n");
-
-                    filewriter.write("9\t");
-                    filewriter.write("No. of Attributes\t");
-                    filewriter.write("nDFAttributes\t");
-                    filewriter.write(nDFAttributes+"\t");
-                    filewriter.write("-\n");
-
-                    filewriter.write("10\t");
-                    filewriter.write("No. of Instances\t");
-                    filewriter.write("nDFInstances\t");
-                    filewriter.write(nDFInstances+"\t");
-                    filewriter.write("-\n");
-
-                    filewriter.write("11\t");
-                    filewriter.write("Test Dataset\t");
-                    filewriter.write("sTestDataFile\t");
-                    filewriter.write(sTestFileName+"\t");
-                    filewriter.write("-\n");
-
-                    filewriter.write("12\t");
-                    filewriter.write("No. of Attributes\t");
-                    filewriter.write("nTDFAttributes\t");
-                    filewriter.write(nTDFAttributes+"\t");
-                    filewriter.write("-\n");
-
-                    filewriter.write("13\t");
-                    filewriter.write("No. of Instances\t");
-                    filewriter.write("nTDFInstances\t");
-                    filewriter.write(nTDFInstances+"\t");
-                    filewriter.write("-\n");
-
-
-                    filewriter.write("14\t");
-                    filewriter.write("First Dataset\t");
-                    filewriter.write("sFileData\t");
-                    filewriter.write(sFileData+"\t");
-                    filewriter.write("-\n");
-
-                    filewriter.write("15\t");
-                    filewriter.write("No. of Attributes\t");
-                    filewriter.write("sdAttributes\t");
-                    filewriter.write(sdAttributes+"\t"); 
-                    filewriter.write("-\n");
-
-                    filewriter.write("16\t");
-                    filewriter.write("No. of Instances\t");
-                    filewriter.write("sdInstances\t");
-                    filewriter.write(sdInstances+"\t");
-                    filewriter.write("-\n");
-
-                    filewriter.write("17\t");
-                    filewriter.write("Second Dataset\t");
-                    filewriter.write("sPFileData\t");
-                    filewriter.write(sPFileData+"\t");
-                    filewriter.write("-\n");
-
-                    filewriter.write("18\t");
-                    filewriter.write("No. of Attributes\t");
-                    filewriter.write("sdPAttributes\t");
-                    filewriter.write(sdPAttributes+"\t");
-                    filewriter.write("-\n");
-
-                    filewriter.write("19\t");
-                    filewriter.write("No. of Instances\t");
-                    filewriter.write("sdPInstances\t");
-                    filewriter.write(sdPInstances+"\t");
-                    filewriter.write("-\n");
-                }
-
-                filewriter.close();
-            %>
-
-            <table>
-                <tr>
-                    <td>
-                        <h2>LSSVR:</h2>
-                    </td>
-                    <td>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                    </td>
-                    <td>
-                        <font color="black" face="tahoma" size="2">
-                        <%
-                            out.println("Data already saved to "+file);
-                        %>
-                    </td>    
-                </tr>
-                <tr>
-                    <td>
-                        &nbsp;&nbsp;
-                    </td>
-                    <td>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                    </td>
-                    <td>
-                        &nbsp;&nbsp;
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        &nbsp;&nbsp;
-                    </td>
-                    <td>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </td>
-                    <td>
-                        <font color="blue" face="tahoma" size="3">
-                        <%
-                            out.println("<a href='javascript:history.back()'> BACK </a>");
-                        %>
-                    </td>
-                </tr>
-            </table>
-            --%>
-        <% } else if (VarLoadData != null) { %>
             <%
-                String filename = "Data_LSSVR.txt";
-                String file = application.getRealPath("/") + filename;
-                BufferedReader br = new BufferedReader(new FileReader(file));
-                String line = null;
-                int j;
-            %>
+            /*
+            out.println("<p>");
+            out.println("VarSaveData = "+VarSaveData);
+            out.println("VarLoadData = "+VarLoadData);
+            out.println("VarReportData = "+VarReportData);
+            out.println("VarNext = "+VarNext);
+            */
+            %> 
+                
+        <% if (VarSaveData != null) { %>
 
-            <table>
-                <tr>
-                    <td>
-                        <h2>LSSVR:</h2>
-                    </td>
-                    <td>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                    </td>
-                    <td>
-                        <font color="black" face="tahoma" size="2">
-                        <%
-                            out.println("Data already loaded from "+file);
-                        %>
-                    </td>    
-                </tr>
-                <tr>
-                    <td>
-                        &nbsp;&nbsp;
-                    </td>
-                    <td>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                    </td>
-                    <td>
-                        &nbsp;&nbsp;
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        &nbsp;&nbsp;
-                    </td>
-                    <td>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </td>
-                    <td>
-                        <font color="blue" face="tahoma" size="3">
-                        <%
-                            out.println("<a href='javascript:history.back()'> BACK </a>");
-                        %>
-                    </td>
-                </tr>
-            </table>
+        <% } else if (VarLoadData != null) { %>
                     
         <% } else if (VarReportData != null) { %>
             <%
@@ -1429,8 +997,8 @@
 
                 nValueC = Float.parseFloat(snValueC);
                 nValueS = Float.parseFloat(snValueS);
-                dHoldOut = Float.parseFloat(sdHoldOut);
-                dCrossValidation = Float.parseFloat(sdCrossValidation);
+                //dHoldOut = Float.parseFloat(sdHoldOut);
+                //dCrossValidation = Float.parseFloat(sdCrossValidation);
 
                 nDFAttributes = Float.parseFloat(snDFAttributes);
                 nDFInstances = Float.parseFloat(snDFInstances);
@@ -1473,14 +1041,12 @@
                         <td>3</td>
                         <td>Hold-Out (%)</td>
                         <td>dHoldOut</td>
-                        <td><%=dHoldOut%></td>
                         <td>-</td>
                     </tr>
                     <tr>
                         <td>4</td>
                         <td>Cross-Validation (%)</td>
                         <td>dCrossValidation</td>
-                        <td><%=dCrossValidation%></td>
                         <td>-</td>
                     </tr>
                     
@@ -1643,8 +1209,6 @@
                 <%
                     nValueC = Float.parseFloat(snValueC);
                     nValueS = Float.parseFloat(snValueS);
-                    dHoldOut = Float.parseFloat(sdHoldOut);
-                    dCrossValidation = Float.parseFloat(sdCrossValidation);
                     
                     if (PRadio.equals("PRadio1"))
                     {
@@ -1704,7 +1268,7 @@
                 <input type="hidden" name="sLearningFileName" id="sLearningFileName" value="<%=sLearningFileName%>"/>
                 <input type="hidden" name="sPredictionFileName" id="sPredictionFileName" value="<%=sPredictionFileName%>"/>
                 
-                <input type="hidden" name="sFileName" id="sFileData" value="<%=sFileData%>"/>
+                <input type="hidden" name="sFileData" id="sFileData" value="<%=sFileData%>"/>
                 <input type="hidden" name="sdAttributes" id="sdAttributes" value="<%=sdAttributes%>"/>
                 <input type="hidden" name="sdInstances" id="sdInstances" value="<%=sdInstances%>"/>
 
@@ -1732,7 +1296,6 @@
                 <input type="hidden" name="vpath" id="vpath" value="<%=vpath%>"/>
                 <input type="hidden" name="vfile" id="vfile" value="<%=vfile%>"/>
 
-                <input type="hidden" name="sHasil" id="sHasil" value="<%=sHasil%>"/>
                 <input type="hidden" name="sPageControl" id="sPageControl" value="<%=sPageControl%>"/>
 
                 <br>
@@ -3683,12 +3246,6 @@
                             <% } else { %> 
                                 <%--> End of sViewProceed + Click on button RUN <--%>
                                 <%
-                                /*
-                                out.println("<p>");
-                                out.println("sHasil = "+sHasil);
-                                out.println("<br>");
-                                */
-                                if (sHasil!="") {
                                     /*
                                     out.println("sBaseFileName = "+sBaseFileName);
                                     out.println("<br>");
@@ -3824,8 +3381,6 @@
                                         /*
                                         out.println("sRunReportTable = "+sRunReportTable);
                                         out.println("<br>");
-                                        out.println("sHasil = "+sHasil);
-                                        out.println("<br>");
                                         out.println("sBaseFileName = "+sBaseFileName);
                                         out.println("<br>");
                                         */
@@ -3835,7 +3390,6 @@
                                         </script>
                                         <%
                                     } 
-                                }
                             }
                         }
                     }
@@ -4597,263 +4151,6 @@
                     <% //#1 displaying input data: 
                     if (sLoadingDataExcelClick != "") { 
                     %>
-                    <%-->
-                    <table>
-                        <tr>
-                            <td>
-                                &nbsp;
-                            </td>
-                            <td>
-                                <b> Run Data: </b>
-                            </td>
-                            <td>&nbsp;</td>
-                            <td>
-                                <a onclick="return closesummarydata2();">
-                                    <img src="Icon-2ArrowLeft.png" alt="..." width="11" height="17">
-                                </a>
-                            </td>
-                            <td>
-                                1.
-                            </td>
-                            <td>
-                                Hyperparameters:
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                                <%
-                                nf.setMaximumFractionDigits(2);
-                                nf.setMinimumFractionDigits(2);
-                                %>
-                                Value of C = <%=nf.format(nValueC)%>
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                                <%
-                                nf.setMaximumFractionDigits(2);
-                                nf.setMinimumFractionDigits(2);
-                                %>
-                                Value of Sigma = <%=nf.format(nValueS)%>
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>
-                                2.
-                            </td>
-                            <td>
-                                Analysis Option:
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                                <%
-                                nf.setMaximumFractionDigits(2);
-                                nf.setMinimumFractionDigits(2);
-                                %>
-                                Hold-out = <%=nf.format(dHoldOut)%> (%)
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                                <%
-                                nf.setMaximumFractionDigits(2);
-                                nf.setMinimumFractionDigits(2);
-                                %>
-                                 Cross-validation = <%=nf.format(dCrossValidation)%> (folds)
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>
-                                3.
-                            </td>
-                            <td>
-                                Normalization Method:
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                                <%
-                                sNormalRadio = "...";
-                                if (NormalRadio.equals("NormalRadio1")) {
-                                    sNormalRadio = "Original value";
-                                }
-                                else if (NormalRadio.equals("NormalRadio2")) {
-                                    sNormalRadio = "Feature scaling";
-                                }
-                                %>
-                                <%=sNormalRadio%>
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>
-                                4.
-                            </td>
-                            <td>
-                                Purpose:
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                                 <%
-                                sPRadio = "...";
-                                if (PRadio.equals("PRadio1")) {
-                                    sPRadio = "Evaluation";
-                                    sDummy = "Dataset : ";
-                                }
-                                else if (PRadio.equals("PRadio2")) {
-                                    sPRadio = "Prediction";
-                                    sDummy = "Learning Dataset : ";
-                                    sFileData = sLearningFileName;
-                                    dAttributes = snLDFAttributes;
-                                    dInstances = snLDFInstances; 
-                                    sPDummy = "Prediction Dataset : ";
-                                    sPFileData = sPredictionFileName;
-                                    dPAttributes = snPDFAttributes;
-                                    dPInstances = snPDFInstances;
-                                    sVariation = "5";
-                                }
-                                %>
-                                <%=sPRadio%>
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>
-                                5.
-                            </td>
-                            <td>
-                                Test Option:
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                                <%
-                                sTORadio = "...";
-                                nf.setMaximumFractionDigits(0);
-                                nf.setMinimumFractionDigits(0);
-                                if (TORadio.equals("TORadio1")) {
-                                    sTORadio = "Use learning dataset";
-                                    if (PRadio.equals("PRadio1")) {
-                                        sDummy = "Dataset : ";
-                                        sFileData = sFileName;
-                                        dAttributes = snDFAttributes; 
-                                        dInstances = snDFInstances; 
-                                        sVariation = "1";
-                                    }
-                                    else if (PRadio.equals("PRadio2")) {
-                                        sTORadio = "-";
-                                    }
-                                }
-                                else if (TORadio.equals("TORadio2")) {
-                                    sTORadio = "Hold-out "+nf.format(dHoldOut)+" (%)";
-                                    if (PRadio.equals("PRadio1")) {
-                                        sDummy = "Dataset : ";
-                                        sFileData = sFileName;
-                                        dAttributes = snDFAttributes;
-                                        dInstances = snDFInstances;
-                                        sVariation = "2";
-                                    }
-                                    else if (PRadio.equals("PRadio2")) {
-                                        sTORadio = "-";
-                                    }
-                                }
-                                else if (TORadio.equals("TORadio3")) {
-                                    sTORadio = "Cross-validation "+nf.format(dCrossValidation)+" (folds)";
-                                    if (PRadio.equals("PRadio1")) {
-                                        sDummy = "Dataset : ";
-                                        sFileData = sFileName;
-                                        dAttributes = snDFAttributes;
-                                        dInstances = snDFInstances;
-                                        sVariation = "3";
-                                    }
-                                    else if (PRadio.equals("PRadio2")) {
-                                        sTORadio = "-";
-                                    }
-                                }
-                                else if (TORadio.equals("TORadio4")) {
-                                    sTORadio = "Use test dataset";
-                                    if (PRadio.equals("PRadio1")) {
-                                        sDummy = "Dataset : ";
-                                        sFileData = sFileName;
-                                        dAttributes = snDFAttributes;
-                                        dInstances = snDFInstances;
-                                        sPDummy = "Test Dataset : ";
-                                        sPFileData = sTestFileName;
-                                        dPAttributes = snTDFAttributes;
-                                        dPInstances = snTDFInstances; 
-                                        sVariation = "4";
-                                    }
-                                    else if (PRadio.equals("PRadio2")) {
-                                        sTORadio = "-";
-                                    }
-                                } 
-                                %>
-                                <%=sTORadio%>
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                                 <b> Run variation # <%=sVariation%> </b>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="7">
-                                &nbsp;&nbsp;&nbsp;
-                            </td>
-                        </tr>
-                    </table>
-
-                    <table>
-                        <tr>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                                <%=sDummy%> <%=sFileData%> 
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                                No. of Attributes = <%=nf.format(Double.parseDouble(dAttributes))%>  
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                                 No. of Instances = <%=nf.format(Double.parseDouble(dInstances))%>  
-                            </td>
-                        </tr>
-                        <tr>
-                            <%if (sVariation == "4" || sVariation == "5") {%>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                                <%=sPDummy%> <%=sPFileData%> 
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                                No. of Attributes = <%=nf.format(Double.parseDouble(dPAttributes))%>  
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>
-                                 No. of Instances = <%=nf.format(Double.parseDouble(dPInstances))%>  
-                            </td>
-                            <%}%>
-                        </tr>
-                    </table>
-                    <--%>
 
                     <% //#3 displaying test dataset 
                     } else if (sLoadingDataExcelClick3 != "") {  
@@ -5576,37 +4873,31 @@
                                     String[][] datatemp3 = new String[2021][19];
 
                                     // first block
-                                    //if (sVariation == "3" || sVariation == "8") { 
+                                    line = br.readLine();
+                                    cols = line.split("\\t");
+                                    j=0;
+                                    while (stemp == "1") {
+                                        for (i = 0; i < 8; i += 1) {
+                                            datatemp2[j][i]=cols[i];
+                                        }
+                                        j=j+1;
+                                        if (j == BestFold) {
+                                            datatemp[0][0]=cols[0];
+                                            datatemp[0][1]=cols[1];
+                                            datatemp[0][2]=cols[2];
+                                            datatemp[0][3]=cols[3];
+                                            datatemp[0][4]=cols[4];
+                                            datatemp[0][5]=cols[5];
+                                            datatemp[0][6]=cols[6];
+                                            datatemp[0][7]=cols[7];
+                                        }
                                         line = br.readLine();
                                         cols = line.split("\\t");
-                                        j=0;
-                                        while (stemp == "1") {
-                                            for (i = 0; i < 8; i += 1) {
-                                                datatemp2[j][i]=cols[i];
-                                            }
-                                            j=j+1;
-                                            if (j == BestFold) {
-                                                datatemp[0][0]=cols[0];
-                                                datatemp[0][1]=cols[1];
-                                                datatemp[0][2]=cols[2];
-                                                datatemp[0][3]=cols[3];
-                                                datatemp[0][4]=cols[4];
-                                                datatemp[0][5]=cols[5];
-                                                datatemp[0][6]=cols[6];
-                                                datatemp[0][7]=cols[7];
-                                            }
-                                            line = br.readLine();
-                                            cols = line.split("\\t");
-                                            ncol = cols.length;
-                                            if (ncol != 8) {
-                                                stemp="0";      //to exit loop 
-                                            }
-                                        } 
-                                    //} 
-                                    //else {
-                                    //    j=0;
-                                    //}
-                                    %>
+                                        ncol = cols.length;
+                                        if (ncol != 8) {
+                                            stemp="0";      //to exit loop 
+                                        }
+                                    } %>
 
                                     <center>
                                         <div> 
@@ -5709,6 +5000,7 @@
                                     line = br.readLine(); 
                                     cols = line.split("\\t");
                                     ncol = cols.length;
+                                    ncol2 = ncol;
                                     jj=0;
                                     while (line != null && stemp == "1") {
                                         cols = line.split("\\t");
@@ -5778,7 +5070,8 @@
 
                             <div id="PGraph" class="tab-pane fade in"> 
                                 <div class="edittab">
-                                    Fold No.:&nbsp;
+                                    <label><input type="checkbox" name="TDCheck" id="TDCheck1" value="TDCheck1" onclick="fTDCheckBox(1);" checked>&nbsp;&nbsp;Fold No.:&nbsp;</label>
+                                    <%-->Fold No.:&nbsp;<--%>
                                     <a href="#PG1">1</a>
                                     <%if (sVariation == "3" || sVariation == "8") { %>
                                         <span class="glyphicon glyphicon-minus"></span> 
@@ -5961,7 +5254,8 @@
 
                             <div id="PTGraph" class="tab-pane fade in">
                                 <div class="edittab">
-                                    Fold No.:&nbsp;
+                                    <label><input type="checkbox" name="TDCheck" id="TDCheck1" value="TDCheck1" onclick="fTDCheckBox(1);" checked>&nbsp;&nbsp;Fold No.:&nbsp;</label>
+                                    <%-->Fold No.:&nbsp;<--%>
                                     <a href="#PT1">1</a>
                                     <%if (sVariation == "3" || sVariation == "8") { %>
                                         <span class="glyphicon glyphicon-minus"></span> 
