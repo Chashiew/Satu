@@ -704,95 +704,6 @@
                 return refreshform(0);
             }
 
-            function viewsummarydata5() {
-                //tanpa sBaseNameCO
-                
-                var sLoadingDataSet1 = document.getElementById("sLoadingDataSet1");
-                sLoadingDataSet1 = "";
-                document.getElementById("sLoadingDataSet1").value = sLoadingDataSet1;
-                var sLoadingDataSet2 = document.getElementById("sLoadingDataSet2");
-                sLoadingDataSet2 = "";
-                document.getElementById("sLoadingDataSet2").value = sLoadingDataSet2;
-                var sLoadingDataSet3 = document.getElementById("sLoadingDataSet3");
-                sLoadingDataSet3 = "";
-                document.getElementById("sLoadingDataSet3").value = sLoadingDataSet3;
-                var sLoadingDataSet4 = document.getElementById("sLoadingDataSet4");
-                sLoadingDataSet4 = "";
-                document.getElementById("sLoadingDataSet4").value = sLoadingDataSet4;
-                var sLoadingDataSet5 = document.getElementById("sLoadingDataSet5");
-                sLoadingDataSet5 = "";
-                document.getElementById("sLoadingDataSet5").value = sLoadingDataSet5;
-
-                var sLoadingDataExcel = document.getElementById("sLoadingDataExcel");
-                sLoadingDataExcel = "";
-                document.getElementById("sLoadingDataExcel").value = sLoadingDataExcel;
-
-                //to un-hide summary data
-                var sLoadingDataExcelClick = document.getElementById("sLoadingDataExcelClick");
-                sLoadingDataExcelClick = "";
-                document.getElementById("sLoadingDataExcelClick").value = sLoadingDataExcelClick;
-                    var sLoadingDataExcelClick3 = document.getElementById("sLoadingDataExcelClick3");
-                    sLoadingDataExcelClick3 = "";
-                    document.getElementById("sLoadingDataExcelClick3").value = sLoadingDataExcelClick3;
-                var sLoadingDataExcelClick4 = document.getElementById("sLoadingDataExcelClick4");
-                sLoadingDataExcelClick4 = "";
-                document.getElementById("sLoadingDataExcelClick4").value = sLoadingDataExcelClick4;
-                    var sLoadingDataExcelClick5 = document.getElementById("sLoadingDataExcelClick5");
-                    sLoadingDataExcelClick5 = "5";
-                    document.getElementById("sLoadingDataExcelClick5").value = sLoadingDataExcelClick5;
-                var sLoadingDataExcelClick6 = document.getElementById("sLoadingDataExcelClick6");
-                sLoadingDataExcelClick6 = "";
-                document.getElementById("sLoadingDataExcelClick6").value = sLoadingDataExcelClick6;
-                
-                document.getElementById("sRunReportTable").value = "0";
-
-                return refreshform(0);
-            }
-
-            function viewsummarydata6() {
-                //tanpa sBaseNameCO
-                var sLoadingDataSet1 = document.getElementById("sLoadingDataSet1");
-                sLoadingDataSet1 = "";
-                document.getElementById("sLoadingDataSet1").value = sLoadingDataSet1;
-                var sLoadingDataSet2 = document.getElementById("sLoadingDataSet2");
-                sLoadingDataSet2 = "";
-                document.getElementById("sLoadingDataSet2").value = sLoadingDataSet2;
-                var sLoadingDataSet3 = document.getElementById("sLoadingDataSet3");
-                sLoadingDataSet3 = "";
-                document.getElementById("sLoadingDataSet3").value = sLoadingDataSet3;
-                var sLoadingDataSet4 = document.getElementById("sLoadingDataSet4");
-                sLoadingDataSet4 = "";
-                document.getElementById("sLoadingDataSet4").value = sLoadingDataSet4;
-                var sLoadingDataSet5 = document.getElementById("sLoadingDataSet5");
-                sLoadingDataSet5 = "";
-                document.getElementById("sLoadingDataSet5").value = sLoadingDataSet5;
-
-                var sLoadingDataExcel = document.getElementById("sLoadingDataExcel");
-                sLoadingDataExcel = "";
-                document.getElementById("sLoadingDataExcel").value = sLoadingDataExcel;
-
-                //to un-hide summary data
-                var sLoadingDataExcelClick = document.getElementById("sLoadingDataExcelClick");
-                sLoadingDataExcelClick = "";
-                document.getElementById("sLoadingDataExcelClick").value = sLoadingDataExcelClick;
-                    var sLoadingDataExcelClick3 = document.getElementById("sLoadingDataExcelClick3");
-                    sLoadingDataExcelClick3 = "";
-                    document.getElementById("sLoadingDataExcelClick3").value = sLoadingDataExcelClick3;
-                var sLoadingDataExcelClick4 = document.getElementById("sLoadingDataExcelClick4");
-                sLoadingDataExcelClick4 = "";
-                document.getElementById("sLoadingDataExcelClick4").value = sLoadingDataExcelClick4;
-                    var sLoadingDataExcelClick5 = document.getElementById("sLoadingDataExcelClick5");
-                    sLoadingDataExcelClick5 = "";
-                    document.getElementById("sLoadingDataExcelClick5").value = sLoadingDataExcelClick5;
-                var sLoadingDataExcelClick6 = document.getElementById("sLoadingDataExcelClick6");
-                sLoadingDataExcelClick6 = "6";
-                document.getElementById("sLoadingDataExcelClick6").value = sLoadingDataExcelClick6;
-                
-                document.getElementById("sRunReportTable").value = "0";
-
-                return refreshform(0);
-            }
-
             function closesummarydata2() {
                 var sBaseFileNameCO = document.getElementById("sBaseFileNameCO");
 
@@ -2296,151 +2207,7 @@
                                                     </td>
                                                 </tr>
                                             <% } %>
-                                            <tr>
-                                                <td colspan="7">
-                                                    &nbsp;
-                                                </td>
-                                            </tr> 
-
-                                            <%
-                                            /*
-                                            out.println("<p>");
-                                            out.println("sResult01Name = " + sResult01Name);
-                                            out.println("<br>");
-                                            out.println("sResult03Name = " + sResult03Name);
-                                            out.println("<br>");
-                                            out.println("sResult04Name = " + sResult04Name);
-                                            out.println("<br>");
-                                            out.println("sResult05Name = " + sResult05Name);
-                                            out.println("<br>");
-                                            */
-
-                                            if (sResult01Name!="") {
-                                            String file = "";
-                                            file = sResult01Name; 
-                                            BufferedReader br = new BufferedReader(new FileReader(file));
-                                            String line = null;
-                                            int i;
-                                            int j;
-
-                                            // first line: title
-                                            line = br.readLine();
-                                            if (line == null) {
-                                                out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
-                                            } else {
-                                                cols = line.split("\\t"); %>
-                                                <tr>
-                                                    <td> &nbsp; </td>
-                                                    <td>
-                                                        <b>Output:</b>
-                                                    </td>
-                                                    <td> &nbsp; </td>
-                                                    <td align="right"> Performance &nbsp; = &nbsp; </td>
-                                                    <td>
-                                                        <"text" size="10" value="<%=cols[0]%>" readonly>
-                                                    </td>
-                                                    <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                                                    <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbspinput type=;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                                                </tr> 
-                                                <tr>
-                                                    <td> &nbsp; </td>
-                                                    <td> &nbsp; </td>
-                                                    <td> &nbsp; </td>
-                                                    <td align="right"> Penalty Parameter, C &nbsp; = &nbsp; </td>
-                                                    <td>
-                                                        <input type="text" size="10" value="<%=cols[1]%>" readonly>
-                                                    </td>
-                                                    <td> &nbsp; </td>
-                                                    <td> &nbsp; </td>
-                                                </tr> 
-                                                <tr>
-                                                    <td> &nbsp; </td>
-                                                    <td> &nbsp; </td>
-                                                    <td> &nbsp; </td>
-                                                    <td align="right"> Kernel Function Parameter, S &nbsp; = &nbsp; </td>
-                                                    <td>
-                                                        <input type="text" size="10" value="<%=cols[2]%>" readonly>
-                                                    </td>
-                                                    <td> &nbsp; </td>
-                                                    <td> &nbsp; </td>
-                                                </tr> 
-                                            <% }
-                                            br.close(); %>
-
-                                            <tr>
-                                                <td colspan="7">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="7">&nbsp;</td>
-                                            </tr>
-                                            <% } %>
                                         </table>
-
-                                        <table>
-                                            <tr>
-                                                <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                                                <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                                                <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                                                <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                                            <%
-                                            if (sResult02Name!="") {
-                                            String file = "";
-                                            file = sResult02Name; 
-                                            BufferedReader br = new BufferedReader(new FileReader(file)); 
-                                            String line = null;
-                                            int i;
-                                            int j;
-
-                                            // first line: title
-                                            line = br.readLine(); 
-                                            if (line == null) { 
-                                                out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
-                                            } else {
-                                                cols = line.split("\\t");
-                                                ncol = cols.length;
-
-                                                for (j=0; j<ncol; j++) {
-                                                    sDummy = cols[j];
-                                                    %>
-                                                        <td>
-                                                            <%=sDummy%>
-                                                        </td>
-                                                        <td> &nbsp;&nbsp; </td>
-                                                <% } %>
-                                            <% } %>
-                                                <td> &nbsp; </td>
-                                                <td> &nbsp; </td>
-                                            </tr> 
-                                            <% 
-                                            line = br.readLine();
-                                            while (line != null) { %>
-                                                <tr>
-                                                    <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
-                                                    <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
-                                                    <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
-                                                    <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
-                                                <%
-                                                cols = line.split("[,\\t]+");
-                                                for (j=0; j<ncol; j++) {
-                                                    sDummy = cols[j];
-                                                    %>
-                                                        <td align="right">
-                                                            <%=sDummy%>
-                                                        </td>
-                                                        <td> &nbsp;&nbsp; </td>
-                                                <% } %>
-                                                </tr>
-                                                <% line = br.readLine();
-                                            } %>
-                                            <% br.close(); %> 
-                                            <tr>
-                                                <td colspan="6"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
-                                            </tr>
-                                            <tr>
-                                                <td colspan="6"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> 
-                                            <% } %>
-                                            </tr>
-                                        </table>    
 
                                         <% if (sResult05Name != "") { %>
                                             <table>
@@ -3277,59 +3044,58 @@
                                                 </script>
 
                                                 <jsp:include page="SFALSSVRServlet">
-                                                        <jsp:param name="nFireFlies" value="<%=nFireFlies%>" />
-                                                        <jsp:param name="nMaxGeneration" value="<%=nMaxGeneration%>" />
-                                                        <jsp:param name="dMinBeta" value="<%=dMinBeta%>" />
-                                                        <jsp:param name="dGamma" value="<%=dGamma%>" />
-                                                        <jsp:param name="dAlpha" value="<%=dAlpha%>" />
-                                                        <jsp:param name="dAIWeight" value="<%=dAIWeight%>" />
-                                                        <jsp:param name="dTau" value="<%=dTau%>" />
-                                                        <jsp:param name="dBPotential" value="<%=dBPotential%>" />
-                                                        <jsp:param name="dC1" value="<%=dC1%>" />
-                                                        <jsp:param name="dC2" value="<%=dC2%>" />
-                                                        <jsp:param name="dS1" value="<%=dS1%>" />
-                                                        <jsp:param name="dS2" value="<%=dS2%>" />
-                                                        <jsp:param name="dTrainingPS" value="<%=dTrainingPS%>" />
-                                                        <jsp:param name="dValidationPS" value="<%=dValidationPS%>" />
-                                                        <jsp:param name="dTotalSize" value="<%=dTotalSize%>" />
-                                                        <jsp:param name="nLastChange1" value="<%=nLastChange1%>" />
-                                                        <jsp:param name="nLastChange2" value="<%=nLastChange2%>" />
-                                                        <jsp:param name="dHoldOut" value="<%=dHoldOut%>" />
-                                                        <jsp:param name="dCrossValidation" value="<%=dCrossValidation%>" />
+                                                    <jsp:param name="vpath" value="<%=vpath%>" />
+                                                    <jsp:param name="vfile" value="<%=vfile%>" />
+                                                    <jsp:param name="nFireFlies" value="<%=nFireFlies%>" />
+                                                    <jsp:param name="nMaxGeneration" value="<%=nMaxGeneration%>" />
+                                                    <jsp:param name="dMinBeta" value="<%=dMinBeta%>" />
+                                                    <jsp:param name="dGamma" value="<%=dGamma%>" />
+                                                    <jsp:param name="dAlpha" value="<%=dAlpha%>" />
+                                                    <jsp:param name="dAIWeight" value="<%=dAIWeight%>" />
+                                                    <jsp:param name="dTau" value="<%=dTau%>" />
+                                                    <jsp:param name="dBPotential" value="<%=dBPotential%>" />
+                                                    <jsp:param name="dC1" value="<%=dC1%>" />
+                                                    <jsp:param name="dC2" value="<%=dC2%>" />
+                                                    <jsp:param name="dS1" value="<%=dS1%>" />
+                                                    <jsp:param name="dS2" value="<%=dS2%>" />
+                                                    <jsp:param name="dTrainingPS" value="<%=dTrainingPS%>" />
+                                                    <jsp:param name="dValidationPS" value="<%=dValidationPS%>" />
+                                                    <jsp:param name="dTotalSize" value="<%=dTotalSize%>" />
+                                                    <jsp:param name="nLastChange1" value="<%=nLastChange1%>" />
+                                                    <jsp:param name="nLastChange2" value="<%=nLastChange2%>" />
+                                                    <jsp:param name="dHoldOut" value="<%=dHoldOut%>" />
+                                                    <jsp:param name="dCrossValidation" value="<%=dCrossValidation%>" />
 
-                                                        <jsp:param name="dNormalRadio" value="<%=dNormalRadio%>" />
-                                                        <jsp:param name="dOptimRadio" value="<%=dOptimRadio%>" />
-                                                        <jsp:param name="dSCRadio" value="<%=dSCRadio%>" />
-                                                        <jsp:param name="dPRadio" value="<%=dPRadio%>" />
-                                                        <jsp:param name="dTORadio" value="<%=dTORadio%>" />
+                                                    <jsp:param name="dNormalRadio" value="<%=dNormalRadio%>" />
+                                                    <jsp:param name="dOptimRadio" value="<%=dOptimRadio%>" />
+                                                    <jsp:param name="dSCRadio" value="<%=dSCRadio%>" />
+                                                    <jsp:param name="dPRadio" value="<%=dPRadio%>" />
+                                                    <jsp:param name="dTORadio" value="<%=dTORadio%>" />
 
-                                                        <jsp:param name="sVariation" value="<%=sVariation%>" />
+                                                    <jsp:param name="sVariation" value="<%=sVariation%>" />
 
-                                                        <jsp:param name="dAttributes" value="<%=dAttributes%>" />
-                                                        <jsp:param name="dInstances" value="<%=dInstances%>" />
+                                                    <jsp:param name="dAttributes" value="<%=dAttributes%>" />
+                                                    <jsp:param name="dInstances" value="<%=dInstances%>" />
 
-                                                        <jsp:param name="dPAttributes" value="<%=dPAttributes%>" />
-                                                        <jsp:param name="dPInstances" value="<%=dPInstances%>" />
+                                                    <jsp:param name="dPAttributes" value="<%=dPAttributes%>" />
+                                                    <jsp:param name="dPInstances" value="<%=dPInstances%>" />
 
-                                                        <jsp:param name="sFileData" value="<%=sFileData%>" />
-                                                        <jsp:param name="sPFileData" value="<%=sPFileData%>" />
+                                                    <jsp:param name="sFileData" value="<%=sFileData%>" />
+                                                    <jsp:param name="sPFileData" value="<%=sPFileData%>" />
 
-                                                        <jsp:param name="sReportFileName" value="<%=sReportFileName%>" />
-                                                        <jsp:param name="sReportFileNameTXT" value="<%=sReportFileNameTXT%>" />
+                                                    <jsp:param name="sReportFileName" value="<%=sReportFileName%>" />
+                                                    <jsp:param name="sReportFileNameTXT" value="<%=sReportFileNameTXT%>" />
 
-                                                        <jsp:param name="vpath" value="<%=vpath%>" />
-                                                        <jsp:param name="vfile" value="<%=vfile%>" />
-
-                                                        <jsp:param name="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
-                                                        <jsp:param name="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
-                                                        <jsp:param name="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
-                                                        <jsp:param name="sResult04Name" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" />
-                                                        <jsp:param name="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
-                                                        <jsp:param name="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
-                                                        <jsp:param name="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
-                                                        <jsp:param name="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
-                                                        <jsp:param name="sResult05Name" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" />
-                                                        <jsp:param name="sResult06Name" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" />
+                                                    <jsp:param name="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
+                                                    <jsp:param name="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
+                                                    <jsp:param name="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
+                                                    <jsp:param name="sResult04Name" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" />
+                                                    <jsp:param name="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
+                                                    <jsp:param name="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
+                                                    <jsp:param name="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
+                                                    <jsp:param name="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
+                                                    <jsp:param name="sResult05Name" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" />
+                                                    <jsp:param name="sResult06Name" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" />
                                                 </jsp:include> 	
                                             <% } %>
                                         <% } %>
@@ -3468,166 +3234,11 @@
                                         <% } 
                                     }
                                 }
-                            } 
-                            else if ((int)Double.parseDouble(sRunReportTable) == 2) {
+                            } else if ((int)Double.parseDouble(sRunReportTable) == 2) {
 
                             } else if ((int)Double.parseDouble(sRunReportTable) == 3) { 
-                                if (sRRTShow != "") { %> 
-                                    <script>
-                                        var sfilefileResult04 = document.getElementById("sfilefileResult04");
-                                    </script>
-                                    <%
-                                        if (sResult04 != "") {
-                                            sfilefileResult04 = application.getRealPath("/") + sResult04;
-                                            sResult04Name=sfilefileResult04; 
-                                        }
-                                        else {
-                                            sfilefileResult04 = sResult04Name;
-                                        }
-                                    %>
-                                    <script>
-                                        var sResult04Name = document.getElementById("sResult04Name");
-                                        document.getElementById("sResult04Name").value = sResult04Name;
-                                    </script>
-                                    <%
-                                        /*
-                                        out.println("<p>");
-                                        out.println("sReportFile = " + sReportFile);
-                                        out.println("sfilefile = " + sfilefile);
-                                        out.println("sReportFileName = " + sReportFileName);
-                                        out.println("<br>");
-                                        */
-                                    %>
-
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                &nbsp;
-                                            </td>
-                                            <td>
-                                                <b> Summary: </b>
-                                            </td>
-                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                            <td colspan="8">
-                                            <input type="text" name="sResult04Name" id="sResult04Name" size="75" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" readonly/>
-                                            <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
-                                            <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
-                                            <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
-                                            <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
-                                            <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
-                                            <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
-                                            <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
-                                            <input type="hidden" name="sResult05Name" id="sResult05Name" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" />
-                                            <input type="hidden" name="sResult06Name" id="sResult06Name" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" />
-                                            <input type="hidden" name="sBaseFileName" id="sBaseFileName" value="<%=sBaseFileName%>">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="11">&nbsp;</td>
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                            <td>
-                                                <b> Output: </b>
-                                            </td>
-                                            <td>&nbsp;</td>
-                                            <th>RMSE Learning</th>
-                                            <td>&nbsp;</td>
-                                            <th>RMSE Test</th>
-                                            <td>&nbsp;</td>
-                                            <th>MAE Learning</th>
-                                            <td>&nbsp;</td>
-                                            <th>MAE Test</th>
-                                            <td>&nbsp;</td>
-                                            <th>MAPE Learning</th>
-                                            <td>&nbsp;</td>
-                                            <th>MAPE Test</th>
-                                            <td>&nbsp;</td>
-                                            <th>R Learning</th>
-                                            <td>&nbsp;</td>
-                                            <th>R Test</th>
-                                        </tr>
-
-                                        <%
-                                        if (sResult04Name != "") {
-                                        String file = ""; 
-                                        file = sResult04Name;
-                                        BufferedReader br = new BufferedReader(new FileReader(file));
-                                        String line = null;
-                                        int i;
-                                        int j;
-
-                                        // first line: title
-                                        line = br.readLine();
-                                        if (line == null) {
-                                            out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
-                                        } else {
-                                            cols = line.split("\\t"); 
-                                            ncol = cols.length;
-                                        } 
-
-                                        line = br.readLine();
-                                        while (line != null) { %>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <%
-                                                cols = line.split("[,\\t]+");
-                                                for (j=0; j<ncol; j++) {
-                                                    sDummy = cols[j];
-                                                    %>
-                                                        <td align="right">
-                                                            <%=sDummy%>
-                                                        </td>
-                                                        <td> &nbsp;&nbsp; </td>
-                                                <% } %>
-                                            </tr>
-                                            <% line = br.readLine();
-                                        }
-                                        br.close();
-                                        } %>
-                                    </table>
-                                <% } else { %>
-                                    <script> var sCreate = document.getElementById("sCreate"); 
-                                        sCreate = "";
-                                        document.getElementById("sCreate").value = sCreate; 
-                                    </script>
-
-                                <table><tr>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                    <td>
-                                        <b> Summary: </b>
-                                    </td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td>
-                                        <input type="file" name="sResult04" id="sResult04"/>
-                                    </td>
-                                    <td>
-                                        &nbsp;<input type="text" name="sResult04Name" id="sResult04Name" size="60" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" readonly/>
-                                        <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
-                                        <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
-                                        <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
-                                        <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
-                                        <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
-                                        <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
-                                        <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
-                                        <input type="hidden" name="sResult05Name" id="sResult05Name" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" />
-                                        <input type="hidden" name="sResult06Name" id="sResult06Name" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" />
-                                    </td>
-                                    <td>
-                                        &nbsp;&nbsp; - - - 
-                                        <a onclick="return showsummaryreport(3);">
-                                        <font color="blue" face="tahoma" size="2">
-                                        <u><b>OPEN</b></u></font></a>
-                                        <font color="black" face="tahoma" size="2">the report.
-                                        </font>
-                                    </td>
-                                </tr></table>
-                                <% } %>
-                            <% } else if ((int)Double.parseDouble(sRunReportTable) == 4) {
+                                
+                            } else if ((int)Double.parseDouble(sRunReportTable) == 4) {
                                 if (sRRTShow != "") { %> 
                                     <script>
                                         var sfilefileResult05 = document.getElementById("sfilefileResult05");
@@ -5420,85 +5031,72 @@
                             <script>
                                 window.scrollTo(0,document.getElementById("view").offsetTop);
                             </script>    
-                            <% //#6 displaying header
-                            } else { 
-                            %>
-
                             <% } %>
-                                    
-                            <!--<table>
-                                <tr>
-                                    <td>
-                                        <div title="GoTo Next Page" class="container boundary" onclick="changetab(2)">
-                                            <font color='blue' size="4" face="Palatino Linotype, Book Antiqua, Palatino, serif">II. View the Results</font>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>-->
                         </div>
                                 
                         <% if (sPageControl.equals("2")) { %>
-                        <div id="results" class="tab-pane fade in active">
+                            <div id="results" class="tab-pane fade in active">
                         <% } else { %>
-                        <div id="results" class="tab-pane fade in">
+                            <div id="results" class="tab-pane fade in">
                         <% } %>
-                            <table>
-                                <tr>
-                                    <td style="width: 10%">
-                                        <a onclick="return previousscreen();" style="float:left;">
-                                            <font color="blue" face="agency FB" size="3">
-                                            &nbsp;&nbsp;&nbsp;<b><u><< BACK</u></b>
-                                            </font>
-                                        </a>                            
-                                    </td>
-                                </tr>
-                            </table> 
+                        
+                        <table>
+                            <tr>
+                                <td style="width: 10%">
+                                    <a onclick="return previousscreen();" style="float:left;">
+                                        <font color="blue" face="agency FB" size="3">
+                                        &nbsp;&nbsp;&nbsp;<b><u><< BACK</u></b>
+                                        </font>
+                                    </a>                            
+                                </td>
+                            </tr>
+                        </table> 
                             
-                            <table>
-                                <tr>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td>
-                                        <%--><div title="Go to previous page" onclick="changetab(1)"><--%>
-                                        <div title="View the previous page" onclick="changetab(1)">
-                                            <%--><h3><u><i><font face="Palatino Linotype, Book Antiqua, Palatino, serif">I. Input Data Review and Run</font></i></u></h3><--%>
-                                            <h3><font color="skyblue" face="Palatino Linotype, Book Antiqua, Palatino, serif">Input Data Review and Run</font></h3>
-                                        </div>
-                                    </td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td>
-                                        <h3><span class="glyphicon glyphicon-bookmark"></span></h3>
-                                    </td>
-                                    <td>&nbsp;&nbsp;</td>
-                                    <td>
-                                        <div>
-                                            <%--><h3><font face="Palatino Linotype, Book Antiqua, Palatino, serif">II. The Results</font></h3><--%>
-                                            <h3><b><font face="Palatino Linotype, Book Antiqua, Palatino, serif">The Results</font></b></h3>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                            <br>
-                            <ul class="nav nav-pills nav-justified" style="background-color: lavender;">
-                                <li class="active"><a data-toggle="tab" href="#Main" id="Menu">Output Table</a></li>
-                                <li><a data-toggle="tab" href="#PGraph">Prediction Graph</a></li>
-                                <li><a data-toggle="tab" href="#PTGraph">Performance Trajectory Graph</a></li>
-                                <li><a data-toggle="tab" href="#TPGraph">Tracing Path Graph</a></li>
-                            </ul>
-                            <br>
+                        <table>
+                            <tr>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td>
+                                    <%--><div title="Go to previous page" onclick="changetab(1)"><--%>
+                                    <div title="View the previous page" onclick="changetab(1)">
+                                        <%--><h3><u><i><font face="Palatino Linotype, Book Antiqua, Palatino, serif">I. Input Data Review and Run</font></i></u></h3><--%>
+                                        <h3><font color="skyblue" face="Palatino Linotype, Book Antiqua, Palatino, serif">Input Data Review and Run</font></h3>
+                                    </div>
+                                </td>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td>
+                                    <h3><span class="glyphicon glyphicon-bookmark"></span></h3>
+                                </td>
+                                <td>&nbsp;&nbsp;</td>
+                                <td>
+                                    <div>
+                                        <%--><h3><font face="Palatino Linotype, Book Antiqua, Palatino, serif">II. The Results</font></h3><--%>
+                                        <h3><b><font face="Palatino Linotype, Book Antiqua, Palatino, serif">The Results</font></b></h3>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <br>
+                        <ul class="nav nav-pills nav-justified" style="background-color: lavender;">
+                            <li class="active"><a data-toggle="tab" href="#Main" id="Menu">Output Table</a></li>
+                            <li><a data-toggle="tab" href="#PGraph">Prediction Graph</a></li>
+                            <li><a data-toggle="tab" href="#PTGraph">Performance Trajectory Graph</a></li>
+                            <li><a data-toggle="tab" href="#TPGraph">Tracing Path Graph</a></li>
+                        </ul>
+                        <br>
                             <div class="tab-content">
                                 <div id="Main" class="tab-pane fade in active">
-                                    <a href="#Optimum">Best optimum hyperparameters</a>
+                                    <a href="#Optimum">Optimum hyperparameters</a>
                                     <span class="glyphicon glyphicon-minus"></span>
-                                    <a href="#Partition">Performance of data partitions</a>
+                                    <a href="#Partition">Performance</a>
                                     <span class="glyphicon glyphicon-minus"></span>
                                     <a href="#Report">Analysis report</a>
                                     <span class="glyphicon glyphicon-minus"></span>
-                                    <a href="#Performance">Test data and prediction</a>
+                                    <a href="#Performance">Data and prediction</a>
                                     <br>
                                     <br>
                                     <br>
                                     <center>
-                                        <font size="4" id="Optimum">Main results - Best optimum hyperparameters</font>
+                                        <font size="4" id="Optimum">Main results - Best optimum hyperparameters; </font>
                                         <a href="#Partition"><span class="glyphicon glyphicon-menu-right"></span></a>
                                         <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                         <br>
@@ -5565,16 +5163,12 @@
                                         </tr></table></div></center> 
                                     <% } %> 
                                                     
-                                    <br>
                                     <br> 
                                     <center>
-                                        <font size="4" id="Partition">Optimum hyperparameters; Performance of training and validation partitions of learning data</font>
-                                        <a href="#Optimum"><span class="glyphicon glyphicon-menu-left"></span></a> 
-                                        <a href="#Report"><span class="glyphicon glyphicon-menu-right"></span></a> 
-                                        <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a> 
+                                        <font size="4">Optimum hyperparameters</font>
                                         <br>
                                     </center>
-                                    <br>
+                                    <br> 
                                     
                                     <% File b = new File(sResult02Name);
                                     String[][] datatemp2 = new String[21][9];
@@ -5640,15 +5234,23 @@
                                             </center> 
                                             <br>
 
-                                            <%if (sVariation == "3" || sVariation == "8") { 
-                                                line = br.readLine();
-                                                line = br.readLine();
-                                                line = br.readLine();
-                                                line = br.readLine();
-                                                line = br.readLine();
-                                            } else { 
-                                                line = br.readLine();
-                                            } 
+                                            <br> 
+                                            <center>
+                                                <font size="4" id="Partition">Performance of learning and test data</font>
+                                                <a href="#Optimum"><span class="glyphicon glyphicon-menu-left"></span></a> 
+                                                <a href="#Report"><span class="glyphicon glyphicon-menu-right"></span></a> 
+                                                <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a> 
+                                                <br>
+                                            </center>
+                                            <br>
+                                    
+                                            <%
+                                            line = br.readLine();
+                                            line = br.readLine();
+                                            line = br.readLine();
+                                            line = br.readLine();
+                                            line = br.readLine();
+                                                
                                             cols = line.split("\\t");
                                             stemp="1"; 
                                             j=0;
@@ -5677,6 +5279,48 @@
                                             }
                                             %>
                                             <center>
+                                                <div> 
+                                                    <table>
+                                                        <tr>
+                                                            <td align="center">Fold No.</td>
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center">RMSE Learning</td>
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center">RMSE Test</td> 
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center">MAE Learning</td> 
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center">MAE Test</td> 
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center">MAPE Learning</td> 
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center">MAPE Test</td> 
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center">R Learning</td> 
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center">R Test</td> 
+                                                        </tr> 
+                                                        <% for (i = 0; i < j; i += 1) { %>
+                                                            <tr>
+                                                            <td align="center"><%=(i+1)%></td>
+                                                            <td>&nbsp;</td>
+                                                            <td align="center"><%=datatemp2[i][0]%></td>
+                                                            <% for (ii = 1; ii < 8; ii += 1) { %>
+                                                                <td>&nbsp;</td>
+                                                                <td align="center"><%=datatemp2[i][ii]%></td> 
+                                                            <% } %>
+                                                            </tr>
+                                                        <% } %>
+                                                    </table> 
+                                                </div> 
+                                            </center> 
+                                            <br>
+                                                    
+                                            <center>
+                                                <font size="4">Performance of training and validation partitions of learning data</font>
+                                                <br>
+                                                <br>
+                                        
                                                 <div> 
                                                     <table>
                                                         <tr>
@@ -5776,23 +5420,12 @@
                                     <br>
                                     <br>
                                     <center>
-                                        <font size="4" id="Performance">Performance of learning and test data; Test data and predicted values of the best fold</font> 
+                                        <font size="4" id="Performance">Test data with predicted values of the best fold</font> 
                                         <a href="#Report"><span class="glyphicon glyphicon-menu-left"></span></a> 
                                         <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a> 
                                         <br>
                                     </center>
                                     <br>
-                                    
-                                    <%
-                                        /*
-                                        out.println("sResult02Name = "+sResult02Name);
-                                        out.println("<br>");
-                                        */
-                                        /*
-                                        out.println("line = "+line);
-                                        out.println("<br>");
-                                        */
-                                    %>
                                     
                                     <% File d = new File(sResult04Name);
                                     if (sResult04Name != "" && d.exists() && !d.isDirectory()) {  
@@ -5803,65 +5436,63 @@
                                         int i;
                                         int j;
                                         int ii;
+                                        int ncol24;
                                         
                                         stemp="1"; //initial value
                                         i=1;
                                         ii=1;
-                                        String[][] datatemp = new String[1021][9];
+                                        String[][] datatemp = new String[200][19];
+                                        String[][] datatemp24 = new String[200][19];
 
                                         // first block
-                                        if (sVariation == "3" || sVariation == "8") { 
+                                        line = br.readLine();
+                                        cols = line.split("\\t");
+                                        ncol = cols.length;
+                                        ncol24=ncol;
+                                        j=0;
+                                        while (stemp == "1") {
+                                            for (i = 0; i < ncol; i += 1) {
+                                                datatemp24[j][i]=cols[i];
+                                            }
+                                            j=j+1;
                                             line = br.readLine();
                                             cols = line.split("\\t");
-                                            j=0;
-                                            while (stemp == "1") {
-                                                for (i = 0; i < 8; i += 1) {
-                                                    datatemp2[j][i]=cols[i];
-                                                }
-                                                j=j+1;
-                                                line = br.readLine();
-                                                cols = line.split("\\t");
-                                                ncol = cols.length;
-                                                if (ncol != 8) {
-                                                    stemp="0";      //to exit loop 
-                                                }
-                                            } 
+                                            ncol = cols.length;
+                                            if (ncol != ncol24) {
+                                                stemp="0";      //to exit loop 
+                                            }
                                         } 
-                                        else {
-                                            j=0;
-                                        }
                                         %>
 
                                         <center>
                                             <div> 
                                                 <table>
                                                     <tr>
-                                                        <td align="center">Fold No.</td>
+                                                        <td align="center">Data No.</td>
+                                                        <% if (PRadio.equals("PRadio1")) { %> 
+                                                            <% for (ii = 1; ii < ncol24-1; ii += 1) { %>
+                                                                <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                                <td align="center">X<%=ii%></td> 
+                                                            <% } %> 
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center">Actual Y</td> 
+                                                        <% } else { %>
+                                                            <% for (ii = 1; ii < ncol24; ii += 1) { %>
+                                                                <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                                <td align="center">X<%=ii%></td> 
+                                                            <% } %> 
+                                                        <% } %> 
                                                         <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
-                                                        <td align="center">RMSE Learning</td>
-                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
-                                                        <td align="center">RMSE Test</td> 
-                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
-                                                        <td align="center">MAE Learning</td> 
-                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
-                                                        <td align="center">MAE Test</td> 
-                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
-                                                        <td align="center">MAPE Learning</td> 
-                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
-                                                        <td align="center">MAPE Test</td> 
-                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
-                                                        <td align="center">R Learning</td> 
-                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
-                                                        <td align="center">R Test</td> 
+                                                        <td align="center">Predicted Y</td> 
                                                     </tr> 
                                                     <% for (i = 0; i < j; i += 1) { %>
                                                         <tr>
                                                         <td align="center"><%=(i+1)%></td>
                                                         <td>&nbsp;</td>
-                                                        <td align="center"><%=datatemp2[i][0]%></td>
-                                                        <% for (ii = 1; ii < 8; ii += 1) { %>
+                                                        <td align="center"><%=datatemp24[i][0]%></td>
+                                                        <% for (ii = 1; ii < ncol24; ii += 1) { %>
                                                             <td>&nbsp;</td>
-                                                            <td align="center"><%=datatemp2[i][ii]%></td> 
+                                                            <td align="center"><%=datatemp24[i][ii]%></td> 
                                                         <% } %>
                                                         </tr>
                                                     <% } %>
@@ -5873,24 +5504,33 @@
                                         <% line = br.readLine();
                                         cols = line.split("\\t");
                                         ncol = cols.length;
+                                        ncol24=ncol;
                                         j=0;
-                                        while (line != null) {
-                                            cols = line.split("\\t");
-                                            for (i = 0; i < ncol; i += 1) {
+                                        stemp="1"; 
+                                        while (stemp == "1") {
+                                            for (i = 0; i < ncol24; i += 1) {
                                                 datatemp[j][i]=cols[i];
                                             }
                                             j=j+1;
                                             line = br.readLine();
-                                        } %>
+                                            cols = line.split("\\t");
+                                            ncol = cols.length;
+                                            if (ncol != ncol24) {
+                                                stemp="0";      //to exit loop 
+                                            }
+                                        } 
+                                        %>
                                         
-                                        <% br.close(); %>
-                                            
                                         <center>
+                                            <font size="4">Learning data with predicted values of the best fold</font>
                                             <div> 
                                                 <table>
                                                     <tr>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                    </tr> 
+                                                    <tr>
                                                         <td align="center">Data No.</td>
-                                                        <% for (ii = 1; ii < ncol-1; ii += 1) { %>
+                                                        <% for (ii = 1; ii < ncol24-1; ii += 1) { %>
                                                             <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
                                                             <td align="center">X<%=ii%></td> 
                                                         <% } %> 
@@ -5904,7 +5544,59 @@
                                                         <td align="center"><%=(i+1)%></td>
                                                         <td>&nbsp;</td>
                                                         <td align="center"><%=datatemp[i][0]%></td>
-                                                        <% for (ii = 1; ii < ncol; ii += 1) { %>
+                                                        <% for (ii = 1; ii < ncol24; ii += 1) { %>
+                                                            <td>&nbsp;</td>
+                                                            <td align="center"><%=datatemp[i][ii]%></td> 
+                                                        <% } %>
+                                                        </tr>
+                                                    <% } %>
+                                                </table> 
+                                            </div> 
+                                        </center>
+                                        <br>
+                                                    
+                                        <% line = br.readLine();
+                                        cols = line.split("\\t");
+                                        j=0;
+                                        stemp="1"; 
+                                        while (stemp == "1") {
+                                            for (i = 0; i < ncol24; i += 1) {
+                                                datatemp[j][i]=cols[i];
+                                            }
+                                            j=j+1;
+                                            line = br.readLine();
+                                            cols = line.split("\\t");
+                                            ncol = cols.length;
+                                            if (ncol != ncol24) {
+                                                stemp="0";      //to exit loop 
+                                            }
+                                        } 
+                                        %>
+                                        
+                                        <center>
+                                            <font size="4">Validation partition of learning data with predicted values of the best fold</font>
+                                            <div> 
+                                                <table>
+                                                    <tr>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                    </tr> 
+                                                    <tr>
+                                                        <td align="center">Data No.</td>
+                                                        <% for (ii = 1; ii < ncol24-1; ii += 1) { %>
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center">X<%=ii%></td> 
+                                                        <% } %> 
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                        <td align="center">Actual Y</td> 
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                        <td align="center">Predicted Y</td> 
+                                                    </tr> 
+                                                    <% for (i = 0; i < j; i += 1) { %>
+                                                        <tr>
+                                                        <td align="center"><%=(i+1)%></td>
+                                                        <td>&nbsp;</td>
+                                                        <td align="center"><%=datatemp[i][0]%></td>
+                                                        <% for (ii = 1; ii < ncol24; ii += 1) { %>
                                                             <td>&nbsp;</td>
                                                             <td align="center"><%=datatemp[i][ii]%></td> 
                                                         <% } %>
@@ -5913,7 +5605,57 @@
                                                 </table> 
                                             </div> 
                                         </center> 
+                                        <br>
                                                     
+                                        <% line = br.readLine();
+                                        cols = line.split("\\t");
+                                        j=0;
+                                        while (line != null) {
+                                            for (i = 0; i < ncol24; i += 1) {
+                                                datatemp[j][i]=cols[i];
+                                            }
+                                            j=j+1;
+                                            line = br.readLine();
+                                            if (line != null) {
+                                                cols = line.split("\\t");
+                                            }
+                                        } 
+                                        %>
+                                        
+                                        <% br.close(); %>
+                                            
+                                        <center>
+                                            <font size="4">Training partition of learning data with predicted values of the best fold</font>
+                                            <div> 
+                                                <table>
+                                                    <tr>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                    </tr> 
+                                                    <tr>
+                                                        <td align="center">Data No.</td>
+                                                        <% for (ii = 1; ii < ncol24-1; ii += 1) { %>
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center">X<%=ii%></td> 
+                                                        <% } %> 
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                        <td align="center">Actual Y</td> 
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                        <td align="center">Predicted Y</td> 
+                                                    </tr> 
+                                                    <% for (i = 0; i < j; i += 1) { %>
+                                                        <tr>
+                                                        <td align="center"><%=(i+1)%></td>
+                                                        <td>&nbsp;</td>
+                                                        <td align="center"><%=datatemp[i][0]%></td>
+                                                        <% for (ii = 1; ii < ncol24; ii += 1) { %>
+                                                            <td>&nbsp;</td>
+                                                            <td align="center"><%=datatemp[i][ii]%></td> 
+                                                        <% } %>
+                                                        </tr>
+                                                    <% } %>
+                                                </table> 
+                                            </div> 
+                                        </center> 
                                     <% } else { %>  
                                         <center><div><table><tr>
                                             <td align="center">
@@ -5926,19 +5668,19 @@
                                 <div id="PGraph" class="tab-pane fade in"> 
                                     <div class="edittab">
                                         <label><input type="checkbox" name="TDCheck" id="TDCheck1" value="TDCheck1" onclick="fTDCheckBox(1);" checked>&nbsp;</label>
-                                        <a href="#TPDataset">Training partition data</a>
-                                        <span class="glyphicon glyphicon-minus"></span> 
-                                        <a href="#VPDataset">Validation partition data</a>
+                                        <a href="#TDataset">Test data</a>
                                         <span class="glyphicon glyphicon-minus"></span> 
                                         <a href="#LDataset">Learning data</a>
                                         <span class="glyphicon glyphicon-minus"></span> 
-                                        <a href="#TDataset">Test data</a>
+                                        <a href="#VPDataset">Validation partition data</a>
+                                        <span class="glyphicon glyphicon-minus"></span> 
+                                        <a href="#TPDataset">Training partition data</a>
                                     </div>
                                     <br>
                                     <br>
                                     <center>
-                                        <font size="4" id="TPDataset">Predicted values of training partition from learning data</font>
-                                        <a href="#VPDataset"><span class="glyphicon glyphicon-menu-right"></span></a> 
+                                        <font size="4" id="TDataset">Predicted values of test data</font>
+                                        <a href="#LDataset"><span class="glyphicon glyphicon-menu-right"></span></a> 
                                         <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a> 
                                         <br>
                                     </center>
@@ -6014,9 +5756,9 @@
                                     <br>
                                     <br>
                                     <center>
-                                        <font size="4" id="VPDataset">Predicted values of validation partition from learning data</font>
-                                        <a href="#TPDataset"><span class="glyphicon glyphicon-menu-left"></span></a>
-                                        <a href="#LDataset"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                        <font size="4" id="LDataset">Predicted values of learning data</font>
+                                        <a href="#TDataset"><span class="glyphicon glyphicon-menu-left"></span></a>
+                                        <a href="#VPDataset"><span class="glyphicon glyphicon-menu-right"></span></a>
                                         <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                         <br>
                                     </center>
@@ -6092,9 +5834,9 @@
                                     <br>
                                     <br>
                                     <center>
-                                        <font size="4" id="LDataset">Predicted values of learning data</font>
-                                        <a href="#VPDataset"><span class="glyphicon glyphicon-menu-left"></span></a>
-                                        <a href="#TDataset"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                        <font size="4" id="VPDataset">Predicted values of validation partition from learning data</font>
+                                        <a href="#LDataset"><span class="glyphicon glyphicon-menu-left"></span></a>
+                                        <a href="#TPDataset"><span class="glyphicon glyphicon-menu-right"></span></a>
                                         <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                         <br>
                                     </center>
@@ -6166,8 +5908,8 @@
                                     <br>
                                     <br>
                                     <center>
-                                        <font size="4" id="TDataset">Predicted values of test data</font>
-                                        <a href="#LDataset"><span class="glyphicon glyphicon-menu-left"></span></a>
+                                        <font size="4" id="TPDataset">Predicted values of training partition from learning data</font>
+                                        <a href="#VPDataset"><span class="glyphicon glyphicon-menu-left"></span></a>
                                         <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                         <br>
                                     </center>
@@ -6295,16 +6037,6 @@
                                             j=0;
                                             while (line != null && stemp=="1") {
                                                 cols = line.split("\\t");
-                                                /*
-                                                out.println("<p>");
-                                                out.println("j = "+j);
-                                                out.println("datatemp[j][0] = "+datatemp[j][0]);
-                                                out.println("cols[0] = "+cols[0]);
-                                                out.println("cols[1] = "+cols[1]);
-                                                out.println("cols[2] = "+cols[2]);
-                                                out.println("cols[3] = "+cols[3]);
-                                                */
-                                                //else if (datatemp[j-1][0] == cols[0]) {
                                                 nNilai2 = (int)Double.parseDouble(cols[0]); 
                                                 if (j==0) {
                                                     for (i = 0; i < ncol; i += 1) {
@@ -6614,6 +6346,7 @@
                                 </div>
                             </div>
                           
+                            <br>
                             <br>
                             <center id="bottomform2">
                                 <button type="button" onclick="" class="btn btn-primary">Save</button>
