@@ -46,4 +46,4 @@ Mean absolute error (learning) [unit]:		 0.2427
 Mean absolute percentage error (learning) [%]:	 19.31 
 Correlation coefficient (learning):		 0.9814 
 ============================================================= 
-Total time [s]:					 1.05 
+Total time [s]:					 1.18 

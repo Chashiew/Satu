@@ -353,6 +353,10 @@ public class SFALSSVRServlet extends HttpServlet {
         String sResult02Name = request.getParameter("sResult02Name");
         String sResult03Name = request.getParameter("sResult03Name");
         String sResult04Name = request.getParameter("sResult04Name");
+        String sResult04aName = request.getParameter("sResult04aName");
+        String sResult04bName = request.getParameter("sResult04bName");
+        String sResult04cName = request.getParameter("sResult04cName");
+        String sResult04dName = request.getParameter("sResult04dName");
         String sResult05Name = request.getParameter("sResult05Name");
         String sResult06Name = request.getParameter("sResult06Name");
         

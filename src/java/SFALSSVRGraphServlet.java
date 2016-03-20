@@ -1,12 +1,8 @@
-/*
+/* @author JDK
+ *
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- */
-
-/**
- *
- * @author JDK
  */
 
 import java.io.IOException;
@@ -34,7 +30,7 @@ import com.mathworks.toolbox.javabuilder.MWNumericArray;
 import com.mathworks.toolbox.javabuilder.webfigures.WebFigure;
 import com.mathworks.toolbox.javabuilder.webfigures.WebFigureHtmlGenerator;
 
-import ProgramSFALSSVRGraph.SFALSSVRGraphClass;
+import ProgramNiMOPSGraph.NiMOPSGraphClass;
 
 public class SFALSSVRGraphServlet extends HttpServlet {
     /**
@@ -49,13 +45,13 @@ public class SFALSSVRGraphServlet extends HttpServlet {
     
     private static final long serialVersionUID = 1L;
 
-    private SFALSSVRGraphClass cWF = null;
+    private NiMOPSGraphClass cWF = null;
 
     public SFALSSVRGraphServlet() {
         super();
         try {
-            cWF = new SFALSSVRGraphClass();
-        } catch (MWException e) {
+            cWF = new NiMOPSGraphClass();
+        } catch (MWException e) { 
             e.printStackTrace();
         }
     }
@@ -78,8 +74,19 @@ public class SFALSSVRGraphServlet extends HttpServlet {
         */
         
         int nOption = Integer.parseInt(request.getParameter("opt"));
+        int GraphNo = Integer.parseInt(request.getParameter("GraphNo"));
 
-        if (nOption == 0) {
+        response.setContentType("text/html");
+        PrintWriter pw = response.getWriter();
+            
+        /*
+        pw.write("opt GraphNo = ");
+        pw.write("<input type='text' size='100' value='"+nOption+"' readonly>");
+        pw.write("<input type='text' size='100' value='"+GraphNo+"' readonly>");
+        pw.write("<br>");
+        */
+
+        if (nOption == 2) {
             //performance:
             
             int iOpt = 0;   //no need optimum point
@@ -89,6 +96,9 @@ public class SFALSSVRGraphServlet extends HttpServlet {
             double Xmax = -1000000.0;
             double Ymin = 1000000.0;
             double Ymax = -1000000.0;
+            
+            int XYRange = 1;
+            int bin = 0;    //not needed here
 
             //String sFileData = request.getParameter("sFileData");
             //String file = request.getSession().getServletContext().getRealPath("/") + sFileData;
@@ -96,19 +106,43 @@ public class SFALSSVRGraphServlet extends HttpServlet {
 
             String vpath = request.getParameter("vpath");
             String vfile = request.getParameter("vfile");
-            String file;
+            String file="";
+
+            /*
+            pw.write("vpath vfile = ");
+            pw.write("<input type='text' size='100' value='"+vpath+"' readonly>");
+            pw.write("<input type='text' size='100' value='"+vfile+"' readonly>");
+            pw.write("<br>");
+            */
+
+            double opt = 2;
+            
             if (vfile != "") {
-                file = vpath + vfile + "05.txt";
+                if (GraphNo == 31) {
+                    file = vpath + vfile + "04a.txt";
+                    opt = Double.parseDouble(request.getParameter("opt"));
+                } else if (GraphNo == 32) {
+                    file = vpath + vfile + "04b.txt";
+                    opt = Double.parseDouble(request.getParameter("opt"));
+                } else if (GraphNo == 33) {
+                    file = vpath + vfile + "04c.txt";
+                    opt = Double.parseDouble(request.getParameter("opt"));
+                } else if (GraphNo == 34) {
+                    file = vpath + vfile + "04d.txt";
+                    opt = Double.parseDouble(request.getParameter("opt"));
+                } else if (GraphNo == 35) {
+                    file = vpath + vfile + "04a.txt";
+                    opt = Double.parseDouble(request.getParameter("opt"));
+                }
             } else {
-                file = "Result05.txt";
+                file = "SFAR03Result04a.txt";
             }
             
             String line = null;
 
-            response.setContentType("text/html");
-            PrintWriter pw = response.getWriter();
             /*
-            pw.write("file = ");
+            pw.write("GraphNo file = ");
+            pw.write("<input type='text' size='100' value='"+GraphNo+"' readonly>");
             pw.write("<input type='text' size='100' value='"+file+"' readonly>");
             pw.write("<br>");
             */
@@ -129,24 +163,33 @@ public class SFALSSVRGraphServlet extends HttpServlet {
                     line = br.readLine();
                 }
                 br.close();
-
-                /*
-                pw.write("nCol = ");
-                pw.write("<input type='text' size='100' value='"+nCol+"' readonly>");
-                pw.write("<br>");
-                */
             }
             catch (Exception e) {
                 e.printStackTrace();
             }
 
+            /*
+            pw.write("nCol = ");
+            pw.write("<input type='text' size='100' value='"+nCol+"' readonly>");
+            pw.write("<br>");
+            */
+
             double[][] dataX = new double[nCol][1];
             double[][] dataY = new double[nCol][1];
-            double[][] dataYY = new double[nCol][1];
+            double[][] dataYY = new double[1][1];
 
-            double[][] dataXopt = new double[1][1];
-            double[][] dataYopt = new double[1][1];
+            double[][] dataXopt = new double[2][1];
+            double[][] dataYopt = new double[2][1];
             
+            double[][] dataX1 = new double[1][1];
+            double[][] dataY1 = new double[1][1];
+            double[][] dataX2 = new double[1][1];
+            double[][] dataY2 = new double[1][1];
+            double[][] dataX3 = new double[1][1];
+            double[][] dataY3 = new double[1][1];
+            
+            dataYY[0][0]=1.0;
+
             try {
                 BufferedReader br = new BufferedReader(new FileReader(file));
                 String sDummy;
@@ -154,29 +197,34 @@ public class SFALSSVRGraphServlet extends HttpServlet {
                 String[] cols;
                 int i;
                 int j;
+                int iXYMin;
+                int iXYMax;
 
                 line = br.readLine();
                 j=0;
                 while (line != null) {
                     cols = line.split("\\t");
 
-                    sDummy = cols[1];
+                    sDummy = cols[0];
                     dataX[j][0]=Double.parseDouble(sDummy);
 
-                    sDummy = cols[2];
+                    sDummy = cols[1];
                     dataY[j][0]=Double.parseDouble(sDummy);
-
-                    sDummy = cols[3];
-                    dataYY[j][0]=Double.parseDouble(sDummy);
 
                     if (Xmin > dataX[j][0]) Xmin = dataX[j][0];
                     if (Xmax < dataX[j][0]) Xmax = dataX[j][0];
 
-                    if (Ymin > dataY[j][0]) Ymin = dataY[j][0];
-                    if (Ymax < dataY[j][0]) Ymax = dataY[j][0];
+                    if (Xmin > dataY[j][0]) Xmin = dataY[j][0];
+                    if (Xmax < dataY[j][0]) Xmax = dataY[j][0];
 
-                    if (Ymin > dataYY[j][0]) Ymin = dataYY[j][0];
-                    if (Ymax < dataYY[j][0]) Ymax = dataYY[j][0];
+                    /*
+                    pw.write("cols[0] cols[1] Xmin Xmax = ");
+                    pw.write("<input type='text' size='100' value='"+cols[0]+"' readonly>");
+                    pw.write("<input type='text' size='100' value='"+cols[1]+"' readonly>");
+                    pw.write("<input type='text' size='100' value='"+Xmin+"' readonly>");
+                    pw.write("<input type='text' size='100' value='"+Xmax+"' readonly>");
+                    pw.write("<br>");
+                    */
 
                     j=j+1;
 
@@ -184,23 +232,42 @@ public class SFALSSVRGraphServlet extends HttpServlet {
                 }
                 br.close();
 
-                Xmin = Xmin - 1;
-                Xmax = Xmax + 1;
+                Xmin = Xmin;
+                Xmax = Xmax;
                 
-                Ymin = 0;
-                if (Ymax<25) Ymax = 25;
-                else if (Ymax<50) Ymax = 50;
-                else if (Ymax<75) Ymax = 75;
-                else if (Ymax<100) Ymax = 100;
-                else if (Ymax<125) Ymax = 125;
-                else if (Ymax<150) Ymax = 150;
-                else if (Ymax<200) Ymax = 200;
-                else if (Ymax<250) Ymax = 250;
-                else if (Ymax<300) Ymax = 300;
-                else if (Ymax<400) Ymax = 400;
-                else if (Ymax<500) Ymax = 500;
-                else if (Ymax<750) Ymax = 750;
-                else Ymax = 1000;
+                Ymin = Xmin;
+                Ymax = Xmax;
+                
+                iXYMin = (int) (Ymin);
+
+                /*
+                pw.write("Xmin Xmax iXYMin = ");
+                pw.write("<input type='text' size='100' value='"+Xmin+"' readonly>");
+                pw.write("<input type='text' size='100' value='"+Xmax+"' readonly>");
+                pw.write("<input type='text' size='100' value='"+iXYMin+"' readonly>");
+                pw.write("<br>");
+                */
+
+                if (iXYMin > Ymin) iXYMin = iXYMin - 1;
+                
+                iXYMax = (int) (Ymax);
+                XYRange = (iXYMax - iXYMin)/7;
+                iXYMax  = iXYMin + XYRange*7;
+                if (iXYMax < Ymax) {
+                    XYRange = XYRange + 1;
+                    iXYMax  = iXYMin + XYRange*7;
+                }
+                
+                dataXopt[0][0]=iXYMin; 
+                dataXopt[1][0]=iXYMax; 
+                dataYopt[0][0]=iXYMin;
+                dataYopt[1][0]=iXYMax;
+                
+                Xmin = iXYMin;
+                Xmax = iXYMax;
+
+                Ymin = iXYMin;
+                Ymax = iXYMax;
 
                 /*
                 pw.write("dataX[0][0] = ");
@@ -233,9 +300,6 @@ public class SFALSSVRGraphServlet extends HttpServlet {
                 e.printStackTrace();
             }
 
-            dataXopt[0][0]=0; 
-            dataYopt[0][0]=0;
-
             /*
              * Get the parameters and convert them to MWArray
              */
@@ -257,7 +321,6 @@ public class SFALSSVRGraphServlet extends HttpServlet {
             params[10] = new MWNumericArray(iOpt, MWClassID.DOUBLE);
             */
             
-            double opt = Double.parseDouble(request.getParameter("opt"));
             //dataX
             //dataY
             //dataYY
@@ -267,42 +330,46 @@ public class SFALSSVRGraphServlet extends HttpServlet {
             //Xmax
             //Ymin
             //Ymax
+            //bin
             //iOpt
             
             //try {
-            //    final SFALSSVRGraphClass m = new SFALSSVRGraphClass();
+            //    final NiMOPSGraphClass m = new NiMOPSGraphClass();
             
+            /**/
+            try {
+                Object results[] = cWF.ProgramNiMOPSGraph(1, vpath, vfile, opt,dataX,dataY,dataYY,dataXopt,dataYopt,dataX1,dataY1,dataX2,dataY2,dataX3,dataY3,Xmin,Xmax,Ymin,Ymax,bin,iOpt);
+
+                //try {
+                    //cWF.ProgramNiMOPSGraph(result, params);
+
                 try {
-                    Object results[] = cWF.ProgramSFALSSVRGraph(1, vpath, vfile, opt,dataX,dataY,dataYY,dataXopt,dataYopt,Xmin,Xmax,Ymin,Ymax,iOpt);
-                        
-                    //try {
-                        //cWF.ProgramSFALSSVRGraph(result, params);
-                        
-                    try {
-                        WebFigure webFig = (WebFigure) ((MWJavaObjectRef) results[0]).get();
-                        // Attach to application cache
-                        request.getSession().getServletContext().setAttribute(
-                            "NimopsFigure", webFig);
+                    WebFigure webFig = (WebFigure) ((MWJavaObjectRef) results[0]).get();
+                    // Attach to application cache
+                    request.getSession().getServletContext().setAttribute(
+                        "NimopsFigure", webFig);
 
-                        WebFigureHtmlGenerator htmlGen = new WebFigureHtmlGenerator(request);
+                    WebFigureHtmlGenerator htmlGen = new WebFigureHtmlGenerator(request);
 
-                        response.setContentType("text/html");
-                        pw.write(htmlGen.getFigureEmbedString(
-                            webFig,
-                            "NimopsFigure",
-                            "application",
-                            "640",
-                            "480",
-                            null));
-                        pw.close();
-                    } finally {
-                        MWArray.disposeArray(results);
-                    }
+                    response.setContentType("text/html");
+                    pw.write("center");
+                    pw.write(htmlGen.getFigureEmbedString(
+                        webFig,
+                        "NimopsFigure",
+                        "application",
+                        "640",
+                        "480",
+                        null));
+                    pw.write("/center");
+                    pw.close();
+                } finally {
+                    MWArray.disposeArray(results);
+                }
 
-                    //} catch (MWException e) {
-                    //    e.printStackTrace();
-                    //}
-                        
+                //} catch (MWException e) {
+                //    e.printStackTrace();
+                //}
+
                 //} finally {
                 //    cWF.dispose();
                 //}
@@ -310,6 +377,7 @@ public class SFALSSVRGraphServlet extends HttpServlet {
             } catch (MWException e) {
                 throw new ServletException(e);
             }
+            /**/
         }
         else {
             //tracing path:
@@ -335,9 +403,6 @@ public class SFALSSVRGraphServlet extends HttpServlet {
                 file = "Result06.txt";
             }
             String line = null;
-
-            response.setContentType("text/html");
-            PrintWriter pw = response.getWriter();
 
             try {
                 BufferedReader br = new BufferedReader(new FileReader(file));
@@ -366,6 +431,13 @@ public class SFALSSVRGraphServlet extends HttpServlet {
 
             double[][] dataXopt = new double[1][1];
             double[][] dataYopt = new double[1][1];
+            
+            double[][] dataX1 = new double[1][1];
+            double[][] dataY1 = new double[1][1];
+            double[][] dataX2 = new double[1][1];
+            double[][] dataY2 = new double[1][1];
+            double[][] dataX3 = new double[1][1];
+            double[][] dataY3 = new double[1][1];
             
             try {
                 BufferedReader br = new BufferedReader(new FileReader(file));
@@ -544,11 +616,11 @@ public class SFALSSVRGraphServlet extends HttpServlet {
             //iOpt
             
             try {
-                Object results[] = cWF.ProgramSFALSSVRGraph(1, vpath, vfile, opt,dataX,dataY,dataYY,dataXopt,dataYopt,Xmin,Xmax,Ymin,Ymax,iOpt);
+                Object results[] = cWF.ProgramNiMOPSGraph(1, vpath, vfile, opt,dataX,dataY,dataYY,dataXopt,dataYopt,dataX1,dataY1,dataX2,dataY2,dataX3,dataY3,Xmin,Xmax,Ymin,Ymax,iOpt);
                         
                 try {
                     
-                    //cWF.ProgramSFALSSVRGraph(result, params);
+                    //cWF.ProgramNiMOPSGraph(result, params);
                     
                     WebFigure webFig = (WebFigure) ((MWJavaObjectRef) results[0]).get();
                     // Attach to application cache

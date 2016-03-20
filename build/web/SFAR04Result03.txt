@@ -51,4 +51,4 @@ Mean absolute error (test) [unit]:		 0.2862
 Mean absolute percentage error (test) [%]:	 25.41 
 Correlation coefficient (test):			 0.9566 
 ============================================================= 
-Total time [s]:					 1.21 
+Total time [s]:					 1.03 
