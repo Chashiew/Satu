@@ -56,7 +56,8 @@
     String sLoadingDataFile = request.getParameter("sLoadingDataFile");
  
     int opt;
-                                                                
+    int GraphNo;
+    
     String sRunReportTable = request.getParameter("sRunReportTable");
     if (sRunReportTable == null) {
         sRunReportTable = "0";
@@ -1182,12 +1183,14 @@
             }
                         
             function changetab(val) {
-                if (val === 1)
-                {
+                if (val === 1) {
                     document.getElementById("sPageControl").value = "1";
                 }
-                else {
+                else if (val === 2) {
                     document.getElementById("sPageControl").value = "2";
+                }
+                else {
+                    document.getElementById("sPageControl").value = "3";
                 }
                 return refreshform(val);
             } 
@@ -1766,11 +1769,17 @@
                                     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                     <td>
                                         <%--><div title="Go to view the results directly!" onclick="changetab(2)"><--%>
-                                        <div title="View pre-computed results..." onclick="changetab(2)">
+                                        <div title="View pre-computed numerical results..." onclick="changetab(2)">
                                             <%--><h3><u><i><font face="Palatino Linotype, Book Antiqua, Palatino, serif">II. The Results</font></i></u></h3><--%>
-                                            <h3><font color="skyblue" face="Palatino Linotype, Book Antiqua, Palatino, serif">The Results</font></h3>
+                                            <h3><font color="skyblue" face="Palatino Linotype, Book Antiqua, Palatino, serif">Numerical Results</font></h3>
                                         </div>
                                     </td>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td>
+                                    <div title="View graphical results page" onclick="changetab(3)">
+                                        <h3><font color="skyblue" face="Palatino Linotype, Book Antiqua, Palatino, serif">Graphical Results</font></h3>
+                                    </div>
+                                </td>
                                 </tr>
                             </table>
                                             
@@ -2547,531 +2556,10 @@
                             } else if ((int)Double.parseDouble(sRunReportTable) == 3) { 
                                 
                             } else if ((int)Double.parseDouble(sRunReportTable) == 4) {
-                                if (sRRTShow != "") { %> 
-                                    <script>
-                                        var sfilefileResult05 = document.getElementById("sfilefileResult05");
-                                    </script>
-                                    <%
-                                        if (sResult05 != "") {
-                                            sfilefileResult05 = application.getRealPath("/") + sResult05;
-                                            sResult05Name=sfilefileResult05; 
-                                        }
-                                        else {
-                                            sfilefileResult05 = sResult05Name;
-                                        }
-                                    %>
-                                    <script>
-                                        var sResult05Name = document.getElementById("sResult05Name");
-                                        document.getElementById("sResult05Name").value = sResult05Name;
-                                    </script>
-                                    <%
-                                        /*
-                                        out.println("sReportFileName = " + sReportFileName);
-                                        out.println("<br>");
-                                        */
-                                    %>
+                            
+                            } else if ((int)Double.parseDouble(sRunReportTable) == 5) { 
 
-                                    <%
-                                    vpath = application.getRealPath("/");
-
-                                    vfile = sBaseFileNameCO;                  //+"01.txt";
-                                    if (vfile == "") {
-                                        vfile = "Result";
-                                    }
-                                    %>
-                                    <script> 
-                                        document.getElementById("vpath").value = vpath; 
-                                        document.getElementById("vfile").value = vfile; 
-                                    </script>
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                &nbsp;
-                                            </td>
-                                            <td>
-                                                <b> Graphic: </b>
-                                            </td>
-                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                            <td colspan="8">
-                                            <input type="text" name="sResult05Name" id="sResult05Name" size="75" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" readonly/>
-                                            <font color="teal" face="tahoma" size="2"> &nbsp; ...</font> 
-                                            <a onclick="return showsummaryreport(6);">
-                                                <font color="blue" face="tahoma" size="2"> <u>performance</u> </font> </a> &nbsp; 
-                                            <% if (PRadio.equals("PRadio1")) {
-                                                if (TORadio.equals("TORadio3")) { 
-                                                    %> <%--><font color="blue" face="tahoma" size="2"> <u>1</u> &nbsp;
-                                                    <u>2</u> &nbsp; <u>3</u> &nbsp; <u>4</u> &nbsp; <u>5</u> &nbsp;
-                                                    <u>6</u> &nbsp; <u>7</u> &nbsp; <u>8</u> &nbsp; <u>9</u> &nbsp;
-                                                    <u>10</u> &nbsp; </font> <--%>
-                                                <% } else {
-                                                    %> <%--><font color="blue" face="tahoma" size="2"> <u>1</u> &nbsp; </font> <--%>
-                                                <% }
-                                            } 
-                                            else {
-                                                %> <%--><font color="blue" face="tahoma" size="2"> <u>1</u> &nbsp; </font> <--%>
-                                            <% } %>
-                                                <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
-                                                <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
-                                                <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
-                                                <input type="hidden" name="sResult04Name" id="sResult04Name" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" />
-                                                <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
-                                                <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
-                                                <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
-                                                <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
-                                                <input type="hidden" name="sBaseFileName" id="sBaseFileName" value="<%=sBaseFileName%>">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                &nbsp;
-                                            </td>
-                                            <td>
-                                                &nbsp;
-                                            </td>
-                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                            <td colspan="8">
-                                            <input type="text" name="sResult06Name" id="sResult06Name" size="75" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" readonly/>
-                                            <font color="teal" face="tahoma" size="2"> &nbsp; ...</font> 
-                                            <a onclick="return showsummaryreport(5);">
-                                                <font color="blue" face="tahoma" size="2"> <u>tracing path</u> </font> </a>
-                                            <% if (PRadio.equals("PRadio1")) {
-                                                if (TORadio.equals("TORadio3")) { 
-                                                    %> <%--><font color="blue" face="tahoma" size="2"> &nbsp; <u>1</u> &nbsp; 
-                                                    <u>2</u> &nbsp; <u>3</u> &nbsp; <u>4</u> &nbsp; <u>5</u> &nbsp;
-                                                    <u>6</u> &nbsp; <u>7</u> &nbsp; <u>8</u> &nbsp; <u>9</u> &nbsp;
-                                                    <u>10</u> &nbsp; </font><--%>
-                                                <% } else {
-                                                    %> <%--><font color="blue" face="tahoma" size="2"> &nbsp; <u>1</u> &nbsp; </font><--%>
-                                                <% }
-                                            } 
-                                            else {
-                                                %> <%--><font color="blue" face="tahoma" size="2"> &nbsp; <u>1</u> &nbsp; </font><--%>
-                                            <% } %>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="11">&nbsp;</td>
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                            <td>
-                                                <b> Output: </b>
-                                            </td>
-                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                            <td>
-                                                <% // calling matlab graphic - performance
-                                                    opt = 0;
-                                                %>
-                                                <jsp:include page="SFALSSVRGraphServlet">
-                                                    <jsp:param name="opt" value="<%=opt%>" />
-                                                    <jsp:param name="dC1" value="<%=dC1%>" /> 
-                                                    <jsp:param name="dC2" value="<%=dC2%>" /> 
-                                                    <jsp:param name="dS1" value="<%=dS1%>" /> 
-                                                    <jsp:param name="dS2" value="<%=dS2%>" /> 
-
-                                                    <jsp:param name="vpath" value="<%=vpath%>" />
-                                                    <jsp:param name="vfile" value="<%=vfile%>" />
-                                                </jsp:include> 	
-                                            </td>
-                                        </tr>
-                                    </table>
-                                <% } else { %>
-                                    <script> var sCreate = document.getElementById("sCreate"); 
-                                        sCreate = "";
-                                        document.getElementById("sCreate").value = sCreate; 
-                                    </script>
-
-                                <table><tr>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                    <td>
-                                        <b> Graphic: </b>
-                                    </td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td>
-                                        <input type="file" name="sResult05" id="sResult05"/>
-                                    </td>
-                                    <td>
-                                        &nbsp;<input type="text" name="sResult05Name" id="sResult05Name" size="60" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" readonly/>
-                                        <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
-                                        <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
-                                        <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
-                                        <input type="hidden" name="sResult04Name" id="sResult04Name" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" />
-                                        <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
-                                        <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
-                                        <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
-                                        <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
-                                    </td>
-                                    <td>
-                                        &nbsp;&nbsp; - - - 
-                                        <a onclick="return showsummaryreport(4);">
-                                        <font color="blue" face="tahoma" size="2">
-                                        <u><b>VIEW</b></u></font></a>
-                                        <font color="black" face="tahoma" size="2">the graphs.
-                                        </font>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td>
-                                        <input type="file" name="sResult06" id="sResult06"/>
-                                    </td>
-                                    <td>
-                                        &nbsp;<input type="text" name="sResult06Name" id="sResult06Name" size="60" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" readonly/>
-                                    </td>
-                                </tr>
-                                </table>
-                                <% } %>
-                            <% } else if ((int)Double.parseDouble(sRunReportTable) == 5) { 
-                                if (sRRTShow != "") { %> 
-                                    <script>
-                                        var sResult06Name = document.getElementById("sResult06Name");
-                                    </script>
-                                    <%
-                                        /*
-                                        out.println("<p>");
-                                        out.println("sReportFile = " + sReportFile);
-                                        out.println("sfilefile = " + sfilefile);
-                                        out.println("sReportFileName = " + sReportFileName);
-                                        out.println("<br>");
-                                        */
-                                    %>
-
-                                    <%
-                                    vpath = application.getRealPath("/");
-
-                                    vfile = sBaseFileNameCO;                  //+"01.txt";
-                                    if (vfile == "") {
-                                        vfile = "Result";
-                                    }
-                                    %>
-
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                &nbsp;
-                                            </td>
-                                            <td>
-                                                <b> Graphic: </b>
-                                            </td>
-                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                            <td colspan="8">
-                                            <input type="text" name="sResult05Name" id="sResult05Name" size="75" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" readonly/>
-                                            <font color="teal" face="tahoma" size="2"> &nbsp; ...</font> 
-                                            <a onclick="return showsummaryreport(6);">
-                                                <font color="blue" face="tahoma" size="2"> <u>performance</u> </font> </a> &nbsp; 
-                                            <% if (PRadio.equals("PRadio1")) {
-                                                if (TORadio.equals("TORadio3")) { 
-                                                    %> <%--><font color="blue" face="tahoma" size="2"> <u>1</u> &nbsp;
-                                                    <u>2</u> &nbsp; <u>3</u> &nbsp; <u>4</u> &nbsp; <u>5</u> &nbsp;
-                                                    <u>6</u> &nbsp; <u>7</u> &nbsp; <u>8</u> &nbsp; <u>9</u> &nbsp;
-                                                    <u>10</u> &nbsp; </font> <--%>
-                                                <% } else {
-                                                    %> <%--><font color="blue" face="tahoma" size="2"> <u>1</u> &nbsp; </font> <--%>
-                                                <% }
-                                            } 
-                                            else {
-                                                %> <%--><font color="blue" face="tahoma" size="2"> <u>1</u> &nbsp; </font> <--%>
-                                            <% } %>
-                                            <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
-                                            <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
-                                            <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
-                                            <input type="hidden" name="sResult04Name" id="sResult04Name" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" />
-                                            <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
-                                            <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
-                                            <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
-                                            <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
-                                            <input type="hidden" name="sBaseFileName" id="sBaseFileName" value="<%=sBaseFileName%>">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                &nbsp;
-                                            </td>
-                                            <td>
-                                                &nbsp;
-                                            </td>
-                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                            <td colspan="8">
-                                            <input type="text" name="sResult06Name" id="sResult06Name" size="75" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" readonly/>
-                                            <font color="teal" face="tahoma" size="2"> &nbsp; ...</font> 
-                                            <a onclick="return showsummaryreport(5);">
-                                                <font color="blue" face="tahoma" size="2"> <u>tracing path</u> </font> </a>
-                                            <% if (PRadio.equals("PRadio1")) {
-                                                if (TORadio.equals("TORadio3")) { 
-                                                    %> <%--><font color="blue" face="tahoma" size="2"> &nbsp; <u>1</u> &nbsp; 
-                                                    <u>2</u> &nbsp; <u>3</u> &nbsp; <u>4</u> &nbsp; <u>5</u> &nbsp;
-                                                    <u>6</u> &nbsp; <u>7</u> &nbsp; <u>8</u> &nbsp; <u>9</u> &nbsp;
-                                                    <u>10</u> &nbsp; </font><--%>
-                                                <% } else {
-                                                    %> <%--><font color="blue" face="tahoma" size="2"> &nbsp; <u>1</u> &nbsp; </font><--%>
-                                                <% }
-                                            } 
-                                            else {
-                                                %> <%--><font color="blue" face="tahoma" size="2"> &nbsp; <u>1</u> &nbsp; </font><--%>
-                                            <% } %>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="11">&nbsp;</td>
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                            <td>
-                                                <b> Output: </b>
-                                            </td>
-                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                            <td>
-                                                <% // calling matlab graphic - performance
-                                                    opt = 1;
-                                                %>
-                                                <jsp:include page="SFALSSVRGraphServlet">
-                                                    <jsp:param name="opt" value="<%=opt%>" />
-                                                    <jsp:param name="dC1" value="<%=dC1%>" />
-                                                    <jsp:param name="dC2" value="<%=dC2%>" />
-                                                    <jsp:param name="dS1" value="<%=dS1%>" />
-                                                    <jsp:param name="dS2" value="<%=dS2%>" />
-
-                                                    <jsp:param name="vpath" value="<%=vpath%>" />
-                                                    <jsp:param name="vfile" value="<%=vfile%>" />
-                                                </jsp:include> 	
-                                            </td>
-
-                                        </tr>
-                                    </table>
-                                <% } else { %>
-                                    <script> var sCreate = document.getElementById("sCreate"); 
-                                        sCreate = "";
-                                        document.getElementById("sCreate").value = sCreate; 
-                                    </script>
-
-                                <table><tr>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                    <td>
-                                        <b> Graphic: </b>
-                                    </td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td>
-                                        <input type="file" name="sResult05" id="sResult05"/>
-                                    </td>
-                                    <td>
-                                        &nbsp;<input type="text" name="sResult05Name" id="sResult05Name" size="60" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" readonly/>
-                                        <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
-                                        <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
-                                        <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
-                                        <input type="hidden" name="sResult04Name" id="sResult04Name" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" />
-                                        <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
-                                        <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
-                                        <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
-                                        <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
-                                    </td>
-                                    <td>
-                                        &nbsp;&nbsp; - - - 
-                                        <a onclick="return showsummaryreport(4);">
-                                        <font color="blue" face="tahoma" size="2">
-                                        <u><b>VIEW</b></u></font></a>
-                                        <font color="black" face="tahoma" size="2">the graphs.
-                                        </font>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td>
-                                        <input type="file" name="sResult06" id="sResult06"/>
-                                    </td>
-                                    <td>
-                                        &nbsp;<input type="text" name="sResult06Name" id="sResult06Name" size="60" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" readonly/>
-                                    </td>
-                                </tr>
-                                </table>
-                                <% } %>
-                            <% } else if ((int)Double.parseDouble(sRunReportTable) == 6) { 
-                                if (sRRTShow != "") { %> 
-                                    <script>
-                                        var include = document.getElementById("sResult05Name");
-                                    </script>
-                                    <%
-                                        /*
-                                        out.println("<p>");
-                                        out.println("sReportFile = " + sReportFile);
-                                        out.println("sfilefile = " + sfilefile);
-                                        out.println("sReportFileName = " + sReportFileName);
-                                        out.println("<br>");
-                                        */
-                                    %>
-
-                                    <%
-                                    vpath = application.getRealPath("/");
-
-                                    vfile = sBaseFileNameCO;                  //+"01.txt";
-                                    if (vfile == "") {
-                                        vfile = "Result";
-                                    }
-                                    %>
-
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                &nbsp;
-                                            </td>
-                                            <td>
-                                                <b> Graphic: </b>
-                                            </td>
-                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                            <td colspan="8">
-                                            <input type="text" name="sResult05Name" id="sResult05Name" size="75" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" readonly/>
-                                            <font color="teal" face="tahoma" size="2"> &nbsp; ...</font> 
-                                            <a onclick="return showsummaryreport(6);">
-                                                <font color="blue" face="tahoma" size="2"> <u>performance</u> </font> </a> &nbsp; 
-                                            <% if (PRadio.equals("PRadio1")) {
-                                                if (TORadio.equals("TORadio3")) { 
-                                                    %> <%--><font color="blue" face="tahoma" size="2"> <u>1</u> &nbsp;
-                                                    <u>2</u> &nbsp; <u>3</u> &nbsp; <u>4</u> &nbsp; <u>5</u> &nbsp;
-                                                    <u>6</u> &nbsp; <u>7</u> &nbsp; <u>8</u> &nbsp; <u>9</u> &nbsp;
-                                                    <u>10</u> &nbsp; </font> <--%>
-                                                <% } else {
-                                                    %> <%--><font color="blue" face="tahoma" size="2"> <u>1</u> &nbsp; </font> <--%>
-                                                <% }
-                                            } 
-                                            else {
-                                                %> <%--><font color="blue" face="tahoma" size="2"> <u>1</u> &nbsp; </font> <--%>
-                                            <% } %>
-                                            <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
-                                            <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
-                                            <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
-                                            <input type="hidden" name="sResult04Name" id="sResult04Name" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" />
-                                            <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
-                                            <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
-                                            <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
-                                            <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
-                                            <input type="hidden" name="sBaseFileName" id="sBaseFileName" value="<%=sBaseFileName%>">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                &nbsp;
-                                            </td>
-                                            <td>
-                                                &nbsp;
-                                            </td>
-                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                            <td colspan="8">
-                                            <input type="text" name="sResult06Name" id="sResult06Name" size="75" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" readonly/>
-                                            <font color="teal" face="tahoma" size="2"> &nbsp; ...</font> 
-                                            <a onclick="return showsummaryreport(5);">
-                                                <font color="blue" face="tahoma" size="2"> <u>tracing path</u> </font> </a>
-                                            <% if (PRadio.equals("PRadio1")) {
-                                                if (TORadio.equals("TORadio3")) { 
-                                                    %> <%--><font color="blue" face="tahoma" size="2"> &nbsp; <u>1</u> &nbsp; 
-                                                    <u>2</u> &nbsp; <u>3</u> &nbsp; <u>4</u> &nbsp; <u>5</u> &nbsp;
-                                                    <u>6</u> &nbsp; <u>7</u> &nbsp; <u>8</u> &nbsp; <u>9</u> &nbsp;
-                                                    <u>10</u> &nbsp; </font><--%>
-                                                <% } else {
-                                                    %> <%--><font color="blue" face="tahoma" size="2"> &nbsp; <u>1</u> &nbsp; </font><--%>
-                                                <% }
-                                            } 
-                                            else {
-                                                %> <%--><font color="blue" face="tahoma" size="2"> &nbsp; <u>1</u> &nbsp; </font><--%>
-                                            <% } %>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="11">&nbsp;</td>
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                            <td>
-                                                <b> Output: </b>
-                                            </td>
-                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                            <td>
-                                                <% // calling matlab graphic - performance
-                                                    opt = 0;
-                                                %>
-                                                <jsp:include page="SFALSSVRGraphServlet">
-                                                    <jsp:param name="opt" value="<%=opt%>" />
-                                                    <jsp:param name="dC1" value="<%=dC1%>" />
-                                                    <jsp:param name="dC2" value="<%=dC2%>" />
-                                                    <jsp:param name="dS1" value="<%=dS1%>" />
-                                                    <jsp:param name="dS2" value="<%=dS2%>" />
-
-                                                    <jsp:param name="vpath" value="<%=vpath%>" />
-                                                    <jsp:param name="vfile" value="<%=vfile%>" />
-                                                </jsp:include> 	
-                                            </td>
-
-                                        </tr>
-                                    </table>
-                                <% } else { %>
-                                    <script> var sCreate = document.getElementById("sCreate"); 
-                                        sCreate = "";
-                                        document.getElementById("sCreate").value = sCreate; 
-                                    </script>
-
-                                <table><tr>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                    <td>
-                                        <b> Graphic: </b>
-                                    </td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td>
-                                        <input type="file" name="sResult05" id="sResult05"/>
-                                    </td>
-                                    <td>
-                                        &nbsp;<input type="text" name="sResult05Name" id="sResult05Name" size="60" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" readonly/>
-                                        <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
-                                        <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
-                                        <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
-                                        <input type="hidden" name="sResult04Name" id="sResult04Name" value="<%if (sResult04Name != null) {%><%=sResult04Name%><%}%>" />
-                                        <input type="hidden" name="sResult04aName" id="sResult04aName" value="<%if (sResult04aName != null) {%><%=sResult04aName%><%}%>" />
-                                        <input type="hidden" name="sResult04bName" id="sResult04bName" value="<%if (sResult04bName != null) {%><%=sResult04bName%><%}%>" />
-                                        <input type="hidden" name="sResult04cName" id="sResult04cName" value="<%if (sResult04cName != null) {%><%=sResult04cName%><%}%>" />
-                                        <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
-                                    </td>
-                                    <td>
-                                        &nbsp;&nbsp; - - - 
-                                        <a onclick="return showsummaryreport(4);">
-                                        <font color="blue" face="tahoma" size="2">
-                                        <u><b>VIEW</b></u></font></a>
-                                        <font color="black" face="tahoma" size="2">the graphs.
-                                        </font>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td>
-                                        <input type="file" name="sResult06" id="sResult06"/>
-                                    </td>
-                                    <td>
-                                        &nbsp;<input type="text" name="sResult06Name" id="sResult06Name" size="60" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" readonly/>
-                                    </td>
-                                </tr>
-                                </table>
-                                <% } %>
-                            <% } %>
+                            } else if ((int)Double.parseDouble(sRunReportTable) == 6) {} %>
                         
                             <div class="bs-example">
                                 <div class="panel panel-default">
@@ -3472,43 +2960,6 @@
                                 </div>
                             </div>
 
-                            <table>
-                                <tr>
-                                    <td>
-                                        <% // calling matlab graphic - performance
-                                            opt = 2;
-
-                                            vpath = application.getRealPath("/");
-
-                                            vfile = sBaseFileName;                  //+"01.txt";
-                                            if (vfile == "") {
-                                                vfile = "SFAR03Result";
-                                            }
-
-                                            /*
-                                            out.println("opt = "+opt);
-                                            out.println("dC1 = "+dC1);
-                                            out.println("dC2 = "+dC2);
-                                            out.println("dS1 = "+dS1);
-                                            out.println("dS2 = "+dS2);
-                                            out.println("vpath = "+vpath);
-                                            out.println("vfile = "+vfile);
-                                            */
-                                        %>
-                                        <jsp:include page="SFALSSVRGraphServlet">
-                                            <jsp:param name="opt" value="<%=opt%>" />
-                                            <jsp:param name="dC1" value="<%=dC1%>" /> 
-                                            <jsp:param name="dC2" value="<%=dC2%>" /> 
-                                            <jsp:param name="dS1" value="<%=dS1%>" /> 
-                                            <jsp:param name="dS2" value="<%=dS2%>" /> 
-
-                                            <jsp:param name="vpath" value="<%=vpath%>" />
-                                            <jsp:param name="vfile" value="<%=vfile%>" />
-                                        </jsp:include> 	
-                                    </td>
-                                </tr>   
-                            </table>
-                            
                             <% if (sLoadingDataSet1 != "" || sLoadingDataSet3 != "") { 
                                 /* 
                                 out.println("<p>");
@@ -4220,7 +3671,7 @@
                             </script>    
                             <% } %>
                         </div>
-                                
+                                        
                         <% if (sPageControl.equals("2")) { %>
                             <div id="results" class="tab-pane fade in active">
                         <% } else { %>
@@ -4243,9 +3694,7 @@
                             <tr>
                                 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                 <td>
-                                    <%--><div title="Go to previous page" onclick="changetab(1)"><--%>
-                                    <div title="View the previous page" onclick="changetab(1)">
-                                        <%--><h3><u><i><font face="Palatino Linotype, Book Antiqua, Palatino, serif">I. Input Data Review and Run</font></i></u></h3><--%>
+                                    <div title="View data page" onclick="changetab(1)">
                                         <h3><font color="skyblue" face="Palatino Linotype, Book Antiqua, Palatino, serif">Input Data Review and Run</font></h3>
                                     </div>
                                 </td>
@@ -4256,18 +3705,23 @@
                                 <td>&nbsp;&nbsp;</td>
                                 <td>
                                     <div>
-                                        <%--><h3><font face="Palatino Linotype, Book Antiqua, Palatino, serif">II. The Results</font></h3><--%>
-                                        <h3><b><font face="Palatino Linotype, Book Antiqua, Palatino, serif">The Results</font></b></h3>
+                                        <h3><b><font face="Palatino Linotype, Book Antiqua, Palatino, serif">Numerical Results</font></b></h3>
+                                    </div>
+                                </td>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td>
+                                    <div title="View graphical results page" onclick="changetab(3)">
+                                        <h3><font color="skyblue" face="Palatino Linotype, Book Antiqua, Palatino, serif">Graphical Results</font></h3>
                                     </div>
                                 </td>
                             </tr>
                         </table>
                         <br>
                         <ul class="nav nav-pills nav-justified" style="background-color: lavender;">
-                            <li class="active"><a data-toggle="tab" href="#Main" id="Menu">Output Table</a></li>
-                            <li><a data-toggle="tab" href="#PGraph">Prediction Graph</a></li>
-                            <li><a data-toggle="tab" href="#PTGraph">Performance Trajectory Graph</a></li>
-                            <li><a data-toggle="tab" href="#TPGraph">Tracing Path Graph</a></li>
+                            <li class="active"><a data-toggle="tab" href="#Main" id="Menu">Main Output</a></li>
+                            <li><a data-toggle="tab" href="#PGraph">Prediction Output</a></li>
+                            <li><a data-toggle="tab" href="#PTGraph">Performance Trajectory Data</a></li>
+                            <li><a data-toggle="tab" href="#TPGraph">Tracing Path Data</a></li>
                         </ul>
                         <br>
                             <div class="tab-content">
@@ -4283,7 +3737,7 @@
                                     <br>
                                     <br>
                                     <center>
-                                        <b><font size="4" id="Optimum">Main results - Best optimum hyperparameters</font></b>
+                                        <b><font size="4" id="Optimum">Main output - Best optimum hyperparameters</font></b>
                                         <a href="#Partition"><span class="glyphicon glyphicon-menu-right"></span></a>
                                         <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                         <br>
@@ -4840,40 +4294,6 @@
                                                         <% } %>
                                                         </tr>
                                                     <% } %>
-                                                    <tr>
-                                                        <td>
-                                                            <% // calling matlab graphic - performance
-                                                                opt = 2;
-                                                                
-                                                                vpath = application.getRealPath("/");
-
-                                                                vfile = sBaseFileName;                  //+"01.txt";
-                                                                if (vfile == "") {
-                                                                    vfile = "SFAR03Result";
-                                                                }
-                                                                
-                                                                /*
-                                                                out.println("opt = "+opt);
-                                                                out.println("dC1 = "+dC1);
-                                                                out.println("dC2 = "+dC2);
-                                                                out.println("dS1 = "+dS1);
-                                                                out.println("dS2 = "+dS2);
-                                                                out.println("vpath = "+vpath);
-                                                                out.println("vfile = "+vfile);
-                                                                */
-                                                            %>
-                                                            <jsp:include page="SFALSSVRGraphServlet">
-                                                                <jsp:param name="opt" value="<%=opt%>" />
-                                                                <jsp:param name="dC1" value="<%=dC1%>" /> 
-                                                                <jsp:param name="dC2" value="<%=dC2%>" /> 
-                                                                <jsp:param name="dS1" value="<%=dS1%>" /> 
-                                                                <jsp:param name="dS2" value="<%=dS2%>" /> 
-
-                                                                <jsp:param name="vpath" value="<%=vpath%>" />
-                                                                <jsp:param name="vfile" value="<%=vfile%>" />
-                                                            </jsp:include> 	
-                                                        </td>
-                                                    </tr>
                                                 </table> 
                                             </div> 
                                         </center> 
@@ -4940,40 +4360,6 @@
                                         <center>
                                             <div> 
                                                 <table>
-                                                    <tr>
-                                                        <td>
-                                                            <% // calling matlab graphic - performance
-                                                                opt = 2;
-                                                                
-                                                                vpath = application.getRealPath("/");
-
-                                                                vfile = sBaseFileName;                  //+"01.txt";
-                                                                if (vfile == "") {
-                                                                    vfile = "SFAR03Result";
-                                                                }
-                                                                
-                                                                /*
-                                                                out.println("opt = "+opt);
-                                                                out.println("dC1 = "+dC1);
-                                                                out.println("dC2 = "+dC2);
-                                                                out.println("dS1 = "+dS1);
-                                                                out.println("dS2 = "+dS2);
-                                                                out.println("vpath = "+vpath);
-                                                                out.println("vfile = "+vfile);
-                                                                */
-                                                            %>
-                                                            <jsp:include page="SFALSSVRGraphServlet">
-                                                                <jsp:param name="opt" value="<%=opt%>" />
-                                                                <jsp:param name="dC1" value="<%=dC1%>" /> 
-                                                                <jsp:param name="dC2" value="<%=dC2%>" /> 
-                                                                <jsp:param name="dS1" value="<%=dS1%>" /> 
-                                                                <jsp:param name="dS2" value="<%=dS2%>" /> 
-
-                                                                <jsp:param name="vpath" value="<%=vpath%>" />
-                                                                <jsp:param name="vfile" value="<%=vfile%>" />
-                                                            </jsp:include> 	
-                                                        </td>
-                                                    </tr>
                                                     <tr>
                                                         <td align="center">Data No.</td>
                                                         <% for (ii = 1; ii < ncol-1; ii += 1) { %>
@@ -5603,11 +4989,248 @@
                           
                             <br>
                             <br>
+                            <a href="#title">
+                                <img src="Arrow top.png" alt="..." width="18" style="float:right">
+                            </a>
                             <center id="bottomform2">
                                 <button type="button" onclick="" class="btn btn-primary">Save</button>
                             </center>
                             <br>
                         </div>
+                                
+                        <% if (sPageControl.equals("3")) { %>
+                        <div id="Gresults" class="tab-pane fade in active">
+                        <% } else { %>
+                            <div id="Gresults" class="tab-pane fade in">
+                        <% } %>
+                                <table>
+                                    <tr>
+                                        <td style="width: 10%">
+                                            <a onclick="return previousscreen();" style="float:left;">
+                                                <font color="blue" face="agency FB" size="3">
+                                                &nbsp;&nbsp;&nbsp;<b><u><< BACK</u></b>
+                                                </font>
+                                            </a>                            
+                                        </td>
+                                    </tr>
+                                </table> 
+
+                                <table>
+                                    <tr>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                        <td>
+                                            <div title="View data page" onclick="changetab(1)">
+                                                <h3><font color="skyblue" face="Palatino Linotype, Book Antiqua, Palatino, serif">Input Data Review and Run</font></h3>
+                                            </div>
+                                        </td>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                        <td>
+                                            <div title="View pre-computed numerical results..." onclick="changetab(2)">
+                                                <h3><font color="skyblue" face="Palatino Linotype, Book Antiqua, Palatino, serif">Numerical Results</font></h3>
+                                            </div>
+                                        </td>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                        <td>
+                                            <h3><span class="glyphicon glyphicon-bookmark"></span></h3>
+                                        </td>
+                                        <td>&nbsp;&nbsp;</td>
+                                        <td>
+                                            <div>
+                                                <h3><b><font face="Palatino Linotype, Book Antiqua, Palatino, serif">Graphical Results</font></b></h3>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                
+                                <br>
+                                <table>
+                                    <tr>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                        <td>
+                                            <h4><b><font color="black" face="Palatino Linotype, Book Antiqua, Palatino, serif">Graph Type:</font></b></h4>
+                                        </td>
+                                        <td>&nbsp;&nbsp;&nbsp;</td>
+                                        <td align="right">
+                                            <h4><font color="black" face="Palatino Linotype, Book Antiqua, Palatino, serif">Prediction Graph</font></h4>
+                                        </td>
+                                        <td>&nbsp;&nbsp;&nbsp;</td>
+                                        <td>
+                                            <button type="button" onclick="return plotgraph(31);">Test Data</button>
+                                            <button type="button" onclick="return plotgraph(32);">Learning Data</button>
+                                            <button type="button" onclick="return plotgraph(33);">Validation Partition</button>
+                                            <button type="button" onclick="return plotgraph(34);">Training Partition</button>
+                                            <button type="button" onclick="return plotgraph(35);">All Data</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                        <td>&nbsp;&nbsp;&nbsp;</td>
+                                        <td>&nbsp;&nbsp;&nbsp;</td>
+                                        <td align="right">
+                                            <h4><font color="black" face="Palatino Linotype, Book Antiqua, Palatino, serif">Performance Trajectory</font></h4>
+                                        </td>
+                                        <td>&nbsp;&nbsp;&nbsp;</td>
+                                        <td>
+                                            <button type="button" onclick="return plotgraph(31);">Fold #1</button>
+                                            <button type="button" onclick="return plotgraph(32);">#2</button>
+                                            <button type="button" onclick="return plotgraph(33);">#3</button>
+                                            <button type="button" onclick="return plotgraph(34);">#4</button>
+                                            <button type="button" onclick="return plotgraph(35);">#5</button>
+                                            <button type="button" onclick="return plotgraph(31);">#6</button>
+                                            <button type="button" onclick="return plotgraph(32);">#7</button>
+                                            <button type="button" onclick="return plotgraph(33);">#8</button>
+                                            <button type="button" onclick="return plotgraph(34);">#9</button>
+                                            <button type="button" onclick="return plotgraph(35);">#10</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                        <td>&nbsp;&nbsp;&nbsp;</td>
+                                        <td>&nbsp;&nbsp;&nbsp;</td>
+                                        <td align="right">
+                                            <h4><font color="black" face="Palatino Linotype, Book Antiqua, Palatino, serif">Tracing Path</font></h4>
+                                        </td>
+                                        <td>&nbsp;&nbsp;&nbsp;</td>
+                                        <td>
+                                            <button type="button" onclick="return plotgraph(31);">Fold #1</button>
+                                            <button type="button" onclick="return plotgraph(32);">#2</button>
+                                            <button type="button" onclick="return plotgraph(33);">#3</button>
+                                            <button type="button" onclick="return plotgraph(34);">#4</button>
+                                            <button type="button" onclick="return plotgraph(35);">#5</button>
+                                            <button type="button" onclick="return plotgraph(31);">#6</button>
+                                            <button type="button" onclick="return plotgraph(32);">#7</button>
+                                            <button type="button" onclick="return plotgraph(33);">#8</button>
+                                            <button type="button" onclick="return plotgraph(34);">#9</button>
+                                            <button type="button" onclick="return plotgraph(35);">#10</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                                
+                                <br>
+                                <center>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <% // calling matlab graphic - performance
+                                                opt = 2;
+
+                                                vpath = application.getRealPath("/");
+
+                                                vfile = sBaseFileName;                  //+"01.txt";
+                                                if (vfile == "") {
+                                                    vfile = "SFAR03Result";
+                                                }
+                                            %>
+                                            <jsp:include page="SFALSSVRGraphServlet">
+                                                <jsp:param name="opt" value="<%=opt%>" />
+                                                <jsp:param name="dC1" value="<%=dC1%>" /> 
+                                                <jsp:param name="dC2" value="<%=dC2%>" /> 
+                                                <jsp:param name="dS1" value="<%=dS1%>" /> 
+                                                <jsp:param name="dS2" value="<%=dS2%>" /> 
+
+                                                <jsp:param name="vpath" value="<%=vpath%>" />
+                                                <jsp:param name="vfile" value="<%=vfile%>" />
+                                            </jsp:include> 	
+                                        </td>
+                                    </tr>   
+                                </table>
+                                <%-->          
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <% // calling matlab graphic - performance
+                                                GraphNo = 32;
+                        
+                                                opt = 2;
+
+                                                vpath = application.getRealPath("/");
+
+                                                vfile = sBaseFileName;                  //+"01.txt";
+                                                if (vfile == "") {
+                                                    vfile = "SFAR03Result";
+                                                }
+                                            %>
+                                            <jsp:include page="SFALSSVRGraphServlet">
+                                                <jsp:param name="GraphNo" value="<%=GraphNo%>" />
+                                                <jsp:param name="opt" value="<%=opt%>" />
+                                                <jsp:param name="dC1" value="<%=dC1%>" /> 
+                                                <jsp:param name="dC2" value="<%=dC2%>" /> 
+                                                <jsp:param name="dS1" value="<%=dS1%>" /> 
+                                                <jsp:param name="dS2" value="<%=dS2%>" /> 
+
+                                                <jsp:param name="vpath" value="<%=vpath%>" />
+                                                <jsp:param name="vfile" value="<%=vfile%>" />
+                                            </jsp:include> 	
+                                        </td>
+                                    </tr>   
+                                </table>
+                                            
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <% // calling matlab graphic - performance
+                                                GraphNo = 33;
+                        
+                                                opt = 2;
+
+                                                vpath = application.getRealPath("/");
+
+                                                vfile = sBaseFileName;                  //+"01.txt";
+                                                if (vfile == "") {
+                                                    vfile = "SFAR03Result";
+                                                }
+                                            %>
+                                            <jsp:include page="SFALSSVRGraphServlet">
+                                                <jsp:param name="GraphNo" value="<%=GraphNo%>" />
+                                                <jsp:param name="opt" value="<%=opt%>" />
+                                                <jsp:param name="dC1" value="<%=dC1%>" /> 
+                                                <jsp:param name="dC2" value="<%=dC2%>" /> 
+                                                <jsp:param name="dS1" value="<%=dS1%>" /> 
+                                                <jsp:param name="dS2" value="<%=dS2%>" /> 
+
+                                                <jsp:param name="vpath" value="<%=vpath%>" />
+                                                <jsp:param name="vfile" value="<%=vfile%>" />
+                                            </jsp:include> 	
+                                        </td>
+                                    </tr>   
+                                </table>
+                                            
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <% // calling matlab graphic - performance
+                                                GraphNo = 34;
+                        
+                                                opt = 2;
+
+                                                vpath = application.getRealPath("/");
+
+                                                vfile = sBaseFileName;                  //+"01.txt";
+                                                if (vfile == "") {
+                                                    vfile = "SFAR03Result";
+                                                }
+                                            %>
+                                            <jsp:include page="SFALSSVRGraphServlet">
+                                                <jsp:param name="GraphNo" value="<%=GraphNo%>" />
+                                                <jsp:param name="opt" value="<%=opt%>" />
+                                                <jsp:param name="dC1" value="<%=dC1%>" /> 
+                                                <jsp:param name="dC2" value="<%=dC2%>" /> 
+                                                <jsp:param name="dS1" value="<%=dS1%>" /> 
+                                                <jsp:param name="dS2" value="<%=dS2%>" /> 
+
+                                                <jsp:param name="vpath" value="<%=vpath%>" />
+                                                <jsp:param name="vfile" value="<%=vfile%>" />
+                                            </jsp:include> 	
+                                        </td>
+                                    </tr>   
+                                </table>
+                                <--%>            
+                                </center>
+
+                                <input type="hidden" name="sBaseFileName" id="sBaseFileName" value="<%=sBaseFileName%>">
+                            </div>
+                        </div>
+                        
                         <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
                         <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
                         <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />
@@ -5618,8 +5241,8 @@
                         <input type="hidden" name="sResult04dName" id="sResult04dName" value="<%if (sResult04dName != null) {%><%=sResult04dName%><%}%>" />
                         <input type="hidden" name="sResult05Name" id="sResult05Name" value="<%if (sResult05Name != null) {%><%=sResult05Name%><%}%>" />
                         <input type="hidden" name="sResult06Name" id="sResult06Name" value="<%if (sResult06Name != null) {%><%=sResult06Name%><%}%>" />
+                        </div>
                     </div>
-                </div>
                 </div>    
             </form>
         <% } %>
