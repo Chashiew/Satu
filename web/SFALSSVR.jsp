@@ -59,9 +59,18 @@
 String VarOne = request.getParameter("VarOne");
 String VarTwo = request.getParameter("VarTwo");
 
-String sLoadingDefault = request.getParameter("sLoadingDefault");
-if (sLoadingDefault == null) {
-    sLoadingDefault = "";        
+String sGraphNo = request.getParameter("sGraphNo");
+if (sGraphNo == null) {
+    sGraphNo = "31";        
+};
+String sopt = request.getParameter("sopt");
+if (sopt == null) {
+    sopt = "2";        
+};
+        
+String sLoadingDefault = request.getParameter("sLoadingDefault"); 
+if (sLoadingDefault == null) { 
+    sLoadingDefault = "";         
 };
     String sLoadingEvaluation = request.getParameter("sLoadingEvaluation");
     if (sLoadingEvaluation == null) {
@@ -1044,6 +1053,9 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     var VarNext = document.getElementById("VarNext");
                     document.getElementById("VarNext").value = val;
                     
+                    var sopt = document.getElementById("sopt");
+                    var sGraphNo = document.getElementById("sGraphNo");
+                    
                     var sLoadingDataExcel = document.getElementById("sLoadingDataExcel");
                     sLoadingDataExcel = "";
                     document.getElementById("sLoadingDataExcel").value = sLoadingDataExcel;
@@ -1858,6 +1870,9 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 <input type="hidden" name="sPFileData" id="sPFileData" value="<%=sPFileData%>" /> 
                 <input type="hidden" name="sdPInstances" id="sdPInstances" value="<%=sdPInstances%>" /> 
                 <input type="hidden" name="sdPAttributes" id="sdPAttributes" value="<%=sdPAttributes%>" /> 
+                
+                <input type="hidden" name="sopt" id="sopt" value="<%=sopt%>" /> 
+                <input type="hidden" name="sGraphNo" id="sGraphNo" value="<%=sGraphNo%>" /> 
                 <br>
                 <br>
                 

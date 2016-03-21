@@ -56,7 +56,18 @@
     String sLoadingDataFile = request.getParameter("sLoadingDataFile");
  
     int opt;
+    String sopt = request.getParameter("sopt");
+    if (sopt == null) {
+        sopt = "2";
+    }
+    opt=(int)Double.parseDouble(sopt); 
+    
     int GraphNo;
+    String sGraphNo = request.getParameter("sGraphNo");
+    if (sGraphNo == null) {
+        sGraphNo = "31";
+    }
+    GraphNo=(int)Double.parseDouble(sGraphNo); 
     
     String sRunReportTable = request.getParameter("sRunReportTable");
     if (sRunReportTable == null) {
@@ -1194,6 +1205,21 @@
                 }
                 return refreshform(val);
             } 
+                        
+            function plotgraph(val) {
+                //alert("Aha1 ...!");
+                document.getElementById("sGraphNo").value = val;
+                if (val===31 || val===32 || val===33 || val===34 || val===35) {
+                    //alert("Aha2 ...!");
+                    document.getElementById("sopt").value = 2;
+                }
+                else {
+                    //alert("Aha3 ...!");
+                    document.getElementById("sopt").value = 2;
+                }
+                //alert("Aha4 ...!");
+                return refreshform(val);
+            } 
         </script>
     </head>
     <body>
@@ -1720,6 +1746,9 @@
                 <input type="hidden" name="vfile" id="vfile" value="<%=vfile%>"/>
 
                 <input type="hidden" name="sPageControl" id="sPageControl" value="<%=sPageControl%>"/>
+
+                <input type="hidden" name="sopt" id="sopt" value="<%=sopt%>"/>
+                <input type="hidden" name="sGraphNo" id="sGraphNo" value="<%=sGraphNo%>"/>
                 
                 <br>
                 <br>
@@ -5059,7 +5088,7 @@
                                             <button type="button" onclick="return plotgraph(32);">Learning Data</button>
                                             <button type="button" onclick="return plotgraph(33);">Validation Partition</button>
                                             <button type="button" onclick="return plotgraph(34);">Training Partition</button>
-                                            <button type="button" onclick="return plotgraph(35);">All Data</button>
+                                            <%--><button type="button" onclick="return plotgraph(35);">All Data</button><--%>
                                         </td>
                                     </tr>
                                     <tr>
@@ -5071,16 +5100,16 @@
                                         </td>
                                         <td>&nbsp;&nbsp;&nbsp;</td>
                                         <td>
-                                            <button type="button" onclick="return plotgraph(31);">Fold #1</button>
-                                            <button type="button" onclick="return plotgraph(32);">#2</button>
-                                            <button type="button" onclick="return plotgraph(33);">#3</button>
-                                            <button type="button" onclick="return plotgraph(34);">#4</button>
-                                            <button type="button" onclick="return plotgraph(35);">#5</button>
-                                            <button type="button" onclick="return plotgraph(31);">#6</button>
-                                            <button type="button" onclick="return plotgraph(32);">#7</button>
-                                            <button type="button" onclick="return plotgraph(33);">#8</button>
-                                            <button type="button" onclick="return plotgraph(34);">#9</button>
-                                            <button type="button" onclick="return plotgraph(35);">#10</button>
+                                            <button type="button" onclick="return plotgraph(41);">Fold #1</button>
+                                            <button type="button" onclick="return plotgraph(42);">#2</button>
+                                            <button type="button" onclick="return plotgraph(43);">#3</button>
+                                            <button type="button" onclick="return plotgraph(44);">#4</button>
+                                            <button type="button" onclick="return plotgraph(45);">#5</button>
+                                            <button type="button" onclick="return plotgraph(46);">#6</button>
+                                            <button type="button" onclick="return plotgraph(47);">#7</button>
+                                            <button type="button" onclick="return plotgraph(48);">#8</button>
+                                            <button type="button" onclick="return plotgraph(49);">#9</button>
+                                            <button type="button" onclick="return plotgraph(410);">#10</button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -5092,16 +5121,16 @@
                                         </td>
                                         <td>&nbsp;&nbsp;&nbsp;</td>
                                         <td>
-                                            <button type="button" onclick="return plotgraph(31);">Fold #1</button>
-                                            <button type="button" onclick="return plotgraph(32);">#2</button>
-                                            <button type="button" onclick="return plotgraph(33);">#3</button>
-                                            <button type="button" onclick="return plotgraph(34);">#4</button>
-                                            <button type="button" onclick="return plotgraph(35);">#5</button>
-                                            <button type="button" onclick="return plotgraph(31);">#6</button>
-                                            <button type="button" onclick="return plotgraph(32);">#7</button>
-                                            <button type="button" onclick="return plotgraph(33);">#8</button>
-                                            <button type="button" onclick="return plotgraph(34);">#9</button>
-                                            <button type="button" onclick="return plotgraph(35);">#10</button>
+                                            <button type="button" onclick="return plotgraph(51);">Fold #1</button>
+                                            <button type="button" onclick="return plotgraph(52);">#2</button>
+                                            <button type="button" onclick="return plotgraph(53);">#3</button>
+                                            <button type="button" onclick="return plotgraph(54);">#4</button>
+                                            <button type="button" onclick="return plotgraph(55);">#5</button>
+                                            <button type="button" onclick="return plotgraph(56);">#6</button>
+                                            <button type="button" onclick="return plotgraph(57);">#7</button>
+                                            <button type="button" onclick="return plotgraph(58);">#8</button>
+                                            <button type="button" onclick="return plotgraph(59);">#9</button>
+                                            <button type="button" onclick="return plotgraph(510);">#10</button>
                                         </td>
                                     </tr>
                                 </table>
@@ -5110,49 +5139,36 @@
                                 <center>
                                 <table>
                                     <tr>
-                                        <td>
+                                        <td align="center">
                                             <% // calling matlab graphic - performance
-                                                opt = 2;
-
-                                                vpath = application.getRealPath("/");
+                                                opt=(int)Double.parseDouble(sopt); 
+                                                GraphNo=(int)Double.parseDouble(sGraphNo);
+                                                
+                                                vpath = application.getRealPath("/"); 
 
                                                 vfile = sBaseFileName;                  //+"01.txt";
-                                                if (vfile == "") {
+                                                if (vfile == "") { 
                                                     vfile = "SFAR03Result";
                                                 }
                                             %>
-                                            <jsp:include page="SFALSSVRGraphServlet">
-                                                <jsp:param name="opt" value="<%=opt%>" />
-                                                <jsp:param name="dC1" value="<%=dC1%>" /> 
-                                                <jsp:param name="dC2" value="<%=dC2%>" /> 
-                                                <jsp:param name="dS1" value="<%=dS1%>" /> 
-                                                <jsp:param name="dS2" value="<%=dS2%>" /> 
-
-                                                <jsp:param name="vpath" value="<%=vpath%>" />
-                                                <jsp:param name="vfile" value="<%=vfile%>" />
-                                            </jsp:include> 	
+                                            <% if (GraphNo == 31) { %>
+                                                <h4><b><font color="black" face="Palatino Linotype, Book Antiqua, Palatino, serif">Test data prediction:</font></b></h4> 
+                                            <% } else if (GraphNo == 32) { %>        
+                                                <h4><b><font color="black" face="Palatino Linotype, Book Antiqua, Palatino, serif">Learning data prediction:</font></b></h4> 
+                                            <% } else if (GraphNo == 33) { %>        
+                                                <h4><b><font color="black" face="Palatino Linotype, Book Antiqua, Palatino, serif">Validation partition data prediction:</font></b></h4> 
+                                            <% } else if (GraphNo == 34) { %>        
+                                                <h4><b><font color="black" face="Palatino Linotype, Book Antiqua, Palatino, serif">Training partition data prediction:</font></b></h4> 
+                                            <% } else if (GraphNo == 35) { %> 
+                                                <h4><b><font color="black" face="Palatino Linotype, Book Antiqua, Palatino, serif">Prediction of all data:</font></b></h4> 
+                                            <% } %>
                                         </td>
-                                    </tr>   
-                                </table>
-                                <%-->          
-                                <table>
+                                    </tr>
                                     <tr>
                                         <td>
-                                            <% // calling matlab graphic - performance
-                                                GraphNo = 32;
-                        
-                                                opt = 2;
-
-                                                vpath = application.getRealPath("/");
-
-                                                vfile = sBaseFileName;                  //+"01.txt";
-                                                if (vfile == "") {
-                                                    vfile = "SFAR03Result";
-                                                }
-                                            %>
                                             <jsp:include page="SFALSSVRGraphServlet">
                                                 <jsp:param name="GraphNo" value="<%=GraphNo%>" />
-                                                <jsp:param name="opt" value="<%=opt%>" />
+                                                <jsp:param name="opt" value="<%=opt%>" /> 
                                                 <jsp:param name="dC1" value="<%=dC1%>" /> 
                                                 <jsp:param name="dC2" value="<%=dC2%>" /> 
                                                 <jsp:param name="dS1" value="<%=dS1%>" /> 
@@ -5164,67 +5180,6 @@
                                         </td>
                                     </tr>   
                                 </table>
-                                            
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <% // calling matlab graphic - performance
-                                                GraphNo = 33;
-                        
-                                                opt = 2;
-
-                                                vpath = application.getRealPath("/");
-
-                                                vfile = sBaseFileName;                  //+"01.txt";
-                                                if (vfile == "") {
-                                                    vfile = "SFAR03Result";
-                                                }
-                                            %>
-                                            <jsp:include page="SFALSSVRGraphServlet">
-                                                <jsp:param name="GraphNo" value="<%=GraphNo%>" />
-                                                <jsp:param name="opt" value="<%=opt%>" />
-                                                <jsp:param name="dC1" value="<%=dC1%>" /> 
-                                                <jsp:param name="dC2" value="<%=dC2%>" /> 
-                                                <jsp:param name="dS1" value="<%=dS1%>" /> 
-                                                <jsp:param name="dS2" value="<%=dS2%>" /> 
-
-                                                <jsp:param name="vpath" value="<%=vpath%>" />
-                                                <jsp:param name="vfile" value="<%=vfile%>" />
-                                            </jsp:include> 	
-                                        </td>
-                                    </tr>   
-                                </table>
-                                            
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <% // calling matlab graphic - performance
-                                                GraphNo = 34;
-                        
-                                                opt = 2;
-
-                                                vpath = application.getRealPath("/");
-
-                                                vfile = sBaseFileName;                  //+"01.txt";
-                                                if (vfile == "") {
-                                                    vfile = "SFAR03Result";
-                                                }
-                                            %>
-                                            <jsp:include page="SFALSSVRGraphServlet">
-                                                <jsp:param name="GraphNo" value="<%=GraphNo%>" />
-                                                <jsp:param name="opt" value="<%=opt%>" />
-                                                <jsp:param name="dC1" value="<%=dC1%>" /> 
-                                                <jsp:param name="dC2" value="<%=dC2%>" /> 
-                                                <jsp:param name="dS1" value="<%=dS1%>" /> 
-                                                <jsp:param name="dS2" value="<%=dS2%>" /> 
-
-                                                <jsp:param name="vpath" value="<%=vpath%>" />
-                                                <jsp:param name="vfile" value="<%=vfile%>" />
-                                            </jsp:include> 	
-                                        </td>
-                                    </tr>   
-                                </table>
-                                <--%>            
                                 </center>
 
                                 <input type="hidden" name="sBaseFileName" id="sBaseFileName" value="<%=sBaseFileName%>">

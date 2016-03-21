@@ -74,7 +74,7 @@ public class SFALSSVRGraphServlet extends HttpServlet {
         */
         
         int nOption = Integer.parseInt(request.getParameter("opt"));
-        //int GraphNo = Integer.parseInt(request.getParameter("GraphNo"));
+        int GraphNo = Integer.parseInt(request.getParameter("GraphNo"));
 
         response.setContentType("text/html");
         PrintWriter pw = response.getWriter();
@@ -86,9 +86,7 @@ public class SFALSSVRGraphServlet extends HttpServlet {
         pw.write("<br>");
         */
 
-        if (nOption == 1) {
-        }
-        else if (nOption == 2) {
+        if (nOption == 2) {
             //performance:
             
             int iOpt = 0;   //no need optimum point
@@ -118,9 +116,8 @@ public class SFALSSVRGraphServlet extends HttpServlet {
             */
 
             double opt = 2;
-            file = vpath + vfile + "04a.txt";
-            opt = Double.parseDouble(request.getParameter("opt"));
-            /*if (vfile != "") {
+            
+            if (vfile != "") {
                 if (GraphNo == 31) {
                     file = vpath + vfile + "04a.txt";
                     opt = Double.parseDouble(request.getParameter("opt"));
@@ -138,8 +135,8 @@ public class SFALSSVRGraphServlet extends HttpServlet {
                     opt = Double.parseDouble(request.getParameter("opt"));
                 }
             } else {
-                file = "SFAR03Result04a.txt"; //kalo vapath kosong
-            }*/
+                file = "SFAR03Result04a.txt";
+            }
             
             String line = null;
 
@@ -355,6 +352,8 @@ public class SFALSSVRGraphServlet extends HttpServlet {
                     WebFigureHtmlGenerator htmlGen = new WebFigureHtmlGenerator(request);
 
                     response.setContentType("text/html");
+                    pw.write("<center>");
+                    pw.write("<br>");
                     pw.write(htmlGen.getFigureEmbedString(
                         webFig,
                         "NimopsFigure",
@@ -362,6 +361,9 @@ public class SFALSSVRGraphServlet extends HttpServlet {
                         "640",
                         "480",
                         null));
+                    pw.write("</center>");
+                    pw.write("<br>");
+                    pw.close();
                 } finally {
                     MWArray.disposeArray(results);
                 }
@@ -379,21 +381,17 @@ public class SFALSSVRGraphServlet extends HttpServlet {
             }
             /**/
             
-            // GraphNo. 32
+            //Graph No.2
+            /*
             file = vpath + vfile + "04b.txt";
-            opt = Double.parseDouble(request.getParameter("opt"));
-            
             line = null;
-
+            String sDummy;
+            String[] headers;
+            String[] cols;
+            int i;
+            int j;
             try {
                 BufferedReader br = new BufferedReader(new FileReader(file));
-                String sDummy;
-                String[] headers;
-                String[] cols;
-                int i;
-                int j;
-
-                // first line: title
                 line = br.readLine();
                 nCol = 0;
                 while (line != null) {
@@ -405,66 +403,44 @@ public class SFALSSVRGraphServlet extends HttpServlet {
             catch (Exception e) {
                 e.printStackTrace();
             }
-
             dataX = new double[nCol][1];
             dataY = new double[nCol][1];
             dataYY = new double[1][1];
-
             dataXopt = new double[2][1];
             dataYopt = new double[2][1];
-            
             dataX1 = new double[1][1];
             dataY1 = new double[1][1];
             dataX2 = new double[1][1];
             dataY2 = new double[1][1];
             dataX3 = new double[1][1];
             dataY3 = new double[1][1];
-            
             dataYY[0][0]=1.0;
-
             try {
                 BufferedReader br = new BufferedReader(new FileReader(file));
-                String sDummy;
-                String[] headers;
-                String[] cols;
-                int i;
-                int j;
                 int iXYMin;
                 int iXYMax;
-
                 line = br.readLine();
                 j=0;
                 while (line != null) {
                     cols = line.split("\\t");
-
                     sDummy = cols[0];
                     dataX[j][0]=Double.parseDouble(sDummy);
-
                     sDummy = cols[1];
                     dataY[j][0]=Double.parseDouble(sDummy);
-
                     if (Xmin > dataX[j][0]) Xmin = dataX[j][0];
                     if (Xmax < dataX[j][0]) Xmax = dataX[j][0];
-
                     if (Xmin > dataY[j][0]) Xmin = dataY[j][0];
                     if (Xmax < dataY[j][0]) Xmax = dataY[j][0];
-
                     j=j+1;
-
                     line = br.readLine();
                 }
                 br.close();
-
                 Xmin = Xmin;
                 Xmax = Xmax;
-                
                 Ymin = Xmin;
                 Ymax = Xmax;
-                
                 iXYMin = (int) (Ymin);
-
                 if (iXYMin > Ymin) iXYMin = iXYMin - 1;
-                
                 iXYMax = (int) (Ymax);
                 XYRange = (iXYMax - iXYMin)/7;
                 iXYMax  = iXYMin + XYRange*7;
@@ -472,46 +448,42 @@ public class SFALSSVRGraphServlet extends HttpServlet {
                     XYRange = XYRange + 1;
                     iXYMax  = iXYMin + XYRange*7;
                 }
-                
                 dataXopt[0][0]=iXYMin; 
                 dataXopt[1][0]=iXYMax; 
                 dataYopt[0][0]=iXYMin;
                 dataYopt[1][0]=iXYMax;
-                
                 Xmin = iXYMin;
                 Xmax = iXYMax;
-
                 Ymin = iXYMin;
                 Ymax = iXYMax;
-
             }
             catch (Exception e) {
                 e.printStackTrace();
             }
-            
-            /**/
+            response.setContentType("text/html");
+            PrintWriter pw12 = response.getWriter();
             try {
                 Object results[] = cWF.ProgramNiMOPSGraph(1, vpath, vfile, opt,dataX,dataY,dataYY,dataXopt,dataYopt,dataX1,dataY1,dataX2,dataY2,dataX3,dataY3,Xmin,Xmax,Ymin,Ymax,bin,iOpt);
-
-                //try {
-                    //cWF.ProgramNiMOPSGraph(result, params);
-
                 try {
-                    WebFigure webFig = (WebFigure) ((MWJavaObjectRef) results[0]).get();
-                    // Attach to application cache
+                    WebFigure webFig12 = (WebFigure) ((MWJavaObjectRef) results[0]).get();
                     request.getSession().getServletContext().setAttribute(
-                        "NimopsFigure", webFig);
-
+                        "NimopsFigure", webFig12);
                     WebFigureHtmlGenerator htmlGen = new WebFigureHtmlGenerator(request);
 
-                    response.setContentType("text/html");
-                    pw.write(htmlGen.getFigureEmbedString(
-                        webFig,
+                    pw12.write("<center>");
+                    pw12.write("<br>");
+                    pw12.write("<h4><b><font color=\"black\" face=\"Palatino Linotype, Book Antiqua, Palatino, serif\">Learning data prediction:</font></b></h4>");
+                    pw12.write("<br>");
+                    pw12.write(htmlGen.getFigureEmbedString(
+                        webFig12,
                         "NimopsFigure",
                         "application",
                         "640",
                         "480",
                         null));
+                    pw12.write("</center>");
+                    pw12.write("<br>");
+                    pw12.close();
                 } finally {
                     MWArray.disposeArray(results);
                 }
@@ -519,285 +491,7 @@ public class SFALSSVRGraphServlet extends HttpServlet {
             } catch (MWException e) {
                 throw new ServletException(e);
             }
-            /**/
-            
-            // GraphNo. 33
-            file = vpath + vfile + "04c.txt";
-            opt = Double.parseDouble(request.getParameter("opt"));
-            
-            line = null;
-
-            try {
-                BufferedReader br = new BufferedReader(new FileReader(file));
-                String sDummy;
-                String[] headers;
-                String[] cols;
-                int i;
-                int j;
-
-                // first line: title
-                line = br.readLine();
-                nCol = 0;
-                while (line != null) {
-                    nCol = nCol + 1;
-                    line = br.readLine();
-                }
-                br.close();
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            dataX = new double[nCol][1];
-            dataY = new double[nCol][1];
-            dataYY = new double[1][1];
-
-            dataXopt = new double[2][1];
-            dataYopt = new double[2][1];
-            
-            dataX1 = new double[1][1];
-            dataY1 = new double[1][1];
-            dataX2 = new double[1][1];
-            dataY2 = new double[1][1];
-            dataX3 = new double[1][1];
-            dataY3 = new double[1][1];
-            
-            dataYY[0][0]=1.0;
-
-            try {
-                BufferedReader br = new BufferedReader(new FileReader(file));
-                String sDummy;
-                String[] headers;
-                String[] cols;
-                int i;
-                int j;
-                int iXYMin;
-                int iXYMax;
-
-                line = br.readLine();
-                j=0;
-                while (line != null) {
-                    cols = line.split("\\t");
-
-                    sDummy = cols[0];
-                    dataX[j][0]=Double.parseDouble(sDummy);
-
-                    sDummy = cols[1];
-                    dataY[j][0]=Double.parseDouble(sDummy);
-
-                    if (Xmin > dataX[j][0]) Xmin = dataX[j][0];
-                    if (Xmax < dataX[j][0]) Xmax = dataX[j][0];
-
-                    if (Xmin > dataY[j][0]) Xmin = dataY[j][0];
-                    if (Xmax < dataY[j][0]) Xmax = dataY[j][0];
-
-                    j=j+1;
-
-                    line = br.readLine();
-                }
-                br.close();
-
-                Xmin = Xmin;
-                Xmax = Xmax;
-                
-                Ymin = Xmin;
-                Ymax = Xmax;
-                
-                iXYMin = (int) (Ymin);
-
-                if (iXYMin > Ymin) iXYMin = iXYMin - 1;
-                
-                iXYMax = (int) (Ymax);
-                XYRange = (iXYMax - iXYMin)/7;
-                iXYMax  = iXYMin + XYRange*7;
-                if (iXYMax < Ymax) {
-                    XYRange = XYRange + 1;
-                    iXYMax  = iXYMin + XYRange*7;
-                }
-                
-                dataXopt[0][0]=iXYMin; 
-                dataXopt[1][0]=iXYMax; 
-                dataYopt[0][0]=iXYMin;
-                dataYopt[1][0]=iXYMax;
-                
-                Xmin = iXYMin;
-                Xmax = iXYMax;
-
-                Ymin = iXYMin;
-                Ymax = iXYMax;
-
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            try {
-                Object results[] = cWF.ProgramNiMOPSGraph(1, vpath, vfile, opt,dataX,dataY,dataYY,dataXopt,dataYopt,dataX1,dataY1,dataX2,dataY2,dataX3,dataY3,Xmin,Xmax,Ymin,Ymax,bin,iOpt);
-
-                try {
-                    WebFigure webFig = (WebFigure) ((MWJavaObjectRef) results[0]).get();
-                    // Attach to application cache
-                    request.getSession().getServletContext().setAttribute(
-                        "NimopsFigure", webFig);
-
-                    WebFigureHtmlGenerator htmlGen = new WebFigureHtmlGenerator(request);
-
-                    response.setContentType("text/html");
-                    pw.write(htmlGen.getFigureEmbedString(
-                        webFig,
-                        "NimopsFigure",
-                        "application",
-                        "640",
-                        "480",
-                        null));
-                } finally {
-                    MWArray.disposeArray(results);
-                }
-
-            } catch (MWException e) {
-                throw new ServletException(e);
-            }
-            /**/
-            
-            // GraphNo. 34
-            file = vpath + vfile + "04d.txt";
-            opt = Double.parseDouble(request.getParameter("opt"));
-            
-            line = null;
-
-            try {
-                BufferedReader br = new BufferedReader(new FileReader(file));
-                String sDummy;
-                String[] headers;
-                String[] cols;
-                int i;
-                int j;
-
-                // first line: title
-                line = br.readLine();
-                nCol = 0;
-                while (line != null) {
-                    nCol = nCol + 1;
-                    line = br.readLine();
-                }
-                br.close();
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            dataX = new double[nCol][1];
-            dataY = new double[nCol][1];
-            dataYY = new double[1][1];
-
-            dataXopt = new double[2][1];
-            dataYopt = new double[2][1];
-            
-            dataX1 = new double[1][1];
-            dataY1 = new double[1][1];
-            dataX2 = new double[1][1];
-            dataY2 = new double[1][1];
-            dataX3 = new double[1][1];
-            dataY3 = new double[1][1];
-            
-            dataYY[0][0]=1.0;
-
-            try {
-                BufferedReader br = new BufferedReader(new FileReader(file));
-                String sDummy;
-                String[] headers;
-                String[] cols;
-                int i;
-                int j;
-                int iXYMin;
-                int iXYMax;
-
-                line = br.readLine();
-                j=0;
-                while (line != null) {
-                    cols = line.split("\\t");
-
-                    sDummy = cols[0];
-                    dataX[j][0]=Double.parseDouble(sDummy);
-
-                    sDummy = cols[1];
-                    dataY[j][0]=Double.parseDouble(sDummy);
-
-                    if (Xmin > dataX[j][0]) Xmin = dataX[j][0];
-                    if (Xmax < dataX[j][0]) Xmax = dataX[j][0];
-
-                    if (Xmin > dataY[j][0]) Xmin = dataY[j][0];
-                    if (Xmax < dataY[j][0]) Xmax = dataY[j][0];
-
-                    j=j+1;
-
-                    line = br.readLine();
-                }
-                br.close();
-
-                Xmin = Xmin;
-                Xmax = Xmax;
-                
-                Ymin = Xmin;
-                Ymax = Xmax;
-                
-                iXYMin = (int) (Ymin);
-
-                if (iXYMin > Ymin) iXYMin = iXYMin - 1;
-                
-                iXYMax = (int) (Ymax);
-                XYRange = (iXYMax - iXYMin)/7;
-                iXYMax  = iXYMin + XYRange*7;
-                if (iXYMax < Ymax) {
-                    XYRange = XYRange + 1;
-                    iXYMax  = iXYMin + XYRange*7;
-                }
-                
-                dataXopt[0][0]=iXYMin; 
-                dataXopt[1][0]=iXYMax; 
-                dataYopt[0][0]=iXYMin;
-                dataYopt[1][0]=iXYMax;
-                
-                Xmin = iXYMin;
-                Xmax = iXYMax;
-
-                Ymin = iXYMin;
-                Ymax = iXYMax;
-
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            try {
-                Object results[] = cWF.ProgramNiMOPSGraph(1, vpath, vfile, opt,dataX,dataY,dataYY,dataXopt,dataYopt,dataX1,dataY1,dataX2,dataY2,dataX3,dataY3,Xmin,Xmax,Ymin,Ymax,bin,iOpt);
-
-                try {
-                    WebFigure webFig = (WebFigure) ((MWJavaObjectRef) results[0]).get();
-                    // Attach to application cache
-                    request.getSession().getServletContext().setAttribute(
-                        "NimopsFigure", webFig);
-
-                    WebFigureHtmlGenerator htmlGen = new WebFigureHtmlGenerator(request);
-
-                    response.setContentType("text/html");
-                    pw.write(htmlGen.getFigureEmbedString(
-                        webFig,
-                        "NimopsFigure",
-                        "application",
-                        "640",
-                        "480",
-                        null));
-                } finally {
-                    MWArray.disposeArray(results);
-                }
-
-            } catch (MWException e) {
-                throw new ServletException(e);
-            }
-            /**/
-            
-            pw.close();
+            */
         }
         else {
             //tracing path:
@@ -991,7 +685,7 @@ public class SFALSSVRGraphServlet extends HttpServlet {
             /*
              * Get the parameters and convert them to MWArray
              */
-            //Object[] params = new MWArray[11];
+            Object[] params = new MWArray[11];
 
             //Object[] result = new Object[1];
 
@@ -1049,7 +743,7 @@ public class SFALSSVRGraphServlet extends HttpServlet {
 
                     WebFigureHtmlGenerator htmlGen = new WebFigureHtmlGenerator(request);
 
-                    //response.setContentType("text/html");
+                    response.setContentType("text/html");
                     pw.write(htmlGen.getFigureEmbedString(
                             webFig,
                             "NimopsFigure",
