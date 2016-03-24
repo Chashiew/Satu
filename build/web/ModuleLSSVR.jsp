@@ -958,8 +958,11 @@
                 {
                     document.getElementById("sPageControl").value = "1";
                 }
-                else {
+                else if (val === 2) {
                     document.getElementById("sPageControl").value = "2";
+                }
+                else {
+                    document.getElementById("sPageControl").value = "3";
                 }
                 //document.getElementById("sRunReportTable").value = "1";
                 return refreshform(val);
@@ -1349,11 +1352,17 @@
                             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                             <td>
                                 <%--><div title="Go to view the results directly!" onclick="changetab(2)"><--%>
-                                <div title="View pre-computed results..." onclick="changetab(2)">
+                                <div title="View pre-computed numerical results..." onclick="changetab(2)">
                                     <%--><h3><u><i><font face="Palatino Linotype, Book Antiqua, Palatino, serif">II. The Results</font></i></u></h3><--%>
-                                    <h3><font color="skyblue" face="Palatino Linotype, Book Antiqua, Palatino, serif">The Results</font></h3>
+                                    <h3><font color="skyblue" face="Palatino Linotype, Book Antiqua, Palatino, serif">Numerical Results</font></h3>
                                 </div>
                             </td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td>
+                            <div title="View graphical results page" onclick="changetab(3)">
+                                <h3><font color="skyblue" face="Palatino Linotype, Book Antiqua, Palatino, serif">Graphical Results</font></h3>
+                            </div>
+                        </td>
                         </tr>
                     </table>
                     <input type="hidden" name="sBaseFileName" id="sBaseFileName" value="<%=sBaseFileName%>">
@@ -4523,14 +4532,11 @@
                                 </td>
                             </tr>
                         </table> 
-                            
                         <table>
                             <tr>
                                 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                 <td>
-                                    <%--><div title="Go to previous page" onclick="changetab(1)"><--%>
-                                    <div title="View the previous page" onclick="changetab(1)">
-                                        <%--><h3><u><i><font face="Palatino Linotype, Book Antiqua, Palatino, serif">I. Input Data Review and Run</font></i></u></h3><--%>
+                                    <div title="View data page" onclick="changetab(1)">
                                         <h3><font color="skyblue" face="Palatino Linotype, Book Antiqua, Palatino, serif">Input Data Review and Run</font></h3>
                                     </div>
                                 </td>
@@ -4541,8 +4547,13 @@
                                 <td>&nbsp;&nbsp;</td>
                                 <td>
                                     <div>
-                                        <%--><h3><font face="Palatino Linotype, Book Antiqua, Palatino, serif">II. The Results</font></h3><--%>
-                                        <h3><b><font face="Palatino Linotype, Book Antiqua, Palatino, serif">The Results</font></b></h3>
+                                        <h3><b><font face="Palatino Linotype, Book Antiqua, Palatino, serif">Numerical Results</font></b></h3>
+                                    </div>
+                                </td>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td>
+                                    <div title="View graphical results page" onclick="changetab(3)">
+                                        <h3><font color="skyblue" face="Palatino Linotype, Book Antiqua, Palatino, serif">Graphical Results</font></h3>
                                     </div>
                                 </td>
                             </tr>
@@ -4552,7 +4563,6 @@
                             <li class="active"><a data-toggle="tab" href="#Main" id="Menu">Output Table</a></li>
                             <li><a data-toggle="tab" href="#PGraph">Prediction Graph of Learning Data</a></li>
                             <li><a data-toggle="tab" href="#PTGraph">Prediction Graph of Test Data</a></li>
-                            <li><a data-toggle="tab" href="#TPGraph">Performance and Tracing Path Graph</a></li><%-->Performance Trajectory Graph<--%>
                         </ul>
                         <br>
                         <div class="tab-content">
@@ -4568,8 +4578,8 @@
                                 <br>
                                 <br>
                                 <center>
-                                    <font size="4" id="Optimum">Main results - Best performance</font>
-                                    <a href="#Partition"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                    <font size="4" id="Optimum">Main output - Best performance</font>
+                                    <a href="#Partition"><span class="glyphicon glyphicon-menu-down"></span></a>
                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                     <br>
                                 </center>
@@ -4636,8 +4646,8 @@
                                 <br> 
                                 <center>
                                     <font size="4" id="Partition">Performance and mean performance of learning and test data</font>
-                                    <a href="#Optimum"><span class="glyphicon glyphicon-menu-left"></span></a> 
-                                    <a href="#Report"><span class="glyphicon glyphicon-menu-right"></span></a> 
+                                    <a href="#Optimum"><span class="glyphicon glyphicon-menu-up"></span></a> 
+                                    <a href="#Report"><span class="glyphicon glyphicon-menu-down"></span></a> 
                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a> 
                                     <br>
                                 </center>
@@ -4798,8 +4808,8 @@
                                 <br>
                                 <center>
                                     <font size="4" id="Report">Analysis report</font>
-                                    <a href="#Partition"><span class="glyphicon glyphicon-menu-left"></span></a> 
-                                    <a href="#Performance"><span class="glyphicon glyphicon-menu-right"></span></a> 
+                                    <a href="#Partition"><span class="glyphicon glyphicon-menu-up"></span></a> 
+                                    <a href="#Performance"><span class="glyphicon glyphicon-menu-down"></span></a> 
                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a> 
                                     <br>
                                 </center>
@@ -4849,7 +4859,7 @@
                                 <br>
                                 <center>
                                     <font size="4" id="Performance">Best performance; Learning and test data with predicted values of the best fold</font> 
-                                    <a href="#Report"><span class="glyphicon glyphicon-menu-left"></span></a> 
+                                    <a href="#Report"><span class="glyphicon glyphicon-menu-up"></span></a> 
                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a> 
                                     <br>
                                 </center>
@@ -5159,51 +5169,51 @@
 
                                         <center>
                                             <% if (jj==1) { %> <font size="4" id="PG1">Prediction of Learning Data - Fold No. <%=jj%></font>
-                                                <a href="#PG2"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#PG2"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                 <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                             <% } %>
                                             <% if (jj==2) { %> <font size="4" id="PG2">Prediction of Learning Data - Fold No. <%=jj%></font>
-                                                <a href="#PG1"><span class="glyphicon glyphicon-menu-left"></span></a>
-                                                <a href="#PG3"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#PG1"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                                <a href="#PG3"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                 <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                             <% } %>  
                                             <% if (jj==3) { %> <font size="4" id="PG3">Prediction of Learning Data - Fold No. <%=jj%></font>
-                                                <a href="#PG2"><span class="glyphicon glyphicon-menu-left"></span></a>
-                                                <a href="#PG4"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#PG2"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                                <a href="#PG4"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                 <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                             <% } %>  
                                             <% if (jj==4) { %> <font size="4" id="PG4">Prediction of Learning Data - Fold No. <%=jj%></font>
-                                                <a href="#PG3"><span class="glyphicon glyphicon-menu-left"></span></a>
-                                                <a href="#PG5"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#PG3"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                                <a href="#PG5"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                 <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                             <% } %> 
                                             <% if (jj==5) { %> <font size="4" id="PG5">Prediction of Learning Data - Fold No. <%=jj%></font>
-                                                <a href="#PG4"><span class="glyphicon glyphicon-menu-left"></span></a>
-                                                <a href="#PG6"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#PG4"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                                <a href="#PG6"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                 <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                             <% } %> 
                                             <% if (jj==6) { %> <font size="4" id="PG6">Prediction of Learning Data - Fold No. <%=jj%></font>
-                                                <a href="#PG5"><span class="glyphicon glyphicon-menu-left"></span></a>
-                                                <a href="#PG7"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#PG5"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                                <a href="#PG7"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                 <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                             <% } %> 
                                             <% if (jj==7) { %> <font size="4" id="PG7">Prediction of Learning Data - Fold No. <%=jj%></font>
-                                                <a href="#PG6"><span class="glyphicon glyphicon-menu-left"></span></a>
-                                                <a href="#PG8"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#PG6"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                                <a href="#PG8"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                 <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                             <% } %> 
                                             <% if (jj==8) { %> <font size="4" id="PG8">Prediction of Learning Data - Fold No. <%=jj%></font>
-                                                <a href="#PG7"><span class="glyphicon glyphicon-menu-left"></span></a>
-                                                <a href="#PG9"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#PG7"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                                <a href="#PG9"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                 <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                             <% } %> 
                                             <% if (jj==9) { %> <font size="4" id="PG9">Prediction of Learning Data - Fold No. <%=jj%></font>
-                                                <a href="#PG8"><span class="glyphicon glyphicon-menu-left"></span></a>
-                                                <a href="#PG10"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#PG8"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                                <a href="#PG10"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                 <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                             <% } %> 
                                             <% if (jj==10) { %> <font size="4" id="PG10">Prediction of Learning Data - Fold No. <%=jj%></font>
-                                                <a href="#PG9"><span class="glyphicon glyphicon-menu-left"></span></a>
+                                                <a href="#PG9"><span class="glyphicon glyphicon-menu-up"></span></a>
                                                 <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                             <% } %> 
                                         </center>
@@ -5343,51 +5353,51 @@
 
                                         <center>
                                             <% if (jj==1) { %> <font size="4" id="PT1">Prediction of Test Data - Fold No. <%=jj%></font>
-                                                <a href="#PT2"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#PT2"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                 <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                             <% } %>
                                             <% if (jj==2) { %> <font size="4" id="PT2">Prediction of Test Data - Fold No. <%=jj%></font>
-                                                <a href="#PT1"><span class="glyphicon glyphicon-menu-left"></span></a>
-                                                <a href="#PT3"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#PT1"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                                <a href="#PT3"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                 <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                             <% } %>  
                                             <% if (jj==3) { %> <font size="4" id="PT3">Prediction of Test Data - Fold No. <%=jj%></font>
-                                                <a href="#PT2"><span class="glyphicon glyphicon-menu-left"></span></a>
-                                                <a href="#PT4"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#PT2"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                                <a href="#PT4"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                 <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                             <% } %>  
                                             <% if (jj==4) { %> <font size="4" id="PT4">Prediction of Test Data - Fold No. <%=jj%></font>
-                                                <a href="#PT3"><span class="glyphicon glyphicon-menu-left"></span></a>
-                                                <a href="#PT5"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#PT3"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                                <a href="#PT5"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                 <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                             <% } %> 
                                             <% if (jj==5) { %> <font size="4" id="PT5">Prediction of Test Data - Fold No. <%=jj%></font>
-                                                <a href="#PT4"><span class="glyphicon glyphicon-menu-left"></span></a>
-                                                <a href="#PT6"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#PT4"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                                <a href="#PT6"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                 <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                             <% } %> 
                                             <% if (jj==6) { %> <font size="4" id="PT6">Prediction of Test Data - Fold No. <%=jj%></font>
-                                                <a href="#PT5"><span class="glyphicon glyphicon-menu-left"></span></a>
-                                                <a href="#PT7"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#PT5"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                                <a href="#PT7"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                 <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                             <% } %> 
                                             <% if (jj==7) { %> <font size="4" id="PT7">Prediction of Test Data - Fold No. <%=jj%></font>
-                                                <a href="#PT6"><span class="glyphicon glyphicon-menu-left"></span></a>
-                                                <a href="#PT8"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#PT6"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                                <a href="#PT8"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                 <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                             <% } %> 
                                             <% if (jj==8) { %> <font size="4" id="PT8">Prediction of Test Data - Fold No. <%=jj%></font>
-                                                <a href="#PT7"><span class="glyphicon glyphicon-menu-left"></span></a>
-                                                <a href="#PT9"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#PT7"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                                <a href="#PT9"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                 <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                             <% } %> 
                                             <% if (jj==9) { %> <font size="4" id="PT9">Prediction of Test Data - Fold No. <%=jj%></font>
-                                                <a href="#PT8"><span class="glyphicon glyphicon-menu-left"></span></a>
-                                                <a href="#PT10"><span class="glyphicon glyphicon-menu-right"></span></a>
+                                                <a href="#PT8"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                                <a href="#PT10"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                 <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                             <% } %> 
                                             <% if (jj==10) { %> <font size="4" id="PT10">Prediction of Test Data - Fold No. <%=jj%></font>
-                                                <a href="#PT9"><span class="glyphicon glyphicon-menu-left"></span></a>
+                                                <a href="#PT9"><span class="glyphicon glyphicon-menu-up"></span></a>
                                                 <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                             <% } %> 
                                         </center>
@@ -5430,22 +5440,91 @@
                                 <% } %>
 
                                 <br><br>
+                                <a href="#title">
+                                    <img src="Arrow top.png" alt="..." width="18" style="float:right">
+                                </a>
                                 <center id="bottomform2">
                                     <button type="button" onclick="" class="btn btn-primary">Save</button>
                                 </center>
                                 <br>
                             </div>
 
-                            <div id="TPGraph" class="tab-pane fade in">
+                            <!--><div id="TPGraph" class="tab-pane fade in">
                                 <br>
                                 <br>
                                 <br>
                                 <center>
                                     <i><font color="red" size="4">... n.a. for baseline system.</font></i>
                                 </center>
-                            </div>
+                            </div><-->
                         </div>
                     </div>
+                                
+                    <% if (sPageControl.equals("3")) { %>
+                    <div id="Gresults" class="tab-pane fade in active">
+                    <% } else { %>
+                        <div id="Gresults" class="tab-pane fade in">
+                    <% } %>
+                            <table>
+                                <tr>
+                                    <td style="width: 10%">
+                                        <a onclick="return previousscreen();" style="float:left;">
+                                            <font color="blue" face="agency FB" size="3">
+                                            &nbsp;&nbsp;&nbsp;<b><u><< BACK</u></b>
+                                            </font>
+                                        </a>                            
+                                    </td>
+                                </tr>
+                            </table> 
+
+                            <table>
+                                    <tr>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                        <td>
+                                            <div title="View data page" onclick="changetab(1)">
+                                                <h3><font color="skyblue" face="Palatino Linotype, Book Antiqua, Palatino, serif">Input Data Review and Run</font></h3>
+                                            </div>
+                                        </td>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                        <td>
+                                            <div title="View pre-computed numerical results..." onclick="changetab(2)">
+                                                <h3><font color="skyblue" face="Palatino Linotype, Book Antiqua, Palatino, serif">Numerical Results</font></h3>
+                                            </div>
+                                        </td>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                        <td>
+                                            <h3><span class="glyphicon glyphicon-bookmark"></span></h3>
+                                        </td>
+                                        <td>&nbsp;&nbsp;</td>
+                                        <td>
+                                            <div>
+                                                <h3><b><font face="Palatino Linotype, Book Antiqua, Palatino, serif">Graphical Results</font></b></h3>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            <br>
+                            <table>
+                                <tr>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>
+                                        <h4><b><font color="black" face="Palatino Linotype, Book Antiqua, Palatino, serif">Graph Type:</font></b></h4>
+                                    </td>
+                                    <td>&nbsp;&nbsp;&nbsp;</td>
+                                    <td align="right">
+                                        <h4><font color="black" face="Palatino Linotype, Book Antiqua, Palatino, serif">Prediction Graph</font></h4>
+                                    </td>
+                                    <td>&nbsp;&nbsp;&nbsp;</td>
+                                    <td>
+                                        <button type="button" onclick="return plotgraph(31);">Test Data</button>
+                                        <button type="button" onclick="return plotgraph(32);">Learning Data</button>
+                                        <%--><button type="button" onclick="return plotgraph(35);">All Data</button><--%>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>            
                     <input type="hidden" name="stResult01Name" id="stResult01Name" value="<%if (stResult01Name != null) {%><%=stResult01Name%><%}%>" />
                     <input type="hidden" name="stResult02Name" id="stResult02Name" value="<%if (stResult02Name != null) {%><%=stResult02Name%><%}%>" />
                     <input type="hidden" name="stResult03Name" id="stResult03Name" value="<%if (stResult03Name != null) {%><%=stResult03Name%><%}%>" />

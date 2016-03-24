@@ -22,18 +22,18 @@ Cross Validation = 10 (folds)
 
 dNormalRadio = 1	
 dOptimRadio = 1	
-dSCRadio = 3	
+dSCRadio = 1	
 dPRadio = 1	
 dTORadio = 2	
 
-sVariation = 23	
+sVariation = 3	
 
 dAttributes = 6	
-dInstances = 74	
+dInstances = 77	
 Datalearn(1,1) = 0.4600	
-Datalearn(74,6) = 4.5500	
+Datalearn(77,6) = 1.8100	
 
-dPAttributes = 6	
-dPInstances = 24	
-Datatest(1,1) = 0.3200	
-Datatest(24,6) = 4.5500	
+dPAttributes = 1	
+dPInstances = 1	
+Datatest(1,1) = 0.0000	
+Datatest(1,1) = 0.0000	

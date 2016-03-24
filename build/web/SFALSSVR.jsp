@@ -67,6 +67,10 @@ String sopt = request.getParameter("sopt");
 if (sopt == null) {
     sopt = "2";        
 };
+String sBestFold = request.getParameter("sBestFold");
+if (sBestFold == null) {
+    sBestFold = "1";        
+};
         
 String sLoadingDefault = request.getParameter("sLoadingDefault"); 
 if (sLoadingDefault == null) { 
@@ -1053,6 +1057,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     var VarNext = document.getElementById("VarNext");
                     document.getElementById("VarNext").value = val;
                     
+                    var sBestFold = document.getElementById("sBestFold");
                     var sopt = document.getElementById("sopt");
                     var sGraphNo = document.getElementById("sGraphNo");
                     
@@ -1873,6 +1878,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 
                 <input type="hidden" name="sopt" id="sopt" value="<%=sopt%>" /> 
                 <input type="hidden" name="sGraphNo" id="sGraphNo" value="<%=sGraphNo%>" /> 
+                <input type="hidden" name="sBestFold" id="sBestFold" value="<%=sBestFold%>" /> 
                 <br>
                 <br>
                 

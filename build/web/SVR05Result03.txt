@@ -16,4 +16,4 @@ Mean absolute error (training) [unit]:		 0.1486
 Mean absolute percentage error (training) [%]:	 14.02 
 Correlation coefficient (training):		 0.9937 
 ============================================================= 
-Total time [s]:					 0.05
+Total time [s]:					 0.09

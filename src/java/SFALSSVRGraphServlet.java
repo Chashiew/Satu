@@ -87,7 +87,7 @@ public class SFALSSVRGraphServlet extends HttpServlet {
         */
 
         if (nOption == 2) {
-            //performance:
+            //prediction:
             
             int iOpt = 0;   //no need optimum point
             int nCol = 0;
@@ -118,21 +118,17 @@ public class SFALSSVRGraphServlet extends HttpServlet {
             double opt = 2;
             
             if (vfile != "") {
+                opt = Double.parseDouble(request.getParameter("opt"));
                 if (GraphNo == 31) {
                     file = vpath + vfile + "04a.txt";
-                    opt = Double.parseDouble(request.getParameter("opt"));
                 } else if (GraphNo == 32) {
                     file = vpath + vfile + "04b.txt";
-                    opt = Double.parseDouble(request.getParameter("opt"));
                 } else if (GraphNo == 33) {
                     file = vpath + vfile + "04c.txt";
-                    opt = Double.parseDouble(request.getParameter("opt"));
                 } else if (GraphNo == 34) {
                     file = vpath + vfile + "04d.txt";
-                    opt = Double.parseDouble(request.getParameter("opt"));
                 } else if (GraphNo == 35) {
                     file = vpath + vfile + "04a.txt";
-                    opt = Double.parseDouble(request.getParameter("opt"));
                 }
             } else {
                 file = "SFAR03Result04a.txt";
@@ -380,142 +376,59 @@ public class SFALSSVRGraphServlet extends HttpServlet {
                 throw new ServletException(e);
             }
             /**/
-            
-            //Graph No.2
-            /*
-            file = vpath + vfile + "04b.txt";
-            line = null;
-            String sDummy;
-            String[] headers;
-            String[] cols;
-            int i;
-            int j;
-            try {
-                BufferedReader br = new BufferedReader(new FileReader(file));
-                line = br.readLine();
-                nCol = 0;
-                while (line != null) {
-                    nCol = nCol + 1;
-                    line = br.readLine();
-                }
-                br.close();
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
-            dataX = new double[nCol][1];
-            dataY = new double[nCol][1];
-            dataYY = new double[1][1];
-            dataXopt = new double[2][1];
-            dataYopt = new double[2][1];
-            dataX1 = new double[1][1];
-            dataY1 = new double[1][1];
-            dataX2 = new double[1][1];
-            dataY2 = new double[1][1];
-            dataX3 = new double[1][1];
-            dataY3 = new double[1][1];
-            dataYY[0][0]=1.0;
-            try {
-                BufferedReader br = new BufferedReader(new FileReader(file));
-                int iXYMin;
-                int iXYMax;
-                line = br.readLine();
-                j=0;
-                while (line != null) {
-                    cols = line.split("\\t");
-                    sDummy = cols[0];
-                    dataX[j][0]=Double.parseDouble(sDummy);
-                    sDummy = cols[1];
-                    dataY[j][0]=Double.parseDouble(sDummy);
-                    if (Xmin > dataX[j][0]) Xmin = dataX[j][0];
-                    if (Xmax < dataX[j][0]) Xmax = dataX[j][0];
-                    if (Xmin > dataY[j][0]) Xmin = dataY[j][0];
-                    if (Xmax < dataY[j][0]) Xmax = dataY[j][0];
-                    j=j+1;
-                    line = br.readLine();
-                }
-                br.close();
-                Xmin = Xmin;
-                Xmax = Xmax;
-                Ymin = Xmin;
-                Ymax = Xmax;
-                iXYMin = (int) (Ymin);
-                if (iXYMin > Ymin) iXYMin = iXYMin - 1;
-                iXYMax = (int) (Ymax);
-                XYRange = (iXYMax - iXYMin)/7;
-                iXYMax  = iXYMin + XYRange*7;
-                if (iXYMax < Ymax) {
-                    XYRange = XYRange + 1;
-                    iXYMax  = iXYMin + XYRange*7;
-                }
-                dataXopt[0][0]=iXYMin; 
-                dataXopt[1][0]=iXYMax; 
-                dataYopt[0][0]=iXYMin;
-                dataYopt[1][0]=iXYMax;
-                Xmin = iXYMin;
-                Xmax = iXYMax;
-                Ymin = iXYMin;
-                Ymax = iXYMax;
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
-            response.setContentType("text/html");
-            PrintWriter pw12 = response.getWriter();
-            try {
-                Object results[] = cWF.ProgramNiMOPSGraph(1, vpath, vfile, opt,dataX,dataY,dataYY,dataXopt,dataYopt,dataX1,dataY1,dataX2,dataY2,dataX3,dataY3,Xmin,Xmax,Ymin,Ymax,bin,iOpt);
-                try {
-                    WebFigure webFig12 = (WebFigure) ((MWJavaObjectRef) results[0]).get();
-                    request.getSession().getServletContext().setAttribute(
-                        "NimopsFigure", webFig12);
-                    WebFigureHtmlGenerator htmlGen = new WebFigureHtmlGenerator(request);
-
-                    pw12.write("<center>");
-                    pw12.write("<br>");
-                    pw12.write("<h4><b><font color=\"black\" face=\"Palatino Linotype, Book Antiqua, Palatino, serif\">Learning data prediction:</font></b></h4>");
-                    pw12.write("<br>");
-                    pw12.write(htmlGen.getFigureEmbedString(
-                        webFig12,
-                        "NimopsFigure",
-                        "application",
-                        "640",
-                        "480",
-                        null));
-                    pw12.write("</center>");
-                    pw12.write("<br>");
-                    pw12.close();
-                } finally {
-                    MWArray.disposeArray(results);
-                }
-
-            } catch (MWException e) {
-                throw new ServletException(e);
-            }
-            */
         }
-        else {
-            //tracing path:
+        else if (nOption == 0) {
+            //performance:
             
-            int iOpt = 1;   //needing optimum point
+            int iOpt = 0;   //no need optimum point
+            int bin = 0;    //not needed here
+            double[][] dataXopt = new double[1][1];
+            double[][] dataYopt = new double[1][1];
+            double[][] dataX1 = new double[1][1];
+            double[][] dataY1 = new double[1][1];
+            double[][] dataX2 = new double[1][1];
+            double[][] dataY2 = new double[1][1];
+            double[][] dataX3 = new double[1][1];
+            double[][] dataY3 = new double[1][1];
+            
+            double opt = 0;
+            
+            /*
+            pw.write("nOption iOpt bin opt = ");
+            pw.write("<input type='text' size='100' value='"+nOption+"' readonly>");
+            pw.write("<input type='text' size='100' value='"+iOpt+"' readonly>");
+            pw.write("<input type='text' size='100' value='"+bin+"' readonly>");
+            pw.write("<input type='text' size='100' value='"+opt+"' readonly>");
+            pw.write("<br>");
+            */
+            
             int nCol = 0;
 
-            double Xmin = 1000000.0;
-            double Xmax = -1000000.0;
+            double Xmin = 0.0;
+            double Xmax = 0.0;
             double Ymin = 1000000.0;
             double Ymax = -1000000.0;
 
-            //String sFileData = request.getParameter("sFileData");
-            //sFileData="Result06.txt";
-            //String file = request.getSession().getServletContext().getRealPath("/") + sFileData;
-            
             String vpath = request.getParameter("vpath");
             String vfile = request.getParameter("vfile");
-            String file;
+            String file="";
+
             if (vfile != "") {
-                file = vpath + vfile + "06.txt";
+                file = vpath + vfile + "05.txt";
             } else {
-                file = "Result06.txt";
+                file = "SFAR03Result05.txt";
             }
+            
+            /*
+            pw.write("Xmin vpath vfile file GraphNo = ");
+            pw.write("<input type='text' size='100' value='"+Xmin+"' readonly>");
+            pw.write("<input type='text' size='100' value='"+vpath+"' readonly>");
+            pw.write("<input type='text' size='100' value='"+vfile+"' readonly>");
+            pw.write("<input type='text' size='100' value='"+file+"' readonly>");
+            pw.write("<input type='text' size='100' value='"+GraphNo+"' readonly>");
+            pw.write("<br>");
+            */
+            
             String line = null;
 
             try {
@@ -530,7 +443,313 @@ public class SFALSSVRGraphServlet extends HttpServlet {
                 line = br.readLine();
                 nCol = 0;
                 while (line != null) {
-                    nCol = nCol + 1;
+                    cols = line.split("\\t");
+
+                    /*
+                    pw.write("cols[0] cols[1] cols[2] cols[3] = ");
+                    pw.write("<input type='text' size='100' value='"+cols[0]+"' readonly>");
+                    pw.write("<input type='text' size='100' value='"+cols[1]+"' readonly>");
+                    pw.write("<input type='text' size='100' value='"+cols[2]+"' readonly>");
+                    pw.write("<input type='text' size='100' value='"+cols[3]+"' readonly>");
+                    pw.write("<br>");
+                    */
+            
+                    if (GraphNo == 41) {
+                        if ((int)Double.parseDouble(cols[0]) == 1) {
+                            nCol = nCol + 1;
+                            if (Ymin > Double.parseDouble(cols[2])) {
+                                Ymin = Double.parseDouble(cols[2]);
+                            }
+                            if (Ymin > Double.parseDouble(cols[3])) {
+                                Ymin = Double.parseDouble(cols[3]);
+                            }
+                            if (Ymax < Double.parseDouble(cols[2])) {
+                                Ymax = Double.parseDouble(cols[2]);
+                            }
+                            if (Ymax < Double.parseDouble(cols[3])) {
+                                Ymax = Double.parseDouble(cols[3]);
+                            }
+                        }
+                    } else if (GraphNo == 42) {
+                        if ((int)Double.parseDouble(cols[0]) == 2) {
+                            nCol = nCol + 1;
+                            if (Ymin > Double.parseDouble(cols[2])) {
+                                Ymin = Double.parseDouble(cols[2]);
+                            }
+                            if (Ymin > Double.parseDouble(cols[3])) {
+                                Ymin = Double.parseDouble(cols[3]);
+                            }
+                            if (Ymax < Double.parseDouble(cols[2])) {
+                                Ymax = Double.parseDouble(cols[2]);
+                            }
+                            if (Ymax < Double.parseDouble(cols[3])) {
+                                Ymax = Double.parseDouble(cols[3]);
+                            }
+                        }
+                    } else if (GraphNo == 43) {
+                        if ((int)Double.parseDouble(cols[0]) == 3) {
+                            nCol = nCol + 1;
+                            if (Ymin > Double.parseDouble(cols[2])) {
+                                Ymin = Double.parseDouble(cols[2]);
+                            }
+                            if (Ymin > Double.parseDouble(cols[3])) {
+                                Ymin = Double.parseDouble(cols[3]);
+                            }
+                            if (Ymax < Double.parseDouble(cols[2])) {
+                                Ymax = Double.parseDouble(cols[2]);
+                            }
+                            if (Ymax < Double.parseDouble(cols[3])) {
+                                Ymax = Double.parseDouble(cols[3]);
+                            }
+                        }
+                    } else if (GraphNo == 44) {
+                        if ((int)Double.parseDouble(cols[0]) == 4) {
+                            nCol = nCol + 1;
+                            if (Ymin > Double.parseDouble(cols[2])) {
+                                Ymin = Double.parseDouble(cols[2]);
+                            }
+                            if (Ymin > Double.parseDouble(cols[3])) {
+                                Ymin = Double.parseDouble(cols[3]);
+                            }
+                            if (Ymax < Double.parseDouble(cols[2])) {
+                                Ymax = Double.parseDouble(cols[2]);
+                            }
+                            if (Ymax < Double.parseDouble(cols[3])) {
+                                Ymax = Double.parseDouble(cols[3]);
+                            }
+                        }
+                    } else if (GraphNo == 45) {
+                        if ((int)Double.parseDouble(cols[0]) == 5) {
+                            nCol = nCol + 1;
+                            if (Ymin > Double.parseDouble(cols[2])) {
+                                Ymin = Double.parseDouble(cols[2]);
+                            }
+                            if (Ymin > Double.parseDouble(cols[3])) {
+                                Ymin = Double.parseDouble(cols[3]);
+                            }
+                            if (Ymax < Double.parseDouble(cols[2])) {
+                                Ymax = Double.parseDouble(cols[2]);
+                            }
+                            if (Ymax < Double.parseDouble(cols[3])) {
+                                Ymax = Double.parseDouble(cols[3]);
+                            }
+                        }
+                    } else if (GraphNo == 46) {
+                        if ((int)Double.parseDouble(cols[0]) == 6) {
+                            nCol = nCol + 1;
+                            if (Ymin > Double.parseDouble(cols[2])) {
+                                Ymin = Double.parseDouble(cols[2]);
+                            }
+                            if (Ymin > Double.parseDouble(cols[3])) {
+                                Ymin = Double.parseDouble(cols[3]);
+                            }
+                            if (Ymax < Double.parseDouble(cols[2])) {
+                                Ymax = Double.parseDouble(cols[2]);
+                            }
+                            if (Ymax < Double.parseDouble(cols[3])) {
+                                Ymax = Double.parseDouble(cols[3]);
+                            }
+                        }
+                    } else if (GraphNo == 47) {
+                        if ((int)Double.parseDouble(cols[0]) == 7) {
+                            nCol = nCol + 1;
+                            if (Ymin > Double.parseDouble(cols[2])) {
+                                Ymin = Double.parseDouble(cols[2]);
+                            }
+                            if (Ymin > Double.parseDouble(cols[3])) {
+                                Ymin = Double.parseDouble(cols[3]);
+                            }
+                            if (Ymax < Double.parseDouble(cols[2])) {
+                                Ymax = Double.parseDouble(cols[2]);
+                            }
+                            if (Ymax < Double.parseDouble(cols[3])) {
+                                Ymax = Double.parseDouble(cols[3]);
+                            }
+                        }
+                    } else if (GraphNo == 48) {
+                        if ((int)Double.parseDouble(cols[0]) == 8) {
+                            nCol = nCol + 1;
+                            if (Ymin > Double.parseDouble(cols[2])) {
+                                Ymin = Double.parseDouble(cols[2]);
+                            }
+                            if (Ymin > Double.parseDouble(cols[3])) {
+                                Ymin = Double.parseDouble(cols[3]);
+                            }
+                            if (Ymax < Double.parseDouble(cols[2])) {
+                                Ymax = Double.parseDouble(cols[2]);
+                            }
+                            if (Ymax < Double.parseDouble(cols[3])) {
+                                Ymax = Double.parseDouble(cols[3]);
+                            }
+                        }
+                    } else if (GraphNo == 49) {
+                        if ((int)Double.parseDouble(cols[0]) == 9) {
+                            nCol = nCol + 1;
+                            if (Ymin > Double.parseDouble(cols[2])) {
+                                Ymin = Double.parseDouble(cols[2]);
+                            }
+                            if (Ymin > Double.parseDouble(cols[3])) {
+                                Ymin = Double.parseDouble(cols[3]);
+                            }
+                            if (Ymax < Double.parseDouble(cols[2])) {
+                                Ymax = Double.parseDouble(cols[2]);
+                            }
+                            if (Ymax < Double.parseDouble(cols[3])) {
+                                Ymax = Double.parseDouble(cols[3]);
+                            }
+                        }
+                    } else if (GraphNo == 410) {
+                        if ((int)Double.parseDouble(cols[0]) == 10) {
+                            nCol = nCol + 1;
+                            if (Ymin > Double.parseDouble(cols[2])) {
+                                Ymin = Double.parseDouble(cols[2]);
+                            }
+                            if (Ymin > Double.parseDouble(cols[3])) {
+                                Ymin = Double.parseDouble(cols[3]);
+                            }
+                            if (Ymax < Double.parseDouble(cols[2])) {
+                                Ymax = Double.parseDouble(cols[2]);
+                            }
+                            if (Ymax < Double.parseDouble(cols[3])) {
+                                Ymax = Double.parseDouble(cols[3]);
+                            }
+                        }
+                    }
+                    line = br.readLine();
+                }
+                Xmax = nCol+1.0;
+                br.close();
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            /*
+            pw.write("nCol Xmax Ymin Ymax = ");
+            pw.write("<input type='text' size='100' value='"+nCol+"' readonly>");
+            pw.write("<input type='text' size='100' value='"+Xmax+"' readonly>");
+            pw.write("<input type='text' size='100' value='"+Ymin+"' readonly>");
+            pw.write("<input type='text' size='100' value='"+Ymax+"' readonly>");
+            pw.write("<br>");
+            */
+            
+            Ymin=0.0;
+            if (Ymax < 2.5) Ymax = 2.5;
+            else if (Ymax < 5.0) Ymax = 5.0;
+            else if (Ymax < 6.0) Ymax = 6.0;
+            else if (Ymax < 8.0) Ymax = 8.0;
+            else if (Ymax < 10.0) Ymax = 10.0;
+            else if (Ymax < 15.0) Ymax = 15.0;
+            else if (Ymax < 20.0) Ymax = 20.0;
+            else if (Ymax < 30.0) Ymax = 30.0;
+            else if (Ymax < 40.0) Ymax = 40.0;
+            else if (Ymax < 50.0) Ymax = 50.0;
+            else if (Ymax < 60.0) Ymax = 60.0;
+            else if (Ymax < 80.0) Ymax = 80.0;
+            else if (Ymax < 100.0) Ymax = 100.0;
+            else if (Ymax < 150.0) Ymax = 150.0;
+            else if (Ymax < 200.0) Ymax = 200.0;
+            else if (Ymax < 250.0) Ymax = 250.0;
+            else if (Ymax < 300.0) Ymax = 300.0;
+            else if (Ymax < 400.0) Ymax = 400.0;
+            
+            double[][] dataX = new double[nCol][1];
+            double[][] dataY = new double[nCol][1];
+            double[][] dataYY = new double[nCol][1];
+
+            try {
+                BufferedReader br = new BufferedReader(new FileReader(file));
+                String sDummy;
+                String[] headers;
+                String[] cols;
+                int i;
+                int j;
+
+                line = br.readLine();
+                j=0;
+                while (line != null) {
+                    cols = line.split("\\t");
+
+                    if (GraphNo == 41) {
+                        if ((int)Double.parseDouble(cols[0]) == 1) {
+                            dataX[j][0]=j+1;
+                            dataY[j][0]=Double.parseDouble(cols[2]);
+                            dataYY[j][0]=Double.parseDouble(cols[3]);
+                            j=j+1;
+                        }
+                    }
+                    else if (GraphNo == 42) {
+                        if ((int)Double.parseDouble(cols[0]) == 2) {
+                            dataX[j][0]=j+1;
+                            dataY[j][0]=Double.parseDouble(cols[2]);
+                            dataYY[j][0]=Double.parseDouble(cols[3]);
+                            j=j+1;
+                        }
+                    }
+                    else if (GraphNo == 43) {
+                        if ((int)Double.parseDouble(cols[0]) == 3) {
+                            dataX[j][0]=j+1;
+                            dataY[j][0]=Double.parseDouble(cols[2]);
+                            dataYY[j][0]=Double.parseDouble(cols[3]);
+                            j=j+1;
+                        }
+                    }
+                    else if (GraphNo == 44) {
+                        if ((int)Double.parseDouble(cols[0]) == 4) {
+                            dataX[j][0]=j+1;
+                            dataY[j][0]=Double.parseDouble(cols[2]);
+                            dataYY[j][0]=Double.parseDouble(cols[3]);
+                            j=j+1;
+                        }
+                    }
+                    else if (GraphNo == 45) {
+                        if ((int)Double.parseDouble(cols[0]) == 5) {
+                            dataX[j][0]=j+1;
+                            dataY[j][0]=Double.parseDouble(cols[2]);
+                            dataYY[j][0]=Double.parseDouble(cols[3]);
+                            j=j+1;
+                        }
+                    }
+                    else if (GraphNo == 46) {
+                        if ((int)Double.parseDouble(cols[0]) == 6) {
+                            dataX[j][0]=j+1;
+                            dataY[j][0]=Double.parseDouble(cols[2]);
+                            dataYY[j][0]=Double.parseDouble(cols[3]);
+                            j=j+1;
+                        }
+                    }
+                    else if (GraphNo == 47) {
+                        if ((int)Double.parseDouble(cols[0]) == 7) {
+                            dataX[j][0]=j+1;
+                            dataY[j][0]=Double.parseDouble(cols[2]);
+                            dataYY[j][0]=Double.parseDouble(cols[3]);
+                            j=j+1;
+                        }
+                    }
+                    else if (GraphNo == 48) {
+                        if ((int)Double.parseDouble(cols[0]) == 8) {
+                            dataX[j][0]=j+1;
+                            dataY[j][0]=Double.parseDouble(cols[2]);
+                            dataYY[j][0]=Double.parseDouble(cols[3]);
+                            j=j+1;
+                        }
+                    }
+                    else if (GraphNo == 49) {
+                        if ((int)Double.parseDouble(cols[0]) == 9) {
+                            dataX[j][0]=j+1;
+                            dataY[j][0]=Double.parseDouble(cols[2]);
+                            dataYY[j][0]=Double.parseDouble(cols[3]);
+                            j=j+1;
+                        }
+                    }
+                    else if (GraphNo == 410) {
+                        if ((int)Double.parseDouble(cols[0]) == 10) {
+                            dataX[j][0]=j+1;
+                            dataY[j][0]=Double.parseDouble(cols[2]);
+                            dataYY[j][0]=Double.parseDouble(cols[3]);
+                            j=j+1;
+                        }
+                    }
                     line = br.readLine();
                 }
                 br.close();
@@ -539,13 +758,55 @@ public class SFALSSVRGraphServlet extends HttpServlet {
                 e.printStackTrace();
             }
 
-            double[][] dataX = new double[nCol][1];
-            double[][] dataY = new double[nCol][1];
-            double[][] dataYY = new double[nCol][1];
-
-            double[][] dataXopt = new double[1][1];
-            double[][] dataYopt = new double[1][1];
+            /*
+            pw.write("dataX[0][0] dataY[0][0] dataYY[0][0] = ");
+            pw.write("<input type='text' size='100' value='"+dataX[0][0]+"' readonly>");
+            pw.write("<input type='text' size='100' value='"+dataY[0][0]+"' readonly>");
+            pw.write("<input type='text' size='100' value='"+dataYY[0][0]+"' readonly>");
+            pw.write("<br>");
+            pw.write("dataX[nCol-1][0] dataY[nCol-1][0] dataYY[nCol-1][0] = ");
+            pw.write("<input type='text' size='100' value='"+dataX[nCol-1][0]+"' readonly>");
+            pw.write("<input type='text' size='100' value='"+dataY[nCol-1][0]+"' readonly>");
+            pw.write("<input type='text' size='100' value='"+dataYY[nCol-1][0]+"' readonly>");
+            pw.write("<br>");
+            */
             
+            try {
+                Object results[] = cWF.ProgramNiMOPSGraph(1, vpath, vfile, opt,dataX,dataY,dataYY,dataXopt,dataYopt,dataX1,dataY1,dataX2,dataY2,dataX3,dataY3,Xmin,Xmax,Ymin,Ymax,bin,iOpt);
+
+                try {
+                    WebFigure webFig = (WebFigure) ((MWJavaObjectRef) results[0]).get();
+                    request.getSession().getServletContext().setAttribute(
+                        "NimopsFigure", webFig);
+
+                    WebFigureHtmlGenerator htmlGen = new WebFigureHtmlGenerator(request);
+
+                    response.setContentType("text/html");
+                    pw.write("<center>");
+                    pw.write("<br>");
+                    pw.write(htmlGen.getFigureEmbedString(
+                        webFig,
+                        "NimopsFigure",
+                        "application",
+                        "640",
+                        "480",
+                        null));
+                    pw.write("</center>");
+                    pw.write("<br>");
+                    pw.close();
+                } finally {
+                    MWArray.disposeArray(results);
+                }
+
+            } catch (MWException e) {
+                throw new ServletException(e);
+            }
+        }
+        else if (nOption == 1) {
+            //tracing path:
+            
+            int iOpt = 0;   //no need optimum point
+            int bin = 0;    //not needed here
             double[][] dataX1 = new double[1][1];
             double[][] dataY1 = new double[1][1];
             double[][] dataX2 = new double[1][1];
@@ -553,210 +814,244 @@ public class SFALSSVRGraphServlet extends HttpServlet {
             double[][] dataX3 = new double[1][1];
             double[][] dataY3 = new double[1][1];
             
+            double[][] dataXopt = new double[1][1];
+            double[][] dataYopt = new double[1][1];
+            
+            double opt = 1;
+            
+            int iGeneration = (int)Double.parseDouble(request.getParameter("nGeneration"));
+            int iBestFold = (int)Double.parseDouble(request.getParameter("sBestFold"));
+            
+            String dC1 = request.getParameter("dC1");
+            String dC2 = request.getParameter("dC2");
+            double Xmin = Double.parseDouble(dC1);
+            double Xmax = Double.parseDouble(dC2);
+            
+            String dS1 = request.getParameter("dS1");
+            String dS2 = request.getParameter("dS2");
+            double Ymin = Double.parseDouble(dS1);
+            double Ymax = Double.parseDouble(dS2);
+
+            String vpath = request.getParameter("vpath");
+            String vfile = request.getParameter("vfile");
+            String file="";
+
+            if (vfile != "") {
+                file = vpath + vfile + "06.txt";
+            } else {
+                file = "SFAR03Result06.txt";
+            }
+
+            String line = null;
+            int nCol = 0;
+
             try {
                 BufferedReader br = new BufferedReader(new FileReader(file));
                 String sDummy;
-                String sDummyP;
                 String[] headers;
                 String[] cols;
                 int i;
                 int j;
-                double iDummyP;
-                double iDummy;
 
+                // first line: title
                 line = br.readLine();
-                j=0;
-                iDummyP=0;
+                nCol = 0;
                 while (line != null) {
                     cols = line.split("\\t");
-
-                    sDummy = cols[1];
-
-                    /*
-                    pw.write("sDummy = ");
-                    pw.write("<input type='text' size='10' value='"+sDummy+"' readonly>");
-                    pw.write("<br>");
-                    */
-                    
-                    iDummy = Double.parseDouble(sDummy);
-                    
-                    /*
-                    pw.write("iDummy = ");
-                    pw.write("<input type='text' size='10' value='"+iDummy+"' readonly>");
-                    pw.write("<br>");
-                    */
-                    
-                    if (iDummyP != iDummy) {
-                        iDummyP = iDummy;
-                        j=0;
-                        iOpt=j;
-                        Xmin = 1000000.0;
-                        Xmax = -1000000.0;
-                        Ymin = 1000000.0;
-                        Ymax = -1000000.0;
+                    if ((int)Double.parseDouble(cols[0]) == iBestFold) {
+                        nCol = nCol + 1;
                     }
-
-                    /*
-                    pw.write("iDummyP = ");
-                    pw.write("<input type='text' size='10' value='"+iDummyP+"' readonly>");
-                    pw.write("<br>");
-                    */
-                    
-                    sDummy = cols[3];
-                    dataX[j][0]=Double.parseDouble(sDummy);
-
-                    sDummy = cols[4];
-                    dataY[j][0]=Double.parseDouble(sDummy);
-
-                    sDummy = cols[5];
-                    dataYY[j][0]=Double.parseDouble(sDummy);
-
-                    if (Ymin > dataYY[j][0]) {
-                        Ymin = dataYY[j][0];
-                        iOpt=j;
-                        Xmin = dataX[j][0];
-                        Xmax = dataY[j][0];
-                    }
-                    
-                    //if (Ymax < dataYY[j][0]) Ymax = dataYY[j][0];
-
-                    j=j+1;
-
                     line = br.readLine();
                 }
                 br.close();
-                
-                dataXopt[0][0]=Xmin;
-                dataYopt[0][0]=Xmax;
-
-                Xmin = Double.parseDouble(request.getParameter("dC1"));
-                Xmax = Double.parseDouble(request.getParameter("dC2"));
-                
-                Ymin = Double.parseDouble(request.getParameter("dS1"));
-                Ymax = Double.parseDouble(request.getParameter("dS2"));
             }
             catch (Exception e) {
                 e.printStackTrace();
             }
 
             /*
-            pw.write("opt = ");
-            pw.write("<input type='text' size='10' value='"+Double.parseDouble(request.getParameter("opt"))+"' readonly>");
-            pw.write("<br>");
-            
-            pw.write("dataX[0][0] = ");
-            pw.write("<input type='text' size='10' value='"+dataX[0][0]+"' readonly>");
-            pw.write("<br>");
-            pw.write("dataX[4][0] = ");
-            pw.write("<input type='text' size='10' value='"+dataX[4][0]+"' readonly>");
-            pw.write("<br>");
-            
-            pw.write("dataY[0][0] = ");
-            pw.write("<input type='text' size='10' value='"+dataY[0][0]+"' readonly>");
-            pw.write("<br>");
-            pw.write("dataY[4][0] = ");
-            pw.write("<input type='text' size='10' value='"+dataY[4][0]+"' readonly>");
-            pw.write("<br>");
-            
-            pw.write("dataXopt[0][0] = ");
-            pw.write("<input type='text' size='10' value='"+dataXopt[0][0]+"' readonly>");
-            pw.write("<br>");
-            pw.write("dataYopt[0][0] = ");
-            pw.write("<input type='text' size='10' value='"+dataYopt[0][0]+"' readonly>");
-            pw.write("<br>");
-
-            pw.write("Xmin = ");
-            pw.write("<input type='text' size='10' value='"+Xmin+"' readonly>");
-            pw.write("<br>");
-            pw.write("Xmax = ");
-            pw.write("<input type='text' size='10' value='"+Xmax+"' readonly>");
-            pw.write("<br>");
-            pw.write("Ymin = ");
-            pw.write("<input type='text' size='10' value='"+Ymin+"' readonly>");
-            pw.write("<br>");
-            pw.write("Ymax = ");
-            pw.write("<input type='text' size='10' value='"+Ymax+"' readonly>");
-            pw.write("<br>");
-            pw.write("iOpt = ");
-            pw.write("<input type='text' size='10' value='"+iOpt+"' readonly>");
-            pw.write("<br>");
+            pw.write("nCol iGeneration iBestFold = ");
+            pw.write("<input type='text' size='100' value='"+nCol+"' readonly>");
+            pw.write("<input type='text' size='100' value='"+iGeneration+"' readonly>");
+            pw.write("<input type='text' size='100' value='"+iBestFold+"' readonly>");
             */
             
-            /*
-             * Get the parameters and convert them to MWArray
-             */
-            Object[] params = new MWArray[11];
+            double[][] dataX = new double[nCol][1];
+            double[][] dataY = new double[nCol][1];
+            double[][] dataXX = new double[nCol][1];
+            double[][] dataYY = new double[nCol][5];
 
-            //Object[] result = new Object[1];
+            try {
+                BufferedReader br = new BufferedReader(new FileReader(file));
+                String sDummy;
+                String[] headers;
+                String[] cols;
+                int i;
+                int j;
+
+                line = br.readLine();
+                j=0;
+                while (line != null) {
+                    cols = line.split("\\t");
+
+                    if ((int)Double.parseDouble(cols[0]) == iBestFold) {
+                        dataYY[j][0]=Double.parseDouble(cols[1]);
+                        dataYY[j][1]=Double.parseDouble(cols[2]);
+                        dataYY[j][2]=Double.parseDouble(cols[3]);
+                        dataYY[j][3]=Double.parseDouble(cols[4]);
+                        dataYY[j][4]=Double.parseDouble(cols[5]);
+                        j=j+1;
+                    }
+                    line = br.readLine();
+                }
+                nCol=j;
+                br.close();
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
 
             /*
-            params[0] = new MWNumericArray(Double.parseDouble(request.getParameter("opt")), MWClassID.DOUBLE);
-            params[1] = new MWNumericArray(dataX, MWClassID.DOUBLE);
-            params[2] = new MWNumericArray(dataY, MWClassID.DOUBLE);
-            params[3] = new MWNumericArray(dataYY, MWClassID.DOUBLE);
-            params[4] = new MWNumericArray(dataXopt, MWClassID.DOUBLE);
-            params[5] = new MWNumericArray(dataYopt, MWClassID.DOUBLE);
-            params[6] = new MWNumericArray(Xmin, MWClassID.DOUBLE);
-            params[7] = new MWNumericArray(Xmax, MWClassID.DOUBLE);
-            params[8] = new MWNumericArray(Ymin, MWClassID.DOUBLE);
-            params[9] = new MWNumericArray(Ymax, MWClassID.DOUBLE);
-            params[10] = new MWNumericArray(iOpt, MWClassID.DOUBLE);
+            pw.write("nCol iGeneration = ");
+            pw.write("<input type='text' size='100' value='"+nCol+"' readonly>");
+            pw.write("<input type='text' size='100' value='"+iGeneration+"' readonly>");
             */
             
+            //assign matrix for the target generation
+            int j=0;
+            for (int i = 0; i < nCol; i += 1) {
+                if (GraphNo == 51) {
+                    if (dataYY[i][0] == iGeneration) {
+                        dataX[j][0]=dataYY[i][2];
+                        dataY[j][0]=dataYY[i][3];
+                        dataXX[j][0]=dataYY[i][4];
+                        j=j+1;
+                    }
+                }
+                else if (GraphNo == 52) {
+                    if (dataYY[i][0] == iGeneration-1) {
+                        dataX[j][0]=dataYY[i][2];
+                        dataY[j][0]=dataYY[i][3];
+                        dataXX[j][0]=dataYY[i][4];
+                        j=j+1;
+                    }
+                }
+                else if (GraphNo == 53) {
+                    if (dataYY[i][0] == iGeneration-2) {
+                        dataX[j][0]=dataYY[i][2];
+                        dataY[j][0]=dataYY[i][3];
+                        dataXX[j][0]=dataYY[i][4];
+                        j=j+1;
+                    }
+                }
+                else if (GraphNo == 54) {
+                    if (dataYY[i][0] == iGeneration-3) {
+                        dataX[j][0]=dataYY[i][2];
+                        dataY[j][0]=dataYY[i][3];
+                        dataXX[j][0]=dataYY[i][4];
+                        j=j+1;
+                    }
+                }
+                else if (GraphNo == 55) {
+                    if (dataYY[i][0] == iGeneration-4) {
+                        dataX[j][0]=dataYY[i][2];
+                        dataY[j][0]=dataYY[i][3];
+                        dataXX[j][0]=dataYY[i][4];
+                        j=j+1;
+                    }
+                }
+                else if (GraphNo == 56) {
+                    if (dataYY[i][0] == iGeneration-5) {
+                        dataX[j][0]=dataYY[i][2];
+                        dataY[j][0]=dataYY[i][3];
+                        dataXX[j][0]=dataYY[i][4];
+                        j=j+1;
+                    }
+                }
+                else if (GraphNo == 57) {
+                    if (dataYY[i][0] == iGeneration-6) {
+                        dataX[j][0]=dataYY[i][2];
+                        dataY[j][0]=dataYY[i][3];
+                        dataXX[j][0]=dataYY[i][4];
+                        j=j+1;
+                    }
+                }
+                else if (GraphNo == 58) {
+                    if (dataYY[i][0] == iGeneration-7) {
+                        dataX[j][0]=dataYY[i][2];
+                        dataY[j][0]=dataYY[i][3];
+                        dataXX[j][0]=dataYY[i][4];
+                        j=j+1;
+                    }
+                }
+                else if (GraphNo == 59) {
+                    if (dataYY[i][0] == iGeneration-8) {
+                        dataX[j][0]=dataYY[i][2];
+                        dataY[j][0]=dataYY[i][3];
+                        dataXX[j][0]=dataYY[i][4];
+                        j=j+1;
+                    }
+                }
+                else if (GraphNo == 510) {
+                    if (dataYY[i][0] == iGeneration-9) {
+                        dataX[j][0]=dataYY[i][2];
+                        dataY[j][0]=dataYY[i][3];
+                        dataXX[j][0]=dataYY[i][4];
+                        j=j+1;
+                    }
+                }
+            }
+            
             /*
-            params[0] = new MWNumericArray(Double.parseDouble(request.getParameter("opt")), MWClassID.DOUBLE);
-            params[1] = new MWNumericArray(dataX, MWClassID.DOUBLE);
-            params[2] = new MWNumericArray(dataY, MWClassID.DOUBLE);
-            params[3] = new MWNumericArray(dataYY, MWClassID.DOUBLE);
-            params[4] = new MWNumericArray(dataXopt, MWClassID.DOUBLE);
-            params[5] = new MWNumericArray(dataYopt, MWClassID.DOUBLE);
-            params[6] = new MWNumericArray(Xmin, MWClassID.DOUBLE);
-            params[7] = new MWNumericArray(Xmax, MWClassID.DOUBLE);
-            params[8] = new MWNumericArray(Ymin, MWClassID.DOUBLE);
-            params[9] = new MWNumericArray(Ymax, MWClassID.DOUBLE);
-            params[10] = new MWNumericArray(iOpt, MWClassID.DOUBLE);
+            pw.write("j = ");
+            pw.write("<input type='text' size='100' value='"+j+"' readonly>");
             */
             
-            double opt = Double.parseDouble(request.getParameter("opt"));
-            //dataX
-            //dataY
-            //dataYY
-            //dataXopt
-            //dataYopt
-            //Xmin
-            //Xmax
-            //Ymin
-            //Ymax
-            //iOpt
+            //optimum hyperparameters
+            double dRMSE=1000000.0;
+            for (int i = 0; i < j; i += 1) {
+                if (dRMSE > dataXX[i][0]) {
+                    dRMSE = dataXX[i][0];
+                    dataXopt[0][0] = dataX[i][0];
+                    dataYopt[0][0] = dataY[i][0];
+                }
+            }
+
+            /*
+            pw.write("dataXopt[0][0] dataYopt[0][0] = ");
+            pw.write("<input type='text' size='100' value='"+dataXopt[0][0]+"' readonly>");
+            pw.write("<input type='text' size='100' value='"+dataYopt[0][0]+"' readonly>");
+            */
             
             try {
-                Object results[] = cWF.ProgramNiMOPSGraph(1, vpath, vfile, opt,dataX,dataY,dataYY,dataXopt,dataYopt,dataX1,dataY1,dataX2,dataY2,dataX3,dataY3,Xmin,Xmax,Ymin,Ymax,iOpt);
-                        
+                Object results[] = cWF.ProgramNiMOPSGraph(1, vpath, vfile, opt,dataX,dataY,dataYY,dataXopt,dataYopt,dataX1,dataY1,dataX2,dataY2,dataX3,dataY3,Xmin,Xmax,Ymin,Ymax,bin,iOpt);
+
                 try {
-                    
-                    //cWF.ProgramNiMOPSGraph(result, params);
-                    
                     WebFigure webFig = (WebFigure) ((MWJavaObjectRef) results[0]).get();
-                    // Attach to application cache
                     request.getSession().getServletContext().setAttribute(
-                            "NimopsFigure", webFig);
+                        "NimopsFigure", webFig);
 
                     WebFigureHtmlGenerator htmlGen = new WebFigureHtmlGenerator(request);
 
                     response.setContentType("text/html");
+                    pw.write("<center>");
+                    pw.write("<br>");
                     pw.write(htmlGen.getFigureEmbedString(
-                            webFig,
-                            "NimopsFigure",
-                            "application",
-                            "640",
-                            "480",
-                            null));
+                        webFig,
+                        "NimopsFigure",
+                        "application",
+                        "640",
+                        "480",
+                        null));
+                    pw.write("</center>");
+                    pw.write("<br>");
                     pw.close();
                 } finally {
                     MWArray.disposeArray(results);
                 }
+
             } catch (MWException e) {
-                e.printStackTrace();
+                throw new ServletException(e);
             }
         }
     }

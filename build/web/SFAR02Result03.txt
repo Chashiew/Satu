@@ -15,40 +15,40 @@ Learning setting
 	 Vaidation partition size [%]:		 30.00 
 ------------------------------------------------------------- 
 Total No. of attributes:			 6 
-Total No. of data (instances):			 74 
+Total No. of data (instances):			 77 
 Test option: Hold-out [%]:			 20 
 No. of test data:				 15 
-No. of learning data:				 59 
-	 No. of data for SFA-LSSVR training:	 41 
-	 No. of data for SFA-LSSVR validation:	 18 
+No. of learning data:				 62 
+	 No. of data for SFA-LSSVR training:	 43 
+	 No. of data for SFA-LSSVR validation:	 19 
 ============================================================= 
 Stopping criteria: 
 Max. generation is reached 
 ------------------------------------------------------------- 
 Performance measures during optimization phase
-Root mean square error (training) [unit]:	 0.3309 
-Root mean square error (validation) [unit]:	 0.4184 
-Mean absolute error (training) [unit]:		 0.2293 
-Mean absolute error (validation) [unit]:	 0.3169 
-Mean absolute percentage error (training) [%]:	 21.77 
-Mean absolute percentage error (validation) [%]: 25.14 
-Correlation coefficient (training):		 0.9803 
-Correlation coefficient (validation):		 0.9784 
+Root mean square error (training) [unit]:	 1.8985 
+Root mean square error (validation) [unit]:	 1.5666 
+Mean absolute error (training) [unit]:		 1.6077 
+Mean absolute error (validation) [unit]:	 1.4378 
+Mean absolute percentage error (training) [%]:	 188.66 
+Mean absolute percentage error (validation) [%]: 243.13 
+Correlation coefficient (training):		 0.9424 
+Correlation coefficient (validation):		 0.9174 
 ============================================================= 
 Optimal parameters for LSSVR model
-C:						 3.615853e+08 
-Sigma:						 4.271870e+02 
+C:						 1.000000e-03 
+Sigma:						 7.472286e+02 
 ------------------------------------------------------------- 
 Performance measures using learning data
-Root mean square error (learning) [unit]:	 0.3189 
-Mean absolute error (learning) [unit]:		 0.2146 
-Mean absolute percentage error (learning) [%]:	 16.69 
-Correlation coefficient (learning):		 0.9839 
+Root mean square error (learning) [unit]:	 1.7940 
+Mean absolute error (learning) [unit]:		 1.5429 
+Mean absolute percentage error (learning) [%]:	 189.19 
+Correlation coefficient (learning):		 0.9300 
 ------------------------------------------------------------- 
 Performance measures using test data
-Root mean square error (test) [unit]:		 0.6537 
-Mean absolute error (test) [unit]:		 0.4936 
-Mean absolute percentage error (test) [%]:	 26.28 
-Correlation coefficient (test):			 0.9510 
+Root mean square error (test) [unit]:		 2.2417 
+Mean absolute error (test) [unit]:		 1.9455 
+Mean absolute percentage error (test) [%]:	 237.13 
+Correlation coefficient (test):			 0.9589 
 ============================================================= 
-Total time [s]:					 1.28 
+Total time [s]:					 1.31 

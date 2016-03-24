@@ -17,6 +17,6 @@ Performance measures using training data
 Percentage of correct prediction (training) [%]:	 100.0000 
 --------------------------------------------------------------------- 
 Performance measures using test data
-Percentage of correct prediction (test) [%]:		 81.2500 
+Percentage of correct prediction (test) [%]:		 70.8333 
 ===================================================================== 
-Total time [s]:						 0.10 
+Total time [s]:						 0.07 

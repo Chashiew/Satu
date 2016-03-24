@@ -24,15 +24,15 @@ No.	Description	Variable	Value	Remark
 22	Hold-Out (%)	dHoldOut	20.0	-
 23	Cross-Validation (%)	dCrossValidation	10.0	-
 24	Test Option	sTORadio	1	Use learning dataset
-25	Data File	sDataFile	NY Bedload transport preprocessing.txt	-
+25	Data File	sDataFile	NY Bedload transport.txt	-
 26	No. of Attributes	nDFAttributes	6	-
-27	No. of Instances	nDFInstances	77	-
+27	No. of Instances	nDFInstances	74	-
 28	Test Data File	sTestDataFile		-
 29	No. of Attributes	nTDFAttributes	0	-
 30	No. of Instances	nTDFInstances	0	-
-31	First Data File	sFileData	NY Bedload transport preprocessing.txt	-
+31	First Data File	sFileData	NY Bedload transport.txt	-
 32	No. of Attributes	sdAttributes	6	-
-33	No. of Instances	sdInstances	77	-
+33	No. of Instances	sdInstances	74	-
 34	Second Data File	sPFileData		-
 35	No. of Attributes	sdPAttributes	0	-
 36	No. of Instances	sdPInstances	0	-
