@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-    if (session.getAttribute("username") != "PiMLab" && session.getAttribute("username") != "a")
+    if (session.getAttribute("username") != "PiMLab" && session.getAttribute("username") != "guest")
     {
         response.sendRedirect("loginpage.jsp");
         return;
@@ -44,7 +44,7 @@
                 <br>
                 <br>
                 <div>
-                    <img src="manual10.JPG" alt="Image Not Found ..." style="width: 1000px"/>
+                    <img src="manual6.JPG" alt="Image Not Found ..." style="width: 1000px"/>
                 </div>
                 <br>
                 <br>
@@ -54,22 +54,16 @@
                 <div>
                         <img src="manual2.JPG" alt="Image Not Found ..." style="width: 850px"/>
                 </div>
+                <br><br><br>
+                <div>
+                        <img src="manual3.JPG" alt="Image Not Found ..." style="width: 1000px"/>
+                </div>
                 <br>
                 <div>
                     <img src="Step Order2.jpg" alt="Image Not Found ..." style="width: 1000px"/>
                 </div>
                 <div>
-                        <img src="manual3.JPG" alt="Image Not Found ..." style="width: 850px"/>
-                </div>
-                <div>
-                        <img src="manual4.JPG" alt="Image Not Found ..." style="width: 650px"/>
-                </div>
-                <br>
-                <div>
-                    <img src="Step Order3.jpg" alt="Image Not Found ..." style="width: 1000px"/>
-                </div>
-                <div>
-                        <img src="manual5.JPG" alt="Image Not Found ..." style="width: 700px"/>
+                        <img src="manual4.JPG" alt="Image Not Found ..." style="width: 1000px"/>
                 </div>
                 
             </center>

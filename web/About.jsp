@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-    if (session.getAttribute("username") != "PiMLab" && session.getAttribute("username") != "a")
+    if (session.getAttribute("username") != "PiMLab" && session.getAttribute("username") != "guest")
     {
         response.sendRedirect("loginpage.jsp");
         return;

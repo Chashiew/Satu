@@ -9,7 +9,7 @@
 <%@ page import="java.text.*" %>
 
 <%
-    if (session.getAttribute("username") != "PiMLab" && session.getAttribute("username") != "a")
+    if (session.getAttribute("username") != "PiMLab" && session.getAttribute("username") != "guest")
     {
         response.sendRedirect("loginpage.jsp");
         return;
@@ -26,6 +26,19 @@
 <%
 String VarA = request.getParameter("VarA");
 String VarB = request.getParameter("VarB");
+
+String sGraphNo = request.getParameter("sGraphNo");
+if (sGraphNo == null) {
+    sGraphNo = "31";        
+};
+String sopt = request.getParameter("sopt");
+if (sopt == null) {
+    sopt = "2";        
+};
+String sBestFold = request.getParameter("sBestFold");
+if (sBestFold == null) {
+    sBestFold = "1";        
+};
 
 String sNormalRadio = "";
 String sPRadio = "";
@@ -1252,6 +1265,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     var VarNext = document.getElementById("VarNext");
                     document.getElementById("VarNext").value = val;
                     
+                    var sBestFold = document.getElementById("sBestFold");
+                    var sopt = document.getElementById("sopt");
+                    var sGraphNo = document.getElementById("sGraphNo");
+                    
                     var sLoadingDataExcel = document.getElementById("sLoadingDataExcel");
                     sLoadingDataExcel = "";
                     document.getElementById("sLoadingDataExcel").value = sLoadingDataExcel;
@@ -1350,7 +1367,11 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
 
                     var VarNextLSSVM = document.getElementById("VarNextLSSVM");
                     document.getElementById("VarNextLSSVM").value = val;
-
+                    
+                    var sBestFold = document.getElementById("sBestFold");
+                    var sopt = document.getElementById("sopt");
+                    var sGraphNo = document.getElementById("sGraphNo");
+                    
                     var sLoadingDataExcelLSSVM = document.getElementById("sLoadingDataExcelLSSVM");
                     sLoadingDataExcelLSSVM = "2";
                     document.getElementById("sLoadingDataExcelLSSVM").value = sLoadingDataExcelLSSVM;
@@ -2277,6 +2298,11 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 <input type="hidden" name="sPFileData" id="sPFileData" value="<%=sPFileData%>" /> 
                 <input type="hidden" name="sdPInstances" id="sdPInstances" value="<%=sdPInstances%>" /> 
                 <input type="hidden" name="sdPAttributes" id="sdPAttributes" value="<%=sdPAttributes%>" /> 
+                
+                <input type="hidden" name="sopt" id="sopt" value="<%=sopt%>" /> 
+                <input type="hidden" name="sGraphNo" id="sGraphNo" value="<%=sGraphNo%>" /> 
+                <input type="hidden" name="sBestFold" id="sBestFold" value="<%=sBestFold%>" /> 
+                
                 <br>
                 <br>
                 <center id="title">
@@ -2351,8 +2377,11 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 <div class="row">
                                     <div class="col-md-3">System parameters:</div>
                                     <div class="col-md-2">Value of C</div>
-                                    <div class="col-md-1">
+                                    <div class="col-md-2">
                                         <input type="text" name="nValueC" id="nValueC" size="5" value="<%=nValueC%>"/>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" onclick="">Load Model</button>
                                     </div>
                                 </div>
                                 <br>
@@ -2415,7 +2444,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                     <div class="row">
                                         <div class="col-md-2">
                                             <input type="hidden" name="fullPath" id="fullPath" value=""/>
-                                            <input type="file" class="filestyle" name="sDataFile" id="sDataFile" accept=".csv,.txt" data-input="false"/>
+                                            <input type="file" class="filestyle" name="sDataFile" id="sDataFile" accept=".txt" data-input="false"/>
                                         </div>
                                         <div class="col-md-2" style="margin-top : 4px">
                                             <a onclick="return computeatform(1);">
@@ -2448,7 +2477,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                     <div class="panel panel-default">
                                         <div class="panel-body">
                                             <div class="container boundary">
-                                                <h3>Test Option Available</h3>
+                                                <h3>Test Option</h3>
                                                 <%--><p>The test data file used to evaluate the optimized model again. Output phase: calculate performance measures (i.e., RMSE, MAE, MAPE, R)</p>
                                                 <p>to find the prediction accuracy.</p><--%>
                                                 <div class="boundary">
@@ -2487,7 +2516,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                                             <div class="col-md-2">
                                                                     <input type="hidden" name="fullPathT" id="fullPathT" value=""/>
                                                                     <!--<input type="file" name="sDataFile" id="sDataFile"/>-->
-                                                                    <input type="file" class="filestyle" name="sTestDataFile" id="sTestDataFile" accept=".csv,.txt" data-input="false"/>
+                                                                    <input type="file" class="filestyle" name="sTestDataFile" id="sTestDataFile" accept=".txt" data-input="false"/>
                                                                 </label>
                                                             </div>
                                                             <div class="col-md-2" style="margin-top : 4px">
@@ -2497,7 +2526,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                                             </div>
                                                             <div class="col-md-2" style="margin-top : 7px">File name</div>
                                                             <div class="col-md-4">
-                                                                <input type="text" name="sTestFileName" id="sTestFileName" size="45" value="<%=sTestFileName%>" readonly/>
+                                                                <input type="text" name="sTestFileName" id="sTestFileName" size="38" value="<%=sTestFileName%>" readonly/>
                                                             </div>
                                                         </div>
                                                         <div class="row" style="margin-bottom : 8px">
@@ -2524,7 +2553,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                                             <div class="col-md-2">
                                                                     <input type="hidden" name="fullPathT" id="fullPathT" value=""/>
                                                                     <!--<input type="file" name="sDataFile" id="sDataFile"/>-->
-                                                                    <input type="file" class="filestyle" name="sTestDataFile" id="sTestDataFile" accept=".csv,.txt" data-input="false"/>
+                                                                    <input type="file" class="filestyle" name="sTestDataFile" id="sTestDataFile" accept=".txt" data-input="false"/>
                                                                 </label>
                                                             </div>
                                                             <div class="col-md-2" style="margin-top : 4px">
@@ -2534,7 +2563,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                                             </div>
                                                             <div class="col-md-2" style="margin-top : 7px">File name</div>
                                                             <div class="col-md-4">
-                                                                <input type="text" name="sTestFileName" id="sTestFileName" size="45" value="<%=sTestFileName%>" readonly/>
+                                                                <input type="text" name="sTestFileName" id="sTestFileName" size="38" value="<%=sTestFileName%>" readonly/>
                                                             </div>
                                                         </div>
                                                         <div class="row" style="margin-bottom : 8px">
@@ -2586,7 +2615,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                     <div class="row">
                                         <div class="col-md-2">
                                             <input type="hidden" name="fullPathL" id="fullPathL" value=""/>
-                                            <input type="file" class="filestyle" name="sLearningDataFile" id="sLearningDataFile" accept=".csv,.txt" data-input="false"/>
+                                            <input type="file" class="filestyle" name="sLearningDataFile" id="sLearningDataFile" accept=".txt" data-input="false"/>
                                         </div>
                                         <div class="col-md-2" style="margin-top : 4px">
                                             <a onclick="return computeatform(1);">
@@ -2621,7 +2650,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                     <div class="row">
                                         <div class="col-md-2">
                                                 <input type="hidden" name="fullPathP" id="fullPathP" value=""/>
-                                                <input type="file" class="filestyle"  name="sPredictionDataFile" id="sPredictionDataFile" accept=".csv,.txt" data-input="false"/>
+                                                <input type="file" class="filestyle"  name="sPredictionDataFile" id="sPredictionDataFile" accept=".txt" data-input="false"/>
                                             </label>
                                         </div>
                                         <div class="col-md-2" style="margin-top : 4px">
@@ -2711,7 +2740,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="container boundary">
-                                <b>Base output file name (eg. SVRResult):</b>&nbsp;&nbsp;&nbsp;
+                                <b>Base output file name:</b>&nbsp;&nbsp;&nbsp;
                                 <!--<font color="teal" face="tahoma" size="2"> Base output file name (eg. SVRResult) </font>-->
                                 <input type="text" name="sBaseFileName" id="sBaseFileName" size="20" value="<%=sBaseFileName%>">
                                 <!--<font color="teal" face="tahoma" size="2">order number and .txt will be automatically added. </font>-->
@@ -4121,6 +4150,9 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 <input type="hidden" name="sdPInstancesLSSVM" id="sdPInstancesLSSVM" value="<%=sdPInstancesLSSVM%>" /> 
                 <input type="hidden" name="sdPAttributesLSSVM" id="sdPAttributesLSSVM" value="<%=sdPAttributesLSSVM%>" /> 
                 
+                <input type="hidden" name="sopt" id="sopt" value="<%=sopt%>" /> 
+                <input type="hidden" name="sGraphNo" id="sGraphNo" value="<%=sGraphNo%>" /> 
+                <input type="hidden" name="sBestFold" id="sBestFold" value="<%=sBestFold%>" /> 
                 <br>
                 <br>
                 <center id="title">
@@ -4194,8 +4226,11 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 <div class="row">
                                     <div class="col-md-3">System parameters:</div>
                                     <div class="col-md-2">Value of C</div>
-                                    <div class="col-md-1">
+                                    <div class="col-md-2">
                                         <input type="text" name="nValueCLSSVM" id="nValueCLSSVM" size="5" value="<%=nValueCLSSVM%>"> 
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" onclick="">Load Model</button>
                                     </div>
                                 </div>
                                 <br>
@@ -4246,7 +4281,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                     <div class="row">
                                         <div class="col-md-2">
                                             <input type="hidden" name="fullPathLSSVM" id="fullPathLSSVM" value=""/>
-                                            <input type="file" class="filestyle" name="sDataFileLSSVM" id="sDataFileLSSVM" accept=".csv,.txt" data-input="false"/>
+                                            <input type="file" class="filestyle" name="sDataFileLSSVM" id="sDataFileLSSVM" accept=".txt" data-input="false"/>
                                         </div>
                                         <div class="col-md-2" style="margin-top : 4px">
                                             <a onclick="return computeatformLSSVM(1);">
@@ -4279,7 +4314,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                     <div class="panel panel-default">
                                         <div class="panel-body">
                                             <div class="container boundary">
-                                                <h3>Test Option Available</h3>
+                                                <h3>Test Option</h3>
                                                 <!--<p>The test data file used to evaluate the optimized model again. Output phase: calculate performance measures (i.e., RMSE, MAE, MAPE, R)</p>
                                                 <p>to find the prediction accuracy.</p>-->
                                                 <div class="boundary">
@@ -4317,7 +4352,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                                     <div class="row">
                                                         <div class="col-md-2">
                                                                 <input type="hidden" name="fullPathTLSSVM" id="fullPathTLSSVM" value=""/>
-                                                                <input type="file" class="filestyle" name="sTestDataFileLSSVM" id="sTestDataFileLSSVM" accept=".csv,.txt" data-input="false"/>
+                                                                <input type="file" class="filestyle" name="sTestDataFileLSSVM" id="sTestDataFileLSSVM" accept=".txt" data-input="false"/>
                                                             </label>
                                                         </div>
                                                         <div class="col-md-2" style="margin-top : 4px">
@@ -4327,7 +4362,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                                         </div>
                                                         <div class="col-md-2" style="margin-top : 7px">File name</div>
                                                         <div class="col-md-4">
-                                                            <input type="text" name="sTestFileNameLSSVM" id="sTestFileNameLSSVM" size="45" value="<%=sTestFileNameLSSVM%>" readonly/>
+                                                            <input type="text" name="sTestFileNameLSSVM" id="sTestFileNameLSSVM" size="38" value="<%=sTestFileNameLSSVM%>" readonly/>
                                                         </div>
                                                     </div>
                                                     <div class="row" style="margin-bottom : 8px">
@@ -4355,7 +4390,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                                     <div class="row">
                                                         <div class="col-md-2">
                                                                 <input type="hidden" name="fullPathTLSSVM" id="fullPathTLSSVM" value=""/>
-                                                                <input type="file" class="filestyle" name="sTestDataFileLSSVM" id="sTestDataFileLSSVM" accept=".csv,.txt" data-input="false"/>
+                                                                <input type="file" class="filestyle" name="sTestDataFileLSSVM" id="sTestDataFileLSSVM" accept=".txt" data-input="false"/>
                                                             </label>
                                                         </div>
                                                         <div class="col-md-2" style="margin-top : 4px">
@@ -4365,7 +4400,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                                         </div>
                                                         <div class="col-md-2" style="margin-top : 7px">File name</div>
                                                         <div class="col-md-4">
-                                                            <input type="text" name="sTestFileNameLSSVM" id="sTestFileNameLSSVM" size="45" value="<%=sTestFileNameLSSVM%>" readonly/>
+                                                            <input type="text" name="sTestFileNameLSSVM" id="sTestFileNameLSSVM" size="38" value="<%=sTestFileNameLSSVM%>" readonly/>
                                                         </div>
                                                     </div>
                                                     <div class="row" style="margin-bottom : 8px">
@@ -4417,7 +4452,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                     <div class="row">
                                         <div class="col-md-2">
                                             <input type="hidden" name="fullPathLLSSVM" id="fullPathLLSSVM" value=""/>
-                                            <input type="file" class="filestyle" name="sLearningDataFileLSSVM" id="sLearningDataFileLSSVM" accept=".csv,.txt" data-input="false"/>
+                                            <input type="file" class="filestyle" name="sLearningDataFileLSSVM" id="sLearningDataFileLSSVM" accept=".txt" data-input="false"/>
                                         </div>
                                         <div class="col-md-2" style="margin-top : 4px">
                                             <a onclick="return computeatformLSSVM(1);">
@@ -4452,7 +4487,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                     <div class="row">
                                         <div class="col-md-2">
                                                 <input type="hidden" name="fullPathPLSSVM" id="fullPathPLSSVM" value=""/>
-                                                <input type="file" class="filestyle"  name="sPredictionDataFileLSSVM" id="sPredictionDataFileLSSVM" accept=".csv,.txt" data-input="false"/>
+                                                <input type="file" class="filestyle"  name="sPredictionDataFileLSSVM" id="sPredictionDataFileLSSVM" accept=".txt" data-input="false"/>
                                             </label>
                                         </div>
                                         <div class="col-md-2" style="margin-top : 4px">
@@ -4548,7 +4583,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="container boundary">
-                            <b>Base output file name (eg. SVMResult):</b>&nbsp;&nbsp;&nbsp;
+                            <b>Base output file name:</b>&nbsp;&nbsp;&nbsp;
                             <!--<font color="teal" face="tahoma" size="2"> Base output file name (eg. SVMResult) </font>-->
                             <input type="text" name="sBaseFileNameLSSVM" id="sBaseFileNameLSSVM" size="20" value="<%=sBaseFileNameLSSVM%>">
                             <!--<font color="teal" face="tahoma" size="2">order number and .txt will be automatically added. </font>-->

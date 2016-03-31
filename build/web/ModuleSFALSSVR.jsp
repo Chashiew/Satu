@@ -9,7 +9,7 @@
 <%@ page import="java.text.*" %>
 
 <%
-    if (session.getAttribute("username") != "PiMLab" && session.getAttribute("username") != "a")
+    if (session.getAttribute("username") != "PiMLab" && session.getAttribute("username") != "guest")
     {
         response.sendRedirect("loginpage.jsp");
         return;
@@ -76,58 +76,22 @@
             vfile = "";
         }
 
-    String sResult01 = request.getParameter("sResult01"); 
-    if (sResult01 == null) {
-        sResult01 = "";
-    }
     String sResult01Name = request.getParameter("sResult01Name"); 
     if (sResult01Name == null) {
         sResult01Name = "";
-    }
-    String sfilefileResult01 = request.getParameter("sfilefileResult01"); 
-    if (sfilefileResult01 == null) {
-        sfilefileResult01 = ""; 
-    }
-
-    String sResult02 = request.getParameter("sResult02");
-    if (sResult02 == null) {
-        sResult02 = "";
     }
     String sResult02Name = request.getParameter("sResult02Name"); 
     if (sResult02Name == null) {
         sResult02Name = "";
     }
-    String sfilefileResult02 = request.getParameter("sfilefileResult02"); 
-    if (sfilefileResult02 == null) {
-        sfilefileResult02 = ""; 
-    }
-
-    String sResult03 = request.getParameter("sResult03");
-    if (sResult03 == null) {
-        sResult03 = "";
-    }
     String sResult03Name = request.getParameter("sResult03Name"); 
     if (sResult03Name == null) {
         sResult03Name = "";
-    }
-    String sfilefileResult03 = request.getParameter("sfilefileResult03"); 
-    if (sfilefileResult03 == null) {
-        sfilefileResult03 = ""; 
-    }
-
-    String sResult04 = request.getParameter("sResult04");
-    if (sResult04 == null) {
-        sResult04 = "";
     }
     String sResult04Name = request.getParameter("sResult04Name"); 
     if (sResult04Name == null) {
         sResult04Name = "";
     }
-    String sfilefileResult04 = request.getParameter("sfilefileResult04"); 
-    if (sfilefileResult04 == null) {
-        sfilefileResult04 = ""; 
-    }
-
     String sResult04aName = request.getParameter("sResult04aName");
     if (sResult04aName == null) {
         sResult04aName = "";
@@ -144,56 +108,15 @@
     if (sResult04dName == null) {
         sResult04dName = "";
     } 
-
-    String sResult05 = request.getParameter("sResult05");
-    if (sResult05 == null) {
-        sResult05 = "";
-    }
     String sResult05Name = request.getParameter("sResult05Name"); 
     if (sResult05Name == null) {
         sResult05Name = "";
-    }
-    String sfilefileResult05 = request.getParameter("sfilefileResult05"); 
-    if (sfilefileResult05 == null) {
-        sfilefileResult05 = ""; 
-    }
-
-    String sResult06 = request.getParameter("sResult06");
-    if (sResult06 == null) {
-        sResult06 = "";
     }
     String sResult06Name = request.getParameter("sResult06Name"); 
     if (sResult06Name == null) {
         sResult06Name = "";
     }
-    String sfilefileResult06 = request.getParameter("sfilefileResult06");
-    if (sfilefileResult06 == null) {
-        sfilefileResult06 = ""; 
-    }
-
-    String sReportFile = request.getParameter("sReportFile");
-    if (sReportFile == null) {
-        sReportFile = "";
-    }
-    String sfilefile = request.getParameter("sfilefile");
-    if (sfilefile == null) {
-        sfilefile = "";
-    }
-
-    String sReportFileTXT = request.getParameter("sReportFileTXT"); 
-    if (sReportFileTXT == null) {
-        sReportFileTXT = "";
-    }
-    String sfilefileTXT = request.getParameter("sfilefileTXT");
-    if (sfilefileTXT == null) {
-        sfilefileTXT = "";
-    }
-
-    String res = request.getParameter("res"); 
-    if (res == null) {
-        res = "";
-    }
-
+    
     String sLoadingDataSet1 = request.getParameter("sLoadingDataSet1");
     if (sLoadingDataSet1 == null) {
         sLoadingDataSet1 = "";       
@@ -216,10 +139,8 @@
     };
 
     String snFireFlies = request.getParameter("nFireFlies");
-    
     String snMaxGeneration = request.getParameter("nMaxGeneration");
-    int nGeneration=(int)Double.parseDouble(snMaxGeneration);;
-            
+    int nGeneration=(int)Double.parseDouble(snMaxGeneration);          
     String sdMinBeta = request.getParameter("dMinBeta"); 
     String sdGamma = request.getParameter("dGamma"); 
     String sdAlpha = request.getParameter("dAlpha"); 
@@ -399,29 +320,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <%
-        /*
-        String hdf = request.getParameter("hiddendatafile");
-        if (hdf == null) {
-            hdf = "0";
-        } 
-        */
-        %>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>NiMOPS: SFA-LSSVR</title>
-        
-        <%-->
-        <style>
-        body { 
-            background: url("edit.png");
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-position: right bottom;
-            background-size: 450px;
-        }
-        </style>
-        (--%>
         
         <link rel="stylesheet" type="text/css" href="mystyle.css">
         <link rel="Stylesheet" type="text/css"
@@ -440,7 +340,6 @@
         <script type="text/javascript">
             function viewdataset(val) {
                 if (val===1) {
-                    //alert("Aha1 ...!");
                     document.getElementById("sLoadingDataSet1").value = val;
                     document.getElementById("sLoadingDataSet2").value = "";
                     document.getElementById("sLoadingDataSet3").value = "";
@@ -448,7 +347,6 @@
                     document.getElementById("sLoadingDataSet5").value = "";
                 }
                 else if (val===2) {
-                    //alert("Aha2 ...!");
                     document.getElementById("sLoadingDataSet1").value = "";
                     document.getElementById("sLoadingDataSet2").value = val;
                     document.getElementById("sLoadingDataSet3").value = "";
@@ -456,7 +354,6 @@
                     document.getElementById("sLoadingDataSet5").value = "";
                 }
                 else if (val===3) {
-                    //alert("Aha3 ...!");
                     document.getElementById("sLoadingDataSet1").value = "";
                     document.getElementById("sLoadingDataSet2").value = "";
                     document.getElementById("sLoadingDataSet3").value = val;
@@ -464,7 +361,6 @@
                     document.getElementById("sLoadingDataSet5").value = "";
                 }
                 else if (val===4) {
-                    //alert("Aha4 ...!");
                     document.getElementById("sLoadingDataSet1").value = "";
                     document.getElementById("sLoadingDataSet2").value = "";
                     document.getElementById("sLoadingDataSet3").value = "";
@@ -478,33 +374,9 @@
                     document.getElementById("sLoadingDataSet4").value = "";
                     document.getElementById("sLoadingDataSet5").value = val;
                 }
-
                 return refreshform(0);
             }
 
-            function closesummarydata2() {
-                sProcessRun = "";
-                document.getElementById("sProcessRun").value = sProcessRun;
-                
-                var sLoadingDataSet1 = document.getElementById("sLoadingDataSet1");
-                sLoadingDataSet1 = "";
-                document.getElementById("sLoadingDataSet1").value = sLoadingDataSet1;
-                var sLoadingDataSet2 = document.getElementById("sLoadingDataSet2");
-                sLoadingDataSet2 = "";
-                document.getElementById("sLoadingDataSet2").value = sLoadingDataSet2;
-                var sLoadingDataSet3 = document.getElementById("sLoadingDataSet3");
-                sLoadingDataSet3 = "";
-                document.getElementById("sLoadingDataSet3").value = sLoadingDataSet3;
-                var sLoadingDataSet4 = document.getElementById("sLoadingDataSet4");
-                sLoadingDataSet4 = "";
-                document.getElementById("sLoadingDataSet4").value = sLoadingDataSet4;
-                var sLoadingDataSet5 = document.getElementById("sLoadingDataSet5");
-                sLoadingDataSet5 = "";
-                document.getElementById("sLoadingDataSet5").value = sLoadingDataSet5;
-
-                return refreshform(0);
-            }
-            
             function rundata2(val) {
                 var sResult01Name = document.getElementById("sResult01Name");
                 var sResult02Name = document.getElementById("sResult02Name");
@@ -537,114 +409,8 @@
                 sLoadingDataSet5 = "";
                 document.getElementById("sLoadingDataSet5").value = sLoadingDataSet5;
 
-                var sResult01 = document.getElementById("sResult01");
-                var sResult02 = document.getElementById("sResult02");
-                var sResult03 = document.getElementById("sResult03");
-                var sResult04 = document.getElementById("sResult04");
-                var sResult05 = document.getElementById("sResult05");
-                var sResult06 = document.getElementById("sResult06");
-                //var sReportFile = document.getElementById("sReportFile");
-                //var sReportFileTXT = document.getElementById("sReportFileTXT");
-                
-                var sResult01Name = document.getElementById("sResult01Name");
-                var sResult02Name = document.getElementById("sResult02Name");
-                var sResult03Name = document.getElementById("sResult03Name");
-                var sResult04Name = document.getElementById("sResult04Name");
-                var sResult04aName = document.getElementById("sResult04aName");
-                var sResult04bName = document.getElementById("sResult04bName");
-                var sResult04cName = document.getElementById("sResult04cName");
-                var sResult04dName = document.getElementById("sResult04dName");
-                var sResult05Name = document.getElementById("sResult05Name");
-                var sResult06Name = document.getElementById("sResult06Name");
-                
                 document.getElementById("sPageControl").value = "1";
                 return refreshform(val);
-            }
-
-            function showsummaryreport(valData) {
-                sProcessRun = "";
-                document.getElementById("sProcessRun").value = sProcessRun;
-                
-                var sLoadingDataSet1 = document.getElementById("sLoadingDataSet1");
-                sLoadingDataSet1 = "";
-                document.getElementById("sLoadingDataSet1").value = sLoadingDataSet1;
-                var sLoadingDataSet2 = document.getElementById("sLoadingDataSet2");
-                sLoadingDataSet2 = "";
-                document.getElementById("sLoadingDataSet2").value = sLoadingDataSet2;
-                var sLoadingDataSet3 = document.getElementById("sLoadingDataSet3");
-                sLoadingDataSet3 = "";
-                document.getElementById("sLoadingDataSet3").value = sLoadingDataSet3;
-                var sLoadingDataSet4 = document.getElementById("sLoadingDataSet4");
-                sLoadingDataSet4 = "";
-                document.getElementById("sLoadingDataSet4").value = sLoadingDataSet4;
-                var sLoadingDataSet5 = document.getElementById("sLoadingDataSet5");
-                sLoadingDataSet5 = "";
-                document.getElementById("sLoadingDataSet5").value = sLoadingDataSet5;
-
-                if (valData===11 || valData===12) { 
-                }
-                else if (valData===2) {
-                }
-                else if (valData===3) {
-                }
-                else if (valData===4) { 
-                    var sResult01Name = document.getElementById("sResult01Name");
-                    var sResult02Name = document.getElementById("sResult02Name");
-                    var sResult03Name = document.getElementById("sResult03Name");
-                    var sResult04Name = document.getElementById("sResult04Name");
-                    var sResult04aName = document.getElementById("sResult04aName");
-                    var sResult04bName = document.getElementById("sResult04bName");
-                    var sResult04cName = document.getElementById("sResult04cName");
-                    var sResult04dName = document.getElementById("sResult04dName");
-
-                    var sResult05 = document.getElementById("sResult05").value;
-                    if (sResult05!=="") {
-                        var sResult05Name = document.getElementById("sResult05");
-                    }
-                    else {
-                        var sResult05Name = document.getElementById("sResult05Name").value;
-                        if (sResult05Name==="") {
-                            document.getElementById("sResult05Name").value="E:\\00 Swarm Optimization\\NiMOPSJava\\build\\web\\Result05.txt";
-                        }
-                    }
-
-                    var sResult06 = document.getElementById("sResult06").value;
-                    if (sResult06!=="") {
-                        var sResult06Name = document.getElementById("sResult06");
-                    }
-                    else {
-                        var sResult06Name = document.getElementById("sResult06Name").value;
-                        if (sResult06Name==="") {
-                            document.getElementById("sResult06Name").value="E:\\00 Swarm Optimization\\NiMOPSJava\\build\\web\\Result06.txt";
-                        }
-                    }
-                }
-                else if (valData===5) { 
-                    var sResult01Name = document.getElementById("sResult01Name");
-                    var sResult02Name = document.getElementById("sResult02Name");
-                    var sResult03Name = document.getElementById("sResult03Name");
-                    var sResult04Name = document.getElementById("sResult04Name");
-                    var sResult04aName = document.getElementById("sResult04aName");
-                    var sResult04bName = document.getElementById("sResult04bName");
-                    var sResult04cName = document.getElementById("sResult04cName");
-                    var sResult04dName = document.getElementById("sResult04dName");
-                    var sResult05Name = document.getElementById("sResult05Name");
-                    var sResult06Name = document.getElementById("sResult06Name");
-                } 
-                else if (valData===6) { 
-                    var sResult01Name = document.getElementById("sResult01Name");
-                    var sResult02Name = document.getElementById("sResult02Name");
-                    var sResult03Name = document.getElementById("sResult03Name");
-                    var sResult04Name = document.getElementById("sResult04Name");
-                    var sResult04aName = document.getElementById("sResult04aName");
-                    var sResult04bName = document.getElementById("sResult04bName");
-                    var sResult04cName = document.getElementById("sResult04cName");
-                    var sResult04dName = document.getElementById("sResult04dName");
-                    var sResult05Name = document.getElementById("sResult05Name");
-                    var sResult06Name = document.getElementById("sResult06Name");
-                } 
-                
-                return refreshform(valData);
             }
 
             function previousscreen() {
@@ -673,12 +439,9 @@
                 var SCRadio = document.getElementById("SCRadio");
                 var PRadio = document.getElementById("PRadio");
                 var TORadio = document.getElementById("TORadio");
-                if (TORadio.value === "TORadio4")
-                {
+                if (TORadio.value === "TORadio4") {
                     document.getElementById("hiddendatafile").value = "1";
-                }
-                else
-                {
+                } else {
                     document.getElementById("hiddendatafile").value = "0";
                 }
 
@@ -781,8 +544,6 @@
                 var sPdAttributes = document.getElementById("sdPAttributes");
 
                 var VarNext = document.getElementById("VarNext");
-                //
-                //var sPageControl = document.getElementById("sPageControl");
                 
                 var sResult01Name = document.getElementById("sResult01Name");
                 var sResult02Name = document.getElementById("sResult02Name");
@@ -801,94 +562,35 @@
                 return valid;
             }           
 
-            function changepurpose(val) {
-                sProcessRun = "";
-                document.getElementById("sProcessRun").value = sProcessRun;
-                
-                var sLoadingDataSet1 = document.getElementById("sLoadingDataSet1");
-                sLoadingDataSet1 = "";
-                document.getElementById("sLoadingDataSet1").value = sLoadingDataSet1;
-                var sLoadingDataSet2 = document.getElementById("sLoadingDataSet2");
-                sLoadingDataSet2 = "";
-                document.getElementById("sLoadingDataSet2").value = sLoadingDataSet2;
-                var sLoadingDataSet3 = document.getElementById("sLoadingDataSet3");
-                sLoadingDataSet3 = "";
-                document.getElementById("sLoadingDataSet3").value = sLoadingDataSet3;
-                var sLoadingDataSet4 = document.getElementById("sLoadingDataSet4");
-                sLoadingDataSet4 = "";
-                document.getElementById("sLoadingDataSet4").value = sLoadingDataSet4;
-                var sLoadingDataSet5 = document.getElementById("sLoadingDataSet5");
-                sLoadingDataSet5 = "";
-                document.getElementById("sLoadingDataSet5").value = sLoadingDataSet5;
-
-                var sResult01 = document.getElementById("sResult01");
-                var sResult02 = document.getElementById("sResult02");
-                var sResult03 = document.getElementById("sResult03");
-                var sResult04 = document.getElementById("sResult04");
-                var sResult05 = document.getElementById("sResult05");
-                var sResult06 = document.getElementById("sResult06");
-                //var sReportFile = document.getElementById("sReportFile");
-                //var sReportFileTXT = document.getElementById("sReportFileTXT");
-                
-                var sResult01Name = document.getElementById("sResult01Name");
-                var sResult02Name = document.getElementById("sResult02Name");
-                var sResult03Name = document.getElementById("sResult03Name");
-                var sResult04Name = document.getElementById("sResult04Name");
-                var sResult04aName = document.getElementById("sResult04aName");
-                var sResult04bName = document.getElementById("sResult04bName");
-                var sResult04cName = document.getElementById("sResult04cName");
-                var sResult04dName = document.getElementById("sResult04dName");
-                var sResult05Name = document.getElementById("sResult05Name");
-                var sResult06Name = document.getElementById("sResult06Name");
-                
-                var sPageControl = document.getElementById("sPageControl");
-                sPageControl = "val"; 
-                document.getElementById("sPageControl").value = "sPageControl";
-                
-                return refreshform(val);
-            }
-                        
             function changetab(val) {
                 var sProcessRun = document.getElementById("sProcessRun");
                 sProcessRun = "";
                 document.getElementById("sProcessRun").value = sProcessRun;
-                
                 if (val === 1) {
                     document.getElementById("sPageControl").value = "1";
-                }
-                else if (val === 2) {
+                } else if (val === 2) {
                     document.getElementById("sPageControl").value = "2";
-                }
-                else {
+                } else {
                     document.getElementById("sPageControl").value = "3";
                 }
                 return refreshform(val);
             } 
                         
             function plotgraph(val) {
-                //alert("Aha1 ...!");
                 document.getElementById("sGraphNo").value = val;
                 if (val===31 || val===32 || val===33 || val===34 || val===35) {
-                    //alert("Aha2 ...!");
+                    document.getElementById("sopt").value = 2;
+                } else if (val===41 || val===42 || val===43 || val===44 || val===45) {
+                    document.getElementById("sopt").value = 0;
+                } else if (val===46 || val===47 || val===48 || val===49 || val===410) {
+                    document.getElementById("sopt").value = 0;
+                } else if (val===51 || val===52 || val===53 || val===54 || val===55) {
+                    document.getElementById("sopt").value = 1;
+                } else if (val===56 || val===57 || val===58 || val===59 || val===510) {
+                    document.getElementById("sopt").value = 1;
+                } else {
                     document.getElementById("sopt").value = 2;
                 }
-                else if (val===41 || val===42 || val===43 || val===44 || val===45) {
-                    document.getElementById("sopt").value = 0;
-                }
-                else if (val===46 || val===47 || val===48 || val===49 || val===410) {
-                    document.getElementById("sopt").value = 0;
-                }
-                else if (val===51 || val===52 || val===53 || val===54 || val===55) {
-                    document.getElementById("sopt").value = 1;
-                }
-                else if (val===56 || val===57 || val===58 || val===59 || val===510) {
-                    document.getElementById("sopt").value = 1;
-                }
-                else {
-                    //alert("Aha3 ...!");
-                    document.getElementById("sopt").value = 2;
-                }
-                //alert("Aha4 ...!");
                 return refreshform(val);
             } 
         </script>
@@ -896,7 +598,7 @@
     <body>
         <div class="sfawrap">
             <center>
-                <img src="headhomepagesub.jpg" alt="Image Not Found ..." width="1000"> 
+                <img src="headhomepagesub.jpg" alt="Image Not Found" width="1000"> 
             </center>
 
             <%@include file="navmenu.jsp" %>
@@ -906,10 +608,8 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;
 
-        <% if (VarSaveData != null) { %> 
-            
-        <% } else if (VarLoadData != null) { %> 
-            
+        <% if (VarSaveData != null) { %>            
+        <% } else if (VarLoadData != null) { %>             
         <% } else if (VarReportData != null) { %> 
             <%
                 response.setContentType("application/vnd.ms-excel");
@@ -1246,8 +946,7 @@
                 </table>
             </form>
                         
-        <% } else if (VarNext != null) { %>
-            
+        <% } else if (VarNext != null) { %>           
             <form action="ModuleSFALSSVR.jsp" name="myform2" id="myform2">
                 <%
                 /**/
@@ -1289,7 +988,6 @@
                 %>
                 
                 <input type="hidden" name="VarOne" id="VarOne" value="<%=VarOne%>"/>
-
                 <input type="hidden" name="VarNext" id="VarNext" value="<%=VarNext%>"/>
                 
                 <input type="hidden" name="nFireFlies" id="nFireFlies" value="<%=nFireFlies%>"/>
@@ -1392,6 +1090,7 @@
                                             </font>
                                         </a>                            
                                     </td>
+                                    <%--<font color="black" face="Arial" size="2" style="float:right">Base output file name:&nbsp;&nbsp;<%=sBaseFileName%>&nbsp;&nbsp;&nbsp;&nbsp;</font>--%>
                                 </tr>
                             </table> 
                             
@@ -1411,7 +1110,7 @@
                                     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                     <td>
                                         <%--><div title="Go to view the results directly!" onclick="changetab(2)"><--%>
-                                        <div title="View pre-computed numerical results..." onclick="changetab(2)">
+                                        <div title="View pre-computed numerical results" onclick="changetab(2)">
                                             <%--><h3><u><i><font face="Palatino Linotype, Book Antiqua, Palatino, serif">II. The Results</font></i></u></h3><--%>
                                             <h3><font color="skyblue" face="Palatino Linotype, Book Antiqua, Palatino, serif">Numerical Results</font></h3>
                                         </div>
@@ -1455,6 +1154,19 @@
                                 document.getElementById("sResult05Name").value = sResult05Name;
                                 document.getElementById("sResult06Name").value = sResult06Name;
                             </script>
+
+                            <div class="bs-example">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="container boundary">
+                                            <div class="row">
+                                                <div class="col-md-4"><h3>Base Output File Name</h3></div>
+                                                <div class="col-md-4"><h3><%=sBaseFileName%></h3></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="bs-example">
                                 <div class="panel panel-default">
@@ -1515,8 +1227,7 @@
                                                     <%
                                                     if (NormalRadio.equals("NormalRadio1")) {
                                                         sNormalRadio = "Original value";
-                                                    }
-                                                    else if (NormalRadio.equals("NormalRadio2")) {
+                                                    } else if (NormalRadio.equals("NormalRadio2")) {
                                                         sNormalRadio = "Feature scaling";
                                                     }
                                                     %>
@@ -1530,12 +1241,10 @@
                                                     if (OptimRadio.equals("OptimRadio1")) {
                                                         dOptimRadio=1;
                                                         sOptimRadio = "RMSE validation";
-                                                    }
-                                                    else if (OptimRadio.equals("OptimRadio2")) {
+                                                    } else if (OptimRadio.equals("OptimRadio2")) {
                                                         dOptimRadio=2;
                                                         sOptimRadio = "MAE validation";
-                                                    }
-                                                    else if (OptimRadio.equals("OptimRadio3")) {
+                                                    } else if (OptimRadio.equals("OptimRadio3")) {
                                                         dOptimRadio=3;
                                                         sOptimRadio = "MAPE validation";
                                                     }
@@ -1553,15 +1262,13 @@
                                                         %> 
                                                         <%=sSCRadio%>
                                                         <%
-                                                    }
-                                                    else if (SCRadio.equals("SCRadio2")) {
+                                                    } else if (SCRadio.equals("SCRadio2")) {
                                                         dSCRadio=2;
                                                         sSCRadio = "Consecutive rates of change in OF values <";
                                                         %> 
                                                         <%=nf.format(nLastChange1)%> <%=sSCRadio%> <%=nf5.format(nLastChange2)%>
                                                         <%
-                                                    }
-                                                    else if (SCRadio.equals("SCRadio3")) {
+                                                    } else if (SCRadio.equals("SCRadio3")) {
                                                         dSCRadio=3;
                                                         sSCRadio = "Either criterion is reached";
                                                         %> 
@@ -1581,8 +1288,7 @@
                                                             dPRadio=1;
                                                             sPRadio = "Evaluation";
                                                             sDummy = "Learning Dataset: ";
-                                                        }
-                                                        else if (PRadio.equals("PRadio2")) {
+                                                        } else if (PRadio.equals("PRadio2")) {
                                                             dPRadio=2;
                                                             sPRadio = "Prediction";
                                                             sDummy = "Learning Dataset: ";
@@ -1600,8 +1306,7 @@
                                                             dPRadio=1;
                                                             sPRadio = "Evaluation";
                                                             sDummy = "Learning Dataset: ";
-                                                        }
-                                                        else if (PRadio.equals("PRadio2")) {
+                                                        } else if (PRadio.equals("PRadio2")) {
                                                             dPRadio=2;
                                                             sPRadio = "Prediction";
                                                             sDummy = "Learning Dataset: ";
@@ -1639,12 +1344,10 @@
                                                                 sPFileData = "";
                                                                 dPAttributes = "0";
                                                                 dPInstances = "0";
-                                                            }
-                                                            else if (PRadio.equals("PRadio2")) { %> 
+                                                            } else if (PRadio.equals("PRadio2")) { %> 
                                                                 -
                                                             <% }
-                                                        }
-                                                        else if (TORadio.equals("TORadio3")) {
+                                                        } else if (TORadio.equals("TORadio3")) {
                                                             dTORadio=3;
                                                             if (PRadio.equals("PRadio1")) { %>
                                                                 Cross-validation = <%=nf.format(dCrossValidation)%> (folds)
@@ -1657,12 +1360,10 @@
                                                                 sPFileData = "";
                                                                 dPAttributes = "0";
                                                                 dPInstances = "0";
-                                                            }
-                                                            else if (PRadio.equals("PRadio2")) { %>
+                                                            } else if (PRadio.equals("PRadio2")) { %>
                                                                 -
                                                             <% }
-                                                        }
-                                                        else {
+                                                        } else {
                                                             if (TORadio.equals("TORadio1")) {
                                                                 dTORadio=1;
                                                                 if (PRadio.equals("PRadio1")) {
@@ -1675,12 +1376,10 @@
                                                                     sPFileData = "";
                                                                     dPAttributes = "0";
                                                                     dPInstances = "0";
-                                                                }
-                                                                else if (PRadio.equals("PRadio2")) {
+                                                                } else if (PRadio.equals("PRadio2")) {
                                                                     sTORadio = "-";
                                                                 }
-                                                            }
-                                                            else if (TORadio.equals("TORadio4")) {
+                                                            } else if (TORadio.equals("TORadio4")) {
                                                                 dTORadio=4;
                                                                 if (PRadio.equals("PRadio1")) {
                                                                     sTORadio = "Use test dataset";
@@ -1693,8 +1392,7 @@
                                                                     dPAttributes = snTDFAttributes; 
                                                                     dPInstances = snTDFInstances; 
                                                                     sVariation = "4";
-                                                                }
-                                                                else if (PRadio.equals("PRadio2")) {
+                                                                } else if (PRadio.equals("PRadio2")) {
                                                                     sTORadio = "-";
                                                                 }
                                                             }
@@ -1714,12 +1412,10 @@
                                                                 sPFileData = "";
                                                                 dPAttributes = "0";
                                                                 dPInstances = "0";
-                                                            }
-                                                            else if (PRadio.equals("PRadio2")) { %> 
+                                                            } else if (PRadio.equals("PRadio2")) { %> 
                                                                 -
                                                             <% }
-                                                        }
-                                                        else if (TORadio.equals("TORadio3")) {
+                                                        } else if (TORadio.equals("TORadio3")) {
                                                             dTORadio=3;
                                                             if (PRadio.equals("PRadio1")) { %>
                                                                 Cross-validation = <%=nf.format(dCrossValidation)%> (folds)
@@ -1732,12 +1428,10 @@
                                                                 sPFileData = "";
                                                                 dPAttributes = "0";
                                                                 dPInstances = "0";
-                                                            }
-                                                            else if (PRadio.equals("PRadio2")) { %>
+                                                            } else if (PRadio.equals("PRadio2")) { %>
                                                                 -
                                                             <% }
-                                                        }
-                                                        else {
+                                                        } else {
                                                             if (TORadio.equals("TORadio1")) {
                                                                 dTORadio=1;
                                                                 if (PRadio.equals("PRadio1")) {
@@ -1750,12 +1444,10 @@
                                                                     sPFileData = "";
                                                                     dPAttributes = "0";
                                                                     dPInstances = "0";
-                                                                }
-                                                                else if (PRadio.equals("PRadio2")) {
+                                                                } else if (PRadio.equals("PRadio2")) {
                                                                     sTORadio = "-";
                                                                 }
-                                                            }
-                                                            else if (TORadio.equals("TORadio4")) {
+                                                            } else if (TORadio.equals("TORadio4")) {
                                                                 dTORadio=4;
                                                                 if (PRadio.equals("PRadio1")) {
                                                                     sTORadio = "Use test dataset";
@@ -1768,12 +1460,10 @@
                                                                     dPAttributes = snTDFAttributes; 
                                                                     dPInstances = snTDFInstances; 
                                                                     sVariation = "9";
-                                                                }
-                                                                else if (PRadio.equals("PRadio2")) {
+                                                                } else if (PRadio.equals("PRadio2")) {
                                                                     sTORadio = "-";
                                                                 }
-                                                            }
-                                                            else {
+                                                            } else {
                                                                 dAttributes = snDFAttributes;
                                                                 dInstances = snDFInstances;
                                                             }
@@ -1832,20 +1522,20 @@
                                                                 </font>
                                                             </a>
                                                         </div>
-                                                        <div class="col-md-4">
+                                                        <%--><div class="col-md-4">
                                                             <font color="black">
                                                                 Base output file name: &nbsp;<b><%=sBaseFileName%></b>
                                                             </font>
-                                                        </div>
+                                                        </div><--%>
                                                     <% } else { %>
                                                         <div class="col-md-4">
                                                             &nbsp;
                                                         </div>
-                                                        <div class="col-md-4">
+                                                        <%--><div class="col-md-4">
                                                             <font color="black">
                                                                 Base output file name: &nbsp;<b><%=sBaseFileName%></b>
                                                             </font>
-                                                        </div>
+                                                        </div><--%>
                                                     <% } %>
                                                     
                                                 <% } else if (PRadio.equals("PRadio2")) { %> 
@@ -1863,11 +1553,11 @@
                                                             </font>
                                                         </a> 
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <%--><div class="col-md-4">
                                                         <font color="black">
                                                         Base output file name: &nbsp;<b><%=sBaseFileName%></b>
                                                         </font>
-                                                    </div>
+                                                    </div><--%>
                                                 <% } %>
                                             </div>
                                         </div>
@@ -1894,7 +1584,7 @@
                                     // first line: title
                                     line = br.readLine();
                                     if (line == null) {
-                                        out .println("<h3><font color='red'>Data file is empty ...!</font></h3>");
+                                        out .println("<h3><font color='red'>Data file is empty !</font></h3>");
                                     } else if (sLoadingDataSet1 != "") {
                                         cols = line.split("\\t");
 
@@ -2012,7 +1702,7 @@
                                                         <tr>
                                                             <td align="left">
                                                                 <font color='red'>
-                                                                &nbsp;&nbsp;Data file not available ... !
+                                                                &nbsp;&nbsp;Data file not available !
                                                                 </font>
                                                             </td> 
                                                         </tr>
@@ -2053,7 +1743,7 @@
                                     // first line: title
                                     line = br.readLine();
                                     if (line == null) {
-                                        out.println("<h3><font color='red'>Data file is empty ...!</font></h3>");
+                                        out.println("<h3><font color='red'>Data file is empty !</font></h3>");
                                     } else if (sLoadingDataSet2 != "") {
                                         cols = line.split("\\t");
 
@@ -2171,7 +1861,7 @@
                                                         <tr>
                                                             <td align="left">
                                                                 <font color='red'>
-                                                                    Data file not available ... !
+                                                                    Data file not available !
                                                                 </font>
                                                             </td> 
                                                         </tr>
@@ -2228,18 +1918,6 @@
                         
                         <% if (sPageControl.equals("1")) { %>
                             <% if (sProcessRun != "") { %>
-                            
-                                <%
-                                /*
-                                out.println("dPAttributes = "+dPAttributes);
-                                out.println("<br>");
-                                out.println("dPInstances = "+dPInstances);
-                                out.println("<br>");
-                                out.println("sPFileData = "+sPFileData);
-                                out.println("<br>");
-                                */
-                                %>
-                            
                                 <jsp:include page="SFALSSVRServlet">
                                     <jsp:param name="nFireFlies" value="<%=nFireFlies%>" />
                                     <jsp:param name="nMaxGeneration" value="<%=nMaxGeneration%>" />
@@ -2310,6 +1988,7 @@
                                         </font>
                                     </a>                            
                                 </td>
+                                <%--<font color="black" face="Arial" size="2" style="float:right">Base output file name:&nbsp;&nbsp;<%=sBaseFileName%>&nbsp;&nbsp;&nbsp;&nbsp;</font>--%>
                             </tr>
                         </table> 
                             
@@ -2361,7 +2040,7 @@
                                     <br>
                                     <center>
                                         <b><font size="4" id="Optimum">Main output - Best optimum hyperparameters</font></b>
-                                        <a href="#Partition"><span class=" glyphicon glyphicon-menu-down"></span></a>
+                                        <a href="#Partition"><span class="glyphicon glyphicon-menu-down"></span></a>
                                         <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <button type="button" onclick="">Save Model</button>
@@ -2382,7 +2061,7 @@
                                         if (line == null) {
                                             %><center><div><table><tr>
                                                 <td align="center">
-                                                    <h3><font color='red'>Output file empty ...!</font></h3>
+                                                    <h3><font color='red'>Output file empty !</font></h3>
                                                 </td>
                                             </tr></table></div></center><% 
                                         } else {
@@ -2425,7 +2104,7 @@
                                     } else { %> 
                                         <center><div><table><tr>
                                             <td align="center">
-                                                <h4><font color='red'>Output file not found ...!</font></h4>
+                                                <h4><font color='red'>Output file not found !</font></h4>
                                             </td>
                                         </tr></table></div></center> 
                                     <% } %> 
@@ -2471,7 +2150,7 @@
                                         if (j == 0) { %>
                                             <center><div><table><tr>
                                                 <td align="center">
-                                                    <h2><font color='red'>Output file empty ...!</font></h2>
+                                                    <h2><font color='red'>Output file empty !</font></h2>
                                                 </td>
                                             </tr></table></div></center> 
                                         <% } else { %>
@@ -2504,8 +2183,8 @@
                                             <br> 
                                             <center>
                                                 <b><font size="4" id="Partition">Performance of learning and test data</font></b>
-                                                <a href="#Optimum"><span class=" glyphicon glyphicon-menu-up"></span></a> 
-                                                <a href="#Report"><span class=" glyphicon glyphicon-menu-down"></span></a> 
+                                                <a href="#Optimum"><span class="glyphicon glyphicon-menu-up"></span></a> 
+                                                <a href="#Report"><span class="glyphicon glyphicon-menu-down"></span></a> 
                                                 <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a> 
                                                 <br>
                                             </center>
@@ -2628,7 +2307,7 @@
                                     } else { %> 
                                         <center><div><table><tr>
                                             <td align="center">
-                                                <h4><font color='red'>Output file not found ...!</font></h4>
+                                                <h4><font color='red'>Output file not found !</font></h4>
                                             </td>
                                         </tr></table></div></center> 
                                     <% } %> 
@@ -2637,8 +2316,8 @@
                                     <br>
                                     <center>
                                         <b><font size="4" id="Report">Analysis report</font></b>
-                                        <a href="#Partition"><span class=" glyphicon glyphicon-menu-up"></span></a> 
-                                        <a href="#Performance"><span class=" glyphicon glyphicon-menu-down"></span></a> 
+                                        <a href="#Partition"><span class="glyphicon glyphicon-menu-up"></span></a> 
+                                        <a href="#Performance"><span class="glyphicon glyphicon-menu-down"></span></a> 
                                         <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a> 
                                         <br>
                                     </center>
@@ -2679,7 +2358,7 @@
                                     <% } else { %>  
                                         <center><div><table><tr>
                                             <td align="center">
-                                                <h4><font color='red'>Output file not found ...!</font></h4>
+                                                <h4><font color='red'>Output file not found !</font></h4>
                                             </td>
                                         </tr></table></div></center> 
                                     <% } %> 
@@ -2688,7 +2367,7 @@
                                     <br>
                                     <center>
                                         <b><font size="4" id="Performance">Test data with predicted values of the best fold</font></b>
-                                        <a href="#Report"><span class=" glyphicon glyphicon-menu-up"></span></a> 
+                                        <a href="#Report"><span class="glyphicon glyphicon-menu-up"></span></a> 
                                         <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a> 
                                         <br>
                                     </center>
@@ -2926,7 +2605,7 @@
                                     <% } else { %>  
                                         <center><div><table><tr>
                                             <td align="center">
-                                                <h4><font color='red'>Output file not found ...!</font></h4>
+                                                <h4><font color='red'>Output file not found !</font></h4>
                                             </td>
                                         </tr></table></div></center> 
                                     <% } %> 
@@ -2946,8 +2625,8 @@
                                     <br>
                                     <br>
                                     <center>
-                                        <font size="4" id="TDataset">Predicted values of test data</font>
-                                        <a href="#LDataset"><span class=" glyphicon glyphicon-menu-down"></span></a> 
+                                        <b><font size="4" id="TDataset">Predicted values of test data</font></b>
+                                        <a href="#LDataset"><span class="glyphicon glyphicon-menu-down"></span></a> 
                                         <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a> 
                                         <br>
                                     </center>
@@ -3015,7 +2694,7 @@
                                     <% } else { %>  
                                         <center><div><table><tr>
                                             <td align="center">
-                                                <h4><font color='red'>Output file not found ...!</font></h4>
+                                                <h4><font color='red'>Output file not found !</font></h4>
                                             </td>
                                         </tr></table></div></center> 
                                     <% } %> 
@@ -3023,9 +2702,9 @@
                                     <br>
                                     <br>
                                     <center>
-                                        <font size="4" id="LDataset">Predicted values of learning data</font>
-                                        <a href="#TDataset"><span class=" glyphicon glyphicon-menu-up"></span></a>
-                                        <a href="#VPDataset"><span class=" glyphicon glyphicon-menu-down"></span></a>
+                                        <b><font size="4" id="LDataset">Predicted values of learning data</font></b>
+                                        <a href="#TDataset"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                        <a href="#VPDataset"><span class="glyphicon glyphicon-menu-down"></span></a>
                                         <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                         <br>
                                     </center>
@@ -3093,7 +2772,7 @@
                                     <% } else { %>  
                                         <center><div><table><tr>
                                             <td align="center">
-                                                <h4><font color='red'>Output file not found ...!</font></h4>
+                                                <h4><font color='red'>Output file not found !</font></h4>
                                             </td>
                                         </tr></table></div></center> 
                                     <% } %> 
@@ -3101,9 +2780,9 @@
                                     <br>
                                     <br>
                                     <center>
-                                        <font size="4" id="VPDataset">Predicted values of validation partition from learning data</font>
-                                        <a href="#LDataset"><span class=" glyphicon glyphicon-menu-up"></span></a>
-                                        <a href="#TPDataset"><span class=" glyphicon glyphicon-menu-down"></span></a>
+                                        <b><font size="4" id="VPDataset">Predicted values of validation partition from learning data</font></b>
+                                        <a href="#LDataset"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                        <a href="#TPDataset"><span class="glyphicon glyphicon-menu-down"></span></a>
                                         <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                         <br>
                                     </center>
@@ -3167,7 +2846,7 @@
                                     <% } else { %>  
                                         <center><div><table><tr>
                                             <td align="center">
-                                                <h4><font color='red'>Output file not found ...!</font></h4>
+                                                <h4><font color='red'>Output file not found !</font></h4>
                                             </td>
                                         </tr></table></div></center> 
                                     <% } %> 
@@ -3175,8 +2854,8 @@
                                     <br>
                                     <br>
                                     <center>
-                                        <font size="4" id="TPDataset">Predicted values of training partition from learning data</font>
-                                        <a href="#VPDataset"><span class=" glyphicon glyphicon-menu-up"></span></a>
+                                        <b><font size="4" id="TPDataset">Predicted values of training partition from learning data</font></b>
+                                        <a href="#VPDataset"><span class="glyphicon glyphicon-menu-up"></span></a>
                                         <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                         <br>
                                     </center>
@@ -3240,7 +2919,7 @@
                                     <% } else { %>  
                                         <center><div><table><tr>
                                             <td align="center">
-                                                <h4><font color='red'>Output file not found ...!</font></h4>
+                                                <h4><font color='red'>Output file not found !</font></h4>
                                             </td>
                                         </tr></table></div></center> 
                                     <% } %> 
@@ -3335,52 +3014,52 @@
                                             %>
 
                                             <center>
-                                                <% if (jj==1) { %> <font size="4" id="PT1">Performance Trajectory of Test Data - Fold No. <%=jj%></font>
-                                                    <a href="#PT2"><span class=" glyphicon glyphicon-menu-down"></span></a>
+                                                <% if (jj==1) { %> <b><font size="4" id="PT1">Performance Trajectory of Test Data - Fold No. <%=jj%></font></b>
+                                                    <a href="#PT2"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                                 <% } %>
-                                                <% if (jj==2) { %> <font size="4" id="PT2">Performance Trajectory of Test Data - Fold No. <%=jj%></font>
-                                                    <a href="#PT1"><span class=" glyphicon glyphicon-menu-up"></span></a>
-                                                    <a href="#PT3"><span class=" glyphicon glyphicon-menu-down"></span></a>
+                                                <% if (jj==2) { %> <b><font size="4" id="PT2">Performance Trajectory of Test Data - Fold No. <%=jj%></font></b>
+                                                    <a href="#PT1"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                                    <a href="#PT3"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                                 <% } %>  
-                                                <% if (jj==3) { %> <font size="4" id="PT3">Performance Trajectory of Test Data - Fold No. <%=jj%></font>
-                                                    <a href="#PT2"><span class=" glyphicon glyphicon-menu-up"></span></a>
-                                                    <a href="#PT4"><span class=" glyphicon glyphicon-menu-down"></span></a>
+                                                <% if (jj==3) { %> <b><font size="4" id="PT3">Performance Trajectory of Test Data - Fold No. <%=jj%></font></b>
+                                                    <a href="#PT2"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                                    <a href="#PT4"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                                 <% } %>  
-                                                <% if (jj==4) { %> <font size="4" id="PT4">Performance Trajectory of Test Data - Fold No. <%=jj%></font>
-                                                    <a href="#PT3"><span class=" glyphicon glyphicon-menu-up"></span></a>
-                                                    <a href="#PT5"><span class=" glyphicon glyphicon-menu-down"></span></a>
+                                                <% if (jj==4) { %> <b><font size="4" id="PT4">Performance Trajectory of Test Data - Fold No. <%=jj%></font></b>
+                                                    <a href="#PT3"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                                    <a href="#PT5"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                                 <% } %> 
-                                                <% if (jj==5) { %> <font size="4" id="PT5">Performance Trajectory of Test Data - Fold No. <%=jj%></font>
-                                                    <a href="#PT4"><span class=" glyphicon glyphicon-menu-up"></span></a>
-                                                    <a href="#PT6"><span class=" glyphicon glyphicon-menu-down"></span></a>
+                                                <% if (jj==5) { %> <b><font size="4" id="PT5">Performance Trajectory of Test Data - Fold No. <%=jj%></font></b>
+                                                    <a href="#PT4"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                                    <a href="#PT6"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                                 <% } %> 
-                                                <% if (jj==6) { %> <font size="4" id="PT6">Performance Trajectory of Test Data - Fold No. <%=jj%></font>
-                                                    <a href="#PT5"><span class=" glyphicon glyphicon-menu-up"></span></a>
-                                                    <a href="#PT7"><span class=" glyphicon glyphicon-menu-down"></span></a>
+                                                <% if (jj==6) { %> <b><font size="4" id="PT6">Performance Trajectory of Test Data - Fold No. <%=jj%></font></b>
+                                                    <a href="#PT5"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                                    <a href="#PT7"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                                 <% } %> 
-                                                <% if (jj==7) { %> <font size="4" id="PT7">Performance Trajectory of Test Data - Fold No. <%=jj%></font>
-                                                    <a href="#PT6"><span class=" glyphicon glyphicon-menu-up"></span></a>
-                                                    <a href="#PT8"><span class=" glyphicon glyphicon-menu-down"></span></a>
+                                                <% if (jj==7) { %> <b><font size="4" id="PT7">Performance Trajectory of Test Data - Fold No. <%=jj%></font></b>
+                                                    <a href="#PT6"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                                    <a href="#PT8"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                                 <% } %> 
-                                                <% if (jj==8) { %> <font size="4" id="PT8">Performance Trajectory of Test Data - Fold No. <%=jj%></font>
-                                                    <a href="#PT7"><span class=" glyphicon glyphicon-menu-up"></span></a>
-                                                    <a href="#PT9"><span class=" glyphicon glyphicon-menu-down"></span></a>
+                                                <% if (jj==8) { %> <b><font size="4" id="PT8">Performance Trajectory of Test Data - Fold No. <%=jj%></font></b>
+                                                    <a href="#PT7"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                                    <a href="#PT9"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                                 <% } %> 
-                                                <% if (jj==9) { %> <font size="4" id="PT9">Performance Trajectory of Test Data - Fold No. <%=jj%></font>
-                                                    <a href="#PT8"><span class=" glyphicon glyphicon-menu-up"></span></a>
-                                                    <a href="#PT10"><span class=" glyphicon glyphicon-menu-down"></span></a>
+                                                <% if (jj==9) { %> <b><font size="4" id="PT9">Performance Trajectory of Test Data - Fold No. <%=jj%></font></b>
+                                                    <a href="#PT8"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                                    <a href="#PT10"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                                 <% } %> 
-                                                <% if (jj==10) { %> <font size="4" id="PT10">Performance Trajectory of Test Data - Fold No. <%=jj%></font>
-                                                    <a href="#PT9"><span class=" glyphicon glyphicon-menu-up"></span></a>
+                                                <% if (jj==10) { %> <b><font size="4" id="PT10">Performance Trajectory of Test Data - Fold No. <%=jj%></font></b>
+                                                    <a href="#PT9"><span class="glyphicon glyphicon-menu-up"></span></a>
                                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                                 <% } %> 
                                             </center> 
@@ -3415,7 +3094,7 @@
                                     <% } else { %>  
                                         <center><div><table><tr>
                                             <td align="center">
-                                                <h4><font color='red'>Output file not found ...!</font></h4>
+                                                <h4><font color='red'>Output file not found !</font></h4>
                                             </td>
                                         </tr></table></div></center> 
                                     <% } %>
@@ -3510,52 +3189,52 @@
                                             %>
 
                                             <center>
-                                                <% if (jj==1) { %> <font size="4" id="TP1">Tracing Path for Searching Best Performance of Test Data - Fold No. <%=jj%></font>
-                                                        <a href="#TP2"><span class=" glyphicon glyphicon-menu-down"></span></a>
+                                                <% if (jj==1) { %> <b><font size="4" id="TP1">Tracing Path for Searching Best Performance of Test Data - Fold No. <%=jj%></font></b>
+                                                    <a href="#TP2"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                                 <% } %>
-                                                <% if (jj==2) { %> <font size="4" id="TP2">Tracing Path for Searching Best Performance of Test Data - Fold No. <%=jj%></font>
-                                                    <a href="#TP1"><span class=" glyphicon glyphicon-menu-up"></span></a>
-                                                    <a href="#TP3"><span class=" glyphicon glyphicon-menu-down"></span></a>
+                                                <% if (jj==2) { %> <b><font size="4" id="TP2">Tracing Path for Searching Best Performance of Test Data - Fold No. <%=jj%></font></b>
+                                                    <a href="#TP1"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                                    <a href="#TP3"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                                 <% } %>  
-                                                <% if (jj==3) { %> <font size="4" id="TP3">Tracing Path for Searching Best Performance of Test Data - Fold No. <%=jj%></font>
-                                                    <a href="#TP2"><span class=" glyphicon glyphicon-menu-up"></span></a>
-                                                    <a href="#TP4"><span class=" glyphicon glyphicon-menu-down"></span></a>
+                                                <% if (jj==3) { %> <b><font size="4" id="TP3">Tracing Path for Searching Best Performance of Test Data - Fold No. <%=jj%></font></b>
+                                                    <a href="#TP2"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                                    <a href="#TP4"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                                 <% } %>  
-                                                <% if (jj==4) { %> <font size="4" id="TP4">Tracing Path for Searching Best Performance of Test Data - Fold No. <%=jj%></font>
-                                                    <a href="#TP3"><span class=" glyphicon glyphicon-menu-up"></span></a>
-                                                    <a href="#TP5"><span class=" glyphicon glyphicon-menu-down"></span></a>
+                                                <% if (jj==4) { %> <b><font size="4" id="TP4">Tracing Path for Searching Best Performance of Test Data - Fold No. <%=jj%></font></b>
+                                                    <a href="#TP3"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                                    <a href="#TP5"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                                 <% } %> 
-                                                <% if (jj==5) { %> <font size="4" id="TP5">Tracing Path for Searching Best Performance of Test Data - Fold No. <%=jj%></font>
-                                                    <a href="#TP4"><span class=" glyphicon glyphicon-menu-up"></span></a>
-                                                    <a href="#TP6"><span class=" glyphicon glyphicon-menu-down"></span></a>
+                                                <% if (jj==5) { %> <b><font size="4" id="TP5">Tracing Path for Searching Best Performance of Test Data - Fold No. <%=jj%></font></b>
+                                                    <a href="#TP4"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                                    <a href="#TP6"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                                 <% } %> 
-                                                <% if (jj==6) { %> <font size="4" id="TP6">Tracing Path for Searching Best Performance of Test Data - Fold No. <%=jj%></font>
-                                                    <a href="#TP5"><span class=" glyphicon glyphicon-menu-up"></span></a>
-                                                    <a href="#TP7"><span class=" glyphicon glyphicon-menu-down"></span></a>
+                                                <% if (jj==6) { %> <b><font size="4" id="TP6">Tracing Path for Searching Best Performance of Test Data - Fold No. <%=jj%></font></b>
+                                                    <a href="#TP5"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                                    <a href="#TP7"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                                 <% } %> 
-                                                <% if (jj==7) { %> <font size="4" id="TP7">Tracing Path for Searching Best Performance of Test Data - Fold No. <%=jj%></font>
-                                                    <a href="#TP6"><span class=" glyphicon glyphicon-menu-up"></span></a>
-                                                    <a href="#TP8"><span class=" glyphicon glyphicon-menu-down"></span></a>
+                                                <% if (jj==7) { %> <b><font size="4" id="TP7">Tracing Path for Searching Best Performance of Test Data - Fold No. <%=jj%></font></b>
+                                                    <a href="#TP6"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                                    <a href="#TP8"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                                 <% } %> 
-                                                <% if (jj==8) { %> <font size="4" id="TP8">Tracing Path for Searching Best Performance of Test Data - Fold No. <%=jj%></font>
-                                                    <a href="#TP7"><span class=" glyphicon glyphicon-menu-up"></span></a>
-                                                    <a href="#TP9"><span class=" glyphicon glyphicon-menu-down"></span></a>
+                                                <% if (jj==8) { %> <b><font size="4" id="TP8">Tracing Path for Searching Best Performance of Test Data - Fold No. <%=jj%></font></b>
+                                                    <a href="#TP7"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                                    <a href="#TP9"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                                 <% } %> 
-                                                <% if (jj==9) { %> <font size="4" id="TP9">Tracing Path for Searching Best Performance of Test Data - Fold No. <%=jj%></font>
-                                                    <a href="#TP8"><span class=" glyphicon glyphicon-menu-up"></span></a>
-                                                    <a href="#TP10"><span class=" glyphicon glyphicon-menu-down"></span></a>
+                                                <% if (jj==9) { %> <b><font size="4" id="TP9">Tracing Path for Searching Best Performance of Test Data - Fold No. <%=jj%></font></b>
+                                                    <a href="#TP8"><span class="glyphicon glyphicon-menu-up"></span></a>
+                                                    <a href="#TP10"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                                 <% } %> 
-                                                <% if (jj==10) { %> <font size="4" id="TP10">Tracing Path for Searching Best Performance of Test Data - Fold No. <%=jj%></font>
-                                                    <a href="#TP9"><span class=" glyphicon glyphicon-menu-up"></span></a>
+                                                <% if (jj==10) { %> <b><font size="4" id="TP10">Tracing Path for Searching Best Performance of Test Data - Fold No. <%=jj%></font></b>
+                                                    <a href="#TP9"><span class="glyphicon glyphicon-menu-up"></span></a>
                                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                                 <% } %> 
                                             </center>
@@ -3606,7 +3285,7 @@
                                     <% } else { %>  
                                         <center><div><table><tr>
                                             <td align="center">
-                                                <h4><font color='red'>Output file not found ...!</font></h4>
+                                                <h4><font color='red'>Output file not found !</font></h4>
                                             </td>
                                         </tr></table></div></center> 
                                     <% } %>
@@ -3639,6 +3318,7 @@
                                                 </font>
                                             </a>                            
                                         </td>
+                                        <%--<font color="black" face="Arial" size="2" style="float:right">Base output file name:&nbsp;&nbsp;<%=sBaseFileName%>&nbsp;&nbsp;&nbsp;&nbsp;</font>--%>
                                     </tr>
                                 </table> 
 
@@ -3652,7 +3332,7 @@
                                         </td>
                                         <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                         <td>
-                                            <div title="View pre-computed numerical results..." onclick="changetab(2)">
+                                            <div title="View pre-computed numerical results" onclick="changetab(2)">
                                                 <h3><font color="skyblue" face="Palatino Linotype, Book Antiqua, Palatino, serif">Numerical Results</font></h3>
                                             </div>
                                         </td>
@@ -3699,16 +3379,34 @@
                                         <td>&nbsp;&nbsp;&nbsp;</td>
                                         <td>
                                             <button type="button" onclick="return plotgraph(41);">Fold #1</button>
-                                            <% if (TORadio.equals("TORadio3")) { %>
-                                                <button type="button" onclick="return plotgraph(42);">#2</button>
-                                                <button type="button" onclick="return plotgraph(43);">#3</button>
-                                                <button type="button" onclick="return plotgraph(44);">#4</button>
-                                                <button type="button" onclick="return plotgraph(45);">#5</button>
-                                                <button type="button" onclick="return plotgraph(46);">#6</button>
-                                                <button type="button" onclick="return plotgraph(47);">#7</button>
-                                                <button type="button" onclick="return plotgraph(48);">#8</button>
-                                                <button type="button" onclick="return plotgraph(49);">#9</button>
-                                                <button type="button" onclick="return plotgraph(410);">#10</button>
+                                            <% if (PRadio.equals("PRadio1")) { %>
+                                                <% if (TORadio.equals("TORadio3")) { %>
+                                                    <button type="button" onclick="return plotgraph(42);">#2</button>
+                                                    <button type="button" onclick="return plotgraph(43);">#3</button>
+                                                    <button type="button" onclick="return plotgraph(44);">#4</button>
+                                                    <button type="button" onclick="return plotgraph(45);">#5</button>
+                                                    <button type="button" onclick="return plotgraph(46);">#6</button>
+                                                    <button type="button" onclick="return plotgraph(47);">#7</button>
+                                                    <button type="button" onclick="return plotgraph(48);">#8</button>
+                                                    <button type="button" onclick="return plotgraph(49);">#9</button>
+                                                    <button type="button" onclick="return plotgraph(410);">#10</button>
+                                                <% } else { %>
+                                                    <% if ((int)Double.parseDouble(sBestFold) != 1) { %> 
+                                                        <script>
+                                                            document.getElementById("sBestFold").value = 1;
+                                                        </script>
+                                                    <% } %>
+                                                    
+                                                    <%if ((int)Double.parseDouble(sGraphNo) >= 41 && (int)Double.parseDouble(sGraphNo) <= 49) { %>        
+                                                        <script>
+                                                            document.getElementById("sGraphNo").value = 41;
+                                                        </script>
+                                                    <% } else if ((int)Double.parseDouble(sGraphNo) == 410) { %>
+                                                        <script>
+                                                            document.getElementById("sGraphNo").value = 41;
+                                                        </script>
+                                                    <% } %>
+                                                <% } %>
                                             <% } %>
                                         </td>
                                     </tr>

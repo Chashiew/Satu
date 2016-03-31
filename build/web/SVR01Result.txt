@@ -15,6 +15,6 @@ Datatrain(1,1) = 0.4600
 Datatrain(74,6) = 4.5500	
 
 dPAttributes = 6	
-dPInstances = 24	
-Datatest(1,1) = 0.3200	
-Datatest(24,6) = 4.5500	
+dPInstances = 74	
+Datatest(1,1) = 0.4600	
+Datatest(74,6) = 4.5500	

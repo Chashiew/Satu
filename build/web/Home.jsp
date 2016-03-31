@@ -18,7 +18,7 @@
     
     <body>
         <%
-            if (session.getAttribute("username") != "PiMLab" && session.getAttribute("username") != "a")
+            if (session.getAttribute("username") != "PiMLab" && session.getAttribute("username") != "guest")
             {
                 response.sendRedirect("loginpage.jsp");
                 return;

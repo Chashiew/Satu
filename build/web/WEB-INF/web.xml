@@ -28,6 +28,18 @@
         <servlet-name>LSSVMServlet</servlet-name>
         <servlet-class>LSSVMServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LSSVRGraphServlet</servlet-name>
+        <servlet-class>LSSVRGraphServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SFALSSVMGraphServlet</servlet-name>
+        <servlet-class>SFALSSVMGraphServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LSSVMGraphServlet</servlet-name>
+        <servlet-class>LSSVMGraphServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>WebFigures</servlet-name>
         <url-pattern>/WebFigures/*</url-pattern>
@@ -55,6 +67,18 @@
     <servlet-mapping>
         <servlet-name>LSSVMServlet</servlet-name>
         <url-pattern>/LSSVMServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LSSVRGraphServlet</servlet-name>
+        <url-pattern>/LSSVRGraphServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SFALSSVMGraphServlet</servlet-name>
+        <url-pattern>/SFALSSVMGraphServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LSSVMGraphServlet</servlet-name>
+        <url-pattern>/LSSVMGraphServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>-1</session-timeout>

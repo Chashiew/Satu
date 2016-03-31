@@ -1,7 +1,7 @@
 SFA-LSSVM Data:
 No.	Description	Variable	Value	Remark
-1	No. of fireflies	nFireFliesLSSVM	50	-
-2	Max. generation	nMaxGenerationLSSVM	25	-
+1	No. of fireflies	nFireFliesLSSVM	5	-
+2	Max. generation	nMaxGenerationLSSVM	5	-
 3	Beta min.	dMinBetaLSSVM	0.10	-
 4	Gamma	dGammaLSSVM	1.00	-
 5	Alpha	dAlphaLSSVM	0.20	-
@@ -23,7 +23,7 @@ No.	Description	Variable	Value	Remark
 21	Purpose	sPRadioLSSVM	1	Evaluation
 22	Hold-Out (%)	dHoldOutLSSVM	20	-
 23	Cross-Validation (%)	dCrossValidationLSSVM	10	-
-24	Test Option	sTORadioLSSVM	1	Use data file
+24	Test Option	sTORadioLSSVM	1	Use learning dataset
 25	Data File	sDataFileLSSVM	Groutability.txt	-
 26	No. of Attributes	nDFAttributesLSSVM	8	-
 27	No. of Instances	nDFInstancesLSSVM	240	-

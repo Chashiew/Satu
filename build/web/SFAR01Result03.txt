@@ -36,7 +36,7 @@ Correlation coefficient (training):		 0.9949
 Correlation coefficient (validation):		 0.8903 
 ============================================================= 
 Optimal parameters for LSSVR model
-C:						 1.481858e+11 
+C:						 1.481857e+11 
 Sigma:						 7.143278e+02 
 ------------------------------------------------------------- 
 Performance measures using learning data
@@ -51,4 +51,4 @@ Mean absolute error (test) [unit]:		 0.2279
 Mean absolute percentage error (test) [%]:	 19.74 
 Correlation coefficient (test):			 0.9853 
 ============================================================= 
-Total time [s]:					 2.51 
+Total time [s]:					 1.58 
