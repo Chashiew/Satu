@@ -86,15 +86,15 @@ public class LSSVMServlet extends HttpServlet {
         
         int ncol = (int)Double.parseDouble(request.getParameter("dAttributesLSSVM"));
         int nrow = (int)Double.parseDouble(request.getParameter("dInstancesLSSVM"));
+            int dAttributesLSSVM = (int)Double.parseDouble(request.getParameter("dAttributesLSSVM"));
+            int dInstancesLSSVM = (int)Double.parseDouble(request.getParameter("dInstancesLSSVM"));
         
-        int dAttributesLSSVM = (int)Double.parseDouble(request.getParameter("dAttributesLSSVM"));
-        int dInstancesLSSVM = (int)Double.parseDouble(request.getParameter("dInstancesLSSVM"));
-        
-        int ncolp = (int)Double.parseDouble(request.getParameter("dPAttributesLSSVM"));
-        int nrowp = (int)Double.parseDouble(request.getParameter("dPInstancesLSSVM"));
-        
-        int dPAttributesLSSVM = (int)Double.parseDouble(request.getParameter("dPAttributesLSSVM"));
-        int dPInstancesLSSVM = (int)Double.parseDouble(request.getParameter("dPInstancesLSSVM"));
+        int ncolp = 0;
+        int nrowp = 0;
+        ncolp = (int)Double.parseDouble(request.getParameter("dPAttributesLSSVM"));
+        nrowp = (int)Double.parseDouble(request.getParameter("dPInstancesLSSVM"));
+            int dPAttributesLSSVM = (int)Double.parseDouble(request.getParameter("dPAttributesLSSVM"));
+            int dPInstancesLSSVM = (int)Double.parseDouble(request.getParameter("dPInstancesLSSVM"));
         
         double[][] Datatrain = new double[nrow][ncol];
         double[][] Datapre = new double[nrowp][ncolp];

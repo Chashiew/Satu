@@ -1819,7 +1819,203 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     document.getElementById("PRadio").value = "PRadio2";
                 }
                 return refreshform(val);
-            }           
+            }
+            
+            function exportparameters()
+            {
+                var nFireFlies = document.getElementById("nFireFlies");
+                var nMaxGeneration = document.getElementById("nMaxGeneration");
+                var dMinBeta = document.getElementById("dMinBeta");
+                var dGamma = document.getElementById("dGamma");
+                var dAlpha = document.getElementById("dAlpha");
+                var dAIWeight = document.getElementById("dAIWeight");
+                var dTau = document.getElementById("dTau");
+                var dBPotential = document.getElementById("dBPotential");
+                var dC1 = document.getElementById("dC1");
+                var dC2 = document.getElementById("dC2");
+                var dS1 = document.getElementById("dS1");
+                var dS2 = document.getElementById("dS2");
+                var dTrainingPS = document.getElementById("dTrainingPS");
+                var dValidationPS = document.getElementById("dValidationPS");
+                var dTotalSize = document.getElementById("dTotalSize");
+                var nLastChange1 = document.getElementById("nLastChange1");
+                var nLastChange2 = document.getElementById("nLastChange2");
+                var dHoldOut = document.getElementById("dHoldOut");
+                var dCrossValidation = document.getElementById("dCrossValidation");
+
+                var fullPath = document.getElementById("fullPath");
+
+                var sFileName = document.getElementById("sFileName");
+
+                var valid = true;
+                
+                document.getElementById("dTotalSize").value = 100;
+                document.getElementById("dValidationPS").value = document.getElementById("dTotalSize").value - document.getElementById("dTrainingPS").value;
+
+                //validation
+                if (nFireFlies.value === "") {
+                    alert("No. of FireFlies cannot be empty!");
+                    nFireFlies.focus();
+                    valid = false;
+                } else if (isNaN(nFireFlies.value)) {
+                    alert("No. of FireFlies = 10 - 100 (50)");
+                    nFireFlies.focus();
+                    nFireFlies.select();
+                    valid = false;
+                } else if (nMaxGeneration.value.length <= 0) {
+                    alert("Max. generation cannot be empty!");
+                    nMaxGeneration.focus();
+                    valid = false;
+                } else if (isNaN(nMaxGeneration.value)) {
+                    alert("Max. generation = 10 - 100 (25)");
+                    nMaxGeneration.focus();
+                    nMaxGeneration.select();
+                    valid = false;
+                } else if (dMinBeta.value.length <= 0) {
+                    alert("Beta min. cannot be empty!");
+                    dMinBeta.focus();
+                    valid = false;
+                } else if (isNaN(dMinBeta.value)) {
+                    alert("Beta min. = ... - ... (0.10)");
+                    dMinBeta.focus();
+                    dMinBeta.select();
+                    valid = false;
+                } else if (dGamma.value.length <= 0) {
+                    alert("Gamma cannot be empty!");
+                    dGamma.focus();
+                    valid = false;
+                } else if (isNaN(dGamma.value)) {
+                    alert("Gamma = ... - ... (1.00)");
+                    dGamma.focus();
+                    dGamma.select();
+                    valid = false;
+                } else if (dAlpha.value.length <= 0) {
+                    alert("Alpha cannot be empty!");
+                    dAlpha.focus();
+                    valid = false;
+                } else if (isNaN(dAlpha.value)) {
+                    alert("Alpha = ... - ... (0.20)");
+                    dAlpha.focus();
+                    dAlpha.select();
+                    valid = false;
+                } else if (dAIWeight.value.length <= 0) {
+                    alert("Adaptive inertia weight cannot be empty!");
+                    dAIWeight.focus();
+                    valid = false;
+                } else if (isNaN(dAIWeight.value)) {
+                    alert("Adaptive inertia weight = ... - ... (0.90)");
+                    dAIWeight.focus();
+                    dAIWeight.select();
+                    valid = false;
+                } else if (dTau.value.length <= 0) {
+                    alert("Tau cannot be empty!");
+                    dTau.focus();
+                    valid = false;
+                } else if (isNaN(dTau.value)) {
+                    alert("Tau = ... - ... (1.50)");
+                    dTau.focus();
+                    dTau.select();
+                    valid = false;
+                } else if (dBPotential.value.length <= 0) {
+                    alert("Biotic potential cannot be empty!");
+                    dBPotential.focus();
+                    valid = false;
+                } else if (isNaN(dBPotential.value)) {
+                    alert("Biotic potential, a = ... - ... (4.00)");
+                    dBPotential.focus();
+                    dBPotential.select();
+                    valid = false;
+                } else if (dC1.value.length <= 0) {
+                    alert("Start value of C cannot be empty!");
+                    dC1.focus();
+                    valid = false;
+                } else if (isNaN(dC1.value)) {
+                    alert("Start value of C = ... - ... (1.00E-3)");
+                    dC1.focus();
+                    dC1.select();
+                    valid = false;
+                } else if (dC2.value.length <= 0) {
+                    alert("End value of C cannot be empty!");
+                    dC2.focus();
+                    valid = false;
+                } else if (isNaN(dC2.value)) {
+                    alert("End value of C = ... - ... (1.00E12)");
+                    dC2.focus();
+                    dC2.select();
+                    valid = false;
+                } else if (dS1.value.length <= 0) {
+                    alert("Start value of sigma cannot be empty!");
+                    dS1.focus();
+                    valid = false;
+                } else if (isNaN(dS1.value)) {
+                    alert("Start value of sigma = ... - ... (1.00E-3)");
+                    dS1.focus();
+                    dS1.select();
+                    valid = false;
+                } else if (dS2.value.length <= 0) {
+                    alert("End value of sigma cannot be empty!");
+                    dS2.focus();
+                    valid = false;
+                } else if (isNaN(dS2.value)) {
+                    alert("End value of sigma = ... - ... (1.00E3)");
+                    dS2.focus();
+                    dS2.select();
+                    valid = false;
+                } else if (dTrainingPS.value.length <= 0) {
+                    alert("Training partition size (%) cannot be empty!");
+                    dTrainingPS.focus();
+                    valid = false;
+                } else if (isNaN(dTrainingPS.value)) {
+                    alert("Training partition size (%) = ... - ... (70)");
+                    dTrainingPS.focus();
+                    dTrainingPS.select();
+                    valid = false;
+                } else if (nLastChange1.value.length <= 0) {
+                    alert("No. of Last Changes cannot be empty!");
+                    nLastChange1.focus();
+                    valid = false;
+                } else if (isNaN(nLastChange1.value)) {
+                    alert("No. of Last Changes = ... - ... (3)");
+                    nLastChange1.focus();
+                    nLastChange1.select();
+                    valid = false;
+                } else if (nLastChange2.value.length <= 0) {
+                    alert("Constant OF Value cannot be empty!");
+                    nLastChange2.focus();
+                    valid = false;
+                } else if (isNaN(nLastChange2.value)) {
+                    alert("Constant OF Value = ... - ... (0.00001)");
+                    nLastChange2.focus();
+                    nLastChange2.select();
+                    valid = false;
+                } else if (dHoldOut.value.length <= 0 && PRadio.value === "PRadio1") {
+                    alert("Hold-Out (%) cannot be empty ...!");
+                    dHoldOut.focus();
+                    valid = false;
+                } else if (isNaN(dHoldOut.value) && PRadio.value === "PRadio1") {
+                    alert("Hold-Out (%) = ... - ... (20)");
+                    dHoldOut.focus();
+                    dHoldOut.select();
+                    valid = false;
+                } else if (dCrossValidation.value.length <= 0 && PRadio.value === "PRadio1") {
+                    alert("Cross-Validation (%) cannot be empty ...!");
+                    dCrossValidation.focus();
+                    valid = false;
+                } else if (isNaN(dCrossValidation.value) && PRadio.value === "PRadio1") {
+                    alert("Cross-Validation (%) = ... - ... (10)");
+                    dCrossValidation.focus();
+                    dCrossValidation.select();
+                    valid = false;
+                }
+
+                fullPath.value = sFileName.value;
+                
+                document.getElementById("myform").action = "SaveParSFALSSVRe.jsp";
+                document.getElementById("myform").submit();
+                
+                return valid;
+            }
+            
         </script>
     </head>
         

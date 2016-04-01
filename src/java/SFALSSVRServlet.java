@@ -156,8 +156,10 @@ public class SFALSSVRServlet extends HttpServlet {
             int dAttributes = (int)Double.parseDouble(request.getParameter("dAttributes"));
             int dInstances = (int)Double.parseDouble(request.getParameter("dInstances"));
         
-        int ncolp = (int)Double.parseDouble(request.getParameter("dPAttributes"));
-        int nrowp = (int)Double.parseDouble(request.getParameter("dPInstances"));
+        int ncolp = 0;
+        int nrowp = 0;
+        ncolp = (int)Double.parseDouble(request.getParameter("dPAttributes"));
+        nrowp = (int)Double.parseDouble(request.getParameter("dPInstances"));
             int dPAttributes = (int)Double.parseDouble(request.getParameter("dPAttributes"));
             int dPInstances = (int)Double.parseDouble(request.getParameter("dPInstances"));
         
