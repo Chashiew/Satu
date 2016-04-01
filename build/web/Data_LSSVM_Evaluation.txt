@@ -6,16 +6,16 @@ No.	Description	Variable	Value	Remark
 4	Purpose	sPRadioLSSVM	1	Evaluation
 5	Hold-Out (%)	dHoldOutLSSVM	20	-
 6	Cross-Validation (%)	dCrossValidationLSSVM	10	-
-7	Test Option	sTORadioLSSVM	1	Use data file
+7	Test Option	sTORadioLSSVM	4	Use test dataset
 8	Data File	sDataFileLSSVM	Groutability.txt	-
 9	No. of Attributes	nDFAttributesLSSVM	8	-
 10	No. of Instances	nDFInstancesLSSVM	240	-
-11	Test Data File	sTestDataFileLSSVM		-
-12	No. of Attributes	nTDFAttributesLSSVM	0	-
-13	No. of Instances	nTDFInstancesLSSVM	0	-
-14	First Data File	sFileDataLSSVM		-
-15	No. of Attributes	sdAttributesLSSVM	1	-
-16	No. of Instances	sdInstancesLSSVM	1	-
-17	Second Data File	sPFileDataLSSVM		-
-18	No. of Attributes	sdPAttributesLSSVM	1	-
-19	No. of Instances	sdPInstancesLSSVM	1	-
+11	Test Data File	sTestDataFileLSSVM	Groutability(Test).txt	-
+12	No. of Attributes	nTDFAttributesLSSVM	8	-
+13	No. of Instances	nTDFInstancesLSSVM	48	-
+14	First Data File	sFileDataLSSVM	Groutability.txt	-
+15	No. of Attributes	sdAttributesLSSVM	8	-
+16	No. of Instances	sdInstancesLSSVM	240	-
+17	Second Data File	sPFileDataLSSVM	Groutability(Test).txt	-
+18	No. of Attributes	sdPAttributesLSSVM	8	-
+19	No. of Instances	sdPInstancesLSSVM	48	-
