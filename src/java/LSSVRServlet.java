@@ -68,6 +68,7 @@ public class LSSVRServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
 
+        
         response.setContentType("text/html");
         PrintWriter pw = response.getWriter();
         
@@ -86,12 +87,16 @@ public class LSSVRServlet extends HttpServlet {
         
         int ncol = (int)Double.parseDouble(request.getParameter("dAttributes"));
         int nrow = (int)Double.parseDouble(request.getParameter("dInstances"));
+            int dAttributes = (int)Double.parseDouble(request.getParameter("dAttributes"));
+            int dInstances = (int)Double.parseDouble(request.getParameter("dInstances"));
         
-        int dAttributes = (int)Double.parseDouble(request.getParameter("dAttributes"));
-        int dInstances = (int)Double.parseDouble(request.getParameter("dInstances"));
+        int ncolp = (int)Double.parseDouble(request.getParameter("dPAttributes"));
+        int nrowp = (int)Double.parseDouble(request.getParameter("dPInstances"));
+            int dPAttributes = (int)Double.parseDouble(request.getParameter("dPAttributes"));
+            int dPInstances = (int)Double.parseDouble(request.getParameter("dPInstances"));
         
         double[][] Datatrain = new double[nrow][ncol];
-        double[][] Datapre = new double[nrow][ncol];
+        double[][] Datapre = new double[nrowp][ncolp];
 
         String sFileData = request.getParameter("sFileData");
         
@@ -138,11 +143,6 @@ public class LSSVRServlet extends HttpServlet {
 
             String sPFileData = request.getParameter("sPFileData");
 
-            int ncolp;
-            int nrowp;
-            int dPAttributes;
-            int dPInstances;
-            
             dPAttributes = (int)Double.parseDouble(request.getParameter("dPAttributes"));
             dPInstances = (int)Double.parseDouble(request.getParameter("dPInstances"));
 
@@ -249,6 +249,7 @@ public class LSSVRServlet extends HttpServlet {
             params[12] = new MWNumericArray(Datatrain, MWClassID.DOUBLE);
             params[13] = new MWNumericArray(Datapre, MWClassID.DOUBLE);
 
+            /**/
             pw.write("<table><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>");
             pw.write("<tr><td>&nbsp;</td><td>vpath</td><td>&nbsp;</td><td>"+vpath+"</td></tr>");
             pw.write("<tr><td>&nbsp;</td><td>vfile</td><td>&nbsp;</td><td>"+vfile+"</td></tr>");
@@ -296,7 +297,8 @@ public class LSSVRServlet extends HttpServlet {
                 pw.write("</tr>");
             }
             pw.write("</table>");
-                        
+            /**/
+                    
             try {
                 final LSSVRClass m = new LSSVRClass();
                 try {

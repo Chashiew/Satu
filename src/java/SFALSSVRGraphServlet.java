@@ -73,12 +73,12 @@ public class SFALSSVRGraphServlet extends HttpServlet {
         int iOpt = Integer.parseInt(request.getParameter("iOpt"));
         */
         
-        int nOption = Integer.parseInt(request.getParameter("opt"));
-        int GraphNo = Integer.parseInt(request.getParameter("GraphNo"));
-
         response.setContentType("text/html");
         PrintWriter pw = response.getWriter();
             
+        int nOption = Integer.parseInt(request.getParameter("opt"));
+        int GraphNo = Integer.parseInt(request.getParameter("GraphNo"));
+
         /*
         pw.write("opt GraphNo = ");
         pw.write("<input type='text' size='100' value='"+nOption+"' readonly>");

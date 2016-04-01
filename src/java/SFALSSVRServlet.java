@@ -153,12 +153,16 @@ public class SFALSSVRServlet extends HttpServlet {
         
         int ncol = (int)Double.parseDouble(request.getParameter("dAttributes"));
         int nrow = (int)Double.parseDouble(request.getParameter("dInstances"));
+            int dAttributes = (int)Double.parseDouble(request.getParameter("dAttributes"));
+            int dInstances = (int)Double.parseDouble(request.getParameter("dInstances"));
         
-        int dAttributes = (int)Double.parseDouble(request.getParameter("dAttributes"));
-        int dInstances = (int)Double.parseDouble(request.getParameter("dInstances"));
+        int ncolp = (int)Double.parseDouble(request.getParameter("dPAttributes"));
+        int nrowp = (int)Double.parseDouble(request.getParameter("dPInstances"));
+            int dPAttributes = (int)Double.parseDouble(request.getParameter("dPAttributes"));
+            int dPInstances = (int)Double.parseDouble(request.getParameter("dPInstances"));
         
         double[][] Datatrain = new double[nrow][ncol];
-        double[][] Datapre = new double[nrow][ncol];
+        double[][] Datapre = new double[nrowp][ncolp];
 
         String sFileData = request.getParameter("sFileData");
         
@@ -215,11 +219,6 @@ public class SFALSSVRServlet extends HttpServlet {
 
             String sPFileData = request.getParameter("sPFileData");
 
-            int ncolp;
-            int nrowp;
-            int dPAttributes;
-            int dPInstances;
-            
             dPAttributes = (int)Double.parseDouble(request.getParameter("dPAttributes"));
             dPInstances = (int)Double.parseDouble(request.getParameter("dPInstances"));
 
@@ -403,6 +402,7 @@ public class SFALSSVRServlet extends HttpServlet {
 
             //Object[] results = new Object[6];
 
+            /**/
             pw.write("<table><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>");
             pw.write("<tr><td>&nbsp;</td><td>vpath</td><td>&nbsp;</td><td>"+vpath+"</td></tr>");
             pw.write("<tr><td>&nbsp;</td><td>vfile</td><td>&nbsp;</td><td>"+vfile+"</td></tr>");
@@ -467,7 +467,8 @@ public class SFALSSVRServlet extends HttpServlet {
                 pw.write("</tr>");
             }
             pw.write("</table>");
-                        
+            /**/
+                    
             try {
                 final SFALSSVRClass m = new SFALSSVRClass();
                 try {
@@ -531,7 +532,7 @@ public class SFALSSVRServlet extends HttpServlet {
                         */
 
                         pw.write("<script>");
-                        pw.write("alert(\"Execution completed successfully! \\n\\n Click Numerical Results to see the output\");");
+                        pw.write("alert(\"Execution completed successfully! \\n\\nClick Numerical Results to see the output\");");
                         pw.write("</script>");
                         pw.close();
                     } finally {

@@ -9,7 +9,7 @@
 <%@ page import="java.text.*" %>
 
 <%
-    if (session.getAttribute("username") != "PiMLab" && session.getAttribute("username") != "guest")
+    if (session.getAttribute("username") != "PiMLab" && session.getAttribute("username") != "a")
     {
         response.sendRedirect("loginpage.jsp");
         return;
@@ -2050,12 +2050,12 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             <div class="container boundary">
                                 <h2>Optimization</h2>
                                 <h3>Objective Function: Classification accuracy (validation)</h3> 
-                                <p>The system will use learning data to train and validate an optimized prediction model.</p>
+                                <p>Calculate accuracy of training model. The system used learning data to train and validate an optimized prediction model.</p>
                             </div>     
                             
                             <div class="container boundary">
                                 <h3>Learning Option</h3>
-                                <p>Set the partition size for training data and validation data.</p>
+                                <p>Set the partition size for train data and validation data.</p>
                                 <div oninput="dValidationPSLSSVM.value=100-parseInt(dTrainingPSLSSVM.value); dTotalSizeLSSVM.value=100;">
                                     <div class="form-group">
                                         <label class="control-label col-md-3">Training partition size</label>
@@ -2176,7 +2176,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                     <div class="panel panel-default">
                                         <div class="panel-body">
                                             <div class="container boundary">
-                                                <h3>Test Option</h3>
+                                                <h3>Test Option Available</h3>
                                                 <%--><p>The test data file used to evaluate the optimized model again. Output phase: calculate performance measures (i.e., RMSE, MAE, MAPE, R)</p><--%>
                                                 <%--><p>to find the prediction accuracy.</p><--%>
                                                 <div class="boundary">
@@ -2435,7 +2435,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="container boundary">
-                                <b>Base output file name:</b>&nbsp;&nbsp;&nbsp;
+                                <b>Base output file name (eg. SFAMResult):</b>&nbsp;&nbsp;&nbsp;
                                 <!--<font color="teal" face="tahoma" size="2"> Base output file name (eg. SFAMResult) </font>-->
                                 <input type="text" name="sBaseFileName" id="sBaseFileName" size="20" value="<%=sBaseFileName%>">
                                 <!--<font color="teal" face="tahoma" size="2">order number and .txt will be automatically added. </font>-->

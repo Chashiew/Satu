@@ -9,7 +9,7 @@
 <%@ page import="java.text.*" %>
 
 <%
-    if (session.getAttribute("username") != "PiMLab" && session.getAttribute("username") != "guest")
+    if (session.getAttribute("username") != "PiMLab" && session.getAttribute("username") != "a")
     {
         response.sendRedirect("loginpage.jsp");
         return;
@@ -2074,21 +2074,21 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             <div class="container boundary">
                                 <h2>Optimization</h2>
                                 <h3>Objective Function</h3> 
-                                <p>The system will use learning data to train and validate an optimized prediction model.</p>
+                                <p>Calculate accuracy of training model. The system used learning data to train and validate an optimized prediction model.</p>
                                 <div class="radio">
-                                    <label><input type="radio" name="OptimRadio" id="OptimRadio1" value="OptimRadio1">RMSEvalidate_data</label>
+                                    <label><input type="radio" name="OptimRadio" id="OptimRadio1" value="OptimRadio1">RMSE validation</label>
                                 </div>
                                 <div class="radio">
-                                    <label><input type="radio" name="OptimRadio" id="OptimRadio2" value="OptimRadio2">MAEvalidate_data</label>
+                                    <label><input type="radio" name="OptimRadio" id="OptimRadio2" value="OptimRadio2">MAE validation</label>
                                 </div>
                                 <div class="radio">
-                                    <label><input type="radio" name="OptimRadio" id="OptimRadio3" value="OptimRadio3">MAPEvalidate_data</label>
+                                    <label><input type="radio" name="OptimRadio" id="OptimRadio3" value="OptimRadio3">MAPE validation</label>
                                 </div>
                             </div>        
                 
                             <div class="container boundary">
                                 <h3>Learning Option</h3>
-                                <p>Set the partition size for training data and validation data.</p>
+                                <p>Set the partition size for train data and validation data.</p>
                                     <!-- <form oninput="dTotalSize.value=parseInt(dTrainingPS.value)+parseInt(dValidationPS.value)"> -->
                                 <div oninput="dValidationPS.value=100-parseInt(dTrainingPS.value); dTotalSize.value=100;">
                                     <div class="form-group">
@@ -2167,7 +2167,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                     <div class="row">
                                         <div class="col-md-2">
                                             <input type="hidden" name="fullPath" id="fullPath" value=""/>
-                                            <input type="file" class="filestyle" name="sDataFile" id="sDataFile" accept=".txt" data-input="false"/>
+                                            <input type="file" class="filestyle" name="sDataFile" id="sDataFile" accept=".csv,.txt" data-input="false"/>
                                         </div>
                                         <div class="col-md-2" style="margin-top : 4px">
                                             <a onclick="return computeatform(1);">
@@ -2202,7 +2202,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                         <div class="panel-body">
                                             <div class="container boundary">
                                                 <%--><h3>Choose for Test Option</h3><--%>
-                                                <h3>Test Option</h3>
+                                                <h3>Test Option Available</h3>
                                                 <div class="boundary">
                                                     <div class="row form-inline">
                                                         <div class="radio col-md-3">
@@ -2240,7 +2240,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                                             <div class="col-md-2">
                                                                     <input type="hidden" name="fullPathT" id="fullPathT" value=""/>
                                                                     <!--<input type="file" name="sDataFile" id="sDataFile"/>-->
-                                                                    <input type="file" class="filestyle" name="sTestDataFile" id="sTestDataFile" accept=".txt" data-input="false"/>
+                                                                    <input type="file" class="filestyle" name="sTestDataFile" id="sTestDataFile" accept=".csv,.txt" data-input="false"/>
                                                             </div>
                                                             <div class="col-md-2" style="margin-top : 4px">
                                                                 <a onclick="return computeatform(1);">
@@ -2276,7 +2276,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                                             <div class="col-md-2">
                                                                     <input type="hidden" name="fullPathT" id="fullPathT" value=""/>
                                                                     <!--<input type="file" name="sDataFile" id="sDataFile"/>-->
-                                                                    <input type="file" class="filestyle" name="sTestDataFile" id="sTestDataFile" accept=".txt" data-input="false"/>
+                                                                    <input type="file" class="filestyle" name="sTestDataFile" id="sTestDataFile" accept=".csv,.txt" data-input="false"/>
                                                             </div>
                                                             <div class="col-md-2" style="margin-top : 4px">
                                                                 <a onclick="return computeatform(1);">
@@ -2338,7 +2338,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                     <div class="row">
                                         <div class="col-md-2">
                                             <input type="hidden" name="fullPathL" id="fullPathL" value=""/>
-                                            <input type="file" class="filestyle" name="sLearningDataFile" id="sLearningDataFile" accept=".txt" data-input="false"/>
+                                            <input type="file" class="filestyle" name="sLearningDataFile" id="sLearningDataFile" accept=".csv,.txt" data-input="false"/>
                                         </div>
                                         <div class="col-md-2" style="margin-top : 4px">
                                             <a onclick="return computeatform(1);">
@@ -2373,7 +2373,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                     <div class="row">
                                         <div class="col-md-2">
                                             <input type="hidden" name="fullPathP" id="fullPathP" value=""/>
-                                            <input type="file" class="filestyle"  name="sPredictionDataFile" id="sPredictionDataFile" accept=".txt" data-input="false"/>
+                                            <input type="file" class="filestyle"  name="sPredictionDataFile" id="sPredictionDataFile" accept=".csv,.txt" data-input="false"/>
                                         </div>
                                         <div class="col-md-2" style="margin-top : 4px">
                                             <a onclick="return computeatform(1);">
@@ -2501,7 +2501,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="container boundary">
-                                <b>Base output file name:</b>&nbsp;&nbsp;&nbsp;
+                                <b>Base output file name (eg. SFARResult):</b>&nbsp;&nbsp;&nbsp;
                                 <!--<font color="teal" face="tahoma" size="2"> Base output file name (eg. SFARResult) </font>-->
                                 <input type="text" name="sBaseFileName" id="sBaseFileName" size="20" value="<%=sBaseFileName%>">
                                 <!--<font color="teal" face="tahoma" size="2">order number and .txt will be automatically added. </font>-->

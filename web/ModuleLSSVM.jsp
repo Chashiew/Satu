@@ -43,9 +43,7 @@
     
     int opt; 
     String sopt = request.getParameter("sopt");
-    if (sopt == null) {
-        sopt = "4";
-    }
+    sopt = "3";
     opt=(int)Double.parseDouble(sopt); 
     
     int GraphNo;
@@ -55,6 +53,13 @@
     }
     GraphNo=(int)Double.parseDouble(sGraphNo); 
     
+    int GraphType;
+    String sGraphType = request.getParameter("sGraphType");
+    if (sGraphType == null) {
+        sGraphType = "1";        
+    };
+    GraphType=(int)Double.parseDouble(sGraphType);
+
     String sPageControl = request.getParameter("sPageControl"); 
     if (sPageControl == null) {
         sPageControl = "1";
@@ -64,45 +69,86 @@
     if (sBaseFileNameLSSVM == null) {
         sBaseFileNameLSSVM = "";
     }
-    
-    String sCreate = request.getParameter("sCreate");
-        if (sCreate == null) {
-            sCreate = "";
-        }
+
     String vpath = request.getParameter("vpath");
     if (vpath == null) {
         vpath = "";
     }
-    String vfile = request.getParameter("vfile");
-    if (vfile == null) {
-        vfile = "";
-    }
+        String vfile = request.getParameter("vfile");
+        if (vfile == null) {
+            vfile = "";
+        }
 
+    String suResult01 = request.getParameter("suResult01");
+    if (suResult01 == null) {
+        suResult01 = "";
+    }
     String suResult01Name = request.getParameter("suResult01Name");
     if (suResult01Name == null) {
         suResult01Name = "";
+    }
+    String sufilefileResult01 = request.getParameter("sufilefileResult01");
+    if (sufilefileResult01 == null) {
+        sufilefileResult01 = "";
+    }
+
+    String suResult02 = request.getParameter("suResult02");
+    if (suResult02 == null) {
+        suResult02 = "";
     }
     String suResult02Name = request.getParameter("suResult02Name");
     if (suResult02Name == null) {
         suResult02Name = "";
     }
+    String sufilefileResult02 = request.getParameter("sufilefileResult02");
+    if (sufilefileResult02 == null) {
+        sufilefileResult02 = "";
+    }
+
+    String suResult03 = request.getParameter("suResult03");
+    if (suResult03 == null) {
+        suResult03 = "";
+    }
     String suResult03Name = request.getParameter("suResult03Name");
     if (suResult03Name == null) {
         suResult03Name = "";
+    }
+    String sufilefileResult03 = request.getParameter("sufilefileResult03");
+    if (sufilefileResult03 == null) {
+        sufilefileResult03 = "";
+    }
+
+    String suResult04 = request.getParameter("suResult04");
+    if (suResult04 == null) {
+        suResult04 = "";
     }
     String suResult04Name = request.getParameter("suResult04Name");
     if (suResult04Name == null) {
         suResult04Name = "";
     }
-    String suResult04cName = request.getParameter("suResult04cName");
-    if (suResult04cName == null) {
-        suResult04cName = "";
+        String suResult04cName = request.getParameter("suResult04cName");
+        if (suResult04cName == null) {
+            suResult04cName = "";
+        }
+        String suResult04dName = request.getParameter("suResult04dName");
+        if (suResult04dName == null) {
+            suResult04dName = "";
+        }
+    String sufilefileResult04 = request.getParameter("sufilefileResult04");
+    if (sufilefileResult04 == null) {
+        sufilefileResult04 = "";
     }
-    String suResult04dName = request.getParameter("suResult04dName");
-    if (suResult04dName == null) {
-        suResult04dName = "";
+
+    String sfilefile = request.getParameter("sfilefile");
+    if (sfilefile == null) {
+        sfilefile = "";
     }
-    
+
+    String sfilefileTXT = request.getParameter("sfilefileTXT");
+    if (sfilefileTXT == null) {
+        sfilefileTXT = "";
+    }
+
     String sLoadingDataSet1 = request.getParameter("sLoadingDataSet1");
     if (sLoadingDataSet1 == null) {
         sLoadingDataSet1 = "";       
@@ -213,6 +259,9 @@
     String[] cols;
     
     int nrow=1;
+    int ncol=1;
+
+    /*int nrow=1;
     //nrow=(int)Double.parseDouble(sdInstancesLSSVM);
     int ncol=1;
     //ncol=(int)Double.parseDouble(sdAttributesLSSVM);
@@ -223,7 +272,8 @@
     int ncolP=1; 
     //ncolP==(int)Double.parseDouble(sdPAttributesLSSVM);
     String[][] Datapre = new String[nrowP][ncolP];
-
+    */
+    
     String sError="";
     double dDummy=1.0;
                             
@@ -254,6 +304,15 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <%
+        /*
+        String hdf = request.getParameter("hiddendatafile");
+        if (hdf == null) {
+            hdf = "0";
+        }
+        */
+        %>
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>NiMOPS: LSSVM</title>
         
@@ -274,6 +333,7 @@
         <script type="text/javascript">
             function viewdataset(val) {
                 if (val===1) {
+                    //alert("Aha1 ...!");
                     document.getElementById("sLoadingDataSet1").value = val;
                     document.getElementById("sLoadingDataSet2").value = "";
                     document.getElementById("sLoadingDataSet3").value = "";
@@ -281,6 +341,7 @@
                     document.getElementById("sLoadingDataSet5").value = "";
                 }
                 else if (val===2) {
+                    //alert("Aha2 ...!");
                     document.getElementById("sLoadingDataSet1").value = "";
                     document.getElementById("sLoadingDataSet2").value = val;
                     document.getElementById("sLoadingDataSet3").value = "";
@@ -288,6 +349,7 @@
                     document.getElementById("sLoadingDataSet5").value = "";
                 }
                 else if (val===3) {
+                    //alert("Aha3 ...!");
                     document.getElementById("sLoadingDataSet1").value = "";
                     document.getElementById("sLoadingDataSet2").value = "";
                     document.getElementById("sLoadingDataSet3").value = val;
@@ -295,6 +357,7 @@
                     document.getElementById("sLoadingDataSet5").value = "";
                 }
                 else if (val===4) {
+                    //alert("Aha4 ...!");
                     document.getElementById("sLoadingDataSet1").value = "";
                     document.getElementById("sLoadingDataSet2").value = "";
                     document.getElementById("sLoadingDataSet3").value = "";
@@ -341,9 +404,7 @@
                 document.getElementById("sLoadingDataSet5").value = sLoadingDataSet5;
 
                 document.getElementById("sPageControl").value = "1";
-                document.getElementById("myform2").action = "ModuleLSSVM.jsp";
-                document.getElementById("myform2").submit();
-                
+
                 return refreshform(val);
             }
 
@@ -393,7 +454,7 @@
                 var sPdAttributesLSSVM = document.getElementById("sdPAttributesLSSVM");
 
                 var VarB = document.getElementById("VarB");
-                document.getElementById("VarB").value = "Two";
+                document.getElementById("VarB").value = "B";
                 
                 document.getElementById("myform2").action = "AllModulesBaseline.jsp";
                 document.getElementById("myform2").submit();
@@ -465,17 +526,44 @@
                 
                 if (val === 1) {
                     document.getElementById("sPageControl").value = "1";
-                } else if (val === 2) {
+                }
+                else if (val === 2) {
                     document.getElementById("sPageControl").value = "2";
-                } else {
+                }
+                else {
                     document.getElementById("sPageControl").value = "3";
                 }
                 return refreshform(val);
             } 
             
             function plotgraph(val) {
+                //alert("Aha1 ...!");
                 document.getElementById("sGraphNo").value = val;
-                document.getElementById("sopt").value = 4;
+
+                var sGraphType = document.getElementById("sGraphType");
+                if (sGraphNo.value==="41") {
+                    //alert("Aha2 ...!");
+                    if (sGraphType.value==="1") {
+                        //alert("Aha21 ...!");
+                        document.getElementById("sGraphType").value = 2;
+                    }
+                    else if (sGraphType.value==="2") {
+                        //alert("Aha22 ...!");
+                        document.getElementById("sGraphType").value = 3;
+                    }
+                    else if (sGraphType.value==="3") {
+                        //alert("Aha23 ...!");
+                        document.getElementById("sGraphType").value = 1;
+                    }
+                    else {
+                        //alert("Aha24 ...!");
+                        document.getElementById("sGraphType").value = 1;
+                    }
+                }
+
+                document.getElementById("sopt").value = 3;
+                
+                //alert("Aha4 ...!");
                 return refreshform(val);
             } 
         </script>
@@ -483,14 +571,14 @@
     <body>
         <div class="sfawrap">
             <center>
-                <img src="headhomepagesub.jpg" alt="Image Not Found" width="1000">
+                <img src="headhomepagesub.jpg" alt="Image Not Found ..." width="1000">
             </center>
             <%@include file="navmenu.jsp" %>
 
         <% if (VarSaveData != null) { %>
             
         <% } else if (VarLoadData != null) { %>
-               
+
         <% } else if (VarReportData != null) { %>
             <%
                 response.setContentType("application/vnd.ms-excel");
@@ -600,15 +688,15 @@
                         sTORadioLSSVM = "Use learning dataset";
                         iRadio = 1;
                     }
-                    else if (PRadioLSSVM.equals("TORadio4LSSVM")) {
+                    else if (TORadioLSSVM.equals("TORadio4LSSVM")) {
                         sTORadioLSSVM = "Use test dataset";
                         iRadio = 4;
                     }
-                    else if (PRadioLSSVM.equals("TORadio2LSSVM")) {
+                    else if (TORadioLSSVM.equals("TORadio2LSSVM")) {
                         sTORadioLSSVM = "Hold-out";
                         iRadio = 2;
                     }
-                    else if (PRadioLSSVM.equals("TORadio3LSSVM")) {
+                    else if (TORadioLSSVM.equals("TORadio3LSSVM")) {
                         sTORadioLSSVM = "Cross-validation";
                         iRadio = 3;
                     }
@@ -713,8 +801,17 @@
                 <%
                 nValueCLSSVM = Float.parseFloat(snValueCLSSVM);
                 nValueSLSSVM = Float.parseFloat(snValueSLSSVM);
-                dHoldOutLSSVM = Float.parseFloat(sdHoldOutLSSVM);
-                dCrossValidationLSSVM = Float.parseFloat(sdCrossValidationLSSVM);
+
+                if (PRadioLSSVM.equals("PRadio1LSSVM"))
+                {
+                    dHoldOutLSSVM = Float.parseFloat(sdHoldOutLSSVM);  
+                    dCrossValidationLSSVM = Float.parseFloat(sdCrossValidationLSSVM); 
+                }
+                else
+                {
+                    dHoldOutLSSVM = 20.0;
+                    dCrossValidationLSSVM = 10;
+                }
 
                 nDFAttributesLSSVM = Float.parseFloat(snDFAttributesLSSVM);
                 nDFInstancesLSSVM = Float.parseFloat(snDFInstancesLSSVM);
@@ -727,9 +824,9 @@
                 %>
                 
                 <input type="hidden" name="VarB" id="VarB" value="<%=VarB%>"/> 
-                
+
                 <input type="hidden" name="VarNextLSSVM" id="VarNextLSSVM" value="<%=VarNextLSSVM%>"/>
-                
+
                 <input type="hidden" name="nValueCLSSVM" id="nValueCLSSVM" value="<%=nValueCLSSVM%>"/>
                 <input type="hidden" name="nValueSLSSVM" id="nValueSLSSVM" value="<%=nValueSLSSVM%>"/>
                 <input type="hidden" name="dHoldOutLSSVM" id="dHoldOutLSSVM" value="<%=dHoldOutLSSVM%>"/>
@@ -773,9 +870,7 @@
                 <input type="hidden" name="sLoadingDataSet4" id="sLoadingDataSet4" value="<%=sLoadingDataSet4%>"/>
                 <input type="hidden" name="sLoadingDataSet5" id="sLoadingDataSet5" value="<%=sLoadingDataSet5%>"/>
                 
-                <input type="hidden" name="sCreate" id="sCreate" value="<%=sCreate%>"/>
-
-                <input type="hidden" name="vpath" id="vpath" value="<%=vpath%>"/>
+                <input type="hidden" name="vpath" id="vpath" value="<%=vpath%>"/> 
                 <input type="hidden" name="vfile" id="vfile" value="<%=vfile%>"/>
 
                 <input type="hidden" name="sPageControl" id="sPageControl" value="<%=sPageControl%>"/>
@@ -783,21 +878,43 @@
                 <input type="hidden" name="sopt" id="sopt" value="<%=sopt%>"/>
                 <input type="hidden" name="sGraphNo" id="sGraphNo" value="<%=sGraphNo%>"/>
                 <input type="hidden" name="sBestFold" id="sBestFold" value="<%=sBestFold%>"/>
+                <input type="hidden" name="sGraphType" id="sGraphType" value="<%=sGraphType%>" /> 
                 
                 <input type="hidden" name="sProcessRun" id="sProcessRun" value="<%=sProcessRun%>"/>
                 
-                <br><br><br>
+                <br>
+                <br>
+                <br>
+
                 <center id="title">
                     <font style="font-family: Palatino Linotype, Book Antiqua, Palatino, serif; font-size: 24pt" color="#2F4F4F">
-                        <b>Least Squares Support Vector Machine (LSSVM)</b>
+                    <b>Least Squares Support Vector Machine (LSSVM)</b>
                     </font>
                 </center>
                 <br>
                 
                 <div class="container boundary">
-                    <ul class="nav nav-tabs"></ul>
+                    <ul class="nav nav-tabs">
+                    </ul>
                 </div>
                 <br>
+
+                <%
+                suResult01Name = application.getRealPath("/") + sBaseFileNameLSSVM +"01.txt";
+                suResult02Name = application.getRealPath("/") + sBaseFileNameLSSVM +"02.txt";
+                suResult03Name = application.getRealPath("/") + sBaseFileNameLSSVM +"03.txt";
+                suResult04Name = application.getRealPath("/") + sBaseFileNameLSSVM +"04.txt";
+                suResult04cName = application.getRealPath("/") + sBaseFileNameLSSVM +"04c.txt";
+                suResult04dName = application.getRealPath("/") + sBaseFileNameLSSVM +"04d.txt";
+                %>
+                <script>
+                    document.getElementById("suResult01Name").value = suResult01Name;
+                    document.getElementById("suResult02Name").value = suResult02Name;
+                    document.getElementById("suResult03Name").value = suResult03Name;
+                    document.getElementById("suResult04Name").value = suResult04Name;
+                    document.getElementById("suResult04cName").value = suResult04cName;
+                    document.getElementById("suResult04dName").value = suResult04dName;
+                </script>
 
                 <div class="tab-content">
                     <% if (sPageControl.equals("1")) { %>
@@ -805,23 +922,7 @@
                     <% } else { %>
                     <div id="processing" class="tab-pane fade in">
                     <% } %>
-                        
-                    <%                
-                    suResult01Name = application.getRealPath("/") + sBaseFileNameLSSVM +"01.txt";
-                    suResult02Name = application.getRealPath("/") + sBaseFileNameLSSVM +"02.txt";
-                    suResult03Name = application.getRealPath("/") + sBaseFileNameLSSVM +"03.txt";
-                    suResult04Name = application.getRealPath("/") + sBaseFileNameLSSVM +"04.txt";
-                    suResult04cName = application.getRealPath("/") + sBaseFileNameLSSVM +"04c.txt";
-                    suResult04dName = application.getRealPath("/") + sBaseFileNameLSSVM +"04d.txt";
-                    %>
-                    <script>
-                        document.getElementById("suResult01Name").value = suResult01Name;
-                        document.getElementById("suResult02Name").value = suResult02Name;
-                        document.getElementById("suResult03Name").value = suResult03Name;
-                        document.getElementById("suResult04Name").value = suResult04Name;
-                        document.getElementById("suResult04cName").value = suResult04cName;
-                        document.getElementById("suResult04dName").value = suResult04dName;
-                    </script>
+
                     <table>
                         <tr>
                             <td style="width: 10%">
@@ -831,6 +932,9 @@
                                     </font>
                                 </a>                            
                             </td>
+
+                            <%--><font color="black" face="Arial" size="2" style="float:right">Base output file name:&nbsp;&nbsp;<%=sBaseFileNameLSSVM%>&nbsp;&nbsp;&nbsp;&nbsp;</font><--%>
+                            
                         </tr>
                     </table>
 
@@ -873,14 +977,14 @@
                             <div class="panel-body">
                                 <div class="container boundary">
                                     <div class="row">
-                                        <div class="col-md-4"><h3>Base Output File Name</h3></div>
-                                        <div class="col-md-4"><h3><%=sBaseFileNameLSSVM%></h3></div>
+                                        <div class="col-md-4"><h4>Base Output File Name</h4></div>
+                                        <div class="col-md-4"><h5><%=sBaseFileNameLSSVM%></h5></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="bs-example">
                         <div class="panel panel-default">
                             <div class="panel-body">
@@ -907,8 +1011,11 @@
                                         <div class="col-md-4">
                                             <%
                                             if (NormalRadioLSSVM.equals("NormalRadio1LSSVM")) {
+                                                dNormalRadioLSSVM = 1;
                                                 sNormalRadioLSSVM = "Original value";
-                                            } else if (NormalRadioLSSVM.equals("NormalRadio2LSSVM")) {
+                                            }
+                                            else if (NormalRadioLSSVM.equals("NormalRadio2LSSVM")) {
+                                                dNormalRadioLSSVM = 2;
                                                 sNormalRadioLSSVM = "Feature scaling";
                                             }
                                             %>
@@ -920,45 +1027,25 @@
                                         <div class="col-md-3">
                                             <%
                                                 sPRadioLSSVM = "...";
-                                                if (NormalRadioLSSVM.equals("NormalRadio1LSSVM")) {
-                                                    dNormalRadioLSSVM=1;    
-                                                    if (PRadioLSSVM.equals("PRadio1LSSVM")) {
-                                                        dPRadioLSSVM = 1;
-                                                        sPRadioLSSVM = "Evaluation";
-                                                        sDummy = "Learning Dataset: ";
-                                                    } else if (PRadioLSSVM.equals("PRadio2LSSVM")) {
-                                                        dPRadioLSSVM = 2;
-                                                        sPRadioLSSVM = "Prediction";
-                                                        sDummy = "Learning Dataset: "; 
-                                                        sFileDataLSSVM = sLearningFileNameLSSVM;
-                                                        dAttributesLSSVM = snLDFAttributesLSSVM;
-                                                        dInstancesLSSVM = snLDFInstancesLSSVM;
-                                                        sPDummy = "Prediction Dataset: ";
-                                                        sPFileDataLSSVM = sPredictionFileNameLSSVM;
-                                                        dPAttributesLSSVM = snPDFAttributesLSSVM;
-                                                        dPInstancesLSSVM = snPDFInstancesLSSVM;
-                                                        sVariation = "5";
-                                                    }
-                                                } else {
-                                                    dNormalRadioLSSVM=2;    
-                                                    if (PRadioLSSVM.equals("PRadio1LSSVM")) {
-                                                        dPRadioLSSVM = 1;
-                                                        sPRadioLSSVM = "Evaluation";
-                                                        sDummy = "Learning Dataset: ";
-                                                    } else if (PRadioLSSVM.equals("PRadio2LSSVM")) {
-                                                        dPRadioLSSVM = 2;
-                                                        sPRadioLSSVM = "Prediction";
-                                                        sDummy = "Learning Dataset: "; 
-                                                        sFileDataLSSVM = sLearningFileNameLSSVM;
-                                                        dAttributesLSSVM = snLDFAttributesLSSVM;
-                                                        dInstancesLSSVM = snLDFInstancesLSSVM;
-                                                        sPDummy = "Prediction Dataset: ";
-                                                        sPFileDataLSSVM = sPredictionFileNameLSSVM;
-                                                        dPAttributesLSSVM = snPDFAttributesLSSVM;
-                                                        dPInstancesLSSVM = snPDFInstancesLSSVM;
-                                                        sVariation = "10";
-                                                    }
-                                                } %>
+                                                if (PRadioLSSVM.equals("PRadio1LSSVM")) {
+                                                    dPRadioLSSVM = 1;
+                                                    sPRadioLSSVM = "Evaluation";
+                                                    sDummy = "Learning Dataset: ";
+                                                }
+                                                else if (PRadioLSSVM.equals("PRadio2LSSVM")) {
+                                                    dPRadioLSSVM = 2;
+                                                    sPRadioLSSVM = "Prediction";
+                                                    sDummy = "Learning Dataset: "; 
+                                                    sFileDataLSSVM = sLearningFileNameLSSVM;
+                                                    dAttributesLSSVM = snLDFAttributesLSSVM;
+                                                    dInstancesLSSVM = snLDFInstancesLSSVM;
+                                                    sPDummy = "Prediction Dataset: ";
+                                                    sPFileDataLSSVM = sPredictionFileNameLSSVM;
+                                                    dPAttributesLSSVM = snPDFAttributesLSSVM;
+                                                    dPInstancesLSSVM = snPDFInstancesLSSVM;
+                                                    sVariation = "5";
+                                                }
+                                            %>
                                             <%=sPRadioLSSVM%>
                                         </div>
                                     </div><br>
@@ -967,160 +1054,81 @@
                                         <div class="col-md-4">
                                             <%
                                                 sTORadioLSSVM = "...";
-                                                if (NormalRadioLSSVM.equals("NormalRadio1LSSVM")) {
-                                                    dNormalRadioLSSVM=1;    
-                                                    if (TORadioLSSVM.equals("TORadio2LSSVM")) { 
-                                                        dTORadioLSSVM = 2;
-                                                        if (PRadioLSSVM.equals("PRadio1LSSVM")) {
-                                                            dPRadioLSSVM = 1; %>
-                                                            Hold-out = <%=nf.format(dHoldOutLSSVM)%> (%) 
-                                                            <% 
-                                                            sDummy = "Learning Dataset: ";
-                                                            sFileDataLSSVM = sFileNameLSSVM;
-                                                            dAttributesLSSVM = snDFAttributesLSSVM;
-                                                            dInstancesLSSVM = snDFInstancesLSSVM;
-                                                            sVariation = "2";
-                                                            sPFileDataLSSVM = "";
-                                                            dPAttributesLSSVM = "0";
-                                                            dPInstancesLSSVM = "0";
-                                                        } else if (PRadioLSSVM.equals("PRadio2LSSVM")) { 
-                                                            dPRadioLSSVM = 2; %>
-                                                            -
-                                                        <% }
-                                                    } else if (TORadioLSSVM.equals("TORadio3LSSVM")) {
-                                                        dTORadioLSSVM = 3;
-                                                        if (PRadioLSSVM.equals("PRadio1LSSVM")) { 
-                                                            dPRadioLSSVM = 1; %>
-                                                            Cross-validation = <%=nf.format(dCrossValidationLSSVM)%> (folds)
-                                                            <%
-                                                            sDummy = "Learning Dataset: ";
-                                                            sFileDataLSSVM = sFileNameLSSVM;
-                                                            dAttributesLSSVM = snDFAttributesLSSVM;
-                                                            dInstancesLSSVM = snDFInstancesLSSVM;
-                                                            sVariation = "3";
-                                                            sPFileDataLSSVM = "";
-                                                            dPAttributesLSSVM = "0";
-                                                            dPInstancesLSSVM = "0";
-                                                        } else if (PRadioLSSVM.equals("PRadio2LSSVM")) {
-                                                            dPRadioLSSVM = 2; %>
-                                                            -
-                                                        <% }
-                                                    } else {
-                                                        if (TORadioLSSVM.equals("TORadio1LSSVM")) {
-                                                            dTORadioLSSVM = 1;
-                                                            if (PRadioLSSVM.equals("PRadio1LSSVM")) {
-                                                                dPRadioLSSVM = 1;
-                                                                sTORadioLSSVM = "Use learning dataset";
-                                                                sDummy = "Learning Dataset: ";
-                                                                sFileDataLSSVM = sFileNameLSSVM;
-                                                                dAttributesLSSVM = snDFAttributesLSSVM;  
-                                                                dInstancesLSSVM = snDFInstancesLSSVM; 
-                                                                sVariation = "1";
-                                                                sPFileDataLSSVM = "";
-                                                                dPAttributesLSSVM = "0";
-                                                                dPInstancesLSSVM = "0";
-                                                            } else if (PRadioLSSVM.equals("PRadio2LSSVM")) {
-                                                                dPRadioLSSVM = 2;
-                                                                sTORadioLSSVM = "-";
-                                                            }
-                                                        } else if (TORadioLSSVM.equals("TORadio4LSSVM")) {
-                                                            dTORadioLSSVM = 4;
-                                                            if (PRadioLSSVM.equals("PRadio1LSSVM")) {
-                                                                dPRadioLSSVM = 1;
-                                                                sTORadioLSSVM = "Use test dataset";
-                                                                sDummy = "Learning Dataset: ";
-                                                                sFileDataLSSVM = sFileNameLSSVM;
-                                                                dAttributesLSSVM = snDFAttributesLSSVM;
-                                                                dInstancesLSSVM = snDFInstancesLSSVM; 
-                                                                sPDummy = "Test Dataset: ";
-                                                                sPFileDataLSSVM = sTestFileNameLSSVM;
-                                                                dPAttributesLSSVM = snTDFAttributesLSSVM; 
-                                                                dPInstancesLSSVM = snTDFInstancesLSSVM; 
-                                                                sVariation = "4";
-                                                            } else if (PRadioLSSVM.equals("PRadio2LSSVM")) {
-                                                                dPRadioLSSVM = 2;
-                                                                sTORadioLSSVM = "-";
-                                                            }
-                                                        } 
+                                                if (TORadioLSSVM.equals("TORadio2LSSVM")) { 
+                                                    dTORadioLSSVM = 2;
+                                                    if (PRadioLSSVM.equals("PRadio1LSSVM")) { %>
+                                                        Hold-out = <%=nf.format(dHoldOutLSSVM)%> (%) 
+                                                        <% 
+                                                        sDummy = "Learning Dataset: ";
+                                                        sFileDataLSSVM = sFileNameLSSVM;
+                                                        dAttributesLSSVM = snDFAttributesLSSVM;
+                                                        dInstancesLSSVM = snDFInstancesLSSVM;
+                                                        sVariation = "2";
+                                                        sPFileDataLSSVM = "";
+                                                        dPAttributesLSSVM = "0";
+                                                        dPInstancesLSSVM = "0";
                                                     }
-                                                } else {
-                                                    dNormalRadioLSSVM=2;    
-                                                    if (TORadioLSSVM.equals("TORadio2LSSVM")) { 
-                                                        dTORadioLSSVM = 2;
-                                                        if (PRadioLSSVM.equals("PRadio1LSSVM")) {
-                                                            dPRadioLSSVM = 1; %>
-                                                            Hold-out = <%=nf.format(dHoldOutLSSVM)%> (%) 
-                                                            <% 
-                                                            sDummy = "Learning Dataset: ";
-                                                            sFileDataLSSVM = sFileNameLSSVM;
-                                                            dAttributesLSSVM = snDFAttributesLSSVM;
-                                                            dInstancesLSSVM = snDFInstancesLSSVM;
-                                                            sVariation = "7";
-                                                            sPFileDataLSSVM = "";
-                                                            dPAttributesLSSVM = "0";
-                                                            dPInstancesLSSVM = "0";
-                                                        } else if (PRadioLSSVM.equals("PRadio2LSSVM")) { 
-                                                            dPRadioLSSVM = 2; %>
-                                                            -
-                                                        <% }
-                                                    } else if (TORadioLSSVM.equals("TORadio3LSSVM")) {
-                                                        dTORadioLSSVM = 3;
-                                                        if (PRadioLSSVM.equals("PRadio1LSSVM")) { 
-                                                            dPRadioLSSVM = 1; %>
-                                                            Cross-validation = <%=nf.format(dCrossValidationLSSVM)%> (folds)
-                                                            <%
-                                                            sDummy = "Learning Dataset: ";
-                                                            sFileDataLSSVM = sFileNameLSSVM;
-                                                            dAttributesLSSVM = snDFAttributesLSSVM;
-                                                            dInstancesLSSVM = snDFInstancesLSSVM;
-                                                            sVariation = "8";
-                                                            sPFileDataLSSVM = "";
-                                                            dPAttributesLSSVM = "0";
-                                                            dPInstancesLSSVM = "0";
-                                                        } else if (PRadioLSSVM.equals("PRadio2LSSVM")) {
-                                                            dPRadioLSSVM = 2; %>
-                                                            -
-                                                        <% }
-                                                    } else {
-                                                        if (TORadioLSSVM.equals("TORadio1LSSVM")) {
-                                                            dTORadioLSSVM = 1;
-                                                            if (PRadioLSSVM.equals("PRadio1LSSVM")) {
-                                                                dPRadioLSSVM = 1;
-                                                                sTORadioLSSVM = "Use learning dataset";
-                                                                sDummy = "Learning Dataset: ";
-                                                                sFileDataLSSVM = sFileNameLSSVM;
-                                                                dAttributesLSSVM = snDFAttributesLSSVM;  
-                                                                dInstancesLSSVM = snDFInstancesLSSVM; 
-                                                                sVariation = "6";
-                                                                sPFileDataLSSVM = "";
-                                                                dPAttributesLSSVM = "0";
-                                                                dPInstancesLSSVM = "0";
-                                                            } else if (PRadioLSSVM.equals("PRadio2LSSVM")) {
-                                                                dPRadioLSSVM = 2;
-                                                                sTORadioLSSVM = "-";
-                                                            }
-                                                        } else if (TORadioLSSVM.equals("TORadio4LSSVM")) {
-                                                            dTORadioLSSVM = 4;
-                                                            if (PRadioLSSVM.equals("PRadio1LSSVM")) {
-                                                                dPRadioLSSVM = 1;
-                                                                sTORadioLSSVM = "Use test dataset";
-                                                                sDummy = "Learning Dataset: ";
-                                                                sFileDataLSSVM = sFileNameLSSVM;
-                                                                dAttributesLSSVM = snDFAttributesLSSVM;
-                                                                dInstancesLSSVM = snDFInstancesLSSVM; 
-                                                                sPDummy = "Test Dataset: ";
-                                                                sPFileDataLSSVM = sTestFileNameLSSVM;
-                                                                dPAttributesLSSVM = snTDFAttributesLSSVM; 
-                                                                dPInstancesLSSVM = snTDFInstancesLSSVM; 
-                                                                sVariation = "9";
-                                                            } else if (PRadioLSSVM.equals("PRadio2LSSVM")) {
-                                                                dPRadioLSSVM = 2;
-                                                                sTORadioLSSVM = "-";
-                                                            }
-                                                        } 
+                                                    else if (PRadioLSSVM.equals("PRadio2LSSVM")) { %> 
+                                                        -
+                                                    <% }
+                                                }
+                                                else if (TORadioLSSVM.equals("TORadio3LSSVM")) {
+                                                    dTORadioLSSVM = 3;
+                                                    if (PRadioLSSVM.equals("PRadio1LSSVM")) { %>
+                                                        Cross-validation = <%=nf.format(dCrossValidationLSSVM)%> (folds)
+                                                        <%
+                                                        sDummy = "Learning Dataset: ";
+                                                        sFileDataLSSVM = sFileNameLSSVM;
+                                                        dAttributesLSSVM = snDFAttributesLSSVM;
+                                                        dInstancesLSSVM = snDFInstancesLSSVM;
+                                                        sVariation = "3";
+                                                        sPFileDataLSSVM = "";
+                                                        dPAttributesLSSVM = "0";
+                                                        dPInstancesLSSVM = "0";
                                                     }
-                                                } %>
-                                                <%=sTORadioLSSVM%>
+                                                    else if (PRadioLSSVM.equals("PRadio2LSSVM")) { %>
+                                                        -
+                                                    <% }
+                                                }
+                                                else {
+                                                    if (TORadioLSSVM.equals("TORadio1LSSVM")) {
+                                                        dTORadioLSSVM = 1;
+                                                        if (PRadioLSSVM.equals("PRadio1LSSVM")) {
+                                                            sTORadioLSSVM = "Use learning dataset";
+                                                            sDummy = "Learning Dataset: ";
+                                                            sFileDataLSSVM = sFileNameLSSVM;
+                                                            dAttributesLSSVM = snDFAttributesLSSVM;  
+                                                            dInstancesLSSVM = snDFInstancesLSSVM; 
+                                                            sVariation = "1";
+                                                            sPFileDataLSSVM = "";
+                                                            dPAttributesLSSVM = "0";
+                                                            dPInstancesLSSVM = "0";
+                                                        }
+                                                        else if (PRadioLSSVM.equals("PRadio2LSSVM")) {
+                                                            sTORadioLSSVM = "-";
+                                                        }
+                                                    }
+                                                    else if (TORadioLSSVM.equals("TORadio4LSSVM")) {
+                                                        dTORadioLSSVM = 4;
+                                                        if (PRadioLSSVM.equals("PRadio1LSSVM")) {
+                                                            sTORadioLSSVM = "Use test dataset";
+                                                            sDummy = "Learning Dataset: ";
+                                                            sFileDataLSSVM = sFileNameLSSVM;
+                                                            dAttributesLSSVM = snDFAttributesLSSVM;
+                                                            dInstancesLSSVM = snDFInstancesLSSVM; 
+                                                            sPDummy = "Test Dataset: ";
+                                                            sPFileDataLSSVM = sTestFileNameLSSVM;
+                                                            dPAttributesLSSVM = snTDFAttributesLSSVM; 
+                                                            dPInstancesLSSVM = snTDFInstancesLSSVM; 
+                                                            sVariation = "4";
+                                                        }
+                                                        else if (PRadioLSSVM.equals("PRadio2LSSVM")) {
+                                                            sTORadioLSSVM = "-";
+                                                        }
+                                                    } %>
+
+                                                <%=sTORadioLSSVM%> 
+                                            <% } %>
                                         </div>
                                         <div class="col-md-2"><b> Run variation # <%=sVariation%> </b></div>
                                     </div>
@@ -1217,6 +1225,12 @@
                                     
                     <% //displaying dataset 
                     if (sLoadingDataSet1 != "" || sLoadingDataSet3 != "") { 
+                        /*
+                        out.println("<p>");
+                        out.println("sLoadingDataSet1 = "+sLoadingDataSet1);
+                        out.println("sLoadingDataSet3 = "+sLoadingDataSet3);
+                        */
+
                         if (sLoadingDataSet1 != "") {
                             sFileDataLSSVM = sFileNameLSSVM;
                         } else if (sLoadingDataSet3 != "") {
@@ -1235,7 +1249,7 @@
                             // first line: title
                             line = br.readLine();
                             if (line == null) {
-                                out .println("<h3><font color='red'>Dataset is empty !</font></h3>");
+                                out .println("<h3><font color='red'>Dataset is empty ...!</font></h3>");
                             } else if (sLoadingDataSet1 != "") {
                                 cols = line.split("\\t");
 
@@ -1352,7 +1366,7 @@
                                                 <tr>
                                                     <td align="left">
                                                         <font color='red'>
-                                                        &nbsp;&nbsp;Dataset not available !
+                                                        &nbsp;&nbsp;Dataset not available ... !
                                                         </font>
                                                     </td> 
                                                 </tr>
@@ -1375,6 +1389,12 @@
                         </script> 
                     <% //#3 displaying test dataset 
                     } else if (sLoadingDataSet2 != "" || sLoadingDataSet4 != "") { 
+                        /*
+                        out.println("<p>");
+                        out.println("sLoadingDataSet1 = "+sLoadingDataSet1);
+                        out.println("sLoadingDataSet3 = "+sLoadingDataSet3);
+                        */
+
                         if (sLoadingDataSet2 != "") {
                             sPFileDataLSSVM = sTestFileNameLSSVM; 
                         } else if (sLoadingDataSet4 != "") {
@@ -1393,7 +1413,7 @@
                             // first line: title
                             line = br.readLine();
                             if (line == null) {
-                                out.println("<h3><font color='red'>Dataset is empty !</font></h3>");
+                                out.println("<h3><font color='red'>Dataset is empty ...!</font></h3>");
                             } else if (sLoadingDataSet2 != "") {
                                 cols = line.split("\\t");
 
@@ -1510,7 +1530,7 @@
                                                 <tr>
                                                     <td align="left">
                                                         <font color='red'>
-                                                            Dataset not available !
+                                                            Dataset not available ... !
                                                         </font>
                                                     </td> 
                                                 </tr>
@@ -1561,10 +1581,30 @@
                     if (vfile == "") { 
                         vfile = "SVM03Result";
                     }
+
+                    if (PRadioLSSVM.equals("PRadio1LSSVM")) { 
+                        if (TORadioLSSVM.equals("TORadio4LSSVM")) {
+                        } else {
+                            dPAttributesLSSVM=dAttributesLSSVM; 
+                            dPInstancesLSSVM=dInstancesLSSVM;
+                        }
+                    }
                     %>
                         
                     <% if (sPageControl.equals("1")) { %>
                         <% if (sProcessRun != "") { %>
+
+                            <%
+                            /*
+                            out.println("dPAttributes = "+dPAttributes);
+                            out.println("<br>");
+                            out.println("dPInstances = "+dPInstances);
+                            out.println("<br>");
+                            out.println("sPFileData = "+sPFileData);
+                            out.println("<br>");
+                            */
+                            %>
+
                             <jsp:include page="LSSVMServlet">
                                 <jsp:param name="nValueCLSSVM" value="<%=nValueCLSSVM%>" />
                                 <jsp:param name="nValueSLSSVM" value="<%=nValueSLSSVM%>" />
@@ -1615,6 +1655,9 @@
                                         </font>
                                     </a>                            
                                 </td>
+
+                                <font color="black" face="Arial" size="2" style="float:right">Base output file name:&nbsp;&nbsp;<%=sBaseFileNameLSSVM%>&nbsp;&nbsp;&nbsp;&nbsp;</font>
+                            
                             </tr>
                         </table> 
                             
@@ -1685,7 +1728,7 @@
                                     if (line == null) {
                                         %><center><div><table><tr>
                                             <td align="center">
-                                                <h3><font color='red'>Output file empty !</font></h3>
+                                                <h3><font color='red'>Output file empty ...!</font></h3>
                                             </td>
                                         </tr></table></div></center><% 
                                     } else {
@@ -1723,7 +1766,7 @@
                                 } else { %> 
                                     <center><div><table><tr>
                                         <td align="center">
-                                            <h4><font color='red'>Output file not found !</font></h4>
+                                            <h4><font color='red'>Output file not found ...!</font></h4>
                                         </td>
                                     </tr></table></div></center> 
                                 <% } %> 
@@ -1759,7 +1802,7 @@
                                         ncol = cols.length;
                                         j=0;
                                         while (stemp == "1") {
-                                            for (i = 0; i < ncol; i += 1) {
+                                            for (i = 0; i < ncol; i += 1) { 
                                                 datatemp[j][i]=cols[i];
                                             }
                                             j=j+1;
@@ -1781,7 +1824,7 @@
                                         if (j == 0) { %>
                                             <center><div><table><tr>
                                                 <td align="center">
-                                                    <h2><font color='red'>Output file empty !</font></h2>
+                                                    <h2><font color='red'>Output file empty ...!</font></h2>
                                                 </td>
                                             </tr></table></div></center> 
                                         <% } else { %>
@@ -1838,7 +1881,7 @@
                                     } else { %> 
                                         <center><div><table><tr>
                                             <td align="center">
-                                                <h4><font color='red'>Output file not found !</font></h4>
+                                                <h4><font color='red'>Output file not found ...!</font></h4>
                                             </td>
                                         </tr></table></div></center> 
                                     <% } %> 
@@ -1889,7 +1932,7 @@
                                 <% } else { %>  
                                     <center><div><table><tr>
                                         <td align="center">
-                                            <h4><font color='red'>Output file not found !</font></h4>
+                                            <h4><font color='red'>Output file not found ...!</font></h4>
                                         </td>
                                     </tr></table></div></center> 
                                 <% } %> 
@@ -2088,7 +2131,7 @@
                                 <% } else { %>  
                                     <center><div><table><tr>
                                         <td align="center">
-                                            <h4><font color='red'>Output file not found !</font></h4>
+                                            <h4><font color='red'>Output file not found ...!</font></h4>
                                         </td>
                                     </tr></table></div></center> 
                                 <% } %> 
@@ -2275,7 +2318,7 @@
                                 <% } else { %>  
                                     <center><div><table><tr>
                                         <td align="center">
-                                            <h4><font color='red'>Output file not found !</font></h4>
+                                            <h4><font color='red'>Output file not found ...!</font></h4>
                                         </td>
                                     </tr></table></div></center> 
                                 <% } %>
@@ -2462,7 +2505,7 @@
                                 <% } else { %>  
                                     <center><div><table><tr>
                                         <td align="center">
-                                            <h4><font color='red'>Output file not found !</font></h4>
+                                            <h4><font color='red'>Output file not found ...!</font></h4>
                                         </td>
                                     </tr></table></div></center> 
                                 <% } %>
@@ -2503,6 +2546,9 @@
                                                 </font>
                                             </a>                            
                                         </td>
+
+                                        <font color="black" face="Arial" size="2" style="float:right">Base output file name:&nbsp;&nbsp;<%=sBaseFileNameLSSVM%>&nbsp;&nbsp;&nbsp;&nbsp;</font>
+                            
                                     </tr>
                                 </table> 
 
@@ -2516,7 +2562,7 @@
                                         </td>
                                         <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                         <td>
-                                            <div title="View pre-computed numerical results" onclick="changetab(2)">
+                                            <div title="View pre-computed numerical results..." onclick="changetab(2)">
                                                 <h3><font color="skyblue" face="Palatino Linotype, Book Antiqua, Palatino, serif">Numerical Results</font></h3>
                                             </div>
                                         </td>
@@ -2626,6 +2672,7 @@
                                     <% // calling matlab graphic - performance
                                         opt=(int)Double.parseDouble(sopt); 
                                         GraphNo=(int)Double.parseDouble(sGraphNo);
+                                        GraphType=(int)Double.parseDouble(sGraphType);
 
                                         vpath = application.getRealPath("/"); 
 
@@ -2682,15 +2729,17 @@
                                     <jsp:include page="LSSVMGraphServlet">
                                         <jsp:param name="sBestFold" value="<%=sBestFold%>" />
                                         <jsp:param name="GraphNo" value="<%=GraphNo%>" />
+                                        <jsp:param name="GraphType" value="<%=GraphType%>" />
                                         <jsp:param name="opt" value="<%=opt%>" /> 
                                         <jsp:param name="PRadioLSSVM" value="<%=PRadioLSSVM%>" /> 
                                         <jsp:param name="TORadioLSSVM" value="<%=TORadioLSSVM%>" /> 
-                                        
                                         <jsp:param name="vpath" value="<%=vpath%>" />
                                         <jsp:param name="vfile" value="<%=vfile%>" />
                                     </jsp:include> 
                                 </center>         
                             <% } %>
+                            
+                            <input type="hidden" name="sBaseFileNameLSSVM" id="sBaseFileNameLSSVM" value="<%=sBaseFileNameLSSVM%>">
                         </div>
                     </div>
                         

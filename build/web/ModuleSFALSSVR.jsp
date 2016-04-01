@@ -1090,7 +1090,7 @@
                                             </font>
                                         </a>                            
                                     </td>
-                                    <%--<font color="black" face="Arial" size="2" style="float:right">Base output file name:&nbsp;&nbsp;<%=sBaseFileName%>&nbsp;&nbsp;&nbsp;&nbsp;</font>--%>
+                                    <%--><font color="black" face="Arial" size="2" style="float:right">Base output file name:&nbsp;&nbsp;<%=sBaseFileName%>&nbsp;&nbsp;&nbsp;&nbsp;</font><--%>
                                 </tr>
                             </table> 
                             
@@ -1160,8 +1160,8 @@
                                     <div class="panel-body">
                                         <div class="container boundary">
                                             <div class="row">
-                                                <div class="col-md-4"><h3>Base Output File Name</h3></div>
-                                                <div class="col-md-4"><h3><%=sBaseFileName%></h3></div>
+                                                <div class="col-md-4"><h4>Base Output File Name</h4></div>
+                                                <div class="col-md-4"><h5><%=sBaseFileName%></h5></div>
                                             </div>
                                         </div>
                                     </div>
@@ -1914,6 +1914,14 @@
                         if (vfile == "") { 
                             vfile = "SFAR03Result";
                         }
+
+                        if (PRadio.equals("PRadio1")) {
+                            if (TORadio.equals("TORadio4")) {
+                            } else {
+                                dPAttributes=dAttributes;
+                                dPInstances=dInstances;
+                            }
+                        }
                         %>
                         
                         <% if (sPageControl.equals("1")) { %>
@@ -1988,7 +1996,7 @@
                                         </font>
                                     </a>                            
                                 </td>
-                                <%--<font color="black" face="Arial" size="2" style="float:right">Base output file name:&nbsp;&nbsp;<%=sBaseFileName%>&nbsp;&nbsp;&nbsp;&nbsp;</font>--%>
+                                <font color="black" face="Arial" size="2" style="float:right">Base output file name:&nbsp;&nbsp;<%=sBaseFileName%>&nbsp;&nbsp;&nbsp;&nbsp;</font><%--><--%>
                             </tr>
                         </table> 
                             
@@ -3318,7 +3326,7 @@
                                                 </font>
                                             </a>                            
                                         </td>
-                                        <%--<font color="black" face="Arial" size="2" style="float:right">Base output file name:&nbsp;&nbsp;<%=sBaseFileName%>&nbsp;&nbsp;&nbsp;&nbsp;</font>--%>
+                                        <font color="black" face="Arial" size="2" style="float:right">Base output file name:&nbsp;&nbsp;<%=sBaseFileName%>&nbsp;&nbsp;&nbsp;&nbsp;</font><%--><--%>
                                     </tr>
                                 </table> 
 

@@ -1137,8 +1137,8 @@
                                 <div class="panel-body">
                                     <div class="container boundary">
                                         <div class="row">
-                                            <div class="col-md-4"><h3>Base Output File Name</h3></div>
-                                            <div class="col-md-4"><h3><%=sBaseFileName%></h3></div>
+                                            <div class="col-md-4"><h4>Base Output File Name</h4></div>
+                                            <div class="col-md-4"><h5><%=sBaseFileName%></h5></div>
                                         </div>
                                     </div>
                                 </div>
@@ -1495,20 +1495,20 @@
                                                             </font>
                                                         </a>
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <%--><div class="col-md-4">
                                                         <font color="black">
                                                             Base output file name: &nbsp;<b><%=sBaseFileName%></b>
                                                         </font>
-                                                    </div>
+                                                    </div><--%>
                                                 <% } else {%>
                                                     <div class="col-md-4">
                                                         &nbsp;
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <%--><div class="col-md-4">
                                                         <font color="black">
                                                             Base output file name: &nbsp;<b><%=sBaseFileName%></b>
                                                         </font>
-                                                    </div>
+                                                    </div><--%>
                                                 <% } %>
 
                                             <% } else if (PRadioLSSVM.equals("PRadio2LSSVM")) { %> 
@@ -1526,11 +1526,11 @@
                                                         </font>
                                                     </a> 
                                                 </div>
-                                                <div class="col-md-4">
+                                                <%--><div class="col-md-4">
                                                     <font color="black">
                                                     Base output file name: &nbsp;<b><%=sBaseFileName%></b>
                                                     </font>
-                                                </div>
+                                                </div><--%>
                                             <% } %>
                                         </div>
                                     </div>
@@ -1887,6 +1887,14 @@
                     if (vfile == "") { 
                         vfile = "SFAM03Result";
                     }
+
+                    if (PRadioLSSVM.equals("PRadio1LSSVM")) {
+                        if (TORadioLSSVM.equals("TORadio4LSSVM")) { 
+                        } else {
+                            dPAttributesLSSVM=dAttributesLSSVM;
+                            dPInstancesLSSVM=dInstancesLSSVM;
+                        }
+                    }
                     %>
 
                     <% if (sPageControl.equals("1")) { %>
@@ -1947,9 +1955,9 @@
                         
                     <div class="tab-content">
                     <% if (sPageControl.equals("2")) { %>
-                    <div id="results" class="tab-pane fade in active">
+                        <div id="results" class="tab-pane fade in active">
                     <% } else { %>
-                    <div id="results" class="tab-pane fade in">
+                        <div id="results" class="tab-pane fade in">
                     <% } %>
                             <table>
                                 <tr>
@@ -1960,6 +1968,7 @@
                                             </font>
                                         </a>                            
                                     </td>
+                                    <font color="black" face="Arial" size="2" style="float:right">Base output file name:&nbsp;&nbsp;<%=sBaseFileName%>&nbsp;&nbsp;&nbsp;&nbsp;</font><%--><--%>
                                 </tr>
                             </table> 
                             
@@ -3272,6 +3281,7 @@
                                                 </font>
                                             </a>                            
                                         </td>
+                                        <font color="black" face="Arial" size="2" style="float:right">Base output file name:&nbsp;&nbsp;<%=sBaseFileName%>&nbsp;&nbsp;&nbsp;&nbsp;</font><%--><--%>
                                     </tr>
                                 </table> 
 

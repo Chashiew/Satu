@@ -45,14 +45,14 @@ public class LSSVMServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     
-    private LSSVMClass cLSSVM = null;
+    private LSSVMClass cLSSVR = null;
 
     private HttpServletRequest servletRequest;
 
     public LSSVMServlet() {
         super();
         try {
-            cLSSVM = new LSSVMClass();
+            cLSSVR = new LSSVMClass();
         } catch (MWException e) {
             e.printStackTrace();
         }
@@ -61,12 +61,12 @@ public class LSSVMServlet extends HttpServlet {
     @Override
     public void destroy() {
         super.destroy();
-        cLSSVM.dispose();
+        cLSSVR.dispose();
     }
     
-    //@Override
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
+    @Override
+    protected void doGet(HttpServletRequest request,
+            HttpServletResponse response) throws ServletException, IOException {
         
         response.setContentType("text/html");
         PrintWriter pw = response.getWriter();
@@ -90,8 +90,14 @@ public class LSSVMServlet extends HttpServlet {
         int dAttributesLSSVM = (int)Double.parseDouble(request.getParameter("dAttributesLSSVM"));
         int dInstancesLSSVM = (int)Double.parseDouble(request.getParameter("dInstancesLSSVM"));
         
+        int ncolp = (int)Double.parseDouble(request.getParameter("dPAttributesLSSVM"));
+        int nrowp = (int)Double.parseDouble(request.getParameter("dPInstancesLSSVM"));
+        
+        int dPAttributesLSSVM = (int)Double.parseDouble(request.getParameter("dPAttributesLSSVM"));
+        int dPInstancesLSSVM = (int)Double.parseDouble(request.getParameter("dPInstancesLSSVM"));
+        
         double[][] Datatrain = new double[nrow][ncol];
-        double[][] Datapre = new double[nrow][ncol];
+        double[][] Datapre = new double[nrowp][ncolp];
 
         String sFileDataLSSVM = request.getParameter("sFileDataLSSVM");
         
@@ -138,11 +144,6 @@ public class LSSVMServlet extends HttpServlet {
 
             String sPFileDataLSSVM = request.getParameter("sPFileDataLSSVM");
 
-            int ncolp;
-            int nrowp;
-            int dPAttributesLSSVM;
-            int dPInstancesLSSVM;
-            
             dPAttributesLSSVM = (int)Double.parseDouble(request.getParameter("dPAttributesLSSVM"));
             dPInstancesLSSVM = (int)Double.parseDouble(request.getParameter("dPInstancesLSSVM"));
 
@@ -227,6 +228,28 @@ public class LSSVMServlet extends HttpServlet {
                 }
             }
             
+            Object[] params = new MWArray[31];  //[37];
+
+            params[0] = new MWNumericArray(Double.parseDouble(request.getParameter("nValueCLSSVM")), MWClassID.DOUBLE);
+            params[1] = new MWNumericArray(Double.parseDouble(request.getParameter("nValueCLSSVM")), MWClassID.DOUBLE);
+            params[2] = new MWNumericArray(Double.parseDouble(request.getParameter("dHoldOutLSSVM")), MWClassID.DOUBLE);
+            params[3] = new MWNumericArray(Double.parseDouble(request.getParameter("dCrossValidationLSSVM")), MWClassID.DOUBLE);
+
+            params[4] = new MWNumericArray(Double.parseDouble(request.getParameter("dNormalRadioLSSVM")), MWClassID.DOUBLE);
+            params[5] = new MWNumericArray(Double.parseDouble(request.getParameter("dPRadioLSSVM")), MWClassID.DOUBLE);
+            params[6] = new MWNumericArray(Double.parseDouble(request.getParameter("dTORadioLSSVM")), MWClassID.DOUBLE);
+
+            params[7] = new MWNumericArray(Double.parseDouble(request.getParameter("sVariation")), MWClassID.DOUBLE);
+
+            params[8] = new MWNumericArray(dAttributesLSSVM, MWClassID.DOUBLE);
+            params[9] = new MWNumericArray(dInstancesLSSVM, MWClassID.DOUBLE);
+
+            params[10] = new MWNumericArray(Double.parseDouble(request.getParameter("dPAttributesLSSVM")), MWClassID.DOUBLE);
+            params[11] = new MWNumericArray(Double.parseDouble(request.getParameter("dPInstancesLSSVM")), MWClassID.DOUBLE);
+
+            params[12] = new MWNumericArray(Datatrain, MWClassID.DOUBLE);
+            params[13] = new MWNumericArray(Datapre, MWClassID.DOUBLE);
+
             pw.write("<table><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>");
             pw.write("<tr><td>&nbsp;</td><td>vpath</td><td>&nbsp;</td><td>"+vpath+"</td></tr>");
             pw.write("<tr><td>&nbsp;</td><td>vfile</td><td>&nbsp;</td><td>"+vfile+"</td></tr>");
@@ -312,44 +335,4 @@ public class LSSVMServlet extends HttpServlet {
             pw.close();
         }
     }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

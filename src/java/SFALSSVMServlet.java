@@ -41,22 +41,8 @@ import com.mathworks.toolbox.javabuilder.webfigures.WebFigureHtmlGenerator;
 
 import ProgramSFALSSVM.SFALSSVMClass;
 
-/**
- *
- * @author DK
- */
 public class SFALSSVMServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    
     //#1
     private static final long serialVersionUID = 1L;
     
@@ -65,10 +51,6 @@ public class SFALSSVMServlet extends HttpServlet {
 
     private HttpServletRequest servletRequest;
 
-    /* @see HttpServlet#HttpServlet()
-     */
-    
-    /* #3 */
     public SFALSSVMServlet() {
         super();
         try {
@@ -77,43 +59,22 @@ public class SFALSSVMServlet extends HttpServlet {
             e.printStackTrace();
         }
     }
-    /**/
-
-    /* @see Servlet#destroy()
-     */
-    
-    /* #4 */
 
     @Override
     public void destroy() {
         super.destroy();
         cSFALSSVM.dispose();
     }
-    /**/
-    
-    /* #5
-     *
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
-     */
-    
-    //@Override
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        /* Get the parameters and convert them to MWArray
-         */
-        /* #6 */
         
         response.setContentType("text/html");
         PrintWriter pw = response.getWriter();
         
-        //ProgramSFALSSVM(vpath, vfile, ...
         String vpath = request.getParameter("vpath");
         String vfile = request.getParameter("vfile");
                 
-        //nFireFliesLSSVM,nMaxGenerationLSSVM,dMinBetaLSSVM,dGammaLSSVM,dAlphaLSSVM,dAIWeightLSSVM, ...
         double nFireFliesLSSVM = Double.parseDouble(request.getParameter("nFireFliesLSSVM"));
         double nMaxGenerationLSSVM = Double.parseDouble(request.getParameter("nMaxGenerationLSSVM"));
         double dMinBetaLSSVM = Double.parseDouble(request.getParameter("dMinBetaLSSVM"));
@@ -121,7 +82,6 @@ public class SFALSSVMServlet extends HttpServlet {
         double dAlphaLSSVM = Double.parseDouble(request.getParameter("dAlphaLSSVM"));
         double dAIWeightLSSVM = Double.parseDouble(request.getParameter("dAIWeightLSSVM"));
 
-        //dTauLSSVM,dBPotentialLSSVM,dC1LSSVM,dC2LSSVM,dS1LSSVM,dS2LSSVM,dTrainingPSLSSVM,dValidationPSLSSVM, ...
         double dTauLSSVM = Double.parseDouble(request.getParameter("dTauLSSVM"));
         double dBPotentialLSSVM = Double.parseDouble(request.getParameter("dBPotentialLSSVM"));
         double dC1LSSVM = Double.parseDouble(request.getParameter("dC1LSSVM"));
@@ -131,46 +91,38 @@ public class SFALSSVMServlet extends HttpServlet {
         double dTrainingPSLSSVM = Double.parseDouble(request.getParameter("dTrainingPSLSSVM"));
         double dValidationPSLSSVM = Double.parseDouble(request.getParameter("dValidationPSLSSVM"));
 
-        //dTotalSizeLSSVM,nLastChange1LSSVM,nLastChange2LSSVM,dHoldOutLSSVM,dCrossValidationLSSVM, ...
         double dTotalSizeLSSVM = Double.parseDouble(request.getParameter("dTotalSizeLSSVM"));
         double nLastChange1LSSVM = Double.parseDouble(request.getParameter("nLastChange1LSSVM"));
         double nLastChange2LSSVM= Double.parseDouble(request.getParameter("nLastChange2LSSVM"));
         double dHoldOutLSSVM = Double.parseDouble(request.getParameter("dHoldOutLSSVM"));
         double dCrossValidationLSSVM = Double.parseDouble(request.getParameter("dCrossValidationLSSVM"));
 
-        //dNormalRadioLSSVM,dSCRadioLSSVM,dPRadioLSSVM,dTORadioLSSVM,sVariation, ...
         double dNormalRadioLSSVM = Double.parseDouble(request.getParameter("dNormalRadioLSSVM"));
         double dSCRadioLSSVM = Double.parseDouble(request.getParameter("dSCRadioLSSVM"));
         double dPRadioLSSVM = Double.parseDouble(request.getParameter("dPRadioLSSVM"));
         double dTORadioLSSVM = Double.parseDouble(request.getParameter("dTORadioLSSVM"));
         double sVariation = Double.parseDouble(request.getParameter("sVariation"));
         
-        //dAttributesLSSVM,dInstancesLSSVM,dPAttributesLSSVM,dPInstancesLSSVM,Datatrain,Datapre)
-        
         int ncol = (int)Double.parseDouble(request.getParameter("dAttributesLSSVM"));
         int nrow = (int)Double.parseDouble(request.getParameter("dInstancesLSSVM"));
+            int dAttributesLSSVM = (int)Double.parseDouble(request.getParameter("dAttributesLSSVM"));
+            int dInstancesLSSVM = (int)Double.parseDouble(request.getParameter("dInstancesLSSVM"));
         
-        int dAttributesLSSVM = (int)Double.parseDouble(request.getParameter("dAttributesLSSVM"));
-        int dInstancesLSSVM = (int)Double.parseDouble(request.getParameter("dInstancesLSSVM"));
+        int ncolp = (int)Double.parseDouble(request.getParameter("dPAttributesLSSVM"));
+        int nrowp = (int)Double.parseDouble(request.getParameter("dPInstancesLSSVM"));
+            int dPAttributesLSSVM = (int)Double.parseDouble(request.getParameter("dPAttributesLSSVM"));
+            int dPInstancesLSSVM = (int)Double.parseDouble(request.getParameter("dPInstancesLSSVM"));
         
         double[][] Datatrain = new double[nrow][ncol];
-        double[][] Datapre = new double[nrow][ncol];
+        double[][] Datapre = new double[nrowp][ncolp];
 
         String sFileDataLSSVM = request.getParameter("sFileDataLSSVM");
         
-        //public static void main (String[] Args) throws Exception {
-
         if (sFileDataLSSVM != "") {  
-            //Error in this command line
-            //String file = servletRequest.getSession().getServletContext().getRealPath("/") + sFileDataLSSVM;
-
             String file = request.getSession().getServletContext().getRealPath("/") + sFileDataLSSVM;
             String line = null;
 
             try {
-                //wrong command line
-                //BufferedReader br = new BufferedReader(file);
-
                 BufferedReader br = new BufferedReader(new FileReader(file));
                 String sDummy;
                 String[] headers;
@@ -181,8 +133,6 @@ public class SFALSSVMServlet extends HttpServlet {
                 // first line: title
                 line = br.readLine();
 
-                //System.out.println(line);
-                
                 if (line != null) {
                     cols = line.split("\\t");
 
@@ -211,11 +161,6 @@ public class SFALSSVMServlet extends HttpServlet {
 
             String sPFileDataLSSVM = request.getParameter("sPFileDataLSSVM");
 
-            int ncolp;
-            int nrowp;
-            int dPAttributesLSSVM;
-            int dPInstancesLSSVM;
-            
             dPAttributesLSSVM = (int)Double.parseDouble(request.getParameter("dPAttributesLSSVM"));
             dPInstancesLSSVM = (int)Double.parseDouble(request.getParameter("dPInstancesLSSVM"));
 
@@ -300,15 +245,6 @@ public class SFALSSVMServlet extends HttpServlet {
                 }
             }
             
-            /*
-            String sResult01Name = request.getParameter("sResult01Name");
-            String sResult02Name = request.getParameter("sResult02Name");
-            String sResult03Name = request.getParameter("sResult03Name");
-            String sResult04Name = request.getParameter("sResult04Name");
-            String sResult05Name = request.getParameter("sResult05Name");
-            String sResult06Name = request.getParameter("sResult06Name");
-            */
-
             /*Object[] params = new MWArray[31];  //[37];
 
             params[0] = new MWNumericArray(Double.parseDouble(request.getParameter("nFireFliesLSSVM")), MWClassID.DOUBLE);
@@ -526,7 +462,7 @@ public class SFALSSVMServlet extends HttpServlet {
                         */
 
                         pw.write("<script>");
-                        pw.write("alert(\"Execution completed successfully! \\n\\n Click Numerical Results to see the output\");");
+                        pw.write("alert(\"Execution completed successfully! \\n\\nClick Numerical Results to see the output\");");
                         pw.write("</script>");
                         pw.close();
                     } finally {
