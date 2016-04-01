@@ -940,15 +940,15 @@
                                                         dNormalRadio=1;    
                                                         if (PRadio.equals("PRadio1")) {
                                                             sPRadio = "Evaluation";
-                                                            sDummy = "Learning Dataset : ";
+                                                            sDummy = "Learning Dataset: ";
                                                         }
                                                         else if (PRadio.equals("PRadio2")) {
                                                             sPRadio = "Prediction";
-                                                            sDummy = "Learning Dataset : "; 
+                                                            sDummy = "Learning Dataset: "; 
                                                             sFileData = sLearningFileName;
                                                             dAttributes = snLDFAttributes;
                                                             dInstances = snLDFInstances;
-                                                            sPDummy = "Prediction Dataset : ";
+                                                            sPDummy = "Prediction Dataset: ";
                                                             sPFileData = sPredictionFileName;
                                                             dPAttributes = snPDFAttributes;
                                                             dPInstances = snPDFInstances;
@@ -958,15 +958,15 @@
                                                         dNormalRadio=2;    
                                                         if (PRadio.equals("PRadio1")) {
                                                             sPRadio = "Evaluation";
-                                                            sDummy = "Learning Dataset : ";
+                                                            sDummy = "Learning Dataset: ";
                                                         }
                                                         else if (PRadio.equals("PRadio2")) {
                                                             sPRadio = "Prediction";
-                                                            sDummy = "Learning Dataset : "; 
+                                                            sDummy = "Learning Dataset: "; 
                                                             sFileData = sLearningFileName;
                                                             dAttributes = snLDFAttributes;
                                                             dInstances = snLDFInstances;
-                                                            sPDummy = "Prediction Dataset : ";
+                                                            sPDummy = "Prediction Dataset: ";
                                                             sPFileData = sPredictionFileName;
                                                             dPAttributes = snPDFAttributes;
                                                             dPInstances = snPDFInstances;
@@ -990,7 +990,7 @@
                                                             Hold-out = <%=nf.format(dHoldOut)%> (%) 
                                                             <%
                                                             dPRadio=1;
-                                                            sDummy = "Learning Dataset : ";
+                                                            sDummy = "Learning Dataset: ";
                                                             sFileData = sFileName;
                                                             dAttributes = snDFAttributes;
                                                             dInstances = snDFInstances;
@@ -1009,7 +1009,7 @@
                                                             Cross-validation = <%=nf.format(dCrossValidation)%> (folds)
                                                             <%
                                                             dPRadio=1;
-                                                            sDummy = "Learning Dataset : ";
+                                                            sDummy = "Learning Dataset: ";
                                                             sFileData = sFileName;
                                                             dAttributes = snDFAttributes;
                                                             dInstances = snDFInstances;
@@ -1028,7 +1028,7 @@
                                                             if (PRadio.equals("PRadio1")) {
                                                                 dPRadio=1;
                                                                 sTORadio = "Use learning dataset";
-                                                                sDummy = "Learning Dataset : ";
+                                                                sDummy = "Learning Dataset: ";
                                                                 sFileData = sFileName;
                                                                 dAttributes = snDFAttributes;  
                                                                 dInstances = snDFInstances; 
@@ -1045,11 +1045,11 @@
                                                             if (PRadio.equals("PRadio1")) {
                                                                 dPRadio=1;
                                                                 sTORadio = "Use test dataset";
-                                                                sDummy = "Learning Dataset : ";
+                                                                sDummy = "Learning Dataset: ";
                                                                 sFileData = sFileName;
                                                                 dAttributes = snDFAttributes;
                                                                 dInstances = snDFInstances; 
-                                                                sPDummy = "Test Dataset : ";
+                                                                sPDummy = "Test Dataset: ";
                                                                 sPFileData = sTestFileName;
                                                                 dPAttributes = snTDFAttributes; 
                                                                 dPInstances = snTDFInstances; 
@@ -1068,7 +1068,7 @@
                                                             Hold-out = <%=nf.format(dHoldOut)%> (%) 
                                                             <% 
                                                             dPRadio=1;
-                                                            sDummy = "Learning Dataset : ";
+                                                            sDummy = "Learning Dataset: ";
                                                             sFileData = sFileName;
                                                             dAttributes = snDFAttributes;
                                                             dInstances = snDFInstances;
@@ -1086,7 +1086,7 @@
                                                             Cross-validation = <%=nf.format(dCrossValidation)%> (folds)
                                                             <%
                                                             dPRadio=1;
-                                                            sDummy = "Learning Dataset : ";
+                                                            sDummy = "Learning Dataset: ";
                                                             sFileData = sFileName;
                                                             dAttributes = snDFAttributes;
                                                             dInstances = snDFInstances;
@@ -1104,7 +1104,7 @@
                                                             if (PRadio.equals("PRadio1")) {
                                                                 dPRadio=1;
                                                                 sTORadio = "Use learning dataset";
-                                                                sDummy = "Learning Dataset : ";
+                                                                sDummy = "Learning Dataset: ";
                                                                 sFileData = sFileName;
                                                                 dAttributes = snDFAttributes;  
                                                                 dInstances = snDFInstances; 
@@ -1121,11 +1121,11 @@
                                                             if (PRadio.equals("PRadio1")) {
                                                                 dPRadio=1;
                                                                 sTORadio = "Use test dataset";
-                                                                sDummy = "Learning Dataset : ";
+                                                                sDummy = "Learning Dataset: ";
                                                                 sFileData = sFileName;
                                                                 dAttributes = snDFAttributes;
                                                                 dInstances = snDFInstances; 
-                                                                sPDummy = "Test Dataset : ";
+                                                                sPDummy = "Test Dataset: ";
                                                                 sPFileData = sTestFileName;
                                                                 dPAttributes = snTDFAttributes; 
                                                                 dPInstances = snTDFInstances; 
@@ -1164,7 +1164,7 @@
                                                 <div class="col-md-4"><h4><%=sPDummy%></h4></div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-4"><%=sFileData%></div>
+                                                <div class="col-md-4"><%=sPFileData%></div>
                                                 <div class="col-md-2">No. of Attributes = <%=nf.format(Double.parseDouble(dPAttributes))%></div>
                                                 <div class="col-md-3">No. of Instances = <%=nf.format(Double.parseDouble(dPInstances))%></div>
                                             </div>

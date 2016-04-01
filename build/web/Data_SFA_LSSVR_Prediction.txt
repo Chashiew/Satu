@@ -21,15 +21,15 @@ No.	Description	Variable	Value	Remark
 19	Objective Function	sOptimRadio	1	RMSE validation
 20	Stop Criterion	sSCRadio	1	Max. generation is reached
 21	Purpose	sPRadio	2	Prediction
-22	Learning Data File	sLearningDataFile	NY Bedload transport learning.txt	-
+22	Learning Data File	sLearningDataFile	NY Bedload transport preprocessing learning.txt	-
 23	No. of Attributes	nLDFAttributes	6	-
 24	No. of Instances	nLDFInstances	61	-
-25	Prediction Data File	sPredictionDataFile	NY Bedload transport prediction.txt	-
+25	Prediction Data File	sPredictionDataFile	NY Bedload transport preprocessing prediction.txt	-
 26	No. of Attributes	nPDFAttributes	5	-
 27	No. of Instances	nPDFInstances	15	-
-28	First Data File	sFileData	NY Bedload transport learning.txt	-
+28	First Data File	sFileData	NY Bedload transport preprocessing learning.txt	-
 29	No. of Attributes	sdAttributes	6	-
 30	No. of Instances	sdInstances	61	-
-31	Second Data File	sPFileData	NY Bedload transport prediction.txt	-
+31	Second Data File	sPFileData	NY Bedload transport preprocessing prediction.txt	-
 32	No. of Attributes	sdPAttributes	5	-
 33	No. of Instances	sdPInstances	15	-

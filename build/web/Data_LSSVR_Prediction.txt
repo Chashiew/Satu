@@ -9,10 +9,10 @@ No.	Description	Variable	Value	Remark
 7	No. of Instances	nLDFInstances	61	-
 8	Prediction Data File	sPredictionDataFile	NY Bedload transport preprocessing prediction.txt	-
 9	No. of Attributes	nPDFAttributes	5	-
-10	No. of Instances	nPDFInstances	15	-
-11	First Data File	sFileData	NY Bedload transport preprocessing learning.txt	-
-12	No. of Attributes	sdAttributes	6	-
-13	No. of Instances	sdInstances	61	-
-14	Second Data File	sPFileData	NY Bedload transport preprocessing prediction.txt	-
-15	No. of Attributes	sdPAttributes	5	-
-16	No. of Instances	sdPInstances	15	-
+10	No. of Instances	nPDFInstances		-
+11	First Data File	sFileData		-
+12	No. of Attributes	sdAttributes		-
+13	No. of Instances	sdInstances		-
+14	Second Data File	sPFileData		-
+15	No. of Attributes	sdPAttributes	1	-
+16	No. of Instances	sdPInstances	1	-

@@ -1248,15 +1248,15 @@
                                                     if (PRadioLSSVM.equals("PRadio1LSSVM")) {
                                                         dPRadioLSSVM = 1;
                                                         sPRadioLSSVM = "Evaluation";
-                                                        sDummy = "Learning Dataset : ";
+                                                        sDummy = "Learning Dataset: ";
                                                     } else if (PRadioLSSVM.equals("PRadio2LSSVM")) {
                                                         dPRadioLSSVM = 2;
                                                         sPRadioLSSVM = "Prediction";
-                                                        sDummy = "Learning Dataset : "; 
+                                                        sDummy = "Learning Dataset: "; 
                                                         sFileDataLSSVM = sLearningFileNameLSSVM;
                                                         dAttributesLSSVM = snLDFAttributesLSSVM;
                                                         dInstancesLSSVM = snLDFInstancesLSSVM;
-                                                        sPDummy = "Prediction Dataset : ";
+                                                        sPDummy = "Prediction Dataset: ";
                                                         sPFileDataLSSVM = sPredictionFileNameLSSVM;
                                                         dPAttributesLSSVM = snPDFAttributesLSSVM;
                                                         dPInstancesLSSVM = snPDFInstancesLSSVM;
@@ -1267,15 +1267,15 @@
                                                     if (PRadioLSSVM.equals("PRadio1LSSVM")) {
                                                         dPRadioLSSVM = 1;
                                                         sPRadioLSSVM = "Evaluation";
-                                                        sDummy = "Learning Dataset : ";
+                                                        sDummy = "Learning Dataset: ";
                                                     } else if (PRadioLSSVM.equals("PRadio2LSSVM")) {
                                                         dPRadioLSSVM = 2;
                                                         sPRadioLSSVM = "Prediction";
-                                                        sDummy = "Learning Dataset : "; 
+                                                        sDummy = "Learning Dataset: "; 
                                                         sFileDataLSSVM = sLearningFileNameLSSVM;
                                                         dAttributesLSSVM = snLDFAttributesLSSVM;
                                                         dInstancesLSSVM = snLDFInstancesLSSVM;
-                                                        sPDummy = "Prediction Dataset : ";
+                                                        sPDummy = "Prediction Dataset: ";
                                                         sPFileDataLSSVM = sPredictionFileNameLSSVM;
                                                         dPAttributesLSSVM = snPDFAttributesLSSVM;
                                                         dPInstancesLSSVM = snPDFInstancesLSSVM;
@@ -1299,7 +1299,7 @@
                                                             dPRadioLSSVM = 1; %>
                                                             Hold-out = <%=nf.format(dHoldOutLSSVM)%> (%) 
                                                             <% 
-                                                            sDummy = "Learning Dataset : ";
+                                                            sDummy = "Learning Dataset: ";
                                                             sFileDataLSSVM = sFileNameLSSVM;
                                                             dAttributesLSSVM = snDFAttributesLSSVM;
                                                             dInstancesLSSVM = snDFInstancesLSSVM;
@@ -1317,7 +1317,7 @@
                                                             dPRadioLSSVM = 1; %>
                                                             Cross-validation = <%=nf.format(dCrossValidationLSSVM)%> (folds)
                                                             <%
-                                                            sDummy = "Learning Dataset : ";
+                                                            sDummy = "Learning Dataset: ";
                                                             sFileDataLSSVM = sFileNameLSSVM;
                                                             dAttributesLSSVM = snDFAttributesLSSVM;
                                                             dInstancesLSSVM = snDFInstancesLSSVM;
@@ -1335,7 +1335,7 @@
                                                             if (PRadioLSSVM.equals("PRadio1LSSVM")) {
                                                                 dPRadioLSSVM = 1;
                                                                 sTORadioLSSVM = "Use learning dataset";
-                                                                sDummy = "Learning Dataset : ";
+                                                                sDummy = "Learning Dataset: ";
                                                                 sFileDataLSSVM = sFileNameLSSVM;
                                                                 dAttributesLSSVM = snDFAttributesLSSVM;  
                                                                 dInstancesLSSVM = snDFInstancesLSSVM; 
@@ -1352,11 +1352,11 @@
                                                             if (PRadioLSSVM.equals("PRadio1LSSVM")) {
                                                                 dPRadioLSSVM = 1;
                                                                 sTORadioLSSVM = "Use test dataset";
-                                                                sDummy = "Learning Dataset : ";
+                                                                sDummy = "Learning Dataset: ";
                                                                 sFileDataLSSVM = sFileNameLSSVM;
                                                                 dAttributesLSSVM = snDFAttributesLSSVM;
                                                                 dInstancesLSSVM = snDFInstancesLSSVM; 
-                                                                sPDummy = "Test Dataset : ";
+                                                                sPDummy = "Test Dataset: ";
                                                                 sPFileDataLSSVM = sTestFileNameLSSVM;
                                                                 dPAttributesLSSVM = snTDFAttributesLSSVM; 
                                                                 dPInstancesLSSVM = snTDFInstancesLSSVM; 
@@ -1374,7 +1374,7 @@
                                                             dPRadioLSSVM = 2; %>
                                                             Hold-out = <%=nf.format(dHoldOutLSSVM)%> (%) 
                                                             <% 
-                                                            sDummy = "Learning Dataset : ";
+                                                            sDummy = "Learning Dataset: ";
                                                             sFileDataLSSVM = sFileNameLSSVM;
                                                             dAttributesLSSVM = snDFAttributesLSSVM;
                                                             dInstancesLSSVM = snDFInstancesLSSVM;
@@ -1392,7 +1392,7 @@
                                                             dPRadioLSSVM = 1; %>
                                                             Cross-validation = <%=nf.format(dCrossValidationLSSVM)%> (folds)
                                                             <%
-                                                            sDummy = "Learning Dataset : ";
+                                                            sDummy = "Learning Dataset: ";
                                                             sFileDataLSSVM = sFileNameLSSVM;
                                                             dAttributesLSSVM = snDFAttributesLSSVM;
                                                             dInstancesLSSVM = snDFInstancesLSSVM;
@@ -1410,7 +1410,7 @@
                                                             if (PRadioLSSVM.equals("PRadio1LSSVM")) {
                                                                 dPRadioLSSVM = 1;
                                                                 sTORadioLSSVM = "Use learning dataset";
-                                                                sDummy = "Learning Dataset : ";
+                                                                sDummy = "Learning Dataset: ";
                                                                 sFileDataLSSVM = sFileNameLSSVM;
                                                                 dAttributesLSSVM = snDFAttributesLSSVM;  
                                                                 dInstancesLSSVM = snDFInstancesLSSVM; 
@@ -1427,11 +1427,11 @@
                                                             if (PRadioLSSVM.equals("PRadio1LSSVM")) {
                                                                 dPRadioLSSVM = 1;
                                                                 sTORadioLSSVM = "Use test dataset";
-                                                                sDummy = "Learning Dataset : ";
+                                                                sDummy = "Learning Dataset: ";
                                                                 sFileDataLSSVM = sFileNameLSSVM;
                                                                 dAttributesLSSVM = snDFAttributesLSSVM;
                                                                 dInstancesLSSVM = snDFInstancesLSSVM; 
-                                                                sPDummy = "Test Dataset : ";
+                                                                sPDummy = "Test Dataset: ";
                                                                 sPFileDataLSSVM = sTestFileNameLSSVM;
                                                                 dPAttributesLSSVM = snTDFAttributesLSSVM; 
                                                                 dPInstancesLSSVM = snTDFInstancesLSSVM; 
@@ -1470,7 +1470,7 @@
                                                 <div class="col-md-4"><h4><%=sPDummy%></h4></div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-4"><%=sFileDataLSSVM%></div>
+                                                <div class="col-md-4"><%=sPFileDataLSSVM%></div>
                                                 <div class="col-md-2">No. of Attributes = <%=nf.format(Double.parseDouble(dPAttributesLSSVM))%></div>
                                                 <div class="col-md-3">No. of Instances = <%=nf.format(Double.parseDouble(dPInstancesLSSVM))%></div>
                                             </div>
