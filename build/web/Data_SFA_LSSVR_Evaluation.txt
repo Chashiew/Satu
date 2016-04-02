@@ -1,6 +1,6 @@
 SFA-LSSVR Data:
 No.	Description	Variable	Value	Remark
-1	No. of fireflies	nFireFlies	5	-
+1	No. of fireflies	nFireFlies	15	-
 2	Max. generation	nMaxGeneration	5	-
 3	Beta min.	dMinBeta	0.10	-
 4	Gamma	dGamma	1.00	-

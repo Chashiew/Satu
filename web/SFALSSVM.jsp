@@ -9,7 +9,7 @@
 <%@ page import="java.text.*" %>
 
 <%
-    if (session.getAttribute("username") != "PiMLab" && session.getAttribute("username") != "a")
+    if (session.getAttribute("username") != "PiMLab" && session.getAttribute("username") != "guest")
     {
         response.sendRedirect("loginpage.jsp");
         return;
@@ -225,13 +225,13 @@ if (dC1LSSVM == null) {
     dC1LSSVM = "";               //"1.00E-3";
 };
 if (dC2LSSVM == null) {
-    dC2LSSVM = "";               //"1.00E12";
+    dC2LSSVM = "";               //"1.00E15";
 };
 if (dS1LSSVM == null) {
     dS1LSSVM = "";               //"1.00E-3";
 };
 if (dS2LSSVM == null) {
-    dS2LSSVM = "";               //"1.00E3";
+    dS2LSSVM = "";               //"1.00E5";
 };
 if (dTrainingPSLSSVM == null) {
     dTrainingPSLSSVM = "";        //"70";
@@ -577,11 +577,15 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 document.getElementById("dTauLSSVM").value = "1.50";
                 document.getElementById("dBPotentialLSSVM").value = "4.00";
                 document.getElementById("dC1LSSVM").value = "1.00E-3" ;
-                document.getElementById("dC2LSSVM").value = "1.00E12" ;
+                document.getElementById("dC2LSSVM").value = "1.00E15" ;
                 document.getElementById("dS1LSSVM").value = "1.00E-3" ;
-                document.getElementById("dS2LSSVM").value = "1.00E3" ;
+                document.getElementById("dS2LSSVM").value = "1.00E5" ;
 
-                document.getElementById("sBaseFileName").value = "SFAMResult"; 
+                if (PRadioLSSVM.value === "PRadio1LSSVM") {
+                    document.getElementById("sBaseFileName").value = "SFALSSVM_EvaResult";
+                } else {
+                    document.getElementById("sBaseFileName").value = "SFALSSVM_PreResult";
+                }    
                 
                 document.getElementById("dTrainingPSLSSVM").value = "70" ;
                 document.getElementById("dValidationPSLSSVM").value = "30" ;
@@ -1305,7 +1309,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     dC2LSSVM.focus();
                     valid = false;
                 } else if (isNaN(dC2LSSVM.value)) {
-                    alert("End value of C = ... - ... (1.00E12)");
+                    alert("End value of C = ... - ... (1.00E15)");
                     dC2LSSVM.focus();
                     dC2LSSVM.select();
                     valid = false;
@@ -1323,7 +1327,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     dS2LSSVM.focus();
                     valid = false;
                 } else if (isNaN(dS2LSSVM.value)) {
-                    alert("End value of sigma = ... - ... (1.00E3)");
+                    alert("End value of sigma = ... - ... (1.00E5)");
                     dS2LSSVM.focus();
                     dS2LSSVM.select();
                     valid = false;
@@ -1612,7 +1616,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     dC2LSSVM.focus();
                     valid = false;
                 } else if (isNaN(dC2LSSVM.value)) {
-                    alert("End value of C = ... - ... (1.00E12)");
+                    alert("End value of C = ... - ... (1.00E15)");
                     dC2LSSVM.focus();
                     dC2LSSVM.select();
                     valid = false;
@@ -1630,7 +1634,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     dS2LSSVM.focus();
                     valid = false;
                 } else if (isNaN(dS2LSSVM.value)) {
-                    alert("End value of sigma = ... - ... (1.00E3)");
+                    alert("End value of sigma = ... - ... (1.00E5)");
                     dS2LSSVM.focus();
                     dS2LSSVM.select();
                     valid = false;
@@ -1774,8 +1778,11 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 //document.getElementById("sMoveBottom").value = val;
 
                 fullPathLSSVM.value = sFileNameLSSVM.value;
-                document.getElementById("sBaseFileName").value = "SFAMResult";
-                document.getElementById("myformLSSVM").action = "SFALSSVM.jsp";
+                if (PRadioLSSVM.value === "PRadio1LSSVM") {
+                    document.getElementById("sBaseFileName").value = "SFALSSVM_EvaResult";
+                } else {
+                    document.getElementById("sBaseFileName").value = "SFALSSVM_PreResult";
+                }document.getElementById("myformLSSVM").action = "SFALSSVM.jsp";
                 document.getElementById("myformLSSVM").submit();
                 //alert("Data file already loaded ...!");
                 //nFireFliesLSSVM.focus();
@@ -1803,6 +1810,208 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     document.getElementById("PRadioLSSVM").value = "PRadio2LSSVM";
                 }
                 return refreshformLSSVM(val);
+            }
+            
+            function exportparameters()
+            {
+                var nFireFliesLSSVM = document.getElementById("nFireFliesLSSVM");
+                var nMaxGenerationLSSVM = document.getElementById("nMaxGenerationLSSVM");
+                var dMinBetaLSSVM = document.getElementById("dMinBetaLSSVM");
+                var dGammaLSSVM = document.getElementById("dGammaLSSVM");
+                var dAlphaLSSVM = document.getElementById("dAlphaLSSVM");
+                var dAIWeightLSSVM = document.getElementById("dAIWeightLSSVM");
+                var dTauLSSVM = document.getElementById("dTauLSSVM");
+                var dBPotentialLSSVM = document.getElementById("dBPotentialLSSVM");
+                var dC1LSSVM = document.getElementById("dC1LSSVM");
+                var dC2LSSVM = document.getElementById("dC2LSSVM");
+                var dS1LSSVM = document.getElementById("dS1LSSVM");
+                var dS2LSSVM = document.getElementById("dS2LSSVM");
+                var dTrainingPSLSSVM = document.getElementById("dTrainingPSLSSVM");
+                var nLastChange1LSSVM = document.getElementById("nLastChange1LSSVM");
+                var nLastChange2LSSVM = document.getElementById("nLastChange2LSSVM");
+                var dHoldOutLSSVM = document.getElementById("dHoldOutLSSVM");
+                var dCrossValidationLSSVM = document.getElementById("dCrossValidationLSSVM");
+
+                var fullPathLSSVM = document.getElementById("fullPathLSSVM");
+                
+                var sFileNameLSSVM = document.getElementById("sFileNameLSSVM");
+                var valid = true;
+
+                document.getElementById("dTotalSizeLSSVM").value = 100;
+                document.getElementById("dValidationPSLSSVM").value = document.getElementById("dTotalSizeLSSVM").value - document.getElementById("dTrainingPSLSSVM").value;
+
+                if (nFireFliesLSSVM.value === "") {
+                    alert("No. of FireFlies cannot be empty!");
+                    nFireFliesLSSVM.focus();
+                    valid = false;
+                } else if (isNaN(nFireFliesLSSVM.value)) {
+                    alert("No. of FireFlies = 10 - 100 (50)");
+                    nFireFliesLSSVM.focus();
+                    nFireFliesLSSVM.select();
+                    valid = false;
+                } else if (nMaxGenerationLSSVM.value.length <= 0) {
+                    alert("Max. generation cannot be empty!");
+                    nMaxGenerationLSSVM.focus();
+                    valid = false;
+                } else if (isNaN(nMaxGenerationLSSVM.value)) {
+                    alert("Max. generation = 10 - 100 (25)");
+                    nMaxGenerationLSSVM.focus();
+                    nMaxGenerationLSSVM.select();
+                    valid = false;
+                } else if (dMinBetaLSSVM.value.length <= 0) {
+                    alert("Beta min. cannot be empty!");
+                    dMinBetaLSSVM.focus();
+                    valid = false;
+                } else if (isNaN(dMinBetaLSSVM.value)) {
+                    alert("Beta min. = ... - ... (0.10)");
+                    dMinBetaLSSVM.focus();
+                    dMinBetaLSSVM.select();
+                    valid = false;
+                } else if (dGammaLSSVM.value.length <= 0) {
+                    alert("Gamma cannot be empty!");
+                    dGammaLSSVM.focus();
+                    valid = false;
+                } else if (isNaN(dGammaLSSVM.value)) {
+                    alert("Gamma = ... - ... (1.00)");
+                    dGammaLSSVM.focus();
+                    dGammaLSSVM.select();
+                    valid = false;
+                } else if (dAlphaLSSVM.value.length <= 0) {
+                    alert("Alpha cannot be empty!");
+                    dAlphaLSSVM.focus();
+                    valid = false;
+                } else if (isNaN(dAlphaLSSVM.value)) {
+                    alert("Alpha = ... - ... (0.20)");
+                    dAlphaLSSVM.focus();
+                    dAlphaLSSVM.select();
+                    valid = false;
+                } else if (dAIWeightLSSVM.value.length <= 0) {
+                    alert("Adaptive inertia weight cannot be empty!");
+                    dAIWeightLSSVM.focus();
+                    valid = false;
+                } else if (isNaN(dAIWeightLSSVM.value)) {
+                    alert("Adaptive inertia weight = ... - ... (0.90)");
+                    dAIWeightLSSVM.focus();
+                    dAIWeightLSSVM.select();
+                    valid = false;
+                } else if (dTauLSSVM.value.length <= 0) {
+                    alert("Tau cannot be empty!");
+                    dTauLSSVM.focus();
+                    valid = false;
+                } else if (isNaN(dTauLSSVM.value)) {
+                    alert("Tau = ... - ... (1.50)");
+                    dTauLSSVM.focus();
+                    dTauLSSVM.select();
+                    valid = false;
+                } else if (dBPotentialLSSVM.value.length <= 0) {
+                    alert("Biotic potential cannot be empty!");
+                    dBPotentialLSSVM.focus();
+                    valid = false;
+                } else if (isNaN(dBPotentialLSSVM.value)) {
+                    alert("Biotic potential, a = ... - ... (4.00)");
+                    dBPotentialLSSVM.focus();
+                    dBPotentialLSSVM.select();
+                    valid = false;
+                } else if (dC1LSSVM.value.length <= 0) {
+                    alert("Start value of C cannot be empty!");
+                    dC1LSSVM.focus();
+                    valid = false;
+                } else if (isNaN(dC1LSSVM.value)) {
+                    alert("Start value of C = ... - ... (1.00E-3)");
+                    dC1LSSVM.focus();
+                    dC1LSSVM.select();
+                    valid = false;
+                } else if (dC2LSSVM.value.length <= 0) {
+                    alert("End value of C cannot be empty!");
+                    dC2LSSVM.focus();
+                    valid = false;
+                } else if (isNaN(dC2LSSVM.value)) {
+                    alert("End value of C = ... - ... (1.00E15)");
+                    dC2LSSVM.focus();
+                    dC2LSSVM.select();
+                    valid = false;
+                } else if (dS1LSSVM.value.length <= 0) {
+                    alert("Start value of sigma cannot be empty!");
+                    dS1LSSVM.focus();
+                    valid = false;
+                } else if (isNaN(dS1LSSVM.value)) {
+                    alert("Start value of sigma = ... - ... (1.00E-3)");
+                    dS1LSSVM.focus();
+                    dS1LSSVM.select();
+                    valid = false;
+                } else if (dS2LSSVM.value.length <= 0) {
+                    alert("End value of sigma cannot be empty!");
+                    dS2LSSVM.focus();
+                    valid = false;
+                } else if (isNaN(dS2LSSVM.value)) {
+                    alert("End value of sigma = ... - ... (1.00E5)");
+                    dS2LSSVM.focus();
+                    dS2LSSVM.select();
+                    valid = false;
+                } else if (dTrainingPSLSSVM.value.length <= 0) {
+                    alert("Training partition size (%) cannot be empty!");
+                    dTrainingPSLSSVM.focus();
+                    valid = false;
+                } else if (isNaN(dTrainingPSLSSVM.value)) {
+                    alert("Training partition size (%) = ... - ... (70)");
+                    dTrainingPSLSSVM.focus();
+                    dTrainingPSLSSVM.select();
+                    valid = false;
+                } else if (nLastChange1LSSVM.value.length <= 0) {
+                    alert("No. of Last Changes cannot be empty!");
+                    nLastChange1LSSVM.focus();
+                    valid = false;
+                } else if (isNaN(nLastChange1LSSVM.value)) {
+                    alert("No. of Last Changes = ... - ... (3)");
+                    nLastChange1LSSVM.focus();
+                    nLastChange1LSSVM.select();
+                    valid = false;
+                } else if (nLastChange2LSSVM.value.length <= 0) {
+                    alert("Constant OF Value cannot be empty!");
+                    nLastChange2LSSVM.focus();
+                    valid = false;
+                } else if (isNaN(nLastChange2LSSVM.value)) {
+                    alert("Constant OF Value = ... - ... (0.00001)");
+                    nLastChange2LSSVM.focus();
+                    nLastChange2LSSVM.select();
+                    valid = false;
+                } else if (dHoldOutLSSVM.value.length <= 0 && PRadioLSSVM.value === "PRadio1LSSVM") {
+                    alert("Hold-Out (%) cannot be empty ...!");
+                    dHoldOutLSSVM.focus();
+                    valid = false;
+                } else if (isNaN(dHoldOutLSSVM.value) && PRadioLSSVM.value === "PRadio1LSSVM") {
+                    alert("Hold-Out (%) = ... - ... (20)");
+                    dHoldOutLSSVM.focus();
+                    dHoldOutLSSVM.select();
+                    valid = false;
+                } else if (dCrossValidationLSSVM.value.length <= 0 && PRadioLSSVM.value === "PRadio1LSSVM") {
+                    alert("Cross-Validation (%) cannot be empty ...!");
+                    dCrossValidationLSSVM.focus();
+                    valid = false;
+                } else if (isNaN(dCrossValidationLSSVM.value) && PRadioLSSVM.value === "PRadio1LSSVM") {
+                    alert("Cross-Validation (%) = ... - ... (10)");
+                    dCrossValidationLSSVM.focus();
+                    dCrossValidationLSSVM.select();
+                    valid = false;
+                } else {
+                }
+
+                fullPathLSSVM.value = sFileNameLSSVM.value;
+                var saveaction;
+                if (document.getElementById("PRadioLSSVM").value === "PRadio1LSSVM")
+                {
+                    saveaction = "SaveParSFALSSVMeval.jsp";
+                }
+                else
+                {
+                    saveaction = "SaveParSFALSSVMpre.jsp";
+                }
+                
+                document.getElementById("myformLSSVM").action = saveaction;
+                document.getElementById("myformLSSVM").method = "POST";
+                document.getElementById("myformLSSVM").submit();
+                
+                return valid;
             }
         </script>
     </head>
@@ -1913,7 +2122,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 <h2><font face="Palatino Linotype, Book Antiqua, Palatino, serif" size="6">Model Settings</font></h2>
                                 <button type="button" onclick="return writedefaultsfalssvm(0)" class="btn btn-primary">Default</button>
                                 <button type="button" onclick="return loadingdataformLSSVM(1);" class="btn btn-primary">Import</button>
-                                <button type="button" onclick="return savingdataLSSVM(0);" class="btn btn-primary">Export</button>
+                                <button type="button" onclick="return exportparameters();" class="btn btn-primary">Export</button>
                                 <button type="button" onclick="return cleardefaultsfalssvm(0);" class="btn btn-primary">Clear</button>
                             </div>
                         </td>
@@ -2050,12 +2259,12 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             <div class="container boundary">
                                 <h2>Optimization</h2>
                                 <h3>Objective Function: Classification accuracy (validation)</h3> 
-                                <p>Calculate accuracy of training model. The system used learning data to train and validate an optimized prediction model.</p>
+                                <p>The system will use learning data to train and validate an optimized prediction model.</p>
                             </div>     
                             
                             <div class="container boundary">
                                 <h3>Learning Option</h3>
-                                <p>Set the partition size for train data and validation data.</p>
+                                <p>Set the partition size for training data and validation data.</p>
                                 <div oninput="dValidationPSLSSVM.value=100-parseInt(dTrainingPSLSSVM.value); dTotalSizeLSSVM.value=100;">
                                     <div class="form-group">
                                         <label class="control-label col-md-3">Training partition size</label>
@@ -2176,13 +2385,13 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                     <div class="panel panel-default">
                                         <div class="panel-body">
                                             <div class="container boundary">
-                                                <h3>Test Option Available</h3>
+                                                <h3>Test Option</h3>
                                                 <%--><p>The test data file used to evaluate the optimized model again. Output phase: calculate performance measures (i.e., RMSE, MAE, MAPE, R)</p><--%>
                                                 <%--><p>to find the prediction accuracy.</p><--%>
                                                 <div class="boundary">
                                                     <div class=" row form-inline">
                                                         <div class="radio col-md-3">
-                                                            <label><input type="radio" name="TORadioLSSVM" id="TORadio1LSSVM" value="TORadio1LSSVM" onclick="ftestdatasection(0);">&nbsp;Use learning dataset</label>
+                                                            <label><input type="radio" name="TORadioLSSVM" id="TORadio1LSSVM" value="TORadio1LSSVM" onclick="ftestdatasection(0);">&nbsp;Use opened dataset</label>
                                                         </div>
                                                         <div class="radio col-md-3">
                                                             <label>
@@ -2435,8 +2644,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="container boundary">
-                                <b>Base output file name (eg. SFAMResult):</b>&nbsp;&nbsp;&nbsp;
-                                <!--<font color="teal" face="tahoma" size="2"> Base output file name (eg. SFAMResult) </font>-->
+                                <b>Base output file name:</b>&nbsp;&nbsp;&nbsp;
+                                <!--<font color="teal" face="tahoma" size="2"> Base output file name</font>-->
                                 <input type="text" name="sBaseFileName" id="sBaseFileName" size="20" value="<%=sBaseFileName%>">
                                 <!--<font color="teal" face="tahoma" size="2">order number and .txt will be automatically added. </font>-->
                             </div>
@@ -2556,7 +2765,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
 
                 String sTORadioLSSVM = "...";
                     if (TORadioLSSVM.equals("TORadio1LSSVM")) {
-                        sTORadioLSSVM = "Use learning dataset";
+                        sTORadioLSSVM = "Use opened dataset";
                         if (PRadioLSSVM.equals("PRadio1LSSVM")) {
                             sDummy = "Data File : ";
                             sFileDataLSSVM = sFileNameLSSVM;
@@ -2856,7 +3065,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             else {
                                 if (TORadioLSSVM.equals("TORadio1LSSVM")) {
                                     if (PRadioLSSVM.equals("PRadio1LSSVM")) {
-                                        sTORadioLSSVM = "Use learning dataset";
+                                        sTORadioLSSVM = "Use opened dataset";
                                     }
                                     else if (PRadioLSSVM.equals("PRadio2LSSVM")) {
                                         sTORadioLSSVM = "-";
@@ -3446,7 +3655,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     //TORadioLSSVM = "...";
                     temp = "";
                     if (TORadioLSSVM.equals("TORadio1LSSVM")) {
-                        temp = "Use learning dataset";
+                        temp = "Use opened dataset";
                         iRadio=1;
                     }
                     else if (TORadioLSSVM.equals("TORadio4LSSVM")) {

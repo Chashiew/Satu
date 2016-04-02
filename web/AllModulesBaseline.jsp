@@ -9,7 +9,7 @@
 <%@ page import="java.text.*" %>
 
 <%
-    if (session.getAttribute("username") != "PiMLab" && session.getAttribute("username") != "a")
+    if (session.getAttribute("username") != "PiMLab" && session.getAttribute("username") != "guest")
     {
         response.sendRedirect("loginpage.jsp");
         return;
@@ -654,8 +654,12 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 document.getElementById("dHoldOut").value = "20" ;
                 document.getElementById("dCrossValidation").value = "10";
 
-                document.getElementById("sBaseFileName").value = "SVRResult"; 
-
+                if (PRadio.value === "PRadio1") {
+                    document.getElementById("sBaseFileName").value = "LSSVR_EvaResult";
+                } else {
+                    document.getElementById("sBaseFileName").value = "LSSVR_PreResult";
+                }    
+                
                 //alert("Aha21 ...!");
                 document.getElementById("NormalRadio1").checked = true; //"null" ;
                 //document.getElementById("PRadio1").checked = true; 
@@ -747,8 +751,12 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 document.getElementById("dHoldOutLSSVM").value = "20" ;
                 document.getElementById("dCrossValidationLSSVM").value = "10";
 
-                document.getElementById("sBaseFileNameLSSVM").value = "SVMResult"; 
-
+                if (PRadioLSSVM.value === "PRadio1LSSVM") {
+                    document.getElementById("sBaseFileNameLSSVM").value = "LSSVM_EvaResult";
+                } else {
+                    document.getElementById("sBaseFileNameLSSVM").value = "LSSVM_PreResult";
+                }    
+                
                 document.getElementById("NormalRadio1LSSVM").checked = true; //"null" ;
                 //document.getElementById("PRadio1LSSVM").checked = true; 
                 document.getElementById("TORadio1LSSVM").checked = true; 
@@ -2003,7 +2011,11 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 document.getElementById("sMoveBottom").value = "0";
 
                 fullPath.value = sFileName.value;
-                document.getElementById("sBaseFileName").value = "SVRResult";
+                if (PRadio.value === "PRadio1") {
+                    document.getElementById("sBaseFileName").value = "LSSVR_EvaResult";
+                } else {
+                    document.getElementById("sBaseFileName").value = "LSSVR_PreResult";
+                }    
                 document.getElementById("myform").action = "AllModulesBaseline.jsp";
                 document.getElementById("myform").submit();
                 
@@ -2102,7 +2114,11 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 document.getElementById("sMoveBottom").value = "0";
 
                 fullPathLSSVM.value = sFileNameLSSVM.value;
-                document.getElementById("sBaseFileNameLSSVM").value = "SVMResult";
+                if (PRadioLSSVM.value === "PRadio1LSSVM") {
+                    document.getElementById("sBaseFileName").value = "LSSVM_EvaResult";
+                } else {
+                    document.getElementById("sBaseFileName").value = "LSSVM_PreResult";
+                }    
                 document.getElementById("myformLSSVM").action = "AllModulesBaseline.jsp";
                 document.getElementById("myformLSSVM").submit();
                 
@@ -2159,7 +2175,11 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 */
                
                 fullPath.value = sFileName.value;
-                document.getElementById("sBaseFileName").value = "SVRResult";
+                if (PRadio.value === "PRadio1") {
+                    document.getElementById("sBaseFileName").value = "LSSVR_EvaResult";
+                } else {
+                    document.getElementById("sBaseFileName").value = "LSSVR_PreResult";
+                }    
                 document.getElementById("myform").action = "AllModulesBaseline.jsp";
                 document.getElementById("myform").submit();
                 //alert("Data file already loaded ...!");
@@ -2219,7 +2239,11 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                  */
                 
                 fullPathLSSVM.value = sFileNameLSSVM.value;
-                document.getElementById("sBaseFileNameLSSVM").value = "SVMResult";
+                if (PRadioLSSVM.value === "PRadio1LSSVM") {
+                    document.getElementById("sBaseFileName").value = "LSSVM_EvaResult";
+                } else {
+                    document.getElementById("sBaseFileName").value = "LSSVM_PreResult";
+                }    
                 document.getElementById("myformLSSVM").action = "AllModulesBaseline.jsp";
                 document.getElementById("myformLSSVM").submit();
                 //alert("Data file already loaded ...!");
@@ -2259,6 +2283,154 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     document.getElementById("PRadioLSSVM").value = "PRadio2LSSVM";
                 }
                 return refreshformLSSVM(val);
+            }
+            
+            function exportparameters(val) {
+                var nValueC = document.getElementById("nValueC");
+                var nValueS = document.getElementById("nValueS");
+                var dHoldOut = document.getElementById("dHoldOut");
+                var dCrossValidation = document.getElementById("dCrossValidation");
+
+                var valid = true;
+
+                if (nValueC.value === "") {
+                    alert("Value of C cannot be empty!");
+                    nValueC.focus();
+                    valid = false;
+                } else if (isNaN(nValueC.value)) {
+                    alert("Value of C = ... - ... (10)");
+                    nValueC.focus();
+                    nValueC.select();
+                    valid = false;
+                } else if (nValueS.value.length <= 0) {
+                    alert("Value of sigma cannot be empty!");
+                    nValueS.focus();
+                    valid = false;
+                } else if (isNaN(nValueS.value)) {
+                    alert("Value of sigma = ... - ... (0.1)");
+                    nValueS.focus();
+                    nValueS.select();
+                    valid = false;
+                } else if (dHoldOut.value.length <= 0) {
+                    alert("Hold-out (%) cannot be empty ...!");
+                    dHoldOut.focus();
+                    valid = false;
+                } else if (isNaN(dHoldOut.value)) {
+                    alert("Hold-out (%) = ... - ... (20)");
+                    dHoldOut.focus();
+                    dHoldOut.select();
+                    valid = false;
+                } else if (dCrossValidation.value.length <= 0) {
+                    alert("Cross-validation (%) cannot be empty ...!");
+                    dCrossValidation.focus();
+                    valid = false;
+                } else if (isNaN(dCrossValidation.value)) {
+                    alert("Cross-validation (%) = ... - ... (10)");
+                    dCrossValidation.focus();
+                    dCrossValidation.select();
+                    valid = false;
+                } else {
+                }
+
+                var fullPath = document.getElementById("fullPath");
+                
+                var sFileName = document.getElementById("sFileName");
+                
+                var sSaveDataFile = document.getElementById("sSaveDataFile");
+                if (valid === true) {
+                    sSaveDataFile = "1";
+                    document.getElementById("sSaveDataFile").value = sSaveDataFile;
+                }
+                fullPath.value = sFileName.value;
+                var saveaction;
+                if (document.getElementById("PRadio").value === "PRadio1")
+                {
+                    saveaction = "SaveParLSSVReval.jsp";
+                }
+                else
+                {
+                    saveaction = "SaveParLSSVRpre.jsp";
+                }
+                
+                document.getElementById("myform").action = saveaction;
+                document.getElementById("myform").method = "POST";
+                document.getElementById("myform").submit();
+                
+                return valid;
+            }
+
+            function exportparametersLSSVM(val) {
+                var nValueCLSSVM = document.getElementById("nValueCLSSVM");
+                var nValueSLSSVM = document.getElementById("nValueSLSSVM");
+                var dHoldOutLSSVM = document.getElementById("dHoldOutLSSVM");
+                var dCrossValidationLSSVM = document.getElementById("dCrossValidationLSSVM");
+
+                var valid = true;
+
+                if (nValueCLSSVM.value === "") {
+                    alert("Value of C cannot be empty!");
+                    nValueCLSSVM.focus();
+                    valid = false;
+                } else if (isNaN(nValueCLSSVM.value)) {
+                    alert("Value of C = ... - ... (10)");
+                    nValueCLSSVM.focus();
+                    nValueCLSSVM.select();
+                    valid = false;
+                } else if (nValueSLSSVM.value.length <= 0) {
+                    alert("Value of sigma cannot be empty!");
+                    nValueSLSSVM.focus();
+                    valid = false;
+                } else if (isNaN(nValueSLSSVM.value)) {
+                    alert("Value of sigma = ... - ... (0.1)");
+                    nValueSLSSVM.focus();
+                    nValueSLSSVM.select();
+                    valid = false;
+                } else if (dHoldOutLSSVM.value.length <= 0) {
+                    alert("Hold-out (%) cannot be empty ...!");
+                    dHoldOutLSSVM.focus();
+                    valid = false;
+                } else if (isNaN(dHoldOutLSSVM.value)) {
+                    alert("Hold-out (%) = ... - ... (20)");
+                    dHoldOutLSSVM.focus();
+                    dHoldOutLSSVM.select();
+                    valid = false;
+                } else if (dCrossValidationLSSVM.value.length <= 0) {
+                    alert("Cross-validation (%) cannot be empty ...!");
+                    dCrossValidationLSSVM.focus();
+                    valid = false;
+                } else if (isNaN(dCrossValidationLSSVM.value)) {
+                    alert("Cross-validation (%) = ... - ... (10)");
+                    dCrossValidationLSSVM.focus();
+                    dCrossValidationLSSVM.select();
+                    valid = false;
+                } else {
+                }
+
+                var fullPathLSSVM = document.getElementById("fullPathLSSVM");
+                var sFileNameLSSVM = document.getElementById("sFileNameLSSVM");
+                
+                var sSaveDataFileLSSVM = document.getElementById("sSaveDataFileLSSVM");
+                if (valid === true) {
+                    sSaveDataFileLSSVM = "1";
+                    document.getElementById("sSaveDataFileLSSVM").value = sSaveDataFileLSSVM;
+                }
+                
+                fullPathLSSVM.value = sFileNameLSSVM.value;
+                var saveaction;
+                if (document.getElementById("PRadioLSSVM").value === "PRadio1LSSVM")
+                {
+                    saveaction = "SaveParLSSVMeval.jsp";
+                }
+                else
+                {
+                    saveaction = "SaveParLSSVMpre.jsp";
+                }
+                
+                document.getElementById("myformLSSVM").action = saveaction;
+                document.getElementById("myformLSSVM").method = "POST";
+                document.getElementById("myformLSSVM").submit();
+                
+                return valid;
             }
         </script>
     </head>
@@ -2358,7 +2530,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 <h2><font face="Palatino Linotype, Book Antiqua, Palatino, serif" size="6">Model Settings</font></h2>
                                 <button type="button" onclick="return writedefaultlssvr(0)" class="btn btn-primary">Default</button>
                                 <button type="button" onclick="return loadingdataform(1);" class="btn btn-primary">Import</button>
-                                <button type="button" onclick="return savingdata(0);" class="btn btn-primary">Export</button>
+                                <button type="button" onclick="return exportparameters(0);" class="btn btn-primary">Export</button>
                                 <button type="button" onclick="return cleardefaultlssvr(0);" class="btn btn-primary">Clear</button>
                             </div>
                         </td>
@@ -2447,7 +2619,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 else if (TORadio.equals("TORadio4")) {%><script>document.getElementById("TORadio4").checked = true; </script><%}
                                 %>        
                                 <div class="container boundary">
-                                    <h3>Learning Data File</h3>
+                                    <h3>Data File</h3>
                                     <div class="row">
                                         <div class="col-md-2">
                                             <input type="hidden" name="fullPath" id="fullPath" value=""/>
@@ -2484,13 +2656,13 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                     <div class="panel panel-default">
                                         <div class="panel-body">
                                             <div class="container boundary">
-                                                <h3>Test Option Available</h3>
+                                                <h3>Test Option</h3>
                                                 <%--><p>The test data file used to evaluate the optimized model again. Output phase: calculate performance measures (i.e., RMSE, MAE, MAPE, R)</p>
                                                 <p>to find the prediction accuracy.</p><--%>
                                                 <div class="boundary">
                                                     <div class="row form-inline">
                                                         <div class="radio col-md-3">
-                                                            <label><input type="radio" name="TORadio" id="TORadio1" value="TORadio1" onclick="ftestdatasection(0);">&nbsp;Use learning dataset</label>
+                                                            <label><input type="radio" name="TORadio" id="TORadio1" value="TORadio1" onclick="ftestdatasection(0);">&nbsp;Use opened dataset</label>
                                                         </div>
                                                         <div class="radio col-md-3">
                                                             <label>
@@ -2747,8 +2919,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="container boundary">
-                                <b>Base output file name (eg. SVRResult):</b>&nbsp;&nbsp;&nbsp;
-                                <!--<font color="teal" face="tahoma" size="2"> Base output file name (eg. SVRResult) </font>-->
+                                <b>Base output file name:</b>&nbsp;&nbsp;&nbsp;
+                                <!--<font color="teal" face="tahoma" size="2"> Base output file name</font>-->
                                 <input type="text" name="sBaseFileName" id="sBaseFileName" size="20" value="<%=sBaseFileName%>">
                                 <!--<font color="teal" face="tahoma" size="2">order number and .txt will be automatically added. </font>-->
                             </div>
@@ -2864,7 +3036,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
 
                 sTORadio = "...";
                 if (TORadio.equals("TORadio1")) {
-                    sTORadio = "Use learning dataset";
+                    sTORadio = "Use opened dataset";
                     if (PRadio.equals("PRadio1")) {
                         sDummy = "Data File : ";
                         sFileData = sFileName;
@@ -3037,7 +3209,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             else {
                                 if (TORadio.equals("TORadio1")) {
                                     if (PRadio.equals("PRadio1")) {
-                                        sTORadio = "Use learning dataset";
+                                        sTORadio = "Use opened dataset";
                                     }
                                     else if (PRadio.equals("PRadio2")) {
                                         sTORadio = "-";
@@ -3479,7 +3651,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 
                     sTORadio = "...";
                     if (TORadio.equals("TORadio1")) {
-                        sTORadio = "Use learning dataset";
+                        sTORadio = "Use opened dataset";
                         iRadio=1;
                     }
                     else if (TORadio.equals("TORadio4")) {
@@ -4209,7 +4381,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 <h2><font face="Palatino Linotype, Book Antiqua, Palatino, serif" size="6">Model Settings</font></h2>
                                 <button type="button" onclick="return writedefaultlssvm(0)" class="btn btn-primary">Default</button>
                                 <button type="button" onclick="return loadingdataformLSSVM(1);" class="btn btn-primary">Import</button>
-                                <button type="button" onclick="return savingdataLSSVM(0);" class="btn btn-primary">Export</button>
+                                <button type="button" onclick="return exportparametersLSSVM(0);" class="btn btn-primary">Export</button>
                                 <button type="button" onclick="return cleardefaultlssvm(0);" class="btn btn-primary">Clear</button>
                             </div>
                         </td>
@@ -4285,7 +4457,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             <input type="hidden" name="PRadioLSSVM" id="PRadioLSSVM" value="<%=PRadioLSSVM%>"/>
                             <% if (PRadioLSSVM.equals("PRadio1LSSVM")) { %>        
                                 <div class="container boundary">
-                                    <h3>Learning Data File</h3>
+                                    <h3>Data File</h3>
                                     <div class="row">
                                         <div class="col-md-2">
                                             <input type="hidden" name="fullPathLSSVM" id="fullPathLSSVM" value=""/>
@@ -4322,13 +4494,13 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                     <div class="panel panel-default">
                                         <div class="panel-body">
                                             <div class="container boundary">
-                                                <h3>Test Option Available</h3>
+                                                <h3>Test Option</h3>
                                                 <!--<p>The test data file used to evaluate the optimized model again. Output phase: calculate performance measures (i.e., RMSE, MAE, MAPE, R)</p>
                                                 <p>to find the prediction accuracy.</p>-->
                                                 <div class="boundary">
                                                     <div class="row form-inline">
                                                         <div class="radio col-md-3">
-                                                            <label><input type="radio" name="TORadioLSSVM" id="TORadio1LSSVM" value="TORadio1LSSVM" onclick="ftestdatasection(0);">&nbsp;Use learning dataset</label>
+                                                            <label><input type="radio" name="TORadioLSSVM" id="TORadio1LSSVM" value="TORadio1LSSVM" onclick="ftestdatasection(0);">&nbsp;Use opened dataset</label>
                                                         </div>
                                                         <div class="radio col-md-3">
                                                             <label>
@@ -4591,8 +4763,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="container boundary">
-                            <b>Base output file name (eg. SVMResult):</b>&nbsp;&nbsp;&nbsp;
-                            <!--<font color="teal" face="tahoma" size="2"> Base output file name (eg. SVMResult) </font>-->
+                            <b>Base output file name:</b>&nbsp;&nbsp;&nbsp;
+                            <!--<font color="teal" face="tahoma" size="2"> Base output file name</font>-->
                             <input type="text" name="sBaseFileNameLSSVM" id="sBaseFileNameLSSVM" size="20" value="<%=sBaseFileNameLSSVM%>">
                             <!--<font color="teal" face="tahoma" size="2">order number and .txt will be automatically added. </font>-->
                         </div>
@@ -4702,7 +4874,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
 
                 sTORadioLSSVM = "..."; 
                     if (TORadioLSSVM.equals("TORadio1LSSVM")) {
-                        sTORadioLSSVM = "Use learning dataset";
+                        sTORadioLSSVM = "Use opened dataset";
                         if (PRadioLSSVM.equals("PRadio1LSSVM")) {
                             sDummy = "Data File : ";
                             sFileDataLSSVM = sFileNameLSSVM;
@@ -4863,7 +5035,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             else {
                                 if (TORadioLSSVM.equals("TORadio1LSSVM")) {
                                     if (PRadioLSSVM.equals("PRadio1LSSVM")) {
-                                        sTORadioLSSVM = "Use learning dataset";
+                                        sTORadioLSSVM = "Use opened dataset";
                                     }
                                     else if (PRadioLSSVM.equals("PRadio2LSSVM")) {
                                         sTORadioLSSVM = "-";
@@ -5298,7 +5470,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
 
                     sTORadioLSSVM = "...";
                     if (TORadioLSSVM.equals("TORadio1LSSVM")) {
-                        sTORadioLSSVM = "Use learning dataset";
+                        sTORadioLSSVM = "Use opened dataset";
                         iRadio=1;
                     }
                     else if (TORadioLSSVM.equals("TORadio4LSSVM")) {

@@ -9,7 +9,7 @@
 <%@ page import="java.text.*" %>
 
 <%
-    if (session.getAttribute("username") != "PiMLab" && session.getAttribute("username") != "a")
+    if (session.getAttribute("username") != "PiMLab" && session.getAttribute("username") != "guest")
     {
         response.sendRedirect("loginpage.jsp");
         return;
@@ -215,13 +215,13 @@ if (dC1 == null) {
     dC1 = "";               //"1.00E-3";
 };
 if (dC2 == null) {
-    dC2 = "";               //"1.00E12";
+    dC2 = "";               //"1.00E15";
 };
 if (dS1 == null) {
     dS1 = "";               //"1.00E-3";
 };
 if (dS2 == null) {
-    dS2 = "";               //"1.00E3";
+    dS2 = "";               //"1.00E5";
 };
 if (dTrainingPS == null) {
     dTrainingPS = "";        //"70";
@@ -569,12 +569,16 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 document.getElementById("dTau").value = "1.50";
                 document.getElementById("dBPotential").value = "4.00";
                 document.getElementById("dC1").value = "1.00E-3" ;
-                document.getElementById("dC2").value = "1.00E12" ;
+                document.getElementById("dC2").value = "1.00E15" ;
                 document.getElementById("dS1").value = "1.00E-3" ;
-                document.getElementById("dS2").value = "1.00E3" ;
+                document.getElementById("dS2").value = "1.00E5" ;
 
-                document.getElementById("sBaseFileName").value = "SFARResult"; 
-
+                if (PRadio.value === "PRadio1") {
+                    document.getElementById("sBaseFileName").value = "SFALSSVR_EvaResult";
+                } else {
+                    document.getElementById("sBaseFileName").value = "SFALSSVR_PreResult";
+                }    
+                
                 document.getElementById("dTrainingPS").value = "70" ;
                 document.getElementById("dValidationPS").value = "30" ;
                 document.getElementById("dTotalSize").value = "100" ;
@@ -1309,7 +1313,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     dC2.focus();
                     valid = false;
                 } else if (isNaN(dC2.value)) {
-                    alert("End value of C = ... - ... (1.00E12)");
+                    alert("End value of C = ... - ... (1.00E15)");
                     dC2.focus();
                     dC2.select();
                     valid = false;
@@ -1327,7 +1331,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     dS2.focus();
                     valid = false;
                 } else if (isNaN(dS2.value)) {
-                    alert("End value of sigma = ... - ... (1.00E3)");
+                    alert("End value of sigma = ... - ... (1.00E5)");
                     dS2.focus();
                     dS2.select();
                     valid = false;
@@ -1619,7 +1623,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     dC2.focus();
                     valid = false;
                 } else if (isNaN(dC2.value)) {
-                    alert("End value of C = ... - ... (1.00E12)");
+                    alert("End value of C = ... - ... (1.00E15)");
                     dC2.focus();
                     dC2.select();
                     valid = false;
@@ -1637,7 +1641,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     dS2.focus();
                     valid = false;
                 } else if (isNaN(dS2.value)) {
-                    alert("End value of sigma = ... - ... (1.00E3)");
+                    alert("End value of sigma = ... - ... (1.00E5)");
                     dS2.focus();
                     dS2.select();
                     valid = false;
@@ -1790,7 +1794,11 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 //document.getElementById("sMoveBottom").value = val;
 
                 fullPath.value = sFileName.value;
-                document.getElementById("sBaseFileName").value = "SFARResult";
+                if (PRadio.value === "PRadio1") {
+                    document.getElementById("sBaseFileName").value = "SFALSSVR_EvaResult";
+                } else {
+                    document.getElementById("sBaseFileName").value = "SFALSSVR_PreResult";
+                }    
                 document.getElementById("myform").action = "SFALSSVR.jsp";
                 document.getElementById("myform").submit();
                 //alert("Data file already loaded ...!");
@@ -1939,7 +1947,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     dC2.focus();
                     valid = false;
                 } else if (isNaN(dC2.value)) {
-                    alert("End value of C = ... - ... (1.00E12)");
+                    alert("End value of C = ... - ... (1.00E15)");
                     dC2.focus();
                     dC2.select();
                     valid = false;
@@ -1957,7 +1965,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     dS2.focus();
                     valid = false;
                 } else if (isNaN(dS2.value)) {
-                    alert("End value of sigma = ... - ... (1.00E3)");
+                    alert("End value of sigma = ... - ... (1.00E5)");
                     dS2.focus();
                     dS2.select();
                     valid = false;
@@ -2010,7 +2018,18 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
 
                 fullPath.value = sFileName.value;
                 
-                document.getElementById("myform").action = "SaveParSFALSSVRe.jsp";
+                var saveaction;
+                if (document.getElementById("PRadio").value === "PRadio1")
+                {
+                    saveaction = "SaveParSFALSSVReval.jsp";
+                }
+                else
+                {
+                    saveaction = "SaveParSFALSSVRpre.jsp";
+                }
+                
+                document.getElementById("myform").action = saveaction;
+                document.getElementById("myform").method = "POST";
                 document.getElementById("myform").submit();
                 
                 return valid;
@@ -2125,7 +2144,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 <h2><font face="Palatino Linotype, Book Antiqua, Palatino, serif" size="6">Model Settings</font></h2>
                                 <button type="button" onclick="return writedefaultsfalssvr(0)" class="btn btn-primary">Default</button>
                                 <button type="button" onclick="return loadingdataform(1);" class="btn btn-primary">Import</button>
-                                <button type="button" name="VarSaveData" value="SAVE" onclick="return savingdata(0);" class="btn btn-primary">Export</button>
+                                <button type="button" name="VarSaveData" value="SAVE" onclick="return exportparameters();" class="btn btn-primary">Export</button>
                                 <%--><input type="submit" name="VarSaveData" value="SAVE" onclick="return savingdata(0);"/><--%>
                                 <button type="button" onclick="return cleardefaultsfalssvr(0);" class="btn btn-primary">Clear</button>
                             </div>
@@ -2270,21 +2289,21 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             <div class="container boundary">
                                 <h2>Optimization</h2>
                                 <h3>Objective Function</h3> 
-                                <p>Calculate accuracy of training model. The system used learning data to train and validate an optimized prediction model.</p>
+                                <p>The system will use learning data to train and validate an optimized prediction model.</p>
                                 <div class="radio">
-                                    <label><input type="radio" name="OptimRadio" id="OptimRadio1" value="OptimRadio1">RMSE validation</label>
+                                    <label><input type="radio" name="OptimRadio" id="OptimRadio1" value="OptimRadio1">RMSEvalidate_data</label>
                                 </div>
                                 <div class="radio">
-                                    <label><input type="radio" name="OptimRadio" id="OptimRadio2" value="OptimRadio2">MAE validation</label>
+                                    <label><input type="radio" name="OptimRadio" id="OptimRadio2" value="OptimRadio2">MAEvalidate_data</label>
                                 </div>
                                 <div class="radio">
-                                    <label><input type="radio" name="OptimRadio" id="OptimRadio3" value="OptimRadio3">MAPE validation</label>
+                                    <label><input type="radio" name="OptimRadio" id="OptimRadio3" value="OptimRadio3">MAPEvalidate_data</label>
                                 </div>
                             </div>        
                 
                             <div class="container boundary">
                                 <h3>Learning Option</h3>
-                                <p>Set the partition size for train data and validation data.</p>
+                                <p>Set the partition size for training data and validation data.</p>
                                     <!-- <form oninput="dTotalSize.value=parseInt(dTrainingPS.value)+parseInt(dValidationPS.value)"> -->
                                 <div oninput="dValidationPS.value=100-parseInt(dTrainingPS.value); dTotalSize.value=100;">
                                     <div class="form-group">
@@ -2398,11 +2417,11 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                         <div class="panel-body">
                                             <div class="container boundary">
                                                 <%--><h3>Choose for Test Option</h3><--%>
-                                                <h3>Test Option Available</h3>
+                                                <h3>Test Option</h3>
                                                 <div class="boundary">
                                                     <div class="row form-inline">
                                                         <div class="radio col-md-3">
-                                                            <label><input type="radio" name="TORadio" id="TORadio1" value="TORadio1" onclick="ftestdatasection(0);">&nbsp;Use learning dataset</label>
+                                                            <label><input type="radio" name="TORadio" id="TORadio1" value="TORadio1" onclick="ftestdatasection(0);">&nbsp;Use opened dataset</label>
                                                         </div>
                                                         <div class="radio col-md-3">
                                                             <label>
@@ -2658,7 +2677,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                     <div class="boundary">
                                     <div class="row form-inline">
                                         <div class="radio col-md-2">
-                                            <label><input type="radio" name="TORadio" id="TORadio1" value="TORadio1" onclick="ftestdatasection(0);">&nbsp;Use learning dataset</label>
+                                            <label><input type="radio" name="TORadio" id="TORadio1" value="TORadio1" onclick="ftestdatasection(0);">&nbsp;Use opened dataset</label>
                                         </div>
                                         <div class="radio col-md-3">
                                             <label><input type="radio" name="TORadio" id="TORadio4" value="TORadio4" onclick="ftestdatasection(1);">&nbsp;Use test dataset</label>
@@ -2697,8 +2716,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="container boundary">
-                                <b>Base output file name (eg. SFARResult):</b>&nbsp;&nbsp;&nbsp;
-                                <!--<font color="teal" face="tahoma" size="2"> Base output file name (eg. SFARResult) </font>-->
+                                <b>Base output file name:</b>&nbsp;&nbsp;&nbsp;
+                                <!--<font color="teal" face="tahoma" size="2"> Base output file name</font>-->
                                 <input type="text" name="sBaseFileName" id="sBaseFileName" size="20" value="<%=sBaseFileName%>">
                                 <!--<font color="teal" face="tahoma" size="2">order number and .txt will be automatically added. </font>-->
                             </div>
@@ -2795,7 +2814,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 //if (PRadio.equals("PRadio1")) {
                 String sTORadio = "...";
                     if (TORadio.equals("TORadio1")) {
-                        sTORadio = "Use learning dataset";
+                        sTORadio = "Use opened dataset";
                         if (PRadio.equals("PRadio1")) {
                             sDummy = "Data File : ";
                             sFileData = sFileName;
@@ -3106,7 +3125,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             else {
                                 if (TORadio.equals("TORadio1")) {
                                     if (PRadio.equals("PRadio1")) {
-                                        sTORadio = "Use learning dataset"; 
+                                        sTORadio = "Use opened dataset"; 
                                     }
                                     else if (PRadio.equals("PRadio2")) {
                                         sTORadio = "-"; 
@@ -3238,7 +3257,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         </td>
                     </tr>
                 </table>                
-            <%}
+            <% }
             else if (sLoadingDataFile != "") {                
                 //reading data from file
                 String filename;
@@ -3796,7 +3815,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     //TORadio = "...";
                     temp = "";
                     if (TORadio.equals("TORadio1")) {
-                        temp = "Use learning dataset";
+                        temp = "Use opened dataset";
                         iRadio=1;
                     }
                     else if (TORadio.equals("TORadio2")) {

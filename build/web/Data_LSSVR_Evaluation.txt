@@ -6,16 +6,16 @@ No.	Description	Variable	Value	Remark
 4	Purpose	sPRadio	1	Evaluation
 5	Hold-Out (%)	dHoldOut	20	-
 6	Cross-Validation (%)	dCrossValidation	10	-
-7	Test Option	sTORadio	1	Use data file
+7	Test Option	sTORadio	1	Use opened dataset
 8	Data File	sDataFile	NY Bedload transport preprocessing.txt	-
 9	No. of Attributes	nDFAttributes	6	-
 10	No. of Instances	nDFInstances	77	-
 11	Test Data File	sTestDataFile		-
 12	No. of Attributes	nTDFAttributes	0	-
 13	No. of Instances	nTDFInstances	0	-
-14	First Data File	sFileData		-
-15	No. of Attributes	sdAttributes		-
-16	No. of Instances	sdInstances		-
+14	First Data File	sFileData	NY Bedload transport preprocessing.txt	-
+15	No. of Attributes	sdAttributes	6	-
+16	No. of Instances	sdInstances	77	-
 17	Second Data File	sPFileData		-
-18	No. of Attributes	sdPAttributes	1	-
-19	No. of Instances	sdPInstances	1	-
+18	No. of Attributes	sdPAttributes	0	-
+19	No. of Instances	sdPInstances	0	-
