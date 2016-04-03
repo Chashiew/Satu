@@ -2035,6 +2035,15 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 return valid;
             }
             
+            function importfilefunc()
+            {
+                var elem = document.getElementById("importfile");
+                if(elem && document.createEvent) {
+                    var evt = document.createEvent("MouseEvents");
+                    evt.initEvent("click", true, false);
+                    elem.dispatchEvent(evt);
+                }
+            }
         </script>
     </head>
         
@@ -2048,7 +2057,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
         &nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;
-
+        
         <div class="sfawrap">
             <form action="ModuleSFALSSVR.jsp" name="myform" id="myform" >
                 <input type="hidden" name="VarOne" id="VarOne" value="<%=VarOne%>"/>
@@ -2060,6 +2069,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 <input type="hidden" name="sMoveBottom" id="sMoveBottom" value="<%=sMoveBottom%>"/>
                 <input type="hidden" name="VarNext" id="VarNext" value="<%=VarNext%>"/>
                 <input type="hidden" name="sError" id="sError" value="<%=sError%>"/>
+                
+                <div style="display:none;"><input type="file" id="importfile" name="importfile"/></div>
                 
                 <% if (hdf.equals("1")) { %>
                     <input type="hidden" name="hiddendatafile" id="hiddendatafile" value="1">
@@ -2144,6 +2155,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 <h2><font face="Palatino Linotype, Book Antiqua, Palatino, serif" size="6">Model Settings</font></h2>
                                 <button type="button" onclick="return writedefaultsfalssvr(0)" class="btn btn-primary">Default</button>
                                 <button type="button" onclick="return loadingdataform(1);" class="btn btn-primary">Import</button>
+                                <button type="button" onclick="return importfilefunc();" id="importbutton" class="btn btn-primary">New Import</button>
                                 <button type="button" name="VarSaveData" value="SAVE" onclick="return exportparameters();" class="btn btn-primary">Export</button>
                                 <%--><input type="submit" name="VarSaveData" value="SAVE" onclick="return savingdata(0);"/><--%>
                                 <button type="button" onclick="return cleardefaultsfalssvr(0);" class="btn btn-primary">Clear</button>
@@ -3258,7 +3270,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     </tr>
                 </table>                
             <% }
-            else if (sLoadingDataFile != "") {                
+            else if (sLoadingDataFile != "") {     
+                
+                String datafile = request.getParameter("importfile");
+                
                 //reading data from file
                 String filename;
                 if (PRadio.equals("PRadio2")) {
@@ -4531,6 +4546,22 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         return false;
                 });
 
+            });
+            
+            var importedfile = document.getElementById("importfile")
+            $(importedfile).change(function(event) {
+                
+                document.getElementById("sSaveDataFile").value = "";
+                document.getElementById("sLoadingDataExcel").value = "";
+                document.getElementById("sLoadingDataExcelClick").value = "";
+                document.getElementById("sLoadingDataFile").value = "1";
+                
+                //document.getElementById("myform").enctype = "text/html";
+                document.getElementById("myform").enctype = "multipart/form-data";
+                document.getElementById("myform").method = "POST";
+                document.getElementById("myform").action = "ImportParamServlet";
+                document.getElementById("myform").submit();
+                
             });
         </script>
     </body>    

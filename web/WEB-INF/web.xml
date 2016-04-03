@@ -40,6 +40,10 @@
         <servlet-name>LSSVMGraphServlet</servlet-name>
         <servlet-class>LSSVMGraphServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ImportParamServlet</servlet-name>
+        <servlet-class>ImportParamServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>WebFigures</servlet-name>
         <url-pattern>/WebFigures/*</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>LSSVMGraphServlet</servlet-name>
         <url-pattern>/LSSVMGraphServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ImportParamServlet</servlet-name>
+        <url-pattern>/ImportParamServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>-1</session-timeout>
