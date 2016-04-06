@@ -1183,7 +1183,7 @@
                                         <div class="container boundary">
                                             <div class="row">
                                                 <div class="col-md-4"><h4>Base Output File Name</h4></div>
-                                                <div class="col-md-4"><h5><%=sBaseFileName%></h5></div>
+                                                <div class="col-md-4"><h4><%=sBaseFileName%></h4></div>
                                             </div>
                                         </div>
                                     </div>
@@ -2013,12 +2013,12 @@
                             <tr>
                                 <td style="width: 10%">
                                     <a onclick="return previousscreen();" style="float:left;">
-                                        <font color="blue" face="agency FB" size="3">
+                                        <font color="blue" face="Agency FB" size="3">
                                         &nbsp;&nbsp;&nbsp;<b><u><< BACK</u></b>
                                         </font>
                                     </a>                            
+                                    <i><font color="black" face="Palatino Linotype, Book Antiqua, Palatino, serif" size="3" style="float:right">Base output file name:&nbsp;&nbsp;<%=sBaseFileName%>&nbsp;&nbsp;&nbsp;&nbsp;</font></i><%--><--%>
                                 </td>
-                                <font color="black" face="Arial" size="2" style="float:right">Base output file name:&nbsp;&nbsp;<%=sBaseFileName%>&nbsp;&nbsp;&nbsp;&nbsp;</font><%--><--%>
                             </tr>
                         </table> 
                             
@@ -2069,15 +2069,12 @@
                                     <br>
                                     <br>
                                     <center>
-                                        <b><font size="4" id="Optimum">Main output - Best optimum hyperparameters</font></b>
+                                        <b><font size="4" id="Optimum">Main output</font></b>
                                         <a href="#Partition"><span class="glyphicon glyphicon-menu-down"></span></a>
                                         <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <button type="button" onclick="return savingmodel(0);">Save Model</button>
-                                        <br>
-                                    </center>
-                                    <br>
-                                    
+                                        <br><br>
+                                        <u><font size="4">Best optimum hyperparameters</font></u>
+                                    </center><br>
                                     <%  File a = new File(sResult01Name);
                                     if (sResult01Name != "" && a.exists() && !a.isDirectory()) {  
                                         String file = sResult01Name;
@@ -2140,10 +2137,9 @@
                                             </td>
                                         </tr></table></div></center> 
                                     <% } %> 
-                                                    
                                     <br> 
                                     <center>
-                                        <font size="4">Optimum hyperparameters</font>
+                                        <u><font size="4">Optimum hyperparameters</font></u>
                                         <br>
                                     </center>
                                     <br> 
@@ -2211,14 +2207,18 @@
                                                 </div> 
                                             </center> 
                                             <br>
-
+                                            <center>
+                                                <button class="btn btn-primary" onclick="return savingmodel(0);">Save Optimum Hyperparameters</button>
+                                            </center>
+                                            <br>
                                             <br> 
                                             <center>
-                                                <b><font size="4" id="Partition">Performance of learning and test data</font></b>
+                                                <b><font size="4" id="Partition">System Performance Evaluation</font></b>
                                                 <a href="#Optimum"><span class="glyphicon glyphicon-menu-up"></span></a> 
                                                 <a href="#Report"><span class="glyphicon glyphicon-menu-down"></span></a> 
                                                 <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a> 
-                                                <br>
+                                                <br><br>
+                                                <u><font size="4">Performance of learning and test data</font></u>
                                             </center>
                                             <br>
                                     
@@ -2295,7 +2295,7 @@
                                             <br>
                                                     
                                             <center>
-                                                <font size="4">Performance of training and validation partitions of learning data</font>
+                                                <u><font size="4">Performance of training and validation partitions of learning data</font></u>
                                                 <br>
                                                 <br>
                                         
@@ -2398,10 +2398,12 @@
                                     <br>
                                     <br>
                                     <center>
-                                        <b><font size="4" id="Performance">Test data with predicted values of the best fold</font></b>
+                                        <b><font size="4" id="Performance">Raw Dataset with Predicted Values</font></b>
                                         <a href="#Report"><span class="glyphicon glyphicon-menu-up"></span></a> 
                                         <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a> 
-                                        <br>
+                                        <br><br>
+                                        <u><font size="4" id="Dataset1">Test data with predicted values of the best fold</font></u>
+                                        <a href="#Dataset2"><span class="glyphicon glyphicon-triangle-bottom"></span></a> 
                                     </center>
                                     <br>
                                     
@@ -2500,7 +2502,9 @@
                                         %>
                                         
                                         <center>
-                                            <font size="4">Learning data with predicted values of the best fold</font>
+                                            <u><font size="4" id="Dataset2">Learning data with predicted values of the best fold</font></u>
+                                            <a href="#Dataset1"><span class="glyphicon glyphicon-triangle-top"></span></a> 
+                                            <a href="#Dataset3"><span class="glyphicon glyphicon-triangle-bottom"></span></a> 
                                             <div> 
                                                 <table>
                                                     <tr>
@@ -2552,7 +2556,9 @@
                                         %>
                                         
                                         <center>
-                                            <font size="4">Validation partition of learning data with predicted values of the best fold</font>
+                                            <u><font size="4" id="Dataset3">Validation partition of learning data with predicted values of the best fold</font></u>
+                                            <a href="#Dataset2"><span class="glyphicon glyphicon-triangle-top"></span></a> 
+                                            <a href="#Dataset4"><span class="glyphicon glyphicon-triangle-bottom"></span></a> 
                                             <div> 
                                                 <table>
                                                     <tr>
@@ -2603,8 +2609,9 @@
                                         <% br.close(); %>
                                             
                                         <center>
-                                            <font size="4">Training partition of learning data with predicted values of the best fold</font>
-                                            <div> 
+                                            <u><font size="4" id="Dataset4">Training partition of learning data with predicted values of the best fold</font></u>
+                                            <a href="#Dataset3"><span class="glyphicon glyphicon-triangle-top"></span></a> 
+                                        <div> 
                                                 <table>
                                                     <tr>
                                                         <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
@@ -3360,7 +3367,7 @@
                                                 </font>
                                             </a>                            
                                         </td>
-                                        <font color="black" face="Arial" size="2" style="float:right">Base output file name:&nbsp;&nbsp;<%=sBaseFileName%>&nbsp;&nbsp;&nbsp;&nbsp;</font><%--><--%>
+                                        <i><font color="black" face="Palatino Linotype, Book Antiqua, Palatino, serif" size="3" style="float:right">Base output file name:&nbsp;&nbsp;<%=sBaseFileName%>&nbsp;&nbsp;&nbsp;&nbsp;</font></i><%--><--%>
                                     </tr>
                                 </table> 
 

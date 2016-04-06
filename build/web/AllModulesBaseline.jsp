@@ -2720,6 +2720,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             <div class="container boundary">
                                 <h2><font face="Palatino Linotype, Book Antiqua, Palatino, serif" size="6">Model Settings</font></h2>
                                 <button type="button" onclick="return writedefaultlssvr(0)" class="btn btn-primary">Default</button>
+                                <button class="btn btn-primary" onclick="loadmodel(1)">Load Optimum Hyperparameters</button>
                                 <button type="button" onclick="return loadingdataform(1);" class="btn btn-primary">Import</button>
                                 <button type="button" onclick="return exportparameters(0);" class="btn btn-primary">Export</button>
                                 <button type="button" onclick="return cleardefaultlssvr(0);" class="btn btn-primary">Clear</button>
@@ -2735,23 +2736,14 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 <div class="bs-example">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <!--<div class="container visible-lg-block wdetail">-->
                             <div class="container wdetail">
                                 <h2>Parameter</h2>
                                 <p>Input data and system parameters.</p>
-                                <!--<div class="row">
-                                    <div class="col-md-3">Input data:</div>
-                                    <div class="col-md-2">none</div>
-                                </div>
-                                <br>-->
                                 <div class="row">
                                     <div class="col-md-3">System parameters:</div>
                                     <div class="col-md-2">Value of C</div>
                                     <div class="col-md-2">
                                         <input type="text" name="nValueC" id="nValueC" size="8" value="<%=nValueC%>"/>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <button type="button" onclick="loadmodel(1)">Load Model</button>
                                     </div>
                                 </div>
                                 <br>
@@ -4595,6 +4587,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             <div class="container boundary">
                                 <h2><font face="Palatino Linotype, Book Antiqua, Palatino, serif" size="6">Model Settings</font></h2>
                                 <button type="button" onclick="return writedefaultlssvm(0)" class="btn btn-primary">Default</button>
+                                <button type="button" onclick="loadmodelLSSVM(1)" class="btn btn-primary">Load Optimum Hyperparameters</button>
                                 <button type="button" onclick="return loadingdataformLSSVM(1);" class="btn btn-primary">Import</button>
                                 <button type="button" onclick="return exportparametersLSSVM(0);" class="btn btn-primary">Export</button>
                                 <button type="button" onclick="return cleardefaultlssvm(0);" class="btn btn-primary">Clear</button>
@@ -4623,9 +4616,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                     <div class="col-md-2">Value of C</div>
                                     <div class="col-md-2">
                                         <input type="text" name="nValueCLSSVM" id="nValueCLSSVM" size="8" value="<%=nValueCLSSVM%>"> 
-                                    </div>
-                                    <div class="col-md-2">
-                                        <button type="button" onclick="loadmodelLSSVM(1)">Load Model</button>
                                     </div>
                                 </div>
                                 <br>

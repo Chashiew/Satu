@@ -978,7 +978,7 @@
                                 <div class="container boundary">
                                     <div class="row">
                                         <div class="col-md-4"><h4>Base Output File Name</h4></div>
-                                        <div class="col-md-4"><h5><%=sBaseFileNameLSSVM%></h5></div>
+                                        <div class="col-md-4"><h4><%=sBaseFileNameLSSVM%></h4></div>
                                     </div>
                                 </div>
                             </div>
@@ -1655,9 +1655,7 @@
                                         </font>
                                     </a>                            
                                 </td>
-
-                                <font color="black" face="Arial" size="2" style="float:right">Base output file name:&nbsp;&nbsp;<%=sBaseFileNameLSSVM%>&nbsp;&nbsp;&nbsp;&nbsp;</font>
-                            
+                                <i><font color="black" face="Palatino Linotype, Book Antiqua, Palatino, serif" size="3" style="float:right">Base output file name:&nbsp;&nbsp;<%=sBaseFileNameLSSVM%>&nbsp;&nbsp;&nbsp;&nbsp;</font></i><%--><--%>
                             </tr>
                         </table> 
                             
@@ -1707,10 +1705,11 @@
                                 <br>
                                 <br>
                                 <center>
-                                    <b><font size="4" id="Optimum">Main output - Best performance</font></b>
+                                    <b><font size="4" id="Optimum">Main output</font></b>
                                     <a href="#Report"><span class="glyphicon glyphicon-menu-down"></span></a>
                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
-                                    <br>
+                                    <br><br>
+                                    <u><font size="4">Best performance</font></u>
                                 </center>
                                 <br>
                                 
@@ -1773,7 +1772,7 @@
 
                                 <br> 
                                 <center>
-                                    <font size="4" id="Partition">Performance of learning and test data</font>
+                                    <u><font size="4" id="Partition">Performance of learning and test data</font></u>
                                     <%--><a href="#Optimum"><span class="glyphicon glyphicon-menu-up"></span></a> 
                                     <a href="#Report"><span class="glyphicon glyphicon-menu-down"></span></a> 
                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a><--%>
@@ -1858,7 +1857,7 @@
                                                         datatemp[1][0] = cols[1];
                                                     %>
                                                         
-                                                    <font size="4">Mean performance of learning and test data</font>
+                                                    <u><font size="4">Mean performance of learning and test data</font></u>
                                                     <br>
                                                     <br>
                                     
@@ -1940,10 +1939,12 @@
                                 <br>
                                 <br>
                                 <center>
-                                    <b><font size="4" id="Performance">Test data with predicted values of the best fold</font></b>
+                                    <b><font size="4" id="Performance">Raw Dataset with Predicted Values</font></b>
                                     <a href="#Report"><span class="glyphicon glyphicon-menu-up"></span></a> 
                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a> 
-                                    <br>
+                                    <br><br>
+                                    <u><font size="4" id="Dataset1">Test data with predicted values of the best fold</font></u>
+                                    <a href="#Dataset2"><span class="glyphicon glyphicon-triangle-bottom"></span></a> 
                                 </center>
                                 <br>
                                 
@@ -2094,7 +2095,8 @@
                                     
                                     <br>
                                     <center>
-                                        <font size="4">Learning data with predicted values of the best fold</font>
+                                        <u><font size="4" id="Dataset2">Learning data with predicted values of the best fold</font></u>
+                                        <a href="#Dataset1"><span class="glyphicon glyphicon-triangle-top"></span></a> 
                                         <br>
                                         <br>
                                             
@@ -2519,15 +2521,15 @@
                                     <button type="button" onclick="" class="btn btn-primary">Save</button>
                                 </center>
                             </div>
-
-                            <!--><div id="TPGraph" class="tab-pane fade in">
+                            <br>
+                            <!--<div id="TPGraph" class="tab-pane fade in">
                                 <br>
                                 <br>
                                 <br>
                                 <center>
                                     <i><font color="red" size="4">... n.a. for baseline system.</font></i>
                                 </center>
-                            </div><-->
+                            </div>-->
                         </div>
                     </div>
                     <% if (sPageControl.equals("3")) { %>
@@ -2546,9 +2548,7 @@
                                                 </font>
                                             </a>                            
                                         </td>
-
-                                        <font color="black" face="Arial" size="2" style="float:right">Base output file name:&nbsp;&nbsp;<%=sBaseFileNameLSSVM%>&nbsp;&nbsp;&nbsp;&nbsp;</font>
-                            
+                                        <i><font color="black" face="Palatino Linotype, Book Antiqua, Palatino, serif" size="3" style="float:right">Base output file name:&nbsp;&nbsp;<%=sBaseFileNameLSSVM%>&nbsp;&nbsp;&nbsp;&nbsp;</font></i><%--><--%>
                                     </tr>
                                 </table> 
 
