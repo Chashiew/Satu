@@ -49,6 +49,9 @@ public class ImportParamServlet extends HttpServlet {
         //}
         String params = "?";
         
+        request.setAttribute("sImportData", "1");
+        params += "sImportData" + "=1&";
+        
         String temp = request.getParameter("sBaseFileName");
         request.setAttribute("sBaseFileName", temp);
         params += "sBaseFileName" + "=" + temp + "&";
@@ -57,7 +60,7 @@ public class ImportParamServlet extends HttpServlet {
         request.setAttribute("hiddendatafile", temp);
         params += "hiddendatafile" + "=" + temp + "&";
         
-        temp = request.getParameter("PRadio");
+        /*temp = request.getParameter("PRadio");
         request.setAttribute("PRadio", temp);
         params += "PRadio" + "=" + temp + "&";
         
@@ -71,7 +74,7 @@ public class ImportParamServlet extends HttpServlet {
         
         temp = request.getParameter("SCRadio");
         request.setAttribute("SCRadio", temp);
-        params += "SCRadio" + "=" + temp + "&";
+        params += "SCRadio" + "=" + temp + "&";*/
         
         temp = request.getParameter("sopt");
         request.setAttribute("sopt", temp);
@@ -110,7 +113,50 @@ public class ImportParamServlet extends HttpServlet {
             params += "&" + name + "=" + value;
         }
         
-        RequestDispatcher dispatcher = request.getRequestDispatcher("SFALSSVR.jsp" + params);
+        temp = (String) request.getAttribute("sPRadio");
+        if (temp != null && temp.equals("2")) {
+            params += "&PRadio=PRadio2";
+        } else {
+            params += "&PRadio=PRadio1";
+        }
+        
+        temp = (String) request.getAttribute("sNormalRadio");
+        if (temp != null && temp.equals("2")) {
+            params += "&NormalRadio=NormalRadio2";
+        } else {
+            params += "&NormalRadio=NormalRadio1";
+        }
+        
+        temp = (String) request.getAttribute("sOptimRadio");
+        if (temp != null && temp.equals("3")) {
+            params += "&OptimRadio=OptimRadio3";
+        } else if (temp != null && temp.equals("2"))  {
+            params += "&OptimRadio=OptimRadio2";
+        } else {
+            params += "&OptimRadio=OptimRadio1";
+        }
+        
+        temp = (String) request.getAttribute("sSCRadio");
+        if (temp != null && temp.equals("3")) {
+            params += "&SCRadio=SCRadio3";
+        } else if (temp != null && temp.equals("2"))  {
+            params += "&SCRadio=SCRadio2";
+        } else {
+            params += "&SCRadio=SCRadio1";
+        }
+        
+        temp = (String) request.getAttribute("sTORadio");
+        if (temp != null && temp.equals("4")) {
+            params += "&TORadio=TORadio4";
+        } else if (temp != null && temp.equals("3")) {
+            params += "&TORadio=TORadio3";
+        } else if (temp != null && temp.equals("2"))  {
+            params += "&TORadio=TORadio2";
+        } else {
+            params += "&TORadio=TORadio1";
+        }
+        
+        RequestDispatcher dispatcher = request.getRequestDispatcher("SFALSSVR.jsp" + params); // to return to SFALSSVR.jsp page with imported params
         dispatcher.forward(request, response);
     }
 

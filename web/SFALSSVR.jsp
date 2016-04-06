@@ -9,7 +9,7 @@
 <%@ page import="java.text.*" %>
 
 <%
-    if (session.getAttribute("username") != "PiMLab" && session.getAttribute("username") != "guest")
+    if (session.getAttribute("username") != "PiMLab" && session.getAttribute("username") != "a")
     {
         response.sendRedirect("loginpage.jsp");
         return;
@@ -100,6 +100,11 @@ if (sLoadingDataExcel == null) {
 String sLoadingDataExcelClick = request.getParameter("sLoadingDataExcelClick");
 if (sLoadingDataExcelClick == null) {
     sLoadingDataExcelClick = "";        
+};
+
+String sImportData = request.getParameter("sImportData");
+if (sImportData == null) {
+    sImportData = "";        
 };
 
 String NormalRadio = request.getParameter("NormalRadio");
@@ -2154,8 +2159,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             <div class="container boundary">
                                 <h2><font face="Palatino Linotype, Book Antiqua, Palatino, serif" size="6">Model Settings</font></h2>
                                 <button type="button" onclick="return writedefaultsfalssvr(0)" class="btn btn-primary">Default</button>
-                                <button type="button" onclick="return loadingdataform(1);" class="btn btn-primary">Import</button>
-                                <button type="button" onclick="return importfilefunc();" id="importbutton" class="btn btn-primary">New Import</button>
+                                <%--><button type="button" onclick="return loadingdataform(1);" class="btn btn-primary">Import</button><--%>
+                                <button type="button" onclick="return importfilefunc();" id="importbutton" class="btn btn-primary">Import</button>
                                 <button type="button" name="VarSaveData" value="SAVE" onclick="return exportparameters();" class="btn btn-primary">Export</button>
                                 <%--><input type="submit" name="VarSaveData" value="SAVE" onclick="return savingdata(0);"/><--%>
                                 <button type="button" onclick="return cleardefaultsfalssvr(0);" class="btn btn-primary">Clear</button>
@@ -2781,7 +2786,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     </table>
                 </center>
             <% 
-            if (sLoadingDataExcel != "") {
+            if (!sLoadingDataExcel.equals("")) {
                 if (NormalRadio.equals("NormalRadio1")) {%><script>document.getElementById("NormalRadio1").checked = true; </script><%} 
                 else if (NormalRadio.equals("NormalRadio2")) {%><script>document.getElementById("NormalRadio2").checked = true; </script><%} 
                 else {
@@ -3270,6 +3275,40 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     </tr>
                 </table>                
             <% }
+            else if (sImportData.equals("1"))
+            {
+                if (NormalRadio.equals("NormalRadio2")) { %>
+                    <script>document.getElementById("NormalRadio2").checked = true;</script>
+                <% } else { %>
+                    <script>document.getElementById("NormalRadio1").checked = true;</script>
+                <% }
+                
+                if (OptimRadio.equals("OptimRadio3")) { %>
+                    <script>document.getElementById("OptimRadio3").checked = true;</script>
+                <% } else if (OptimRadio.equals("OptimRadio2")){ %>
+                    <script>document.getElementById("OptimRadio2").checked = true;</script>
+                <% } else { %>
+                    <script>document.getElementById("OptimRadio1").checked = true;</script>
+                <% }
+                
+                if (SCRadio.equals("SCRadio3")) { %>
+                    <script>document.getElementById("SCRadio3").checked = true;</script>
+                <% } else if (SCRadio.equals("SCRadio2")){ %>
+                    <script>document.getElementById("SCRadio2").checked = true;</script>
+                <% } else { %>
+                    <script>document.getElementById("SCRadio1").checked = true;</script>
+                <% }
+                
+                if (TORadio.equals("TORadio4")) { %>
+                    <script>document.getElementById("TORadio4").checked = true;</script>
+                <% } else if (TORadio.equals("TORadio3")){ %>
+                    <script>document.getElementById("TORadio3").checked = true;</script>
+                <% } else if (TORadio.equals("TORadio2")){ %>
+                    <script>document.getElementById("TORadio2").checked = true;</script>
+                <% } else { %>
+                    <script>document.getElementById("TORadio1").checked = true;</script>
+                <% }
+            }
             else if (sLoadingDataFile != "") {     
                 
                 String datafile = request.getParameter("importfile");

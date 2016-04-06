@@ -9,7 +9,7 @@
 <%@ page import="java.text.*" %>
 
 <%
-    if (session.getAttribute("username") != "PiMLab" && session.getAttribute("username") != "guest")
+    if (session.getAttribute("username") != "PiMLab" && session.getAttribute("username") != "a")
     {
         response.sendRedirect("loginpage.jsp");
         return;

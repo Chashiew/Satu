@@ -9,7 +9,7 @@
 <%@ page import="java.text.*" %>
 
 <%
-    if (session.getAttribute("username") != "PiMLab" && session.getAttribute("username") != "guest")
+    if (session.getAttribute("username") != "PiMLab" && session.getAttribute("username") != "a")
     {
         response.sendRedirect("loginpage.jsp");
         return;
@@ -30,6 +30,11 @@
 
     String VarOne = request.getParameter("VarOne");
     String VarNext = request.getParameter("VarNext");
+
+    String sSaveModel = request.getParameter("sSaveModel");
+    if (sSaveModel == null) {
+        sSaveModel = "";        
+    };
 
     String sProcessRun = request.getParameter("sProcessRun");
     if (sProcessRun == null) {
@@ -255,6 +260,9 @@
     double dPRadio=0;
     double dTORadio=0;
 
+    String sValueC = "";
+    String sValueS = ""; 
+
     String sDataFile = request.getParameter("sDataFile");
     String sTestDataFile = request.getParameter("sTestDataFile");
     String sLearningDataFile = request.getParameter("sLearningDataFile"); 
@@ -393,6 +401,10 @@
                 sProcessRun = "1";
                 document.getElementById("sProcessRun").value = sProcessRun;
                 
+                var sSaveModel = document.getElementById("sSaveModel");
+                sSaveModel = "";
+                document.getElementById("sSaveModel").value = sSaveModel;
+
                 var sLoadingDataSet1 = document.getElementById("sLoadingDataSet1");
                 sLoadingDataSet1 = "";
                 document.getElementById("sLoadingDataSet1").value = sLoadingDataSet1;
@@ -573,6 +585,9 @@
                 } else {
                     document.getElementById("sPageControl").value = "3";
                 }
+                var sSaveModel = document.getElementById("sSaveModel");
+                sSaveModel = "";
+                document.getElementById("sSaveModel").value = sSaveModel;
                 return refreshform(val);
             } 
                         
@@ -591,6 +606,14 @@
                 } else {
                     document.getElementById("sopt").value = 2;
                 }
+                return refreshform(val);
+            }
+            
+            function savingmodel(val) {
+                var sSaveModel = document.getElementById("sSaveModel");
+                sSaveModel = "1";
+                document.getElementById("sSaveModel").value = sSaveModel;
+                
                 return refreshform(val);
             } 
         </script>
@@ -1059,10 +1082,9 @@
                 <input type="hidden" name="sGraphNo" id="sGraphNo" value="<%=sGraphNo%>"/>
                 <input type="hidden" name="sBestFold" id="sBestFold" value="<%=sBestFold%>"/>
                 
-                <input type="hidden" name="sProcessRun" id="sProcessRun" value="<%=sProcessRun%>"/>
-                
-                <br>
-                <br>
+                <input type="hidden" name="sProcessRun" id="sProcessRun" value="<%=sProcessRun%>"/>                
+                <input type="hidden" name="sSaveModel" id="sSaveModel" value="<%=sSaveModel%>"/>
+                <br><br>
                 <center id="title">
                     <font style="font-family: Palatino Linotype, Book Antiqua, Palatino, serif; font-size: 24pt" color="#2F4F4F">
                         <b>NiMOPS for Regression</b>
@@ -2051,7 +2073,7 @@
                                         <a href="#Partition"><span class="glyphicon glyphicon-menu-down"></span></a>
                                         <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <button type="button" onclick="">Save Model</button>
+                                        <button type="button" onclick="return savingmodel(0);">Save Model</button>
                                         <br>
                                     </center>
                                     <br>
@@ -2075,6 +2097,8 @@
                                         } else {
                                             cols = line.split("\\t");
                                             sBestFold=cols[3];
+                                            sValueC = cols[0];
+                                            sValueS = cols[1];
                                             %>
                                             <center>
                                                 <div> 
@@ -3310,7 +3334,17 @@
                             </center>
                             <br>
                         </div>
-                                
+                        <% if (sSaveModel != "") { 
+                            String filename;
+                            filename = "SVRModel.txt";
+                            String file = application.getRealPath("/") + filename;
+                            FileWriter filewriter = new FileWriter(file, false);
+                            filewriter.write(sValueC+"\t"); 
+                            filewriter.write(sValueS+"\n");
+                            filewriter.close(); %>
+                            <script>alert('Model is already saved on the server');</script>
+                        <% } %>
+                        
                         <% if (sPageControl.equals("3")) { %>
                         <div id="Gresults" class="tab-pane fade in active">
                         <% } else { %>

@@ -129,10 +129,10 @@
         iRadio=4;
     }
     content = content + "24\tTest Option\tsTORadio\t" + iRadio+"\t" + temp+"\n";
-    content = content + "25\tData File\tsDataFile\t" + sFileName+"\t-\n";
+    content = content + "25\tData File\tsFileName\t" + sFileName+"\t-\n";
     content = content + "26\tNo. of Attributes\tnDFAttributes\t" + nDFAttributes+"\t-\n";
     content = content + "27\tNo. of Instances\tnDFInstances\t" + nDFInstances+"\t-\n";
-    content = content + "28\tTest Data File\tsTestDataFile\t" + sTestFileName+"\t-\n";
+    content = content + "28\tTest Data File\tsTestFileName\t" + sTestFileName+"\t-\n";
     content = content + "29\tNo. of Attributes\tnTDFAttributes\t" + nTDFAttributes+"\t-\n";
     content = content + "30\tNo. of Instances\tnTDFInstances\t" + nTDFInstances+"\t-\n";
     content = content + "31\tFirst Data File\tsFileData\t" + sFileData+"\t-\n";

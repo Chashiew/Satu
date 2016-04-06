@@ -9,7 +9,7 @@
 <%@ page import="java.text.*" %>
 
 <%
-    if (session.getAttribute("username") != "PiMLab" && session.getAttribute("username") != "guest")
+    if (session.getAttribute("username") != "PiMLab" && session.getAttribute("username") != "a")
     {
         response.sendRedirect("loginpage.jsp");
         return;
@@ -31,6 +31,11 @@
     String VarTwo = request.getParameter("VarTwo");
     String VarNextLSSVM = request.getParameter("VarNextLSSVM");
     
+    String sSaveModel = request.getParameter("sSaveModel");
+    if (sSaveModel == null) {
+        sSaveModel = "";        
+    };
+
     String sProcessRun = request.getParameter("sProcessRun");
     if (sProcessRun == null) {
         sProcessRun="";
@@ -239,6 +244,9 @@
     double dPRadioLSSVM =1;
     double dTORadioLSSVM =1;
 
+    String sValueC = "";
+    String sValueS = ""; 
+
     String sDataFileLSSVM = request.getParameter("sDataFileLSSVM");
     String sTestDataFileLSSVM = request.getParameter("sTestDataFileLSSVM");
     String sLearningDataFileLSSVM = request.getParameter("sLearningDataFileLSSVM");
@@ -378,6 +386,10 @@
                 sProcessRun = "1";
                 document.getElementById("sProcessRun").value = sProcessRun;
                 
+                var sSaveModel = document.getElementById("sSaveModel");
+                sSaveModel = "";
+                document.getElementById("sSaveModel").value = sSaveModel;
+
                 var sLoadingDataSet1 = document.getElementById("sLoadingDataSet1");
                 sLoadingDataSet1 = "";
                 document.getElementById("sLoadingDataSet1").value = sLoadingDataSet1;
@@ -555,6 +567,9 @@
                 } else {
                     document.getElementById("sPageControl").value = "3";
                 }
+                var sSaveModel = document.getElementById("sSaveModel");
+                sSaveModel = "";
+                document.getElementById("sSaveModel").value = sSaveModel;
                 return refreshform(val);
             } 
                         
@@ -592,7 +607,14 @@
                     document.getElementById("sopt").value = 3;
                 }
                 return refreshform(val);
-            }  
+            }
+            
+            function savingmodel(val) {
+                var sSaveModel = document.getElementById("sSaveModel");
+                sSaveModel = "1";
+                document.getElementById("sSaveModel").value = sSaveModel;
+                return refreshform(val);
+            } 
         </script>
     </head>
     <body>
@@ -1040,7 +1062,7 @@
                 <input type="hidden" name="sGraphType" id="sGraphType" value="<%=sGraphType%>" /> 
                 
                 <input type="hidden" name="sProcessRun" id="sProcessRun" value="<%=sProcessRun%>"/>
-                
+                <input type="hidden" name="sSaveModel" id="sSaveModel" value="<%=sSaveModel%>"/>
                 <br><br><br>
                 <center id="title">
                     <font style="font-family: Palatino Linotype, Book Antiqua, Palatino, serif; font-size: 24pt" color="#2F4F4F">
@@ -2026,7 +2048,7 @@
                                     <a href="#Partition"><span class="glyphicon glyphicon-menu-down"></span></a>
                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <button type="button" onclick="">Save Model</button>
+                                    <button type="button" onclick="return savingmodel(0);">Save Model</button>
                                     <br>
                                 </center>
                                 <%  File a = new File(ssResult01Name);
@@ -2048,6 +2070,8 @@
                                     } else {
                                         cols = line.split("\\t");
                                         sBestFold=cols[3];
+                                        sValueC = cols[0];
+                                        sValueS = cols[1];
                                         %>
                                         <br>
                                         <center>
@@ -3265,6 +3289,16 @@
                             </center>
                             <br>
                         </div>
+                        <% if (sSaveModel != "") { 
+                            String filename;
+                            filename = "SVMModel.txt";
+                            String file = application.getRealPath("/") + filename;
+                            FileWriter filewriter = new FileWriter(file, false);
+                            filewriter.write(sValueC+"\t");
+                            filewriter.write(sValueS+"\n");
+                            filewriter.close(); %>
+                            <script>alert('Model is already saved on the server');</script>
+                        <% } %>
                             
                         <% if (sPageControl.equals("3")) { %>
                         <div id="Gresults" class="tab-pane fade in active">

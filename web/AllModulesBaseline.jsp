@@ -9,7 +9,7 @@
 <%@ page import="java.text.*" %>
 
 <%
-    if (session.getAttribute("username") != "PiMLab" && session.getAttribute("username") != "guest")
+    if (session.getAttribute("username") != "PiMLab" && session.getAttribute("username") != "a")
     {
         response.sendRedirect("loginpage.jsp");
         return;
@@ -26,6 +26,15 @@
 <%
 String VarA = request.getParameter("VarA");
 String VarB = request.getParameter("VarB");
+
+String sLoadModel = request.getParameter("sLoadModel");
+if (sLoadModel == null) {
+    sLoadModel = "";        
+};
+    String sLoadModelLSSVM = request.getParameter("sLoadModelLSSVM");
+    if (sLoadModelLSSVM == null) {
+        sLoadModelLSSVM = "";        
+    };
 
 String sGraphNo = request.getParameter("sGraphNo");
 if (sGraphNo == null) {
@@ -447,9 +456,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
         if (hdf == null) {
             hdf = "0";
         }
-        /**/
-        //out.println("hdf = "+hdf); 
-        /**/
         %>
         
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -510,7 +516,11 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 var sPredictionFileName = document.getElementById("sPredictionFileName");
 
                 var VarA = document.getElementById("VarA");
-                    
+                
+                var sLoadModel = document.getElementById("sLoadModel");
+                sLoadModel = "";
+                document.getElementById("sLoadModel").value = sLoadModel;
+                
                 var sSaveDataFile = document.getElementById("sSaveDataFile");
                 sSaveDataFile = "";
                 document.getElementById("sSaveDataFile").value = sSaveDataFile;
@@ -591,6 +601,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
 
                 var VarB = document.getElementById("VarB");
 
+                var sLoadModelLSSVM = document.getElementById("sLoadModelLSSVM");
+                sLoadModelLSSVM = "";
+                document.getElementById("sLoadModelLSSVM").value = sLoadModelLSSVM;
+                
                 var sSaveDataFileLSSVM = document.getElementById("sSaveDataFileLSSVM");
                 sSaveDataFileLSSVM = "";
                 document.getElementById("sSaveDataFileLSSVM").value = sSaveDataFileLSSVM;
@@ -701,6 +715,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 
                 var VarA = document.getElementById("VarA");
                     
+                var sLoadModel = document.getElementById("sLoadModel");
+                sLoadModel = "";
+                document.getElementById("sLoadModel").value = sLoadModel;
+                
                 var sLoadingDefault = document.getElementById("sLoadingDefault");
                 sLoadingDefault = "1";
                 document.getElementById("sLoadingDefault").value = sLoadingDefault;
@@ -737,6 +755,79 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 //1. these lines to follow are not executed, as the display has been refreshed.
                 //alert("Aha2 ...!");
                 //fullPath.value = sFileName.value;
+                document.getElementById("myform").action = "AllModulesBaseline.jsp";
+                document.getElementById("myform").submit();
+                valid = false;
+                
+                return valid;
+            }
+            
+            function loadmodel(val) {
+                var nValueC = document.getElementById("nValueC");
+                var nValueS = document.getElementById("nValueS");
+                var dHoldOut = document.getElementById("dHoldOut");
+                var dCrossValidation = document.getElementById("dCrossValidation");
+
+                var NormalRadio = document.getElementById("NormalRadio");
+                var PRadio = document.getElementById("PRadio");
+                var TORadio = document.getElementById("TORadio");
+
+                var sDataFile = document.getElementById("sDataFile");
+                var nDFInstances = document.getElementById("nDFInstances");
+                var nDFAttributes = document.getElementById("nDFAttributes");
+                var sTestDataFile = document.getElementById("sTestDataFile");
+                var nTDFInstances = document.getElementById("nTDFInstances");
+                var nTDFAttributes = document.getElementById("nTDFAttributes");
+                var sLearningDataFile = document.getElementById("sLearningDataFile");
+                var nLDFInstances = document.getElementById("nLDFInstances");
+                var nLDFAttributes = document.getElementById("nLDFAttributes");
+                var sPredictionDataFile = document.getElementById("sPredictionDataFile");
+                var nPDFInstances = document.getElementById("nPDFInstances");
+                var nPDFAttributes = document.getElementById("nPDFAttributes");
+                var fullPath = document.getElementById("fullPath");
+                var fullPathT = document.getElementById("fullPathT");
+                var fullPathL = document.getElementById("fullPathL");
+                var fullPathP = document.getElementById("fullPathP");
+
+                var sFileName = document.getElementById("sFileName");
+                var sTestFileName = document.getElementById("sTestFileName");
+                var sLearningFileName = document.getElementById("sLearningFileName");
+                var sPredictionFileName = document.getElementById("sPredictionFileName");
+                
+                var VarA = document.getElementById("VarA");
+                    
+                var sLoadModel = document.getElementById("sLoadModel");
+                sLoadModel = "1";
+                document.getElementById("sLoadModel").value = sLoadModel;
+                
+                var sLoadingDefault = document.getElementById("sLoadingDefault");
+                sLoadingDefault = "";
+                document.getElementById("sLoadingDefault").value = sLoadingDefault;
+
+                var sLoadingEvaluation = document.getElementById("sLoadingEvaluation");
+                sLoadingEvaluation = "";
+                document.getElementById("sLoadingEvaluation").value = sLoadingEvaluation;
+
+                var sLoadingPrediction = document.getElementById("sLoadingPrediction");
+                sLoadingPrediction = "";
+                document.getElementById("sLoadingPrediction").value = sLoadingPrediction;
+
+                var sSaveDataFile = document.getElementById("sSaveDataFile");
+                sSaveDataFile = "";
+                document.getElementById("sSaveDataFile").value = "";
+
+                var sLoadingDataFile = document.getElementById("sLoadingDataFile");
+                sLoadingDataFile = "";
+                document.getElementById("sLoadingDataFile").value = sLoadingDataFile;
+
+                var sLoadingDataExcel = document.getElementById("sLoadingDataExcel");
+                sLoadingDataExcel = "";
+                document.getElementById("sLoadingDataExcel").value = sLoadingDataExcel;
+                
+                var sLoadingDataExcelClick = document.getElementById("sLoadingDataExcelClick");
+                sLoadingDataExcelClick = "";
+                document.getElementById("sLoadingDataExcelClick").value = sLoadingDataExcelClick;
+                
                 document.getElementById("myform").action = "AllModulesBaseline.jsp";
                 document.getElementById("myform").submit();
                 valid = false;
@@ -788,6 +879,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 
                 var VarB = document.getElementById("VarB");
                     
+                var sLoadModel = document.getElementById("sLoadModel");
+                sLoadModel = "";
+                document.getElementById("sLoadModel").value = sLoadModel;
+                
                 var sLoadingDefaultLSSVM = document.getElementById("sLoadingDefaultLSSVM");
                 sLoadingDefaultLSSVM = "1";
                 document.getElementById("sLoadingDefaultLSSVM").value = sLoadingDefaultLSSVM;
@@ -827,6 +922,45 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 document.getElementById("myformLSSVM").submit();
                 valid = false;
 
+                return valid;
+            }
+            
+            function loadmodelLSSVM(val) {
+                var sLoadModelLSSVM = document.getElementById("sLoadModelLSSVM");
+                sLoadModelLSSVM = "1";
+                document.getElementById("sLoadModelLSSVM").value = sLoadModelLSSVM;
+             
+                var sLoadingDefaultLSSVM = document.getElementById("sLoadingDefaultLSSVM");
+                sLoadingDefaultLSSVM = "";
+                document.getElementById("sLoadingDefaultLSSVM").value = sLoadingDefaultLSSVM;
+
+                var sLoadingEvaluationLSSVM = document.getElementById("sLoadingEvaluationLSSVM");
+                sLoadingEvaluationLSSVM = "";
+                document.getElementById("sLoadingEvaluationLSSVM").value = sLoadingEvaluationLSSVM;
+
+                var sLoadingPredictionLSSVM = document.getElementById("sLoadingPredictionLSSVM");
+                sLoadingPredictionLSSVM = "";
+                document.getElementById("sLoadingPredictionLSSVM").value = sLoadingPredictionLSSVM;
+
+                sSaveDataFileLSSVM = "";
+                document.getElementById("sSaveDataFileLSSVM").value = "";
+
+                var sLoadingDataFileLSSVM = document.getElementById("sLoadingDataFileLSSVM");
+                sLoadingDataFileLSSVM = "";
+                document.getElementById("sLoadingDataFileLSSVM").value = sLoadingDataFileLSSVM;
+                
+                var sLoadingDataExcelLSSVM = document.getElementById("sLoadingDataExcelLSSVM");
+                sLoadingDataExcelLSSVM = "";
+                document.getElementById("sLoadingDataExcelLSSVM").value = sLoadingDataExcelLSSVM;
+                
+                var sLoadingDataExcelClickLSSVM = document.getElementById("sLoadingDataExcelClickLSSVM");
+                sLoadingDataExcelClickLSSVM = "";
+                document.getElementById("sLoadingDataExcelClickLSSVM").value = sLoadingDataExcelClickLSSVM;
+
+                document.getElementById("myformLSSVM").action = "AllModulesBaseline.jsp";
+                document.getElementById("myformLSSVM").submit();
+                valid = false;
+                
                 return valid;
             }
 
@@ -873,7 +1007,11 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 document.getElementById("sMoveBottom").value = val;
                 
                 var VarA = document.getElementById("VarA");
-                    
+                
+                var sLoadModel = document.getElementById("sLoadModel");
+                sLoadModel = "";
+                document.getElementById("sLoadModel").value = sLoadModel;
+                
                 var sLoadingDefault = document.getElementById("sLoadingDefault");
                 sLoadingDefault = "1";
                 document.getElementById("sLoadingDefault").value = sLoadingDefault;
@@ -957,7 +1095,11 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 document.getElementById("sMoveBottom").value = val;
                 
                 var VarB = document.getElementById("VarB");
-                    
+                 
+                var sLoadModelLSSVM = document.getElementById("sLoadModelLSSVM");
+                sLoadModelLSSVM = "";
+                document.getElementById("sLoadModelLSSVM").value = sLoadModelLSSVM;
+                
                 var sLoadingDefaultLSSVM = document.getElementById("sLoadingDefaultLSSVM");
                 sLoadingDefaultLSSVM = "1";
                 document.getElementById("sLoadingDefaultLSSVM").value = sLoadingDefaultLSSVM;
@@ -1031,7 +1173,11 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 var sPredictionFileName = document.getElementById("sPredictionFileName");
 
                 var VarA = document.getElementById("VarA");
-                    
+                
+                var sLoadModel = document.getElementById("sLoadModel");
+                sLoadModel = "";
+                document.getElementById("sLoadModel").value = sLoadModel;
+                
                 var sLoadingDataExcel = document.getElementById("sLoadingDataExcel");
                 sLoadingDataExcel = "1";
                 document.getElementById("sLoadingDataExcel").value = sLoadingDataExcel;
@@ -1132,6 +1278,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
 
                 var VarB = document.getElementById("VarB");
 
+                var sLoadModelLSSVM = document.getElementById("sLoadModelLSSVM");
+                sLoadModelLSSVM = "";
+                document.getElementById("sLoadModelLSSVM").value = sLoadModelLSSVM;
+                
                 var sLoadingDataExcelLSSVM = document.getElementById("sLoadingDataExcelLSSVM");
                 sLoadingDataExcelLSSVM = "2";
                 document.getElementById("sLoadingDataExcelLSSVM").value = sLoadingDataExcelLSSVM;
@@ -1282,6 +1432,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     var sGraphNo = document.getElementById("sGraphNo");
                     var sGraphType = document.getElementById("sGraphType");
                     
+                    var sLoadModel = document.getElementById("sLoadModel");
+                    sLoadModel = "";
+                    document.getElementById("sLoadModel").value = sLoadModel;
+
                     var sLoadingDataExcel = document.getElementById("sLoadingDataExcel");
                     sLoadingDataExcel = "";
                     document.getElementById("sLoadingDataExcel").value = sLoadingDataExcel;
@@ -1386,6 +1540,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     var sGraphNo = document.getElementById("sGraphNo");
                     var sGraphType = document.getElementById("sGraphType");
                     
+                    var sLoadModelLSSVM = document.getElementById("sLoadModelLSSVM");
+                    sLoadModelLSSVM = "";
+                    document.getElementById("sLoadModelLSSVM").value = sLoadModelLSSVM;
+
                     var sLoadingDataExcelLSSVM = document.getElementById("sLoadingDataExcelLSSVM");
                     sLoadingDataExcelLSSVM = "2";
                     document.getElementById("sLoadingDataExcelLSSVM").value = sLoadingDataExcelLSSVM;
@@ -1483,6 +1641,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
 
                     var VarA = document.getElementById("VarA");
                     
+                    var sLoadModel = document.getElementById("sLoadModel");
+                    sLoadModel = "";
+                    document.getElementById("sLoadModel").value = sLoadModel;
+
                     var sLoadingDataExcel = document.getElementById("sLoadingDataExcel");
                     sLoadingDataExcel = "1";
                     document.getElementById("sLoadingDataExcel").value = sLoadingDataExcel;
@@ -1587,6 +1749,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
 
                     var VarB = document.getElementById("VarB");
                     
+                    var sLoadModelLSSVM = document.getElementById("sLoadModelLSSVM");
+                    sLoadModelLSSVM = "";
+                    document.getElementById("sLoadModelLSSVM").value = sLoadModelLSSVM;
+
                     var sLoadingDataExcelLSSVM = document.getElementById("sLoadingDataExcelLSSVM");
                     sLoadingDataExcelLSSVM = "2";
                     document.getElementById("sLoadingDataExcelLSSVM").value = sLoadingDataExcelLSSVM;
@@ -1692,10 +1858,14 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     var sPredictionFileName = document.getElementById("sPredictionFileName");
                     //alert("Aha 134 ...!");
 
+                    var sLoadModel = document.getElementById("sLoadModel");
+                    sLoadModel = "";
+                    document.getElementById("sLoadModel").value = sLoadModel;
+
                     sSaveDataFile = "";
                     document.getElementById("sSaveDataFile").value = "";
                     //alert("Aha 135 ...!");
-
+                   
                     var sLoadingDataFile = document.getElementById("sLoadingDataFile");
                     sLoadingDataFile = "";
                     document.getElementById("sLoadingDataFile").value = sLoadingDataFile;
@@ -1846,6 +2016,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     var sLearningFileNameLSSVM = document.getElementById("sLearningFileNameLSSVM");
                     var sPredictionFileNameLSSVM = document.getElementById("sPredictionFileNameLSSVM");
 
+                    var sLoadModelLSSVM = document.getElementById("sLoadModelLSSVM");
+                    sLoadModelLSSVM = "";
+                    document.getElementById("sLoadModelLSSVM").value = sLoadModelLSSVM;
+
                     sSaveDataFileLSSVM = "";
                     document.getElementById("sSaveDataFileLSSVM").value = "";
                     //alert("Aha 135 ...!");
@@ -1991,6 +2165,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
 
                 var VarA = document.getElementById("VarA");
                 
+                var sLoadModel = document.getElementById("sLoadModel");
+                sLoadModel = "";
+                document.getElementById("sLoadModel").value = sLoadModel;
+
                 var sSaveDataFile = document.getElementById("sSaveDataFile");
                 if (valid === true) {
                     sSaveDataFile = "1";
@@ -2094,6 +2272,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
 
                 var VarB = document.getElementById("VarB");
                 
+                var sLoadModelLSSVM = document.getElementById("sLoadModelLSSVM");
+                sLoadModelLSSVM = "";
+                document.getElementById("sLoadModelLSSVM").value = sLoadModelLSSVM;
+
                 var sSaveDataFileLSSVM = document.getElementById("sSaveDataFileLSSVM");
                 if (valid === true) {
                     sSaveDataFileLSSVM = "1";
@@ -2155,6 +2337,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
 
                 var VarA = document.getElementById("VarA");
                 
+               var sLoadModel = document.getElementById("sLoadModel");
+                sLoadModel = "";
+                document.getElementById("sLoadModel").value = sLoadModel;
+     
                 sSaveDataFile = "";
                 document.getElementById("sSaveDataFile").value = "";
 
@@ -2219,6 +2405,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
 
                 var VarB = document.getElementById("VarB");
                 
+                var sLoadModelLSSVM = document.getElementById("sLoadModelLSSVM");
+                sLoadModelLSSVM = "";
+                document.getElementById("sLoadModelLSSVM").value = sLoadModelLSSVM;
+
                 sSaveDataFileLSSVM = "";
                 document.getElementById("sSaveDataFileLSSVM").value = "";
 
@@ -2459,6 +2649,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 <input type="hidden" name="sMoveBottom" id="sMoveBottom" value="<%=sMoveBottom%>"/>
                 <input type="hidden" name="VarNext" id="VarNext" value="<%=VarNext%>"/>
                 <input type="hidden" name="sError" id="sError" value="<%=sError%>"/>
+                <input type="hidden" name="sLoadModel" id="sLoadModel" value="<%=sLoadModel%>"/>
                                 
                 <% if (hdf.equals("1")) { %>
                     <input type="hidden" name="hiddendatafile" id="hiddendatafile" value="1">
@@ -2557,10 +2748,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                     <div class="col-md-3">System parameters:</div>
                                     <div class="col-md-2">Value of C</div>
                                     <div class="col-md-2">
-                                        <input type="text" name="nValueC" id="nValueC" size="5" value="<%=nValueC%>"/>
+                                        <input type="text" name="nValueC" id="nValueC" size="8" value="<%=nValueC%>"/>
                                     </div>
                                     <div class="col-md-2">
-                                        <button type="button" onclick="">Load Model</button>
+                                        <button type="button" onclick="loadmodel(1)">Load Model</button>
                                     </div>
                                 </div>
                                 <br>
@@ -2568,7 +2759,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                     <div class="col-md-3"></div>
                                     <div class="col-md-2">Value of sigma</div>
                                     <div class="col-md-1">
-                                        <input type="text" name="nValueS" id="nValueS" size="5" value="<%=nValueS%>"/>
+                                        <input type="text" name="nValueS" id="nValueS" size="8" value="<%=nValueS%>"/>
                                     </div>
                                 </div>
                             </div>
@@ -3760,13 +3951,34 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     else if (TORadio.equals("TORadio4")) {%><script>document.getElementById("TORadio4").checked = true; </script><%}
                 }
             }
+            else if (sLoadModel != "") { 
+                String filename;
+                filename = "SVRModel.txt";
+                String file = application.getRealPath("/") + filename;
+                BufferedReader br = new BufferedReader(new FileReader(file)); 
+                String line = null;
+                String[] cols;
+                line = br.readLine();
+                if (line == null) {
+                    out .println("<h3><font color='red'>Model not found !</font></h3>");
+                } else {
+                    cols = line.split("\\t"); 
+                    %><script>document.getElementById("nValueC").value = "<%=cols[0]%>";
+                    document.getElementById("nValueS").value = "<%=cols[1]%>";
+                    </script><%
+                }
+                
+                if (NormalRadio.equals("NormalRadio1")) {%><script>document.getElementById("NormalRadio1").checked = true; </script><%}
+                else if (NormalRadio.equals("NormalRadio2")) {%><script>document.getElementById("NormalRadio2").checked = true; </script><%}
+            
+                if (PRadio.equals("PRadio1")) { 
+                    if (TORadio.equals("TORadio1")) {%><script>document.getElementById("TORadio1").checked = true; </script><%}
+                    else if (TORadio.equals("TORadio2")) {%><script>document.getElementById("TORadio2").checked = true; </script><%}
+                    else if (TORadio.equals("TORadio3")) {%><script>document.getElementById("TORadio3").checked = true; </script><%}
+                    else if (TORadio.equals("TORadio4")) {%><script>document.getElementById("TORadio4").checked = true; </script><%}
+                }
+            }
             else {
-                /*
-                out.println("<p>");
-                out.println("sLoadingEvaluation = "+sLoadingEvaluation);
-                out.println("sLoadingPrediction = "+sLoadingPrediction);
-                */
-
                 if (sLoadingEvaluation != "") {  
                     if (sTestFileName != "") { 
                         %><script>document.getElementById("TORadio4").checked = true; 
@@ -4333,6 +4545,9 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 <input type="hidden" name="sGraphNo" id="sGraphNo" value="<%=sGraphNo%>" /> 
                 <input type="hidden" name="sBestFold" id="sBestFold" value="<%=sBestFold%>" /> 
                 <input type="hidden" name="sGraphType" id="sGraphType" value="<%=sGraphType%>" /> 
+                
+                <input type="hidden" name="sLoadModelLSSVM" id="sLoadModelLSSVM" value="<%=sLoadModelLSSVM%>"/>
+
                 <br>
                 <br>
                 <center id="title">
@@ -4407,10 +4622,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                     <div class="col-md-3">System parameters:</div>
                                     <div class="col-md-2">Value of C</div>
                                     <div class="col-md-2">
-                                        <input type="text" name="nValueCLSSVM" id="nValueCLSSVM" size="5" value="<%=nValueCLSSVM%>"> 
+                                        <input type="text" name="nValueCLSSVM" id="nValueCLSSVM" size="8" value="<%=nValueCLSSVM%>"> 
                                     </div>
                                     <div class="col-md-2">
-                                        <button type="button" onclick="">Load Model</button>
+                                        <button type="button" onclick="loadmodelLSSVM(1)">Load Model</button>
                                     </div>
                                 </div>
                                 <br>
@@ -4418,7 +4633,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                     <div class="col-md-3"></div>
                                     <div class="col-md-2">Value of sigma</div>
                                     <div class="col-md-1">
-                                        <input type="text" name="nValueSLSSVM" id="nValueSLSSVM" size="5" value="<%=nValueSLSSVM%>">
+                                        <input type="text" name="nValueSLSSVM" id="nValueSLSSVM" size="8" value="<%=nValueSLSSVM%>">
                                     </div>
                                 </div>
                             </div>
@@ -5568,6 +5783,33 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 filewriter.close();
 
                 %><script>alert('Your input form has been saved on the server');</script><%
+                
+                if (NormalRadioLSSVM.equals("NormalRadio1LSSVM")) {%><script>document.getElementById("NormalRadio1LSSVM").checked = true;</script>
+                <% } else if (NormalRadioLSSVM.equals("NormalRadio2LSSVM")) {%><script>document.getElementById("NormalRadio2LSSVM").checked = true;</script> <% }
+            
+                if (PRadio.equals("PRadio1")) { 
+                    if (TORadioLSSVM.equals("TORadio1LSSVM")) {%><script>document.getElementById("TORadio1LSSVM").checked = true;</script>
+                    <% } else if (TORadioLSSVM.equals("TORadio2LSSVM")) {%><script>document.getElementById("TORadio2LSSVM").checked = true;</script>
+                    <% } else if (TORadioLSSVM.equals("TORadio3LSSVM")) {%><script>document.getElementById("TORadio3LSSVM").checked = true;</script>
+                    <% } else if (TORadioLSSVM.equals("TORadio4LSSVM")) {%><script>document.getElementById("TORadio4LSSVM").checked = true;</script><% }
+                }
+            }
+            else if (sLoadModelLSSVM != "") { 
+                String filename;
+                filename = "SVMModel.txt";
+                String file = application.getRealPath("/") + filename;
+                BufferedReader br = new BufferedReader(new FileReader(file)); 
+                String line = null;
+                String[] cols;
+                line = br.readLine();
+                if (line == null) {
+                    out .println("<h3><font color='red'>Model not found !</font></h3>");
+                } else {
+                    cols = line.split("\\t"); 
+                    %><script>document.getElementById("nValueCLSSVM").value = "<%=cols[0]%>";
+                    document.getElementById("nValueSLSSVM").value = "<%=cols[1]%>";
+                    </script><%
+                }
                 
                 if (NormalRadioLSSVM.equals("NormalRadio1LSSVM")) {%><script>document.getElementById("NormalRadio1LSSVM").checked = true;</script>
                 <% } else if (NormalRadioLSSVM.equals("NormalRadio2LSSVM")) {%><script>document.getElementById("NormalRadio2LSSVM").checked = true;</script> <% }

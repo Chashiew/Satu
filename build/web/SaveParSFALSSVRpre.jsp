@@ -100,10 +100,10 @@
     iRadio=2;
     content = content + "21\tPurpose\tsPRadio\t" + iRadio+"\t" + temp+"\n";
     
-    content = content + "22\tLearning Data File\tsLearningDataFile\t" + sLearningFileName+"\t-\n";
+    content = content + "22\tLearning Data File\tsLearningFileName\t" + sLearningFileName+"\t-\n";
     content = content + "23\tNo. of Attributes\tnLDFAttributes\t" + nLDFAttributes+"\t-\n";
     content = content + "24\tNo. of Instances\tnLDFInstances\t" + nLDFInstances+"\t-\n";
-    content = content + "25\tPrediction Data File\tsPredictionDataFile\t" + sPredictionFileName+"\t-\n";
+    content = content + "25\tPrediction Data File\tsPredictionFileName\t" + sPredictionFileName+"\t-\n";
     content = content + "26\tNo. of Attributes\tnPDFAttributes\t" + nPDFAttributes+"\t-\n";
     content = content + "27\tNo. of Instances\tnPDFInstances\t" + nPDFInstances+"\t-\n";
     content = content + "28\tFirst Data File\tsFileData\t" + sFileData+"\t-\n";

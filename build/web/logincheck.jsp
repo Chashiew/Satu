@@ -23,7 +23,7 @@
                     session.setAttribute("username", "PiMLab");
                     response.sendRedirect("Home.jsp");
                 } 
-            else if (username.equals("guest") && password.equals("guest"))
+            else if (username.equals("a") && password.equals("a"))
                 {
                     session.setAttribute("username", "PiMLab");
                     response.sendRedirect("Home.jsp");
