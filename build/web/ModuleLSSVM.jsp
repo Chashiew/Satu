@@ -56,7 +56,7 @@
     int GraphType;
     String sGraphType = request.getParameter("sGraphType");
     if (sGraphType == null) {
-        sGraphType = "1";        
+        sGraphType = "2"; //1       
     };
     GraphType=(int)Double.parseDouble(sGraphType);
 
@@ -549,15 +549,15 @@
                     }
                     else if (sGraphType.value==="2") {
                         //alert("Aha22 ...!");
-                        document.getElementById("sGraphType").value = 3;
+                        document.getElementById("sGraphType").value = 2; //3
                     }
                     else if (sGraphType.value==="3") {
                         //alert("Aha23 ...!");
-                        document.getElementById("sGraphType").value = 1;
+                        document.getElementById("sGraphType").value = 2; //1
                     }
                     else {
                         //alert("Aha24 ...!");
-                        document.getElementById("sGraphType").value = 1;
+                        document.getElementById("sGraphType").value = 2; //1
                     }
                 }
 
