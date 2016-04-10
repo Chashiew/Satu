@@ -403,8 +403,7 @@ public class SFALSSVMServlet extends HttpServlet {
             try {
                 final SFALSSVMClass m = new SFALSSVMClass();
                 try {
-                    Object results[] = m.ProgramSFALSSVM(1,vpath,vfile,nFireFliesLSSVM,nMaxGenerationLSSVM,dMinBetaLSSVM,dGammaLSSVM,dAlphaLSSVM,dAIWeightLSSVM,dTauLSSVM,dBPotentialLSSVM,dC1LSSVM,dC2LSSVM,dS1LSSVM,dS2LSSVM,dTrainingPSLSSVM,dValidationPSLSSVM,dTotalSizeLSSVM,nLastChange1LSSVM,nLastChange2LSSVM,dHoldOutLSSVM,dCrossValidationLSSVM,dNormalRadioLSSVM,dSCRadioLSSVM,dPRadioLSSVM,dTORadioLSSVM,sVariation,dAttributesLSSVM,dInstancesLSSVM,dPAttributesLSSVM,dPInstancesLSSVM,Datatrain,Datapre)
-;
+                    Object results[] = m.ProgramSFALSSVM(1,vpath,vfile,nFireFliesLSSVM,nMaxGenerationLSSVM,dMinBetaLSSVM,dGammaLSSVM,dAlphaLSSVM,dAIWeightLSSVM,dTauLSSVM,dBPotentialLSSVM,dC1LSSVM,dC2LSSVM,dS1LSSVM,dS2LSSVM,dTrainingPSLSSVM,dValidationPSLSSVM,dTotalSizeLSSVM,nLastChange1LSSVM,nLastChange2LSSVM,dHoldOutLSSVM,dCrossValidationLSSVM,dNormalRadioLSSVM,dSCRadioLSSVM,dPRadioLSSVM,dTORadioLSSVM,sVariation,dAttributesLSSVM,dInstancesLSSVM,dPAttributesLSSVM,dPInstancesLSSVM,Datatrain,Datapre);
                     try {
                         /*
                         pw.write("<table><tr><td>&nbsp;</td>");

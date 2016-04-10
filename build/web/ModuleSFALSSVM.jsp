@@ -1312,7 +1312,7 @@
                                             <div class="col-md-4">Test Option:</div>
                                             <div class="col-md-4">
                                                 <%
-                                                sTORadioLSSVM = "...";
+                                                sTORadioLSSVM = "";
                                                 if (NormalRadioLSSVM.equals("NormalRadio1LSSVM")) {
                                                     dNormalRadioLSSVM = 1;
                                                     if (TORadioLSSVM.equals("TORadio2LSSVM")) { 
@@ -2044,7 +2044,7 @@
                                 <br>
                                 <br>
                                 <center>
-                                    <b><font size="4" id="Optimum">Main output</font></b>
+                                    <b><font size="4" id="Optimum">Main Output</font></b>
                                     <a href="#Partition"><span class="glyphicon glyphicon-menu-down"></span></a>
                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                     <br><br>
@@ -2086,7 +2086,7 @@
                                                         <td align="left"><%=cols[1]%></td>
                                                     </tr> 
                                                     <tr>
-                                                        <td align="right">RMSE</td> 
+                                                        <td align="right">MAE</td> 
                                                         <td align="center">=</td> 
                                                         <td align="left"><%=cols[2]%></td>
                                                     </tr> 
@@ -2168,7 +2168,7 @@
                                                         <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
                                                         <td align="center">Kernel Function Parameter, S</td> 
                                                         <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
-                                                        <td align="center">RMSE of Validation Data</td> 
+                                                        <td align="center">MAE of Validation Data</td> 
                                                     </tr> 
                                                     <% for (i = 0; i < j; i += 1) { %>
                                                         <tr>
@@ -2194,7 +2194,11 @@
                                             <a href="#Report"><span class="glyphicon glyphicon-menu-down"></span></a>
                                             <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                             <br><br>
-                                            <u><font size="4">Performance of learning and test data</font></u>
+                                            <% if (PRadioLSSVM.equals("PRadio1LSSVM")) { %> 
+                                                <u><font size="4">Performance of learning and test data</font></u>
+                                            <% } else { %>
+                                                <u><font size="4">Performance of learning and prediction data</font></u>
+                                            <% } %>
                                         </center>
                                         <br>
 
@@ -2243,7 +2247,11 @@
                                                         <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
                                                         <td align="center">Percent Accuracy of Learning Data</td>
                                                         <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
-                                                        <td align="center">Percent Accuracy of Test Data</td> 
+                                                        <% if (PRadioLSSVM.equals("PRadio1LSSVM")) { %> 
+                                                            <td align="center">Percent Accuracy of Test Data</td> 
+                                                        <% } else { %>
+                                                            <td align="center">Percent Accuracy of Prediction Data</td> 
+                                                        <% } %>
                                                     </tr> 
                                                     <% for (i = 0; i < j; i += 1) { %>
                                                         <tr>
@@ -2303,7 +2311,7 @@
                                 <br>
                                 <br>
                                 <center>
-                                    <b><font size="4" id="Report">Analysis report</font></b>
+                                    <b><font size="4" id="Report">Analysis Report</font></b>
                                     <a href="#Partition"><span class="glyphicon glyphicon-menu-up"></span></a>
                                     <a href="#Performance"><span class="glyphicon glyphicon-menu-down"></span></a>
                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
@@ -2357,7 +2365,11 @@
                                     <a href="#Report"><span class="glyphicon glyphicon-menu-up"></span></a>
                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                     <br><br>
-                                    <u><font size="4" id="Dataset1">Test data with predicted values of the best fold</font></u>
+                                    <% if (PRadioLSSVM.equals("PRadio1LSSVM")) { %> 
+                                        <u><font size="4" id="Dataset1">Test data with predicted values of the best fold</font></u>
+                                    <% } else { %>
+                                        <u><font size="4" id="Dataset1">Prediction data with predicted values of the best fold</font></u>
+                                    <% } %>
                                     <a href="#Dataset2"><span class="glyphicon glyphicon-triangle-bottom"></span></a> 
                                 </center> 
                                 <br>
@@ -2606,7 +2618,11 @@
                             <div id="PGraph" class="tab-pane fade in">
                                 <div class="edittab">
                                     <%--><label><input type="checkbox" name="TDCheck" id="TDCheck1" value="TDCheck1" onclick="fTDCheckBox(1);" checked>&nbsp;</label><--%>
-                                    <a href="#TDataset">Test data</a>
+                                    <% if (PRadioLSSVM.equals("PRadio1LSSVM")) { %> 
+                                        <a href="#TDataset">Test data</a>
+                                    <% } else { %>
+                                        <a href="#TDataset">Prediction data</a>
+                                    <% } %>
                                     <span class="glyphicon glyphicon-minus"></span> 
                                     <a href="#LDataset">Learning data</a>
                                     <span class="glyphicon glyphicon-minus"></span> 
@@ -2617,7 +2633,11 @@
                                 <br>
                                 <br>
                                 <center>
-                                    <b><font size="4" id="TDataset">Predicted values of test data</font></b>
+                                    <% if (PRadioLSSVM.equals("PRadio1LSSVM")) { %> 
+                                        <b><font size="4" id="TDataset">Predicted Values of Test Data</font></b>
+                                    <% } else { %>
+                                        <b><font size="4" id="TDataset">Predicted Values of Prediction Data</font></b>
+                                    <% } %>
                                     <a href="#LDataset"><span class="glyphicon glyphicon-menu-down"></span></a> 
                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a> 
                                     <br>
@@ -2693,7 +2713,7 @@
                                 <br>
                                 <br>
                                 <center>
-                                    <b><font size="4" id="LDataset">Predicted values of learning data</font></b>
+                                    <b><font size="4" id="LDataset">Predicted Values of Learning Data</font></b>
                                     <a href="#TDataset"><span class="glyphicon glyphicon-menu-up"></span></a>
                                     <a href="#VPDataset"><span class="glyphicon glyphicon-menu-down"></span></a>
                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
@@ -2770,7 +2790,7 @@
                                 <br>
                                 <br>
                                 <center>
-                                    <b><font size="4" id="VPDataset">Predicted values of validation partition from learning data</font></b>
+                                    <b><font size="4" id="VPDataset">Predicted Values of Validation Partition from Learning Data</font></b>
                                     <a href="#LDataset"><span class="glyphicon glyphicon-menu-up"></span></a>
                                     <a href="#TPDataset"><span class="glyphicon glyphicon-menu-down"></span></a>
                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
@@ -2843,7 +2863,7 @@
                                 <br>
                                 <br>
                                 <center>
-                                    <b><font size="4" id="TPDataset">Predicted values of training partition from learning data</font></b>
+                                    <b><font size="4" id="TPDataset">Predicted Values of Training Partition from Learning Data</font></b>
                                     <a href="#VPDataset"><span class="glyphicon glyphicon-menu-up"></span></a>
                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                     <br>
@@ -3011,7 +3031,10 @@
                                         %>
 
                                         <center>
-                                            <% if (jj==1) { %> <b><font size="4" id="PT1">Performance Trajectory of Test Data - Fold No. <%=jj%></font></b>
+                                        <% if (PRadioLSSVM.equals("PRadio2LSSVM")) { %>
+                                            <b><font size="4" id="PT1">Performance Trajectory of Prediction Data - Fold No. <%=jj%></font></b>
+                                        <% } else { 
+                                            if (jj==1) { %> <b><font size="4" id="PT1">Performance Trajectory of Test Data - Fold No. <%=jj%></font></b>
                                                 <a href="#PT2"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                 <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                             <% } %>
@@ -3059,6 +3082,7 @@
                                                 <a href="#PT9"><span class="glyphicon glyphicon-menu-up"></span></a>
                                                 <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                             <% } %> 
+                                        <% } %> 
                                         </center> 
                                         <br>
 
@@ -3185,7 +3209,10 @@
                                         %>
 
                                         <center>
-                                            <% if (jj==1) { %> <b><font size="4" id="TP1">Tracing Path for Searching Best Performance of Test Data - Fold No. <%=jj%></font></b>
+                                        <% if (PRadioLSSVM.equals("PRadio2LSSVM")) { %>
+                                            <b><font size="4" id="TP1">Tracing Path for Searching Best Performance of Prediction Data - Fold No. <%=jj%></font></b>
+                                        <% } else { 
+                                            if (jj==1) { %> <b><font size="4" id="TP1">Tracing Path for Searching Best Performance of Test Data - Fold No. <%=jj%></font></b>
                                                     <a href="#TP2"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                 <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                             <% } %>
@@ -3233,6 +3260,7 @@
                                                 <a href="#TP9"><span class="glyphicon glyphicon-menu-up"></span></a>
                                                 <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                             <% } %> 
+                                        <% } %> 
                                         </center>
                                         <br>
 
@@ -3368,7 +3396,11 @@
                                         </td>
                                         <td>&nbsp;&nbsp;&nbsp;</td>
                                         <td>
-                                            <button type="button" onclick="return plotgraph(31);">Test Data</button>
+                                            <% if (PRadioLSSVM.equals("PRadio1LSSVM")) { %>
+                                                <button type="button" onclick="return plotgraph(31);">Test Data</button>
+                                            <% } else { %>
+                                                <button type="button" onclick="return plotgraph(31);">Prediction Data</button>
+                                            <% } %>
                                             <button type="button" onclick="return plotgraph(32);">Learning Data</button>
                                             <button type="button" onclick="return plotgraph(33);">Validation Partition</button>
                                             <button type="button" onclick="return plotgraph(34);">Training Partition</button>
@@ -3494,8 +3526,12 @@
                                                     vfile = "SFAM03Result";
                                                 }
                                             %>
-                                            <% if (GraphNo == 31) { %>
-                                                <h4><b><font color="black" face="Palatino Linotype, Book Antiqua, Palatino, serif">Test data prediction:</font></b></h4> 
+                                            <% if (GraphNo == 31) { 
+                                                if (PRadioLSSVM.equals("PRadio1LSSVM")) { %>
+                                                    <h4><b><font color="black" face="Palatino Linotype, Book Antiqua, Palatino, serif">Test data prediction:</font></b></h4>
+                                                <% } else { %>
+                                                    <h4><b><font color="black" face="Palatino Linotype, Book Antiqua, Palatino, serif">Prediction data:</font></b></h4>
+                                                <% } %>
                                             <% } else if (GraphNo == 32) { %>        
                                                 <h4><b><font color="black" face="Palatino Linotype, Book Antiqua, Palatino, serif">Learning data prediction:</font></b></h4> 
                                             <% } else if (GraphNo == 33) { %>        

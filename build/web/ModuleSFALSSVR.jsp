@@ -1350,7 +1350,7 @@
                                                 <div class="col-md-4">Test Option:</div>
                                                 <div class="col-md-4">
                                                     <%
-                                                    sTORadio = "...";
+                                                    sTORadio = "";
                                                     if (NormalRadio.equals("NormalRadio1")) {
                                                         dNormalRadio=1;
                                                         if (TORadio.equals("TORadio2")) {
@@ -2069,7 +2069,7 @@
                                     <br>
                                     <br>
                                     <center>
-                                        <b><font size="4" id="Optimum">Main output</font></b>
+                                        <b><font size="4" id="Optimum">Main Output</font></b>
                                         <a href="#Partition"><span class="glyphicon glyphicon-menu-down"></span></a>
                                         <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                         <br><br>
@@ -2111,7 +2111,13 @@
                                                             <td align="left"><%=cols[1]%></td>
                                                         </tr> 
                                                         <tr>
-                                                            <td align="right">RMSE</td> 
+                                                            <% if (OptimRadio.equals("OptimRadio1")) { %>
+                                                                <td align="right">RMSE</td>
+                                                            <% } else if (OptimRadio.equals("OptimRadio2")) { %>
+                                                                <td align="right">MAE</td>
+                                                            <% } else if (OptimRadio.equals("OptimRadio3")) { %>
+                                                                <td align="right">MAPE</td>
+                                                            <% } %>
                                                             <td align="center">=</td> 
                                                             <td align="left"><%=cols[2]%></td>
                                                         </tr> 
@@ -2192,7 +2198,13 @@
                                                             <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
                                                             <td align="center">Kernel Function Parameter, S</td> 
                                                             <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
-                                                            <td align="center">RMSE of Validation Data</td> 
+                                                            <% if (OptimRadio.equals("OptimRadio1")) { %>
+                                                                <td align="center">RMSE of Validation Data</td>
+                                                            <% } else if (OptimRadio.equals("OptimRadio2")) { %>
+                                                                <td align="center">MAE of Validation Data</td>
+                                                            <% } else if (OptimRadio.equals("OptimRadio3")) { %>
+                                                                <td align="center">MAPE of Validation Data</td>
+                                                            <% } %>
                                                         </tr> 
                                                         <% for (i = 0; i < j; i += 1) { %>
                                                             <tr>
@@ -2218,7 +2230,11 @@
                                                 <a href="#Report"><span class="glyphicon glyphicon-menu-down"></span></a> 
                                                 <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a> 
                                                 <br><br>
-                                                <u><font size="4">Performance of learning and test data</font></u>
+                                                <% if (PRadio.equals("PRadio1")) { %>
+                                                    <u><font size="4">Performance of learning and test data</font></u>
+                                                <% } else { %>
+                                                    <u><font size="4">Performance of learning and prediction data</font></u>
+                                                <% } %>
                                             </center>
                                             <br>
                                     
@@ -2260,6 +2276,7 @@
                                                 <div> 
                                                     <table>
                                                         <tr>
+                                                        <% if (PRadio.equals("PRadio1")) { %>
                                                             <td align="center">Fold No.</td>
                                                             <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
                                                             <td align="center">RMSE Learning</td>
@@ -2276,7 +2293,26 @@
                                                             <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
                                                             <td align="center">R Learning</td> 
                                                             <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
-                                                            <td align="center">R Test</td> 
+                                                            <td align="center">R Test</td>
+                                                        <% } else { %>
+                                                            <td align="center">Fold No.</td>
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center">RMSE Learning</td>
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center">RMSE Prediction</td> 
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center">MAE Learning</td> 
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center">MAE Prediction</td> 
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center">MAPE Learning</td> 
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center">MAPE Prediction</td> 
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center">R Learning</td> 
+                                                            <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
+                                                            <td align="center">R Prediction</td>
+                                                        <% } %>
                                                         </tr> 
                                                         <% for (i = 0; i < j; i += 1) { %>
                                                             <tr>
@@ -2347,7 +2383,7 @@
                                     <br>
                                     <br>
                                     <center>
-                                        <b><font size="4" id="Report">Analysis report</font></b>
+                                        <b><font size="4" id="Report">Analysis Report</font></b>
                                         <a href="#Partition"><span class="glyphicon glyphicon-menu-up"></span></a> 
                                         <a href="#Performance"><span class="glyphicon glyphicon-menu-down"></span></a> 
                                         <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a> 
@@ -2402,7 +2438,11 @@
                                         <a href="#Report"><span class="glyphicon glyphicon-menu-up"></span></a> 
                                         <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a> 
                                         <br><br>
-                                        <u><font size="4" id="Dataset1">Test data with predicted values of the best fold</font></u>
+                                        <% if (PRadio.equals("PRadio1")) { %>
+                                            <u><font size="4" id="Dataset1">Test data with predicted values of the best fold</font></u>
+                                        <% } else { %>
+                                            <u><font size="4" id="Dataset1">Prediction data with predicted values of the best fold</font></u>
+                                        <% } %>
                                         <a href="#Dataset2"><span class="glyphicon glyphicon-triangle-bottom"></span></a> 
                                     </center>
                                     <br>
@@ -2653,7 +2693,11 @@
                                 <div id="PGraph" class="tab-pane fade in"> 
                                     <div class="edittab">
                                         <%--><label><input type="checkbox" name="TDCheck1" id="TDCheck1" value="TDCheck1" onclick="fTDCheckBox(1);">&nbsp;</label><--%>
-                                        <a href="#TDataset">Test data</a>
+                                        <% if (PRadio.equals("PRadio1")) { %> 
+                                            <a href="#TDataset">Test data</a>
+                                        <% } else { %>
+                                            <a href="#TDataset">Prediction data</a>
+                                        <% } %>
                                         <span class="glyphicon glyphicon-minus"></span> 
                                         <a href="#LDataset">Learning data</a>
                                         <span class="glyphicon glyphicon-minus"></span> 
@@ -2664,7 +2708,11 @@
                                     <br>
                                     <br>
                                     <center>
-                                        <b><font size="4" id="TDataset">Predicted values of test data</font></b>
+                                        <% if (PRadio.equals("PRadio1")) { %> 
+                                            <b><font size="4" id="TDataset">Predicted Values of Test Data</font></b>
+                                        <% } else { %>
+                                            <b><font size="4" id="TDataset">Predicted Values of Prediction Data</font></b>
+                                        <% } %>
                                         <a href="#LDataset"><span class="glyphicon glyphicon-menu-down"></span></a> 
                                         <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a> 
                                         <br>
@@ -2741,7 +2789,7 @@
                                     <br>
                                     <br>
                                     <center>
-                                        <b><font size="4" id="LDataset">Predicted values of learning data</font></b>
+                                        <b><font size="4" id="LDataset">Predicted Values of Learning Data</font></b>
                                         <a href="#TDataset"><span class="glyphicon glyphicon-menu-up"></span></a>
                                         <a href="#VPDataset"><span class="glyphicon glyphicon-menu-down"></span></a>
                                         <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
@@ -2819,7 +2867,7 @@
                                     <br>
                                     <br>
                                     <center>
-                                        <b><font size="4" id="VPDataset">Predicted values of validation partition from learning data</font></b>
+                                        <b><font size="4" id="VPDataset">Predicted Values of Validation Partition from Learning Data</font></b>
                                         <a href="#LDataset"><span class="glyphicon glyphicon-menu-up"></span></a>
                                         <a href="#TPDataset"><span class="glyphicon glyphicon-menu-down"></span></a>
                                         <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
@@ -2893,7 +2941,7 @@
                                     <br>
                                     <br>
                                     <center>
-                                        <b><font size="4" id="TPDataset">Predicted values of training partition from learning data</font></b>
+                                        <b><font size="4" id="TPDataset">Predicted Values of Training Partition from Learning Data</font></b>
                                         <a href="#VPDataset"><span class="glyphicon glyphicon-menu-up"></span></a>
                                         <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                         <br>
@@ -3045,14 +3093,14 @@
                                                 }
                                             }
                                             jj = jj + 1;
-                                            if (jj>1) {
-                                                %>
+                                            if (jj>1) { %>
                                                 <br><br>
-                                                <%
-                                            }
-                                            %>
+                                            <% } %>
 
                                             <center>
+                                            <% if (PRadio.equals("PRadio2")) { %>
+                                                <b><font size="4">Performance Trajectory of Prediction Data - Fold No. <%=jj%></font></b>
+                                            <% } else { %>    
                                                 <% if (jj==1) { %> <b><font size="4" id="PT1">Performance Trajectory of Test Data - Fold No. <%=jj%></font></b>
                                                     <a href="#PT2"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
@@ -3101,6 +3149,7 @@
                                                     <a href="#PT9"><span class="glyphicon glyphicon-menu-up"></span></a>
                                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                                 <% } %> 
+                                            <% } %> 
                                             </center> 
                                             <br>
 
@@ -3228,7 +3277,10 @@
                                             %>
 
                                             <center>
-                                                <% if (jj==1) { %> <b><font size="4" id="TP1">Tracing Path for Searching Best Performance of Test Data - Fold No. <%=jj%></font></b>
+                                            <% if (PRadio.equals("PRadio2")) { %>
+                                            <b><font size="4">Tracing Path for Searching Best Performance of Prediction Data - Fold No. <%=jj%></font></b>
+                                            <% } else {
+                                                if (jj==1) { %> <b><font size="4" id="TP1">Tracing Path for Searching Best Performance of Test Data - Fold No. <%=jj%></font></b>
                                                     <a href="#TP2"><span class="glyphicon glyphicon-menu-down"></span></a>
                                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                                                 <% } %>
@@ -3275,7 +3327,8 @@
                                                 <% if (jj==10) { %> <b><font size="4" id="TP10">Tracing Path for Searching Best Performance of Test Data - Fold No. <%=jj%></font></b>
                                                     <a href="#TP9"><span class="glyphicon glyphicon-menu-up"></span></a>
                                                     <a href="#Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
-                                                <% } %> 
+                                                <% } %>
+                                            <% } %>
                                             </center>
                                             <br>
 
@@ -3411,7 +3464,11 @@
                                         </td>
                                         <td>&nbsp;&nbsp;&nbsp;</td>
                                         <td>
-                                            <button type="button" onclick="return plotgraph(31);">Test Data</button>
+                                            <% if (PRadio.equals("PRadio1")) { %> 
+                                                <button type="button" onclick="return plotgraph(31);">Test Data</button>
+                                            <% } else { %>
+                                                <button type="button" onclick="return plotgraph(31);">Prediction Data</button>
+                                            <% } %>
                                             <button type="button" onclick="return plotgraph(32);">Learning Data</button>
                                             <button type="button" onclick="return plotgraph(33);">Validation Partition</button>
                                             <button type="button" onclick="return plotgraph(34);">Training Partition</button>
@@ -3536,8 +3593,12 @@
                                                     vfile = "SFAR03Result";
                                                 }
                                             %>
-                                            <% if (GraphNo == 31) { %>
-                                                <h4><b><font color="black" face="Palatino Linotype, Book Antiqua, Palatino, serif">Test data prediction:</font></b></h4> 
+                                            <% if (GraphNo == 31) {
+                                                if (PRadio.equals("PRadio1")) { %> 
+                                                    <h4><b><font color="black" face="Palatino Linotype, Book Antiqua, Palatino, serif">Test data prediction:</font></b></h4> 
+                                                <% } else { %>
+                                                    <h4><b><font color="black" face="Palatino Linotype, Book Antiqua, Palatino, serif">Prediction data:</font></b></h4> 
+                                                <% } %>
                                             <% } else if (GraphNo == 32) { %>        
                                                 <h4><b><font color="black" face="Palatino Linotype, Book Antiqua, Palatino, serif">Learning data prediction:</font></b></h4> 
                                             <% } else if (GraphNo == 33) { %>        
@@ -3613,7 +3674,6 @@
                             <input type="hidden" name="sBaseFileName" id="sBaseFileName" value="<%=sBaseFileName%>">
                             </div>
                         </div>
-                        
                         <input type="hidden" name="sResult01Name" id="sResult01Name" value="<%if (sResult01Name != null) {%><%=sResult01Name%><%}%>" />
                         <input type="hidden" name="sResult02Name" id="sResult02Name" value="<%if (sResult02Name != null) {%><%=sResult02Name%><%}%>" />
                         <input type="hidden" name="sResult03Name" id="sResult03Name" value="<%if (sResult03Name != null) {%><%=sResult03Name%><%}%>" />

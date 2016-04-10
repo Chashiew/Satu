@@ -3104,7 +3104,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             <div class="container boundary">
                                 <b>Base output file name:</b>&nbsp;&nbsp;&nbsp;
                                 <!--<font color="teal" face="tahoma" size="2"> Base output file name</font>-->
-                                <input type="text" name="sBaseFileName" id="sBaseFileName" size="20" value="<%=sBaseFileName%>">
+                                <input type="text" name="sBaseFileName" id="sBaseFileName" size="30" value="<%=sBaseFileName%>">
                                 <!--<font color="teal" face="tahoma" size="2">order number and .txt will be automatically added. </font>-->
                             </div>
                         </div>
@@ -4970,7 +4970,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         <div class="container boundary">
                             <b>Base output file name:</b>&nbsp;&nbsp;&nbsp;
                             <!--<font color="teal" face="tahoma" size="2"> Base output file name</font>-->
-                            <input type="text" name="sBaseFileNameLSSVM" id="sBaseFileNameLSSVM" size="20" value="<%=sBaseFileNameLSSVM%>">
+                            <input type="text" name="sBaseFileNameLSSVM" id="sBaseFileNameLSSVM" size="30" value="<%=sBaseFileNameLSSVM%>">
                             <!--<font color="teal" face="tahoma" size="2">order number and .txt will be automatically added. </font>-->
                         </div>
                     </div>

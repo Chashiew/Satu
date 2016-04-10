@@ -2306,7 +2306,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             <div class="container boundary">
                                 <h2>Optimization</h2>
                                 <h3>Objective Function</h3> 
-                                <p>The system will use learning data to train and validate an optimized prediction model.</p>
+                                <!--<p>The system will use learning data to train and validate an optimized prediction model.</p>-->
+                                <p>The system will use learning data to validate an optimized prediction model using the following objective function:</p>
                                 <div class="radio">
                                     <label><input type="radio" name="OptimRadio" id="OptimRadio1" value="OptimRadio1">RMSEvalidate_data</label>
                                 </div>
@@ -2735,7 +2736,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             <div class="container boundary">
                                 <b>Base output file name:</b>&nbsp;&nbsp;&nbsp;
                                 <!--<font color="teal" face="tahoma" size="2"> Base output file name</font>-->
-                                <input type="text" name="sBaseFileName" id="sBaseFileName" size="20" value="<%=sBaseFileName%>">
+                                <input type="text" name="sBaseFileName" id="sBaseFileName" size="30" value="<%=sBaseFileName%>">
                                 <!--<font color="teal" face="tahoma" size="2">order number and .txt will be automatically added. </font>-->
                             </div>
                         </div>
