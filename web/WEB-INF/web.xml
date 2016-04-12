@@ -41,8 +41,20 @@
         <servlet-class>LSSVMGraphServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ImportParamServlet</servlet-name>
-        <servlet-class>ImportParamServlet</servlet-class>
+        <servlet-name>ImportSFARParamServlet</servlet-name>
+        <servlet-class>ImportSFARParamServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ImportSFAMParamServlet</servlet-name>
+        <servlet-class>ImportSFAMParamServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ImportLSSVRParamServlet</servlet-name>
+        <servlet-class>ImportLSSVRParamServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ImportLSSVMParamServlet</servlet-name>
+        <servlet-class>ImportLSSVMParamServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>WebFigures</servlet-name>
@@ -85,8 +97,20 @@
         <url-pattern>/LSSVMGraphServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ImportParamServlet</servlet-name>
-        <url-pattern>/ImportParamServlet</url-pattern>
+        <servlet-name>ImportSFARParamServlet</servlet-name>
+        <url-pattern>/ImportSFARParamServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ImportSFAMParamServlet</servlet-name>
+        <url-pattern>/ImportSFAMParamServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ImportLSSVRParamServlet</servlet-name>
+        <url-pattern>/ImportLSSVRParamServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ImportLSSVMParamServlet</servlet-name>
+        <url-pattern>/ImportLSSVMParamServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>-1</session-timeout>

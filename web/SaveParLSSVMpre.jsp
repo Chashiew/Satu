@@ -39,10 +39,10 @@
     iRadio=2;
     content = content + "4\tPurpose\tsPRadioLSSVM\t" + iRadio+"\t" + sPRadioLSSVM+"\n";
     
-    content = content + "5\tLearning Data File\tsLearningDataFileLSSVM\t" + sLearningFileNameLSSVM+"\t-\n";
+    content = content + "5\tLearning Data File\tsLearningFileNameLSSVM\t" + sLearningFileNameLSSVM+"\t-\n";
     content = content + "6\tNo. of Attributes\tnLDFAttributesLSSVM\t" + nLDFAttributesLSSVM+"\t-\n";
     content = content + "7\tNo. of Instances\tnLDFInstancesLSSVM\t" + nLDFInstancesLSSVM+"\t-\n";
-    content = content + "8\tPrediction Data File\tsPredictionDataFileLSSVM\t" + sPredictionFileNameLSSVM+"\t-\n";
+    content = content + "8\tPrediction Data File\tsPredictionFileNameLSSVM\t" + sPredictionFileNameLSSVM+"\t-\n";
     content = content + "9\tNo. of Attributes\tnPDFAttributesLSSVM\t" + nPDFAttributesLSSVM+"\t-\n";
     content = content + "10\tNo. of Instances\tnPDFInstancesLSSVM\t" + nPDFInstancesLSSVM+"\t-\n";
     content = content + "11\tFirst Data File\tsFileDataLSSVM\t" + sFileDataLSSVM+"\t-\n";

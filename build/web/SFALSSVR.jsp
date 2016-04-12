@@ -301,12 +301,6 @@ if (sPredictionFileName == null) {
     sPredictionFileName = "";
 }
 
-/*
-out.println("<p>");
-out.println("sDataFile = "+sDataFile);
-out.println("<br>");
-*/
-
 String OptimRadio = request.getParameter("OptimRadio");
 String SCRadio = request.getParameter("SCRadio");
 String PRadio = request.getParameter("PRadio");
@@ -323,21 +317,6 @@ if (PRadio == null) {
 if (TORadio == null) {
     TORadio = "";
 }
-
-/*
-out.println("1. TORadio = "+TORadio);
-out.println("<br>");
-out.println("TORadio = "+TORadio);
-out.println("<br>");
-out.println("<p>");
-out.println("nPDFAttributes = "+nPDFAttributes);
-out.println("<br>");
-out.println("NormalRadio = "+NormalRadio);
-out.println("OptimRadio = "+OptimRadio);
-out.println("SCRadio = "+SCRadio);
-out.println("PRadio = "+PRadio);
-out.println("TORadio = "+TORadio);
-*/
 
 String sOptimRadio = "...";
 double dDummy=1.0;
@@ -1725,14 +1704,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 fullPath.value = sFileName.value;
                 document.getElementById("myform").action = "SFALSSVR.jsp";
                 document.getElementById("myform").submit();
-                //alert("Data file already saved ...!");
-                //nFireFlies.focus();
-                //valid = false;
-                
-                //var sMoveBottom = document.getElementById("sMoveBottom");
-                //sMoveBottom.value = val;
-                //document.getElementById("sMoveBottom").value = val;
-            
                 return valid;
             }
                 
@@ -2022,7 +1993,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 }
 
                 fullPath.value = sFileName.value;
-                
                 var saveaction;
                 if (document.getElementById("PRadio").value === "PRadio1")
                 {
@@ -2667,21 +2637,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 <input type="hidden" name="sTestFileName" id="sTestFileName" value="<%=sTestFileName%>">
                                 <input type="hidden" name="nTDFAttributes" id="nTDFAttributes" value="<%=nTDFAttributes%>">
                                 <input type="hidden" name="nTDFInstances" id="nTDFInstances" value="<%=nTDFInstances%>">
-                            
-                            <% } 
-
-                            /*
-                            out.println("PRadio = "+PRadio); 
-                            out.println("TORadio = "+TORadio);
-                            out.println("sFileData = "+sFileData);
-                            out.println("sdInstances = "+sdInstances);
-                            out.println("sdAttributes = "+sdAttributes);
-                            out.println("sPFileData = "+sPFileData);
-                            out.println("sdPInstances = "+sdPInstances);
-                            out.println("sdPAttributes = "+sdPAttributes);
-                            */
-                            
-                            %>
+                            <% } %>
                         </div>
                     </div>
                 </div>
@@ -2753,21 +2709,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     <img src="arrowup.JPG" alt="..." width="18">  
                 </div>-->
                 
-                <%-- } 
-
-                /*
-                out.println("PRadio = "+PRadio);
-                out.println("TORadio = "+TORadio);
-                out.println("nLDFAttributes = "+nLDFAttributes);
-                out.println("nLDFInstances = "+nLDFInstances);
-                out.println("nPDFAttributes = "+nPDFAttributes);
-                out.println("nPDFInstances = "+nPDFInstances);
-                out.println("sdInstances = "+sdInstances);
-                out.println("sdAttributes = "+sdAttributes);
-                */
-                
-                --%>
-
                 <br>                
                 <center>
                     <a onclick="return checkdata(1);">
@@ -3247,7 +3188,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         <td>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             &nbsp;&nbsp;&nbsp;&nbsp;
-            
                         </td>
                         <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                         <td>
@@ -3275,9 +3215,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         </td>
                     </tr>
                 </table>                
-            <% }
-            else if (sImportData.equals("1"))
-            {
+            <% } else if (sImportData.equals("1")) {
                 if (NormalRadio.equals("NormalRadio2")) { %>
                     <script>document.getElementById("NormalRadio2").checked = true;</script>
                 <% } else { %>
@@ -3309,8 +3247,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 <% } else { %>
                     <script>document.getElementById("TORadio1").checked = true;</script>
                 <% }
-            }
-            else if (sLoadingDataFile != "") {     
+            
+            } else if (sLoadingDataFile != "") {     
                 
                 String datafile = request.getParameter("importfile");
                 
@@ -4585,10 +4523,9 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         $('html, body').animate({scrollTop : 0},800);
                         return false;
                 });
-
             });
             
-            var importedfile = document.getElementById("importfile")
+            var importedfile = document.getElementById("importfile");
             $(importedfile).change(function(event) {
                 
                 document.getElementById("sSaveDataFile").value = "";
@@ -4599,9 +4536,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 //document.getElementById("myform").enctype = "text/html";
                 document.getElementById("myform").enctype = "multipart/form-data";
                 document.getElementById("myform").method = "POST";
-                document.getElementById("myform").action = "ImportParamServlet";
+                document.getElementById("myform").action = "ImportSFARParamServlet";
                 document.getElementById("myform").submit();
-                
             });
         </script>
     </body>    

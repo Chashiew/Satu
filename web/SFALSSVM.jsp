@@ -106,6 +106,11 @@ if (sLoadingDataExcelClickLSSVM == null) {
     sLoadingDataExcelClickLSSVM = "";        
 };
 
+String sImportDataLSSVM = request.getParameter("sImportDataLSSVM");
+if (sImportDataLSSVM == null) {
+    sImportDataLSSVM = "";        
+};
+
 String NormalRadioLSSVM = request.getParameter("NormalRadioLSSVM");
 if (NormalRadioLSSVM == null) {
     NormalRadioLSSVM = "";
@@ -145,19 +150,6 @@ String sResult06Name = request.getParameter("sResult06Name");
 if (sResult06Name == null) {
     sResult06Name = "";
 }
-
-/* 
-out.println("<p>");
-out.println("VarOne = "+VarOne);
-out.println("<br>");
-out.println("sLoadingDataFile = "+sLoadingDataFile);
-out.println("<p>");
-out.println("VarTwo = "+VarTwo);
-out.println("<br>");
-out.println("NormalRadioLSSVM = "+NormalRadioLSSVM);
-out.println("<br>");
-out.println("sLoadingDataExcelClick = "+sLoadingDataExcelClick);
-*/
 
 String nFireFliesLSSVM = request.getParameter("nFireFliesLSSVM");
 String nMaxGenerationLSSVM = request.getParameter("nMaxGenerationLSSVM");
@@ -318,20 +310,6 @@ if (PRadioLSSVM == null) {
 if (TORadioLSSVM == null) {
     TORadioLSSVM = "";
 }
-
-/*
-out.println("1. TORadio = "+TORadio);
-out.println("<br>");
-out.println("TORadioLSSVM = "+TORadioLSSVM);
-out.println("<br>");
-out.println("<p>");
-out.println("nPDFAttributes = "+nPDFAttributes);
-out.println("<br>");
-out.println("NormalRadio = "+NormalRadio);
-out.println("SCRadio = "+SCRadio);
-out.println("PRadio = "+PRadio);
-out.println("TORadio = "+TORadio);
-*/
 
 double dDummy=1.0;
 String sDummy = "...";
@@ -665,7 +643,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 sLoadingDataExcelClickLSSVM = "";
                 document.getElementById("sLoadingDataExcelClickLSSVM").value = sLoadingDataExcelClickLSSVM;
 
-                if (PRadio.value === "PRadio1") {
+                if (PRadioLSSVM.value === "PRadio1LSSVM") {
                     document.getElementById("testdatasection").style.display = "none";
                     var hdf = document.getElementById("hdf");
                     hdf = "0";
@@ -673,7 +651,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 }
                 
                 //1. these lines to follow are not executed, as the display has been refreshed.
-                fullPathLSSVM.value = sFileNameLSSVM.value;
                 document.getElementById("myformLSSVM").action = "SFALSSVM.jsp";
                 document.getElementById("myformLSSVM").submit();
                 valid = false;
@@ -792,10 +769,9 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 document.getElementById("myformLSSVM").submit();
                 valid = false;
 
-                //alert("Aha4 ...!");
-                //document.getElementById("TORadio1").checked = true; 
-                
                 return valid;
+        
+                //window.location = "SFALSSVM.jsp"
             }
 
             function viewsummarydataLSSVM() {
@@ -1040,11 +1016,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     var fullPathTLSSVM = document.getElementById("fullPathTLSSVM");
                     var fullPathLLSSVM = document.getElementById("fullPathLLSSVM");
                     var fullPathPLSSVM = document.getElementById("fullPathPLSSVM");
-
-                    var sFileNameLSSVM = document.getElementById("sFileNameLSSVM");
-                    var sTestFileNameLSSVM = document.getElementById("sTestFileNameLSSVM");
-                    var sLearningFileNameLSSVM = document.getElementById("sLearningFileNameLSSVM");
-                    var sPredictionFileNameLSSVM = document.getElementById("sPredictionFileNameLSSVM");
 
                     var sResult01Name = document.getElementById("sResult01Name");
                     var sResult02Name = document.getElementById("sResult02Name");
@@ -2013,6 +1984,16 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 
                 return valid;
             }
+            
+            function importSVMfilefunc()
+            {
+                var elem = document.getElementById("importfileLSSVM");
+                if(elem && document.createEvent) {
+                    var evt = document.createEvent("MouseEvents");
+                    evt.initEvent("click", true, false);
+                    elem.dispatchEvent(evt);
+                }
+            }
         </script>
     </head>
         
@@ -2042,6 +2023,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 <input type="hidden" name="VarNextLSSVM" id="VarNextLSSVM" value="<%=VarNextLSSVM%>"/> 
                 <input type="hidden" name="sErrorLSSVM" id="sErrorLSSVM" value="<%=sErrorLSSVM%>"/> 
 
+                <div style="display:none;"><input type="file" id="importfileLSSVM" name="importfileLSSVM"/></div>
+                
                 <% if (hdf.equals("1")) { %>
                     <input type="hidden" name="hiddendatafile" id="hiddendatafile" value="1">
                 <% } else { %>
@@ -2121,7 +2104,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             <div class="container boundary">
                                 <h2><font face="Palatino Linotype, Book Antiqua, Palatino, serif" size="6">Model Settings</font></h2>
                                 <button type="button" onclick="return writedefaultsfalssvm(0)" class="btn btn-primary">Default</button>
-                                <button type="button" onclick="return loadingdataformLSSVM(1);" class="btn btn-primary">Import</button>
+                                <%--<button type="button" onclick="return loadingdataformLSSVM(1);" class="btn btn-primary">Import</button>--%>
+                                <button type="button" onclick="return importSVMfilefunc();" id="importbutton" class="btn btn-primary">Import</button>
                                 <button type="button" onclick="return exportparameters();" class="btn btn-primary">Export</button>
                                 <button type="button" onclick="return cleardefaultsfalssvm(0);" class="btn btn-primary">Clear</button>
                             </div>
@@ -2598,7 +2582,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 </script>
 
                                 <% 
-                                sFileDataLSSVM=sFileNameLSSVM;
+                                sFileDataLSSVM=sLearningFileNameLSSVM;
                                 sdInstancesLSSVM=nDFInstancesLSSVM;
                                 sdAttributesLSSVM=nDFAttributesLSSVM;
                                 sPFileDataLSSVM=sTestFileNameLSSVM;
@@ -2674,8 +2658,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
 
             <%
             if (sLoadingDataExcelLSSVM != "") {
-                
-                //running
                 if (NormalRadioLSSVM.equals("NormalRadio1LSSVM")) {%><script>document.getElementById("NormalRadio1LSSVM").checked = true; </script><%}
                 else if (NormalRadioLSSVM.equals("NormalRadio2LSSVM")) {%><script>document.getElementById("NormalRadio2LSSVM").checked = true; </script><%}
             
@@ -3170,9 +3152,70 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 <div class="scrollToTop">
                   <img src="arrowup.JPG" alt="..." width="18">  
                 </div>--%>
-                <%
-            }
-            else if (sLoadingDataFileLSSVM != "") {
+            <table>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                        </td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td>
+                            <jsp:include page="SFALSSVMServlet">
+                                <jsp:param name="nFireFliesLSSVM" value="<%=nFireFliesLSSVM%>" />
+                                <jsp:param name="nMaxGenerationLSSVM" value="<%=nMaxGenerationLSSVM%>" />
+                                <jsp:param name="dMinBetaLSSVM" value="<%=dMinBetaLSSVM%>" />
+                                <jsp:param name="dGammaLSSVM" value="<%=dGammaLSSVM%>" />
+                                <jsp:param name="dAlphaLSSVM" value="<%=dAlphaLSSVM%>" />
+                                <jsp:param name="dAIWeightLSSVM" value="<%=dAIWeightLSSVM%>" />
+                                <jsp:param name="dTauLSSVM" value="<%=dTauLSSVM%>" />
+                                <jsp:param name="dBPotentialLSSVM" value="<%=dBPotentialLSSVM%>" />
+                                <jsp:param name="dC1LSSVM" value="<%=dC1LSSVM%>" />
+                                <jsp:param name="dC2LSSVM" value="<%=dC2LSSVM%>" />
+                                <jsp:param name="dS1LSSVM" value="<%=dS1LSSVM%>" />
+                                <jsp:param name="dS2LSSVM" value="<%=dS2LSSVM%>" />
+                                <jsp:param name="dTrainingPSLSSVM" value="<%=dTrainingPSLSSVM%>" />
+                                <jsp:param name="dValidationPSLSSVM" value="<%=dValidationPSLSSVM%>" />
+                                <jsp:param name="dTotalSizeLSSVM" value="<%=dTotalSizeLSSVM%>" />
+                                <jsp:param name="nLastChange1LSSVM" value="<%=nLastChange1LSSVM%>" />
+                                <jsp:param name="nLastChange2LSSVM" value="<%=nLastChange2LSSVM%>" />
+                                <jsp:param name="dHoldOutLSSVM" value="<%=dHoldOutLSSVM%>" />
+                                <jsp:param name="dCrossValidationLSSVM" value="<%=dCrossValidationLSSVM%>" />
+                            </jsp:include> 	
+                        </td>
+                    </tr>
+                </table>                
+            <% }
+            else if (sImportDataLSSVM.equals("1"))
+            {
+                if (NormalRadioLSSVM.equals("NormalRadio2LSSVM")) { %>
+                    <script>document.getElementById("NormalRadio2LSSVM").checked = true;</script>
+                <% } else { %>
+                    <script>document.getElementById("NormalRadio1LSSVM").checked = true;</script>
+                <% }
+                
+                if (SCRadioLSSVM.equals("SCRadio3LSSVM")) { %>
+                    <script>document.getElementById("SCRadio3LSSVM").checked = true;</script>
+                <% } else if (SCRadioLSSVM.equals("SCRadio2LSSVM")){ %>
+                    <script>document.getElementById("SCRadio2LSSVM").checked = true;</script>
+                <% } else { %>
+                    <script>document.getElementById("SCRadio1LSSVM").checked = true;</script>
+                <% }
+                
+                if (TORadioLSSVM.equals("TORadio4LSSVM")) { %>
+                    <script>document.getElementById("TORadio4LSSVM").checked = true;</script>
+                <% } else if (TORadioLSSVM.equals("TORadio3LSSVM")){ %>
+                    <script>document.getElementById("TORadio3LSSVM").checked = true;</script>
+                <% } else if (TORadioLSSVM.equals("TORadio2LSSVM")){ %>
+                    <script>document.getElementById("TORadio2LSSVM").checked = true;</script>
+                <% } else { %>
+                    <script>document.getElementById("TORadio1LSSVM").checked = true;</script>
+                <% }
+                        
+            } else if (sLoadingDataFileLSSVM != "") {
+                
+                String datafile = request.getParameter("importfileLSSVM");
+                
                 //reading data from file
                 String filenameLSSVM;
                 if (PRadioLSSVM.equals("PRadio2LSSVM")) {
@@ -4271,23 +4314,22 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         $('html, body').animate({scrollTop : 0},800);
                         return false;
                 });
-
+            });
+                
+            var importedfile = document.getElementById("importfileLSSVM");
+            $(importedfile).change(function(event) {
+                
+                document.getElementById("sSaveDataFileLSSVM").value = "";
+                document.getElementById("sLoadingDataExcelLSSVM").value = "";
+                document.getElementById("sLoadingDataExcelClickLSSVM").value = "";
+                document.getElementById("sLoadingDataFileLSSVM").value = "1";
+                
+                //document.getElementById("myformLSSVM").enctype = "text/html";
+                document.getElementById("myformLSSVM").enctype = "multipart/form-data";
+                document.getElementById("myformLSSVM").method = "POST";
+                document.getElementById("myformLSSVM").action = "ImportSFAMParamServlet";
+                document.getElementById("myformLSSVM").submit();
             });
         </script>
-        
-        <%--
-        alert("Aha15 ...!");  
-
-        <script>alert("Aha15 ...!");</script>
-         
-        out.println("<p>");
-        out.println("VarOne = "+VarOne);
-        out.println("<br>");
-        out.println("sLoadingDataFile = "+sLoadingDataFile);
-        out.println("<p>");
-        out.println("VarTwo = "+VarTwo);
-        out.println("<br>");
-        out.println("sLoadingDataExcelClick = "+sLoadingDataExcelClick);
-        --%>
     </body>    
 </html>

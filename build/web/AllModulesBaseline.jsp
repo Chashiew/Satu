@@ -120,6 +120,15 @@ if (sSaveDataFile == null) {
         sSaveDataFileLSSVM = "";        
     };
 
+String sImportData = request.getParameter("sImportData");
+if (sImportData == null) {
+    sImportData = "";        
+};
+    String sImportDataLSSVM = request.getParameter("sImportDataLSSVM");
+    if (sImportDataLSSVM == null) {
+        sImportDataLSSVM = "";        
+    };
+
 String NormalRadio = request.getParameter("NormalRadio");
 if (NormalRadio == null) {
     NormalRadio = "";
@@ -2622,6 +2631,26 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 
                 return valid;
             }
+            
+            function importfilefunc()
+            {
+                var elem = document.getElementById("importfile");
+                if(elem && document.createEvent) {
+                    var evt = document.createEvent("MouseEvents");
+                    evt.initEvent("click", true, false);
+                    elem.dispatchEvent(evt);
+                }
+            }
+            
+            function importSVMfilefunc()
+            {
+                var elem = document.getElementById("importfileLSSVM");
+                if(elem && document.createEvent) {
+                    var evt = document.createEvent("MouseEvents");
+                    evt.initEvent("click", true, false);
+                    elem.dispatchEvent(evt);
+                }
+            }
         </script>
     </head>
     
@@ -2651,6 +2680,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 <input type="hidden" name="sError" id="sError" value="<%=sError%>"/>
                 <input type="hidden" name="sLoadModel" id="sLoadModel" value="<%=sLoadModel%>"/>
                                 
+                <div style="display:none;"><input type="file" id="importfile" name="importfile"/></div>
+                
                 <% if (hdf.equals("1")) { %>
                     <input type="hidden" name="hiddendatafile" id="hiddendatafile" value="1">
                 <% } else { %>
@@ -2721,7 +2752,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 <h2><font face="Palatino Linotype, Book Antiqua, Palatino, serif" size="6">Model Settings</font></h2>
                                 <button type="button" onclick="return writedefaultlssvr(0)" class="btn btn-primary">Default</button>
                                 <button class="btn btn-primary" onclick="loadmodel(1)">Load Optimum Hyperparameters</button>
-                                <button type="button" onclick="return loadingdataform(1);" class="btn btn-primary">Import</button>
+                                <%--<button type="button" onclick="return loadingdataform(1);" class="btn btn-primary">Import</button>--%>
+                                <button type="button" onclick="return importfilefunc();" id="importbutton" class="btn btn-primary">Import</button>
                                 <button type="button" onclick="return exportparameters(0);" class="btn btn-primary">Export</button>
                                 <button type="button" onclick="return cleardefaultlssvr(0);" class="btn btn-primary">Clear</button>
                             </div>
@@ -3288,7 +3320,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
 
                 %>
 
-                <% if (sLoadingDataExcelClick != "") { %>
+                <%--<% if (sLoadingDataExcelClick != "") { %>
                 <table>
                     <tr>
                         <td>&nbsp;</td>
@@ -3498,15 +3530,46 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     <a href="#top">
                         <img src="arrowup.JPG" alt="..." width="18">
                     </a>
-                </h6>
-                <%
-            }
-            else if (sLoadingDataFile != "") {
-                /*
-                out.println("<p>");
-                out.println("sLoadingDataFile = "+sLoadingDataFile);
-                */
+                </h6>--%>
+                <table>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                        </td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td>
+                            <jsp:include page="LSSVRServlet">
+                                <jsp:param name="nValueC" value="<%=nValueC%>" />
+                                <jsp:param name="nValueS" value="<%=nValueS%>" />
+                                <jsp:param name="dHoldOut" value="<%=dHoldOut%>" />
+                                <jsp:param name="dCrossValidation" value="<%=dCrossValidation%>" />
+                            </jsp:include>  	
+                        </td>
+                    </tr>
+                </table>                
+            <% } else if (sImportData.equals("1")) {
+                if (NormalRadio.equals("NormalRadio2")) { %>
+                    <script>document.getElementById("NormalRadio2").checked = true;</script>
+                <% } else { %>
+                    <script>document.getElementById("NormalRadio1").checked = true;</script>
+                <% }
 
+                if (TORadio.equals("TORadio4")) { %>
+                    <script>document.getElementById("TORadio4").checked = true;</script>
+                <% } else if (TORadio.equals("TORadio3")){ %>
+                    <script>document.getElementById("TORadio3").checked = true;</script>
+                <% } else if (TORadio.equals("TORadio2")){ %>
+                    <script>document.getElementById("TORadio2").checked = true;</script>
+                <% } else { %>
+                    <script>document.getElementById("TORadio1").checked = true;</script>
+                <% }
+            
+            } else if (sLoadingDataFile != "") {
+                
+                String datafile = request.getParameter("importfile");
+                
                 String filename;
                 if (PRadio.equals("PRadio2")) { 
                     filename = "Data_LSSVR_Prediction.txt";
@@ -4516,6 +4579,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 <input type="hidden" name="VarNextLSSVM" id="VarNextLSSVM" value="<%=VarNextLSSVM%>"/>
                 <input type="hidden" name="sErrorLSSVM" id="sErrorLSSVM" value="<%=sErrorLSSVM%>"/>
 
+                <div style="display:none;"><input type="file" id="importfileLSSVM" name="importfileLSSVM"/></div>
+                
                 <% if (hdf.equals("1")) { %>
                     <input type="hidden" name="hiddendatafile" id="hiddendatafile" value="1">
                 <% } else { %>
@@ -4588,7 +4653,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 <h2><font face="Palatino Linotype, Book Antiqua, Palatino, serif" size="6">Model Settings</font></h2>
                                 <button type="button" onclick="return writedefaultlssvm(0)" class="btn btn-primary">Default</button>
                                 <button type="button" onclick="loadmodelLSSVM(1)" class="btn btn-primary">Load Optimum Hyperparameters</button>
-                                <button type="button" onclick="return loadingdataformLSSVM(1);" class="btn btn-primary">Import</button>
+                                <%--<button type="button" onclick="return loadingdataformLSSVM(1);" class="btn btn-primary">Import</button>--%>
+                                <button type="button" onclick="return importSVMfilefunc();" id="importbutton" class="btn btn-primary">Import</button>
                                 <button type="button" onclick="return exportparametersLSSVM(0);" class="btn btn-primary">Export</button>
                                 <button type="button" onclick="return cleardefaultlssvm(0);" class="btn btn-primary">Clear</button>
                             </div>
@@ -5136,7 +5202,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     }
                 %>
                     
-                <% if (sLoadingDataExcelClickLSSVM != "") { %>
+                <%--<% if (sLoadingDataExcelClickLSSVM != "") { %>
                 <table>
                     <tr>
                         <td>&nbsp;</td>
@@ -5345,14 +5411,53 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     <b> [&nbsp;RUNNING] . . . &nbsp;&nbsp;&nbsp;</b>
                     <%--<a href="#top">
                         <img src="Icon-Top.png" alt="..." width="13" height="17">
-                    </a>--%>
+                    </a>
                     <div class="scrollToTop">
                       <img src="arrowup.JPG" alt="..." width="18">  
                     </div>
-                </h6>
-                <%
-            }
-            else if (sLoadingDataFileLSSVM != "") {
+                </h6>--%>
+                <table>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+            
+                        </td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td>
+                            <jsp:include page="LSSVMServlet">
+                                <jsp:param name="nValueCLSSVM" value="<%=nValueCLSSVM%>" />
+                                <jsp:param name="nValueSLSSVM" value="<%=nValueSLSSVM%>" />
+                                <jsp:param name="dHoldOutLSSVM" value="<%=dHoldOutLSSVM%>" />
+                                <jsp:param name="dCrossValidationLSSVM" value="<%=dCrossValidationLSSVM%>" />
+                            </jsp:include>	
+                        </td>
+                    </tr>
+                </table>                
+            <% }
+            else if (sImportDataLSSVM.equals("1"))
+            {
+                if (NormalRadioLSSVM.equals("NormalRadio2LSSVM")) { %>
+                    <script>document.getElementById("NormalRadio2LSSVM").checked = true;</script>
+                <% } else { %>
+                    <script>document.getElementById("NormalRadio1LSSVM").checked = true;</script>
+                <% }
+                
+                if (TORadioLSSVM.equals("TORadio4LSSVM")) { %>
+                    <script>document.getElementById("TORadio4LSSVM").checked = true;</script>
+                <% } else if (TORadioLSSVM.equals("TORadio3LSSVM")){ %>
+                    <script>document.getElementById("TORadio3LSSVM").checked = true;</script>
+                <% } else if (TORadioLSSVM.equals("TORadio2LSSVM")){ %>
+                    <script>document.getElementById("TORadio2LSSVM").checked = true;</script>
+                <% } else { %>
+                    <script>document.getElementById("TORadio1LSSVM").checked = true;</script>
+                <% }
+            
+            } else if (sLoadingDataFileLSSVM != "") {
+                
+                String datafile = request.getParameter("importfileLSSVM");
+                
                 //reading data from file
                 String filenameLSSVM;
                 if (PRadioLSSVM.equals("PRadio2LSSVM")) {
@@ -6333,6 +6438,36 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         $('html, body').animate({scrollTop : 0},800);
                         return false;
                 });
+            });
+            
+            var importedfile = document.getElementById("importfile")
+            $(importedfile).change(function(event) {
+                
+                document.getElementById("sSaveDataFile").value = "";
+                document.getElementById("sLoadingDataExcel").value = "";
+                document.getElementById("sLoadingDataExcelClick").value = "";
+                document.getElementById("sLoadingDataFile").value = "1";
+                
+                //document.getElementById("myform").enctype = "text/html";
+                document.getElementById("myform").enctype = "multipart/form-data";
+                document.getElementById("myform").method = "POST";
+                document.getElementById("myform").action = "ImportLSSVRParamServlet";
+                document.getElementById("myform").submit();
+            });
+            
+            var importedfile = document.getElementById("importfileLSSVM");
+            $(importedfile).change(function(event) {
+                
+                document.getElementById("sSaveDataFileLSSVM").value = "";
+                document.getElementById("sLoadingDataExcelLSSVM").value = "";
+                document.getElementById("sLoadingDataExcelClickLSSVM").value = "";
+                document.getElementById("sLoadingDataFileLSSVM").value = "1";
+                
+                //document.getElementById("myformLSSVM").enctype = "text/html";
+                document.getElementById("myformLSSVM").enctype = "multipart/form-data";
+                document.getElementById("myformLSSVM").method = "POST";
+                document.getElementById("myformLSSVM").action = "ImportLSSVMParamServlet";
+                document.getElementById("myformLSSVM").submit();
             });
         </script>
     </body>

@@ -7,7 +7,6 @@
     String NormalRadio = request.getParameter("NormalRadio");
     int iRadio = 0;
     String sPRadio = "";
-    String PRadio = request.getParameter("PRadio");
     String sLearningFileName = request.getParameter("sLearningFileName");
     String nLDFAttributes = request.getParameter("nLDFAttributes");
     String nLDFInstances = request.getParameter("nLDFInstances");
@@ -40,10 +39,10 @@
     sPRadio = "Prediction";
     iRadio=2;
     content = content + "4\tPurpose\tsPRadio\t" + iRadio+"\t" + sPRadio+"\n";
-    content = content + "5\tLearning Data File\tsLearningDataFile\t" + sLearningFileName+"\t-\n";
+    content = content + "5\tLearning Data File\tsLearningFileName\t" + sLearningFileName+"\t-\n";
     content = content + "6\tNo. of Attributes\tnLDFAttributes\t" + nLDFAttributes+"\t-\n";
     content = content + "7\tNo. of Instances\tnLDFInstances\t" + nLDFInstances+"\t-\n";
-    content = content + "8\tPrediction Data File\tsPredictionDataFile\t" + sPredictionFileName+"\t-\n";
+    content = content + "8\tPrediction Data File\tsPredictionFileName\t" + sPredictionFileName+"\t-\n";
     content = content + "9\tNo. of Attributes\tnPDFAttributes\t" + nPDFAttributes+"\t-\n";
     content = content + "10\tNo. of Instances\tnPDFInstances\t" + nPDFInstances+"\t-\n";
     content = content + "11\tFirst Data File\tsFileData\t" + sFileData+"\t-\n";

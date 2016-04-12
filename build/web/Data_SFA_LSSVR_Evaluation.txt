@@ -1,7 +1,7 @@
 SFA-LSSVR Data:
 No.	Description	Variable	Value	Remark
-1	No. of fireflies	nFireFlies	15	-
-2	Max. generation	nMaxGeneration	5	-
+1	No. of fireflies	nFireFlies	50	-
+2	Max. generation	nMaxGeneration	25	-
 3	Beta min.	dMinBeta	0.10	-
 4	Gamma	dGamma	1.00	-
 5	Alpha	dAlpha	0.20	-
@@ -23,16 +23,16 @@ No.	Description	Variable	Value	Remark
 21	Purpose	sPRadio	1	Evaluation
 22	Hold-Out (%)	dHoldOut	20	-
 23	Cross-Validation (%)	dCrossValidation	10	-
-24	Test Option	sTORadio	4	Use test dataset
+24	Test Option	sTORadio	1	Use data file
 25	Data File	sDataFile	NY Bedload transport preprocessing.txt	-
 26	No. of Attributes	nDFAttributes	6	-
 27	No. of Instances	nDFInstances	77	-
-28	Test Data File	sTestDataFile	NY Bedload transport test.txt	-
-29	No. of Attributes	nTDFAttributes	6	-
-30	No. of Instances	nTDFInstances	24	-
+28	Test Data File	sTestDataFile		-
+29	No. of Attributes	nTDFAttributes	0	-
+30	No. of Instances	nTDFInstances	0	-
 31	First Data File	sFileData	NY Bedload transport preprocessing.txt	-
 32	No. of Attributes	sdAttributes	6	-
 33	No. of Instances	sdInstances	77	-
-34	Second Data File	sPFileData	NY Bedload transport test.txt	-
-35	No. of Attributes	sdPAttributes	6	-
-36	No. of Instances	sdPInstances	24	-
+34	Second Data File	sPFileData		-
+35	No. of Attributes	sdPAttributes	0	-
+36	No. of Instances	sdPInstances	0	-

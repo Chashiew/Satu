@@ -63,10 +63,10 @@
         iRadio=3;
     }
     content = content + "7\tTest Option\tsTORadioLSSVM\t" + iRadio+"\t" + sTORadioLSSVM+"\n";
-    content = content + "8\tData File\tsDataFileLSSVM\t" + sFileNameLSSVM+"\t-\n";
+    content = content + "8\tData File\tsFileNameLSSVM\t" + sFileNameLSSVM+"\t-\n";
     content = content + "9\tNo. of Attributes\tnDFAttributesLSSVM\t" + nDFAttributesLSSVM+"\t-\n";
     content = content + "10\tNo. of Instances\tnDFInstancesLSSVM\t" + nDFInstancesLSSVM+"\t-\n";
-    content = content + "11\tTest Data File\tsTestDataFileLSSVM\t" + sTestFileNameLSSVM+"\t-\n";
+    content = content + "11\tTest Data File\tsTestFileNameLSSVM\t" + sTestFileNameLSSVM+"\t-\n";
     content = content + "12\tNo. of Attributes\tnTDFAttributesLSSVM\t" + nTDFAttributesLSSVM+"\t-\n";
     content = content + "13\tNo. of Instances\tnTDFInstancesLSSVM\t" + nTDFInstancesLSSVM+"\t-\n";
     content = content + "14\tFirst Data File\tsFileDataLSSVM\t" + sFileDataLSSVM+"\t-\n";

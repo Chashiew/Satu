@@ -21,7 +21,6 @@
     String NormalRadioLSSVM = request.getParameter("NormalRadioLSSVM");
     int iRadio = 0;
     String SCRadioLSSVM = request.getParameter("SCRadioLSSVM");
-    String PRadioLSSVM = request.getParameter("PRadioLSSVM");
     String sLearningFileNameLSSVM = request.getParameter("sLearningFileNameLSSVM");
     String nLDFAttributesLSSVM = request.getParameter("nLDFAttributesLSSVM");
     String nLDFInstancesLSSVM = request.getParameter("nLDFInstancesLSSVM");
@@ -84,10 +83,10 @@
     temp = "Prediction";
     iRadio=2;
     content = content + "21\tPurpose\tsPRadioLSSVM\t" + iRadio+"\t" + temp+"\n";
-    content = content + "22\tLearning Data File\tsLearningDataFileLSSVM\t" + sLearningFileNameLSSVM+"\t-\n";
+    content = content + "22\tLearning Data File\tsLearningFileNameLSSVM\t" + sLearningFileNameLSSVM+"\t-\n";
     content = content + "23\tNo. of Attributes\tnLDFAttributesLSSVM\t" + nLDFAttributesLSSVM+"\t-\n";
     content = content + "24\tNo. of Instances\tnLDFInstancesLSSVM\t" + nLDFInstancesLSSVM+"\t-\n";
-    content = content + "25\tPrediction Data File\tsPredictionDataFileLSSVM\t" + sPredictionFileNameLSSVM+"\t-\n";
+    content = content + "25\tPrediction Data File\tsPredictionFileNameLSSVM\t" + sPredictionFileNameLSSVM+"\t-\n";
     content = content + "26\tNo. of Attributes\tnPDFAttributesLSSVM\t" + nPDFAttributesLSSVM+"\t-\n";
     content = content + "27\tNo. of Instances\tnPDFInstancesLSSVM\t" + nPDFInstancesLSSVM+"\t-\n";
     content = content + "28\tFirst Data File\tsFileDataLSSVM\t" + sFileDataLSSVM+"\t-\n";

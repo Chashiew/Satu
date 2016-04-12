@@ -16,11 +16,12 @@
             <file>file:/E:/00%20Swarm%20Optimization/NiMOPSJava/web/ModuleLSSVR.jsp</file>
             <file>file:/E:/00%20Swarm%20Optimization/NiMOPSJava/web/AllModulesBaseline.jsp</file>
             <file>file:/E:/00%20Swarm%20Optimization/NiMOPSJava/web/ModuleLSSVM.jsp</file>
-            <file>file:/E:/00%20Swarm%20Optimization/NiMOPSJava/src/java/ImportParamServlet.java</file>
             <file>file:/E:/00%20Swarm%20Optimization/NiMOPSJava/web/ModuleSFALSSVM.jsp</file>
-            <file>file:/E:/00%20Swarm%20Optimization/NiMOPSJava/src/java/SFALSSVMGraphServlet.java</file>
+            <file>file:/E:/00%20Swarm%20Optimization/NiMOPSJava/src/java/ImportSFARParamServlet.java</file>
+            <file>file:/E:/00%20Swarm%20Optimization/NiMOPSJava/src/java/ImportLSSVMParamServlet.java</file>
             <file>file:/E:/00%20Swarm%20Optimization/NiMOPSJava/web/ModuleSFALSSVR.jsp</file>
-            <file>file:/E:/00%20Swarm%20Optimization/NiMOPSJava/src/java/LSSVMGraphServlet.java</file>
+            <file>file:/E:/00%20Swarm%20Optimization/NiMOPSJava/src/java/ImportLSSVRParamServlet.java</file>
+            <file>file:/E:/00%20Swarm%20Optimization/NiMOPSJava/src/java/ImportSFAMParamServlet.java</file>
             <file>file:/E:/00%20Swarm%20Optimization/NiMOPSJava/web/SFALSSVR.jsp</file>
         </group>
     </open-files>
