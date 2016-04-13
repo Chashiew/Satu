@@ -2225,12 +2225,20 @@
                                     int jj;
                                     int nNilai1=1;
                                     int nNilai2;
+                                    
+                                    nrow = 0;
+                                    // make the system read the content flexible
+                                    while ((line = br.readLine()) != null) {
+                                        nrow += 1;
+                                    }
 
+                                    br = new BufferedReader(new FileReader(file)); 
+                                        
                                     stemp="1"; //initial value
                                     i=1;
                                     ii=1;
                                     jj=0; 
-                                    String[][] datatemp = new String[1000][21];
+                                    String[][] datatemp = new String[nrow][21];
 
                                     line = br.readLine();
                                     line = br.readLine();
