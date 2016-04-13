@@ -42,7 +42,6 @@
         </div>
     </div>--%>
         
-        
     <center>
         <br><br>
         <h1><font color="#2F4F4F" face="Georgia">Please Sign In</font></h1>
@@ -90,7 +89,7 @@
                 </tr>
             </table>
             
-            <input type="submit" name="VarSubmit" value="Submit" style="font-size: 10pt"/> 
+            <input type="submit" class="btn btn-primary" name="VarSubmit" value="Submit" style="font-size: 10pt"/> 
             
             <%--
             username.focus();

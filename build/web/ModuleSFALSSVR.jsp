@@ -2507,13 +2507,13 @@
                                                     </tr> 
                                                     <% for (i = 0; i < j; i += 1) { %>
                                                         <tr>
-                                                        <td align="center"><%=(i+1)%></td>
-                                                        <td>&nbsp;</td>
-                                                        <td align="center"><%=datatemp24[i][0]%></td>
-                                                        <% for (ii = 1; ii < ncol24; ii += 1) { %>
+                                                            <td align="center"><%=(i+1)%></td>
                                                             <td>&nbsp;</td>
-                                                            <td align="center"><%=datatemp24[i][ii]%></td> 
-                                                        <% } %>
+                                                            <td align="center"><%=datatemp24[i][0]%></td>
+                                                            <% for (ii = 1; ii < ncol24; ii += 1) { %>
+                                                                <td>&nbsp;</td>
+                                                                <td align="center"><%=datatemp24[i][ii]%></td> 
+                                                            <% } %>
                                                         </tr>
                                                     <% } %>
                                                 </table> 
@@ -3230,11 +3230,19 @@
                                         int nNilai1=1;
                                         int nNilai2;
                                         
+                                        nrow = 0;
+                                        // make the system read the content flexible
+                                        while ((line = br.readLine()) != null) {
+                                            nrow += 1;
+                                        }
+                                        
+                                        br = new BufferedReader(new FileReader(file)); 
+                                        
                                         stemp="1"; //initial value
                                         i=1;
                                         ii=1;
                                         jj=0; 
-                                        String[][] datatemp = new String[1000][21];
+                                        String[][] datatemp = new String[nrow][21];
 
                                         line = br.readLine();
                                         cols = line.split("\\t");
@@ -3593,8 +3601,8 @@
                                                     vfile = "SFAR03Result";
                                                 }
                                             %>
-                                            <% if (GraphNo == 31) {
-                                                if (PRadio.equals("PRadio1")) { %> 
+                                            <% if (GraphNo == 31) { %>
+                                                <% if (PRadio.equals("PRadio1")) { %> 
                                                     <h4><b><font color="black" face="Palatino Linotype, Book Antiqua, Palatino, serif">Test data prediction:</font></b></h4> 
                                                 <% } else { %>
                                                     <h4><b><font color="black" face="Palatino Linotype, Book Antiqua, Palatino, serif">Prediction data:</font></b></h4> 
