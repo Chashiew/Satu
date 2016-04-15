@@ -74,53 +74,12 @@
             </div>
         </div>
         
-        <div class="visible-sm-block wdetailsm">
-            <br>
-            <br>
-            <br>
-            <center>
-                <div>
-                    <img src="manual1.JPG" alt="Image Not Found ..." style="width: 800px"/>
-                </div>
-                <br>
-                <br>
-                <br>
-                <div>
-                    <img src="manual10.JPG" alt="Image Not Found ..." style="width: 800px"/>
-                </div>
-                <br>
-                <br>
-                <div>
-                    <img src="Step Order1.jpg" alt="Image Not Found ..." style="width: 800px"/>
-                </div>
-                <div>
-                        <img src="manual2.JPG" alt="Image Not Found ..." style="width: 680px"/>
-                </div>
-                <br>
-                <div>
-                    <img src="Step Order2.jpg" alt="Image Not Found ..." style="width: 800px"/>
-                </div>
-                <div>
-                        <img src="manual3.JPG" alt="Image Not Found ..." style="width: 544px"/>
-                </div>
-                <div>
-                        <img src="manual4.JPG" alt="Image Not Found ..." style="width: 520px"/>
-                </div>
-                <br>
-                <div>
-                    <img src="Step Order3.jpg" alt="Image Not Found ..." style="width: 800px"/>
-                </div>
-                <div>
-                        <img src="manual5.JPG" alt="Image Not Found ..." style="width: 560px"/>
-                </div>
-                
-            </center>
-            <br>
-            <br>
-            <div class="scrollToTopsm">
-                <img src="arrowup.JPG" alt="..." width="14">  
+        <center>
+            <div class="container wdetail">
+                <h2>For full instruction steps,&nbsp;<a href="FileDownloadServlet">download here</a>!</h2>
             </div>
-        </div>
+        </center>    
+        <br><br>
         
         <script>
             $(document).ready(function(){

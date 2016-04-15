@@ -56,6 +56,10 @@
         <servlet-name>ImportLSSVMParamServlet</servlet-name>
         <servlet-class>ImportLSSVMParamServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FileDownloadServlet</servlet-name>
+        <servlet-class>FileDownloadServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>WebFigures</servlet-name>
         <url-pattern>/WebFigures/*</url-pattern>
@@ -111,6 +115,10 @@
     <servlet-mapping>
         <servlet-name>ImportLSSVMParamServlet</servlet-name>
         <url-pattern>/ImportLSSVMParamServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FileDownloadServlet</servlet-name>
+        <url-pattern>/FileDownloadServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>-1</session-timeout>
