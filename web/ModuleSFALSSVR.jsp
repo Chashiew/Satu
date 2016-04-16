@@ -615,7 +615,22 @@
                 document.getElementById("sSaveModel").value = sSaveModel;
                 
                 return refreshform(val);
-            } 
+            }
+            
+            function savingmodelexport() {
+                var valid = true;
+                var savemodelaction;
+                if (document.getElementById("PRadio").value === "PRadio2")
+                {
+                    savemodelaction = "SaveSFALSSVRPreModel.jsp";
+                }
+                
+                document.getElementById("myform2").action = savemodelaction;
+                document.getElementById("myform2").method = "POST";
+                document.getElementById("myform2").submit();
+                
+                return valid;
+            }
         </script>
     </head>
     <body>
@@ -1084,6 +1099,9 @@
                 
                 <input type="hidden" name="sProcessRun" id="sProcessRun" value="<%=sProcessRun%>"/>                
                 <input type="hidden" name="sSaveModel" id="sSaveModel" value="<%=sSaveModel%>"/>
+                
+                <input type="hidden" name="sValueC" id="sValueC" value="<%=sValueC%>"/>
+                <input type="hidden" name="sValueS" id="sValueS" value="<%=sValueS%>"/>
                 <br><br>
                 <center id="title">
                     <font style="font-family: Palatino Linotype, Book Antiqua, Palatino, serif; font-size: 24pt" color="#2F4F4F">
@@ -2097,6 +2115,10 @@
                                             sValueC = cols[0];
                                             sValueS = cols[1];
                                             %>
+                                            <script>
+                                                document.getElementById("sValueC").value = "<%=sValueC%>";
+                                                document.getElementById("sValueS").value = "<%=sValueS%>";
+                                            </script>
                                             <center>
                                                 <div> 
                                                     <table>
@@ -2220,7 +2242,9 @@
                                             </center> 
                                             <br>
                                             <center>
-                                                <button class="btn btn-primary" onclick="return savingmodel(0);">Save Optimum Hyperparameters</button>
+                                                <% if (PRadio.equals("PRadio2")) { %>
+                                                    <button class="btn btn-primary" onclick="return savingmodelexport();">Save Optimum Hyperparameters</button>
+                                                <% } %>
                                             </center>
                                             <br>
                                             <br> 
@@ -3401,14 +3425,44 @@
                                 <button type="button" onclick="" class="btn btn-primary">Save</button>
                             </center>
                             <br>
-                        </div>
+                            </div>
                         <% if (sSaveModel != "") { 
                             String filename;
                             filename = "SVRModel.txt";
                             String file = application.getRealPath("/") + filename;
                             FileWriter filewriter = new FileWriter(file, false);
-                            filewriter.write(sValueC+"\t"); 
+                            int iRadio = 0;
+                            String temp = "";
+
+                            filewriter.write("Penalty Parameter, C\t");
+                            filewriter.write(sValueC+"\n"); 
+                            filewriter.write("Kernel Parameter, S\t");
                             filewriter.write(sValueS+"\n");
+
+                            if (NormalRadio.equals("NormalRadio1")) {
+                                temp = "Original value";
+                                iRadio=1;
+                            }
+                            else if (NormalRadio.equals("NormalRadio2")) {
+                                temp = "Feature scaling";
+                                iRadio=2;
+                            }
+                            filewriter.write("Normalization Method\t");
+                            filewriter.write("sNormalRadio\t");
+                            filewriter.write(iRadio+"\t");
+                            filewriter.write(temp+"\n");
+
+                            filewriter.write("Learning Data File\t");
+                            filewriter.write("sLearningDataFile\t");
+                            filewriter.write(sLearningFileName+"\n");
+
+                            filewriter.write("No. of Attributes\t");
+                            filewriter.write("nLDFAttributes\t");
+                            filewriter.write(nLDFAttributes+"\n");
+
+                            filewriter.write("No. of Instances\t");
+                            filewriter.write("nLDFInstances\t");
+                            filewriter.write(nLDFInstances+"\n");
                             filewriter.close(); %>
                             <script>alert('Model is already saved on the server');</script>
                         <% } %>

@@ -615,6 +615,21 @@
                 document.getElementById("sSaveModel").value = sSaveModel;
                 return refreshform(val);
             } 
+            
+            function savingmodelexport() {
+                var valid = true;
+                var savemodelaction;
+                if (document.getElementById("PRadioLSSVM").value === "PRadio2LSSVM")
+                {
+                    savemodelaction = "SaveSFALSSVMPreModel.jsp";
+                }
+                
+                document.getElementById("myform2").action = savemodelaction;
+                document.getElementById("myform2").method = "POST";
+                document.getElementById("myform2").submit();
+                
+                return valid;
+            }
         </script>
     </head>
     <body>
@@ -1063,6 +1078,9 @@
                 
                 <input type="hidden" name="sProcessRun" id="sProcessRun" value="<%=sProcessRun%>"/>
                 <input type="hidden" name="sSaveModel" id="sSaveModel" value="<%=sSaveModel%>"/>
+
+                <input type="hidden" name="sValueC" id="sValueC" value="<%=sValueC%>"/>
+                <input type="hidden" name="sValueS" id="sValueS" value="<%=sValueS%>"/>
                 <br><br><br>
                 <center id="title">
                     <font style="font-family: Palatino Linotype, Book Antiqua, Palatino, serif; font-size: 24pt" color="#2F4F4F">
@@ -2072,6 +2090,10 @@
                                         sValueC = cols[0];
                                         sValueS = cols[1];
                                         %>
+                                        <script>
+                                            document.getElementById("sValueC").value = "<%=sValueC%>";
+                                            document.getElementById("sValueS").value = "<%=sValueS%>";
+                                        </script>
                                         <center>
                                             <div> 
                                                 <table>
@@ -2184,7 +2206,9 @@
                                         </center>
                                         <br>
                                         <center>
-                                            <button class="btn btn-primary" onclick="return savingmodel(0);">Save Optimum Hyperparameters</button>
+                                            <% if (PRadioLSSVM.equals("PRadio2LSSVM")) { %>
+                                                <button class="btn btn-primary" onclick="return savingmodelexport();">Save Optimum Hyperparameters</button>
+                                            <% } %>
                                         </center>
                                         <br>
                                         <br>

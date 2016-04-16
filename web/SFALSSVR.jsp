@@ -1805,8 +1805,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 return refreshform(val);
             }
             
-            function exportparameters()
-            {
+            function exportparameters() {
                 var nFireFlies = document.getElementById("nFireFlies");
                 var nMaxGeneration = document.getElementById("nMaxGeneration");
                 var dMinBeta = document.getElementById("dMinBeta");
