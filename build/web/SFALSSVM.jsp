@@ -1994,6 +1994,14 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     elem.dispatchEvent(evt);
                 }
             }
+            
+            function sendfileSVM()
+            {
+                document.getElementById("myform").enctype = "multipart/form-data";
+                document.getElementById("myform").method = "POST";
+                document.getElementById("myform").action = "ScanDataFileSFALSSVM";
+                document.getElementById("myform").submit();
+            }
         </script>
     </head>
         
@@ -2332,14 +2340,14 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 else if (TORadioLSSVM.equals("TORadio4LSSVM")) {%><script>document.getElementById("TORadio4LSSVM").checked = true; </script><%}
                                 %>        
                                 <div class="container boundary">
-                                    <h3>Learning Data File</h3>
+                                    <h3>Data File</h3>
                                     <div class="row">
                                         <div class="col-md-2">
                                             <input type="hidden" name="fullPathLSSVM" id="fullPathLSSVM" value=""/>
                                             <input type="file" class="filestyle" name="sDataFileLSSVM" id="sDataFileLSSVM" accept=".csv,.txt" data-input="false"/>
                                         </div>
                                         <div class="col-md-2" style="margin-top : 4px">
-                                            <a onclick="return computeatformLSSVM(1);">
+                                            <a onclick="return sendfileSVM();">
                                                 <span class="glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
                                             </a>
                                         </div>
@@ -2412,7 +2420,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                                             </div>
 
                                                             <div class="col-md-2" style="margin-top : 4px">
-                                                                <a onclick="return computeatformLSSVM(1);">
+                                                                <a onclick="return sendfileSVM();">
                                                                     <span class="glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
                                                                 </a>
                                                             </div>
@@ -2448,7 +2456,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                                                     <input type="file" class="filestyle" name="sTestDataFileLSSVM" id="sTestDataFileLSSVM" accept=".csv,.txt" data-input="false"/>
                                                             </div>
                                                             <div class="col-md-2" style="margin-top : 4px"> 
-                                                                <a onclick="return computeatformLSSVM(1);"> 
+                                                                <a onclick="return sendfileSVM();"> 
                                                                     <span class="glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
                                                                 </a>
                                                             </div>
@@ -2509,7 +2517,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                             <input type="file" class="filestyle" name="sLearningDataFileLSSVM" id="sLearningDataFileLSSVM" accept=".csv,.txt" data-input="false"/>
                                         </div>
                                         <div class="col-md-2" style="margin-top : 4px">
-                                            <a onclick="return computeatformLSSVM(1);">
+                                            <a onclick="return sendfileSVM();">
                                                 <span class="glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
                                             </a>
                                         </div>
@@ -2545,7 +2553,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                             </label>
                                         </div>
                                         <div class="col-md-2" style="margin-top : 4px">
-                                            <a onclick="return computeatformLSSVM(1);">
+                                            <a onclick="return sendfileSVM();">
                                                 <span class="glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
                                             </a>
                                         </div>

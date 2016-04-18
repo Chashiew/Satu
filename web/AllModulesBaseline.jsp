@@ -1917,6 +1917,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                                 document.getElementById("myform").submit();
                                             }
                                         } else {
+                                            //sFileName.value = sDataFile.value;
                                             fullPath.value = sDataFile.value;
                                             document.getElementById("myform").action = "AllModulesBaseline.jsp";
                                             document.getElementById("myform").submit();
@@ -1943,9 +1944,9 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         }
                     }
                     /**/
+                    
                 }
                 //alert("Aha 14 ...!");
-
                 //fullPath.value = sFileName.value;
                 //document.getElementById("myform").action = "AllModulesBaseline.jsp";
                 //document.getElementById("myform").submit();
@@ -2675,6 +2676,22 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 }
                 return false;
             }
+            
+            function sendfile()
+            {
+                document.getElementById("myform").enctype = "multipart/form-data";
+                document.getElementById("myform").method = "POST";
+                document.getElementById("myform").action = "ScanDataFileLSSVR";
+                document.getElementById("myform").submit();
+            }
+            
+            function sendfileSVM()
+            {
+                document.getElementById("myform").enctype = "multipart/form-data";
+                document.getElementById("myform").method = "POST";
+                document.getElementById("myform").action = "ScanDataFileLSSVM";
+                document.getElementById("myform").submit();
+            }
         </script>
     </head>
     
@@ -2866,7 +2883,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                             <input type="file" class="filestyle" name="sDataFile" id="sDataFile" accept=".csv,.txt" data-input="false"/>
                                         </div>
                                         <div class="col-md-2" style="margin-top : 4px">
-                                            <a onclick="return computeatform(1);">
+                                            <a onclick="return sendfile();">
                                                 <span class="glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
                                             </a>
                                         </div>
@@ -2939,7 +2956,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                                                 </label>
                                                             </div>
                                                             <div class="col-md-2" style="margin-top : 4px">
-                                                                <a onclick="return computeatform(1);">
+                                                                <a onclick="return sendfile();">
                                                                     <span class="glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
                                                                 </a>
                                                             </div>
@@ -2976,7 +2993,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                                                 </label>
                                                             </div>
                                                             <div class="col-md-2" style="margin-top : 4px">
-                                                                <a onclick="return computeatform(1);">
+                                                                <a onclick="return sendfile();">
                                                                     <span class="glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
                                                                 </a>
                                                             </div>
@@ -3037,7 +3054,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                             <input type="file" class="filestyle" name="sLearningDataFile" id="sLearningDataFile" accept=".csv,.txt" data-input="false"/>
                                         </div>
                                         <div class="col-md-2" style="margin-top : 4px">
-                                            <a onclick="return computeatform(1);">
+                                            <a onclick="return sendfile();">
                                                 <span class="glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
                                             </a>
                                         </div>
@@ -3073,7 +3090,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                             </label>
                                         </div>
                                         <div class="col-md-2" style="margin-top : 4px">
-                                            <a onclick="return computeatform(1);">
+                                            <a onclick="return sendfile();">
                                                 <span class="glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
                                             </a>
                                         </div>
@@ -4134,7 +4151,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         line = br.readLine();
                         cols = line.split("\\t");
                         iDFAttributes = cols.length;
-                        iDFAttributes = iDFAttributes - 0;
                         %>
                         <script>
                             document.getElementById("nDFAttributes").value = "<%=iDFAttributes%>";
@@ -4758,7 +4774,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                             <input type="file" class="filestyle" name="sDataFileLSSVM" id="sDataFileLSSVM" accept=".csv,.txt" data-input="false"/>
                                         </div>
                                         <div class="col-md-2" style="margin-top : 4px">
-                                            <a onclick="return computeatformLSSVM(1);">
+                                            <a onclick="return sendfileSVM();">
                                                 <span class="glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
                                             </a>
                                         </div>
@@ -4830,7 +4846,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                                             </label>
                                                         </div>
                                                         <div class="col-md-2" style="margin-top : 4px">
-                                                            <a onclick="return computeatformLSSVM(1);">
+                                                            <a onclick="return sendfileSVM();">
                                                                 <span class="glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
                                                             </a>
                                                         </div>
@@ -4868,7 +4884,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                                             </label>
                                                         </div>
                                                         <div class="col-md-2" style="margin-top : 4px">
-                                                            <a onclick="return computeatformLSSVM(1);">
+                                                            <a onclick="return sendfileSVM();">
                                                                 <span class="glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
                                                             </a>
                                                         </div>
@@ -4929,7 +4945,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                             <input type="file" class="filestyle" name="sLearningDataFileLSSVM" id="sLearningDataFileLSSVM" accept=".csv,.txt" data-input="false"/>
                                         </div>
                                         <div class="col-md-2" style="margin-top : 4px">
-                                            <a onclick="return computeatformLSSVM(1);">
+                                            <a onclick="return sendfileSVM();">
                                                 <span class="glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
                                             </a>
                                         </div>
@@ -4965,7 +4981,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                             </label>
                                         </div>
                                         <div class="col-md-2" style="margin-top : 4px">
-                                            <a onclick="return computeatformLSSVM(1);">
+                                            <a onclick="return sendfileSVM();">
                                                 <span class="glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
                                             </a>
                                         </div>

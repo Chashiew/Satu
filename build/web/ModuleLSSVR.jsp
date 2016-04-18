@@ -724,9 +724,24 @@
                     nValueC = Float.parseFloat(snValueC);
                     nValueS = Float.parseFloat(snValueS);
                     
+                    
                     if (PRadio.equals("PRadio1")) {
-                        dHoldOut = Float.parseFloat(sdHoldOut);
-                        dCrossValidation = Float.parseFloat(sdCrossValidation);
+                        if (TORadio.equals("TORadio2"))
+                        {
+                            dHoldOut = Float.parseFloat(sdHoldOut);
+                        }
+                        else
+                        {
+                            dHoldOut = 20.0;
+                        }
+                        if (TORadio.equals("TORadio3"))
+                        {
+                            dCrossValidation = Float.parseFloat(sdCrossValidation);
+                        }
+                        else
+                        {
+                            dCrossValidation = 10;
+                        }
                     } else {
                         dHoldOut = 20.0;
                         dCrossValidation = 10;

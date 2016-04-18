@@ -1,3 +1,5 @@
+<%@page import="java.text.NumberFormat"%>
+<%@page import="java.text.DecimalFormat"%>
 <%
     String content = "";
     
@@ -9,9 +11,13 @@
     String nLDFAttributes = request.getParameter("nLDFAttributes");
     String nLDFInstances = request.getParameter("nLDFInstances");
     
+    double d = Double.parseDouble(sValueC);
+    NumberFormat formatter = new DecimalFormat("#");
+    String f = formatter.format(d);
+    
     content = content + "Optimization Model\n";
     content = content + "No.\tDescription\tVariable\tValue\tRemark\n";
-    content = content + "1\tPenalty Parameter, C\tnValueC\t" + sValueC+"\t-\n";
+    content = content + "1\tPenalty Parameter, C\tnValueC\t" + f +"\t-\n";
     content = content + "2\tKernel Parameter, S\tnValueS\t" + sValueS+"\t-\n";
     String temp = "";
     if (NormalRadio.equals("NormalRadio1")) {

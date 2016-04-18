@@ -68,6 +68,22 @@
         <servlet-name>LoadSVMModelServlet</servlet-name>
         <servlet-class>LoadSVMModelServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ScanDataFile</servlet-name>
+        <servlet-class>ScanDataFileLSSVR</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ScanDataFIleSVM</servlet-name>
+        <servlet-class>ScanDataFIleLSSVM</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ScanDataFIleSFALSSVR</servlet-name>
+        <servlet-class>ScanDataFIleSFALSSVR</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ScanDataFileSFALSSVM</servlet-name>
+        <servlet-class>ScanDataFileSFALSSVM</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>WebFigures</servlet-name>
         <url-pattern>/WebFigures/*</url-pattern>
@@ -135,6 +151,22 @@
     <servlet-mapping>
         <servlet-name>LoadSVMModelServlet</servlet-name>
         <url-pattern>/LoadSVMModelServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ScanDataFile</servlet-name>
+        <url-pattern>/ScanDataFile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ScanDataFIleSVM</servlet-name>
+        <url-pattern>/ScanDataFIleSVM</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ScanDataFIleSFALSSVR</servlet-name>
+        <url-pattern>/ScanDataFIleSFALSSVR</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ScanDataFileSFALSSVM</servlet-name>
+        <url-pattern>/ScanDataFileSFALSSVM</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>-1</session-timeout>

@@ -79,6 +79,7 @@ public class LoadSVRModelServlet extends HttpServlet {
         } else {
             params += "&NormalRadio=NormalRadio1";
         }
+        params = params.replaceAll("\\+", " %2B");
         
         RequestDispatcher dispatcher = request.getRequestDispatcher("AllModulesBaseline.jsp" + params); // to return to LSSVR.jsp page with imported params
         dispatcher.forward(request, response);

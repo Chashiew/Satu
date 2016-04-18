@@ -2017,6 +2017,14 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     evt.initEvent("click", true, false);
                     elem.dispatchEvent(evt);
                 }
+            
+            
+            function sendfile()
+            {
+                document.getElementById("myform").enctype = "multipart/form-data";
+                document.getElementById("myform").method = "POST";
+                document.getElementById("myform").action = "ScanDataFileSFALSSVR";
+                document.getElementById("myform").submit();
             }
         </script>
     </head>
@@ -2365,14 +2373,14 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 else if (TORadio.equals("TORadio4")) {%><script>document.getElementById("TORadio4").checked = true; </script><%}
                                 %>        
                                 <div class="container boundary">
-                                    <h3>Learning Data File</h3>
+                                    <h3>Data File</h3>
                                     <div class="row">
                                         <div class="col-md-2">
                                             <input type="hidden" name="fullPath" id="fullPath" value=""/>
                                             <input type="file" class="filestyle" name="sDataFile" id="sDataFile" accept=".csv,.txt" data-input="false"/>
                                         </div>
                                         <div class="col-md-2" style="margin-top : 4px">
-                                            <a onclick="return computeatform(1);">
+                                            <a onclick="return sendfile();">
                                                 <span class="glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
                                             </a>
                                         </div>
