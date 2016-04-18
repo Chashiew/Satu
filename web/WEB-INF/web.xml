@@ -60,6 +60,14 @@
         <servlet-name>FileDownloadServlet</servlet-name>
         <servlet-class>FileDownloadServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoadSVRModelServlet</servlet-name>
+        <servlet-class>LoadSVRModelServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadSVMModelServlet</servlet-name>
+        <servlet-class>LoadSVMModelServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>WebFigures</servlet-name>
         <url-pattern>/WebFigures/*</url-pattern>
@@ -119,6 +127,14 @@
     <servlet-mapping>
         <servlet-name>FileDownloadServlet</servlet-name>
         <url-pattern>/FileDownloadServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadSVRModelServlet</servlet-name>
+        <url-pattern>/LoadSVRModelServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadSVMModelServlet</servlet-name>
+        <url-pattern>/LoadSVMModelServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>-1</session-timeout>

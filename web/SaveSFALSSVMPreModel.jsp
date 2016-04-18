@@ -22,7 +22,7 @@
         temp = "Feature scaling";
         iRadio=2;
     }
-    content = content + "3\tNormalization Method\tNormalRadioLSSVM\t" + iRadio+"\t" + temp+"\n";
+    content = content + "3\tNormalization Method\tsNormalRadioLSSVM\t" + iRadio+"\t" + temp+"\n";
     content = content + "4\tData File\tsLearningFileNameLSSVM\t" + sLearningFileNameLSSVM+"\t-\n";
     content = content + "5\tNo. of Attributes\tnLDFAttributesLSSVM\t" + nLDFAttributesLSSVM+"\t-\n";
     content = content + "6\tNo. of Instances\tnLDFInstancesLSSVM\t" + nLDFInstancesLSSVM+"\t-\n";

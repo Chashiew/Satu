@@ -11,8 +11,8 @@
     
     content = content + "Optimization Model\n";
     content = content + "No.\tDescription\tVariable\tValue\tRemark\n";
-    content = content + "1\tPenalty Parameter, C\tsValueC\t" + sValueC+"\t-\n";
-    content = content + "2\tKernel Parameter, S\tsValueS\t" + sValueS+"\t-\n";
+    content = content + "1\tPenalty Parameter, C\tnValueC\t" + sValueC+"\t-\n";
+    content = content + "2\tKernel Parameter, S\tnValueS\t" + sValueS+"\t-\n";
     String temp = "";
     if (NormalRadio.equals("NormalRadio1")) {
         temp = "Original value";
@@ -26,6 +26,9 @@
     content = content + "4\tData File\tsFileName\t" + sLearningFileName+"\t-\n";
     content = content + "5\tNo. of Attributes\tnLDFAttributes\t" + nLDFAttributes+"\t-\n";
     content = content + "6\tNo. of Instances\tnLDFInstances\t" + nLDFInstances+"\t-\n";
+    content = content + "4\tData File\tsLearningFileName\t" + sLearningFileName+"\t-\n";
+    content = content + "5\tNo. of Attributes\tnDFAttributes\t" + nLDFAttributes+"\t-\n";
+    content = content + "6\tNo. of Instances\tnDFInstances\t" + nLDFInstances+"\t-\n";
 
     response.setContentType("text/plain");
     response.setHeader("Content-Disposition", "attachment; filename=SFALSSVR_Model.txt"); // Force "Save As" dialogue.

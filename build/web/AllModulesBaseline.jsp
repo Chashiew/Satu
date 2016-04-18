@@ -2640,6 +2640,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     evt.initEvent("click", true, false);
                     elem.dispatchEvent(evt);
                 }
+                return false;
             }
             
             function importSVMfilefunc()
@@ -2650,6 +2651,29 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     evt.initEvent("click", true, false);
                     elem.dispatchEvent(evt);
                 }
+                return false;
+            }
+            
+            function loadmodelfunc()
+            {
+                var elem = document.getElementById("loadmodel");
+                if(elem && document.createEvent) {
+                    var evt = document.createEvent("MouseEvents");
+                    evt.initEvent("click", true, false);
+                    elem.dispatchEvent(evt);
+                }
+                return false;
+            }
+            
+            function loadmodelfuncLSSVM()
+            {
+                var elem = document.getElementById("loadmodelLSSVM");
+                if(elem && document.createEvent) {
+                    var evt = document.createEvent("MouseEvents");
+                    evt.initEvent("click", true, false);
+                    elem.dispatchEvent(evt);
+                }
+                return false;
             }
         </script>
     </head>
@@ -2681,6 +2705,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 <input type="hidden" name="sLoadModel" id="sLoadModel" value="<%=sLoadModel%>"/>
                                 
                 <div style="display:none;"><input type="file" id="importfile" name="importfile"/></div>
+                <div style="display:none;"><input type="file" id="loadmodel" name="loadmodel"/></div>
                 
                 <% if (hdf.equals("1")) { %>
                     <input type="hidden" name="hiddendatafile" id="hiddendatafile" value="1">
@@ -2751,7 +2776,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             <div class="container boundary">
                                 <h2><font face="Palatino Linotype, Book Antiqua, Palatino, serif" size="6">Model Settings</font></h2>
                                 <button type="button" onclick="return writedefaultlssvr(0)" class="btn btn-primary">Default</button>
-                                <button class="btn btn-primary" onclick="loadmodel(1)">Load Optimum Hyperparameters</button>
+                                <button type="button" class="btn btn-primary" onclick="return loadmodelfunc();">Load Optimum Hyperparameters</button>
                                 <%--<button type="button" onclick="return loadingdataform(1);" class="btn btn-primary">Import</button>--%>
                                 <button type="button" onclick="return importfilefunc();" id="importbutton" class="btn btn-primary">Import</button>
                                 <button type="button" onclick="return exportparameters(0);" class="btn btn-primary">Export</button>
@@ -4007,6 +4032,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 }
             }
             else if (sLoadModel != "") { 
+                String datafile = request.getParameter("loadmodel");
+                
                 String filename;
                 filename = "SVRModel.txt";
                 String file = application.getRealPath("/") + filename;
@@ -4023,15 +4050,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     </script><%
                 }
                 
-                if (NormalRadio.equals("NormalRadio1")) {%><script>document.getElementById("NormalRadio1").checked = true; </script><%}
-                else if (NormalRadio.equals("NormalRadio2")) {%><script>document.getElementById("NormalRadio2").checked = true; </script><%}
-            
-                if (PRadio.equals("PRadio1")) { 
-                    if (TORadio.equals("TORadio1")) {%><script>document.getElementById("TORadio1").checked = true; </script><%}
-                    else if (TORadio.equals("TORadio2")) {%><script>document.getElementById("TORadio2").checked = true; </script><%}
-                    else if (TORadio.equals("TORadio3")) {%><script>document.getElementById("TORadio3").checked = true; </script><%}
-                    else if (TORadio.equals("TORadio4")) {%><script>document.getElementById("TORadio4").checked = true; </script><%}
-                }
+                if (NormalRadio.equals("NormalRadio1")) {%>
+                    <script>document.getElementById("NormalRadio1").checked = true; </script><%}
+                else if (NormalRadio.equals("NormalRadio2")) {%>
+                    <script>document.getElementById("NormalRadio2").checked = true; </script><%}
             }
             else {
                 if (sLoadingEvaluation != "") {  
@@ -4580,6 +4602,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 <input type="hidden" name="sErrorLSSVM" id="sErrorLSSVM" value="<%=sErrorLSSVM%>"/>
 
                 <div style="display:none;"><input type="file" id="importfileLSSVM" name="importfileLSSVM"/></div>
+                <div style="display:none;"><input type="file" id="loadmodelLSSVM" name="loadmodelLSSVM"/></div>
                 
                 <% if (hdf.equals("1")) { %>
                     <input type="hidden" name="hiddendatafile" id="hiddendatafile" value="1">
@@ -4652,7 +4675,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             <div class="container boundary">
                                 <h2><font face="Palatino Linotype, Book Antiqua, Palatino, serif" size="6">Model Settings</font></h2>
                                 <button type="button" onclick="return writedefaultlssvm(0)" class="btn btn-primary">Default</button>
-                                <button type="button" onclick="loadmodelLSSVM(1)" class="btn btn-primary">Load Optimum Hyperparameters</button>
+                                <button type="button" onclick="return loadmodelfuncLSSVM()" class="btn btn-primary">Load Optimum Hyperparameters</button>
                                 <%--<button type="button" onclick="return loadingdataformLSSVM(1);" class="btn btn-primary">Import</button>--%>
                                 <button type="button" onclick="return importSVMfilefunc();" id="importbutton" class="btn btn-primary">Import</button>
                                 <button type="button" onclick="return exportparametersLSSVM(0);" class="btn btn-primary">Export</button>
@@ -5890,6 +5913,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 }
             }
             else if (sLoadModelLSSVM != "") { 
+                String datafile = request.getParameter("loadmodelLSSVM");
+                
                 String filename;
                 filename = "SVMModel.txt";
                 String file = application.getRealPath("/") + filename;
@@ -6440,7 +6465,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 });
             });
             
-            var importedfile = document.getElementById("importfile")
+            var importedfile = document.getElementById("importfile");
             $(importedfile).change(function(event) {
                 
                 document.getElementById("sSaveDataFile").value = "";
@@ -6467,6 +6492,30 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 document.getElementById("myformLSSVM").enctype = "multipart/form-data";
                 document.getElementById("myformLSSVM").method = "POST";
                 document.getElementById("myformLSSVM").action = "ImportLSSVMParamServlet";
+                document.getElementById("myformLSSVM").submit();
+            });
+            
+            var loadmodel = document.getElementById("loadmodel");
+            $(loadmodel).change(function(event) {
+                
+                document.getElementById("sLoadModel").value = "1";
+                
+                //document.getElementById("myform").enctype = "text/html";
+                document.getElementById("myform").enctype = "multipart/form-data";
+                document.getElementById("myform").method = "POST";
+                document.getElementById("myform").action = "LoadSVRModelServlet";
+                document.getElementById("myform").submit();
+            });
+            
+            var loadmodel = document.getElementById("loadmodelLSSVM");
+            $(loadmodel).change(function(event) {
+                
+                document.getElementById("sLoadModelLSSVM").value = "1";
+                
+                //document.getElementById("myform").enctype = "text/html";
+                document.getElementById("myformLSSVM").enctype = "multipart/form-data";
+                document.getElementById("myformLSSVM").method = "POST";
+                document.getElementById("myformLSSVM").action = "LoadSVMModelServlet";
                 document.getElementById("myformLSSVM").submit();
             });
         </script>
