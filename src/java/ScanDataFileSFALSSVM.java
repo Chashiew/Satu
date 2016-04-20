@@ -110,7 +110,7 @@ public class ScanDataFileSFALSSVM extends HttpServlet {
 
             // second line: column header
             headers = lines[1].split("\\t");
-            params += "sTestDataFileLSSVM=" + datafile.getSubmittedFileName() + "&";
+            params += "sTestFileNameLSSVM=" + datafile.getSubmittedFileName() + "&";
             params += "nTDFAttributesLSSVM=" + headers.length + "&";
             params += "nTDFInstancesLSSVM=" + (lines.length-2) + "&";
         }
@@ -147,7 +147,7 @@ public class ScanDataFileSFALSSVM extends HttpServlet {
 
             // second line: column header
             headers = lines[1].split("\\t");
-            params += "sLearningDataFileLSSVM=" + datafile.getSubmittedFileName() + "&";
+            params += "sLearningFileNameLSSVM=" + datafile.getSubmittedFileName() + "&";
             params += "nLDFAttributesLSSVM=" + headers.length + "&";
             params += "nLDFInstancesLSSVM=" + (lines.length-2) + "&";
         }
@@ -184,7 +184,7 @@ public class ScanDataFileSFALSSVM extends HttpServlet {
 
             // second line: column header
             headers = lines[1].split("\\t");
-            params += "sPredictionDataFileLSSVM=" + datafile.getSubmittedFileName()+ "&";
+            params += "sPredictionFileNameLSSVM=" + datafile.getSubmittedFileName()+ "&";
             params += "nPDFAttributesLSSVM=" + headers.length + "&";
             params += "nPDFInstancesLSSVM=" + (lines.length-2) + "&";
         }

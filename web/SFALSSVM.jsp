@@ -4008,7 +4008,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     br.close();
                 }
                 else if (sTestFileNameLSSVM != "") {
-                    String file = application.getRealPath("/") + sTestFileNameLSSVM;
+                    //String file = application.getRealPath("/") + sTestFileNameLSSVM;
+                    String file = sTestFileNameLSSVM;
                     BufferedReader br = new BufferedReader(new FileReader(file));
                     String line = null;
                     String[] headers;
@@ -4125,7 +4126,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     br.close();
                 }
                 else if (sLearningFileNameLSSVM != "") {
-                    String file = application.getRealPath("/") + sLearningFileNameLSSVM;
+                    //String file = application.getRealPath("/") + sLearningFileNameLSSVM;
+                    String file = sLearningFileNameLSSVM;
                     BufferedReader br = new BufferedReader(new FileReader(file));
                     String line = null;
                     String[] headers;
@@ -4234,7 +4236,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     br.close();
                 }
                 else if (sPredictionFileNameLSSVM != "") { 
-                    String file = application.getRealPath("/") + sPredictionFileNameLSSVM; 
+                    //String file = application.getRealPath("/") + sPredictionFileNameLSSVM; 
+                    String file = sPredictionFileNameLSSVM;
                     BufferedReader br = new BufferedReader(new FileReader(file)); 
                     String line = null;
                     String[] headers; 

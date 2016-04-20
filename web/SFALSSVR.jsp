@@ -4132,7 +4132,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     br.close();
                 }
                 else if (sTestFileName != "") {
-                    String file = application.getRealPath("/") + sTestFileName;
+                    //String file = application.getRealPath("/") + sTestFileName;
+                    String file = sTestFileName;
                     BufferedReader br = new BufferedReader(new FileReader(file));
                     String line = null;
                     String[] headers;
@@ -4287,7 +4288,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     }
                 }
                 else if (sLearningFileName != "") {
-                    String file = application.getRealPath("/") + sLearningFileName;
+                    //String file = application.getRealPath("/") + sLearningFileName;
+                    String file = sLearningFileName;
                     BufferedReader br = new BufferedReader(new FileReader(file));
                     String line = null;
                     String[] headers;
@@ -4447,7 +4449,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     br.close();
                 }
                 else if (sPredictionFileName != "") {
-                    String file = application.getRealPath("/") + sPredictionFileName;
+                    //String file = application.getRealPath("/") + sPredictionFileName;
+                    String file = sPredictionFileName;
                     BufferedReader br = new BufferedReader(new FileReader(file));
                     String line = null;
                     String[] headers;
