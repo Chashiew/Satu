@@ -37,7 +37,7 @@ public class ScanDataFileLSSVR extends HttpServlet {
         String params = "?";
         
         Part datafile = request.getPart("sDataFile");
-        if (datafile != null)
+        if (datafile.getSize() > 0)
         {
             InputStream filestream = datafile.getInputStream();
             Scanner S = new Scanner(filestream).useDelimiter("\\A");
@@ -53,12 +53,13 @@ public class ScanDataFileLSSVR extends HttpServlet {
 
             // second line: column header
             headers = lines[1].split("\\t");
+            params += "sFileName=" + datafile.getSubmittedFileName() + "&";
             params += "nDFAttributes=" + headers.length + "&";
             params += "nDFInstances=" + (lines.length-2) + "&";
         }
         
         datafile = request.getPart("sTestDataFile");
-        if (datafile != null)
+        if (datafile.getSize() > 0)
         {
             InputStream filestream = datafile.getInputStream();
             Scanner S = new Scanner(filestream).useDelimiter("\\A");
@@ -74,12 +75,13 @@ public class ScanDataFileLSSVR extends HttpServlet {
 
             // second line: column header
             headers = lines[1].split("\\t");
+            params += "sTestFileName=" + datafile.getSubmittedFileName() + "&";
             params += "nTDFAttributes=" + headers.length + "&";
             params += "nTDFInstances=" + (lines.length-2) + "&";
         }
         
         datafile = request.getPart("sLearningDataFile");
-        if (datafile != null)
+        if (datafile.getSize() > 0)
         {
             InputStream filestream = datafile.getInputStream();
             Scanner S = new Scanner(filestream).useDelimiter("\\A");
@@ -95,12 +97,13 @@ public class ScanDataFileLSSVR extends HttpServlet {
 
             // second line: column header
             headers = lines[1].split("\\t");
+            params += "sLearningFileName=" + datafile.getSubmittedFileName() + "&";
             params += "nLDFAttributes=" + headers.length + "&";
             params += "nLDFInstances=" + (lines.length-2) + "&";
         }
         
         datafile = request.getPart("sPredictionDataFile");
-        if (datafile != null)
+        if (datafile.getSize() > 0)
         {
             InputStream filestream = datafile.getInputStream();
             Scanner S = new Scanner(filestream).useDelimiter("\\A");
@@ -116,6 +119,7 @@ public class ScanDataFileLSSVR extends HttpServlet {
 
             // second line: column header
             headers = lines[1].split("\\t");
+            params += "sPredictionFileName=" + datafile.getSubmittedFileName()+ "&";
             params += "nPDFAttributes=" + headers.length + "&";
             params += "nPDFInstances=" + (lines.length-2) + "&";
         }

@@ -69,16 +69,16 @@
         <servlet-class>LoadSVMModelServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ScanDataFile</servlet-name>
+        <servlet-name>ScanDataFileLSSVR</servlet-name>
         <servlet-class>ScanDataFileLSSVR</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ScanDataFIleSVM</servlet-name>
-        <servlet-class>ScanDataFIleLSSVM</servlet-class>
+        <servlet-name>ScanDataFileLSSVM</servlet-name>
+        <servlet-class>ScanDataFileLSSVM</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ScanDataFIleSFALSSVR</servlet-name>
-        <servlet-class>ScanDataFIleSFALSSVR</servlet-class>
+        <servlet-name>ScanDataFileSFALSSVR</servlet-name>
+        <servlet-class>ScanDataFileSFALSSVR</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ScanDataFileSFALSSVM</servlet-name>
@@ -153,16 +153,16 @@
         <url-pattern>/LoadSVMModelServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ScanDataFile</servlet-name>
-        <url-pattern>/ScanDataFile</url-pattern>
+        <servlet-name>ScanDataFileLSSVR</servlet-name>
+        <url-pattern>/ScanDataFileLSSVR</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ScanDataFIleSVM</servlet-name>
-        <url-pattern>/ScanDataFIleSVM</url-pattern>
+        <servlet-name>ScanDataFileLSSVM</servlet-name>
+        <url-pattern>/ScanDataFileLSSVM</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ScanDataFIleSFALSSVR</servlet-name>
-        <url-pattern>/ScanDataFIleSFALSSVR</url-pattern>
+        <servlet-name>ScanDataFileSFALSSVR</servlet-name>
+        <url-pattern>/ScanDataFileSFALSSVR</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ScanDataFileSFALSSVM</servlet-name>

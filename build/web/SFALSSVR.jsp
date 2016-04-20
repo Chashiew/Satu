@@ -2017,7 +2017,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     evt.initEvent("click", true, false);
                     elem.dispatchEvent(evt);
                 }
-            
+            }
             
             function sendfile()
             {
