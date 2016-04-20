@@ -1997,10 +1997,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
             
             function sendfileSVM()
             {
-                document.getElementById("myform").enctype = "multipart/form-data";
-                document.getElementById("myform").method = "POST";
-                document.getElementById("myform").action = "ScanDataFileSFALSSVM";
-                document.getElementById("myform").submit();
+                document.getElementById("myformLSSVM").enctype = "multipart/form-data";
+                document.getElementById("myformLSSVM").method = "POST";
+                document.getElementById("myformLSSVM").action = "ScanDataFileSFALSSVM";
+                document.getElementById("myformLSSVM").submit();
             }
         </script>
     </head>

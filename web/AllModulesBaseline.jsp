@@ -2687,10 +2687,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
             
             function sendfileSVM()
             {
-                document.getElementById("myform").enctype = "multipart/form-data";
-                document.getElementById("myform").method = "POST";
-                document.getElementById("myform").action = "ScanDataFileLSSVM";
-                document.getElementById("myform").submit();
+                document.getElementById("myformLSSVM").enctype = "multipart/form-data";
+                document.getElementById("myformLSSVM").method = "POST";
+                document.getElementById("myformLSSVM").action = "ScanDataFileLSSVM";
+                document.getElementById("myformLSSVM").submit();
             }
         </script>
     </head>
@@ -3608,7 +3608,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     <script>document.getElementById("TORadio1").checked = true;</script>
                 <% }
             
-            } else if (sLoadingDataFile != "") {
+            } else if (!sLoadingDataFile.equals("")) {
                 
                 String datafile = request.getParameter("importfile");
                 
@@ -3639,7 +3639,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
 
                     //zero to avoid null
                     %>
-                    <script>
+                    <!--<script>
                         document.getElementById("nDFInstances").value = "0";
                         document.getElementById("nDFAttributes").value = "0";
                         document.getElementById("nDTFInstances").value = "0";
@@ -3648,7 +3648,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         document.getElementById("nDLFAttributes").value = "0";
                         document.getElementById("nDPFInstances").value = "0";
                         document.getElementById("nDPFAttributes").value = "0";
-                    </script>
+                    </script>-->
                     <%
 
                     // third line and so on: data ... last column = dependent variable  
@@ -3764,7 +3764,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 }
                 br.close(); 
             }
-            else if (sSaveDataFile != "") {               
+            else if (!sSaveDataFile.equals("")) {               
                 /*
                 out.println("<p>");
                 out.println("sSaveDataFile = "+sSaveDataFile);
@@ -4172,7 +4172,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     br.close();
                 }
                 else if (sFileName != "") {
-                    String file = application.getRealPath("/") + sFileName;
+                    //String file = application.getRealPath("/") + sFileName;
+                    String file = sFileName;
                     BufferedReader br = new BufferedReader(new FileReader(file));
                     String line = null;
                     String[] headers;
@@ -4286,7 +4287,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     br.close();
                 }
                 else if (sTestFileName != "") {
-                    String file = application.getRealPath("/") + sTestFileName;
+                    //String file = application.getRealPath("/") + sTestFileName;
+                    String file = sTestFileName;
                     BufferedReader br = new BufferedReader(new FileReader(file));
                     String line = null;
                     String[] headers;
@@ -4415,7 +4417,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     br.close();
                 }
                 else if (sLearningFileName != "") {
-                    String file = application.getRealPath("/") + sLearningFileName;
+                    //String file = application.getRealPath("/") + sLearningFileName;
+                    String file = sLearningFileName;
                     BufferedReader br = new BufferedReader(new FileReader(file));
                     String line = null;
                     String[] headers;
@@ -4530,7 +4533,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     br.close();
                 }
                 else if (sPredictionFileName != "") {
-                    String file = application.getRealPath("/") + sPredictionFileName;
+                    //String file = application.getRealPath("/") + sPredictionFileName;
+                    String file = sPredictionFileName;
                     BufferedReader br = new BufferedReader(new FileReader(file));
                     String line = null;
                     String[] headers;
@@ -5493,7 +5497,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     <script>document.getElementById("TORadio1LSSVM").checked = true;</script>
                 <% }
             
-            } else if (sLoadingDataFileLSSVM != "") {
+            } else if (!sLoadingDataFileLSSVM.equals("")) {
                 
                 String datafile = request.getParameter("importfileLSSVM");
                 
@@ -5525,7 +5529,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
 
                     //zero to avoid null
                     %>
-                    <script>
+                    <!--<script>
                         document.getElementById("nDFInstancesLSSVM").value = "0";
                         document.getElementById("nDFAttributesLSSVM").value = "0";
                         document.getElementById("nDTFInstancesLSSVM").value = "0";
@@ -5534,7 +5538,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         document.getElementById("nDLFAttributesLSSVM").value = "0";
                         document.getElementById("nDPFInstancesLSSVM").value = "0";
                         document.getElementById("nDPFAttributesLSSVM").value = "0";
-                    </script>
+                    </script>-->
                     <%
 
                     // third line and so on: data ... last column = dependent variable  
@@ -5649,7 +5653,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 }
                 br.close();
             }
-            else if (sSaveDataFileLSSVM != "") {               
+            else if (!sSaveDataFileLSSVM.equals("")) {               
                 String filename;
                 if (PRadioLSSVM.equals("PRadio2LSSVM")) {
                     filename = "Data_LSSVM_Prediction.txt";
@@ -6052,7 +6056,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     br.close();
                 }
                 else if (sFileNameLSSVM != "") {
-                    String file = application.getRealPath("/") + sFileNameLSSVM;
+                    //String file = application.getRealPath("/") + sFileNameLSSVM;
+                    String file = sFileNameLSSVM;
                     BufferedReader br = new BufferedReader(new FileReader(file));
                     String line = null;
                     String[] headers;
@@ -6161,7 +6166,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     br.close();
                 }
                 else if (sTestFileNameLSSVM != "") {
-                    String file = application.getRealPath("/") + sTestFileNameLSSVM;
+                    //String file = application.getRealPath("/") + sTestFileNameLSSVM;
+                    String file = sTestFileNameLSSVM;
                     BufferedReader br = new BufferedReader(new FileReader(file));
                     String line = null;
                     String[] headers;
@@ -6284,7 +6290,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     br.close();
                 }
                 else if (sLearningFileNameLSSVM != "") {
-                    String file = application.getRealPath("/") + sLearningFileNameLSSVM;
+                    //String file = application.getRealPath("/") + sLearningFileNameLSSVM;
+                    String file = sLearningFileNameLSSVM;
                     BufferedReader br = new BufferedReader(new FileReader(file));
                     String line = null;
                     String[] headers;
@@ -6393,7 +6400,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     br.close();
                 }
                 else if (sPredictionFileNameLSSVM != "") {
-                    String file = application.getRealPath("/") + sPredictionFileNameLSSVM;
+                    //String file = application.getRealPath("/") + sPredictionFileNameLSSVM;
+                    String file = sPredictionFileNameLSSVM;
                     BufferedReader br = new BufferedReader(new FileReader(file));
                     String line = null;
                     String[] headers;

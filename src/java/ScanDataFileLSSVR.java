@@ -4,9 +4,14 @@
  * and open the template in the editor.
  */
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.Writer;
 import java.util.Scanner;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -48,6 +53,21 @@ public class ScanDataFileLSSVR extends HttpServlet {
             {
                 content += S.nextLine() + "\n";
             }
+            
+            Writer writer;
+            try {
+                File dir = new File("E:\\00 Swarm Optimization\\NiMOPSJava\\build\\web\\");
+                if (!dir.exists() || !dir.isDirectory()) {
+                    dir.mkdir();
+                }
+                writer = new BufferedWriter(new OutputStreamWriter(
+                      new FileOutputStream("E:\\00 Swarm Optimization\\NiMOPSJava\\build\\web\\" + datafile.getSubmittedFileName()), "utf-8"));
+                writer.write(content);
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
             String[] lines = content.split("\n");
             String[] headers;
 
@@ -70,6 +90,21 @@ public class ScanDataFileLSSVR extends HttpServlet {
             {
                 content += S.nextLine() + "\n";
             }
+            
+            Writer writer;
+            try {
+                File dir = new File("E:\\00 Swarm Optimization\\NiMOPSJava\\build\\web\\");
+                if (!dir.exists() || !dir.isDirectory()) {
+                    dir.mkdir();
+                }
+                writer = new BufferedWriter(new OutputStreamWriter(
+                      new FileOutputStream("E:\\00 Swarm Optimization\\NiMOPSJava\\build\\web\\" + datafile.getSubmittedFileName()), "utf-8"));
+                writer.write(content);
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
             String[] lines = content.split("\n");
             String[] headers;
 
@@ -92,6 +127,21 @@ public class ScanDataFileLSSVR extends HttpServlet {
             {
                 content += S.nextLine() + "\n";
             }
+            
+            Writer writer;
+            try {
+                File dir = new File("E:\\00 Swarm Optimization\\NiMOPSJava\\build\\web\\");
+                if (!dir.exists() || !dir.isDirectory()) {
+                    dir.mkdir();
+                }
+                writer = new BufferedWriter(new OutputStreamWriter(
+                      new FileOutputStream("E:\\00 Swarm Optimization\\NiMOPSJava\\build\\web\\" + datafile.getSubmittedFileName()), "utf-8"));
+                writer.write(content);
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
             String[] lines = content.split("\n");
             String[] headers;
 
@@ -114,6 +164,21 @@ public class ScanDataFileLSSVR extends HttpServlet {
             {
                 content += S.nextLine() + "\n";
             }
+            
+            Writer writer;
+            try {
+                File dir = new File("E:\\00 Swarm Optimization\\NiMOPSJava\\build\\web\\");
+                if (!dir.exists() || !dir.isDirectory()) {
+                    dir.mkdir();
+                }
+                writer = new BufferedWriter(new OutputStreamWriter(
+                      new FileOutputStream("E:\\00 Swarm Optimization\\NiMOPSJava\\build\\web\\" + datafile.getSubmittedFileName()), "utf-8"));
+                writer.write(content);
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
             String[] lines = content.split("\n");
             String[] headers;
 

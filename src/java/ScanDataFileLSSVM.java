@@ -4,9 +4,14 @@
  * and open the template in the editor.
  */
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.Writer;
 import java.util.Scanner;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -37,7 +42,7 @@ public class ScanDataFileLSSVM extends HttpServlet {
         String params = "?";
         
         Part datafile = request.getPart("sDataFileLSSVM");
-        if (datafile != null)
+        if (datafile.getSize() > 0)
         {
             InputStream filestream = datafile.getInputStream();
             Scanner S = new Scanner(filestream).useDelimiter("\\A");
@@ -48,17 +53,33 @@ public class ScanDataFileLSSVM extends HttpServlet {
             {
                 content += S.nextLine() + "\n";
             }
+            
+            Writer writer;
+            try {
+                File dir = new File("E:\\00 Swarm Optimization\\NiMOPSJava\\build\\web\\");
+                if (!dir.exists() || !dir.isDirectory()) {
+                    dir.mkdir();
+                }
+                writer = new BufferedWriter(new OutputStreamWriter(
+                      new FileOutputStream("E:\\00 Swarm Optimization\\NiMOPSJava\\build\\web\\" + datafile.getSubmittedFileName()), "utf-8"));
+                writer.write(content);
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
             String[] lines = content.split("\n");
             String[] headers;
 
             // second line: column header
             headers = lines[1].split("\\t");
+            params += "sFileNameLSSVM=" + datafile.getSubmittedFileName() + "&";
             params += "nDFAttributesLSSVM=" + headers.length + "&";
             params += "nDFInstancesLSSVM=" + (lines.length-2) + "&";
         }
         
         datafile = request.getPart("sTestDataFileLSSVM");
-        if (datafile != null)
+        if (datafile.getSize() > 0)
         {
             InputStream filestream = datafile.getInputStream();
             Scanner S = new Scanner(filestream).useDelimiter("\\A");
@@ -69,17 +90,33 @@ public class ScanDataFileLSSVM extends HttpServlet {
             {
                 content += S.nextLine() + "\n";
             }
+            
+            Writer writer;
+            try {
+                File dir = new File("E:\\00 Swarm Optimization\\NiMOPSJava\\build\\web\\");
+                if (!dir.exists() || !dir.isDirectory()) {
+                    dir.mkdir();
+                }
+                writer = new BufferedWriter(new OutputStreamWriter(
+                      new FileOutputStream("E:\\00 Swarm Optimization\\NiMOPSJava\\build\\web\\" + datafile.getSubmittedFileName()), "utf-8"));
+                writer.write(content);
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
             String[] lines = content.split("\n");
             String[] headers;
 
             // second line: column header
             headers = lines[1].split("\\t");
+            params += "sTestFileNameLSSVM=" + datafile.getSubmittedFileName() + "&";
             params += "nTDFAttributesLSSVM=" + headers.length + "&";
             params += "nTDFInstancesLSSVM=" + (lines.length-2) + "&";
         }
         
         datafile = request.getPart("sLearningDataFileLSSVM");
-        if (datafile != null)
+        if (datafile.getSize() > 0)
         {
             InputStream filestream = datafile.getInputStream();
             Scanner S = new Scanner(filestream).useDelimiter("\\A");
@@ -90,17 +127,33 @@ public class ScanDataFileLSSVM extends HttpServlet {
             {
                 content += S.nextLine() + "\n";
             }
+            
+            Writer writer;
+            try {
+                File dir = new File("E:\\00 Swarm Optimization\\NiMOPSJava\\build\\web\\");
+                if (!dir.exists() || !dir.isDirectory()) {
+                    dir.mkdir();
+                }
+                writer = new BufferedWriter(new OutputStreamWriter(
+                      new FileOutputStream("E:\\00 Swarm Optimization\\NiMOPSJava\\build\\web\\" + datafile.getSubmittedFileName()), "utf-8"));
+                writer.write(content);
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
             String[] lines = content.split("\n");
             String[] headers;
 
             // second line: column header
             headers = lines[1].split("\\t");
+            params += "sLearningFileNameLSSVM=" + datafile.getSubmittedFileName() + "&";
             params += "nLDFAttributesLSSVM=" + headers.length + "&";
             params += "nLDFInstancesLSSVM=" + (lines.length-2) + "&";
         }
         
         datafile = request.getPart("sPredictionDataFileLSSVM");
-        if (datafile != null)
+        if (datafile.getSize() > 0)
         {
             InputStream filestream = datafile.getInputStream();
             Scanner S = new Scanner(filestream).useDelimiter("\\A");
@@ -111,11 +164,27 @@ public class ScanDataFileLSSVM extends HttpServlet {
             {
                 content += S.nextLine() + "\n";
             }
+            
+            Writer writer;
+            try {
+                File dir = new File("E:\\00 Swarm Optimization\\NiMOPSJava\\build\\web\\");
+                if (!dir.exists() || !dir.isDirectory()) {
+                    dir.mkdir();
+                }
+                writer = new BufferedWriter(new OutputStreamWriter(
+                      new FileOutputStream("E:\\00 Swarm Optimization\\NiMOPSJava\\build\\web\\" + datafile.getSubmittedFileName()), "utf-8"));
+                writer.write(content);
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
             String[] lines = content.split("\n");
             String[] headers;
 
             // second line: column header
             headers = lines[1].split("\\t");
+            params += "sPredictionFileNameLSSVM=" + datafile.getSubmittedFileName()+ "&";
             params += "nPDFAttributesLSSVM=" + headers.length + "&";
             params += "nPDFInstancesLSSVM=" + (lines.length-2) + "&";
         }

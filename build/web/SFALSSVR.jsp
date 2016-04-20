@@ -2455,7 +2455,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                                                     <input type="file" class="filestyle" name="sTestDataFile" id="sTestDataFile" accept=".csv,.txt" data-input="false"/>
                                                             </div>
                                                             <div class="col-md-2" style="margin-top : 4px">
-                                                                <a onclick="return computeatform(1);">
+                                                                <a onclick="return sendfile();">
                                                                     <span class="glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
                                                                 </a>
                                                             </div>
@@ -2491,7 +2491,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                                                     <input type="file" class="filestyle" name="sTestDataFile" id="sTestDataFile" accept=".csv,.txt" data-input="false"/>
                                                             </div>
                                                             <div class="col-md-2" style="margin-top : 4px">
-                                                                <a onclick="return computeatform(1);">
+                                                                <a onclick="return sendfile();">
                                                                     <span class="glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
                                                                 </a>
                                                             </div>
@@ -2553,7 +2553,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                             <input type="file" class="filestyle" name="sLearningDataFile" id="sLearningDataFile" accept=".csv,.txt" data-input="false"/>
                                         </div>
                                         <div class="col-md-2" style="margin-top : 4px">
-                                            <a onclick="return computeatform(1);">
+                                            <a onclick="return sendfile();">
                                                 <span class="glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
                                             </a>
                                         </div>
@@ -2588,7 +2588,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                             <input type="file" class="filestyle"  name="sPredictionDataFile" id="sPredictionDataFile" accept=".csv,.txt" data-input="false"/>
                                         </div>
                                         <div class="col-md-2" style="margin-top : 4px">
-                                            <a onclick="return computeatform(1);">
+                                            <a onclick="return sendfile()">
                                                 <span class="glyphicon glyphicon-hand-right" style="font-size: 20px">&nbsp;Send</span>
                                             </a>
                                         </div>
