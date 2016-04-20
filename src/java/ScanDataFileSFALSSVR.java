@@ -4,9 +4,15 @@
  * and open the template in the editor.
  */
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.Writer;
 import java.util.Scanner;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -37,7 +43,7 @@ public class ScanDataFileSFALSSVR extends HttpServlet {
         String params = "?";
         
         Part datafile = request.getPart("sDataFile");
-        if (datafile != null)
+        if (datafile.getSize() > 0)
         {
             InputStream filestream = datafile.getInputStream();
             Scanner S = new Scanner(filestream).useDelimiter("\\A");
@@ -48,17 +54,33 @@ public class ScanDataFileSFALSSVR extends HttpServlet {
             {
                 content += S.nextLine() + "\n";
             }
+            
+            Writer writer;
+            try {
+                File dir = new File("E:\\00 Swarm Optimization\\NiMOPSJava\\build\\web\\");
+                if (!dir.exists() || !dir.isDirectory()) {
+                    dir.mkdir();
+                }
+                writer = new BufferedWriter(new OutputStreamWriter(
+                      new FileOutputStream("E:\\00 Swarm Optimization\\NiMOPSJava\\build\\web\\" + datafile.getSubmittedFileName()), "utf-8"));
+                writer.write(content);
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
             String[] lines = content.split("\n");
             String[] headers;
 
             // second line: column header
             headers = lines[1].split("\\t");
+            params += "sFileName=" + datafile.getSubmittedFileName() + "&";
             params += "nDFAttributes=" + headers.length + "&";
             params += "nDFInstances=" + (lines.length-2) + "&";
         }
         
         datafile = request.getPart("sTestDataFile");
-        if (datafile != null)
+        if (datafile.getSize() > 0)
         {
             InputStream filestream = datafile.getInputStream();
             Scanner S = new Scanner(filestream).useDelimiter("\\A");
@@ -69,17 +91,33 @@ public class ScanDataFileSFALSSVR extends HttpServlet {
             {
                 content += S.nextLine() + "\n";
             }
+            
+            Writer writer;
+            try {
+                File dir = new File("E:\\00 Swarm Optimization\\NiMOPSJava\\build\\web\\");
+                if (!dir.exists() || !dir.isDirectory()) {
+                    dir.mkdir();
+                }
+                writer = new BufferedWriter(new OutputStreamWriter(
+                      new FileOutputStream("E:\\00 Swarm Optimization\\NiMOPSJava\\build\\web\\" + datafile.getSubmittedFileName()), "utf-8"));
+                writer.write(content);
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
             String[] lines = content.split("\n");
             String[] headers;
 
             // second line: column header
             headers = lines[1].split("\\t");
+            params += "sTestFileName=" + datafile.getSubmittedFileName() + "&";
             params += "nTDFAttributes=" + headers.length + "&";
             params += "nTDFInstances=" + (lines.length-2) + "&";
         }
         
         datafile = request.getPart("sLearningDataFile");
-        if (datafile != null)
+        if (datafile.getSize() > 0)
         {
             InputStream filestream = datafile.getInputStream();
             Scanner S = new Scanner(filestream).useDelimiter("\\A");
@@ -90,17 +128,33 @@ public class ScanDataFileSFALSSVR extends HttpServlet {
             {
                 content += S.nextLine() + "\n";
             }
+            
+            Writer writer;
+            try {
+                File dir = new File("E://00 Swarm Optimization/dataset/");
+                if (!dir.exists() || !dir.isDirectory()) {
+                    dir.mkdir();
+                }
+                writer = new BufferedWriter(new OutputStreamWriter(
+                      new FileOutputStream("E://00 Swarm Optimization/dataset/" + datafile.getSubmittedFileName()), "utf-8"));
+                writer.write(content);
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
             String[] lines = content.split("\n");
             String[] headers;
 
             // second line: column header
             headers = lines[1].split("\\t");
+            params += "sLearningFileName=" + datafile.getSubmittedFileName() + "&";
             params += "nLDFAttributes=" + headers.length + "&";
             params += "nLDFInstances=" + (lines.length-2) + "&";
         }
         
         datafile = request.getPart("sPredictionDataFile");
-        if (datafile != null)
+        if (datafile.getSize() > 0)
         {
             InputStream filestream = datafile.getInputStream();
             Scanner S = new Scanner(filestream).useDelimiter("\\A");
@@ -111,11 +165,27 @@ public class ScanDataFileSFALSSVR extends HttpServlet {
             {
                 content += S.nextLine() + "\n";
             }
+            
+            Writer writer;
+            try {
+                File dir = new File("E://00 Swarm Optimization/dataset/");
+                if (!dir.exists() || !dir.isDirectory()) {
+                    dir.mkdir();
+                }
+                writer = new BufferedWriter(new OutputStreamWriter(
+                      new FileOutputStream("E://00 Swarm Optimization/dataset/" + datafile.getSubmittedFileName()), "utf-8"));
+                writer.write(content);
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
             String[] lines = content.split("\n");
             String[] headers;
 
             // second line: column header
             headers = lines[1].split("\\t");
+            params += "sPredictionFileName=" + datafile.getSubmittedFileName()+ "&";
             params += "nPDFAttributes=" + headers.length + "&";
             params += "nPDFInstances=" + (lines.length-2) + "&";
         }

@@ -4,6 +4,8 @@
     Author     : JDK
 --%>
 
+<%@page import="java.nio.file.Paths"%>
+<%@page import="java.nio.file.Path"%>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.io.*" %>
 <%@ page import="java.text.*" %>
@@ -1527,7 +1529,11 @@
                                                 <div class="col-md-4"><h4><%=sDummy%></h4></div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-4"><%=sFileData%></div>
+                                                <%
+                                                    Path p = Paths.get(sFileData);
+                                                    String filedataname = p.getFileName().toString();
+                                                %>
+                                                <div class="col-md-4"><%=filedataname%></div>
                                                 <div class="col-md-2">No. of Attributes = <%=nf.format(Double.parseDouble(dAttributes))%></div>
                                                 <div class="col-md-3">No. of Instances = <%=nf.format(Double.parseDouble(dInstances))%></div>
                                             </div>

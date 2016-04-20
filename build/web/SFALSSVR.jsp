@@ -1058,6 +1058,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     document.getElementById("sLoadingDataExcelClick").value = sLoadingDataExcelClick;
 
                     //alert("Aha1 ...!");
+                    //sFileName.value = "E://00 Swarm Optimization/NiMOPSJava/build/web/" + sFileName.value;
+                    //sFileData.value = "E://00 Swarm Optimization/NiMOPSJava/build/web/" + sFileData.value;
                     fullPath.value = sFileName.value;
                     document.getElementById("myform").action = "ModuleSFALSSVR.jsp";   //#A of 1 //"SFALSSVR.jsp"; (To Result Form) //"SFALSSVRServlet"; (To Data Form)
                     document.getElementById("myform").submit();
@@ -3255,7 +3257,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     <script>document.getElementById("TORadio1").checked = true;</script>
                 <% }
             
-            } else if (sLoadingDataFile != "") {     
+            } else if (!sLoadingDataFile.equals("")) {     
                 
                 String datafile = request.getParameter("importfile");
                 
@@ -3287,7 +3289,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
 
                     //zero to avoid null
                     %>
-                    <script>
+                    <!--<script>
                         document.getElementById("nDFInstances").value = "0";
                         document.getElementById("nDFAttributes").value = "0";
                         document.getElementById("nDTFInstances").value = "0";
@@ -3296,7 +3298,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         document.getElementById("nDLFAttributes").value = "0";
                         document.getElementById("nDPFInstances").value = "0";
                         document.getElementById("nDPFAttributes").value = "0";
-                    </script>
+                    </script>-->
                     <%
 
                     // third line and so on: data ... last column = dependent variable  
@@ -3454,7 +3456,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 }
                 br.close(); 
             }
-            else if (sSaveDataFile != "") {                
+            else if (!sSaveDataFile.equals("")) {                
                 /*
                 String snFireFlies = request.getParameter("nFireFlies");
                 String snMaxGeneration = request.getParameter("nMaxGeneration");
@@ -3930,8 +3932,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     else if (TORadio.equals("TORadio3")) {%><script>document.getElementById("TORadio3").checked = true; </script><%}
                     else if (TORadio.equals("TORadio4")) {%><script>document.getElementById("TORadio4").checked = true; </script><%}
                 }
-            }
-            else {
+            } else {
                 if (sLoadingDefault != "") {}
                 
                 if (sLoadingEvaluation != "") {  
@@ -4021,7 +4022,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     br.close();
                 }
                 else if (sFileName != "") { 
-                    String file = application.getRealPath("/") + sFileName;
+                    //String file = "E:/00 Swarm Optimization/NiMOPSJava/build/web/" + sFileName;
+                    String file = sFileName;
                     BufferedReader br = new BufferedReader(new FileReader(file)); 
                     String line = null;
                     String[] headers;
