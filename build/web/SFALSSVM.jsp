@@ -3220,7 +3220,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     <script>document.getElementById("TORadio1LSSVM").checked = true;</script>
                 <% }
                         
-            } else if (sLoadingDataFileLSSVM != "") {
+            } else if (!sLoadingDataFileLSSVM.equals("")) {
                 
                 String datafile = request.getParameter("importfileLSSVM");
                 
@@ -3253,7 +3253,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
 
                     //zero to avoid null
                     %>
-                    <script>
+                    <!--<script>
                         document.getElementById("nDFInstancesLSSVM").value = "0";
                         document.getElementById("nDFAttributesLSSVM").value = "0";
                         document.getElementById("nDTFInstancesLSSVM").value = "0";
@@ -3262,7 +3262,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                         document.getElementById("nDLFAttributesLSSVM").value = "0";
                         document.getElementById("nDPFInstancesLSSVM").value = "0";
                         document.getElementById("nDPFAttributesLSSVM").value = "0";
-                    </script>
+                    </script>-->
                     <%
 
                     // third line and so on: data ... last column = dependent variable  
@@ -3401,7 +3401,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 }
                 br.close();
             }
-            else if (sSaveDataFileLSSVM != "") {                
+            else if (!sSaveDataFileLSSVM.equals("")) {                
                 String filename;
                 if (PRadioLSSVM.equals("PRadio2LSSVM")) {
                     filename = "Data_SFA_LSSVM_Prediction.txt";
@@ -3817,8 +3817,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     else if (TORadioLSSVM.equals("TORadio3LSSVM")) {%><script>document.getElementById("TORadio3LSSVM").checked = true; </script><%}
                     else if (TORadioLSSVM.equals("TORadio4LSSVM")) {%><script>document.getElementById("TORadio4LSSVM").checked = true; </script><%}
                 }
-            }
-            else { 
+            } else { 
                 if (sLoadingDefaultLSSVM != "") {} 
                 
                 if (sLoadingEvaluationLSSVM != "") { 
@@ -3899,7 +3898,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     br.close();
                 }
                 else if (sFileNameLSSVM != "") {
-                    String file = application.getRealPath("/") + sFileNameLSSVM;
+                    //String file = application.getRealPath("/") + sFileNameLSSVM;
+                    String file = sFileNameLSSVM;
                     BufferedReader br = new BufferedReader(new FileReader(file));
                     String line = null;
                     String[] headers;
