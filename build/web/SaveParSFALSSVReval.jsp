@@ -143,6 +143,6 @@
     content = content + "36\tNo. of Instances\tsdPInstances\t" + sdPInstances+"\t-\n";
     
     response.setContentType("text/plain");
-    response.setHeader("Content-Disposition", "attachment; filename=Data_SFA_LSSVR_Evaluation.txt"); // Force "Save As" dialogue.
+    response.setHeader("Content-Disposition", "attachment; filename=Data_SFA_LSSVR_Evaluation.exp"); // Force "Save As" dialogue.
     response.getWriter().write(content); // Write CSV file to response. This will be saved in the location specified by the user.
 %>

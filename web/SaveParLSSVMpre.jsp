@@ -53,6 +53,6 @@
     content = content + "16\tNo. of Instances\tsdPInstancesLSSVM\t" + sdPInstancesLSSVM+"\t-\n";
 
     response.setContentType("text/plain");
-    response.setHeader("Content-Disposition", "attachment; filename=Data_LSSVM_Prediction.txt"); // Force "Save As" dialogue.
+    response.setHeader("Content-Disposition", "attachment; filename=Data_LSSVM_Prediction.exp"); // Force "Save As" dialogue.
     response.getWriter().write(content); // Write CSV file to response. This will be saved in the location specified by the user.
 %>
