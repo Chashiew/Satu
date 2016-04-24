@@ -567,6 +567,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 document.getElementById("sLoadingDataExcelClick").value = sLoadingDataExcelClick;
 
                 fullPath.value = sFileName.value;
+                fullPath.value = nDFInstances.value;
+                fullPath.value = nDFAttributes.value;
                 document.getElementById("myform").action = "AllModulesBaseline.jsp";
                 document.getElementById("myform").submit();
                 valid = false;
@@ -4122,10 +4124,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 int iDFInstances = 0;
                 int iDFAttributes = 0;
                 %>
-                    <script>
+                    <%--<script>
                         document.getElementById("nDFInstances").value = "<%=iDFInstances%>";
                         document.getElementById("nDFAttributes").value = "<%=iDFAttributes%>";
-                    </script>
+                    </script>--%>
                 <%
                 
                 if (sDataFile != "") {

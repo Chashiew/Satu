@@ -587,7 +587,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 document.getElementById("sDataFile").value = "";    //"null"; 
                 document.getElementById("sTestDataFile").value = ""; 
                 document.getElementById("sLearningDataFile").value = ""; 
-                document.getElementById("sPredictionDataFile").value = ""; 
+                document.getElementById("sPredictionDataFile").value = "";
                 
                 //alert("Aha22 ...!");
                 document.getElementById("nDFAttributes").value = "0"; 
@@ -3971,10 +3971,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 int iDFInstances = 0;
                 int iDFAttributes = 0;
                 %>
-                <script>
+                <%--<script>
                     document.getElementById("nDFInstances").value = "<%=iDFInstances%>";
                     document.getElementById("nDFAttributes").value = "<%=iDFAttributes%>";
-                </script>
+                </script>--%>
                 <%
                 
                 if (sDataFile != "") {
