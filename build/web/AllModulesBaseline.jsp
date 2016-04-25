@@ -653,6 +653,8 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 document.getElementById("sLoadingDataExcelClickLSSVM").value = "";
                 
                 fullPathLSSVM.value = sFileNameLSSVM.value;
+                fullPathLSSVM.value = nDFInstancesLSSVM.value;
+                fullPathLSSVM.value = nDFAttributesLSSVM.value;
                 document.getElementById("myformLSSVM").action = "AllModulesBaseline.jsp";
                 document.getElementById("myformLSSVM").submit();
                 valid = false;
@@ -6008,10 +6010,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 int iDFInstancesLSSVM = 0;
                 int iDFAttributesLSSVM = 0;
                 %>
-                    <script>
+                    <%--<script>
                         document.getElementById("nDFInstancesLSSVM").value = "<%=iDFInstancesLSSVM%>";
                         document.getElementById("nDFAttributesLSSVM").value = "<%=iDFAttributesLSSVM%>";
-                    </script>
+                    </script>--%>
                 <%
                 if (sDataFileLSSVM != "") {
                     String file = application.getRealPath("/") + sDataFileLSSVM;
