@@ -192,11 +192,29 @@ if (nDFInstances == null) {
     nDFInstances = "0";
 }
 String nTDFAttributes = request.getParameter("nTDFAttributes");
+if (nTDFAttributes == null) {
+    nTDFAttributes = "0";
+}
 String nTDFInstances = request.getParameter("nTDFInstances");
+if (nTDFInstances == null) {
+    nTDFInstances = "0";
+}
 String nLDFAttributes = request.getParameter("nLDFAttributes");
+if (nLDFAttributes == null) {
+    nLDFAttributes = "0";
+}
 String nLDFInstances = request.getParameter("nLDFInstances");
+if (nLDFInstances == null) {
+    nLDFInstances = "0";
+}
 String nPDFAttributes = request.getParameter("nPDFAttributes");
+if (nPDFAttributes == null) {
+    nPDFAttributes = "0";
+}
 String nPDFInstances = request.getParameter("nPDFInstances");
+if (nPDFInstances == null) {
+    nPDFInstances = "0";
+}
 
 if (nFireFlies == null) {
     nFireFlies = "";        //"50";
@@ -3982,7 +4000,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     document.getElementById("nDFAttributes").value = "<%=iDFAttributes%>";
                 </script>--%>
                 <%
-                
                 if (sDataFile != "") {
                     String file = application.getRealPath("/") + sDataFile;
                     BufferedReader br = new BufferedReader(new FileReader(file)); 
@@ -4088,10 +4105,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 int iTDFInstances = 0;
                 int iTDFAttributes = 0;
                 %>
-                <script>
+                <%--<script>
                     document.getElementById("nTDFInstances").value = "<%=iTDFInstances%>";
                     document.getElementById("nTDFAttributes").value = "<%=iTDFAttributes%>";
-                </script>
+                </script>--%>
                 <%
                 if (sTestDataFile != "") {
                     String file = application.getRealPath("/") + sTestDataFile;
@@ -4206,10 +4223,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 int iLDFAttributes = 0;
                 int iLDFInstances = 0;
                 %>
-                <script>
+                <%--<script>
                     document.getElementById("nLDFInstances").value = "<%=iLDFInstances%>";
                     document.getElementById("nLDFAttributes").value = "<%=iLDFAttributes%>";
-                </script>
+                </script>--%>
                 <%
                 
                 if (sLearningDataFile != "") {
@@ -4406,10 +4423,10 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 int iPDFInstances = 0; 
                 int iPDFAttributes = 0;
                 %>
-                <script>
+                <%--<script>
                     document.getElementById("nPDFInstances").value = "<%=iPDFInstances%>";
                     document.getElementById("nPDFAttributes").value = "<%=iPDFAttributes%>";
-                </script>
+                </script>--%>
                 <%
                 if (sPredictionDataFile != "") {
                     String file = application.getRealPath("/") + sPredictionDataFile;
