@@ -184,7 +184,13 @@ String dHoldOut = request.getParameter("dHoldOut");
 String dCrossValidation = request.getParameter("dCrossValidation");
 
 String nDFAttributes = request.getParameter("nDFAttributes");
+if (nDFAttributes == null) {
+    nDFAttributes = "0";
+}
 String nDFInstances = request.getParameter("nDFInstances");
+if (nDFInstances == null) {
+    nDFInstances = "0";
+}
 String nTDFAttributes = request.getParameter("nTDFAttributes");
 String nTDFInstances = request.getParameter("nTDFInstances");
 String nLDFAttributes = request.getParameter("nLDFAttributes");
