@@ -633,6 +633,36 @@
                 
                 return valid;
             }
+            
+            function saveresult() {
+                var valid = true;
+                var saveaction;
+                if (document.getElementById("MenuMO").className === "active")
+                {
+                    saveaction = "SaveSFALSSVRResultMO.jsp";
+                }
+                else if (document.getElementById("MenuPO").className === "active")
+                {
+                    saveaction = "SaveSFALSSVRResultPO.jsp";
+                }
+                else if (document.getElementById("MenuPTD").className === "active")
+                {
+                    saveaction = "SaveSFALSSVRResultPTD.jsp";
+                }
+                else if (document.getElementById("MenuTPD").className === "active")
+                {
+                    saveaction = "SaveSFALSSVRResultTPD.jsp";
+                }
+                else
+                {
+                    valid = false;
+                }
+                
+                document.getElementById("myform2").action = saveaction;
+                document.getElementById("myform2").method = "POST";
+                document.getElementById("myform2").submit();
+                return valid;
+            }
         </script>
     </head>
     <body>
@@ -2074,10 +2104,10 @@
                         </table>
                         <br>
                         <ul class="nav nav-pills nav-justified" style="background-color: lavender;">
-                            <li class="active"><a data-toggle="tab" href="#Main" id="Menu">Main Output</a></li>
-                            <li><a data-toggle="tab" href="#PGraph">Prediction Output</a></li>
-                            <li><a data-toggle="tab" href="#PTGraph">Performance Trajectory Data</a></li>
-                            <li><a data-toggle="tab" href="#TPGraph">Tracing Path Data</a></li>
+                            <li id="MenuMO" class="active"><a data-toggle="tab" href="#Main" id="Menu">Main Output</a></li>
+                            <li id="MenuPO" ><a data-toggle="tab" href="#PGraph">Prediction Output</a></li>
+                            <li id="MenuPTD" ><a data-toggle="tab" href="#PTGraph">Performance Trajectory Data</a></li>
+                            <li id="MenuTPD" ><a data-toggle="tab" href="#TPGraph">Tracing Path Data</a></li>
                         </ul>
                         <br>
                             <div class="tab-content">
@@ -3428,7 +3458,7 @@
                             </a>
                             <br>
                             <center id="bottomform2">
-                                <button type="button" onclick="" class="btn btn-primary">Save</button>
+                                <button type="button" onclick="return saveresult();" class="btn btn-primary">Save</button>
                             </center>
                             <br>
                             </div>

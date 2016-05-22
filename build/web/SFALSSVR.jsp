@@ -581,10 +581,12 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 document.getElementById("dS1").value = "1.00E-3" ;
                 document.getElementById("dS2").value = "1.00E5" ;
 
+                var date = new Date();
+                var strdatetime = "" + date.getFullYear() + (date.getMonth() + 1) + date.getDate() + date.getHours() + date.getMinutes() + date.getSeconds();
                 if (PRadio.value === "PRadio1") {
-                    document.getElementById("sBaseFileName").value = "SFALSSVR_EvaResult";
+                    document.getElementById("sBaseFileName").value = "SFALSSVR_EvaResult" + strdatetime;
                 } else {
-                    document.getElementById("sBaseFileName").value = "SFALSSVR_PreResult";
+                    document.getElementById("sBaseFileName").value = "SFALSSVR_PreResult" + strdatetime;
                 }    
                 
                 document.getElementById("dTrainingPS").value = "70" ;

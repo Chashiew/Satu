@@ -37,6 +37,6 @@
     content = content + "6\tNo. of Instances\tnDFInstances\t" + nLDFInstances+"\t-\n";
 
     response.setContentType("text/plain");
-    response.setHeader("Content-Disposition", "attachment; filename=SFALSSVR_Model.pim"); // Force "Save As" dialogue.
+    response.setHeader("Content-Disposition", "attachment; filename=SFALSSVR_Model.pimsfar"); // Force "Save As" dialogue.
     response.getWriter().write(content); // Write CSV file to response. This will be saved in the location specified by the user.
 %>

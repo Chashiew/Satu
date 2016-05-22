@@ -76,7 +76,7 @@ public class ScanDataFileSFALSSVR extends HttpServlet {
             headers = lines[1].split("\\t");
             params += "sFileName=" + datafile.getSubmittedFileName() + "&";
             params += "nDFAttributes=" + headers.length + "&";
-            params += "nDFInstances=" + (lines.length-2) + "&";
+            params += "nDFInstances=" + (lines.length-1) + "&";             // length-2 if there is a title, length-1 if no title
         }
         
         datafile = request.getPart("sTestDataFile");

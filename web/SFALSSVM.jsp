@@ -577,7 +577,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 document.getElementById("dCrossValidationLSSVM").value = "10";
 
                 document.getElementById("NormalRadio1LSSVM").checked = true; //"null" ;
-                document.getElementById("SCRadio1LSSVM").checked = true; 
+                document.getElementById("SCRadio3LSSVM").checked = true; 
                 //document.getElementById("PRadio1LSSVM").checked = true; 
                 document.getElementById("TORadio1LSSVM").checked = true; 
             
