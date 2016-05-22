@@ -2510,7 +2510,17 @@
                                     <% File d = new File(sResult04Name);
                                     if (sResult04Name != "" && d.exists() && !d.isDirectory()) {  
                                         String file = sResult04Name;
-                                        BufferedReader br = new BufferedReader(new FileReader(file)); 
+                                        BufferedReader br = new BufferedReader(new FileReader(file));
+                                        int colcount = 0; 
+                                        int rowcount = 0;
+                                        colcount = br.readLine().split("\\t").length;
+                                        while (br.readLine() != null)
+                                        {
+                                            rowcount++;
+                                        }
+                                        br.close();
+                                        
+                                        br = new BufferedReader(new FileReader(file));
                                         String line = null;
                                         String stemp;
                                         int i;
@@ -2521,8 +2531,8 @@
                                         stemp="1"; //initial value
                                         i=1;
                                         ii=1;
-                                        String[][] datatemp = new String[200][19];
-                                        String[][] datatemp24 = new String[200][19];
+                                        String[][] datatemp = new String[rowcount][colcount];
+                                        String[][] datatemp24 = new String[rowcount][colcount];
 
                                         // first block
                                         line = br.readLine();

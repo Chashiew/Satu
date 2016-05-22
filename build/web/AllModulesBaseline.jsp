@@ -681,10 +681,12 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 document.getElementById("dHoldOut").value = "20" ;
                 document.getElementById("dCrossValidation").value = "10";
 
+                var date = new Date();
+                var strdatetime = "" + date.getFullYear() + (date.getMonth() + 1) + date.getDate() + date.getHours() + date.getMinutes() + date.getSeconds();
                 if (PRadio.value === "PRadio1") {
-                    document.getElementById("sBaseFileName").value = "LSSVR_EvaResult";
+                    document.getElementById("sBaseFileName").value = "LSSVR_EvaResult" + strdatetime;
                 } else {
-                    document.getElementById("sBaseFileName").value = "LSSVR_PreResult";
+                    document.getElementById("sBaseFileName").value = "LSSVR_PreResult" + strdatetime;
                 }    
                 
                 //alert("Aha21 ...!");
@@ -855,10 +857,12 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 document.getElementById("dHoldOutLSSVM").value = "20" ;
                 document.getElementById("dCrossValidationLSSVM").value = "10";
 
+                var date = new Date();
+                var strdatetime = "" + date.getFullYear() + (date.getMonth() + 1) + date.getDate() + date.getHours() + date.getMinutes() + date.getSeconds();
                 if (PRadioLSSVM.value === "PRadio1LSSVM") {
-                    document.getElementById("sBaseFileNameLSSVM").value = "LSSVM_EvaResult";
+                    document.getElementById("sBaseFileNameLSSVM").value = "LSSVM_EvaResult" + strdatetime;
                 } else {
-                    document.getElementById("sBaseFileNameLSSVM").value = "LSSVM_PreResult";
+                    document.getElementById("sBaseFileNameLSSVM").value = "LSSVM_PreResult" + strdatetime;
                 }    
                 
                 document.getElementById("NormalRadio1LSSVM").checked = true; //"null" ;

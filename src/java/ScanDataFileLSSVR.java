@@ -75,7 +75,7 @@ public class ScanDataFileLSSVR extends HttpServlet {
             headers = lines[1].split("\\t");
             params += "sFileName=" + datafile.getSubmittedFileName() + "&";
             params += "nDFAttributes=" + headers.length + "&";
-            params += "nDFInstances=" + (lines.length-2) + "&";
+            params += "nDFInstances=" + (lines.length-1) + "&";
         }
         
         datafile = request.getPart("sTestDataFile");
@@ -112,7 +112,7 @@ public class ScanDataFileLSSVR extends HttpServlet {
             headers = lines[1].split("\\t");
             params += "sTestFileName=" + datafile.getSubmittedFileName() + "&";
             params += "nTDFAttributes=" + headers.length + "&";
-            params += "nTDFInstances=" + (lines.length-2) + "&";
+            params += "nTDFInstances=" + (lines.length-1) + "&";
         }
         
         datafile = request.getPart("sLearningDataFile");
@@ -149,7 +149,7 @@ public class ScanDataFileLSSVR extends HttpServlet {
             headers = lines[1].split("\\t");
             params += "sLearningFileName=" + datafile.getSubmittedFileName() + "&";
             params += "nLDFAttributes=" + headers.length + "&";
-            params += "nLDFInstances=" + (lines.length-2) + "&";
+            params += "nLDFInstances=" + (lines.length-1) + "&";
         }
         
         datafile = request.getPart("sPredictionDataFile");
@@ -186,7 +186,7 @@ public class ScanDataFileLSSVR extends HttpServlet {
             headers = lines[1].split("\\t");
             params += "sPredictionFileName=" + datafile.getSubmittedFileName()+ "&";
             params += "nPDFAttributes=" + headers.length + "&";
-            params += "nPDFInstances=" + (lines.length-2) + "&";
+            params += "nPDFInstances=" + (lines.length-1) + "&";
         }
         
         java.util.Enumeration enu = request.getParameterNames();

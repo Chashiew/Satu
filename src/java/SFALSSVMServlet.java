@@ -40,6 +40,8 @@ import com.mathworks.toolbox.javabuilder.webfigures.WebFigure;
 import com.mathworks.toolbox.javabuilder.webfigures.WebFigureHtmlGenerator;
 
 import ProgramSFALSSVM.SFALSSVMClass;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class SFALSSVMServlet extends HttpServlet {
 
@@ -126,6 +128,16 @@ public class SFALSSVMServlet extends HttpServlet {
 
             try {
                 BufferedReader br = new BufferedReader(new FileReader(file));
+                ArrayList<String> arr = new ArrayList();
+                while ((line = br.readLine()) != null)
+                {
+                    arr.add(line);
+                }
+                br.close();
+                
+                String header = arr.remove(0);
+                Collections.shuffle(arr);
+                
                 String sDummy;
                 String[] headers;
                 String[] cols;
@@ -133,18 +145,27 @@ public class SFALSSVMServlet extends HttpServlet {
                 int j;
 
                 // first line: title
-                line = br.readLine();
+                //line = br.readLine();
 
-                if (line != null) {
-                    cols = line.split("\\t");
+                if (arr.size() > 0) {
+                    //cols = line.split("\\t");
 
                     // second line: column header
-                    line = br.readLine();
-                    headers = line.split("\\t");
+                    //line = br.readLine();
+                    headers = header.split("\\t");
 
                     // third line and so on: data ... last column = dependent variable  
-                    line = br.readLine(); 
-                    j=0;
+                    //line = br.readLine(); 
+                    for (j = 0; j < arr.size(); j++)
+                    {
+                        line = arr.get(j);
+                        cols = line.split("\\t");
+                        for (i = 0; i < ncol; i += 1) {
+                            sDummy = cols[i];
+                            Datatrain[j][i]=Double.parseDouble(sDummy);
+                        }
+                    }
+                    /*j=0;
                     while (line != null) {
                         cols = line.split("\\t");
                         for (i = 0; i < ncol; i += 1) {
@@ -153,9 +174,9 @@ public class SFALSSVMServlet extends HttpServlet {
                         }
                         j=j+1;
                         line = br.readLine();
-                    }
+                    }*/
                 }
-                br.close();
+                //br.close();
             } 
             catch (Exception e) {
                 e.printStackTrace();
