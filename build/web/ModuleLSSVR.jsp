@@ -2054,6 +2054,23 @@
                                 if (stResult04Name != "" && d.exists() && !d.isDirectory()) {  
                                     String file = stResult04Name;
                                     BufferedReader br = new BufferedReader(new FileReader(file)); 
+                                    int colcount = 0;
+                                    int rowcount = 0;
+                                    int coln;
+                                    String sent;
+                                    //colcount = br.readLine().split("\\t").length;
+                                    while ((sent = br.readLine()) != null)
+                                    {
+                                        coln = sent.split("\\t").length;
+                                        if (colcount < coln)
+                                        {
+                                            colcount = coln;
+                                        }
+                                        rowcount++;
+                                    }
+                                    br.close();
+
+                                    br = new BufferedReader(new FileReader(file));
                                     String line = null;
                                     String stemp;
                                     int i;
@@ -2064,8 +2081,8 @@
                                     stemp="1"; //initial value
                                     i=1;
                                     ii=1;
-                                    String[][] datatemp = new String[2021][19];
-                                    String[][] datatemp3 = new String[2021][19];
+                                    String[][] datatemp = new String[rowcount][colcount];
+                                    String[][] datatemp3 = new String[rowcount][colcount];
 
                                     // first block
                                     line = br.readLine();

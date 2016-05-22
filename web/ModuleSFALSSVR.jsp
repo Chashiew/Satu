@@ -2793,6 +2793,16 @@
                                     if (sResult04aName != "" && e.exists() && !e.isDirectory()) {  
                                         String file = sResult04aName;
                                         BufferedReader br = new BufferedReader(new FileReader(file)); 
+                                        int colcount = 0; 
+                                        int rowcount = 1;
+                                        colcount = br.readLine().split("\\t").length;
+                                        while (br.readLine() != null)
+                                        {
+                                            rowcount++;
+                                        }
+                                        br.close();
+
+                                        br = new BufferedReader(new FileReader(file));
                                         String line = null;
                                         String stemp;
                                         int i;
@@ -2802,7 +2812,7 @@
                                         stemp="1"; //initial value
                                         i=1;
                                         ii=1;
-                                        String[][] datatemp = new String[1021][9];
+                                        String[][] datatemp = new String[rowcount][colcount];
 
                                         line = br.readLine();
                                         cols = line.split("\\t");
@@ -2871,6 +2881,16 @@
                                     if (sResult04bName != "" && f.exists() && !f.isDirectory()) {  
                                         String file = sResult04bName;
                                         BufferedReader br = new BufferedReader(new FileReader(file)); 
+                                        int colcount = 0; 
+                                        int rowcount = 1;
+                                        colcount = br.readLine().split("\\t").length;
+                                        while (br.readLine() != null)
+                                        {
+                                            rowcount++;
+                                        }
+                                        br.close();
+
+                                        br = new BufferedReader(new FileReader(file));
                                         String line = null;
                                         String stemp;
                                         int i;
@@ -2880,7 +2900,7 @@
                                         stemp="1"; //initial value
                                         i=1;
                                         ii=1;
-                                        String[][] datatemp = new String[1021][9];
+                                        String[][] datatemp = new String[rowcount][colcount];
 
                                         line = br.readLine();
                                         cols = line.split("\\t");
@@ -2949,6 +2969,16 @@
                                     if (sResult04cName != "" && g.exists() && !g.isDirectory()) {  
                                         String file = sResult04cName;
                                         BufferedReader br = new BufferedReader(new FileReader(file)); 
+                                        int colcount = 0; 
+                                        int rowcount = 1;
+                                        colcount = br.readLine().split("\\t").length;
+                                        while (br.readLine() != null)
+                                        {
+                                            rowcount++;
+                                        }
+                                        br.close();
+
+                                        br = new BufferedReader(new FileReader(file));
                                         String line = null;
                                         String stemp;
                                         int i;
@@ -2958,7 +2988,7 @@
                                         stemp="1"; //initial value
                                         i=1;
                                         ii=1;
-                                        String[][] datatemp = new String[1021][9];
+                                        String[][] datatemp = new String[rowcount][colcount];
 
                                         line = br.readLine();
                                         cols = line.split("\\t");
@@ -3022,6 +3052,16 @@
                                     if (sResult04dName != "" && h.exists() && !h.isDirectory()) {  
                                         String file = sResult04dName;
                                         BufferedReader br = new BufferedReader(new FileReader(file)); 
+                                        int colcount = 0; 
+                                        int rowcount = 1;
+                                        colcount = br.readLine().split("\\t").length;
+                                        while (br.readLine() != null)
+                                        {
+                                            rowcount++;
+                                        }
+                                        br.close();
+
+                                        br = new BufferedReader(new FileReader(file));
                                         String line = null;
                                         String stemp;
                                         int i;
@@ -3031,7 +3071,7 @@
                                         stemp="1"; //initial value
                                         i=1;
                                         ii=1;
-                                        String[][] datatemp = new String[1021][9];
+                                        String[][] datatemp = new String[rowcount][colcount];
 
                                         line = br.readLine();
                                         cols = line.split("\\t");
@@ -3115,6 +3155,16 @@
                                     if (sResult05Name != "" && ist.exists() && !ist.isDirectory()) {  
                                         String file = sResult05Name;
                                         BufferedReader br = new BufferedReader(new FileReader(file)); 
+                                        int colcount = 0; 
+                                        int rowcount = 1;
+                                        colcount = br.readLine().split("\\t").length;
+                                        while (br.readLine() != null)
+                                        {
+                                            rowcount++;
+                                        }
+                                        br.close();
+
+                                        br = new BufferedReader(new FileReader(file));
                                         String line = null;
                                         String stemp;
                                         int i; 
@@ -3128,7 +3178,7 @@
                                         i=1;
                                         ii=1;
                                         jj=0; 
-                                        String[][] datatemp = new String[1000][21];
+                                        String[][] datatemp = new String[rowcount][colcount];
 
                                         line = br.readLine();
                                         cols = line.split("\\t");
@@ -3291,6 +3341,16 @@
                                     if (sResult06Name != "" && jst.exists() && !jst.isDirectory()) {  
                                         String file = sResult06Name;
                                         BufferedReader br = new BufferedReader(new FileReader(file)); 
+                                        int colcount = 0; 
+                                        int rowcount = 1;
+                                        colcount = br.readLine().split("\\t").length;
+                                        while (br.readLine() != null)
+                                        {
+                                            rowcount++;
+                                        }
+                                        br.close();
+
+                                        br = new BufferedReader(new FileReader(file));
                                         String line = null;
                                         String stemp;
                                         int i; 
@@ -3300,19 +3360,19 @@
                                         int nNilai1=1;
                                         int nNilai2;
                                         
-                                        nrow = 0;
+                                        /*nrow = 0;
                                         // make the system read the content flexible
                                         while ((line = br.readLine()) != null) {
                                             nrow += 1;
                                         }
                                         
-                                        br = new BufferedReader(new FileReader(file)); 
+                                        br = new BufferedReader(new FileReader(file));*/ 
                                         
                                         stemp="1"; //initial value
                                         i=1;
                                         ii=1;
                                         jj=0; 
-                                        String[][] datatemp = new String[nrow][21];
+                                        String[][] datatemp = new String[rowcount][colcount];
 
                                         line = br.readLine();
                                         cols = line.split("\\t");
