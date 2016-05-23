@@ -2206,7 +2206,7 @@
                                         <br>
                                         <center>
                                             <% if (PRadioLSSVM.equals("PRadio2LSSVM")) { %>
-                                                <button class="btn btn-primary" onclick="return savingmodelexport();">Save Optimum Hyperparameters</button>
+                                                <button class="btn btn-primary" onclick="return savingmodelexport();">Save Model</button>
                                             <% } %>
                                         </center>
                                         <br>

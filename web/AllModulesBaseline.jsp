@@ -2801,7 +2801,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             <div class="container boundary">
                                 <h2><font face="Palatino Linotype, Book Antiqua, Palatino, serif" size="6">Model Settings</font></h2>
                                 <button type="button" onclick="return writedefaultlssvr(0)" class="btn btn-primary">Default</button>
-                                <button type="button" class="btn btn-primary" onclick="return loadmodelfunc();">Load Optimum Hyperparameters</button>
+                                <button type="button" class="btn btn-primary" onclick="return loadmodelfunc();">Load Model</button>
                                 <%--<button type="button" onclick="return loadingdataform(1);" class="btn btn-primary">Import</button>--%>
                                 <button type="button" onclick="return importfilefunc();" id="importbutton" class="btn btn-primary">Import</button>
                                 <button type="button" onclick="return exportparameters(0);" class="btn btn-primary">Export</button>
@@ -4703,7 +4703,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                             <div class="container boundary">
                                 <h2><font face="Palatino Linotype, Book Antiqua, Palatino, serif" size="6">Model Settings</font></h2>
                                 <button type="button" onclick="return writedefaultlssvm(0)" class="btn btn-primary">Default</button>
-                                <button type="button" onclick="return loadmodelfuncLSSVM()" class="btn btn-primary">Load Optimum Hyperparameters</button>
+                                <button type="button" onclick="return loadmodelfuncLSSVM()" class="btn btn-primary">Load Model</button>
                                 <%--<button type="button" onclick="return loadingdataformLSSVM(1);" class="btn btn-primary">Import</button>--%>
                                 <button type="button" onclick="return importSVMfilefunc();" id="importbutton" class="btn btn-primary">Import</button>
                                 <button type="button" onclick="return exportparametersLSSVM(0);" class="btn btn-primary">Export</button>
