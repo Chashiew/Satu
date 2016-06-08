@@ -1254,7 +1254,7 @@
                                 cols = line.split("\\t");
 
                                 // second line: column header
-                                line = br.readLine();
+                                //line = br.readLine();
                                 headers = line.split("\\t");
 
                                 // third line and so on: data ... last column = dependent variable  
@@ -1272,7 +1272,7 @@
                                 cols = line.split("\\t");
 
                                 // second line: column header
-                                line = br.readLine();
+                                //line = br.readLine();
                                 headers = line.split("\\t");
 
                                 // third line and so on: data ... last column = dependent variable  
@@ -1418,7 +1418,7 @@
                                 cols = line.split("\\t");
 
                                 // second line: column header
-                                line = br.readLine();
+                                //line = br.readLine();
                                 headers = line.split("\\t");
 
                                 // third line and so on: data ... last column = dependent variable  
@@ -1436,7 +1436,7 @@
                                 cols = line.split("\\t");
 
                                 // second line: column header
-                                line = br.readLine();
+                                //line = br.readLine();
                                 headers = line.split("\\t");
 
                                 // third line and so on: data ... last column = dependent variable  

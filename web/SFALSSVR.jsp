@@ -603,7 +603,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 //alert("Aha12 ...!");
                 document.getElementById("OptimRadio1").checked = true;   
                 //alert("Aha13 ...!");
-                document.getElementById("SCRadio1").checked = true; 
+                document.getElementById("SCRadio3").checked = true; 
                 //alert("Aha14 ...!");
                 //document.getElementById("PRadio1").checked = true; 
                 //alert("Aha15 ...!");
@@ -2213,6 +2213,14 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 </div>
                                 <br>
                                 <div class="row">
+                                    <div class="col-md-4">Initial population generation:</div>
+                                    <div class="col-md-2">Biotic potential, a</div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="dBPotential" id="dBPotential" size="5" value="<%=dBPotential%>"/>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
                                     <div class="col-md-4">Attractiveness:</div>
                                     <div class="col-md-2">Beta min.</div>
                                     <div class="col-md-1">
@@ -2249,14 +2257,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                     <div class="col-md-2">Tau</div>
                                     <div class="col-md-1">
                                         <input type="text" id="dTau" name="dTau" size="5" value="<%=dTau%>"/>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-md-4">Logistic map:</div>
-                                    <div class="col-md-2">Biotic potential, a</div>
-                                    <div class="col-md-1">
-                                        <input type="text" name="dBPotential" id="dBPotential" size="5" value="<%=dBPotential%>"/>
                                     </div>
                                 </div>
                                 <br>

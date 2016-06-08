@@ -2151,6 +2151,14 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                 </div>
                                 <br>
                                 <div class="row">
+                                    <div class="col-md-4">Initial population generation:</div>
+                                    <div class="col-md-2">Biotic potential, a</div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="dBPotentialLSSVM" id="dBPotentialLSSVM" size="5" value="<%=dBPotentialLSSVM%>">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
                                     <div class="col-md-4">Attractiveness:</div>
                                     <div class="col-md-2">Beta min.</div>
                                     <div class="col-md-1">
@@ -2187,14 +2195,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                     <div class="col-md-2">Tau</div>
                                     <div class="col-md-1">
                                         <input type="text" id="dTauLSSVM" name="dTauLSSVM" size="5" value="<%=dTauLSSVM%>"> 
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-md-4">Logistic map:</div>
-                                    <div class="col-md-2">Biotic potential, a</div>
-                                    <div class="col-md-1">
-                                        <input type="text" name="dBPotentialLSSVM" id="dBPotentialLSSVM" size="5" value="<%=dBPotentialLSSVM%>">
                                     </div>
                                 </div>
                                 <br>

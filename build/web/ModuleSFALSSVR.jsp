@@ -488,6 +488,18 @@
                 var sPFileData = document.getElementById("sPFileData");
                 var sPdInstances = document.getElementById("sdPInstances");
                 var sPdAttributes = document.getElementById("sdPAttributes");
+                
+                document.getElementById("sResult01Name").value = "";
+                document.getElementById("sResult02Name").value = "";
+                document.getElementById("sResult03Name").value = "";
+                document.getElementById("sResult04Name").value = "";
+                document.getElementById("sResult04aName").value = "";
+                document.getElementById("sResult04bName").value = "";
+                document.getElementById("sResult04cName").value = "";
+                document.getElementById("sResult04dName").value = "";
+                document.getElementById("sResult05Name").value = "";
+                document.getElementById("sResult06Name").value = "";
+                
 
                 var VarOne = document.getElementById("VarOne");
                 document.getElementById("VarOne").value = "One";
@@ -1254,6 +1266,10 @@
                                                 <div class="col-md-4">Max. generation = <%=nf.format(nMaxGeneration)%></div>
                                             </div><br>
                                             <div class="row">
+                                                <div class="col-md-4">Initial population generation:</div>
+                                                <div class="col-md-4">Biotic potential, a = <%=nf2.format(dBPotential)%></div>
+                                            </div><br>
+                                            <div class="row">
                                                 <div class="col-md-4">Attractiveness:</div>
                                                 <div class="col-md-4">Beta min. = <%=nf2.format(dMinBeta)%></div>
                                             </div>
@@ -1272,10 +1288,6 @@
                                             <div class="row">
                                                 <div class="col-md-4"></div>
                                                 <div class="col-md-4">Tau = <%=nf2.format(dTau)%></div>
-                                            </div><br>
-                                            <div class="row">
-                                                <div class="col-md-4">Logistic map:</div>
-                                                <div class="col-md-4">Biotic potential, a = <%=nf2.format(dBPotential)%></div>
                                             </div><br>
                                             <div class="row">
                                                 <div class="col-md-4">Hyperparameters:</div>
@@ -1665,7 +1677,7 @@
                                         cols = line.split("\\t");
 
                                         // second line: column header
-                                        line = br.readLine();
+                                        //line = br.readLine();
                                         headers = line.split("\\t");
 
                                         // third line and so on: data ... last column = dependent variable  
@@ -1683,7 +1695,7 @@
                                         cols = line.split("\\t");
 
                                         // second line: column header
-                                        line = br.readLine();
+                                        //line = br.readLine();
                                         headers = line.split("\\t");
 
                                         // third line and so on: data ... last column = dependent variable  
@@ -1824,7 +1836,7 @@
                                         cols = line.split("\\t");
 
                                         // second line: column header
-                                        line = br.readLine();
+                                        //line = br.readLine();
                                         headers = line.split("\\t");
 
                                         // third line and so on: data ... last column = dependent variable  
@@ -1842,7 +1854,7 @@
                                         cols = line.split("\\t");
 
                                         // second line: column header
-                                        line = br.readLine();
+                                        //line = br.readLine();
                                         headers = line.split("\\t");
 
                                         // third line and so on: data ... last column = dependent variable  

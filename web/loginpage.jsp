@@ -90,12 +90,16 @@
             </table>
             
             <input type="submit" class="btn btn-primary" name="VarSubmit" value="Submit" style="font-size: 10pt"/> 
-            
             <%--
             username.focus();
-            --%>                                        
+            --%> 
+            
         </form> 
     </center>
+    <br/><br/><br/><br/><br/><br/>
+    <div style="width: 400px; height:400px; position: relative; margin-left: auto; margin-right: auto;">
+        <img src="best viewed01.png" alt="Image Not Found ..." style="width: 100%; bottom: 0px; position: absolute; text-align: center;"/>
+    </div>
  
     <!--<script>
         function checklogin(val) { 

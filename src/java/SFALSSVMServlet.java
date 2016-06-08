@@ -484,7 +484,7 @@ public class SFALSSVMServlet extends HttpServlet {
                         */
 
                         pw.write("<script>");
-                        pw.write("alert(\"Execution completed successfully! \\n\\nClick Numerical Results to see the output\");");
+                        pw.write("alert(\"Execution completed successfully! \\n\\nClick 'Numerical Results' to see the output\");");
                         pw.write("</script>");
                         pw.close();
                     } finally {

@@ -1200,6 +1200,11 @@
                                         </div>
                                         <br>
                                         <div class="row">
+                                            <div class="col-md-4">Initial population generation:</div>
+                                            <div class="col-md-3">Biotic potential, a = <%=nf2.format(dBPotentialLSSVM)%></div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
                                             <div class="col-md-4">Attractiveness:</div>
                                             <div class="col-md-3">Beta min. = <%=nf2.format(dMinBetaLSSVM)%></div>
                                         </div>
@@ -1219,11 +1224,6 @@
                                         <div class="row">
                                             <div class="col-md-4"></div>
                                             <div class="col-md-3">Tau = <%=nf2.format(dTauLSSVM)%></div>
-                                        </div>
-                                        <br>
-                                        <div class="row">
-                                            <div class="col-md-4">Logistic map:</div>
-                                            <div class="col-md-3">Biotic potential, a = <%=nf2.format(dBPotentialLSSVM)%></div>
                                         </div>
                                         <br>
                                         <div class="row">
@@ -1603,7 +1603,7 @@
                                     cols = line.split("\\t");
 
                                     // second line: column header
-                                    line = br.readLine();
+                                    //line = br.readLine();
                                     headers = line.split("\\t");
 
                                     // third line and so on: data ... last column = dependent variable  
@@ -1621,7 +1621,7 @@
                                     cols = line.split("\\t");
 
                                     // second line: column header
-                                    line = br.readLine();
+                                    //line = br.readLine();
                                     headers = line.split("\\t");
 
                                     // third line and so on: data ... last column = dependent variable  
@@ -1761,7 +1761,7 @@
                                     cols = line.split("\\t");
 
                                     // second line: column header
-                                    line = br.readLine();
+                                    //line = br.readLine();
                                     headers = line.split("\\t");
 
                                     // third line and so on: data ... last column = dependent variable  
@@ -1779,7 +1779,7 @@
                                     cols = line.split("\\t");
 
                                     // second line: column header
-                                    line = br.readLine();
+                                    //line = br.readLine();
                                     headers = line.split("\\t");
 
                                     // third line and so on: data ... last column = dependent variable  

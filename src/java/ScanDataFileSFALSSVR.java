@@ -131,12 +131,12 @@ public class ScanDataFileSFALSSVR extends HttpServlet {
             
             Writer writer;
             try {
-                File dir = new File("E://00 Swarm Optimization/dataset/");
+                File dir = new File("E:\\00 Swarm Optimization\\NiMOPSJava\\build\\web\\");
                 if (!dir.exists() || !dir.isDirectory()) {
                     dir.mkdir();
                 }
                 writer = new BufferedWriter(new OutputStreamWriter(
-                      new FileOutputStream("E://00 Swarm Optimization/dataset/" + datafile.getSubmittedFileName()), "utf-8"));
+                      new FileOutputStream("E:\\00 Swarm Optimization\\NiMOPSJava\\build\\web\\" + datafile.getSubmittedFileName()), "utf-8"));
                 writer.write(content);
                 writer.close();
             } catch (IOException e) {
@@ -168,12 +168,12 @@ public class ScanDataFileSFALSSVR extends HttpServlet {
             
             Writer writer;
             try {
-                File dir = new File("E://00 Swarm Optimization/dataset/");
+                File dir = new File("E:\\00 Swarm Optimization\\NiMOPSJava\\build\\web\\");
                 if (!dir.exists() || !dir.isDirectory()) {
                     dir.mkdir();
                 }
                 writer = new BufferedWriter(new OutputStreamWriter(
-                      new FileOutputStream("E://00 Swarm Optimization/dataset/" + datafile.getSubmittedFileName()), "utf-8"));
+                      new FileOutputStream("E:\\00 Swarm Optimization\\NiMOPSJava\\build\\web\\" + datafile.getSubmittedFileName()), "utf-8"));
                 writer.write(content);
                 writer.close();
             } catch (IOException e) {
