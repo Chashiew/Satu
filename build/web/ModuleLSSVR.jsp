@@ -489,7 +489,37 @@
                 document.getElementById("sGraphNo").value = val;
                 document.getElementById("sopt").value = 2;
                 return refreshform(val);
-            } 
+            }
+            
+            function saveresult() {
+                var valid = true;
+                var saveaction;
+                if (document.getElementById("MenuMO").className === "active")
+                {
+                    saveaction = "SaveLSSVRResultMO.jsp";
+                }
+                else if (document.getElementById("MenuPOT") !== null && document.getElementById("MenuPOT").className === "active")
+                {
+                    saveaction = "SaveLSSVRResultPOT.jsp";
+                }
+                else if (document.getElementById("MenuPOP") !== null && document.getElementById("MenuPOP").className === "active")
+                {
+                    saveaction = "SaveLSSVRResultPOP.jsp";
+                }
+                else if (document.getElementById("MenuPOL").className === "active")
+                {
+                    saveaction = "SaveLSSVRResultPOL.jsp";
+                }
+                else
+                {
+                    valid = false;
+                }
+                
+                document.getElementById("myform2").action = saveaction;
+                document.getElementById("myform2").method = "POST";
+                document.getElementById("myform2").submit();
+                return valid;
+            }
         </script>
     </head>
     <body>
@@ -1686,13 +1716,13 @@
                         </table>
                         <br>
                         <ul class="nav nav-pills nav-justified" style="background-color: lavender;">
-                            <li class="active"><a data-toggle="tab" href="#Main" id="Menu">Main Output</a></li>
+                            <li id="MenuMO" class="active"><a data-toggle="tab" href="#Main" id="Menu">Main Output</a></li>
                             <% if (PRadio.equals("PRadio1")) { %> 
-                                <li><a data-toggle="tab" href="#PGraph">Prediction Output of Test Data</a></li>
+                                <li id="MenuPOT"><a data-toggle="tab" href="#PGraph">Prediction Output of Test Data</a></li>
                             <% } else { %>
-                                <li><a data-toggle="tab" href="#PGraph">Prediction Output of Prediction Data</a></li>
+                                <li id="MenuPOP"><a data-toggle="tab" href="#PGraph">Prediction Output of Prediction Data</a></li>
                             <% } %>
-                            <li><a data-toggle="tab" href="#PTGraph">Prediction Output of Learning Data</a></li>
+                            <li id="MenuPOL"><a data-toggle="tab" href="#PTGraph">Prediction Output of Learning Data</a></li>
                         </ul>
                         <br>
                         <div class="tab-content">
@@ -2268,7 +2298,7 @@
                                 </a>
                                 <br>
                                 <center id="bottomform2">
-                                    <button type="button" onclick="" class="btn btn-primary">Save</button>
+                                    <button type="button" onclick="return saveresult();" class="btn btn-primary">Save</button>
                                 </center>
                             </div>
 
@@ -2467,7 +2497,7 @@
                                 </a>
                                 <br>
                                 <center id="bottomform2"> 
-                                    <button type="button" onclick="" class="btn btn-primary">Save</button>
+                                    <button type="button" onclick="return saveresult();" class="btn btn-primary">Save</button>
                                 </center>
                             </div>
 
@@ -2654,7 +2684,7 @@
                                 </a>
                                 <br>
                                 <center id="bottomform2">
-                                    <button type="button" onclick="" class="btn btn-primary">Save</button>
+                                    <button type="button" onclick="return saveresult();" class="btn btn-primary">Save</button>
                                 </center>
                             </div>
                             <br>

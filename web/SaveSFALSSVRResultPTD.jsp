@@ -1,7 +1,6 @@
 <%@page import="java.io.FileReader"%><%@page import="java.io.BufferedReader"%><%@page import="java.io.File"%>
 <%
     String content = "";
-    String PRadio = request.getParameter("PRadio");
     String foldno = "0";
     
     String sResult05Name = request.getParameter("sResult05Name");
