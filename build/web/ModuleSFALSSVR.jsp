@@ -500,7 +500,6 @@
                 document.getElementById("sResult05Name").value = "";
                 document.getElementById("sResult06Name").value = "";
                 
-
                 var VarOne = document.getElementById("VarOne");
                 document.getElementById("VarOne").value = "One";
                 
@@ -2523,11 +2522,18 @@
                                     if (sResult04Name != "" && d.exists() && !d.isDirectory()) {  
                                         String file = sResult04Name;
                                         BufferedReader br = new BufferedReader(new FileReader(file));
-                                        int colcount = 0; 
+                                        int colcount = 0;
                                         int rowcount = 0;
-                                        colcount = br.readLine().split("\\t").length;
-                                        while (br.readLine() != null)
+                                        int coln;
+                                        String sent;
+                                        //colcount = br.readLine().split("\\t").length;
+                                        while ((sent = br.readLine()) != null)
                                         {
+                                            coln = sent.split("\\t").length;
+                                            if (colcount < coln)
+                                            {
+                                                colcount = coln;
+                                            }
                                             rowcount++;
                                         }
                                         br.close();
@@ -2805,11 +2811,18 @@
                                     if (sResult04aName != "" && e.exists() && !e.isDirectory()) {  
                                         String file = sResult04aName;
                                         BufferedReader br = new BufferedReader(new FileReader(file)); 
-                                        int colcount = 0; 
-                                        int rowcount = 1;
-                                        colcount = br.readLine().split("\\t").length;
-                                        while (br.readLine() != null)
+                                        int colcount = 0;
+                                        int rowcount = 0;
+                                        int coln;
+                                        String sent;
+                                        //colcount = br.readLine().split("\\t").length;
+                                        while ((sent = br.readLine()) != null)
                                         {
+                                            coln = sent.split("\\t").length;
+                                            if (colcount < coln)
+                                            {
+                                                colcount = coln;
+                                            }
                                             rowcount++;
                                         }
                                         br.close();
@@ -2893,11 +2906,18 @@
                                     if (sResult04bName != "" && f.exists() && !f.isDirectory()) {  
                                         String file = sResult04bName;
                                         BufferedReader br = new BufferedReader(new FileReader(file)); 
-                                        int colcount = 0; 
-                                        int rowcount = 1;
-                                        colcount = br.readLine().split("\\t").length;
-                                        while (br.readLine() != null)
+                                        int colcount = 0;
+                                        int rowcount = 0;
+                                        int coln;
+                                        String sent;
+                                        //colcount = br.readLine().split("\\t").length;
+                                        while ((sent = br.readLine()) != null)
                                         {
+                                            coln = sent.split("\\t").length;
+                                            if (colcount < coln)
+                                            {
+                                                colcount = coln;
+                                            }
                                             rowcount++;
                                         }
                                         br.close();
@@ -2981,11 +3001,18 @@
                                     if (sResult04cName != "" && g.exists() && !g.isDirectory()) {  
                                         String file = sResult04cName;
                                         BufferedReader br = new BufferedReader(new FileReader(file)); 
-                                        int colcount = 0; 
-                                        int rowcount = 1;
-                                        colcount = br.readLine().split("\\t").length;
-                                        while (br.readLine() != null)
+                                        int colcount = 0;
+                                        int rowcount = 0;
+                                        int coln;
+                                        String sent;
+                                        //colcount = br.readLine().split("\\t").length;
+                                        while ((sent = br.readLine()) != null)
                                         {
+                                            coln = sent.split("\\t").length;
+                                            if (colcount < coln)
+                                            {
+                                                colcount = coln;
+                                            }
                                             rowcount++;
                                         }
                                         br.close();
@@ -3064,11 +3091,18 @@
                                     if (sResult04dName != "" && h.exists() && !h.isDirectory()) {  
                                         String file = sResult04dName;
                                         BufferedReader br = new BufferedReader(new FileReader(file)); 
-                                        int colcount = 0; 
-                                        int rowcount = 1;
-                                        colcount = br.readLine().split("\\t").length;
-                                        while (br.readLine() != null)
+                                        int colcount = 0;
+                                        int rowcount = 0;
+                                        int coln;
+                                        String sent;
+                                        //colcount = br.readLine().split("\\t").length;
+                                        while ((sent = br.readLine()) != null)
                                         {
+                                            coln = sent.split("\\t").length;
+                                            if (colcount < coln)
+                                            {
+                                                colcount = coln;
+                                            }
                                             rowcount++;
                                         }
                                         br.close();
@@ -3167,11 +3201,18 @@
                                     if (sResult05Name != "" && ist.exists() && !ist.isDirectory()) {  
                                         String file = sResult05Name;
                                         BufferedReader br = new BufferedReader(new FileReader(file)); 
-                                        int colcount = 0; 
-                                        int rowcount = 1;
-                                        colcount = br.readLine().split("\\t").length;
-                                        while (br.readLine() != null)
+                                        int colcount = 0;
+                                        int rowcount = 0;
+                                        int coln;
+                                        String sent;
+                                        //colcount = br.readLine().split("\\t").length;
+                                        while ((sent = br.readLine()) != null)
                                         {
+                                            coln = sent.split("\\t").length;
+                                            if (colcount < coln)
+                                            {
+                                                colcount = coln;
+                                            }
                                             rowcount++;
                                         }
                                         br.close();
@@ -3353,11 +3394,18 @@
                                     if (sResult06Name != "" && jst.exists() && !jst.isDirectory()) {  
                                         String file = sResult06Name;
                                         BufferedReader br = new BufferedReader(new FileReader(file)); 
-                                        int colcount = 0; 
-                                        int rowcount = 1;
-                                        colcount = br.readLine().split("\\t").length;
-                                        while (br.readLine() != null)
+                                        int colcount = 0;
+                                        int rowcount = 0;
+                                        int coln;
+                                        String sent;
+                                        //colcount = br.readLine().split("\\t").length;
+                                        while ((sent = br.readLine()) != null)
                                         {
+                                            coln = sent.split("\\t").length;
+                                            if (colcount < coln)
+                                            {
+                                                colcount = coln;
+                                            }
                                             rowcount++;
                                         }
                                         br.close();

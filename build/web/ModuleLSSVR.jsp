@@ -403,7 +403,14 @@
                 var sPFileData = document.getElementById("sPFileData");
                 var sPdInstances = document.getElementById("sdPInstances");
                 var sPdAttributes = document.getElementById("sdPAttributes");
-
+                
+                document.getElementById("stResult01Name").value = "";
+                document.getElementById("stResult02Name").value = "";
+                document.getElementById("stResult03Name").value = "";
+                document.getElementById("stResult04Name").value = "";
+                document.getElementById("stResult04cName").value = "";
+                document.getElementById("stResult04dName").value = "";
+                
                 var VarA = document.getElementById("VarA");
                 document.getElementById("VarA").value = "One";
                 
@@ -2335,6 +2342,23 @@
                                 if (stResult04dName != "" && kst.exists() && !kst.isDirectory()) {  
                                     String file = stResult04dName; 
                                     BufferedReader br = new BufferedReader(new FileReader(file)); 
+                                    int colcount = 0;
+                                    int rowcount = 0;
+                                    int coln;
+                                    String sent;
+                                    //colcount = br.readLine().split("\\t").length;
+                                    while ((sent = br.readLine()) != null)
+                                    {
+                                        coln = sent.split("\\t").length;
+                                        if (colcount < coln)
+                                        {
+                                            colcount = coln;
+                                        }
+                                        rowcount++;
+                                    }
+                                    br.close();
+
+                                    br = new BufferedReader(new FileReader(file));
                                     String line = null;
                                     String stemp;
                                     int i; 
@@ -2356,7 +2380,7 @@
                                     i=1;
                                     ii=1;
                                     jj=0; 
-                                    String[][] datatemp = new String[nrow][21];
+                                    String[][] datatemp = new String[rowcount][colcount];
 
                                     line = br.readLine();
                                     line = br.readLine();
@@ -2534,6 +2558,23 @@
                                 if (stResult04cName != "" && jst.exists() && !jst.isDirectory()) {  
                                     String file = stResult04cName; 
                                     BufferedReader br = new BufferedReader(new FileReader(file)); 
+                                    int colcount = 0;
+                                    int rowcount = 0;
+                                    int coln;
+                                    String sent;
+                                    //colcount = br.readLine().split("\\t").length;
+                                    while ((sent = br.readLine()) != null)
+                                    {
+                                        coln = sent.split("\\t").length;
+                                        if (colcount < coln)
+                                        {
+                                            colcount = coln;
+                                        }
+                                        rowcount++;
+                                    }
+                                    br.close();
+
+                                    br = new BufferedReader(new FileReader(file));
                                     String line = null;
                                     String stemp;
                                     int i; 
@@ -2547,7 +2588,7 @@
                                     i=1;
                                     ii=1;
                                     jj=0; 
-                                    String[][] datatemp = new String[1000][21];
+                                    String[][] datatemp = new String[rowcount][colcount];
 
                                     line = br.readLine();
                                     line = br.readLine();
@@ -2915,7 +2956,6 @@
                         <% } %>
                     </div>
                     </div>  
-                    
                     <input type="hidden" name="stResult01Name" id="stResult01Name" value="<%if (stResult01Name != null) {%><%=stResult01Name%><%}%>" />
                     <input type="hidden" name="stResult02Name" id="stResult02Name" value="<%if (stResult02Name != null) {%><%=stResult02Name%><%}%>" />
                     <input type="hidden" name="stResult03Name" id="stResult03Name" value="<%if (stResult03Name != null) {%><%=stResult03Name%><%}%>" />

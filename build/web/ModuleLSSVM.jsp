@@ -452,6 +452,13 @@
                 var sPFileDataLSSVM = document.getElementById("sPFileDataLSSVM");
                 var sPdInstancesLSSVM = document.getElementById("sdPInstancesLSSVM");
                 var sPdAttributesLSSVM = document.getElementById("sdPAttributesLSSVM");
+                
+                document.getElementById("suResult01Name").value = "";
+                document.getElementById("suResult02Name").value = "";
+                document.getElementById("suResult03Name").value = "";
+                document.getElementById("suResult04Name").value = "";
+                document.getElementById("suResult04cName").value = "";
+                document.getElementById("suResult04dName").value = "";
 
                 var VarB = document.getElementById("VarB");
                 document.getElementById("VarB").value = "B";
@@ -566,6 +573,36 @@
                 //alert("Aha4 ...!");
                 return refreshform(val);
             } 
+            
+            function saveresult() {
+                var valid = true;
+                var saveaction;
+                if (document.getElementById("MenuMO").className === "active")
+                {
+                    saveaction = "SaveLSSVMResultMO.jsp";
+                }
+                else if (document.getElementById("MenuPOT") !== null && document.getElementById("MenuPOT").className === "active")
+                {
+                    saveaction = "SaveLSSVMResultPOT.jsp";
+                }
+                else if (document.getElementById("MenuPOP") !== null && document.getElementById("MenuPOP").className === "active")
+                {
+                    saveaction = "SaveLSSVMResultPOP.jsp";
+                }
+                else if (document.getElementById("MenuPOL").className === "active")
+                {
+                    saveaction = "SaveLSSVMResultPOL.jsp";
+                }
+                else
+                {
+                    valid = false;
+                }
+                
+                document.getElementById("myform2").action = saveaction;
+                document.getElementById("myform2").method = "POST";
+                document.getElementById("myform2").submit();
+                return valid;
+            }
         </script>
     </head>
     <body>
@@ -899,23 +936,6 @@
                 </div>
                 <br>
 
-                <%
-                suResult01Name = application.getRealPath("/") + sBaseFileNameLSSVM +"01.txt";
-                suResult02Name = application.getRealPath("/") + sBaseFileNameLSSVM +"02.txt";
-                suResult03Name = application.getRealPath("/") + sBaseFileNameLSSVM +"03.txt";
-                suResult04Name = application.getRealPath("/") + sBaseFileNameLSSVM +"04.txt";
-                suResult04cName = application.getRealPath("/") + sBaseFileNameLSSVM +"04c.txt";
-                suResult04dName = application.getRealPath("/") + sBaseFileNameLSSVM +"04d.txt";
-                %>
-                <script>
-                    document.getElementById("suResult01Name").value = suResult01Name;
-                    document.getElementById("suResult02Name").value = suResult02Name;
-                    document.getElementById("suResult03Name").value = suResult03Name;
-                    document.getElementById("suResult04Name").value = suResult04Name;
-                    document.getElementById("suResult04cName").value = suResult04cName;
-                    document.getElementById("suResult04dName").value = suResult04dName;
-                </script>
-
                 <div class="tab-content">
                     <% if (sPageControl.equals("1")) { %>
                     <div id="processing" class="tab-pane fade in active">
@@ -923,6 +943,23 @@
                     <div id="processing" class="tab-pane fade in">
                     <% } %>
 
+                        <%
+                        suResult01Name = application.getRealPath("/") + sBaseFileNameLSSVM +"01.txt";
+                        suResult02Name = application.getRealPath("/") + sBaseFileNameLSSVM +"02.txt";
+                        suResult03Name = application.getRealPath("/") + sBaseFileNameLSSVM +"03.txt";
+                        suResult04Name = application.getRealPath("/") + sBaseFileNameLSSVM +"04.txt";
+                        suResult04cName = application.getRealPath("/") + sBaseFileNameLSSVM +"04c.txt";
+                        suResult04dName = application.getRealPath("/") + sBaseFileNameLSSVM +"04d.txt";
+                        %>
+                        <script>
+                            document.getElementById("suResult01Name").value = suResult01Name;
+                            document.getElementById("suResult02Name").value = suResult02Name;
+                            document.getElementById("suResult03Name").value = suResult03Name;
+                            document.getElementById("suResult04Name").value = suResult04Name;
+                            document.getElementById("suResult04cName").value = suResult04cName;
+                            document.getElementById("suResult04dName").value = suResult04dName;
+                        </script>
+                
                     <table>
                         <tr>
                             <td style="width: 10%">
@@ -1687,13 +1724,13 @@
                         </table>
                         <br>
                         <ul class="nav nav-pills nav-justified" style="background-color: lavender;">
-                            <li class="active"><a data-toggle="tab" href="#Main" id="Menu">Main Output</a></li>
+                            <li id="MenuMO" class="active"><a data-toggle="tab" href="#Main" id="Menu">Main Output</a></li>
                             <% if (PRadioLSSVM.equals("PRadio1LSSVM")) { %>
-                                <li><a data-toggle="tab" href="#PGraph">Prediction Output of Test Data</a></li>
+                                <li id="MenuPOT"><a data-toggle="tab" href="#PGraph">Prediction Output of Test Data</a></li>
                             <% } else { %>
-                                <li><a data-toggle="tab" href="#PGraph">Prediction Output of Prediction Data</a></li>
+                                <li id="MenuPOP"><a data-toggle="tab" href="#PGraph">Prediction Output of Prediction Data</a></li>
                             <% } %>
-                            <li><a data-toggle="tab" href="#PTGraph">Prediction Output of Learning Data</a></li>
+                            <li id="MenuPOL"><a data-toggle="tab" href="#PTGraph">Prediction Output of Learning Data</a></li>
                         </ul>
                         <br>
                         <div class="tab-content">
@@ -2197,7 +2234,7 @@
                                 </a>
                                 <br>
                                 <center id="bottomform2">
-                                    <button type="button" onclick="" class="btn btn-primary">Save</button>
+                                    <button type="button" onclick="saveresult();" class="btn btn-primary">Save</button>
                                 </center>
                             </div>
 
@@ -2234,6 +2271,23 @@
                                 if (suResult04dName != "" && kst.exists() && !kst.isDirectory()) {  
                                     String file = suResult04dName; 
                                     BufferedReader br = new BufferedReader(new FileReader(file)); 
+                                    int colcount = 0;
+                                    int rowcount = 0;
+                                    int coln;
+                                    String sent;
+                                    //colcount = br.readLine().split("\\t").length;
+                                    while ((sent = br.readLine()) != null)
+                                    {
+                                        coln = sent.split("\\t").length;
+                                        if (colcount < coln)
+                                        {
+                                            colcount = coln;
+                                        }
+                                        rowcount++;
+                                    }
+                                    br.close();
+                                    
+                                    br = new BufferedReader(new FileReader(file));
                                     String line = null;
                                     String stemp;
                                     int i; 
@@ -2255,7 +2309,7 @@
                                     i=1;
                                     ii=1;
                                     jj=0; 
-                                    String[][] datatemp = new String[nrow][21];
+                                    String[][] datatemp = new String[rowcount][colcount];
 
                                     line = br.readLine();
                                     line = br.readLine();
@@ -2433,6 +2487,23 @@
                                 if (suResult04cName != "" && jst.exists() && !jst.isDirectory()) {  
                                     String file = suResult04cName; 
                                     BufferedReader br = new BufferedReader(new FileReader(file)); 
+                                    int colcount = 0;
+                                    int rowcount = 0;
+                                    int coln;
+                                    String sent;
+                                    //colcount = br.readLine().split("\\t").length;
+                                    while ((sent = br.readLine()) != null)
+                                    {
+                                        coln = sent.split("\\t").length;
+                                        if (colcount < coln)
+                                        {
+                                            colcount = coln;
+                                        }
+                                        rowcount++;
+                                    }
+                                    br.close();
+                                    
+                                    br = new BufferedReader(new FileReader(file));
                                     String line = null;
                                     String stemp;
                                     int i; 
@@ -2446,7 +2517,7 @@
                                     i=1;
                                     ii=1;
                                     jj=0; 
-                                    String[][] datatemp = new String[1000][21];
+                                    String[][] datatemp = new String[rowcount][colcount];
 
                                     line = br.readLine();
                                     line = br.readLine();
@@ -2810,11 +2881,8 @@
                                     </jsp:include> 
                                 </center>         
                             <% } %>
-                            
-                            <input type="hidden" name="sBaseFileNameLSSVM" id="sBaseFileNameLSSVM" value="<%=sBaseFileNameLSSVM%>">
                         </div>
                     </div>
-                        
                     <input type="hidden" name="suResult01Name" id="suResult01Name" value="<%if (suResult01Name != null) {%><%=suResult01Name%><%}%>" />
                     <input type="hidden" name="suResult02Name" id="suResult02Name" value="<%if (suResult02Name != null) {%><%=suResult02Name%><%}%>" />
                     <input type="hidden" name="suResult03Name" id="suResult03Name" value="<%if (suResult03Name != null) {%><%=suResult03Name%><%}%>" />
@@ -2825,8 +2893,9 @@
                     </div>
                 </div>
             </form>
-        <% } %>
         </div>
+        <% } %>
+        
         <script>
             $(document).ready(function(){
 

@@ -470,6 +470,17 @@
                 var sPdInstancesLSSVM = document.getElementById("sdPInstancesLSSVM");
                 var sPdAttributesLSSVM = document.getElementById("sdPAttributesLSSVM");
 
+                document.getElementById("ssResult01Name").value = "";
+                document.getElementById("ssResult02Name").value = "";
+                document.getElementById("ssResult03Name").value = "";
+                document.getElementById("ssResult04Name").value = "";
+                document.getElementById("ssResult04aName").value = "";
+                document.getElementById("ssResult04bName").value = "";
+                document.getElementById("ssResult04cName").value = "";
+                document.getElementById("ssResult04dName").value = "";
+                document.getElementById("ssResult05Name").value = "";
+                document.getElementById("ssResult06Name").value = "";
+                
                 var VarTwo = document.getElementById("VarTwo");
                 document.getElementById("VarTwo").value = "Two";
                 
@@ -628,6 +639,36 @@
                 document.getElementById("myform2").method = "POST";
                 document.getElementById("myform2").submit();
                 
+                return valid;
+            }
+            
+            function saveresult() {
+                var valid = true;
+                var saveaction;
+                if (document.getElementById("MenuMO").className === "active")
+                {
+                    saveaction = "SaveSFALSSVMResultMO.jsp";
+                }
+                else if (document.getElementById("MenuPO").className === "active")
+                {
+                    saveaction = "SaveSFALSSVMResultPO.jsp";
+                }
+                else if (document.getElementById("MenuPTD").className === "active")
+                {
+                    saveaction = "SaveSFALSSVMResultPTD.jsp";
+                }
+                else if (document.getElementById("MenuTPD").className === "active")
+                {
+                    saveaction = "SaveSFALSSVMResultTPD.jsp";
+                }
+                else
+                {
+                    valid = false;
+                }
+                
+                document.getElementById("myform2").action = saveaction;
+                document.getElementById("myform2").method = "POST";
+                document.getElementById("myform2").submit();
                 return valid;
             }
         </script>
@@ -2043,10 +2084,10 @@
                         </table>
                         <br>
                         <ul class="nav nav-pills nav-justified" style="background-color: lavender;">
-                            <li class="active"><a data-toggle="tab" href="#Main" id="Menu">Main Output</a></li>
-                            <li><a data-toggle="tab" href="#PGraph">Prediction Output</a></li> 
-                            <li><a data-toggle="tab" href="#PTGraph">Performance Trajectory Data</a></li>
-                            <li><a data-toggle="tab" href="#TPGraph">Tracing Path Data</a></li>
+                            <li id="MenuMO" class="active"><a data-toggle="tab" href="#Main" id="Menu">Main Output</a></li>
+                            <li id="MenuPO" ><a data-toggle="tab" href="#PGraph">Prediction Output</a></li>
+                            <li id="MenuPTD" ><a data-toggle="tab" href="#PTGraph">Performance Trajectory Data</a></li>
+                            <li id="MenuTPD" ><a data-toggle="tab" href="#TPGraph">Tracing Path Data</a></li>
                         </ul>
                         <br>
                         <div class="tab-content">
@@ -2402,11 +2443,18 @@
                                 if (ssResult04Name != "" && d.exists() && !d.isDirectory()) {  
                                     String file = ssResult04Name;
                                     BufferedReader br = new BufferedReader(new FileReader(file));
-                                    int colcount = 0; 
+                                    int colcount = 0;
                                     int rowcount = 0;
-                                    colcount = br.readLine().split("\\t").length;
-                                    while (br.readLine() != null)
+                                    int coln;
+                                    String sent;
+                                    //colcount = br.readLine().split("\\t").length;
+                                    while ((sent = br.readLine()) != null)
                                     {
+                                        coln = sent.split("\\t").length;
+                                        if (colcount < coln)
+                                        {
+                                            colcount = coln;
+                                        }
                                         rowcount++;
                                     }
                                     br.close();
@@ -2684,11 +2732,18 @@
                                 if (ssResult04aName != "" && e.exists() && !e.isDirectory()) {  
                                     String file = ssResult04aName;
                                     BufferedReader br = new BufferedReader(new FileReader(file)); 
-                                    int colcount = 0; 
-                                    int rowcount = 1;
-                                    colcount = br.readLine().split("\\t").length;
-                                    while (br.readLine() != null)
+                                    int colcount = 0;
+                                    int rowcount = 0;
+                                    int coln;
+                                    String sent;
+                                    //colcount = br.readLine().split("\\t").length;
+                                    while ((sent = br.readLine()) != null)
                                     {
+                                        coln = sent.split("\\t").length;
+                                        if (colcount < coln)
+                                        {
+                                            colcount = coln;
+                                        }
                                         rowcount++;
                                     }
                                     br.close();
@@ -2772,11 +2827,18 @@
                                 if (ssResult04bName != "" && f.exists() && !f.isDirectory()) {  
                                     String file = ssResult04bName;
                                     BufferedReader br = new BufferedReader(new FileReader(file)); 
-                                    int colcount = 0; 
-                                    int rowcount = 1;
-                                    colcount = br.readLine().split("\\t").length;
-                                    while (br.readLine() != null)
+                                    int colcount = 0;
+                                    int rowcount = 0;
+                                    int coln;
+                                    String sent;
+                                    //colcount = br.readLine().split("\\t").length;
+                                    while ((sent = br.readLine()) != null)
                                     {
+                                        coln = sent.split("\\t").length;
+                                        if (colcount < coln)
+                                        {
+                                            colcount = coln;
+                                        }
                                         rowcount++;
                                     }
                                     br.close();
@@ -2860,11 +2922,18 @@
                                 if (ssResult04cName != "" && g.exists() && !g.isDirectory()) {  
                                     String file = ssResult04cName;
                                     BufferedReader br = new BufferedReader(new FileReader(file)); 
-                                    int colcount = 0; 
-                                    int rowcount = 1;
-                                    colcount = br.readLine().split("\\t").length;
-                                    while (br.readLine() != null)
+                                    int colcount = 0;
+                                    int rowcount = 0;
+                                    int coln;
+                                    String sent;
+                                    //colcount = br.readLine().split("\\t").length;
+                                    while ((sent = br.readLine()) != null)
                                     {
+                                        coln = sent.split("\\t").length;
+                                        if (colcount < coln)
+                                        {
+                                            colcount = coln;
+                                        }
                                         rowcount++;
                                     }
                                     br.close();
@@ -2943,11 +3012,18 @@
                                 if (ssResult04dName != "" && h.exists() && !h.isDirectory()) {  
                                     String file = ssResult04dName;
                                     BufferedReader br = new BufferedReader(new FileReader(file)); 
-                                    int colcount = 0; 
-                                    int rowcount = 1;
-                                    colcount = br.readLine().split("\\t").length;
-                                    while (br.readLine() != null)
+                                    int colcount = 0;
+                                    int rowcount = 0;
+                                    int coln;
+                                    String sent;
+                                    //colcount = br.readLine().split("\\t").length;
+                                    while ((sent = br.readLine()) != null)
                                     {
+                                        coln = sent.split("\\t").length;
+                                        if (colcount < coln)
+                                        {
+                                            colcount = coln;
+                                        }
                                         rowcount++;
                                     }
                                     br.close();
@@ -3046,11 +3122,18 @@
                                 if (ssResult05Name != "" && ist.exists() && !ist.isDirectory()) {  
                                     String file = ssResult05Name; 
                                     BufferedReader br = new BufferedReader(new FileReader(file)); 
-                                    int colcount = 0; 
-                                    int rowcount = 1;
-                                    colcount = br.readLine().split("\\t").length;
-                                    while (br.readLine() != null)
+                                    int colcount = 0;
+                                    int rowcount = 0;
+                                    int coln;
+                                    String sent;
+                                    //colcount = br.readLine().split("\\t").length;
+                                    while ((sent = br.readLine()) != null)
                                     {
+                                        coln = sent.split("\\t").length;
+                                        if (colcount < coln)
+                                        {
+                                            colcount = coln;
+                                        }
                                         rowcount++;
                                     }
                                     br.close();
@@ -3183,9 +3266,9 @@
                                                     <tr>
                                                         <td align="center">Generation No.</td>
                                                         <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
-                                                        <td align="center">Mean RMSE</td> 
+                                                        <td align="center">Mean MAE</td> 
                                                         <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
-                                                        <td align="center">Best RMSE</td> 
+                                                        <td align="center">Best MAE</td> 
                                                     </tr> 
                                                     <% for (i = 0; i < j; i += 1) { %>
                                                         <tr>
@@ -3245,11 +3328,18 @@
                                 if (ssResult06Name != "" && jst.exists() && !jst.isDirectory()) {  
                                     String file = ssResult06Name;
                                     BufferedReader br = new BufferedReader(new FileReader(file)); 
-                                    int colcount = 0; 
-                                    int rowcount = 1;
-                                    colcount = br.readLine().split("\\t").length;
-                                    while (br.readLine() != null)
+                                    int colcount = 0;
+                                    int rowcount = 0;
+                                    int coln;
+                                    String sent;
+                                    //colcount = br.readLine().split("\\t").length;
+                                    while ((sent = br.readLine()) != null)
                                     {
+                                        coln = sent.split("\\t").length;
+                                        if (colcount < coln)
+                                        {
+                                            colcount = coln;
+                                        }
                                         rowcount++;
                                     }
                                     br.close();
@@ -3386,7 +3476,7 @@
                                                         <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
                                                         <td align="center">Kernel Function Parameter, S</td> 
                                                         <td>&nbsp;&nbsp;&nbsp;&nbsp</td>
-                                                        <td align="center">RMSE</td> 
+                                                        <td align="center">MAE</td> 
                                                     </tr> 
                                                     <% for (i = 0; i < j; i += 1) { %>
                                                         <tr>
@@ -3432,7 +3522,7 @@
                             </a>
                             <br>
                             <center id="bottomform">
-                                <button type="button" onclick="" class="btn btn-primary">Save</button>
+                                <button type="button" onclick="saveresult();" class="btn btn-primary">Save</button>
                             </center>
                             <br>
                         </div>
@@ -3717,6 +3807,16 @@
                         <input type="hidden" name="sBaseFileName" id="sBaseFileName" value="<%=sBaseFileName%>">
                     </div>
                 </div>
+                    <input type="hidden" name="ssResult01Name" id="ssResult01Name" value="<%if (ssResult01Name != null) {%><%=ssResult01Name%><%}%>" />
+                    <input type="hidden" name="ssResult02Name" id="ssResult02Name" value="<%if (ssResult02Name != null) {%><%=ssResult02Name%><%}%>" />
+                    <input type="hidden" name="ssResult03Name" id="ssResult03Name" value="<%if (ssResult03Name != null) {%><%=ssResult03Name%><%}%>" />
+                    <input type="hidden" name="ssResult04Name" id="ssResult04Name" value="<%if (ssResult04Name != null) {%><%=ssResult04Name%><%}%>" />
+                    <input type="hidden" name="ssResult04aName" id="ssResult04aName" value="<%if (ssResult04aName != null) {%><%=ssResult04aName%><%}%>" />
+                    <input type="hidden" name="ssResult04bName" id="ssResult04bName" value="<%if (ssResult04bName != null) {%><%=ssResult04bName%><%}%>" />
+                    <input type="hidden" name="ssResult04cName" id="ssResult04cName" value="<%if (ssResult04cName != null) {%><%=ssResult04cName%><%}%>" />
+                    <input type="hidden" name="ssResult04dName" id="ssResult04dName" value="<%if (ssResult04dName != null) {%><%=ssResult04dName%><%}%>" />
+                    <input type="hidden" name="ssResult05Name" id="ssResult05Name" value="<%if (ssResult05Name != null) {%><%=ssResult05Name%><%}%>" />
+                    <input type="hidden" name="ssResult06Name" id="ssResult06Name" value="<%if (ssResult06Name != null) {%><%=ssResult06Name%><%}%>" />
                 </div>
             </form>
         <% } %>
