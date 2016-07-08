@@ -111,7 +111,7 @@
                     <img src="a-LVM.JPG" title="Click Me!" style="width: 210px" id="img2" alt=""/></a>
                 <a href="">
                     <img src="a-LVR.JPG" title="Click Me!" style="width: 180px" id="img3" alt=""/></a>
-                <a href="">
+                <a href="http://www.sciencedirect.com/science/article/pii/S0926580516300553">
                     <img src="a-SFAM.JPG" title="Click Me!" style="width: 260px" id="img4" alt=""/></a>
                 <a href="http://ascelibrary.org/doi/10.1061/%28ASCE%29CP.1943-5487.0000547">
                     <img src="a-SFAR.JPG" title="Click Me!" style="width: 230px" id="img5" alt=""/></a>
@@ -120,7 +120,7 @@
                 <img src="arrowup.JPG" alt="..." width="18">  
             </div>
         </div>
-        
+        <br><br>
         <script>
             $(document).ready(function(){
 

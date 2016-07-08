@@ -23,11 +23,11 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.ProgramSFALSSVM.jar}</file>
+                    <file>${file.reference.ProgramLSSVR.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.ProgramLSSVR.jar}</file>
+                    <file>${file.reference.ProgramNiMOPSGraph.jar-1}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
@@ -35,7 +35,7 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.ProgramNiMOPSGraph.jar-1}</file>
+                    <file>${file.reference.ProgramSFALSSVM.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>

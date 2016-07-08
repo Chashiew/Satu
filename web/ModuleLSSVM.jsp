@@ -184,21 +184,81 @@
     String snPDFAttributesLSSVM = request.getParameter("nPDFAttributesLSSVM");
     String snPDFInstancesLSSVM = request.getParameter("nPDFInstancesLSSVM");
 
-    int nrows1=(int)Double.parseDouble(snDFInstancesLSSVM); 
-    int ncols1=(int)Double.parseDouble(snDFAttributesLSSVM);
+    int nrows1;
+    if (snDFInstancesLSSVM!="") {
+        nrows1=(int)Double.parseDouble(snDFInstancesLSSVM); 
+    } else {
+        nrows1=1;
+        snDFInstancesLSSVM = "0";
+    }
+    int ncols1;
+    if (snDFAttributesLSSVM!="") {
+        ncols1=(int)Double.parseDouble(snDFAttributesLSSVM); 
+    } else { 
+        ncols1=1; 
+        snDFAttributesLSSVM = "0";
+    }
     String[][] Dataraw = new String[nrows1][ncols1];
+    //int nrows1=(int)Double.parseDouble(snDFInstancesLSSVM); 
+    //int ncols1=(int)Double.parseDouble(snDFAttributesLSSVM);
+    //String[][] Dataraw = new String[nrows1][ncols1];
 
-    int nrows2=(int)Double.parseDouble(snTDFInstancesLSSVM);
-    int ncols2=(int)Double.parseDouble(snTDFAttributesLSSVM);
+    int nrows2;
+    if (snTDFInstancesLSSVM!="") {
+        nrows2=(int)Double.parseDouble(snTDFInstancesLSSVM); 
+    } else { 
+        nrows2=1; 
+        snTDFInstancesLSSVM = "0";
+    }
+    int ncols2;
+    if (snTDFAttributesLSSVM!="") {
+        ncols2=(int)Double.parseDouble(snTDFAttributesLSSVM); 
+    } else { 
+        ncols2=1; 
+        snTDFAttributesLSSVM = "0";
+    }
     String[][] Datatest = new String[nrows2][ncols2];
+    //int nrows2=(int)Double.parseDouble(snTDFInstancesLSSVM);
+    //int ncols2=(int)Double.parseDouble(snTDFAttributesLSSVM);
+    //String[][] Datatest = new String[nrows2][ncols2];
 
-    int nrows3=(int)Double.parseDouble(snLDFInstancesLSSVM);
-    int ncols3=(int)Double.parseDouble(snLDFAttributesLSSVM);
+    int nrows3;
+    if (snLDFInstancesLSSVM!="") {
+        nrows3=(int)Double.parseDouble(snLDFInstancesLSSVM); 
+    } else { 
+        nrows3=1; 
+        snLDFInstancesLSSVM = "0";
+    }
+    int ncols3;
+    if (snLDFAttributesLSSVM!="") {
+        ncols3=(int)Double.parseDouble(snLDFAttributesLSSVM); 
+    } else { 
+        ncols3=1;
+        snLDFAttributesLSSVM = "0";
+    }
     String[][] Datatrains = new String[nrows3][ncols3];
+    //int nrows3=(int)Double.parseDouble(snLDFInstancesLSSVM);
+    //int ncols3=(int)Double.parseDouble(snLDFAttributesLSSVM);
+    //String[][] Datatrains = new String[nrows3][ncols3];
 
-    int nrows4=(int)Double.parseDouble(snPDFInstancesLSSVM);
-    int ncols4=(int)Double.parseDouble(snPDFAttributesLSSVM);
+    int nrows4;
+    if (snPDFInstancesLSSVM!="") {
+        nrows4=(int)Double.parseDouble(snPDFInstancesLSSVM); 
+    } else { 
+        nrows4=1;
+        snPDFInstancesLSSVM = "0";
+    }
+    int ncols4;
+    if (snPDFAttributesLSSVM!="") {
+        ncols4=(int)Double.parseDouble(snPDFAttributesLSSVM); 
+    } else { 
+        ncols4=1;
+        snPDFAttributesLSSVM = "0";
+    }
     String[][] Datapres = new String[nrows4][ncols4];
+    //int nrows4=(int)Double.parseDouble(snPDFInstancesLSSVM);
+    //int ncols4=(int)Double.parseDouble(snPDFAttributesLSSVM);
+    //String[][] Datapres = new String[nrows4][ncols4];
 
     double nValueCLSSVM;
     double nValueSLSSVM;
@@ -1326,91 +1386,79 @@
                             }
                             br.close();
                             %>
-                            <div class="bs-example">
-                                <div class="panel panel-default">
-                                    <div class="panel-body">
-                                        <div class="container boundary">
-                                            <table>
-                                                <tr>
-                                                    <% if (sLoadingDataSet1 != "") { %>
-                                                        <td>
-                                                            <b>Learning Dataset (for Evaluation): </b>
-                                                        </td>
-                                                    <% } else { %>
-                                                        <td>
-                                                            <b>Learning Dataset (for Prediction): </b>
-                                                        </td>
-                                                    <% } %> 
-                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                    <td>
-                                                        <a onclick="return viewdataset(5);">
-                                                            <img src="Icon-2ArrowLeft.png" alt="..." width="11" height="17">
-                                                        </a>
-                                                    </td>
-                                                    <td>&nbsp;&nbsp;</td>
-                                                    <td>&nbsp;&nbsp;</td>
-                                                    <td align="center">
-                                                        No.
+                            <div class="container boundary">
+                                <table>
+                                    <tr>
+                                        <% if (sLoadingDataSet1 != "") { %>
+                                            <td>
+                                                <b>Learning Dataset (for Evaluation): </b>
+                                            </td>
+                                        <% } else { %>
+                                            <td>
+                                                <b>Learning Dataset (for Prediction): </b>
+                                            </td>
+                                        <% } %> 
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                        <td>
+                                            <a onclick="return viewdataset(5);">
+                                                <img src="Icon-2ArrowLeft.png" alt="..." width="11" height="17">
+                                            </a>
+                                        </td>
+                                        <td>&nbsp;&nbsp;</td>
+                                        <td>&nbsp;&nbsp;</td>
+                                        <td align="center">
+                                            No.
+                                        </td>
+                                        <td>&nbsp;&nbsp;&nbsp;</td>
+                                        <% for (j = 0; j < ncols1; j += 1) { %> 
+                                            <td align="center">
+                                                <%=headers[j]%>
+                                            </td>
+                                            <td>&nbsp;&nbsp;&nbsp;</td>
+                                        <% } %>
+                                    </tr>
+
+                                    <% for (i = 0; i < nrows1; i += 1) { %> 
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td align="center">
+                                                <%=i%>
+                                            </td> 
+                                            <td>&nbsp;&nbsp;&nbsp;</td>
+                                            <% if (sLoadingDataSet1 != "") { %>
+                                                <% for (j = 0; j < ncols1; j += 1) { %> 
+                                                    <td align="right">
+                                                        <%=nf3.format(Double.parseDouble(Dataraw[i][j]))%>
                                                     </td>
                                                     <td>&nbsp;&nbsp;&nbsp;</td>
-                                                    <% for (j = 0; j < ncols1; j += 1) { %> 
-                                                        <td align="center">
-                                                            <%=headers[j]%>
-                                                        </td>
-                                                        <td>&nbsp;&nbsp;&nbsp;</td>
-                                                    <% } %>
-                                                </tr>
-
-                                                <% for (i = 0; i < nrows1; i += 1) { %> 
-                                                    <tr>
-                                                        <td>&nbsp;</td>
-                                                        <td>&nbsp;</td>
-                                                        <td>&nbsp;</td>
-                                                        <td>&nbsp;</td>
-                                                        <td>&nbsp;</td>
-                                                        <td align="center">
-                                                            <%=i%>
-                                                        </td> 
-                                                        <td>&nbsp;&nbsp;&nbsp;</td>
-                                                        <% if (sLoadingDataSet1 != "") { %>
-                                                            <% for (j = 0; j < ncols1; j += 1) { %> 
-                                                                <td align="right">
-                                                                    <%=nf3.format(Double.parseDouble(Dataraw[i][j]))%>
-                                                                </td>
-                                                                <td>&nbsp;&nbsp;&nbsp;</td>
-                                                            <% } %>
-                                                        <% } else { %>
-                                                            <% for (j = 0; j < ncols1; j += 1) { %> 
-                                                                <td align="right">
-                                                                    <%=nf3.format(Double.parseDouble(Datatrains[i][j]))%>
-                                                                </td>
-                                                                <td>&nbsp;&nbsp;&nbsp;</td>
-                                                            <% } %>
-                                                        <% } %>
-                                                    </tr>
                                                 <% } %>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
+                                            <% } else { %>
+                                                <% for (j = 0; j < ncols1; j += 1) { %> 
+                                                    <td align="right">
+                                                        <%=nf3.format(Double.parseDouble(Datatrains[i][j]))%>
+                                                    </td>
+                                                    <td>&nbsp;&nbsp;&nbsp;</td>
+                                                <% } %>
+                                            <% } %>
+                                        </tr>
+                                    <% } %>
+                                </table>
                             </div>
                         <% } else { %>
-                            <div class="bs-example">
-                                <div class="panel panel-default">
-                                    <div class="panel-body">
-                                        <div class="container boundary">
-                                            <table>
-                                                <tr>
-                                                    <td align="left">
-                                                        <font color='red'>
-                                                        &nbsp;&nbsp;Dataset not available ... !
-                                                        </font>
-                                                    </td> 
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="container boundary">
+                                <table>
+                                    <tr>
+                                        <td align="left">
+                                            <font color='red'>
+                                            &nbsp;&nbsp;Dataset not available ... !
+                                            </font>
+                                        </td> 
+                                    </tr>
+                                </table>
                             </div>
                         <% } %>
                         <a href="#view">
@@ -1490,91 +1538,79 @@
                             }
                             br.close();
                             %>
-                            <div class="bs-example">
-                                <div class="panel panel-default">
-                                    <div class="panel-body">
-                                        <div class="container boundary">
-                                            <table>
-                                                <tr>
-                                                    <% if (sLoadingDataSet2 != "") { %>
-                                                        <td>
-                                                            <b>Test Dataset: </b>
-                                                        </td>
-                                                    <% } else { %>
-                                                        <td>
-                                                            <b>Prediction Dataset: </b>
-                                                        </td>
-                                                    <% } %> 
-                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                    <td>
-                                                        <a onclick="return viewdataset(5);">
-                                                            <img src="Icon-2ArrowLeft.png" alt="..." width="11" height="17">
-                                                        </a>
-                                                    </td>
-                                                    <td>&nbsp;&nbsp;</td>
-                                                    <td>&nbsp;&nbsp;</td>
-                                                    <td align="center">
-                                                        No.
+                            <div class="container boundary">
+                                <table>
+                                    <tr>
+                                        <% if (sLoadingDataSet2 != "") { %>
+                                            <td>
+                                                <b>Test Dataset: </b>
+                                            </td>
+                                        <% } else { %>
+                                            <td>
+                                                <b>Prediction Dataset: </b>
+                                            </td>
+                                        <% } %> 
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                        <td>
+                                            <a onclick="return viewdataset(5);">
+                                                <img src="Icon-2ArrowLeft.png" alt="..." width="11" height="17">
+                                            </a>
+                                        </td>
+                                        <td>&nbsp;&nbsp;</td>
+                                        <td>&nbsp;&nbsp;</td>
+                                        <td align="center">
+                                            No.
+                                        </td>
+                                        <td>&nbsp;&nbsp;&nbsp;</td>
+                                        <% for (j = 0; j < ncols2; j += 1) { %> 
+                                            <td align="center">
+                                                <%=headers[j]%>
+                                            </td>
+                                            <td>&nbsp;&nbsp;&nbsp;</td>
+                                        <% } %>
+                                    </tr>
+
+                                    <% for (i = 0; i < nrows2; i += 1) { %> 
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td align="center">
+                                                <%=i%>
+                                            </td> 
+                                            <td>&nbsp;&nbsp;&nbsp;</td>
+                                            <% if (sLoadingDataSet2 != "") { %>
+                                                <% for (j = 0; j < ncols2; j += 1) { %> 
+                                                    <td align="right">
+                                                        <%=nf3.format(Double.parseDouble(Datatest[i][j]))%>
                                                     </td>
                                                     <td>&nbsp;&nbsp;&nbsp;</td>
-                                                    <% for (j = 0; j < ncols2; j += 1) { %> 
-                                                        <td align="center">
-                                                            <%=headers[j]%>
-                                                        </td>
-                                                        <td>&nbsp;&nbsp;&nbsp;</td>
-                                                    <% } %>
-                                                </tr>
-
-                                                <% for (i = 0; i < nrows2; i += 1) { %> 
-                                                    <tr>
-                                                        <td>&nbsp;</td>
-                                                        <td>&nbsp;</td>
-                                                        <td>&nbsp;</td>
-                                                        <td>&nbsp;</td>
-                                                        <td>&nbsp;</td>
-                                                        <td align="center">
-                                                            <%=i%>
-                                                        </td> 
-                                                        <td>&nbsp;&nbsp;&nbsp;</td>
-                                                        <% if (sLoadingDataSet2 != "") { %>
-                                                            <% for (j = 0; j < ncols2; j += 1) { %> 
-                                                                <td align="right">
-                                                                    <%=nf3.format(Double.parseDouble(Datatest[i][j]))%>
-                                                                </td>
-                                                                <td>&nbsp;&nbsp;&nbsp;</td>
-                                                            <% } %>
-                                                        <% } else { %>
-                                                            <% for (j = 0; j < ncols2; j += 1) { %> 
-                                                                <td align="right">
-                                                                    <%=nf3.format(Double.parseDouble(Datapres[i][j]))%>
-                                                                </td>
-                                                                <td>&nbsp;&nbsp;&nbsp;</td>
-                                                            <% } %>
-                                                        <% } %>
-                                                    </tr>
                                                 <% } %>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
+                                            <% } else { %>
+                                                <% for (j = 0; j < ncols2; j += 1) { %> 
+                                                    <td align="right">
+                                                        <%=nf3.format(Double.parseDouble(Datapres[i][j]))%>
+                                                    </td>
+                                                    <td>&nbsp;&nbsp;&nbsp;</td>
+                                                <% } %>
+                                            <% } %>
+                                        </tr>
+                                    <% } %>
+                                </table>
                             </div>
                         <% } else { %>
-                            <div class="bs-example">
-                                <div class="panel panel-default">
-                                    <div class="panel-body">
-                                        <div class="container boundary">
-                                            <table>
-                                                <tr>
-                                                    <td align="left">
-                                                        <font color='red'>
-                                                            Dataset not available ... !
-                                                        </font>
-                                                    </td> 
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="container boundary">
+                                <table>
+                                    <tr>
+                                        <td align="left">
+                                            <font color='red'>
+                                                Dataset not available ... !
+                                            </font>
+                                        </td> 
+                                    </tr>
+                                </table>
                             </div>
                         <% } %>
                         <a href="#view">

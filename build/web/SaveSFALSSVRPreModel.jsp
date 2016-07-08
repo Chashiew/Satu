@@ -1,40 +1,49 @@
-<%@page import="java.text.NumberFormat"%>
-<%@page import="java.text.DecimalFormat"%>
+<%@page import="java.io.FileReader"%> <%@page import="java.io.BufferedReader"%> <%@page import="java.text.NumberFormat"%> <%@page import="java.text.DecimalFormat"%>
 <%
     String content = "";
     
-    String sValueC = request.getParameter("sValueC");
-    String sValueS = request.getParameter("sValueS");
-    String NormalRadio = request.getParameter("NormalRadio");
-    int iRadio = 0;
-    String sLearningFileName = request.getParameter("sLearningFileName");
-    String nLDFAttributes = request.getParameter("nLDFAttributes");
-    String nLDFInstances = request.getParameter("nLDFInstances");
+    String basefilename = request.getParameter("sBaseFileName");
+    basefilename = basefilename + "07.txt";
+    BufferedReader br = new BufferedReader(new FileReader("E:\\00 Swarm Optimization\\NiMOPSJava\\build\\web\\" + basefilename));
     
-    double d = Double.parseDouble(sValueC);
-    NumberFormat formatter = new DecimalFormat("#");
-    String f = formatter.format(d);
-    
-    content = content + "Optimization Model\n";
-    content = content + "No.\tDescription\tVariable\tValue\tRemark\n";
-    content = content + "1\tPenalty Parameter, C\tnValueC\t" + f +"\t-\n";
-    content = content + "2\tKernel Parameter, S\tnValueS\t" + sValueS+"\t-\n";
-    String temp = "";
-    if (NormalRadio.equals("NormalRadio1")) {
-        temp = "Original value";
-        iRadio=1;
+    String line;
+    while ((line = br.readLine()) != null)
+    {
+        content += line + "\n";
     }
-    else if (NormalRadio.equals("NormalRadio2")) {
-        temp = "Feature scaling";
-        iRadio=2;
-    }
-    content = content + "3\tNormalization Method\tsNormalRadio\t" + iRadio+"\t" + temp+"\n";
-    content = content + "4\tData File\tsFileName\t" + sLearningFileName+"\t-\n";
-    content = content + "5\tNo. of Attributes\tnLDFAttributes\t" + nLDFAttributes+"\t-\n";
-    content = content + "6\tNo. of Instances\tnLDFInstances\t" + nLDFInstances+"\t-\n";
-    content = content + "4\tData File\tsLearningFileName\t" + sLearningFileName+"\t-\n";
-    content = content + "5\tNo. of Attributes\tnDFAttributes\t" + nLDFAttributes+"\t-\n";
-    content = content + "6\tNo. of Instances\tnDFInstances\t" + nLDFInstances+"\t-\n";
+    content = content.substring(0, content.length()-1);
+//    String sValueC = request.getParameter("sValueC");
+//    String sValueS = request.getParameter("sValueS");
+//    String NormalRadio = request.getParameter("NormalRadio");
+//    int iRadio = 0;
+//    String sLearningFileName = request.getParameter("sLearningFileName");
+//    String nLDFAttributes = request.getParameter("nLDFAttributes");
+//    String nLDFInstances = request.getParameter("nLDFInstances");
+//    
+//    double d = Double.parseDouble(sValueC);
+//    NumberFormat formatter = new DecimalFormat("#");
+//    String f = formatter.format(d);
+//    
+//    content = content + "Optimization Model\n";
+//    content = content + "No.\tDescription\tVariable\tValue\tRemark\n";
+//    content = content + "1\tPenalty Parameter, C\tnValueC\t" + f +"\t-\n";
+//    content = content + "2\tKernel Parameter, S\tnValueS\t" + sValueS+"\t-\n";
+//    String temp = "";
+//    if (NormalRadio.equals("NormalRadio1")) {
+//        temp = "Original value";
+//        iRadio=1;
+//    }
+//    else if (NormalRadio.equals("NormalRadio2")) {
+//        temp = "Feature scaling";
+//        iRadio=2;
+//    }
+//    content = content + "3\tNormalization Method\tsNormalRadio\t" + iRadio+"\t" + temp+"\n";
+//    content = content + "4\tData File\tsFileName\t" + sLearningFileName+"\t-\n";
+//    content = content + "5\tNo. of Attributes\tnLDFAttributes\t" + nLDFAttributes+"\t-\n";
+//    content = content + "6\tNo. of Instances\tnLDFInstances\t" + nLDFInstances+"\t-\n";
+//    content = content + "4\tData File\tsLearningFileName\t" + sLearningFileName+"\t-\n";
+//    content = content + "5\tNo. of Attributes\tnDFAttributes\t" + nLDFAttributes+"\t-\n";
+//    content = content + "6\tNo. of Instances\tnDFInstances\t" + nLDFInstances+"\t-\n";
 
     response.setContentType("text/plain");
     response.setHeader("Content-Disposition", "attachment; filename=SFALSSVR_Model.orm"); // Force "Save As" dialogue.
