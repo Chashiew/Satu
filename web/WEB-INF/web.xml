@@ -84,6 +84,10 @@
         <servlet-name>ScanDataFileSFALSSVM</servlet-name>
         <servlet-class>ScanDataFileSFALSSVM</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RunLSSVRWithModel</servlet-name>
+        <servlet-class>RunLSSVRWithModel</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>WebFigures</servlet-name>
         <url-pattern>/WebFigures/*</url-pattern>
@@ -167,6 +171,10 @@
     <servlet-mapping>
         <servlet-name>ScanDataFileSFALSSVM</servlet-name>
         <url-pattern>/ScanDataFileSFALSSVM</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RunLSSVRWithModel</servlet-name>
+        <url-pattern>/RunLSSVRWithModel</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>-1</session-timeout>

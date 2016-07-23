@@ -35,6 +35,16 @@ if (sLoadModel == null) {
     if (sLoadModelLSSVM == null) {
         sLoadModelLSSVM = "";        
     };
+    
+String modelloaded = request.getParameter("modelloaded");
+if (modelloaded == null) {
+    modelloaded = "";        
+};
+
+String modelloadedLSSVM = request.getParameter("modelloadedLSSVM");
+if (modelloadedLSSVM == null) {
+    modelloadedLSSVM = "";
+};
 
 String sGraphNo = request.getParameter("sGraphNo");
 if (sGraphNo == null) {
@@ -2728,6 +2738,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 <input type="hidden" name="VarNext" id="VarNext" value="<%=VarNext%>"/>
                 <input type="hidden" name="sError" id="sError" value="<%=sError%>"/>
                 <input type="hidden" name="sLoadModel" id="sLoadModel" value="<%=sLoadModel%>"/>
+                <input type="hidden" name="modelloaded" id="modelloaded" value="<%=modelloaded%>"/>
                                 
                 <div style="display:none;"><input type="file" id="importfile" name="importfile"/></div>
                 <div style="display:none;"><input type="file" id="loadmodel" name="loadmodel"/></div>
@@ -2825,7 +2836,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                     <div class="col-md-3">System parameters:</div>
                                     <div class="col-md-2">Value of C</div>
                                     <div class="col-md-2">
-                                        <input type="text" name="nValueC" id="nValueC" size="8" value="<%=nValueC%>"/>
+                                        <input type="text" name="nValueC" id="nValueC" size="8" value="<%=nValueC%>" <%if (modelloaded.equals("1")) {%><%="readonly"%><%}%>/>
                                     </div>
                                 </div>
                                 <br>
@@ -2833,7 +2844,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                                     <div class="col-md-3"></div>
                                     <div class="col-md-2">Value of sigma</div>
                                     <div class="col-md-1">
-                                        <input type="text" name="nValueS" id="nValueS" size="8" value="<%=nValueS%>"/>
+                                        <input type="text" name="nValueS" id="nValueS" size="8" value="<%=nValueS%>"  <%if (modelloaded.equals("1")) {%><%="readonly"%><%}%>/>
                                     </div>
                                 </div>
                             </div>
@@ -4056,30 +4067,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                     else if (TORadio.equals("TORadio4")) {%><script>document.getElementById("TORadio4").checked = true; </script><%}
                 }
             }
-            else if (sLoadModel != "") { 
-                String datafile = request.getParameter("loadmodel");
-                
-                String filename;
-                filename = "SVRModel.txt";
-                String file = application.getRealPath("/") + filename;
-                BufferedReader br = new BufferedReader(new FileReader(file)); 
-                String line = null;
-                String[] cols;
-                line = br.readLine();
-                if (line == null) {
-                    out .println("<h3><font color='red'>Model not found !</font></h3>");
-                } else {
-                    cols = line.split("\\t"); 
-                    %><script>document.getElementById("nValueC").value = "<%=cols[0]%>";
-                    document.getElementById("nValueS").value = "<%=cols[1]%>";
-                    </script><%
-                }
-                
-                if (NormalRadio.equals("NormalRadio1")) {%>
-                    <script>document.getElementById("NormalRadio1").checked = true; </script><%}
-                else if (NormalRadio.equals("NormalRadio2")) {%>
-                    <script>document.getElementById("NormalRadio2").checked = true; </script><%}
-            }
             else {
                 if (sLoadingEvaluation != "") {  
                     if (sTestFileName != "") { 
@@ -4655,6 +4642,7 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 <input type="hidden" name="sGraphType" id="sGraphType" value="<%=sGraphType%>" /> 
                 
                 <input type="hidden" name="sLoadModelLSSVM" id="sLoadModelLSSVM" value="<%=sLoadModelLSSVM%>"/>
+                <input type="hidden" name="modelloadedLSSVM" id="modelloadedLSSVM" value="<%=modelloadedLSSVM%>"/>
 
                 <br>
                 <br>
@@ -5929,35 +5917,6 @@ NumberFormat ndf = new DecimalFormat("0.00E0");
                 filewriter.close();
 
                 %><script>alert('Your input form has been saved on the server');</script><%
-                
-                if (NormalRadioLSSVM.equals("NormalRadio1LSSVM")) {%><script>document.getElementById("NormalRadio1LSSVM").checked = true;</script>
-                <% } else if (NormalRadioLSSVM.equals("NormalRadio2LSSVM")) {%><script>document.getElementById("NormalRadio2LSSVM").checked = true;</script> <% }
-            
-                if (PRadio.equals("PRadio1")) { 
-                    if (TORadioLSSVM.equals("TORadio1LSSVM")) {%><script>document.getElementById("TORadio1LSSVM").checked = true;</script>
-                    <% } else if (TORadioLSSVM.equals("TORadio2LSSVM")) {%><script>document.getElementById("TORadio2LSSVM").checked = true;</script>
-                    <% } else if (TORadioLSSVM.equals("TORadio3LSSVM")) {%><script>document.getElementById("TORadio3LSSVM").checked = true;</script>
-                    <% } else if (TORadioLSSVM.equals("TORadio4LSSVM")) {%><script>document.getElementById("TORadio4LSSVM").checked = true;</script><% }
-                }
-            }
-            else if (sLoadModelLSSVM != "") { 
-                String datafile = request.getParameter("loadmodelLSSVM");
-                
-                String filename;
-                filename = "SVMModel.txt";
-                String file = application.getRealPath("/") + filename;
-                BufferedReader br = new BufferedReader(new FileReader(file)); 
-                String line = null;
-                String[] cols;
-                line = br.readLine();
-                if (line == null) {
-                    out .println("<h3><font color='red'>Model not found !</font></h3>");
-                } else {
-                    cols = line.split("\\t"); 
-                    %><script>document.getElementById("nValueCLSSVM").value = "<%=cols[0]%>";
-                    document.getElementById("nValueSLSSVM").value = "<%=cols[1]%>";
-                    </script><%
-                }
                 
                 if (NormalRadioLSSVM.equals("NormalRadio1LSSVM")) {%><script>document.getElementById("NormalRadio1LSSVM").checked = true;</script>
                 <% } else if (NormalRadioLSSVM.equals("NormalRadio2LSSVM")) {%><script>document.getElementById("NormalRadio2LSSVM").checked = true;</script> <% }

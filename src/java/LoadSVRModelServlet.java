@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -62,23 +64,40 @@ public class LoadSVRModelServlet extends HttpServlet {
         
         String[] cols = content.split("\n");
         String line;
-        String name;
-        String value;
         
-        for (int i = 2; i < cols.length; i++)
+        for (int i = 0; i < cols.length; i++)
         {
-            name = cols[i].split("\t")[2];
-            value = cols[i].split("\t")[3];
-            request.setAttribute(name,value);
-            params += "&" + name + "=" + value;
+            if (cols[i].startsWith("gam"))
+            {
+                request.setAttribute("nValueC",cols[i].split(" ")[1]);
+                params += "&nValueC=" + cols[i].split(" ")[1].replace(".", "%2E");
+            }
+            if (cols[i].startsWith("kernel_pars"))
+            {
+                request.setAttribute("nValueS",cols[i].split(" ")[1]);
+                params += "&nValueS=" + cols[i].split(" ")[1].replace(".", "%2E");
+            }
+            if (cols[i].startsWith("normalization"))
+            {
+                String tempstr = cols[i].split(" ")[1];
+                if (tempstr.equals("radiobuttonFS") || tempstr.equals("normal1"))
+                {
+                    tempstr = "NormalRadio2";
+                }
+                else
+                {
+                    tempstr = "NormalRadio1";
+                }
+                request.setAttribute("NormalRadio",tempstr);
+                params += "&NormalRadio=" + tempstr;
+            }
         }
         
-        temp = (String) request.getAttribute("sNormalRadio");
-        if (temp != null && temp.equals("2")) {
-            params += "&NormalRadio=NormalRadio2";
-        } else {
-            params += "&NormalRadio=NormalRadio1";
-        }
+        BufferedWriter bw = new BufferedWriter(new FileWriter("E:\\00 Swarm Optimization\\NiMOPSJava\\build\\web\\" + request.getParameter("sBaseFileName") + "_model.txt"));
+        bw.write(content);
+        bw.close();
+        
+        params += "&modelloaded=1";
         params = params.replaceAll("\\+", " %2B");
         
         RequestDispatcher dispatcher = request.getRequestDispatcher("AllModulesBaseline.jsp" + params); // to return to LSSVR.jsp page with imported params

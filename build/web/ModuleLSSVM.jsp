@@ -34,6 +34,11 @@
         sProcessRun="";
     }
 
+    String modelloadedLSSVM = request.getParameter("modelloadedLSSVM");
+    if (modelloadedLSSVM == null) {
+        modelloadedLSSVM="";
+    }
+
     int nBestFold;
     String sBestFold = request.getParameter("sBestFold");
     if (sBestFold == null) {
@@ -436,36 +441,43 @@
             }
     
             function rundata2(val) {
-                var suResult01Name = document.getElementById("suResult01Name");
-                var suResult02Name = document.getElementById("suResult02Name");
-                var suResult03Name = document.getElementById("suResult03Name");
-                var suResult04Name = document.getElementById("suResult04Name");
-                var suResult04cName = document.getElementById("suResult04cName");
-                var suResult04dName = document.getElementById("suResult04dName");
-                
-                var sProcessRun = document.getElementById("sProcessRun");
-                sProcessRun = "1";
-                document.getElementById("sProcessRun").value = sProcessRun;
-                
-                var sLoadingDataSet1 = document.getElementById("sLoadingDataSet1");
-                sLoadingDataSet1 = "";
-                document.getElementById("sLoadingDataSet1").value = sLoadingDataSet1;
-                var sLoadingDataSet2 = document.getElementById("sLoadingDataSet2");
-                sLoadingDataSet2 = "";
-                document.getElementById("sLoadingDataSet2").value = sLoadingDataSet2;
-                var sLoadingDataSet3 = document.getElementById("sLoadingDataSet3");
-                sLoadingDataSet3 = "";
-                document.getElementById("sLoadingDataSet3").value = sLoadingDataSet3;
-                var sLoadingDataSet4 = document.getElementById("sLoadingDataSet4");
-                sLoadingDataSet4 = "";
-                document.getElementById("sLoadingDataSet4").value = sLoadingDataSet4;
-                var sLoadingDataSet5 = document.getElementById("sLoadingDataSet5");
-                sLoadingDataSet5 = "";
-                document.getElementById("sLoadingDataSet5").value = sLoadingDataSet5;
+                if (document.getElementById("modelloadedLSSVM").value !== 1)
+                {
+                    var suResult01Name = document.getElementById("suResult01Name");
+                    var suResult02Name = document.getElementById("suResult02Name");
+                    var suResult03Name = document.getElementById("suResult03Name");
+                    var suResult04Name = document.getElementById("suResult04Name");
+                    var suResult04cName = document.getElementById("suResult04cName");
+                    var suResult04dName = document.getElementById("suResult04dName");
 
-                document.getElementById("sPageControl").value = "1";
+                    var sProcessRun = document.getElementById("sProcessRun");
+                    sProcessRun = "1";
+                    document.getElementById("sProcessRun").value = sProcessRun;
 
-                return refreshform(val);
+                    var sLoadingDataSet1 = document.getElementById("sLoadingDataSet1");
+                    sLoadingDataSet1 = "";
+                    document.getElementById("sLoadingDataSet1").value = sLoadingDataSet1;
+                    var sLoadingDataSet2 = document.getElementById("sLoadingDataSet2");
+                    sLoadingDataSet2 = "";
+                    document.getElementById("sLoadingDataSet2").value = sLoadingDataSet2;
+                    var sLoadingDataSet3 = document.getElementById("sLoadingDataSet3");
+                    sLoadingDataSet3 = "";
+                    document.getElementById("sLoadingDataSet3").value = sLoadingDataSet3;
+                    var sLoadingDataSet4 = document.getElementById("sLoadingDataSet4");
+                    sLoadingDataSet4 = "";
+                    document.getElementById("sLoadingDataSet4").value = sLoadingDataSet4;
+                    var sLoadingDataSet5 = document.getElementById("sLoadingDataSet5");
+                    sLoadingDataSet5 = "";
+                    document.getElementById("sLoadingDataSet5").value = sLoadingDataSet5;
+
+                    document.getElementById("sPageControl").value = "1";
+
+                    return refreshform(val);
+                }
+                else
+                {
+                    // RunLSSVMWithModel
+                }
             }
 
             function previousscreenLSSVM() {
@@ -978,6 +990,7 @@
                 <input type="hidden" name="sGraphType" id="sGraphType" value="<%=sGraphType%>" /> 
                 
                 <input type="hidden" name="sProcessRun" id="sProcessRun" value="<%=sProcessRun%>"/>
+                <input type="hidden" name="modelloadedLSSVM" id="modelloadedLSSVM" value="<%=modelloadedLSSVM%>"/>
                 
                 <br>
                 <br>

@@ -34,6 +34,11 @@
         sProcessRun="";
     }
 
+    String modelloaded = request.getParameter("modelloaded");
+    if (modelloaded == null) {
+        modelloaded="";
+    }
+
     int nBestFold;
     String sBestFold = request.getParameter("sBestFold");
     if (sBestFold == null) {
@@ -327,36 +332,47 @@
             }
     
             function rundata2(val) {
-                var stResult01Name = document.getElementById("stResult01Name");
-                var stResult02Name = document.getElementById("stResult02Name");
-                var stResult03Name = document.getElementById("stResult03Name");
-                var stResult04Name = document.getElementById("stResult04Name");
-                var stResult04cName = document.getElementById("stResult04cName");
-                var stResult04dName = document.getElementById("stResult04dName");
-                
-                var sProcessRun = document.getElementById("sProcessRun");
-                sProcessRun = "1";
-                document.getElementById("sProcessRun").value = sProcessRun;
-                
-                var sLoadingDataSet1 = document.getElementById("sLoadingDataSet1");
-                sLoadingDataSet1 = "";
-                document.getElementById("sLoadingDataSet1").value = sLoadingDataSet1;
-                var sLoadingDataSet2 = document.getElementById("sLoadingDataSet2");
-                sLoadingDataSet2 = "";
-                document.getElementById("sLoadingDataSet2").value = sLoadingDataSet2;
-                var sLoadingDataSet3 = document.getElementById("sLoadingDataSet3");
-                sLoadingDataSet3 = "";
-                document.getElementById("sLoadingDataSet3").value = sLoadingDataSet3;
-                var sLoadingDataSet4 = document.getElementById("sLoadingDataSet4");
-                sLoadingDataSet4 = "";
-                document.getElementById("sLoadingDataSet4").value = sLoadingDataSet4;
-                var sLoadingDataSet5 = document.getElementById("sLoadingDataSet5");
-                sLoadingDataSet5 = "";
-                document.getElementById("sLoadingDataSet5").value = sLoadingDataSet5;
+                if (document.getElementById("modelloaded").value !== "1")
+                {
+                    var stResult01Name = document.getElementById("stResult01Name");
+                    var stResult02Name = document.getElementById("stResult02Name");
+                    var stResult03Name = document.getElementById("stResult03Name");
+                    var stResult04Name = document.getElementById("stResult04Name");
+                    var stResult04cName = document.getElementById("stResult04cName");
+                    var stResult04dName = document.getElementById("stResult04dName");
 
-                document.getElementById("sPageControl").value = "1";
+                    var sProcessRun = document.getElementById("sProcessRun");
+                    sProcessRun = "1";
+                    document.getElementById("sProcessRun").value = sProcessRun;
 
-                return refreshform(val);
+                    var sLoadingDataSet1 = document.getElementById("sLoadingDataSet1");
+                    sLoadingDataSet1 = "";
+                    document.getElementById("sLoadingDataSet1").value = sLoadingDataSet1;
+                    var sLoadingDataSet2 = document.getElementById("sLoadingDataSet2");
+                    sLoadingDataSet2 = "";
+                    document.getElementById("sLoadingDataSet2").value = sLoadingDataSet2;
+                    var sLoadingDataSet3 = document.getElementById("sLoadingDataSet3");
+                    sLoadingDataSet3 = "";
+                    document.getElementById("sLoadingDataSet3").value = sLoadingDataSet3;
+                    var sLoadingDataSet4 = document.getElementById("sLoadingDataSet4");
+                    sLoadingDataSet4 = "";
+                    document.getElementById("sLoadingDataSet4").value = sLoadingDataSet4;
+                    var sLoadingDataSet5 = document.getElementById("sLoadingDataSet5");
+                    sLoadingDataSet5 = "";
+                    document.getElementById("sLoadingDataSet5").value = sLoadingDataSet5;
+
+                    document.getElementById("sPageControl").value = "1";
+
+                    return refreshform(val);
+                }
+                else
+                {
+                    // RunLSSVRWithModel
+                    document.getElementById("myform2").action = "RunLSSVRWithModel";
+                    document.getElementById("myform2").submit();
+
+                    return valid;
+                }
             }
             
             function previousscreen() {
@@ -850,6 +866,7 @@
                 <input type="hidden" name="sBestFold" id="sBestFold" value="<%=sBestFold%>"/>
                 
                 <input type="hidden" name="sProcessRun" id="sProcessRun" value="<%=sProcessRun%>"/>
+                <input type="hidden" name="modelloaded" id="modelloaded" value="<%=modelloaded%>"/>
                 
                 <br><br><br>
                 <center id="title">
